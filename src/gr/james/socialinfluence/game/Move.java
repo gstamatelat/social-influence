@@ -119,7 +119,6 @@ public class Move implements Iterable<MovePoint> {
 
     @Override
     public Iterator<MovePoint> iterator() {
-        // TODO: Is the iterator thread-safe? Oo
         return this.moveObject.iterator();
     }
 
