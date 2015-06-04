@@ -8,8 +8,8 @@ public class MovePointer {
     private final Object lock = new Object();
     private Move ref;
 
-    public MovePointer(Move e) {
-        ref = e;
+    public MovePointer() {
+        ref = null;
     }
 
     /**

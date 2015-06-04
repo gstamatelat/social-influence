@@ -65,8 +65,6 @@ public class BruteForcePlayer extends Player {
 
     @Override
     public void getMove() {
-        long now = System.currentTimeMillis();
-
         Game game = new Game(g);
 
         HashSet<Move> movesHistory = new HashSet<Move>();
@@ -75,7 +73,7 @@ public class BruteForcePlayer extends Player {
         Move bestMove = getRandomMove(g, d.getNumOfMoves(), Integer.parseInt(this.options.get("weight_levels")), d.getBudget(), null, false);
         movesHistory.add(bestMove);
 
-        while (System.currentTimeMillis() - now < d.getExecution()) {
+        while (!this.isInterrupted()) {
             Move newMove = getRandomMove(g, d.getNumOfMoves(), Integer.parseInt(this.options.get("weight_levels")), d.getBudget(), game.getPlayerAMove(), Boolean.parseBoolean(this.options.get("clever")));
             game.setPlayer(PlayerEnum.A, bestMove);
             game.setPlayer(PlayerEnum.B, newMove);

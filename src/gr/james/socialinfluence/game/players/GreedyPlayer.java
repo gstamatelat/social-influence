@@ -41,9 +41,6 @@ public class GreedyPlayer extends Player {
 
     @Override
     public void getMove() {
-        /* Log the time */
-        long now = System.currentTimeMillis();
-
         /* Here be distanceMap and vector */
         HashMap<Vertex[], Double> distanceMap = new HashMap<Vertex[], Double>();
         HashMap<Vertex, Double> vector = new HashMap<Vertex, Double>();
@@ -62,7 +59,7 @@ public class GreedyPlayer extends Player {
         HashMap<Move, Double> treeMoves = new HashMap<Move, Double>();
 
         PageRankIterator pri = new PageRankIterator(g, 0.0);
-        while (pri.hasNext() && (System.currentTimeMillis() - now < d.getExecution())) {
+        while (pri.hasNext() && !this.isInterrupted()) {
             Vertex firstGuess = pri.next();
 
             /* Initialize the vector */

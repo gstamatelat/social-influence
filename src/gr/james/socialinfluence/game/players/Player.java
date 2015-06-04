@@ -16,10 +16,16 @@ public abstract class Player implements Runnable {
 
     protected Graph g;
     protected GameDefinition d;
-    protected MovePointer movePtr = new MovePointer(null);
+    protected MovePointer movePtr = new MovePointer();
+
+    private boolean interrupted = false;
 
     public Player() {
         putDefaultOptions();
+    }
+
+    public boolean isInterrupted() {
+        return this.interrupted;
     }
 
     public abstract void getMove();
@@ -36,8 +42,10 @@ public abstract class Player implements Runnable {
 
         try {
             Thread t = new Thread(this);
+            this.interrupted = false;
             t.start();
             t.join(this.d.getExecution());
+            this.interrupted = true;
             if (this.movePtr.get() != null) {
                 m = this.movePtr.get();
             }
