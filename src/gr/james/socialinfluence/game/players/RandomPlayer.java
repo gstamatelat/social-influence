@@ -8,13 +8,13 @@ public class RandomPlayer extends Player {
     @Override
     public void getMove() {
         Move m = new Move();
-        RandomVertexIterator rvi = new RandomVertexIterator(g);
-        while (m.getVerticesCount() < d.getNumOfMoves()) {
+        RandomVertexIterator rvi = new RandomVertexIterator(this.g);
+        while (m.getVerticesCount() < this.d.getNumOfMoves()) {
             m.putVertex(rvi.next(), 1.0);
         }
+        this.movePtr.set(m);
         if (!this.d.getTournament()) {
             Helper.log("RandomG player: " + m);
         }
-        movePtr.set(m);
     }
 }

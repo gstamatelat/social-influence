@@ -46,8 +46,8 @@ public class GreedyPlayer extends Player {
         HashMap<Vertex, Double> vector = new HashMap<Vertex, Double>();
 
         /* Fill the distanceMap */
-        for (Vertex v : g.getVertices()) {
-            HashMap<Vertex, Double> temp = Dijkstra.execute(g, v);
+        for (Vertex v : this.g.getVertices()) {
+            HashMap<Vertex, Double> temp = Dijkstra.execute(this.g, v);
             for (Map.Entry<Vertex, Double> e : temp.entrySet()) {
                 distanceMap.put(new Vertex[]{e.getKey(), v}, e.getValue());
             }
@@ -58,13 +58,13 @@ public class GreedyPlayer extends Player {
 
         HashMap<Move, Double> treeMoves = new HashMap<Move, Double>();
 
-        PageRankIterator pri = new PageRankIterator(g, 0.0);
+        PageRankIterator pri = new PageRankIterator(this.g, 0.0);
         while (pri.hasNext() && !this.isInterrupted()) {
             Vertex firstGuess = pri.next();
 
             /* Initialize the vector */
             vector.clear();
-            for (Vertex v : g.getVertices()) {
+            for (Vertex v : this.g.getVertices()) {
                 vector.put(v, 1.0);
             }
 
@@ -76,7 +76,7 @@ public class GreedyPlayer extends Player {
             /* Simulation loop */
             while (m.getVerticesCount() < d.getNumOfMoves()) {
                 HashMap<Vertex, Double> sumMap = new HashMap<Vertex, Double>();
-                for (Vertex v : g.getVertices()) {
+                for (Vertex v : this.g.getVertices()) {
                     HashMap<Vertex, Double> tmpVector = new HashMap<Vertex, Double>();
                     for (Map.Entry<Vertex, Double> e : vector.entrySet()) {
                         tmpVector.put(e.getKey(), e.getValue());
@@ -102,7 +102,7 @@ public class GreedyPlayer extends Player {
 
             /* Find the best move, aka the one with min vector sum */
             Move minMove = getMinimum(treeMoves);
-            movePtr.set(minMove);
+            this.movePtr.set(minMove);
 
             /* This helps when computation takes a long time */
             if (!this.d.getTournament()) {

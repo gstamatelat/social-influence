@@ -9,13 +9,13 @@ public class SlowPlayer extends Player {
     public void getMove() {
         long now = System.currentTimeMillis();
 
-        while (System.currentTimeMillis() - now < 5 * d.getExecution()) {
+        while (System.currentTimeMillis() - now < 5 * this.d.getExecution()) {
             Move m = new Move();
-            RandomVertexIterator rvi = new RandomVertexIterator(g);
-            while (m.getVerticesCount() < d.getNumOfMoves()) {
+            RandomVertexIterator rvi = new RandomVertexIterator(this.g);
+            while (m.getVerticesCount() < this.d.getNumOfMoves()) {
                 m.putVertex(rvi.next(), 1.0);
             }
-            movePtr.set(m);
+            this.movePtr.set(m);
             if (!this.d.getTournament()) {
                 Helper.log("Slow player: " + m);
             }

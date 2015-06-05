@@ -65,19 +65,19 @@ public class BruteForcePlayer extends Player {
 
     @Override
     public void getMove() {
-        Game game = new Game(g);
+        Game game = new Game(this.g);
 
         HashSet<Move> movesHistory = new HashSet<Move>();
         HashSet<Move> moveDraws = new HashSet<Move>();
 
-        Move bestMove = getRandomMove(g, d.getNumOfMoves(), Integer.parseInt(this.options.get("weight_levels")), d.getBudget(), null, false);
+        Move bestMove = getRandomMove(this.g, this.d.getNumOfMoves(), Integer.parseInt(this.options.get("weight_levels")), this.d.getBudget(), null, false);
         movesHistory.add(bestMove);
 
         while (!this.isInterrupted()) {
-            Move newMove = getRandomMove(g, d.getNumOfMoves(), Integer.parseInt(this.options.get("weight_levels")), d.getBudget(), game.getPlayerAMove(), Boolean.parseBoolean(this.options.get("clever")));
+            Move newMove = getRandomMove(this.g, this.d.getNumOfMoves(), Integer.parseInt(this.options.get("weight_levels")), this.d.getBudget(), game.getPlayerAMove(), Boolean.parseBoolean(this.options.get("clever")));
             game.setPlayer(PlayerEnum.A, bestMove);
             game.setPlayer(PlayerEnum.B, newMove);
-            int gameScore = game.runGame(d, Double.parseDouble(this.options.get("epsilon"))).score;
+            int gameScore = game.runGame(this.d, Double.parseDouble(this.options.get("epsilon"))).score;
             if (gameScore < 0) {
             } else if (gameScore == 0) {
                 if (moveDraws.add(game.getPlayerBMove())) {
@@ -92,12 +92,12 @@ public class BruteForcePlayer extends Player {
                         Helper.log("Going in circles after " + game.getPlayerBMove());
                     }
                 }
-                if (!this.d.getTournament()) {
-                    Helper.log("New best move " + newMove.toString());
-                }
                 moveDraws.clear();
                 bestMove = newMove;
                 this.movePtr.set(bestMove);
+                if (!this.d.getTournament()) {
+                    Helper.log("New best move " + newMove.toString());
+                }
             }
         }
     }
