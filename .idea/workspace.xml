@@ -71,13 +71,16 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Player.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/gr/james/socialinfluence/game/players/Player.java">
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.38846573">
-              <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.3438202">
+              <caret line="18" column="42" selection-start-line="18" selection-start-column="42" selection-end-line="18" selection-end-column="42" />
               <folding />
             </state>
+          </provider>
+          <provider editor-type-id="MarkdownPreviewEditor">
+            <state />
           </provider>
         </entry>
       </file>
@@ -817,12 +820,6 @@
       <workItem from="1390549192770" duration="36385000" />
       <workItem from="1390703827822" duration="9771000" />
     </task>
-    <task id="LOCAL-00183">
-      <created>1408389512323</created>
-      <option name="number" value="00183" />
-      <option name="project" value="LOCAL" />
-      <updated>1408389512323</updated>
-    </task>
     <task id="LOCAL-00184">
       <created>1408404102461</created>
       <option name="number" value="00184" />
@@ -1111,7 +1108,13 @@
       <option name="project" value="LOCAL" />
       <updated>1433493620966</updated>
     </task>
-    <option name="localTasksCounter" value="232" />
+    <task id="LOCAL-00232" summary="README additions">
+      <created>1433494697897</created>
+      <option name="number" value="00232" />
+      <option name="project" value="LOCAL" />
+      <updated>1433494697897</updated>
+    </task>
+    <option name="localTasksCounter" value="233" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -1189,7 +1192,8 @@
     <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="Initial" />
     <MESSAGE value="Javadoc for isInterrupted()" />
-    <option name="LAST_COMMIT_MESSAGE" value="Javadoc for isInterrupted()" />
+    <MESSAGE value="README additions" />
+    <option name="LAST_COMMIT_MESSAGE" value="README additions" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1552,6 +1556,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/gr/james/socialinfluence/game/players/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.38846573">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3438202">
@@ -1561,14 +1573,6 @@
       </provider>
       <provider editor-type-id="MarkdownPreviewEditor">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gr/james/socialinfluence/game/players/Player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.38846573">
-          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-          <folding />
-        </state>
       </provider>
     </entry>
   </component>
