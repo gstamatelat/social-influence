@@ -18,5 +18,6 @@ Running time - Complexity:
 - There needs to be a helper function or some `Graph` member method that can return if a graph is aperiodic or not.
 - Consider converting `Move` to immutable.
 - Considering converting `Move` to `Map`.
-- Implement a method `void submitMove(Move m)` on `Player` class, which will replace the `MovePointer` concept. `submitMove` should deep copy the move before setting. Consider implementing a `recallMove()` as well for getting the last submitted move.
+- Implement a method `boolean submitMove(Move m)` on `Player` class, which will replace the `MovePointer` concept. `submitMove` should deep copy the move before setting. Consider implementing a `recallMove()` as well for getting the last submitted move.
 - `Player` should not be able to mutate the `Graph` object `g`. Consider passing a copy instead.
+- Consider renaming `numOfMoves` to `actions` or something else.

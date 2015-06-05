@@ -97,7 +97,7 @@ public class GreedyPlayer extends Player {
             }
 
             /* Insert this move to the list */
-            m.normalizeWeights(d.getBudget());
+            m.normalizeWeights(d.getBudget()); // TODO: Can this line safely be removed?
             treeMoves.put(m, vectorSum(vector));
 
             /* Find the best move, aka the one with min vector sum */

@@ -42,7 +42,7 @@ public class BruteForcePlayer extends Player {
             // TODO: Something must be done to allow selecting less than numOfMoves vertices.
             moves.putVertex(it.next(), Finals.RANDOM.nextInt(weightLevels) + 1);
         }
-        return moves.normalizeWeights(weightSum);
+        return moves;
     }
 
     public static Move getRandomMoveWithMutation(Graph g, int numOfMoves, int weightLevels, double weightSum, Move lastMove) {
@@ -60,7 +60,7 @@ public class BruteForcePlayer extends Player {
 
             moves.putVertex(v, Finals.RANDOM.nextInt(weightLevels) + 1);
         }
-        return moves.normalizeWeights(weightSum);
+        return moves;
     }
 
     @Override

@@ -26,8 +26,10 @@ public abstract class Player implements Runnable {
 
     /**
      * <p>Tests whether the player has been interrupted. The game mechanism requests player interruption when the
-     * available time for execution has been elapsed. When this flag is set to {@code true}, further moves submitted
-     * by the player will be ignored and this is an indication that the player must terminate gracefully.</p>
+     * player has exhausted the available time for execution. When this flag is set to {@code true}, further moves
+     * submitted by the player will be ignored and this is an indication that the player must terminate gracefully.
+     * This flag is an alternative way of time tracking besides {@link GameDefinition#getExecution() getExecution()}
+     * method of field {@link #d}.</p>
      *
      * @return {@code true} if the player was interrupted and must terminate, otherwise {@code false}
      */

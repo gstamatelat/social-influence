@@ -12,7 +12,6 @@ public class RandomPlayer extends Player {
         while (m.getVerticesCount() < d.getNumOfMoves()) {
             m.putVertex(rvi.next(), 1.0);
         }
-        m.normalizeWeights(d.getBudget());
         if (!this.d.getTournament()) {
             Helper.log("RandomG player: " + m);
         }
