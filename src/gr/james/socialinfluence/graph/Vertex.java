@@ -21,7 +21,7 @@ public class Vertex implements Comparable {
     }
 
     /**
-     * <p>Returns the id of this vertex. Id's are integers.</p>
+     * <p>Gets the id of this vertex. Id's are integers.</p>
      * <p><b>Running Time:</b> Very Fast</p>
      *
      * @return the id of this vertex
