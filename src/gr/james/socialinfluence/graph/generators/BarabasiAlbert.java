@@ -3,6 +3,7 @@ package gr.james.socialinfluence.graph.generators;
 import gr.james.socialinfluence.graph.Graph;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.graph.algorithms.Degree;
+import gr.james.socialinfluence.helper.Finals;
 import gr.james.socialinfluence.helper.Helper;
 import gr.james.socialinfluence.helper.WeightedRandom;
 
@@ -15,7 +16,7 @@ public class BarabasiAlbert {
         R = Helper.getRandom(R);
 
         if (stepEdges > initialClique) {
-            Helper.logError("stepEdges <= initialClique is a constraint");
+            Helper.logError(Finals.S_BARABASI_STEP);
             return null;
         }
 

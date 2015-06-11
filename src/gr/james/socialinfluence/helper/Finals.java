@@ -16,4 +16,5 @@ public class Finals {
     public static final String S_MOVE_VERTEX_NULL = "WARNING: A player is trying to add a null Vertex on a Move object but no change was performed. This is caused when .putVertex() is called with a null argument.";
     public static final String S_MOVE_WEIGHT_NEGATIVE = "WARNING: A player is trying to add a Vertex on a Move object with a non-positive weight %f but no change was performed. This is caused when .putVertex() is called with a negative weight argument.";
     public static final String S_MOVE_EXCEED = "WARNING: Move %s contains more than %d vertices. Slicing to %s. This indicates a mistake in your player.";
+    public static final String S_BARABASI_STEP = "ERROR: stepEdges <= initialClique is a constraint";
 }
