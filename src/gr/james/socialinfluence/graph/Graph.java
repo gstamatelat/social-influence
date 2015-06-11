@@ -39,6 +39,21 @@ public class Graph {
         this.edges = new HashSet<Edge>();
     }
 
+    public static Graph combineGraphs(Graph[] graphs) {
+        Graph r = new Graph();
+        for (Graph g : graphs) {
+            for (Vertex v : g.vertices) {
+                v.parentGraph = r;
+                r.vertices.add(v);
+            }
+            for (Edge e : g.edges) {
+                e.parentGraph = r;
+                r.edges.add(e);
+            }
+        }
+        return r;
+    }
+
     /**
      * <p>Sets a new name for this graph. The name is used on printing and other exporting functionality.</p>
      * <p><b>Running Time:</b> Very Fast</p>
@@ -51,13 +66,13 @@ public class Graph {
         return this;
     }
 
+    public String getMeta() {
+        return this.meta;
+    }
+
     public Graph setMeta(String meta) {
         this.meta = meta;
         return this;
-    }
-
-    public String getMeta() {
-        return this.meta;
     }
 
     /**
@@ -115,21 +130,6 @@ public class Graph {
     private Graph orderLabels(Iterator<Vertex> vi) {
         // TODO: Implement
         return this;
-    }
-
-    public static Graph combineGraphs(Graph[] graphs) {
-        Graph r = new Graph();
-        for (Graph g : graphs) {
-            for (Vertex v : g.vertices) {
-                v.parentGraph = r;
-                r.vertices.add(v);
-            }
-            for (Edge e : g.edges) {
-                e.parentGraph = r;
-                r.edges.add(e);
-            }
-        }
-        return r;
     }
 
     /**

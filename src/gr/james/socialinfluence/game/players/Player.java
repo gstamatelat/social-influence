@@ -61,7 +61,7 @@ public abstract class Player implements Runnable {
             int count = 0;
             while (t.isAlive()) {
                 if (count > 0) {
-                    Helper.log(String.format(Finals.S_WAITING_PLAYER, count * d.getExecution() / 1000, this.getClass().getSimpleName()));
+                    Helper.log(String.format(Finals.W_WAITING_PLAYER, count * d.getExecution() / 1000, this.getClass().getSimpleName()));
                 }
                 t.join(d.getExecution());
                 count++;
