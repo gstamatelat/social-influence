@@ -6,10 +6,8 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d584793e-3e99-4c99-962d-98344dab3943" name="Default" comment="Removed the call to normalizeWeights() from the players since it's not needed any more">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tests/gr/james/socialinfluence/tests/Tests.java" />
-      <change type="DELETED" beforePath="C:\Users\James\Desktop\social-influence\src\gr\james\socialinfluence\tests\RandomSurferTest.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SocialInfluence.iml" afterPath="$PROJECT_DIR$/SocialInfluence.iml" />
+    <list default="true" id="d584793e-3e99-4c99-962d-98344dab3943" name="Default" comment="New tests class">
+      <change type="DELETED" beforePath="C:\Users\James\Desktop\social-influence\src\gr\james\socialinfluence\main\ProgramPavlos.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="SocialInfluence.iws" />
@@ -83,6 +81,26 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="Player.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/gr/james/socialinfluence/game/players/Player.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="35" column="19" selection-start-line="35" selection-start-column="19" selection-end-line="35" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BarabasiAlbert.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/gr/james/socialinfluence/graph/generators/BarabasiAlbert.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.62846583">
+              <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="DegreeDistributionTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/gr/james/socialinfluence/tests/DegreeDistributionTest.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -93,11 +111,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Edge.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Edge.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/gr/james/socialinfluence/graph/Edge.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.780037">
-              <caret line="75" column="20" selection-start-line="75" selection-start-column="20" selection-end-line="75" selection-end-column="20" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="72" column="25" selection-start-line="72" selection-start-column="25" selection-end-line="72" selection-end-column="25" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GameDefinition.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/gr/james/socialinfluence/game/GameDefinition.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="20" column="19" selection-start-line="20" selection-start-column="19" selection-end-line="20" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -316,6 +344,28 @@
               <option name="myItemId" value="socialinfluence" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SocialInfluence" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="social-influence" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="socialinfluence" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
@@ -373,7 +423,7 @@
       <recent name="gr.james.socialinfluence.graph" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.Tests">
+  <component name="RunManager" selected="Application.Greedy">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
@@ -543,23 +593,6 @@
       </RunnerSettings>
       <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Debug" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
-    <configuration default="false" name="ProgramPavlos" type="Application" factoryName="Application" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" value="gr.james.socialinfluence.main.ProgramPavlos" />
-      <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" value="" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="SocialInfluence" />
-      <envs />
-      <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
@@ -769,19 +802,18 @@
       <patterns />
       <method />
     </configuration>
-    <list size="12">
+    <list size="11">
       <item index="0" class="java.lang.String" itemvalue="Application.DirectGame" />
-      <item index="1" class="java.lang.String" itemvalue="Application.ProgramPavlos" />
-      <item index="2" class="java.lang.String" itemvalue="Application.Greedy" />
-      <item index="3" class="java.lang.String" itemvalue="Application.SlowPlayerTest" />
-      <item index="4" class="java.lang.String" itemvalue="Application.DegreeEigenvectorTest" />
-      <item index="5" class="java.lang.String" itemvalue="Application.Sotiris" />
-      <item index="6" class="java.lang.String" itemvalue="Application.Tests" />
-      <item index="7" class="java.lang.String" itemvalue="Application.CheckDraw" />
-      <item index="8" class="java.lang.String" itemvalue="Application.Jackson" />
-      <item index="9" class="java.lang.String" itemvalue="Application.DegreeDistributionTest" />
-      <item index="10" class="java.lang.String" itemvalue="Application.PlayerTest" />
-      <item index="11" class="java.lang.String" itemvalue="JUnit.Tests" />
+      <item index="1" class="java.lang.String" itemvalue="Application.Greedy" />
+      <item index="2" class="java.lang.String" itemvalue="Application.SlowPlayerTest" />
+      <item index="3" class="java.lang.String" itemvalue="Application.DegreeEigenvectorTest" />
+      <item index="4" class="java.lang.String" itemvalue="Application.Sotiris" />
+      <item index="5" class="java.lang.String" itemvalue="Application.Tests" />
+      <item index="6" class="java.lang.String" itemvalue="Application.CheckDraw" />
+      <item index="7" class="java.lang.String" itemvalue="Application.Jackson" />
+      <item index="8" class="java.lang.String" itemvalue="Application.DegreeDistributionTest" />
+      <item index="9" class="java.lang.String" itemvalue="Application.PlayerTest" />
+      <item index="10" class="java.lang.String" itemvalue="JUnit.Tests" />
     </list>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
@@ -802,12 +834,6 @@
       <updated>1389812848473</updated>
       <workItem from="1390549192770" duration="36385000" />
       <workItem from="1390703827822" duration="9771000" />
-    </task>
-    <task id="LOCAL-00185">
-      <created>1408409252653</created>
-      <option name="number" value="00185" />
-      <option name="project" value="LOCAL" />
-      <updated>1408409252653</updated>
     </task>
     <task id="LOCAL-00186">
       <created>1408410110126</created>
@@ -1097,7 +1123,13 @@
       <option name="project" value="LOCAL" />
       <updated>1433529042387</updated>
     </task>
-    <option name="localTasksCounter" value="234" />
+    <task id="LOCAL-00234" summary="New tests class">
+      <created>1433991710432</created>
+      <option name="number" value="00234" />
+      <option name="project" value="LOCAL" />
+      <updated>1433991710433</updated>
+    </task>
+    <option name="localTasksCounter" value="235" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -1125,7 +1157,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32942432" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32864866" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1134,7 +1166,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32864866" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39915523" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39915523" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32946146" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26504752" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32683983" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1209,7 +1241,11 @@
     <MESSAGE value="Javadoc for isInterrupted()" />
     <MESSAGE value="README additions" />
     <MESSAGE value="Removed the call to normalizeWeights() from the players since it's not needed any more" />
-    <option name="LAST_COMMIT_MESSAGE" value="Removed the call to normalizeWeights() from the players since it's not needed any more" />
+    <MESSAGE value="New tests class" />
+    <option name="LAST_COMMIT_MESSAGE" value="New tests class" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1247,13 +1283,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5179543">
           <caret line="28" column="5" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gr/james/socialinfluence/main/ProgramPavlos.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="12" column="14" selection-start-line="12" selection-start-column="14" selection-end-line="12" selection-end-column="14" />
         </state>
       </provider>
     </entry>
@@ -1313,13 +1342,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/gr/james/socialinfluence/graph/generators/BarabasiAlbert.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="35" column="42" selection-start-line="35" selection-start-column="42" selection-end-line="35" selection-end-column="186" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/gr/james/socialinfluence/graph/generators/Clique.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1352,13 +1374,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.61769354">
           <caret line="23" column="108" selection-start-line="23" selection-start-column="108" selection-end-line="23" selection-end-column="108" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gr/james/socialinfluence/game/GameDefinition.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.56398106">
-          <caret line="21" column="31" selection-start-line="21" selection-start-column="31" selection-end-line="21" selection-end-column="31" />
         </state>
       </provider>
     </entry>
@@ -1512,14 +1527,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/gr/james/socialinfluence/game/players/Player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="29" column="48" selection-start-line="29" selection-start-column="48" selection-end-line="29" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider editor-type-id="MarkdownPreviewEditor">
         <state />
@@ -1589,8 +1596,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/gr/james/socialinfluence/graph/Edge.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.780037">
-          <caret line="75" column="20" selection-start-line="75" selection-start-column="20" selection-end-line="75" selection-end-column="20" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="72" column="25" selection-start-line="72" selection-start-column="25" selection-end-line="72" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gr/james/socialinfluence/game/GameDefinition.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="19" selection-start-line="20" selection-start-column="19" selection-end-line="20" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gr/james/socialinfluence/game/players/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="35" column="19" selection-start-line="35" selection-start-column="19" selection-end-line="35" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gr/james/socialinfluence/graph/generators/BarabasiAlbert.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.62846583">
+          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
           <folding />
         </state>
       </provider>
