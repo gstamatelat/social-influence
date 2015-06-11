@@ -2,6 +2,7 @@
   <artifact type="jar" build-on-make="true" name="SocialInfluence:jar">
     <output-path>$PROJECT_DIR$/out/jar/</output-path>
     <root id="archive" name="SocialInfluence.jar">
+      <element id="dir-copy" path="$PROJECT_DIR$/src" />
       <element id="module-output" name="SocialInfluence" />
     </root>
   </artifact>

@@ -6,8 +6,11 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d584793e-3e99-4c99-962d-98344dab3943" name="Default" comment="delete broken class">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/gr/james/socialinfluence/tests/Tests.java" afterPath="$PROJECT_DIR$/tests/gr/james/socialinfluence/tests/Tests.java" />
+    <list default="true" id="d584793e-3e99-4c99-962d-98344dab3943" name="Default" comment="todo in tests">
+      <change type="DELETED" beforePath="C:\Users\James\Desktop\social-influence\.idea\artifacts\SocialInfluenceFull_jar.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\James\Desktop\social-influence\.idea\artifacts\SocialInfluenceSource_jar.xml" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/SocialInfluence_jar.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/SocialInfluence_jar.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gr/james/socialinfluence/graph/Vertex.java" afterPath="$PROJECT_DIR$/src/gr/james/socialinfluence/graph/Vertex.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="SocialInfluence.iws" />
@@ -71,11 +74,34 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Tests.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider editor-type-id="MarkdownPreviewEditor">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-12.896552">
+              <caret line="22" column="64" selection-start-line="22" selection-start-column="64" selection-end-line="22" selection-end-column="64" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Vertex.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/gr/james/socialinfluence/graph/Vertex.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-1.9412404">
+              <caret line="8" column="53" selection-start-line="8" selection-start-column="53" selection-end-line="8" selection-end-column="53" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Tests.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/gr/james/socialinfluence/tests/Tests.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.48502994">
-              <caret line="30" column="49" selection-start-line="30" selection-start-column="49" selection-end-line="30" selection-end-column="49" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="39" column="13" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -173,7 +199,6 @@
         <option value="$PROJECT_DIR$/src/gr/james/socialinfluence/game/players/BruteForcePlayer.java" />
         <option value="$PROJECT_DIR$/src/gr/james/socialinfluence/game/players/MaxDegreePlayer.java" />
         <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/src/gr/james/socialinfluence/graph/Vertex.java" />
         <option value="$PROJECT_DIR$/test/gr/james/socialinfluence/graph/VertexTest.java" />
         <option value="$PROJECT_DIR$/src/gr/james/socialinfluence/graph/VertexTest.java" />
         <option value="$PROJECT_DIR$/tests/gr/james/socialinfluence/graph/VertexTest.java" />
@@ -183,6 +208,7 @@
         <option value="$PROJECT_DIR$/src/gr/james/socialinfluence/tests/RandomSurferTest.java" />
         <option value="$PROJECT_DIR$/src/gr/james/socialinfluence/graph/Edge.java" />
         <option value="$PROJECT_DIR$/tests/gr/james/socialinfluence/tests/Tests.java" />
+        <option value="$PROJECT_DIR$/src/gr/james/socialinfluence/graph/Vertex.java" />
       </list>
     </option>
   </component>
@@ -419,7 +445,7 @@
     <property name="FullScreen" value="false" />
     <property name="SearchEverywhereHistory" value="BigFraction&#10;Set" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.21954022" />
     <property name="LayoutCode.rearrangeEntriesPlain text" value="false" />
@@ -862,12 +888,6 @@
       <workItem from="1390549192770" duration="36385000" />
       <workItem from="1390703827822" duration="9771000" />
     </task>
-    <task id="LOCAL-00187">
-      <created>1408411250346</created>
-      <option name="number" value="00187" />
-      <option name="project" value="LOCAL" />
-      <updated>1408411250346</updated>
-    </task>
     <task id="LOCAL-00188">
       <created>1408411290145</created>
       <option name="number" value="00188" />
@@ -1156,7 +1176,13 @@
       <option name="project" value="LOCAL" />
       <updated>1433991969655</updated>
     </task>
-    <option name="localTasksCounter" value="236" />
+    <task id="LOCAL-00236" summary="todo in tests">
+      <created>1433992381071</created>
+      <option name="number" value="00236" />
+      <option name="project" value="LOCAL" />
+      <updated>1433992381071</updated>
+    </task>
+    <option name="localTasksCounter" value="237" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -1195,7 +1221,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39915523" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32946146" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26504752" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26504752" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32683983" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21041666" sideWeight="0.49945945" order="0" side_tool="false" content_ui="combo" />
@@ -1270,7 +1296,8 @@
     <MESSAGE value="Removed the call to normalizeWeights() from the players since it's not needed any more" />
     <MESSAGE value="New tests class" />
     <MESSAGE value="delete broken class" />
-    <option name="LAST_COMMIT_MESSAGE" value="delete broken class" />
+    <MESSAGE value="todo in tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="todo in tests" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -1533,17 +1560,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.896552">
-          <caret line="22" column="64" selection-start-line="22" selection-start-column="64" selection-end-line="22" selection-end-column="64" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/gr/james/socialinfluence/graph/generators/Master.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1564,14 +1580,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33297062">
           <caret line="389" column="16" selection-start-line="389" selection-start-column="16" selection-end-line="389" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gr/james/socialinfluence/graph/Vertex.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.35146898">
-          <caret line="129" column="43" selection-start-line="129" selection-start-column="43" selection-end-line="129" selection-end-column="43" />
           <folding />
         </state>
       </provider>
@@ -1650,8 +1658,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/gr/james/socialinfluence/tests/Tests.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.48502994">
-          <caret line="30" column="49" selection-start-line="30" selection-start-column="49" selection-end-line="30" selection-end-column="49" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="39" column="13" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-12.896552">
+          <caret line="22" column="64" selection-start-line="22" selection-start-column="64" selection-end-line="22" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gr/james/socialinfluence/graph/Vertex.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.9412404">
+          <caret line="8" column="53" selection-start-line="8" selection-start-column="53" selection-end-line="8" selection-end-column="53" />
           <folding />
         </state>
       </provider>

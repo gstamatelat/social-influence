@@ -6,7 +6,7 @@ import java.util.Set;
  * <p>Represents a single vertex. An object of type Vertex behaves like an immutable object, contains an id, a label
  * and is bound to a specific Graph object at any given point in time which can be obtained with getParentPath. The
  * id field may not be changed, but the label can be. It is safe to use this class in a collection since equals and
- * hashCode methods only depend on id, which is constant. Vertex objects returned by methods are always shallow copies.
+ * hashCode methods only depend on id, which is fixed. Vertex objects returned by methods are always shallow copies.
  * There is no deep copy of a Vertex as that would not be practical for the operations that can be performed.</p>
  */
 public class Vertex implements Comparable {
@@ -45,7 +45,7 @@ public class Vertex implements Comparable {
      * <p>Sets the label of this vertex. Labels are used on printing and exporting.</p>
      * <p><b>Running Time:</b> Very Fast</p>
      *
-     * @param label The new label of the vertex
+     * @param label the new label of the vertex
      * @return the current instance
      * @see #getLabel()
      */
