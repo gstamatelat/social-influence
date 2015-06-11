@@ -20,13 +20,15 @@ public class Tests {
     @Test
     public void randomSurferTest() throws Exception {
         /**
-         * Variables: You should change the following variables: MEAN, DAMPING_FACTOR and g as you see fit. The results
+         * Variables: You should change the following variables: MEAN, DAMPING_FACTORS and g as you see fit. The results
          * printed at the end must always be identical (or almost identical).
          *
          * MEAN:            Controls how many steps the random surfer does.
          * DAMPING_FACTOR:  Probability of a random jump.
          * g:               The graph.
          */
+
+        // TODO: Execute this for multiple graphs
         double MEAN = 1000000;
         double DAMPING_FACTORS[] = {0.15, 0.3, 0.5};
         Graph G = RandomG.generate(20, 0.2);
