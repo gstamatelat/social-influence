@@ -4,14 +4,20 @@ import gr.james.socialinfluence.graph.Edge;
 import gr.james.socialinfluence.graph.Graph;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.graph.algorithms.Degree;
+import gr.james.socialinfluence.graph.algorithms.Dijkstra;
+import gr.james.socialinfluence.graph.algorithms.FloydWarshall;
 import gr.james.socialinfluence.graph.algorithms.PageRank;
 import gr.james.socialinfluence.graph.algorithms.iterators.RandomSurferIterator;
 import gr.james.socialinfluence.graph.collections.GraphState;
+import gr.james.socialinfluence.graph.collections.VertexPair;
 import gr.james.socialinfluence.graph.generators.BarabasiAlbert;
 import gr.james.socialinfluence.graph.generators.RandomG;
 import gr.james.socialinfluence.helper.Finals;
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Tests {
     /**
@@ -82,6 +88,38 @@ public class Tests {
             /* Assert if maps not approx. equal */
             for (Vertex v : g.getVertices()) {
                 Assert.assertEquals("degreeEigenvectorTest - " + g.getMeta(), degree.get(v), pagerank.get(v), 0.01);
+            }
+        }
+    }
+
+    /**
+     * <p>This test demonstrates that {@link FloydWarshall} yields the same result as multiple executions of
+     * {@link Dijkstra}.</p>
+     */
+    @Test
+    public void FloydWarshallTest() {
+        int counts[] = {10, 20, 30, 40, 50, 100, 250};
+        double ps[] = {0.05, 0.1, 0.2};
+
+        for (int vertexCount : counts) {
+            for (double p : ps) {
+                Graph g = RandomG.generate(vertexCount, p);
+
+                Map<VertexPair, Double> distFloyd = FloydWarshall.execute(g);
+
+                HashMap<VertexPair, Double> distDijkstra = new HashMap<VertexPair, Double>();
+                for (Vertex v : g.getVertices()) {
+                    HashMap<Vertex, Double> temp = Dijkstra.execute(g, v);
+                    for (Map.Entry<Vertex, Double> e : temp.entrySet()) {
+                        distDijkstra.put(new VertexPair(v, e.getKey()), e.getValue());
+                    }
+                }
+
+                for (Vertex u : g.getVertices()) {
+                    for (Vertex v : g.getVertices()) {
+                        Assert.assertEquals("FloydWarshallTest - " + g.getMeta(), distFloyd.get(new VertexPair(u, v)), distDijkstra.get(new VertexPair(u, v)));
+                    }
+                }
             }
         }
     }
