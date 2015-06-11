@@ -103,10 +103,16 @@ public class Tests {
 
         for (int vertexCount : counts) {
             for (double p : ps) {
+                /* Create graph and randomize edge weights */
                 Graph g = RandomG.generate(vertexCount, p);
+                for (Edge e : g.getEdges()) {
+                    e.setWeight(Finals.RANDOM.nextDouble());
+                }
 
+                /* Floyd-Warshall */
                 Map<VertexPair, Double> distFloyd = FloydWarshall.execute(g);
 
+                /* Dijkstra */
                 HashMap<VertexPair, Double> distDijkstra = new HashMap<VertexPair, Double>();
                 for (Vertex v : g.getVertices()) {
                     HashMap<Vertex, Double> temp = Dijkstra.execute(g, v);
@@ -115,9 +121,10 @@ public class Tests {
                     }
                 }
 
+                /* Assertions */
                 for (Vertex u : g.getVertices()) {
                     for (Vertex v : g.getVertices()) {
-                        Assert.assertEquals("FloydWarshallTest - " + g.getMeta(), distFloyd.get(new VertexPair(u, v)), distDijkstra.get(new VertexPair(u, v)));
+                        Assert.assertEquals("FloydWarshallTest - " + g.getMeta(), distFloyd.get(new VertexPair(u, v)), distDijkstra.get(new VertexPair(u, v)), Math.pow(10, -5));
                     }
                 }
             }
