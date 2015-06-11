@@ -21,11 +21,11 @@ public class Tests {
      */
     @Test
     public void randomSurferTest() {
-        double mean = 1000000;
+        int mean = 500000;
         double dampingFactors[] = {0, 0.3};
         double ps[] = {0.05, 0.1};
 
-        for (int vertexCount = 10; vertexCount < 90; vertexCount += 20) {
+        for (int vertexCount = 20; vertexCount <= 40; vertexCount += 20) {
             for (double p : ps) {
                 /* Create graph and randomize edge weights */
                 Graph g = RandomG.generate(vertexCount, p);
@@ -35,11 +35,11 @@ public class Tests {
 
                 /* For all damping factors */
                 for (double DAMPING_FACTOR : dampingFactors) {
-
                     /* Emulate the random surfer until mean of the map values is MEAN, aka for MEAN * N steps */
                     GraphState gs = new GraphState(g, 0.0);
                     RandomSurferIterator rsi = new RandomSurferIterator(g, DAMPING_FACTOR);
-                    while (gs.getMean() < mean) {
+                    int steps = mean * g.getVerticesCount();
+                    while (--steps > 0) {
                         Vertex v = rsi.next();
                         gs.put(v, gs.get(v) + 1.0);
                     }
@@ -52,7 +52,7 @@ public class Tests {
 
                     /* Assert if maps not approx. equal */
                     for (Vertex v : g.getVertices()) {
-                        Assert.assertEquals("randomSurferTest", gs.get(v), pr.get(v), 0.01);
+                        Assert.assertEquals("randomSurferTest - " + g.getMeta(), gs.get(v), pr.get(v), 0.01);
                     }
                 }
             }
