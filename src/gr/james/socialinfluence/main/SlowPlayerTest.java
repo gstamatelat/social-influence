@@ -1,4 +1,4 @@
-package gr.james.socialinfluence.tests;
+package gr.james.socialinfluence.main;
 
 import gr.james.socialinfluence.game.GameDefinition;
 import gr.james.socialinfluence.game.Move;
