@@ -94,7 +94,7 @@ public class Graph {
 
     public Vertex addVertex(Vertex v) {
         if (v.getParentGraph() != null && v.getParentGraph() != this) {
-            throw new GraphException(Finals.E_VERTEX_IS_BOUND);
+            throw new GraphException(Finals.E_GRAPH_VERTEX_BOUND);
         }
         v.parentGraph = this;
         this.vertices.add(v);
@@ -151,10 +151,10 @@ public class Graph {
 
         for (Vertex y : f) {
             for (Edge e : y.getOutEdges()) {
-                this.addEdge(v, e.target).setWeight(e.getWeight());
+                this.addEdge(v, e.getTarget()).setWeight(e.getWeight());
             }
             for (Edge e : y.getInEdges()) {
-                this.addEdge(e.source, v).setWeight(e.getWeight());
+                this.addEdge(e.getSource(), v).setWeight(e.getWeight());
             }
             this.removeVertex(y);
         }
@@ -202,7 +202,7 @@ public class Graph {
 
     public Edge addEdge(Edge e) {
         if (e.getSource().getParentGraph() != this || e.getTarget().getParentGraph() != this) {
-            throw new GraphException(Finals.E_EDGE_NOT_SAME_GRAPH);
+            throw new GraphException(Finals.E_GRAPH_EDGE_DIFFERENT);
         }
         this.edges.add(e);
         return e;
@@ -230,7 +230,7 @@ public class Graph {
         // TODO: Consider doing something like this.remove(new Edge(source, target))
         Edge candidate = null;
         for (Edge e : this.edges) {
-            if (e.source.equals(source) && e.target.equals(target)) {
+            if (e.getSource().equals(source) && e.getTarget().equals(target)) {
                 candidate = e;
                 break;
             }
@@ -259,7 +259,7 @@ public class Graph {
     public Set<Edge> getOutEdges(Vertex v) {
         Set<Edge> outEdges = new HashSet<Edge>();
         for (Edge e : this.edges) {
-            if (e.source.equals(v)) {
+            if (e.getSource().equals(v)) {
                 outEdges.add(e);
             }
         }
@@ -284,7 +284,7 @@ public class Graph {
     public Set<Edge> getInEdges(Vertex v) {
         Set<Edge> inEdges = new HashSet<Edge>();
         for (Edge e : this.edges) {
-            if (e.target.equals(v)) {
+            if (e.getTarget().equals(v)) {
                 inEdges.add(e);
             }
         }
@@ -341,8 +341,8 @@ public class Graph {
         // TODO: Not tested
         ArrayList<Vertex[]> edgeList = new ArrayList<Vertex[]>();
         for (Edge e : this.edges) {
-            Vertex v = e.source;
-            Vertex w = e.target;
+            Vertex v = e.getSource();
+            Vertex w = e.getTarget();
             if (!v.equals(w)) {
                 int indexOfOpposite = -1;
                 for (int i = 0; i < edgeList.size(); i++) {
@@ -407,6 +407,7 @@ public class Graph {
     }
 
     public double getDiameter() {
+        // TODO: Should return a list/path/walk of vertices to show both the weight sum and the steps
         HashMap<Vertex[], Double> distanceMap = new HashMap<Vertex[], Double>();
 
         for (Vertex v : this.getVertices()) {
@@ -438,8 +439,8 @@ public class Graph {
         if (this.isUndirected()) {
             ArrayList<Vertex[]> edgeList = new ArrayList<Vertex[]>();
             for (Edge e : this.edges) {
-                Vertex v = e.source;
-                Vertex w = e.target;
+                Vertex v = e.getSource();
+                Vertex w = e.getTarget();
                 int indexOfOpposite = -1;
                 for (int i = 0; i < edgeList.size(); i++) {
                     if (edgeList.get(i)[0].equals(w) && edgeList.get(i)[1].equals(v)) {
@@ -478,8 +479,8 @@ public class Graph {
             dot += "  bgcolor = transparent;" + System.lineSeparator();
             dot += "  splines = true;" + System.lineSeparator();
             for (Edge e : this.edges) {
-                Vertex v = e.source;
-                Vertex w = e.target;
+                Vertex v = e.getSource();
+                Vertex w = e.getTarget();
                 dot += "  " + v.toString() + " -> " + w.toString() + System.lineSeparator();
             }
             dot += "}" + System.lineSeparator();

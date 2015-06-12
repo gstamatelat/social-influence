@@ -12,6 +12,14 @@ public class Edge extends VertexPair {
         this.weight = Finals.DEFAULT_EDGE_WEIGHT;
     }
 
+    public Vertex getSource() {
+        return this.getFirst();
+    }
+
+    public Vertex getTarget() {
+        return this.getSecond();
+    }
+
     public double getWeight() {
         return this.weight;
     }
@@ -40,12 +48,12 @@ public class Edge extends VertexPair {
 
         Edge edge = (Edge) o;
 
-        return source.equals(edge.source) && target.equals(edge.target);
+        return getSource().equals(edge.getSource()) && getTarget().equals(edge.getTarget());
     }
 
     @Override
     public int hashCode() {
-        return 31 * source.hashCode() + target.hashCode();
+        return 31 * getSource().hashCode() + getTarget().hashCode();
     }
 
     @Override

@@ -80,9 +80,9 @@ public abstract class Player implements Runnable {
 
     public final Player setOption(String name, String value) {
         if (!this.options.containsKey(name)) {
-            throw new GraphException(Finals.E_NO_PARAMETER, this.getClass().getSimpleName(), name);
+            throw new GraphException(Finals.E_PLAYER_NO_PARAMETER, this.getClass().getSimpleName(), name);
         } else if (value == null) {
-            throw new GraphException(Finals.E_OPTION_NOT_NULL);
+            throw new GraphException(Finals.E_PLAYER_OPTION_NULL);
         } else {
             this.options.put(name, value);
         }
