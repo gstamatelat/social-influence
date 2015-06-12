@@ -23,7 +23,7 @@ public class Vertex implements Comparable {
      * <p>Creates a new {@link Vertex} that doesn't belong to a graph. You must bind it to a graph using
      * {@link Graph#addVertex(Vertex)} or {@link #setParentGraph(Graph)} in order to be able to use it.</p>
      */
-    public Vertex() {
+    Vertex() {
         this.id = Vertex.getNextId();
         this.label = String.valueOf(this.id);
         this.parentGraph = null;
