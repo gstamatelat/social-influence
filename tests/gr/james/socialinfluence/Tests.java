@@ -12,6 +12,7 @@ import gr.james.socialinfluence.graph.collections.GraphState;
 import gr.james.socialinfluence.graph.collections.VertexPair;
 import gr.james.socialinfluence.graph.generators.BarabasiAlbert;
 import gr.james.socialinfluence.graph.generators.RandomG;
+import gr.james.socialinfluence.graph.generators.TwoWheels;
 import gr.james.socialinfluence.helper.Finals;
 import org.junit.Assert;
 import org.junit.Test;
@@ -132,5 +133,10 @@ public class Tests {
                 }
             }
         }
+    }
+
+    @Test
+    public void twoWheelsTest() {
+        Graph g = TwoWheels.generate(7);
     }
 }

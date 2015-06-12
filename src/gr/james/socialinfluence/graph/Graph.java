@@ -48,9 +48,12 @@ public class Graph {
                 r.vertices.add(v);
             }
             for (Edge e : g.edges) {
-                e.parentGraph = r;
                 r.edges.add(e);
             }
+        }
+        for (Graph g : graphs) {
+            g.vertices.clear();
+            g.edges.clear();
         }
         return r;
     }
@@ -198,8 +201,10 @@ public class Graph {
     }
 
     public Edge addEdge(Vertex source, Vertex target) {
+        if (source.getParentGraph() != this || target.getParentGraph() != this) {
+            throw new GraphException(Finals.E_EDGE_NOT_SAME_GRAPH);
+        }
         Edge e = new Edge(source, target);
-        e.parentGraph = this;
         this.edges.add(e);
         return e;
     }

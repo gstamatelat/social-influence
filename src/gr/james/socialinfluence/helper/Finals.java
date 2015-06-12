@@ -22,4 +22,5 @@ public class Finals {
     public static final String E_BARABASI_STEP = "stepEdges <= initialClique is a constraint";
     public static final String E_MOVE_WEIGHT_NEGATIVE = "A player is trying to add a Vertex on a Move object with a non-positive weight %f. This is caused when .putVertex() is called with a negative weight argument.";
     public static final String E_VERTEX_IS_BOUND = "Trying to add a vertex that already belongs to another graph. Remove it first.";
+    public static final String E_EDGE_NOT_SAME_GRAPH = "The source and target of an edge must both belong to the graph you are trying to add it.";
 }

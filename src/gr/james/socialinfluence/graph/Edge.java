@@ -5,7 +5,6 @@ import gr.james.socialinfluence.helper.Finals;
 import gr.james.socialinfluence.helper.Helper;
 
 public class Edge extends VertexPair {
-    Graph parentGraph;
     double weight;
 
     Edge(Vertex source, Vertex target) {
@@ -24,10 +23,6 @@ public class Edge extends VertexPair {
             this.weight = weight;
         }
         return this;
-    }
-
-    public Graph remove() {
-        return this.parentGraph.removeEdge(this);
     }
 
     /**
