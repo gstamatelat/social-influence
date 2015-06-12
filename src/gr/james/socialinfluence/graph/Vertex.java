@@ -110,6 +110,7 @@ public class Vertex implements Comparable {
      * <p><b>Running Time:</b> Slow</p>
      *
      * @return the inbound degree of this vertex
+     * @see #getOutDegree()
      */
     public int getInDegree() {
         return this.parentGraph.getInDegree(this);
@@ -121,6 +122,7 @@ public class Vertex implements Comparable {
      * <p><b>Running Time:</b> Slow</p>
      *
      * @return the outbound degree of this vertex
+     * @see #getInDegree()
      */
     public int getOutDegree() {
         return this.parentGraph.getOutDegree(this);
@@ -131,6 +133,7 @@ public class Vertex implements Comparable {
      * <p><b>Running Time:</b> Slow</p>
      *
      * @return the sum of weights of all outbound edges from this vertex
+     * @see #getInWeightSum()
      */
     public double getOutWeightSum() {
         return this.parentGraph.getOutWeightSum(this);
@@ -141,6 +144,7 @@ public class Vertex implements Comparable {
      * <p><b>Running Time:</b> Slow</p>
      *
      * @return the sum of weights of all inbound edges to this vertex
+     * @see #getOutWeightSum()
      */
     public double getInWeightSum() {
         return this.parentGraph.getInWeightSum(this);
