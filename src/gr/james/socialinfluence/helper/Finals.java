@@ -21,4 +21,5 @@ public class Finals {
     public static final String E_OPTION_NOT_NULL = "Player option value can't be null.";
     public static final String E_BARABASI_STEP = "stepEdges <= initialClique is a constraint";
     public static final String E_MOVE_WEIGHT_NEGATIVE = "A player is trying to add a Vertex on a Move object with a non-positive weight %f but no change was performed. This is caused when .putVertex() is called with a negative weight argument.";
+    public static final String E_VERTEX_HAS_GRAPH = "Trying to add a vertex that already belongs to another graph. Remove it first.";
 }

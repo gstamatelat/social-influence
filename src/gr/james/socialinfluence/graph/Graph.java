@@ -91,7 +91,7 @@ public class Graph {
 
     public Vertex addVertex(Vertex v) {
         if (v.getParentGraph() != null && v.getParentGraph() != this) {
-            throw new GraphException("Trying to add a vertex that already belongs to another graph. Remove it first.");
+            throw new GraphException(Finals.E_VERTEX_HAS_GRAPH);
         }
         v.parentGraph = this;
         this.vertices.add(v);
