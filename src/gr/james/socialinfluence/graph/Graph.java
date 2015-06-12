@@ -200,13 +200,16 @@ public class Graph {
         return this.edges.size();
     }
 
-    public Edge addEdge(Vertex source, Vertex target) {
-        if (source.getParentGraph() != this || target.getParentGraph() != this) {
+    public Edge addEdge(Edge e) {
+        if (e.getSource().getParentGraph() != this || e.getTarget().getParentGraph() != this) {
             throw new GraphException(Finals.E_EDGE_NOT_SAME_GRAPH);
         }
-        Edge e = new Edge(source, target);
         this.edges.add(e);
         return e;
+    }
+
+    public Edge addEdge(Vertex source, Vertex target) {
+        return this.addEdge(new Edge(source, target));
     }
 
     public Set<Edge> addEdge(Vertex source, Vertex target, boolean undirected) {

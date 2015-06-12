@@ -12,7 +12,6 @@ import gr.james.socialinfluence.graph.collections.GraphState;
 import gr.james.socialinfluence.graph.collections.VertexPair;
 import gr.james.socialinfluence.graph.generators.BarabasiAlbert;
 import gr.james.socialinfluence.graph.generators.RandomG;
-import gr.james.socialinfluence.graph.generators.TwoWheels;
 import gr.james.socialinfluence.helper.Finals;
 import org.junit.Assert;
 import org.junit.Test;
@@ -136,7 +135,23 @@ public class Tests {
     }
 
     @Test
-    public void twoWheelsTest() {
-        Graph g = TwoWheels.generate(7);
+    public void combineGraphsTest() {
+        int GRAPHS = 10;
+
+        Graph graphs[] = new Graph[GRAPHS];
+        for (int i = 0; i < GRAPHS; i++) {
+            graphs[i] = RandomG.generate(Finals.RANDOM.nextInt(50) + 50, Finals.RANDOM.nextDouble());
+        }
+
+        int vertexCount = 0;
+        int edgeCount = 0;
+        for (Graph g : graphs) {
+            vertexCount += g.getVerticesCount();
+            edgeCount += g.getEdgesCount();
+        }
+
+        Graph g = Graph.combineGraphs(graphs);
+        Assert.assertEquals("combineGraphsTest - vertexCount", vertexCount, g.getVerticesCount());
+        Assert.assertEquals("combineGraphsTest - edgeCount", edgeCount, g.getEdgesCount());
     }
 }
