@@ -46,8 +46,10 @@ public class Game {
         Vertex playerA = this.g.addVertex();
         Vertex playerB = this.g.addVertex();
 
-        playerA.addEdge(playerA);
-        playerB.addEdge(playerB);
+        this.g.addEdge(playerA, playerA);
+        this.g.addEdge(playerB, playerB);
+        //playerA.addEdge(playerA);
+        //playerB.addEdge(playerB);
 
         for (MovePoint e : this.playerAMove) {
             g.addEdge(e.vertex, playerA).setWeight(e.weight);
@@ -77,12 +79,12 @@ public class Game {
             if (this.playerAMove.getVerticesCount() > d.getNumOfMoves()) {
                 String oldMove = this.playerAMove.toString();
                 this.playerAMove.sliceMove(d.getNumOfMoves());
-                Helper.log(String.format(Finals.S_MOVE_EXCEED, oldMove, d.getNumOfMoves(), this.playerAMove.toString()));
+                Helper.logError(Finals.W_MOVE_EXCEED, oldMove, d.getNumOfMoves(), this.playerAMove.toString());
             }
             if (this.playerBMove.getVerticesCount() > d.getNumOfMoves()) {
                 String oldMove = this.playerBMove.toString();
                 this.playerBMove.sliceMove(d.getNumOfMoves());
-                Helper.log(String.format(Finals.S_MOVE_EXCEED, oldMove, d.getNumOfMoves(), this.playerBMove.toString()));
+                Helper.logError(Finals.W_MOVE_EXCEED, oldMove, d.getNumOfMoves(), this.playerBMove.toString());
             }
 
             this.playerAMove.normalizeWeights(d.getBudget());

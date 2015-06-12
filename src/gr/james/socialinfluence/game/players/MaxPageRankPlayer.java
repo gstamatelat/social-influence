@@ -14,7 +14,7 @@ public class MaxPageRankPlayer extends Player {
         }
         this.movePtr.set(m);
         if (!this.d.getTournament()) {
-            Helper.log("Max PageRank player: " + m);
+            Helper.log("Max PageRank player: %s", m);
         }
     }
 }

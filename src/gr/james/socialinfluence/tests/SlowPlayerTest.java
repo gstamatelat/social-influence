@@ -15,6 +15,6 @@ public class SlowPlayerTest {
 
         Player slowPlayer = new SlowPlayer();
         Move m = slowPlayer.findMove(g, d);
-        Helper.log("Final move: " + m.toString());
+        Helper.log("Final move: %s", m);
     }
 }

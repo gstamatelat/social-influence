@@ -20,15 +20,19 @@ public class Vertex implements Comparable {
     protected String label;
     protected Graph parentGraph;
 
-    public Vertex(Graph parentGraph) {
+    /**
+     * <p>Creates a new {@link Vertex} that doesn't belong to a graph. You must bind it to a graph using
+     * {@link Graph#addVertex(Vertex)} or {@link #setParentGraph(Graph)} in order to be able to use it.</p>
+     */
+    public Vertex() {
         this.id = Vertex.getNextId();
         this.label = String.valueOf(this.id);
-        this.parentGraph = parentGraph;
+        this.parentGraph = null;
     }
 
     /**
      * <p>Returns an integer id that is guaranteed to be unique for every framework session (execution). This method is
-     * used by the constructor {@link Vertex#Vertex(Graph)} to produce a unique id for the new vertex.</p>
+     * used by the constructor {@link #Vertex()} to produce a unique id for the new vertex.</p>
      *
      * @return the unique id
      */
@@ -72,6 +76,11 @@ public class Vertex implements Comparable {
 
     public Graph getParentGraph() {
         return this.parentGraph;
+    }
+
+    public Graph setParentGraph(Graph g) {
+        g.addVertex(this);
+        return g;
     }
 
     /**

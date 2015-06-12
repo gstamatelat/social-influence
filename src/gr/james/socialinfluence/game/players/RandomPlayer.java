@@ -14,7 +14,7 @@ public class RandomPlayer extends Player {
         }
         this.movePtr.set(m);
         if (!this.d.getTournament()) {
-            Helper.log("RandomG player: " + m);
+            Helper.log("RandomG player: %s", m);
         }
     }
 }

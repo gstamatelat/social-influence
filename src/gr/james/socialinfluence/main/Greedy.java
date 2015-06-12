@@ -22,6 +22,6 @@ public class Greedy {
 
         Player greedyPlayer = new GreedyPlayer();
         Move m = greedyPlayer.findMove(g, new GameDefinition(movesCount, (double) movesCount, 60000L, false));
-        Helper.log("Final move: " + m.toString());
+        Helper.log("Final move: %s", m);
     }
 }

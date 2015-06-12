@@ -24,12 +24,12 @@ public class Helper {
         return num;
     }
 
-    public static void log(String text) {
-        System.out.println(new SimpleDateFormat("dd/MM/yyyy HH:mm").format(Calendar.getInstance().getTime()) + " | " + text);
+    public static void log(String messagePattern, Object... arguments) {
+        System.out.println(new SimpleDateFormat("dd/MM/yyyy HH:mm").format(Calendar.getInstance().getTime()) + " | " + String.format(messagePattern, arguments));
     }
 
-    public static void logError(String text) {
-        System.err.println(text);
+    public static void logError(String messagePattern, Object... arguments) {
+        System.err.println(new SimpleDateFormat("dd/MM/yyyy HH:mm").format(Calendar.getInstance().getTime()) + " | " + String.format(messagePattern, arguments));
     }
 
     public static Random getRandom(Random r) {

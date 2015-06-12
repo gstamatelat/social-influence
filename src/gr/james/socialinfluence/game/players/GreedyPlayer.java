@@ -108,7 +108,7 @@ public class GreedyPlayer extends Player {
 
             /* This helps when computation takes a long time */
             if (!this.d.getTournament()) {
-                Helper.log(firstGuess + " : " + minMove);
+                Helper.log("%s : %s", firstGuess, minMove);
             }
         }
     }

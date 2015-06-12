@@ -3,6 +3,7 @@ package gr.james.socialinfluence.graph;
 import gr.james.socialinfluence.graph.algorithms.Dijkstra;
 import gr.james.socialinfluence.graph.algorithms.iterators.RandomVertexIterator;
 import gr.james.socialinfluence.helper.Finals;
+import gr.james.socialinfluence.helper.GraphException;
 import gr.james.socialinfluence.helper.Helper;
 import gr.james.socialinfluence.helper.WeightedRandom;
 
@@ -82,7 +83,17 @@ public class Graph {
      * @return the new vertex object
      */
     public Vertex addVertex() {
-        Vertex v = new Vertex(this);
+        Vertex v = new Vertex();
+        v.parentGraph = this;
+        this.vertices.add(v);
+        return v;
+    }
+
+    public Vertex addVertex(Vertex v) {
+        if (v.getParentGraph() != null && v.getParentGraph() != this) {
+            throw new GraphException("Trying to add a vertex that already belongs to another graph. Remove it first.");
+        }
+        v.parentGraph = this;
         this.vertices.add(v);
         return v;
     }
@@ -111,6 +122,7 @@ public class Graph {
             }
         }
         this.vertices.remove(v);
+        v.parentGraph = null;
         return this;
     }
 
@@ -123,15 +135,6 @@ public class Graph {
         return null;
     }
 
-    public boolean containsId(int id) {
-        return this.getVertexFromId(id) != null;
-    }
-
-    private Graph orderLabels(Iterator<Vertex> vi) {
-        // TODO: Implement
-        return this;
-    }
-
     /**
      * <p>Fuses two or more vertices into a single one. This method may cause information loss
      * if there are conflicts on the edges.</p>
@@ -141,7 +144,6 @@ public class Graph {
      * @return the vertex that is the result of the fusion
      */
     public Vertex fuseVertices(Vertex[] f) {
-        // TODO: Add running time
         Vertex v = this.addVertex();
 
         for (Vertex y : f) {
@@ -186,7 +188,7 @@ public class Graph {
 
     /**
      * <p>Calculates the total amount of directed edges that this graph has. This method is a little faster than using
-     * getEdges().size()</p>
+     * {@code getEdges().size()}.</p>
      * <p><b>Running Time:</b> Very Fast</p>
      *
      * @return the number of directed edges in this graph
@@ -219,6 +221,7 @@ public class Graph {
     }
 
     public Graph removeEdge(Vertex source, Vertex target) {
+        // TODO: Consider doing something like this.remove(new Edge(source, target))
         Edge candidate = null;
         for (Edge e : this.edges) {
             if (e.source.equals(source) && e.target.equals(target)) {

@@ -82,21 +82,21 @@ public class BruteForcePlayer extends Player {
             } else if (gameScore == 0) {
                 if (moveDraws.add(game.getPlayerBMove())) {
                     if (!this.d.getTournament()) {
-                        Helper.log("Draw with move " + game.getPlayerBMove());
+                        Helper.log("Draw with move %s", game.getPlayerBMove());
                     }
                 }
             } else {
                 boolean contained = movesHistory.add(newMove);
                 if (!contained) {
                     if (!this.d.getTournament()) {
-                        Helper.log("Going in circles after " + game.getPlayerBMove());
+                        Helper.log("Going in circles after %s", game.getPlayerBMove());
                     }
                 }
                 moveDraws.clear();
                 bestMove = newMove;
                 this.movePtr.set(bestMove);
                 if (!this.d.getTournament()) {
-                    Helper.log("New best move " + newMove.toString());
+                    Helper.log("New best move %s", newMove.toString());
                 }
             }
         }

@@ -17,7 +17,7 @@ public class SlowPlayer extends Player {
             }
             this.movePtr.set(m);
             if (!this.d.getTournament()) {
-                Helper.log("Slow player: " + m);
+                Helper.log("Slow player: %s", m);
             }
         }
     }

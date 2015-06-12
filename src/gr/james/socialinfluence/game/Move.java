@@ -2,7 +2,7 @@ package gr.james.socialinfluence.game;
 
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.helper.Finals;
-import gr.james.socialinfluence.helper.Helper;
+import gr.james.socialinfluence.helper.GraphException;
 
 import java.util.Iterator;
 import java.util.Set;
@@ -36,13 +36,8 @@ public class Move implements Iterable<MovePoint> {
      * @return the current instance
      */
     public Move putVertex(Vertex v, double weight) {
-        if (v == null) {
-            Helper.logError(Finals.S_MOVE_VERTEX_NULL);
-            return this;
-        }
         if (weight <= 0) {
-            Helper.logError(String.format(Finals.S_MOVE_WEIGHT_NEGATIVE, weight));
-            return this;
+            throw new GraphException(Finals.E_MOVE_WEIGHT_NEGATIVE, weight);
         }
 
         boolean exists = false;

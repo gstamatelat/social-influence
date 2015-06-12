@@ -21,6 +21,15 @@ public class Edge {
         return this.weight;
     }
 
+    public Edge setWeight(double weight) {
+        if (weight <= 0) {
+            Helper.logError(Finals.W_EDGE_WEIGHT_NEGATIVE, weight);
+        } else {
+            this.weight = weight;
+        }
+        return this;
+    }
+
     public Vertex getSource() {
         return this.source;
     }
@@ -33,51 +42,31 @@ public class Edge {
         return this.parentGraph.removeEdge(this);
     }
 
-    public Edge setWeight(double weight) {
-        if (weight <= 0) {
-            Helper.logError(String.format(Finals.S_EDGE_WEIGHT_NEGATIVE, weight));
-        } else {
-            this.weight = weight;
-        }
-        return this;
-    }
-
-    @Override
-    public int hashCode() {
-        return 5 * source.hashCode() + 7 * target.hashCode();
-    }
-
     /**
      * <p>Compares this Edge to the specified object. The result is {@code true} if the edges have the same {@code
      * source} and the same {@code target} (that is, with the same ids); {@code weight} does not play any role in the
      * result.</p>
      *
-     * @param obj The object to compare this {@code Edge} against
+     * @param o The object to compare this {@code Edge} against
      * @return {@code true} if the argument represents an {@code Edge} equivalent to this edge, otherwise {@code false}
      */
     @Override
-    public boolean equals(Object obj) {
-        if (obj == null)
-            return false;
-        if (obj == this)
-            return true;
-        if (!(obj instanceof Edge))
-            return false;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
-        Edge rhs = (Edge) obj;
+        Edge edge = (Edge) o;
 
-        if (!rhs.source.equals(this.source)) {
-            return false;
-        }
-        if (!rhs.target.equals(this.target)) {
-            return false;
-        }
+        return source.equals(edge.source) && target.equals(edge.target);
+    }
 
-        return true;
+    @Override
+    public int hashCode() {
+        return 31 * source.hashCode() + target.hashCode();
     }
 
     @Override
     public String toString() {
-        return source.toString() + " -> " + target.toString() + " [" + weight + "]";
+        return String.format("%s -> %s [%f]", this.source, this.target, this.weight);
     }
 }

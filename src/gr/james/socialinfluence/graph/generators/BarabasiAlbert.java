@@ -4,6 +4,7 @@ import gr.james.socialinfluence.graph.Graph;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.graph.algorithms.Degree;
 import gr.james.socialinfluence.helper.Finals;
+import gr.james.socialinfluence.helper.GraphException;
 import gr.james.socialinfluence.helper.Helper;
 import gr.james.socialinfluence.helper.WeightedRandom;
 
@@ -16,8 +17,7 @@ public class BarabasiAlbert {
         R = Helper.getRandom(R);
 
         if (stepEdges > initialClique) {
-            Helper.logError(Finals.S_BARABASI_STEP);
-            return null;
+            throw new GraphException(Finals.E_BARABASI_STEP);
         }
 
         Graph g = Clique.generate(initialClique);
