@@ -40,22 +40,6 @@ public class Helper {
         }
     }
 
-    /**
-     * <p>This field holds a serial number needed by {@link #getNextId getNextId()}.</p>
-     */
-    private static int nextId = 1;
-
-    /**
-     * <p>Returns an integer id that is guaranteed to be unique for every session (execution). This method is used by
-     * {@link gr.james.socialinfluence.graph.Graph#addVertex() Graph.addVertex()} to produce a unique id for the new
-     * vertex.</p>
-     *
-     * @return the unique id
-     */
-    public static int getNextId() {
-        return nextId++;
-    }
-
     public static double getWeightSum(Set<Edge> edges) {
         double sum = 0;
         for (Edge e : edges) {

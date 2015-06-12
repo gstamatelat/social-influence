@@ -46,12 +46,14 @@ public class GreedyPlayer extends Player {
         HashMap<Vertex, Double> vector = new HashMap<Vertex, Double>();
 
         /* Fill the distanceMap */
+        // TODO: Replace this snippet with FloydWarshall method, but care, this map has (t,s) rather than (s,t)
         for (Vertex v : this.g.getVertices()) {
             HashMap<Vertex, Double> temp = Dijkstra.execute(this.g, v);
             for (Map.Entry<Vertex, Double> e : temp.entrySet()) {
                 distanceMap.put(new Vertex[]{e.getKey(), v}, e.getValue());
             }
         }
+        // TODO: Replace up to here
         for (Map.Entry<Vertex[], Double> e : distanceMap.entrySet()) {
             e.setValue(1 / Math.exp(e.getValue()));
         }

@@ -124,6 +124,9 @@ public class Tests {
                 /* Assertions */
                 for (Vertex u : g.getVertices()) {
                     for (Vertex v : g.getVertices()) {
+                        // TODO: Both Dijkstra and Floyd-Warshall use additions, it is intuitive that there won't be any double rounding issues
+                        // TODO: Also, 10^{-5} is too hardcoded for a quantity that could very well be really close to 10^{-5}
+                        // TODO: It's better to just compare 1 (one) with the ratio of distFloyd/distDijkstra
                         Assert.assertEquals("FloydWarshallTest - " + g.getMeta(), distFloyd.get(new VertexPair(u, v)), distDijkstra.get(new VertexPair(u, v)), Math.pow(10, -5));
                     }
                 }

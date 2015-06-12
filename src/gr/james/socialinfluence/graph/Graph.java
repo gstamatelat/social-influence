@@ -82,7 +82,7 @@ public class Graph {
      * @return the new vertex object
      */
     public Vertex addVertex() {
-        Vertex v = new Vertex(Helper.getNextId(), this);
+        Vertex v = new Vertex(this);
         this.vertices.add(v);
         return v;
     }

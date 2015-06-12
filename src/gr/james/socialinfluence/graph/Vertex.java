@@ -10,14 +10,30 @@ import java.util.Set;
  * There is no deep copy of a Vertex as that would not be practical for the operations that can be performed.</p>
  */
 public class Vertex implements Comparable {
+
+    /**
+     * <p>This field holds a serial number needed by {@link #getNextId getNextId()}.</p>
+     */
+    private static int nextId = 1;
+
     protected int id;
     protected String label;
     protected Graph parentGraph;
 
-    Vertex(int id, Graph parentGraph) {
-        this.id = id;
-        this.label = String.valueOf(id);
+    public Vertex(Graph parentGraph) {
+        this.id = Vertex.getNextId();
+        this.label = String.valueOf(this.id);
         this.parentGraph = parentGraph;
+    }
+
+    /**
+     * <p>Returns an integer id that is guaranteed to be unique for every framework session (execution). This method is
+     * used by the constructor {@link Vertex#Vertex(Graph)} to produce a unique id for the new vertex.</p>
+     *
+     * @return the unique id
+     */
+    private static int getNextId() {
+        return nextId++;
     }
 
     /**
@@ -131,32 +147,29 @@ public class Vertex implements Comparable {
     }
 
     @Override
-    public int compareTo(Object o) {
-        Vertex rhs = (Vertex) o;
-        return Integer.compare(this.id, rhs.id);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Vertex vertex = (Vertex) o;
+
+        return this.id == vertex.id;
+
     }
 
     @Override
     public int hashCode() {
-        return id;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null)
-            return false;
-        if (obj == this)
-            return true;
-        if (!(obj instanceof Vertex))
-            return false;
-
-        Vertex rhs = (Vertex) obj;
-
-        return this.id == rhs.id;
+        return this.id;
     }
 
     @Override
     public String toString() {
-        return label;
+        return this.label;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        Vertex rhs = (Vertex) o;
+        return Integer.compare(this.id, rhs.id);
     }
 }
