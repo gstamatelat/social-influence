@@ -16,10 +16,10 @@ public class Finals {
     public static final String W_MOVE_EXCEED = "WARNING: Move %s contains more than %d vertices. Slicing to %s. This indicates a mistake in your player.";
 
     /* Exceptions: these finals must be arguments to GraphException() */
-    public static final String E_ILLEGAL_ARGUMENT_NULL = "Argument %s can't be null in Class %s";
+    public static final String E_ARGUMENT_NULL = "Argument %s can't be null in Class %s";
     public static final String E_NO_PARAMETER = "%s doesn't have any parameter with name %s.";
     public static final String E_OPTION_NOT_NULL = "Player option value can't be null.";
     public static final String E_BARABASI_STEP = "stepEdges <= initialClique is a constraint";
-    public static final String E_MOVE_WEIGHT_NEGATIVE = "A player is trying to add a Vertex on a Move object with a non-positive weight %f but no change was performed. This is caused when .putVertex() is called with a negative weight argument.";
-    public static final String E_VERTEX_HAS_GRAPH = "Trying to add a vertex that already belongs to another graph. Remove it first.";
+    public static final String E_MOVE_WEIGHT_NEGATIVE = "A player is trying to add a Vertex on a Move object with a non-positive weight %f. This is caused when .putVertex() is called with a negative weight argument.";
+    public static final String E_VERTEX_IS_BOUND = "Trying to add a vertex that already belongs to another graph. Remove it first.";
 }

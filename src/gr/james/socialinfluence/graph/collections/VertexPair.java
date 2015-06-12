@@ -13,10 +13,10 @@ public class VertexPair {
 
     public VertexPair(Vertex source, Vertex target) {
         if (source == null) {
-            throw new IllegalArgumentException(String.format(Finals.E_ILLEGAL_ARGUMENT_NULL, "source", this.getClass().getSimpleName()));
+            throw new IllegalArgumentException(String.format(Finals.E_ARGUMENT_NULL, "source", this.getClass().getSimpleName()));
         }
         if (target == null) {
-            throw new IllegalArgumentException(String.format(Finals.E_ILLEGAL_ARGUMENT_NULL, "target", this.getClass().getSimpleName()));
+            throw new IllegalArgumentException(String.format(Finals.E_ARGUMENT_NULL, "target", this.getClass().getSimpleName()));
         }
         this.source = source;
         this.target = target;

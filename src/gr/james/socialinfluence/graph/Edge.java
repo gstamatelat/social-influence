@@ -1,20 +1,16 @@
 package gr.james.socialinfluence.graph;
 
+import gr.james.socialinfluence.graph.collections.VertexPair;
 import gr.james.socialinfluence.helper.Finals;
 import gr.james.socialinfluence.helper.Helper;
 
-public class Edge {
-    Vertex source;
-    Vertex target;
+public class Edge extends VertexPair {
     Graph parentGraph;
     double weight;
 
-    Edge() {
+    Edge(Vertex source, Vertex target) {
+        super(source, target);
         this.weight = Finals.DEFAULT_EDGE_WEIGHT;
-    }
-
-    public Edge(double weight) {
-        this.setWeight(weight);
     }
 
     public double getWeight() {
@@ -28,14 +24,6 @@ public class Edge {
             this.weight = weight;
         }
         return this;
-    }
-
-    public Vertex getSource() {
-        return this.source;
-    }
-
-    public Vertex getTarget() {
-        return this.target;
     }
 
     public Graph remove() {
@@ -67,6 +55,6 @@ public class Edge {
 
     @Override
     public String toString() {
-        return String.format("%s -> %s [%f]", this.source, this.target, this.weight);
+        return String.format("%s -> %s [%f]", this.getSource(), this.getTarget(), this.weight);
     }
 }

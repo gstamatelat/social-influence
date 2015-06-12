@@ -91,7 +91,7 @@ public class Graph {
 
     public Vertex addVertex(Vertex v) {
         if (v.getParentGraph() != null && v.getParentGraph() != this) {
-            throw new GraphException(Finals.E_VERTEX_HAS_GRAPH);
+            throw new GraphException(Finals.E_VERTEX_IS_BOUND);
         }
         v.parentGraph = this;
         this.vertices.add(v);
@@ -198,9 +198,7 @@ public class Graph {
     }
 
     public Edge addEdge(Vertex source, Vertex target) {
-        Edge e = new Edge();
-        e.source = source;
-        e.target = target;
+        Edge e = new Edge(source, target);
         e.parentGraph = this;
         this.edges.add(e);
         return e;

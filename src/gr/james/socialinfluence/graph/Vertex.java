@@ -15,10 +15,9 @@ public class Vertex implements Comparable {
      * <p>This field holds a serial number needed by {@link #getNextId getNextId()}.</p>
      */
     private static int nextId = 1;
-
-    protected int id;
-    protected String label;
-    protected Graph parentGraph;
+    String label;
+    Graph parentGraph;
+    private int id;
 
     /**
      * <p>Creates a new {@link Vertex} that doesn't belong to a graph. You must bind it to a graph using
