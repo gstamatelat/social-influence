@@ -38,6 +38,7 @@ public class Move implements Iterable<MovePoint> {
     public Move putVertex(Vertex v, double weight) {
         if (weight <= 0) {
             throw new GraphException(Finals.E_MOVE_WEIGHT_NEGATIVE, weight);
+
         }
 
         boolean exists = false;
