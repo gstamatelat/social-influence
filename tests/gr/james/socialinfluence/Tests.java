@@ -124,7 +124,8 @@ public class Tests {
                         // TODO: Both Dijkstra and Floyd-Warshall use additions, it is intuitive that there won't be any double rounding issues
                         // TODO: Also, 10^{-5} is too hardcoded for a quantity that could very well be really close to 10^{-5}
                         // TODO: It's better to just compare 1 (one) with the ratio of distFloyd/distDijkstra
-                        Assert.assertEquals("FloydWarshallTest - " + g.getMeta(), distFloyd.get(new VertexPair(u, v)), distDijkstra.get(new VertexPair(u, v)), Math.pow(10, -5));
+                        Assert.assertEquals("FloydWarshallTest - " + g.getMeta(), distFloyd.get(new VertexPair(u, v)),
+                                distDijkstra.get(new VertexPair(u, v)), Math.pow(10, -5));
                     }
                 }
             }
@@ -172,8 +173,8 @@ public class Tests {
     }
 
     /**
-     * <p>In the {@link TwoWheels} graph, the maximum degree should be {@code max(6, n-1)}, where {@code n} is the
-     * input of {@link TwoWheels#generate(int)}</p>
+     * <p>In the {@link TwoWheels} graph, the maximum degree should be {@code max(6, n-1)}, where {@code n} is the input
+     * of {@link TwoWheels#generate(int)}</p>
      */
     @Test
     public void twoWheelsTest() {

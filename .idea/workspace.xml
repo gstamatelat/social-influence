@@ -6,7 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d584793e-3e99-4c99-962d-98344dab3943" name="Default" comment="2 more bullets in TODO (and counting)">
+    <list default="true" id="d584793e-3e99-4c99-962d-98344dab3943" name="Default" comment="Simplified randomSurfer Test">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/gr/james/socialinfluence/Tests.java" afterPath="$PROJECT_DIR$/tests/gr/james/socialinfluence/Tests.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -97,8 +97,8 @@
       <file leaf-file-name="Tests.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tests/gr/james/socialinfluence/Tests.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.3097484">
-              <caret line="49" column="39" selection-start-line="49" selection-start-column="39" selection-end-line="49" selection-end-column="39" />
+            <state vertical-scroll-proportion="0.6415094">
+              <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -934,12 +934,6 @@
       <workItem from="1390549192770" duration="36385000" />
       <workItem from="1390703827822" duration="9771000" />
     </task>
-    <task id="LOCAL-00211">
-      <created>1432203682042</created>
-      <option name="number" value="00211" />
-      <option name="project" value="LOCAL" />
-      <updated>1432203682042</updated>
-    </task>
     <task id="LOCAL-00212">
       <created>1432221938644</created>
       <option name="number" value="00212" />
@@ -1228,7 +1222,13 @@
       <option name="project" value="LOCAL" />
       <updated>1434287290433</updated>
     </task>
-    <option name="localTasksCounter" value="260" />
+    <task id="LOCAL-00260" summary="Simplified randomSurfer Test">
+      <created>1434289582201</created>
+      <option name="number" value="00260" />
+      <option name="project" value="LOCAL" />
+      <updated>1434289582201</updated>
+    </task>
+    <option name="localTasksCounter" value="261" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -1336,7 +1336,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="delete broken class" />
     <MESSAGE value="todo in tests" />
     <MESSAGE value="convert eigenvectordegree to test" />
     <MESSAGE value="Create VertexPair class" />
@@ -1361,7 +1360,8 @@
     <MESSAGE value="Update TwoWheel generator &amp; test" />
     <MESSAGE value="TwoWheels test javadoc" />
     <MESSAGE value="2 more bullets in TODO (and counting)" />
-    <option name="LAST_COMMIT_MESSAGE" value="2 more bullets in TODO (and counting)" />
+    <MESSAGE value="Simplified randomSurfer Test" />
+    <option name="LAST_COMMIT_MESSAGE" value="Simplified randomSurfer Test" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -1757,8 +1757,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/gr/james/socialinfluence/Tests.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.3097484">
-          <caret line="49" column="39" selection-start-line="49" selection-start-column="39" selection-end-line="49" selection-end-column="39" />
+        <state vertical-scroll-proportion="0.6415094">
+          <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
           <folding />
         </state>
       </provider>
