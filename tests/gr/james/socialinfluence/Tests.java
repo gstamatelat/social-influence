@@ -13,6 +13,7 @@ import gr.james.socialinfluence.graph.collections.VertexPair;
 import gr.james.socialinfluence.graph.generators.BarabasiAlbert;
 import gr.james.socialinfluence.graph.generators.BarabasiAlbertCluster;
 import gr.james.socialinfluence.graph.generators.RandomG;
+import gr.james.socialinfluence.graph.generators.TwoWheels;
 import gr.james.socialinfluence.helper.Finals;
 import org.junit.Assert;
 import org.junit.Test;
@@ -172,6 +173,32 @@ public class Tests {
                 Graph g = BarabasiAlbertCluster.generate(_clusterSize, 2, 2, 1.0, _clusters);
                 Assert.assertEquals("clustersTest", _clusters * _clusterSize, g.getVerticesCount());
             }
+        }
+    }
+
+    @Test
+    public void twoWheelsTest() {
+        for (int k = 4; k < 100; k++) {
+            /* Generate TwoWheels(k) */
+            Graph g = TwoWheels.generate(k);
+
+            /* Get degree */
+            GraphState gs = Degree.execute(g, true);
+
+            /* Get the max */
+            int max = 0;
+            for (Vertex v : g.getVertices()) {
+                if (gs.get(v) > max) {
+                    max = gs.get(v).intValue();
+                }
+            }
+
+            if (Math.max(6, k - 1) != max) {
+                g.exportToDot(System.out);
+            }
+
+            /* The max has to be k or 6 if k is too low */
+            Assert.assertEquals("twoWheelsTest - " + k, Math.max(6, k - 1), max);
         }
     }
 }

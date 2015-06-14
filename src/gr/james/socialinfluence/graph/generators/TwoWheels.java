@@ -7,8 +7,20 @@ public class TwoWheels {
     public static Graph generate(int wheelVertices) {
         Graph g1 = Wheel.generate(wheelVertices);
         Graph g2 = Wheel.generate(wheelVertices);
-        Vertex a = g1.getVertices().iterator().next();
-        Vertex b = g2.getVertices().iterator().next();
+        Vertex a = null;
+        Vertex b = null;
+        for (Vertex v : g1.getVertices()) {
+            if (v.getOutDegree() == 3) {
+                a = v;
+                break;
+            }
+        }
+        for (Vertex v : g2.getVertices()) {
+            if (v.getOutDegree() == 3) {
+                b = v;
+                break;
+            }
+        }
         Graph g = Graph.combineGraphs(new Graph[]{g1, g2});
         g.fuseVertices(new Vertex[]{a, b});
 
