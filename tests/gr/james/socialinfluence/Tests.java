@@ -11,8 +11,10 @@ import gr.james.socialinfluence.graph.algorithms.iterators.RandomSurferIterator;
 import gr.james.socialinfluence.graph.collections.GraphState;
 import gr.james.socialinfluence.graph.collections.VertexPair;
 import gr.james.socialinfluence.graph.generators.BarabasiAlbert;
+import gr.james.socialinfluence.graph.generators.BarabasiAlbertCluster;
 import gr.james.socialinfluence.graph.generators.RandomG;
 import gr.james.socialinfluence.helper.Finals;
+import gr.james.socialinfluence.helper.Helper;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -159,5 +161,12 @@ public class Tests {
             Assert.assertEquals("combineGraphsTest - subGraph - vertices", 0, u.getVerticesCount());
             Assert.assertEquals("combineGraphsTest - subGraph - edges", 0, u.getEdgesCount());
         }
+    }
+
+    @Test
+    public void clustersTest() {
+        long now = System.currentTimeMillis();
+        BarabasiAlbertCluster.generate(25, 2, 2, 1.0, 10);
+        Helper.log("%d", System.currentTimeMillis() - now);
     }
 }
