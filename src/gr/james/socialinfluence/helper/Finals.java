@@ -18,6 +18,7 @@ public class Finals {
     /* Exceptions: these finals must be arguments to GraphException(). Format: E_CLASSNAME_IDENTIFIER. */
     public static final String E_PLAYER_NO_PARAMETER = "%s doesn't have any parameter with name %s.";
     public static final String E_PLAYER_OPTION_NULL = "Player option value can't be null.";
+    public static final String E_PLAYER_EXCEPTION = "Player %s triggered exception: %s";
 
     public static final String E_MOVEPOINTER_SET_NULL = "Cannot submit a null move.";
 

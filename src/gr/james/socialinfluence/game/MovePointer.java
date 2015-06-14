@@ -5,7 +5,8 @@ import gr.james.socialinfluence.helper.GraphException;
 
 /**
  * <p>Simple thread-safe wrapper class to avoid illegal calls on a {@link gr.james.socialinfluence.game.Move} object
- * from the engine and player threads. All methods of this class are thread-safe.</p>
+ * from the engine and player threads. All methods of this class are thread-safe. An object of type {@code MovePointer}
+ * cannot contain a null {@link Move}.</p>
  */
 public class MovePointer {
     private final Object lock = new Object();

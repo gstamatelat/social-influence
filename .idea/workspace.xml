@@ -6,8 +6,11 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d584793e-3e99-4c99-962d-98344dab3943" name="Default" comment="MovePointer now starts with an empty move">
+    <list default="true" id="d584793e-3e99-4c99-962d-98344dab3943" name="Default" comment="Minor fix in Player to support default empty move on MovePointer">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gr/james/socialinfluence/helper/Finals.java" afterPath="$PROJECT_DIR$/src/gr/james/socialinfluence/helper/Finals.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gr/james/socialinfluence/game/MovePointer.java" afterPath="$PROJECT_DIR$/src/gr/james/socialinfluence/game/MovePointer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gr/james/socialinfluence/game/players/Player.java" afterPath="$PROJECT_DIR$/src/gr/james/socialinfluence/game/players/Player.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="SocialInfluence.iws" />
@@ -85,7 +88,7 @@
         <entry file="file://$PROJECT_DIR$/src/gr/james/socialinfluence/helper/Finals.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="21" column="53" selection-start-line="21" selection-start-column="31" selection-end-line="21" selection-end-column="53" />
+              <caret line="20" column="88" selection-start-line="20" selection-start-column="88" selection-end-line="20" selection-end-column="88" />
               <folding />
             </state>
           </provider>
@@ -144,28 +147,18 @@
       <file leaf-file-name="Player.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/gr/james/socialinfluence/game/players/Player.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.44011977">
-              <caret line="57" column="36" selection-start-line="57" selection-start-column="36" selection-end-line="57" selection-end-column="36" />
+            <state vertical-scroll-proportion="0.5928144">
+              <caret line="52" column="19" selection-start-line="52" selection-start-column="19" selection-end-line="52" selection-end-column="19" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MovePointer.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/gr/james/socialinfluence/game/MovePointer.java">
+      <file leaf-file-name="Helper.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/gr/james/socialinfluence/helper/Helper.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="39" column="28" selection-start-line="39" selection-start-column="28" selection-end-line="39" selection-end-column="28" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Edge.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/gr/james/socialinfluence/graph/Edge.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="55" column="31" selection-start-line="55" selection-start-column="31" selection-end-line="55" selection-end-column="31" />
+              <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -235,7 +228,6 @@
         <option value="$PROJECT_DIR$/src/gr/james/socialinfluence/game/Game.java" />
         <option value="$PROJECT_DIR$/src/gr/james/socialinfluence/main/DegreeDistributionTest.java" />
         <option value="$PROJECT_DIR$/src/gr/james/socialinfluence/main/SlowPlayerTest.java" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/gr/james/socialinfluence/graph/generators/TwoWheels.java" />
         <option value="$PROJECT_DIR$/src/gr/james/socialinfluence/graph/Vertex.java" />
         <option value="$PROJECT_DIR$/src/gr/james/socialinfluence/graph/algorithms/FloydWarshall.java" />
@@ -245,8 +237,9 @@
         <option value="$PROJECT_DIR$/src/gr/james/socialinfluence/graph/collections/VertexPair.java" />
         <option value="$PROJECT_DIR$/src/gr/james/socialinfluence/graph/generators/BarabasiAlbertCluster.java" />
         <option value="$PROJECT_DIR$/tests/gr/james/socialinfluence/Tests.java" />
-        <option value="$PROJECT_DIR$/src/gr/james/socialinfluence/helper/Finals.java" />
+        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/gr/james/socialinfluence/game/MovePointer.java" />
+        <option value="$PROJECT_DIR$/src/gr/james/socialinfluence/helper/Finals.java" />
         <option value="$PROJECT_DIR$/src/gr/james/socialinfluence/game/players/Player.java" />
       </list>
     </option>
@@ -822,12 +815,6 @@
       <workItem from="1390549192770" duration="36385000" />
       <workItem from="1390703827822" duration="9771000" />
     </task>
-    <task id="LOCAL-00205">
-      <created>1408685974330</created>
-      <option name="number" value="00205" />
-      <option name="project" value="LOCAL" />
-      <updated>1408685974330</updated>
-    </task>
     <task id="LOCAL-00206">
       <created>1408688531786</created>
       <option name="number" value="00206" />
@@ -1116,7 +1103,13 @@
       <option name="project" value="LOCAL" />
       <updated>1434249139882</updated>
     </task>
-    <option name="localTasksCounter" value="254" />
+    <task id="LOCAL-00254" summary="Minor fix in Player to support default empty move on MovePointer">
+      <created>1434249265423</created>
+      <option name="number" value="00254" />
+      <option name="project" value="LOCAL" />
+      <updated>1434249265423</updated>
+    </task>
+    <option name="localTasksCounter" value="255" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -1248,14 +1241,15 @@
     <MESSAGE value="Fixed Barabasi cluster test" />
     <MESSAGE value="MovePointer throws exception when submitting null move" />
     <MESSAGE value="MovePointer now starts with an empty move" />
-    <option name="LAST_COMMIT_MESSAGE" value="MovePointer now starts with an empty move" />
+    <MESSAGE value="Minor fix in Player to support default empty move on MovePointer" />
+    <option name="LAST_COMMIT_MESSAGE" value="Minor fix in Player to support default empty move on MovePointer" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="168" />
+      <option name="time" value="169" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1422,13 +1416,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/gr/james/socialinfluence/game/players/BruteForcePlayer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="98" column="50" selection-start-line="98" selection-start-column="50" selection-end-line="98" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/gr/james/socialinfluence/game/players/GreedyPlayer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1478,13 +1465,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/gr/james/socialinfluence/helper/Helper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5583832">
-          <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/gr/james/socialinfluence/main/SlowPlayerTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.48353294">
@@ -1503,16 +1483,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.26197603">
           <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.58528954">
-          <caret line="22" column="64" selection-start-line="22" selection-start-column="64" selection-end-line="22" selection-end-column="64" />
         </state>
       </provider>
     </entry>
@@ -1618,26 +1588,53 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/gr/james/socialinfluence/helper/Finals.java">
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="21" column="53" selection-start-line="21" selection-start-column="31" selection-end-line="21" selection-end-column="53" />
+        <state vertical-scroll-proportion="0.53208137">
+          <caret line="20" column="89" selection-start-line="20" selection-start-column="89" selection-end-line="20" selection-end-column="89" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/gr/james/socialinfluence/game/MovePointer.java">
       <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.38173652">
+          <caret line="15" column="25" selection-start-line="15" selection-start-column="25" selection-end-line="15" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gr/james/socialinfluence/game/players/BruteForcePlayer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.6616766">
+          <caret line="98" column="50" selection-start-line="98" selection-start-column="50" selection-end-line="98" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gr/james/socialinfluence/helper/Helper.java">
+      <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="39" column="28" selection-start-line="39" selection-start-column="28" selection-end-line="39" selection-end-column="28" />
+          <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gr/james/socialinfluence/helper/Finals.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="88" selection-start-line="20" selection-start-column="88" selection-end-line="20" selection-end-column="88" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/gr/james/socialinfluence/game/players/Player.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.44011977">
-          <caret line="57" column="36" selection-start-line="57" selection-start-column="36" selection-end-line="57" selection-end-column="36" />
+        <state vertical-scroll-proportion="0.5928144">
+          <caret line="52" column="19" selection-start-line="52" selection-start-column="19" selection-end-line="52" selection-end-column="19" />
           <folding />
         </state>
       </provider>

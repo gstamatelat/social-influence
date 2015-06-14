@@ -41,7 +41,11 @@ public abstract class Player implements Runnable {
     public abstract void getMove();
 
     public void run() {
-        getMove();
+        try {
+            getMove();
+        } catch (Exception e) {
+            Helper.logError(Finals.E_PLAYER_EXCEPTION, this.getClass().getSimpleName(), e);
+        }
     }
 
     public final Move findMove(Graph g, GameDefinition d) {
