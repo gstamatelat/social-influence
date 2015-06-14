@@ -6,8 +6,8 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d584793e-3e99-4c99-962d-98344dab3943" name="Default" comment="Update TwoWheel generator &amp; test">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/gr/james/socialinfluence/Tests.java" afterPath="$PROJECT_DIR$/tests/gr/james/socialinfluence/Tests.java" />
+    <list default="true" id="d584793e-3e99-4c99-962d-98344dab3943" name="Default" comment="TwoWheels test javadoc">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="SocialInfluence.iws" />
@@ -71,14 +71,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider editor-type-id="MarkdownPreviewEditor">
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-14.655172">
-              <caret line="25" column="45" selection-start-line="25" selection-start-column="45" selection-end-line="25" selection-end-column="45" />
+            <state vertical-scroll-proportion="0.7183099">
+              <caret line="27" column="37" selection-start-line="27" selection-start-column="37" selection-end-line="27" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -104,11 +104,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Tests.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Tests.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/gr/james/socialinfluence/Tests.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6946108">
-              <caret line="189" column="32" selection-start-line="189" selection-start-column="32" selection-end-line="189" selection-end-column="32" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="176" column="9" selection-start-line="176" selection-start-column="9" selection-end-line="176" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -244,13 +244,13 @@
         <option value="$PROJECT_DIR$/src/gr/james/socialinfluence/game/players/Obelix.java" />
         <option value="$PROJECT_DIR$/src/gr/james/socialinfluence/helper/Finals.java" />
         <option value="$PROJECT_DIR$/src/gr/james/socialinfluence/game/Game.java" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/gr/james/socialinfluence/game/Move.java" />
         <option value="$PROJECT_DIR$/src/gr/james/socialinfluence/main/DirectGame.java" />
         <option value="$PROJECT_DIR$/src/gr/james/socialinfluence/graph/algorithms/iterators/InDegreeIterator.java" />
         <option value="$PROJECT_DIR$/src/gr/james/socialinfluence/graph/algorithms/iterators/PageRankIterator.java" />
         <option value="$PROJECT_DIR$/src/gr/james/socialinfluence/graph/generators/TwoWheels.java" />
         <option value="$PROJECT_DIR$/tests/gr/james/socialinfluence/Tests.java" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -934,12 +934,6 @@
       <workItem from="1390549192770" duration="36385000" />
       <workItem from="1390703827822" duration="9771000" />
     </task>
-    <task id="LOCAL-00209">
-      <created>1408764427920</created>
-      <option name="number" value="00209" />
-      <option name="project" value="LOCAL" />
-      <updated>1408764427920</updated>
-    </task>
     <task id="LOCAL-00210">
       <created>1432053493629</created>
       <option name="number" value="00210" />
@@ -1228,7 +1222,13 @@
       <option name="project" value="LOCAL" />
       <updated>1434285387966</updated>
     </task>
-    <option name="localTasksCounter" value="258" />
+    <task id="LOCAL-00258" summary="TwoWheels test javadoc">
+      <created>1434287179402</created>
+      <option name="number" value="00258" />
+      <option name="project" value="LOCAL" />
+      <updated>1434287179402</updated>
+    </task>
+    <option name="localTasksCounter" value="259" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -1336,7 +1336,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Removed the call to normalizeWeights() from the players since it's not needed any more" />
     <MESSAGE value="New tests class" />
     <MESSAGE value="delete broken class" />
     <MESSAGE value="todo in tests" />
@@ -1361,7 +1360,8 @@
     <MESSAGE value="Now handling uncatched player exceptions with an error message" />
     <MESSAGE value="Fixed TwoWheels generation bug" />
     <MESSAGE value="Update TwoWheel generator &amp; test" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update TwoWheel generator &amp; test" />
+    <MESSAGE value="TwoWheels test javadoc" />
+    <option name="LAST_COMMIT_MESSAGE" value="TwoWheels test javadoc" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -1711,17 +1711,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.655172">
-          <caret line="25" column="45" selection-start-line="25" selection-start-column="45" selection-end-line="25" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/gr/james/socialinfluence/graph/generators/Wheel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1756,8 +1745,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/gr/james/socialinfluence/Tests.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6946108">
-          <caret line="189" column="32" selection-start-line="189" selection-start-column="32" selection-end-line="189" selection-end-column="32" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="176" column="9" selection-start-line="176" selection-start-column="9" selection-end-line="176" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7183099">
+          <caret line="27" column="37" selection-start-line="27" selection-start-column="37" selection-end-line="27" selection-end-column="37" />
           <folding />
         </state>
       </provider>

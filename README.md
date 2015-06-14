@@ -24,3 +24,5 @@ Running time - Complexity:
 - Create a `MutableGraph` class that will derive `Graph`. 
 - `getVertexFromId()` is confusing and needs to go.
 - `Game` should accept `Player`s not `Move`s.
+- Grid generator and maybe some edge randomizer: http://www.cs.cornell.edu/home/kleinber/swn.d/swn.html
+- Method "stretch" that extends edges
