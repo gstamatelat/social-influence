@@ -12,7 +12,7 @@ public class MovePointer {
     private Move ref;
 
     public MovePointer() {
-        ref = null;
+        ref = new Move();
     }
 
     /**
@@ -23,11 +23,7 @@ public class MovePointer {
      */
     public Move get() {
         synchronized (lock) {
-            if (ref == null) {
-                return null;
-            } else {
-                return ref.deepCopy();
-            }
+            return ref.deepCopy();
         }
     }
 
