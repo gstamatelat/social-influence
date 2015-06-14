@@ -177,6 +177,10 @@ public class Tests {
         }
     }
 
+    /**
+     * <p>In the {@link TwoWheels} graph, the maximum degree should be {@code max(6, n-1)}, where {@code n} is the
+     * input of {@link TwoWheels#generate(int)}</p>
+     */
     @Test
     public void twoWheelsTest() {
         for (int k = 4; k < 100; k++) {
