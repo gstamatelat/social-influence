@@ -31,40 +31,34 @@ public class Tests {
     @Test
     public void randomSurferTest() {
         int mean = 500000;
-        double dampingFactors[] = {0, 0.3};
-        double ps[] = {0.05, 0.1};
+        double dampingFactor = Finals.RANDOM.nextDouble() * 0.3;
+        double p = Finals.RANDOM.nextDouble() * 0.15 + 0.05;
+        int vertexCount = 40;
 
-        for (int vertexCount = 20; vertexCount <= 40; vertexCount += 20) {
-            for (double p : ps) {
-                /* Create graph and randomize edge weights */
-                Graph g = RandomG.generate(vertexCount, p);
-                for (Edge e : g.getEdges()) {
-                    e.setWeight(Finals.RANDOM.nextDouble());
-                }
+        /* Create graph and randomize edge weights */
+        Graph g = RandomG.generate(vertexCount, p);
+        for (Edge e : g.getEdges()) {
+            e.setWeight(Finals.RANDOM.nextDouble());
+        }
 
-                /* For all damping factors */
-                for (double DAMPING_FACTOR : dampingFactors) {
-                    /* Emulate the random surfer until mean of the map values is MEAN, aka for MEAN * N steps */
-                    GraphState gs = new GraphState(g, 0.0);
-                    RandomSurferIterator rsi = new RandomSurferIterator(g, DAMPING_FACTOR);
-                    int steps = mean * g.getVerticesCount();
-                    while (--steps > 0) {
-                        Vertex v = rsi.next();
-                        gs.put(v, gs.get(v) + 1.0);
-                    }
+        /* Emulate the random surfer until mean of the map values is MEAN, aka for MEAN * N steps */
+        GraphState gs = new GraphState(g, 0.0);
+        RandomSurferIterator rsi = new RandomSurferIterator(g, dampingFactor);
+        int steps = mean * g.getVerticesCount();
+        while (--steps > 0) {
+            Vertex v = rsi.next();
+            gs.put(v, gs.get(v) + 1.0);
+        }
 
-                    /* Get the PageRank and normalize gs to it */
-                    GraphState pr = PageRank.execute(g, DAMPING_FACTOR);
-                    for (Vertex v : gs.keySet()) {
-                        gs.put(v, pr.getSum() * gs.get(v) / (g.getVerticesCount() * mean));
-                    }
+        /* Get the PageRank and normalize gs to it */
+        GraphState pr = PageRank.execute(g, dampingFactor);
+        for (Vertex v : gs.keySet()) {
+            gs.put(v, pr.getSum() * gs.get(v) / (g.getVerticesCount() * mean));
+        }
 
-                    /* Assert if maps not approx. equal */
-                    for (Vertex v : g.getVertices()) {
-                        Assert.assertEquals("randomSurferTest - " + g.getMeta(), gs.get(v), pr.get(v), 0.01);
-                    }
-                }
-            }
+        /* Assert if maps not approx. equal */
+        for (Vertex v : g.getVertices()) {
+            Assert.assertEquals("randomSurferTest - " + g.getMeta(), gs.get(v), pr.get(v), 0.01);
         }
     }
 
