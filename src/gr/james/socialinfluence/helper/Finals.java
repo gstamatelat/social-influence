@@ -19,6 +19,8 @@ public class Finals {
     public static final String E_PLAYER_NO_PARAMETER = "%s doesn't have any parameter with name %s.";
     public static final String E_PLAYER_OPTION_NULL = "Player option value can't be null.";
 
+    public static final String E_MOVEPOINTER_SET_NULL = "Cannot submit a null move.";
+
     public static final String E_BARABASI_STEP = "stepEdges <= initialClique is a constraint";
 
     public static final String E_MOVE_WEIGHT_NEGATIVE = "A player is trying to add a Vertex on a Move object with a non-positive weight %f. This is caused when .putVertex() is called with a negative weight argument.";

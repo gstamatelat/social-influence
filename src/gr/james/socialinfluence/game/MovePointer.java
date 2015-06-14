@@ -1,5 +1,8 @@
 package gr.james.socialinfluence.game;
 
+import gr.james.socialinfluence.helper.Finals;
+import gr.james.socialinfluence.helper.GraphException;
+
 /**
  * <p>Simple thread-safe wrapper class to avoid illegal calls on a {@link gr.james.socialinfluence.game.Move} object
  * from the engine and player threads. All methods of this class are thread-safe.</p>
@@ -20,7 +23,11 @@ public class MovePointer {
      */
     public Move get() {
         synchronized (lock) {
-            return ref.deepCopy();
+            if (ref == null) {
+                return null;
+            } else {
+                return ref.deepCopy();
+            }
         }
     }
 
@@ -30,9 +37,13 @@ public class MovePointer {
      *
      * @param e the {@link Move} to set. This input will be deep-copied before it is set as part of the
      *          {@link MovePointer} thread-safety.
+     * @throws GraphException when the input move is {@code null}
      */
     public void set(Move e) {
         synchronized (lock) {
+            if (e == null) {
+                throw new GraphException(Finals.E_MOVEPOINTER_SET_NULL);
+            }
             this.ref = e.deepCopy();
         }
     }
