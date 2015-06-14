@@ -7,6 +7,7 @@ import gr.james.socialinfluence.graph.algorithms.Degree;
 import gr.james.socialinfluence.graph.algorithms.Dijkstra;
 import gr.james.socialinfluence.graph.algorithms.FloydWarshall;
 import gr.james.socialinfluence.graph.algorithms.PageRank;
+import gr.james.socialinfluence.graph.algorithms.iterators.InDegreeIterator;
 import gr.james.socialinfluence.graph.algorithms.iterators.RandomSurferIterator;
 import gr.james.socialinfluence.graph.collections.GraphState;
 import gr.james.socialinfluence.graph.collections.VertexPair;
@@ -182,20 +183,8 @@ public class Tests {
             /* Generate TwoWheels(k) */
             Graph g = TwoWheels.generate(k);
 
-            /* Get degree */
-            GraphState gs = Degree.execute(g, true);
-
-            /* Get the max */
-            int max = 0;
-            for (Vertex v : g.getVertices()) {
-                if (gs.get(v) > max) {
-                    max = gs.get(v).intValue();
-                }
-            }
-
-            if (Math.max(6, k - 1) != max) {
-                g.exportToDot(System.out);
-            }
+            /* Get max degree */
+            int max = new InDegreeIterator(g).next().getOutDegree();
 
             /* The max has to be k or 6 if k is too low */
             Assert.assertEquals("twoWheelsTest - " + k, Math.max(6, k - 1), max);

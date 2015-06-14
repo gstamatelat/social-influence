@@ -10,10 +10,11 @@ import java.util.Iterator;
 import java.util.Map;
 
 public class InDegreeIterator implements Iterator<Vertex> {
+    // TODO: Consider using PriorityQueue
     private HashMap<Vertex, Integer> nodes;
 
     public InDegreeIterator(Graph g) {
-        // TODO: Use Degree.execute, this one is extremely slow
+        nodes = new HashMap<Vertex, Integer>();
         for (Vertex v : g.getVertices()) {
             this.nodes.put(v, v.getInDegree());
         }
