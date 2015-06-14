@@ -14,7 +14,6 @@ import gr.james.socialinfluence.graph.generators.BarabasiAlbert;
 import gr.james.socialinfluence.graph.generators.BarabasiAlbertCluster;
 import gr.james.socialinfluence.graph.generators.RandomG;
 import gr.james.socialinfluence.helper.Finals;
-import gr.james.socialinfluence.helper.Helper;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -140,7 +139,7 @@ public class Tests {
     public void combineGraphsTest() {
         int GRAPHS = 10;
 
-        Graph graphs[] = new Graph[GRAPHS];
+        Graph[] graphs = new Graph[GRAPHS];
         for (int i = 0; i < GRAPHS; i++) {
             graphs[i] = RandomG.generate(Finals.RANDOM.nextInt(50) + 50, Finals.RANDOM.nextDouble());
         }
@@ -165,8 +164,14 @@ public class Tests {
 
     @Test
     public void clustersTest() {
-        long now = System.currentTimeMillis();
-        BarabasiAlbertCluster.generate(25, 2, 2, 1.0, 10);
-        Helper.log("%d", System.currentTimeMillis() - now);
+        int[] clusters = {5, 6, 7, 8, 9, 10};
+        int[] clusterSize = {10, 15, 20};
+
+        for (int _clusters : clusters) {
+            for (int _clusterSize : clusterSize) {
+                Graph g = BarabasiAlbertCluster.generate(_clusterSize, 2, 2, 1.0, _clusters);
+                Assert.assertEquals("clustersTest", _clusters * _clusterSize, g.getVerticesCount());
+            }
+        }
     }
 }
