@@ -34,11 +34,11 @@ public class Move implements Iterable<MovePoint> {
      * @param v      the vertex of this move point, can't be null
      * @param weight the weight of this move point
      * @return the current instance
+     * @throws GraphException if {@code weight} input is non-positive
      */
     public Move putVertex(Vertex v, double weight) {
         if (weight <= 0) {
             throw new GraphException(Finals.E_MOVE_WEIGHT_NEGATIVE, weight);
-
         }
 
         boolean exists = false;
@@ -120,6 +120,9 @@ public class Move implements Iterable<MovePoint> {
 
     @Override
     public String toString() {
+        if (this.moveObject.isEmpty()) {
+            return "[]";
+        }
         String outStr = "[";
         for (MovePoint t : this.moveObject) {
             outStr += t.vertex.toString();

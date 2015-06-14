@@ -99,7 +99,7 @@ public class Tests {
      */
     @Test
     public void floydWarshallTest() {
-        int counts[] = {10, 20, 30, 40, 50, 100, 250};
+        int counts[] = {10, 20, 50, 100, 250};
         double ps[] = {0.05, 0.1, 0.2};
 
         for (int vertexCount : counts) {

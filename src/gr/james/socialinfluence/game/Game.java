@@ -5,6 +5,7 @@ import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.graph.algorithms.DeGroot;
 import gr.james.socialinfluence.graph.collections.GraphState;
 import gr.james.socialinfluence.helper.Finals;
+import gr.james.socialinfluence.helper.GraphException;
 import gr.james.socialinfluence.helper.Helper;
 
 public class Game {
@@ -48,15 +49,21 @@ public class Game {
 
         this.g.addEdge(playerA, playerA);
         this.g.addEdge(playerB, playerB);
-        //playerA.addEdge(playerA);
-        //playerB.addEdge(playerB);
 
         for (MovePoint e : this.playerAMove) {
-            g.addEdge(e.vertex, playerA).setWeight(e.weight);
+            try {
+                g.addEdge(e.vertex, playerA).setWeight(e.weight);
+            } catch (GraphException x) {
+                Helper.logError(Finals.W_GAME_INVALID_VERTEX);
+            }
         }
 
         for (MovePoint e : this.playerBMove) {
-            g.addEdge(e.vertex, playerB).setWeight(e.weight);
+            try {
+                g.addEdge(e.vertex, playerB).setWeight(e.weight);
+            } catch (GraphException x) {
+                Helper.logError(Finals.W_GAME_INVALID_VERTEX);
+            }
         }
 
         GraphState initialOpinions = new GraphState(g);
@@ -79,12 +86,12 @@ public class Game {
             if (this.playerAMove.getVerticesCount() > d.getNumOfMoves()) {
                 String oldMove = this.playerAMove.toString();
                 this.playerAMove.sliceMove(d.getNumOfMoves());
-                Helper.logError(Finals.W_MOVE_EXCEED, oldMove, d.getNumOfMoves(), this.playerAMove.toString());
+                Helper.logError(Finals.W_GAME_MOVE_EXCEED, oldMove, d.getNumOfMoves(), this.playerAMove.toString());
             }
             if (this.playerBMove.getVerticesCount() > d.getNumOfMoves()) {
                 String oldMove = this.playerBMove.toString();
                 this.playerBMove.sliceMove(d.getNumOfMoves());
-                Helper.logError(Finals.W_MOVE_EXCEED, oldMove, d.getNumOfMoves(), this.playerBMove.toString());
+                Helper.logError(Finals.W_GAME_MOVE_EXCEED, oldMove, d.getNumOfMoves(), this.playerBMove.toString());
             }
 
             this.playerAMove.normalizeWeights(d.getBudget());

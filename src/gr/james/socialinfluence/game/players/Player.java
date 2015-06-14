@@ -44,7 +44,7 @@ public abstract class Player implements Runnable {
         try {
             getMove();
         } catch (Exception e) {
-            Helper.logError(Finals.E_PLAYER_EXCEPTION, this.getClass().getSimpleName(), e);
+            Helper.logError(Finals.E_PLAYER_EXCEPTION, this.getClass().getSimpleName(), e, g, d);
         }
     }
 
@@ -64,7 +64,7 @@ public abstract class Player implements Runnable {
             int count = 0;
             while (t.isAlive()) {
                 if (count > 0) {
-                    Helper.logError(Finals.W_WAITING_PLAYER, count * d.getExecution() / 1000, this.getClass().getSimpleName());
+                    Helper.logError(Finals.W_PLAYER_WAITING, count * d.getExecution() / 1000, this.getClass().getSimpleName());
                 }
                 t.join(d.getExecution());
                 count++;

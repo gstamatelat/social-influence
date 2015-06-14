@@ -493,4 +493,9 @@ public class Graph {
         }
         return this;
     }
+
+    @Override
+    public String toString() {
+        return String.format("{name=%s, meta=%s}", name, meta);
+    }
 }

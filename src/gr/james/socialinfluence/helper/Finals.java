@@ -11,14 +11,15 @@ public class Finals {
     public static final double DEFAULT_EPSILON = 0.0;
 
     /* Warnings: these finals must be arguments to Helper.logError() */
-    public static final String W_WAITING_PLAYER = "WARNING: Been waiting %d seconds for %s to terminate gracefully.";
+    public static final String W_PLAYER_WAITING = "WARNING: Been waiting %d seconds for %s to terminate gracefully.";
     public static final String W_EDGE_WEIGHT_NEGATIVE = "WARNING: Edge weight must be positive. Got %f. No change done.";
-    public static final String W_MOVE_EXCEED = "WARNING: Move %s contains more than %d vertices. Slicing to %s. This indicates a mistake in your player.";
+    public static final String W_GAME_MOVE_EXCEED = "WARNING: Move %s contains more than %d vertices. Slicing to %s. This indicates a mistake in your player.";
+    public static final String W_GAME_INVALID_VERTEX = "WARNING: A player requested a move vertex that doesn't belong in the graph. This indicates a mistake in your player.";
 
     /* Exceptions: these finals must be arguments to GraphException(). Format: E_CLASSNAME_IDENTIFIER. */
     public static final String E_PLAYER_NO_PARAMETER = "%s doesn't have any parameter with name %s.";
     public static final String E_PLAYER_OPTION_NULL = "Player option value can't be null.";
-    public static final String E_PLAYER_EXCEPTION = "Player %s triggered exception: %s";
+    public static final String E_PLAYER_EXCEPTION = "Player %s triggered exception <%s> on graph %s and definition %s";
 
     public static final String E_MOVEPOINTER_SET_NULL = "Cannot submit a null move.";
 

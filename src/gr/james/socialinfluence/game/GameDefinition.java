@@ -6,6 +6,13 @@ public class GameDefinition {
     private long execution;
     private boolean tournament;
 
+    public GameDefinition(int numOfMoves, double budget, long execution, boolean tournament) {
+        this.numOfMoves = numOfMoves;
+        this.budget = budget;
+        this.execution = execution;
+        this.tournament = tournament;
+    }
+
     public int getNumOfMoves() {
         return this.numOfMoves;
     }
@@ -22,10 +29,8 @@ public class GameDefinition {
         return this.tournament;
     }
 
-    public GameDefinition(int numOfMoves, double budget, long execution, boolean tournament) {
-        this.numOfMoves = numOfMoves;
-        this.budget = budget;
-        this.execution = execution;
-        this.tournament = tournament;
+    @Override
+    public String toString() {
+        return String.format("{numOfMoves=%d, budget=%f, execution=%d, tournament=%b}", numOfMoves, budget, execution, tournament);
     }
 }

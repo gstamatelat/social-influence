@@ -22,3 +22,5 @@ Running time - Complexity:
 - `Player` should not be able to mutate the `Graph` object `g`. Consider passing a copy instead.
 - Consider renaming `numOfMoves` to `actions` or something else.
 - Create a `MutableGraph` class that will derive `Graph`. 
+- `getVertexFromId()` is confusing and needs to go.
+- `Game` should accept `Player`s not `Move`s.
