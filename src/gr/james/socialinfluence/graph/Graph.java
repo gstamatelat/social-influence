@@ -138,6 +138,15 @@ public class Graph {
         return null;
     }
 
+    /**
+     * <p>Get a {@link Vertex} of this graph based on its index. Index is a deterministic, per-graph attribute between
+     * {@code 0} (inclusive) and {@link #getVerticesCount()} (exclusive), indicating the rank of the ID of the specific
+     * vertex in the ordered ID list.</p>
+     *
+     * @param index the index of the vertex
+     * @return the vertex reference with the provided index
+     * @throws GraphException if {@code index} is less than {@code 0}
+     */
     public Vertex getVertexFromIndex(int index) {
         if (index < 0 || index >= this.getVerticesCount()) {
             throw new GraphException(Finals.E_GRAPH_INDEX_OUT_OF_BOUNDS, index);
@@ -155,7 +164,6 @@ public class Graph {
     /**
      * <p>Fuses two or more vertices into a single one. This method may cause information loss
      * if there are conflicts on the edges.</p>
-     * <p><b>Running Time:</b> ???</p>
      *
      * @param f an array of vertices to be fused
      * @return the vertex that is the result of the fusion
