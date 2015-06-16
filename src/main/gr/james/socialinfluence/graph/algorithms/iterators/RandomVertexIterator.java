@@ -1,8 +1,8 @@
 package gr.james.socialinfluence.graph.algorithms.iterators;
 
-import gr.james.socialinfluence.helper.Finals;
 import gr.james.socialinfluence.graph.Graph;
 import gr.james.socialinfluence.graph.Vertex;
+import gr.james.socialinfluence.helper.Finals;
 
 import java.util.ArrayList;
 import java.util.Iterator;

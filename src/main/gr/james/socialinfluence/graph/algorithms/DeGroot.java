@@ -2,8 +2,8 @@ package gr.james.socialinfluence.graph.algorithms;
 
 import gr.james.socialinfluence.graph.Edge;
 import gr.james.socialinfluence.graph.Graph;
-import gr.james.socialinfluence.graph.collections.GraphState;
 import gr.james.socialinfluence.graph.Vertex;
+import gr.james.socialinfluence.graph.collections.GraphState;
 import gr.james.socialinfluence.helper.Finals;
 import gr.james.socialinfluence.helper.Helper;
 

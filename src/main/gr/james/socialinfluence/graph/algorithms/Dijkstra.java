@@ -8,35 +8,6 @@ import java.util.HashMap;
 import java.util.PriorityQueue;
 
 public class Dijkstra {
-    private static class DijkstraNode implements Comparable {
-        // TODO: We already have ObjectWithWeight, maybe use it here and ditch this class
-        public Vertex vertex;
-        public double distance;
-        public Vertex parent;
-
-        public DijkstraNode(Vertex vertex, Vertex parent, double distance) {
-            this.vertex = vertex;
-            this.parent = parent;
-            this.distance = distance;
-        }
-
-        @Override
-        public int compareTo(Object o) {
-            DijkstraNode other = (DijkstraNode) o;
-            return Double.compare(this.distance, other.distance);
-        }
-
-        @Override
-        public int hashCode() {
-            return this.vertex.hashCode();
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            return this.vertex.equals(obj);
-        }
-    }
-
     public static HashMap<Vertex, Double> execute(Graph g, Vertex source) {
         HashMap<Vertex, DijkstraNode> nodeMap = new HashMap<Vertex, DijkstraNode>();
         for (Vertex v : g.getVertices()) {
@@ -69,5 +40,34 @@ public class Dijkstra {
             r.put(e.vertex, e.distance);
         }
         return r;
+    }
+
+    private static class DijkstraNode implements Comparable {
+        // TODO: We already have ObjectWithWeight, maybe use it here and ditch this class
+        public Vertex vertex;
+        public double distance;
+        public Vertex parent;
+
+        public DijkstraNode(Vertex vertex, Vertex parent, double distance) {
+            this.vertex = vertex;
+            this.parent = parent;
+            this.distance = distance;
+        }
+
+        @Override
+        public int compareTo(Object o) {
+            DijkstraNode other = (DijkstraNode) o;
+            return Double.compare(this.distance, other.distance);
+        }
+
+        @Override
+        public int hashCode() {
+            return this.vertex.hashCode();
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            return this.vertex.equals(obj);
+        }
     }
 }
