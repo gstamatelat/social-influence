@@ -25,27 +25,25 @@ import java.util.HashSet;
  * </ul>
  */
 public class BruteForcePlayer extends Player {
-    public static Move getRandomMove(Graph g, int numOfMoves, int weightLevels, double weightSum, Move lastMove, boolean clever) {
+    public static Move getRandomMove(Graph g, int numOfMoves, int weightLevels, Move lastMove, boolean clever) {
         if (!clever) {
-            return getRandomMoveWithoutMutation(g, numOfMoves, weightLevels, weightSum);
+            return getRandomMoveWithoutMutation(g, numOfMoves, weightLevels);
         } else {
-            return getRandomMoveWithMutation(g, numOfMoves, weightLevels, weightSum, lastMove);
+            return getRandomMoveWithMutation(g, numOfMoves, weightLevels, lastMove);
         }
     }
 
-    public static Move getRandomMoveWithoutMutation(Graph g, int numOfMoves, int weightLevels, double weightSum) {
+    public static Move getRandomMoveWithoutMutation(Graph g, int numOfMoves, int weightLevels) {
         Move moves = new Move();
         RandomVertexIterator it = new RandomVertexIterator(g);
         while (moves.getVerticesCount() < numOfMoves) {
-            // TODO: The algorithm can't select less than numOfMoves nodes because the weight cannot become one.
-            // TODO: If the weight becomes one, then Graph won't accept an edge weight of 0.
             // TODO: Something must be done to allow selecting less than numOfMoves vertices.
             moves.putVertex(it.next(), Finals.RANDOM.nextInt(weightLevels) + 1);
         }
         return moves;
     }
 
-    public static Move getRandomMoveWithMutation(Graph g, int numOfMoves, int weightLevels, double weightSum, Move lastMove) {
+    public static Move getRandomMoveWithMutation(Graph g, int numOfMoves, int weightLevels, Move lastMove) {
         double jump_probability = 0.2; // TODO: Make it an option, or even better adaptive since it should depend on the diameter of the graph
 
         Move moves = new Move();
@@ -70,11 +68,11 @@ public class BruteForcePlayer extends Player {
         HashSet<Move> movesHistory = new HashSet<Move>();
         HashSet<Move> moveDraws = new HashSet<Move>();
 
-        Move bestMove = getRandomMove(this.g, this.d.getNumOfMoves(), Integer.parseInt(this.options.get("weight_levels")), this.d.getBudget(), null, false);
+        Move bestMove = getRandomMove(this.g, this.d.getNumOfMoves(), Integer.parseInt(this.options.get("weight_levels")), null, false);
         movesHistory.add(bestMove);
 
         while (!this.isInterrupted()) {
-            Move newMove = getRandomMove(this.g, this.d.getNumOfMoves(), Integer.parseInt(this.options.get("weight_levels")), this.d.getBudget(), game.getPlayerAMove(), Boolean.parseBoolean(this.options.get("clever")));
+            Move newMove = getRandomMove(this.g, this.d.getNumOfMoves(), Integer.parseInt(this.options.get("weight_levels")), game.getPlayerAMove(), Boolean.parseBoolean(this.options.get("clever")));
             game.setPlayer(PlayerEnum.A, bestMove);
             game.setPlayer(PlayerEnum.B, newMove);
             int gameScore = game.runGame(this.d, Double.parseDouble(this.options.get("epsilon"))).score;
