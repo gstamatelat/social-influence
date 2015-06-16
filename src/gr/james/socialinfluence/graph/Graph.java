@@ -138,6 +138,20 @@ public class Graph {
         return null;
     }
 
+    public Vertex getVertexFromIndex(int index) {
+        if (index < 0 || index >= this.getVerticesCount()) {
+            throw new GraphException(Finals.E_GRAPH_INDEX_OUT_OF_BOUNDS, index);
+        }
+        TreeSet<Vertex> allVertices = new TreeSet<Vertex>();
+        allVertices.addAll(this.vertices);
+        Iterator<Vertex> it = allVertices.iterator();
+        Vertex v = it.next();
+        while (index-- > 0) {
+            v = it.next();
+        }
+        return v;
+    }
+
     /**
      * <p>Fuses two or more vertices into a single one. This method may cause information loss
      * if there are conflicts on the edges.</p>
