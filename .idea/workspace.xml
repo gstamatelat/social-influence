@@ -6,7 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d584793e-3e99-4c99-962d-98344dab3943" name="Default" comment="Javadoc on USE_LINKED_HASH_SET">
+    <list default="true" id="d584793e-3e99-4c99-962d-98344dab3943" name="Default" comment="Extra graph constructor with options">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/Graph.java" afterPath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/Graph.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/GraphOptions.java" afterPath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/GraphOptions.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
@@ -72,11 +72,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Graph.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Graph.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/Graph.java">
           <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="53" column="5" selection-start-line="53" selection-start-column="5" selection-end-line="53" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GraphOptions.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/GraphOptions.java">
+          <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.48281017">
-              <caret line="43" column="59" selection-start-line="43" selection-start-column="59" selection-end-line="43" selection-end-column="59" />
+              <caret line="19" column="1" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -157,8 +167,8 @@
         <option value="$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/io/Csv.java" />
         <option value="$PROJECT_DIR$/src/main/gr/james/socialinfluence/game/players/BruteForcePlayer.java" />
         <option value="$PROJECT_DIR$/src/main/gr/james/socialinfluence/main/CheckDraw.java" />
-        <option value="$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/GraphOptions.java" />
         <option value="$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/Graph.java" />
+        <option value="$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/GraphOptions.java" />
       </list>
     </option>
   </component>
@@ -846,12 +856,6 @@
       <workItem from="1390549192770" duration="36385000" />
       <workItem from="1390703827822" duration="9771000" />
     </task>
-    <task id="LOCAL-00217">
-      <created>1432240320417</created>
-      <option name="number" value="00217" />
-      <option name="project" value="LOCAL" />
-      <updated>1432240320418</updated>
-    </task>
     <task id="LOCAL-00218">
       <created>1432241317057</created>
       <option name="number" value="00218" />
@@ -1140,7 +1144,13 @@
       <option name="project" value="LOCAL" />
       <updated>1434651378608</updated>
     </task>
-    <option name="localTasksCounter" value="266" />
+    <task id="LOCAL-00266" summary="Extra graph constructor with options">
+      <created>1434651858506</created>
+      <option name="number" value="00266" />
+      <option name="project" value="LOCAL" />
+      <updated>1434651858506</updated>
+    </task>
+    <option name="localTasksCounter" value="267" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -1248,7 +1258,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Moved getNextId() into Vertex class" />
     <MESSAGE value="Fixed typo on Floyd-Warshall javadoc" />
     <MESSAGE value="Vertex fixes, exceptions and other" />
     <MESSAGE value="String table addition" />
@@ -1273,7 +1282,8 @@
     <MESSAGE value="Add CSV importer and IndexIterator" />
     <MESSAGE value="Add GraphOptions" />
     <MESSAGE value="Javadoc on USE_LINKED_HASH_SET" />
-    <option name="LAST_COMMIT_MESSAGE" value="Javadoc on USE_LINKED_HASH_SET" />
+    <MESSAGE value="Extra graph constructor with options" />
+    <option name="LAST_COMMIT_MESSAGE" value="Extra graph constructor with options" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -1432,14 +1442,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/GraphOptions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.27952167">
-          <caret line="11" column="1" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/algorithms/iterators/IndexIterator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.813154">
@@ -1482,8 +1484,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/Graph.java">
       <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="53" column="5" selection-start-line="53" selection-start-column="5" selection-end-line="53" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/GraphOptions.java">
+      <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.48281017">
-          <caret line="43" column="59" selection-start-line="43" selection-start-column="59" selection-end-line="43" selection-end-column="59" />
+          <caret line="19" column="1" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="1" />
           <folding />
         </state>
       </provider>

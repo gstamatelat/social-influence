@@ -41,11 +41,14 @@ public class Graph {
     public Graph(EnumSet<GraphOptions> e) {
         this.name = Finals.DEFAULT_GRAPH_NAME;
         this.meta = "";
-        if (e.contains(GraphOptions.USE_LINKED_HASH_SET)) {
+        if (e.contains(GraphOptions.VERTEX_USE_LINKED_HASH_SET)) {
             this.vertices = new LinkedHashSet<Vertex>();
-            this.edges = new LinkedHashSet<Edge>();
         } else {
             this.vertices = new HashSet<Vertex>();
+        }
+        if (e.contains(GraphOptions.EDGE_USE_LINKED_HASH_SET)) {
+            this.edges = new LinkedHashSet<Edge>();
+        } else {
             this.edges = new HashSet<Edge>();
         }
     }
