@@ -31,13 +31,23 @@ public class Graph {
     private Set<Edge> edges;
 
     /**
-     * <p>Creates a new empty graph with name {@code Finals.DEFAULT_GRAPH_NAME}</p>
+     * <p>Creates a new empty graph with name {@code Finals.DEFAULT_GRAPH_NAME} and default
+     * {@link GraphOptions options}.</p>
      */
     public Graph() {
+        this(EnumSet.noneOf(GraphOptions.class));
+    }
+
+    public Graph(EnumSet<GraphOptions> e) {
         this.name = Finals.DEFAULT_GRAPH_NAME;
         this.meta = "";
-        this.vertices = new HashSet<Vertex>();
-        this.edges = new HashSet<Edge>();
+        if (e.contains(GraphOptions.USE_LINKED_HASH_SET)) {
+            this.vertices = new LinkedHashSet<Vertex>();
+            this.edges = new LinkedHashSet<Edge>();
+        } else {
+            this.vertices = new HashSet<Vertex>();
+            this.edges = new HashSet<Edge>();
+        }
     }
 
     public static Graph combineGraphs(Graph[] graphs) {
@@ -56,30 +66,6 @@ public class Graph {
             g.edges.clear();
         }
         return r;
-    }
-
-    public Graph setFlag(GraphOptions e) {
-        if (e == GraphOptions.USE_LINKED_HASH_SET) {
-            LinkedHashSet<Vertex> newVertices = new LinkedHashSet<Vertex>();
-            LinkedHashSet<Edge> newEdges = new LinkedHashSet<Edge>();
-            newVertices.addAll(this.vertices);
-            newEdges.addAll(this.edges);
-            this.vertices = newVertices;
-            this.edges = newEdges;
-        }
-        return this;
-    }
-
-    public Graph unsetFlag(GraphOptions e) {
-        if (e == GraphOptions.USE_LINKED_HASH_SET) {
-            HashSet<Vertex> newVertices = new HashSet<Vertex>();
-            HashSet<Edge> newEdges = new HashSet<Edge>();
-            newVertices.addAll(this.vertices);
-            newEdges.addAll(this.edges);
-            this.vertices = newVertices;
-            this.edges = newEdges;
-        }
-        return this;
     }
 
     /**
