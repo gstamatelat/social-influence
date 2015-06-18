@@ -26,3 +26,4 @@ Running time - Complexity:
 - `Game` should accept `Player`s not `Move`s.
 - Grid generator and maybe some edge randomizer: http://www.cs.cornell.edu/home/kleinber/swn.d/swn.html
 - Method "stretch" that extends edges
+- Restore the inputs Graph and GameDefinition on Player and create seperate class `PlayerExecutor` that executes it
