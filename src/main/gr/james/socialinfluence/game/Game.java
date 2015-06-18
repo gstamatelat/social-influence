@@ -29,9 +29,9 @@ public class Game {
 
     public Game setPlayer(PlayerEnum player, Move move) {
         if (player == PlayerEnum.A) {
-            this.playerAMove = move;
+            this.playerAMove = move.deepCopy();
         } else {
-            this.playerBMove = move;
+            this.playerBMove = move.deepCopy();
         }
         return this;
     }
@@ -80,9 +80,6 @@ public class Game {
 
     public GameResult runGame(GameDefinition d, double deGrootEpsilon) {
         if (d != null) {
-            this.playerAMove = this.playerAMove.deepCopy();
-            this.playerBMove = this.playerBMove.deepCopy();
-
             if (this.playerAMove.getVerticesCount() > d.getNumOfMoves()) {
                 String oldMove = this.playerAMove.toString();
                 this.playerAMove.sliceMove(d.getNumOfMoves());
