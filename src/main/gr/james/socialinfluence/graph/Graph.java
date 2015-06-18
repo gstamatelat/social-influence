@@ -31,13 +31,19 @@ public class Graph {
     private Set<Edge> edges;
 
     /**
-     * <p>Creates a new empty graph with name {@code Finals.DEFAULT_GRAPH_NAME} and default
+     * <p>Creates a new empty graph with name {@link Finals#DEFAULT_GRAPH_NAME} and default
      * {@link GraphOptions options}.</p>
      */
     public Graph() {
         this(EnumSet.noneOf(GraphOptions.class));
     }
 
+    /**
+     * <p>Creates a new empty graph with name {@link Finals#DEFAULT_GRAPH_NAME} and the specified
+     * {@link GraphOptions options}.</p>
+     *
+     * @param e the options to use when constructing this Graph
+     */
     public Graph(EnumSet<GraphOptions> e) {
         this.name = Finals.DEFAULT_GRAPH_NAME;
         this.meta = "";
