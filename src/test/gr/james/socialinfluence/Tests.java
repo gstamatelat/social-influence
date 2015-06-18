@@ -11,6 +11,7 @@ import gr.james.socialinfluence.graph.algorithms.iterators.InDegreeIterator;
 import gr.james.socialinfluence.graph.algorithms.iterators.RandomSurferIterator;
 import gr.james.socialinfluence.graph.collections.GraphState;
 import gr.james.socialinfluence.graph.collections.VertexPair;
+import gr.james.socialinfluence.graph.from.Csv;
 import gr.james.socialinfluence.graph.generators.BarabasiAlbert;
 import gr.james.socialinfluence.graph.generators.BarabasiAlbertCluster;
 import gr.james.socialinfluence.graph.generators.RandomG;
@@ -19,6 +20,8 @@ import gr.james.socialinfluence.helper.Finals;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -208,5 +211,10 @@ public class Tests {
             /* getVertexFromIndex(N-1) must always return the wheel center vertex */
             Assert.assertEquals("getVertexFromIndexTest - " + k, k - 1, g.getVertexFromIndex(g.getVerticesCount() - 2).getOutDegree());
         }
+    }
+
+    @Test
+    public void importTest() throws IOException {
+        Csv.get(new FileInputStream("/home/james/Desktop/school.csv"));
     }
 }
