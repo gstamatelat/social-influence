@@ -1,22 +1,19 @@
 package gr.james.socialinfluence.main;
 
-import gr.james.socialinfluence.game.Game;
 import gr.james.socialinfluence.game.GameDefinition;
-import gr.james.socialinfluence.game.PlayerEnum;
-import gr.james.socialinfluence.game.players.GreedyPlayer;
+import gr.james.socialinfluence.game.players.BruteForcePlayer;
 import gr.james.socialinfluence.game.players.Player;
 import gr.james.socialinfluence.graph.Graph;
-import gr.james.socialinfluence.graph.generators.Path;
+import gr.james.socialinfluence.graph.io.Csv;
+
+import java.io.IOException;
+import java.net.URL;
 
 public class CheckDraw {
-    public static void main(String[] args) {
-        Graph g = Path.generate(11, false);
-        Player p = new GreedyPlayer();
+    public static void main(String[] args) throws IOException {
+        Graph g = Csv.from(new URL("YOUNOTAKECANDLE").openStream());
 
-        Game game = new Game(g);
-        GameDefinition d = new GameDefinition(5, 5.0, 10000L, false);
-        game.setPlayer(PlayerEnum.A, p.findMove(g, d));
-        game.setPlayer(PlayerEnum.B, p.findMove(g, d));
-        System.out.println(game.runGame(d));
+        Player p = new BruteForcePlayer().setOption("epsilon", "0.0001").setOption("weight_levels", "1");
+        p.findMove(g, new GameDefinition(3, 3.0, 0, false));
     }
 }

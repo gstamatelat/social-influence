@@ -8,10 +8,10 @@ import gr.james.socialinfluence.graph.algorithms.Dijkstra;
 import gr.james.socialinfluence.graph.algorithms.FloydWarshall;
 import gr.james.socialinfluence.graph.algorithms.PageRank;
 import gr.james.socialinfluence.graph.algorithms.iterators.InDegreeIterator;
+import gr.james.socialinfluence.graph.algorithms.iterators.IndexIterator;
 import gr.james.socialinfluence.graph.algorithms.iterators.RandomSurferIterator;
 import gr.james.socialinfluence.graph.collections.GraphState;
 import gr.james.socialinfluence.graph.collections.VertexPair;
-import gr.james.socialinfluence.graph.from.Csv;
 import gr.james.socialinfluence.graph.generators.BarabasiAlbert;
 import gr.james.socialinfluence.graph.generators.BarabasiAlbertCluster;
 import gr.james.socialinfluence.graph.generators.RandomG;
@@ -20,8 +20,6 @@ import gr.james.socialinfluence.helper.Finals;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -121,7 +119,10 @@ public class Tests {
                     }
                 }
 
-                /* Assertions */
+                /* Length assertion */
+                Assert.assertEquals("FloydWarshallTest - length - " + g.getMeta(), distFloyd.size(), distDijkstra.size());
+
+                /* Value assertions */
                 for (Vertex u : g.getVertices()) {
                     for (Vertex v : g.getVertices()) {
                         // TODO: Both Dijkstra and Floyd-Warshall use additions, it is intuitive that there won't be any double rounding issues
@@ -214,7 +215,19 @@ public class Tests {
     }
 
     @Test
-    public void importTest() throws IOException {
-        Csv.get(new FileInputStream("/home/james/Desktop/school.csv"));
+    public void indexIteratorTest() {
+        Graph g = TwoWheels.generate(Finals.RANDOM.nextInt(25) + 5);
+        IndexIterator it = new IndexIterator(g);
+        int total = 0;
+        Vertex pre = null;
+        while (it.hasNext()) {
+            Vertex next = it.next();
+            if (pre != null) {
+                Assert.assertTrue("indexIteratorTest - previous", next.getId() > pre.getId());
+            }
+            pre = next;
+            total++;
+        }
+        Assert.assertEquals("indexIteratorTest - length", g.getVerticesCount(), total);
     }
 }
