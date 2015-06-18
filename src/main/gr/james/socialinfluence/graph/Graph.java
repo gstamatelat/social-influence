@@ -58,6 +58,30 @@ public class Graph {
         return r;
     }
 
+    public Graph setFlag(GraphOptions e) {
+        if (e == GraphOptions.USE_LINKED_HASH_SET) {
+            LinkedHashSet<Vertex> newVertices = new LinkedHashSet<Vertex>();
+            LinkedHashSet<Edge> newEdges = new LinkedHashSet<Edge>();
+            newVertices.addAll(this.vertices);
+            newEdges.addAll(this.edges);
+            this.vertices = newVertices;
+            this.edges = newEdges;
+        }
+        return this;
+    }
+
+    public Graph unsetFlag(GraphOptions e) {
+        if (e == GraphOptions.USE_LINKED_HASH_SET) {
+            HashSet<Vertex> newVertices = new HashSet<Vertex>();
+            HashSet<Edge> newEdges = new HashSet<Edge>();
+            newVertices.addAll(this.vertices);
+            newEdges.addAll(this.edges);
+            this.vertices = newVertices;
+            this.edges = newEdges;
+        }
+        return this;
+    }
+
     /**
      * <p>Sets a new name for this graph. The name is used on printing and other exporting functionality.</p>
      * <p><b>Running Time:</b> Very Fast</p>
