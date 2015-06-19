@@ -98,8 +98,8 @@ public class Game {
         GraphState b = this.swapPlayers().runPrimitiveGame(deGrootEpsilon);
         GraphState a = this.swapPlayers().runPrimitiveGame(deGrootEpsilon);
 
-        double am = a.getMean() - 0.5;
-        double bm = b.getMean() - 0.5;
+        double am = a.getMean(g.getVertices()) - 0.5;
+        double bm = b.getMean(g.getVertices()) - 0.5;
 
         int score;
 

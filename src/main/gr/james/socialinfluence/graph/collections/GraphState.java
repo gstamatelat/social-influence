@@ -6,6 +6,7 @@ import gr.james.socialinfluence.helper.Finals;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * <p>GraphState maps every vertex in a graph with a double value. Useful as a holder for some metric, like PageRank.
@@ -14,40 +15,21 @@ import java.util.Map;
 public class GraphState extends HashMap<Vertex, Double> {
     // TODO: This class doesn't seem right, constructor accepting graph? maybe convert to subclass of HashMap
     // TODO: GraphState<E> extends HashMap<Vertex, E>?
-    //private HashMap<Vertex, Double> state;
 
     public GraphState() {
-        //state = new HashMap<Vertex, Double>();
     }
 
     public GraphState(Graph g) {
-        //this.state = new HashMap<Vertex, Double>();
         for (Vertex v : g.getVertices()) {
-            //this.state.put(v, Finals.DEFAULT_GRAPH_STATE);
             this.put(v, Finals.DEFAULT_GRAPH_STATE);
         }
     }
 
     public GraphState(Graph g, double initialState) {
-        //this.state = new HashMap<Vertex, Double>();
         for (Vertex v : g.getVertices()) {
-            //this.state.put(v, initialState);
             this.put(v, initialState);
         }
     }
-
-    /*public double getState(Vertex v) {
-        return this.state.get(v);
-    }*/
-
-    /*public GraphState setState(Vertex v, double state) {
-        this.state.put(v, state);
-        return this;
-    }*/
-
-    /*public HashMap<Vertex, Double> getStates() {
-        return this.state;
-    }*/
 
     public GraphState subtractAbs(GraphState r) {
         GraphState ret = new GraphState();
@@ -93,12 +75,20 @@ public class GraphState extends HashMap<Vertex, Double> {
     }
 
     public double getMean() {
+        return getMean(this.keySet());
+    }
+
+    public double getMean(Set<Vertex> includeOnly) {
         double mean = 0.0;
         int count = 0;
-        for (double e : this.values()) {
-            mean += e;
-            count++;
+
+        for (Map.Entry<Vertex, Double> e : this.entrySet()) {
+            if (includeOnly.contains(e.getKey())) {
+                mean += e.getValue();
+                count++;
+            }
         }
+
         return mean / (double) count;
     }
 
