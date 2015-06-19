@@ -79,7 +79,7 @@ public class Graph {
 
     /**
      * <p>Sets a new name for this graph. The name is used on printing and other exporting functionality.</p>
-     * <p><b>Running Time:</b> Very Fast</p>
+     * <p><b>Complexity:</b> O(1)</p>
      *
      * @param name The new name for this graph
      * @return this instance
@@ -100,7 +100,7 @@ public class Graph {
 
     /**
      * <p>Inserts a new vertex to the graph and returns it. Use {@link #addVertices} for bulk inserts.</p>
-     * <p><b>Running Time:</b> Fast</p>
+     * <p><b>Complexity:</b> O(1)</p>
      *
      * @return the new vertex object
      */
@@ -164,7 +164,8 @@ public class Graph {
      *
      * @param index the index of the vertex
      * @return the vertex reference with the provided index
-     * @throws GraphException if {@code index} is less than {@code 0}
+     * @throws GraphException if {@code index} is outside of {@code 0} (inclusive) and {@link #getVerticesCount()}
+     *                        (exclusive)
      */
     public Vertex getVertexFromIndex(int index) {
         if (index < 0 || index >= this.getVerticesCount()) {
@@ -211,7 +212,7 @@ public class Graph {
 
     /**
      * <p>Connects all the vertices in the graph. Does not create self-connections (loops).</p>
-     * <p><b>Running Time:</b> Slow</p>
+     * <p><b>Complexity:</b> O(n<sup>2</sup>)</p>
      *
      * @return the current instance
      */
@@ -233,7 +234,7 @@ public class Graph {
     /**
      * <p>Calculates the total amount of directed edges that this graph has. This method is a little faster than using
      * {@code getEdges().size()}.</p>
-     * <p><b>Running Time:</b> Very Fast</p>
+     * <p><b>Complexity:</b> O(1)</p>
      *
      * @return the number of directed edges in this graph
      */
@@ -419,7 +420,7 @@ public class Graph {
 
     /**
      * <p>Returns an unmodifiable Set of vertices that this graph consists of.</p>
-     * <p><b>Running Time:</b> Very Fast</p>
+     * <p><b>Complexity:</b> O(1)</p>
      *
      * @return the list of vertices of this graph
      */
@@ -429,7 +430,7 @@ public class Graph {
 
     /**
      * <p>Returns the number of vertices in this graph. This method is faster than using getVertices().size()</p>
-     * <p><b>Running Time:</b> Very Fast</p>
+     * <p><b>Complexity:</b> O(1)</p>
      *
      * @return the number of vertices in this graph
      */
