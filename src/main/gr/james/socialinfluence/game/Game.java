@@ -95,11 +95,29 @@ public class Game {
             this.playerBMove.normalizeWeights(d.getBudget());
         }
 
+        if (this.playerAMove.getVerticesCount() == 0 || this.playerBMove.getVerticesCount() == 0) {
+            Helper.logError(Finals.W_GAME_EMPTY_MOVE);
+            Vertex s1 = g.addVertex();
+            Vertex s2 = g.addVertex();
+            g.removeVertex(s1).removeVertex(s2);
+            if (this.playerAMove.getVerticesCount() > 0) {
+                GraphState gs = new GraphState(g, 0.0);
+                gs.put(s1, 0.0);
+                gs.put(s2, 1.0);
+                return new GameResult(-1, gs);
+            } else if (this.playerBMove.getVerticesCount() > 0) {
+                GraphState gs = new GraphState(g, 1.0);
+                gs.put(s1, 0.0);
+                gs.put(s2, 1.0);
+                return new GameResult(1, gs);
+            }
+        }
+
         GraphState b = this.swapPlayers().runPrimitiveGame(deGrootEpsilon);
         GraphState a = this.swapPlayers().runPrimitiveGame(deGrootEpsilon);
 
-        double am = a.getMean(g.getVertices()) - 0.5;
-        double bm = b.getMean(g.getVertices()) - 0.5;
+        double am = a.getMean() - 0.5;
+        double bm = b.getMean() - 0.5;
 
         int score;
 

@@ -210,6 +210,16 @@ public class Graph {
         return rvi.next();
     }
 
+    public Set<Vertex> getStubbornVertices() {
+        Set<Vertex> stubborn = new TreeSet<Vertex>();
+        for (Vertex v : this.vertices) {
+            if (v.getOutDegree() == 1 && v.getOutEdges().iterator().next().getTarget().equals(v)) {
+                stubborn.add(v);
+            }
+        }
+        return Collections.unmodifiableSet(stubborn);
+    }
+
     /**
      * <p>Connects all the vertices in the graph. Does not create self-connections (loops).</p>
      * <p><b>Complexity:</b> O(n<sup>2</sup>)</p>

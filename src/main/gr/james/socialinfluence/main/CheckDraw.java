@@ -1,19 +1,28 @@
 package gr.james.socialinfluence.main;
 
-import gr.james.socialinfluence.game.GameDefinition;
-import gr.james.socialinfluence.game.players.BruteForcePlayer;
-import gr.james.socialinfluence.game.players.Player;
+import gr.james.socialinfluence.game.Game;
+import gr.james.socialinfluence.game.GameResult;
+import gr.james.socialinfluence.game.Move;
+import gr.james.socialinfluence.game.PlayerEnum;
 import gr.james.socialinfluence.graph.Graph;
-import gr.james.socialinfluence.graph.io.Csv;
+import gr.james.socialinfluence.graph.generators.BarabasiAlbert;
+import gr.james.socialinfluence.helper.Helper;
 
 import java.io.IOException;
-import java.net.URL;
 
 public class CheckDraw {
     public static void main(String[] args) throws IOException {
-        Graph g = Csv.from(new URL("YOUNOTAKECANDLE").openStream());
+        Graph g = BarabasiAlbert.generate(5, 2, 2, 1.0);
 
-        Player p = new BruteForcePlayer().setOption("epsilon", "0.0001").setOption("weight_levels", "1");
-        p.findMove(g, new GameDefinition(3, 3.0, 0, false));
+        Move m = new Move();
+        m.putVertex(g.getRandomVertex(), 1.0);
+
+        Game game = new Game(g);
+        game.setPlayer(PlayerEnum.A, new Move());
+        game.setPlayer(PlayerEnum.B, m);
+
+        GameResult gr = game.runGame(null);
+        Helper.log("%d", gr.score);
+        Helper.log("%s", gr.fullState);
     }
 }

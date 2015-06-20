@@ -13,6 +13,7 @@ public class Finals {
     public static final String W_EDGE_WEIGHT_NEGATIVE = "WARNING: Edge weight must be positive. Got %f. No change done.";
     public static final String W_GAME_MOVE_EXCEED = "WARNING: Move %s contains more than %d vertices. Slicing to %s. This indicates a mistake in your player.";
     public static final String W_GAME_INVALID_VERTEX = "WARNING: A player requested a move vertex that doesn't belong in the graph. This indicates a mistake in your player.";
+    public static final String W_GAME_EMPTY_MOVE = "WARNING: A player submitted an empty move or didn't terminate before submitting a move.";
     public static final String W_DEGROOT_PERIODIC = "WARNING: Possible periodicity on %s.";
 
     /* Exceptions: these finals must be arguments to GraphException(). Format: E_CLASSNAME_IDENTIFIER. */
