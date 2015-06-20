@@ -51,6 +51,7 @@ public abstract class Player implements Runnable {
     public final Move findMove(Graph g, GameDefinition d) {
         this.g = g;
         this.d = d;
+        this.movePtr = new MovePointer();
 
         Move m = null;
 
