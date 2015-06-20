@@ -11,10 +11,10 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 
 public class Csv {
-    public static Graph from(InputStream in) throws IOException {
+    public static Graph from(InputStream source) throws IOException {
         Graph g = new Graph();
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(in, "UTF8"));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(source, "UTF8"));
         String line;
         boolean firstLine = true;
         IndexIterator it = null;
@@ -39,6 +39,6 @@ public class Csv {
         }
         reader.close();
 
-        return g.setName("CSVImport");
+        return g.setName("CSVImport").setMeta(String.format("CSV,source=%s", source));
     }
 }

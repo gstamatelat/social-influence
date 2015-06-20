@@ -39,7 +39,7 @@ public class DeGroot {
             if (stateHistory.contains(nextState)) {
                 stabilized = true;
                 if (!nextState.equals(lastState)) {
-                    //Helper.log("Periodic");
+                    Helper.logError(Finals.W_DEGROOT_PERIODIC + g.getMeta());
                 }
             }
             stateHistory.add(lastState = nextState);
