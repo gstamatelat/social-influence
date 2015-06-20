@@ -9,7 +9,7 @@ import java.util.Set;
  * hashCode methods only depend on id, which is fixed. Vertex objects returned by methods are always shallow copies.
  * There is no deep copy of a Vertex as that would not be practical for the operations that can be performed.</p>
  */
-public class Vertex implements Comparable {
+public class Vertex implements Comparable<Vertex> {
 
     /**
      * <p>This field holds a serial number needed by {@link #getNextId getNextId()}.</p>
@@ -180,8 +180,7 @@ public class Vertex implements Comparable {
     }
 
     @Override
-    public int compareTo(Object o) {
-        Vertex rhs = (Vertex) o;
-        return Integer.compare(this.id, rhs.id);
+    public int compareTo(Vertex o) {
+        return Integer.compare(this.id, o.id);
     }
 }
