@@ -6,22 +6,9 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d584793e-3e99-4c99-962d-98344dab3943" name="Default" comment="Javadoc public threshold">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/helper/RandomHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/generators/BarabasiAlbert.java" afterPath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/generators/BarabasiAlbert.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/generators/BarabasiAlbertCluster.java" afterPath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/generators/BarabasiAlbertCluster.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/game/players/BruteForcePlayer.java" afterPath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/game/players/BruteForcePlayer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/main/DegreeDistributionTest.java" afterPath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/main/DegreeDistributionTest.java" />
+    <list default="true" id="d584793e-3e99-4c99-962d-98344dab3943" name="Default" comment="Added RandomHelper as a Random singleton for entire framework">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/helper/Finals.java" afterPath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/helper/Finals.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/Graph.java" afterPath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/Graph.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/helper/Helper.java" afterPath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/helper/Helper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/algorithms/iterators/InDegreeIterator.java" afterPath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/algorithms/iterators/InDegreeIterator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/algorithms/iterators/PageRankIterator.java" afterPath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/algorithms/iterators/PageRankIterator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/generators/RandomG.java" afterPath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/generators/RandomG.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/algorithms/iterators/RandomSurferIterator.java" afterPath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/algorithms/iterators/RandomSurferIterator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/algorithms/iterators/RandomVertexIterator.java" afterPath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/algorithms/iterators/RandomVertexIterator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/gr/james/socialinfluence/Tests.java" afterPath="$PROJECT_DIR$/src/test/gr/james/socialinfluence/Tests.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/helper/WeightedRandom.java" afterPath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/helper/WeightedRandom.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/helper/RandomHelper.java" afterPath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/helper/RandomHelper.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="SocialInfluence.iws" />
@@ -88,8 +75,18 @@
       <file leaf-file-name="RandomHelper.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/gr/james/socialinfluence/helper/RandomHelper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5641026">
-              <caret line="22" column="1" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
+            <state vertical-scroll-proportion="0.3846154">
+              <caret line="15" column="117" selection-start-line="15" selection-start-column="117" selection-end-line="15" selection-end-column="117" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Finals.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/gr/james/socialinfluence/helper/Finals.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="21" column="51" selection-start-line="21" selection-start-column="31" selection-end-line="21" selection-end-column="51" />
               <folding />
             </state>
           </provider>
@@ -157,9 +154,7 @@
         <option value="$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/collections/WeightedItem.java" />
         <option value="$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/algorithms/Dijkstra.java" />
         <option value="$PROJECT_DIR$/src/main/gr/james/socialinfluence/helper/GraphRandom.java" />
-        <option value="$PROJECT_DIR$/src/main/gr/james/socialinfluence/helper/Finals.java" />
         <option value="$PROJECT_DIR$/src/main/gr/james/socialinfluence/helper/Helper.java" />
-        <option value="$PROJECT_DIR$/src/main/gr/james/socialinfluence/helper/RandomHelper.java" />
         <option value="$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/algorithms/iterators/RandomSurferIterator.java" />
         <option value="$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/algorithms/iterators/RandomVertexIterator.java" />
         <option value="$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/algorithms/iterators/PageRankIterator.java" />
@@ -172,6 +167,8 @@
         <option value="$PROJECT_DIR$/src/main/gr/james/socialinfluence/main/DegreeDistributionTest.java" />
         <option value="$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/generators/BarabasiAlbertCluster.java" />
         <option value="$PROJECT_DIR$/src/test/gr/james/socialinfluence/Tests.java" />
+        <option value="$PROJECT_DIR$/src/main/gr/james/socialinfluence/helper/Finals.java" />
+        <option value="$PROJECT_DIR$/src/main/gr/james/socialinfluence/helper/RandomHelper.java" />
       </list>
     </option>
   </component>
@@ -889,12 +886,6 @@
       <workItem from="1390549192770" duration="36385000" />
       <workItem from="1390703827822" duration="9771000" />
     </task>
-    <task id="LOCAL-00220">
-      <created>1432241846422</created>
-      <option name="number" value="00220" />
-      <option name="project" value="LOCAL" />
-      <updated>1432241846422</updated>
-    </task>
     <task id="LOCAL-00221">
       <created>1432293821024</created>
       <option name="number" value="00221" />
@@ -1183,7 +1174,13 @@
       <option name="project" value="LOCAL" />
       <updated>1434697910475</updated>
     </task>
-    <option name="localTasksCounter" value="269" />
+    <task id="LOCAL-00269" summary="Added RandomHelper as a Random singleton for entire framework">
+      <created>1434801719619</created>
+      <option name="number" value="00269" />
+      <option name="project" value="LOCAL" />
+      <updated>1434801719619</updated>
+    </task>
+    <option name="localTasksCounter" value="270" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -1280,7 +1277,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="String table addition" />
     <MESSAGE value="Moved old tests to .main" />
     <MESSAGE value="Edge extends VertexPair" />
     <MESSAGE value="Removed parentGraph from Edge" />
@@ -1305,7 +1301,8 @@
     <MESSAGE value="Extra graph constructor with options" />
     <MESSAGE value="Add EDGE_USE_LINKED_HASH_SET" />
     <MESSAGE value="Javadoc public threshold" />
-    <option name="LAST_COMMIT_MESSAGE" value="Javadoc public threshold" />
+    <MESSAGE value="Added RandomHelper as a Random singleton for entire framework" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added RandomHelper as a Random singleton for entire framework" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -1540,14 +1537,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/gr/james/socialinfluence/helper/Finals.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/gr/james/socialinfluence/helper/Helper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1576,14 +1565,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="25" column="58" selection-start-line="25" selection-start-column="58" selection-end-line="25" selection-end-column="58" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/gr/james/socialinfluence/Tests.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="5.3589745">
-          <caret line="218" column="61" selection-start-line="218" selection-start-column="61" selection-end-line="218" selection-end-column="61" />
           <folding />
         </state>
       </provider>
@@ -1652,10 +1633,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/gr/james/socialinfluence/Tests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.51282054">
+          <caret line="41" column="69" selection-start-line="41" selection-start-column="69" selection-end-line="41" selection-end-column="69" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/gr/james/socialinfluence/helper/Finals.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="21" column="51" selection-start-line="21" selection-start-column="31" selection-end-line="21" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/gr/james/socialinfluence/helper/RandomHelper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5641026">
-          <caret line="22" column="1" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
+        <state vertical-scroll-proportion="0.3846154">
+          <caret line="15" column="117" selection-start-line="15" selection-start-column="117" selection-end-line="15" selection-end-column="117" />
           <folding />
         </state>
       </provider>

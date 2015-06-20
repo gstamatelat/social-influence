@@ -19,6 +19,8 @@ public class Finals {
     public static final String E_PLAYER_OPTION_NULL = "Player option value can't be null.";
     public static final String E_PLAYER_EXCEPTION = "Player %s triggered exception <%s> on graph %s and definition %s";
 
+    public static final String E_RANDOM_HELPER_INIT = "Global Random instance has been already initialized";
+
     public static final String E_MOVEPOINTER_SET_NULL = "Cannot submit a null move.";
 
     public static final String E_BARABASI_STEP = "stepEdges <= initialClique is a constraint";
