@@ -1,10 +1,8 @@
 package gr.james.socialinfluence.helper;
 
-import java.util.Random;
-
 public class Finals {
     /* Constants */
-    public static final Random RANDOM = new Random();
+    //public static final Random RANDOM = new Random();
     public static final double DEFAULT_EDGE_WEIGHT = 1.0;
     public static final double DEFAULT_GRAPH_STATE = 0.5;
     public static final String DEFAULT_GRAPH_NAME = "G";

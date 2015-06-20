@@ -5,7 +5,7 @@ import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.graph.algorithms.Degree;
 import gr.james.socialinfluence.graph.collections.GraphState;
 import gr.james.socialinfluence.graph.generators.BarabasiAlbert;
-import gr.james.socialinfluence.helper.Finals;
+import gr.james.socialinfluence.helper.RandomHelper;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -23,7 +23,7 @@ public class DegreeDistributionTest {
          * [c_1, e_1] = [c_2, e_2] = ... = [c_p, e_p] in order for the graph to have scale-free degree
          * distribution. On this example p = coefficient_count / 2. Press Ctrl+C to terminate.
          */
-        Graph g = BarabasiAlbert.generate(10000, 2, 1, 1.2, null);
+        Graph g = BarabasiAlbert.generate(10000, 2, 1, 1.2);
         int coefficient_count = 2;
         double speed = 1.0;
 
@@ -48,7 +48,7 @@ public class DegreeDistributionTest {
         while (true) {
             double[] coefficients = new double[minCoefficients.length];
             for (int i = 0; i < minCoefficients.length; i++) {
-                coefficients[i] = speed * Finals.RANDOM.nextGaussian() + minCoefficients[i];
+                coefficients[i] = speed * RandomHelper.getRandom().nextGaussian() + minCoefficients[i];
             }
             double diff = 0;
             for (int i = 0; i < largestDegree; i++) {

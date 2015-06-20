@@ -444,7 +444,7 @@ public class Graph {
         for (Edge e : outEdges) {
             weightMap.put(e, (weighted ? e.getWeight() : 1.0));
         }
-        List<Edge> edges = WeightedRandom.makeRandomSelection(weightMap, 1, null);
+        List<Edge> edges = WeightedRandom.makeRandomSelection(weightMap, 1);
         return edges.get(0);
     }
 

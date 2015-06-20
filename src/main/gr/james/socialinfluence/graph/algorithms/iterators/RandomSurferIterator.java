@@ -2,7 +2,7 @@ package gr.james.socialinfluence.graph.algorithms.iterators;
 
 import gr.james.socialinfluence.graph.Graph;
 import gr.james.socialinfluence.graph.Vertex;
-import gr.james.socialinfluence.helper.Finals;
+import gr.james.socialinfluence.helper.RandomHelper;
 
 import java.util.Iterator;
 
@@ -32,7 +32,7 @@ public class RandomSurferIterator implements Iterator<Vertex> {
 
     @Override
     public Vertex next() {
-        if (this.current != null && Finals.RANDOM.nextDouble() > dampingFactor) {
+        if (this.current != null && RandomHelper.getRandom().nextDouble() > dampingFactor) {
             this.current = this.current.getRandomOutEdge(true).getTarget();
             if (this.current == null) {
                 this.current = new RandomVertexIterator(g).next();

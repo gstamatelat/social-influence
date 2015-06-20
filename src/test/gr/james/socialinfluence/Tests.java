@@ -16,7 +16,7 @@ import gr.james.socialinfluence.graph.generators.BarabasiAlbert;
 import gr.james.socialinfluence.graph.generators.BarabasiAlbertCluster;
 import gr.james.socialinfluence.graph.generators.RandomG;
 import gr.james.socialinfluence.graph.generators.TwoWheels;
-import gr.james.socialinfluence.helper.Finals;
+import gr.james.socialinfluence.helper.RandomHelper;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -32,14 +32,14 @@ public class Tests {
     @Test
     public void randomSurferTest() {
         int mean = 500000;
-        double dampingFactor = Finals.RANDOM.nextDouble() * 0.3;
-        double p = Finals.RANDOM.nextDouble() * 0.15 + 0.05;
+        double dampingFactor = RandomHelper.getRandom().nextDouble() * 0.3;
+        double p = RandomHelper.getRandom().nextDouble() * 0.15 + 0.05;
         int vertexCount = 40;
 
         /* Create graph and randomize edge weights */
         Graph g = RandomG.generate(vertexCount, p);
         for (Edge e : g.getEdges()) {
-            e.setWeight(Finals.RANDOM.nextDouble());
+            e.setWeight(RandomHelper.getRandom().nextDouble());
         }
 
         /* Emulate the random surfer until mean of the map values is MEAN, aka for MEAN * N steps */
@@ -104,7 +104,7 @@ public class Tests {
                 /* Create graph and randomize edge weights */
                 Graph g = RandomG.generate(vertexCount, p);
                 for (Edge e : g.getEdges()) {
-                    e.setWeight(Finals.RANDOM.nextDouble());
+                    e.setWeight(RandomHelper.getRandom().nextDouble());
                 }
 
                 /* Floyd-Warshall */
@@ -142,7 +142,7 @@ public class Tests {
 
         Graph[] graphs = new Graph[GRAPHS];
         for (int i = 0; i < GRAPHS; i++) {
-            graphs[i] = RandomG.generate(Finals.RANDOM.nextInt(50) + 50, Finals.RANDOM.nextDouble());
+            graphs[i] = RandomG.generate(RandomHelper.getRandom().nextInt(50) + 50, RandomHelper.getRandom().nextDouble());
         }
 
         int vertexCount = 0;
@@ -216,7 +216,7 @@ public class Tests {
 
     @Test
     public void indexIteratorTest() {
-        Graph g = TwoWheels.generate(Finals.RANDOM.nextInt(25) + 5);
+        Graph g = TwoWheels.generate(RandomHelper.getRandom().nextInt(25) + 5);
         IndexIterator it = new IndexIterator(g);
         int total = 0;
         Vertex pre = null;

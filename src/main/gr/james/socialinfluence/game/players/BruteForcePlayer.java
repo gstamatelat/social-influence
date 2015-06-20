@@ -10,6 +10,7 @@ import gr.james.socialinfluence.graph.algorithms.iterators.RandomSurferIterator;
 import gr.james.socialinfluence.graph.algorithms.iterators.RandomVertexIterator;
 import gr.james.socialinfluence.helper.Finals;
 import gr.james.socialinfluence.helper.Helper;
+import gr.james.socialinfluence.helper.RandomHelper;
 
 import java.util.HashSet;
 
@@ -38,7 +39,7 @@ public class BruteForcePlayer extends Player {
         RandomVertexIterator it = new RandomVertexIterator(g);
         while (moves.getVerticesCount() < numOfMoves) {
             // TODO: Something must be done to allow selecting less than numOfMoves vertices.
-            moves.putVertex(it.next(), Finals.RANDOM.nextInt(weightLevels) + 1);
+            moves.putVertex(it.next(), RandomHelper.getRandom().nextInt(weightLevels) + 1);
         }
         return moves;
     }
@@ -52,11 +53,11 @@ public class BruteForcePlayer extends Player {
         for (MovePoint mp : lastMove) {
             Vertex v = mp.vertex;
             RandomSurferIterator randomSurfer = new RandomSurferIterator(g, 0.0, v);
-            while (Finals.RANDOM.nextDouble() < jump_probability) {
+            while (RandomHelper.getRandom().nextDouble() < jump_probability) {
                 v = randomSurfer.next();
             }
 
-            moves.putVertex(v, Finals.RANDOM.nextInt(weightLevels) + 1);
+            moves.putVertex(v, RandomHelper.getRandom().nextInt(weightLevels) + 1);
         }
         return moves;
     }

@@ -2,7 +2,7 @@ package gr.james.socialinfluence.graph.algorithms.iterators;
 
 import gr.james.socialinfluence.graph.Graph;
 import gr.james.socialinfluence.graph.Vertex;
-import gr.james.socialinfluence.helper.Finals;
+import gr.james.socialinfluence.helper.RandomHelper;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -22,7 +22,7 @@ public class RandomVertexIterator implements Iterator<Vertex> {
 
     @Override
     public Vertex next() {
-        int randomIndex = Finals.RANDOM.nextInt(this.nodes.size());
+        int randomIndex = RandomHelper.getRandom().nextInt(this.nodes.size());
         return this.nodes.remove(randomIndex);
     }
 
