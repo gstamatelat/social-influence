@@ -66,12 +66,12 @@ public class Game {
             }
         }
 
-        GraphState initialOpinions = new GraphState(g);
+        GraphState initialOpinions = new GraphState(g, 0.5);
 
         initialOpinions.put(playerA, 0.0);
         initialOpinions.put(playerB, 1.0);
 
-        GraphState lastState = DeGroot.execute(g, initialOpinions, deGrootEpsilon);
+        GraphState lastState = DeGroot.execute(g, initialOpinions, deGrootEpsilon, false);
 
         this.g.removeVertex(playerA).removeVertex(playerB);
 
@@ -95,7 +95,8 @@ public class Game {
             this.playerBMove.normalizeWeights(d.getBudget());
         }
 
-        if (this.playerAMove.getVerticesCount() == 0 || this.playerBMove.getVerticesCount() == 0) {
+        /* If one of the players didn't submit a move, the other one is obviously the winner */
+        if ((this.playerAMove.getVerticesCount() == 0) ^ (this.playerBMove.getVerticesCount() == 0)) {
             Helper.logError(Finals.W_GAME_EMPTY_MOVE);
             Vertex s1 = g.addVertex();
             Vertex s2 = g.addVertex();
@@ -111,6 +112,17 @@ public class Game {
                 gs.put(s2, 1.0);
                 return new GameResult(1, gs);
             }
+        }
+
+        /* If moves are both empty or equal, it's obviously a draw */
+        if (this.playerAMove.equals(this.playerBMove)) {
+            Vertex s1 = g.addVertex();
+            Vertex s2 = g.addVertex();
+            g.removeVertex(s1).removeVertex(s2);
+            GraphState gs = new GraphState(g, 0.5);
+            gs.put(s1, 0.0);
+            gs.put(s2, 1.0);
+            return new GameResult(0, gs);
         }
 
         GraphState b = this.swapPlayers().runPrimitiveGame(deGrootEpsilon);

@@ -20,6 +20,7 @@ public class DeGroot {
         Map<Vertex, Set<Edge>> outEdgesMap = g.getOutEdges();
 
         boolean stabilized = false;
+        /*int reps = 0;*/
         while (!stabilized) {
             GraphState nextState = new GraphState(g, 0.0);
 
@@ -47,6 +48,21 @@ public class DeGroot {
             } else {
                 lastState = nextState;
             }
+            /*reps++;
+            if (reps > 10000) {
+                Set<Vertex> stubborn = g.getStubbornVertices();
+                Map<Vertex, Set<Edge>> stubbornEdges = new HashMap<Vertex, Set<Edge>>();
+                for (Vertex v : stubborn) {
+                    stubbornEdges.put(v, v.getInEdges());
+                }
+                double avg = lastState.getMean();
+                try {
+                    g.exportToDot(new FileOutputStream("C:\\Users\\James\\Desktop\\graph.dot"));
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                int y = 0;
+            }*/
         }
 
         return lastState;

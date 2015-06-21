@@ -6,22 +6,10 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d584793e-3e99-4c99-962d-98344dab3943" name="Default" comment="History parameter on DeGroot">
-      <change type="MOVED" beforePath="C:\Users\James\Desktop\social-influence\src\main\gr\james\socialinfluence\graph\collections\GraphState.java" afterPath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/collections/GraphState.java" />
-      <change type="MOVED" beforePath="C:\Users\James\Desktop\social-influence\src\main\gr\james\socialinfluence\graph\collections\Pair.java" afterPath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/collections/Pair.java" />
-      <change type="MOVED" beforePath="C:\Users\James\Desktop\social-influence\src\main\gr\james\socialinfluence\graph\collections\VertexPair.java" afterPath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/collections/VertexPair.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/main/CheckDraw.java" afterPath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/main/CheckDraw.java" />
+    <list default="true" id="d584793e-3e99-4c99-962d-98344dab3943" name="Default" comment="Refactor collections on root package">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/algorithms/DeGroot.java" afterPath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/algorithms/DeGroot.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/algorithms/Degree.java" afterPath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/algorithms/Degree.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/main/DegreeDistributionTest.java" afterPath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/main/DegreeDistributionTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/Edge.java" afterPath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/Edge.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/helper/Finals.java" afterPath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/helper/Finals.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/algorithms/FloydWarshall.java" afterPath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/algorithms/FloydWarshall.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/game/Game.java" afterPath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/game/Game.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/game/GameResult.java" afterPath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/game/GameResult.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/algorithms/PageRank.java" afterPath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/algorithms/PageRank.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/algorithms/iterators/PageRankIterator.java" afterPath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/algorithms/iterators/PageRankIterator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/gr/james/socialinfluence/Tests.java" afterPath="$PROJECT_DIR$/src/test/gr/james/socialinfluence/Tests.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="SocialInfluence.iws" />
@@ -85,11 +73,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="DeGroot.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="DeGroot.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/algorithms/DeGroot.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="42" column="66" selection-start-line="42" selection-start-column="66" selection-end-line="42" selection-end-column="66" />
+            <state vertical-scroll-proportion="0.33333334">
+              <caret line="40" column="55" selection-start-line="40" selection-start-column="55" selection-end-line="40" selection-end-column="55" />
               <folding />
             </state>
           </provider>
@@ -99,17 +87,17 @@
         <entry file="file://$PROJECT_DIR$/src/main/gr/james/socialinfluence/game/Game.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="60" column="46" selection-start-line="60" selection-start-column="46" selection-end-line="60" selection-end-column="46" />
+              <caret line="76" column="0" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CheckDraw.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CheckDraw.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/gr/james/socialinfluence/main/CheckDraw.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.51282054">
-              <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="22" column="1" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -205,13 +193,13 @@
         <option value="$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/io/Csv.java" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/Graph.java" />
-        <option value="$PROJECT_DIR$/src/main/gr/james/socialinfluence/game/Game.java" />
         <option value="$PROJECT_DIR$/src/main/gr/james/socialinfluence/game/players/Player.java" />
         <option value="$PROJECT_DIR$/src/main/gr/james/socialinfluence/main/DirectGame.java" />
         <option value="$PROJECT_DIR$/src/test/gr/james/socialinfluence/Tests.java" />
-        <option value="$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/algorithms/DeGroot.java" />
-        <option value="$PROJECT_DIR$/src/main/gr/james/socialinfluence/helper/Finals.java" />
         <option value="$PROJECT_DIR$/src/main/gr/james/socialinfluence/main/CheckDraw.java" />
+        <option value="$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/algorithms/DeGroot.java" />
+        <option value="$PROJECT_DIR$/src/main/gr/james/socialinfluence/game/Game.java" />
+        <option value="$PROJECT_DIR$/src/main/gr/james/socialinfluence/helper/Finals.java" />
       </list>
     </option>
   </component>
@@ -831,12 +819,6 @@
       <workItem from="1390549192770" duration="36385000" />
       <workItem from="1390703827822" duration="9771000" />
     </task>
-    <task id="LOCAL-00226">
-      <created>1433073100879</created>
-      <option name="number" value="00226" />
-      <option name="project" value="LOCAL" />
-      <updated>1433073100879</updated>
-    </task>
     <task id="LOCAL-00227">
       <created>1433073157131</created>
       <option name="number" value="00227" />
@@ -1125,7 +1107,13 @@
       <option name="project" value="LOCAL" />
       <updated>1434875098945</updated>
     </task>
-    <option name="localTasksCounter" value="275" />
+    <task id="LOCAL-00275" summary="Refactor collections on root package">
+      <created>1434877679975</created>
+      <option name="number" value="00275" />
+      <option name="project" value="LOCAL" />
+      <updated>1434877679975</updated>
+    </task>
+    <option name="localTasksCounter" value="276" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -1142,7 +1130,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32942432" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31995776" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1155,7 +1143,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27032736" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32683983" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20989583" sideWeight="0.49945945" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20989583" sideWeight="0.49945945" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24973376" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23454158" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1222,7 +1210,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="BarabasiAlbertCluster exception fix" />
     <MESSAGE value="Fixed Barabasi cluster test" />
     <MESSAGE value="MovePointer throws exception when submitting null move" />
     <MESSAGE value="MovePointer now starts with an empty move" />
@@ -1247,7 +1234,8 @@
     <MESSAGE value="Fixed bug: new movePtr for every findMove()" />
     <MESSAGE value="Experiments on mains" />
     <MESSAGE value="History parameter on DeGroot" />
-    <option name="LAST_COMMIT_MESSAGE" value="History parameter on DeGroot" />
+    <MESSAGE value="Refactor collections on root package" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactor collections on root package" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -1263,22 +1251,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/algorithms/DeGroot.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/gr/james/socialinfluence/game/players/Player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="62" column="35" selection-start-line="62" selection-start-column="35" selection-end-line="62" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/gr/james/socialinfluence/helper/Finals.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1619,18 +1591,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/algorithms/DeGroot.java">
+    <entry file="file://$PROJECT_DIR$/src/main/gr/james/socialinfluence/main/CheckDraw.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="42" column="66" selection-start-line="42" selection-start-column="66" selection-end-line="42" selection-end-column="66" />
+          <caret line="22" column="1" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/gr/james/socialinfluence/game/MovePoint.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.15384616">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/gr/james/socialinfluence/game/Move.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.9743589">
+          <caret line="152" column="0" selection-start-line="152" selection-start-column="0" selection-end-line="152" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/gr/james/socialinfluence/helper/Finals.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.41025642">
-          <caret line="16" column="89" selection-start-line="16" selection-start-column="89" selection-end-line="16" selection-end-column="89" />
+        <state vertical-scroll-proportion="0.20512821">
+          <caret line="8" column="54" selection-start-line="8" selection-start-column="54" selection-end-line="8" selection-end-column="54" />
           <folding />
         </state>
       </provider>
@@ -1638,15 +1626,15 @@
     <entry file="file://$PROJECT_DIR$/src/main/gr/james/socialinfluence/game/Game.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="60" column="46" selection-start-line="60" selection-start-column="46" selection-end-line="60" selection-end-column="46" />
+          <caret line="76" column="0" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/gr/james/socialinfluence/main/CheckDraw.java">
+    <entry file="file://$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/algorithms/DeGroot.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.51282054">
-          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.33333334">
+          <caret line="40" column="55" selection-start-line="40" selection-start-column="55" selection-end-line="40" selection-end-column="55" />
           <folding />
         </state>
       </provider>
