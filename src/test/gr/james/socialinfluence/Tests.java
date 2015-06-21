@@ -3,10 +3,7 @@ package gr.james.socialinfluence;
 import gr.james.socialinfluence.graph.Edge;
 import gr.james.socialinfluence.graph.Graph;
 import gr.james.socialinfluence.graph.Vertex;
-import gr.james.socialinfluence.graph.algorithms.Degree;
-import gr.james.socialinfluence.graph.algorithms.Dijkstra;
-import gr.james.socialinfluence.graph.algorithms.FloydWarshall;
-import gr.james.socialinfluence.graph.algorithms.PageRank;
+import gr.james.socialinfluence.graph.algorithms.*;
 import gr.james.socialinfluence.graph.algorithms.iterators.InDegreeIterator;
 import gr.james.socialinfluence.graph.algorithms.iterators.IndexIterator;
 import gr.james.socialinfluence.graph.algorithms.iterators.RandomSurferIterator;
@@ -229,5 +226,25 @@ public class Tests {
             total++;
         }
         Assert.assertEquals("indexIteratorTest - length", g.getVerticesCount(), total);
+    }
+
+    /**
+     * <p>In a graph without stubborn agents, all vertices reach to a common opinion upon DeGroot convergence.</p>
+     */
+    @Test
+    public void deGrootTest() {
+        Graph g = RandomG.generate(100, 0.05);
+
+        GraphState initialState = new GraphState(g, 0.0);
+        for (Vertex v : g.getVertices()) {
+            initialState.put(v, RandomHelper.getRandom().nextDouble());
+        }
+
+        GraphState finalState = DeGroot.execute(g, initialState, 0.0, true);
+        double avg = finalState.getMean();
+
+        for (double e : finalState.values()) {
+            Assert.assertEquals("deGrootTest", avg, e, 0.00001);
+        }
     }
 }

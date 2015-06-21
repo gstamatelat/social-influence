@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class DeGroot {
-    public static GraphState execute(Graph g, GraphState initialOpinions, double epsilon) {
+    public static GraphState execute(Graph g, GraphState initialOpinions, double epsilon, boolean keepHistory) {
         HashSet<GraphState> stateHistory = new HashSet<GraphState>();
         GraphState lastState = initialOpinions;
         stateHistory.add(initialOpinions);
@@ -36,19 +36,31 @@ public class DeGroot {
             if (nextState.subtractAbs(lastState).lessThan(epsilon)) {
                 stabilized = true;
             }
-            if (stateHistory.contains(nextState)) {
-                stabilized = true;
-                if (!nextState.equals(lastState)) {
-                    Helper.logError(Finals.W_DEGROOT_PERIODIC + g.getMeta());
+            if (keepHistory) {
+                if (stateHistory.contains(nextState)) {
+                    stabilized = true;
+                    if (!nextState.equals(lastState)) {
+                        Helper.logError(Finals.W_DEGROOT_PERIODIC + g.getMeta());
+                    }
                 }
+                stateHistory.add(lastState = nextState);
+            } else {
+                lastState = nextState;
             }
-            stateHistory.add(lastState = nextState);
         }
 
         return lastState;
     }
 
+    public static GraphState execute(Graph g, GraphState initialOpinions, double epsilon) {
+        return execute(g, initialOpinions, epsilon, Finals.DEFAULT_HISTORY);
+    }
+
+    public static GraphState execute(Graph g, GraphState initialOpinions, boolean keepHistory) {
+        return execute(g, initialOpinions, Finals.DEFAULT_EPSILON, keepHistory);
+    }
+
     public static GraphState execute(Graph g, GraphState initialOpinions) {
-        return execute(g, initialOpinions, Finals.DEFAULT_EPSILON);
+        return execute(g, initialOpinions, Finals.DEFAULT_EPSILON, Finals.DEFAULT_HISTORY);
     }
 }
