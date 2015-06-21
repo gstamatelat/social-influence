@@ -18,7 +18,7 @@ public class MovePointer {
 
     /**
      * <p>Gets a copy of the internal {@link Move} object of this instance.</p>
-     * <p><b>Running Time:</b> ???</p>
+     * <p><b>Complexity:</b> O(n)</p>
      *
      * @return a deep copy of the internal {@link Move} object
      */
@@ -30,7 +30,7 @@ public class MovePointer {
 
     /**
      * <p>Sets the internal {@link Move} object of this instance.</p>
-     * <p><b>Running Time:</b> ???</p>
+     * <p><b>Complexity:</b> O(n)</p>
      *
      * @param e the {@link Move} to set. This input will be deep-copied before it is set as part of the
      *          {@link MovePointer} thread-safety.
