@@ -7,7 +7,7 @@ public class Finals {
     public static final String DEFAULT_GRAPH_NAME = "G";
     public static final double DEFAULT_DEGROOT_PRECISION = 0.0;
     public static final double DEFAULT_PAGERANK_PRECISION = 0.0;
-    public static final double DEFAULT_GAME_PRECISION = 1.0e-5;
+    public static final double DEFAULT_GAME_PRECISION = 1.0e-8;
     public static final boolean DEFAULT_DEGROOT_HISTORY = true;
 
     /* Warnings: these finals must be arguments to Helper.logError() */

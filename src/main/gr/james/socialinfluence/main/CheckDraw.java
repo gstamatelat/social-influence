@@ -27,7 +27,7 @@ public class CheckDraw {
         game.setPlayer(PlayerEnum.A, m1);
         game.setPlayer(PlayerEnum.B, m2);
 
-        GameResult gr = game.runGame(d);
+        GameResult gr = game.runGame(d, 1.0e-5);
 
         Helper.log("%s", gr);
     }
