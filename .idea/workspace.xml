@@ -6,8 +6,8 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d584793e-3e99-4c99-962d-98344dab3943" name="Default" comment="Minor Finals reordering">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/game/MovePointer.java" afterPath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/game/MovePointer.java" />
+    <list default="true" id="d584793e-3e99-4c99-962d-98344dab3943" name="Default" comment="Complexity javadoc on MovePointer">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/helper/Finals.java" afterPath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/helper/Finals.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="SocialInfluence.iws" />
@@ -131,21 +131,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Finals.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Finals.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/gr/james/socialinfluence/helper/Finals.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="27" column="41" selection-start-line="27" selection-start-column="41" selection-end-line="27" selection-end-column="41" />
+            <state vertical-scroll-proportion="0.07692308">
+              <caret line="3" column="17" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MovePointer.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MovePointer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/gr/james/socialinfluence/game/MovePointer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.33333334">
-              <caret line="26" column="34" selection-start-line="26" selection-start-column="34" selection-end-line="26" selection-end-column="34" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="31" column="69" selection-start-line="31" selection-start-column="69" selection-end-line="31" selection-end-column="69" />
               <folding />
             </state>
           </provider>
@@ -236,8 +236,8 @@
         <option value="$PROJECT_DIR$/src/main/gr/james/socialinfluence/game/Game.java" />
         <option value="$PROJECT_DIR$/src/main/gr/james/socialinfluence/main/DirectGame.java" />
         <option value="$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/algorithms/Degree.java" />
-        <option value="$PROJECT_DIR$/src/main/gr/james/socialinfluence/helper/Finals.java" />
         <option value="$PROJECT_DIR$/src/main/gr/james/socialinfluence/game/MovePointer.java" />
+        <option value="$PROJECT_DIR$/src/main/gr/james/socialinfluence/helper/Finals.java" />
       </list>
     </option>
   </component>
@@ -913,12 +913,6 @@
       <workItem from="1390549192770" duration="36385000" />
       <workItem from="1390703827822" duration="9771000" />
     </task>
-    <task id="LOCAL-00231" summary="Javadoc for isInterrupted()">
-      <created>1433493620965</created>
-      <option name="number" value="00231" />
-      <option name="project" value="LOCAL" />
-      <updated>1433493620966</updated>
-    </task>
     <task id="LOCAL-00232" summary="README additions">
       <created>1433494697897</created>
       <option name="number" value="00232" />
@@ -1207,7 +1201,13 @@
       <option name="project" value="LOCAL" />
       <updated>1434906229102</updated>
     </task>
-    <option name="localTasksCounter" value="280" />
+    <task id="LOCAL-00280" summary="Complexity javadoc on MovePointer">
+      <created>1434906440649</created>
+      <option name="number" value="00280" />
+      <option name="project" value="LOCAL" />
+      <updated>1434906440649</updated>
+    </task>
+    <option name="localTasksCounter" value="281" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -1304,7 +1304,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Now handling uncatched player exceptions with an error message" />
     <MESSAGE value="Fixed TwoWheels generation bug" />
     <MESSAGE value="Update TwoWheel generator &amp; test" />
     <MESSAGE value="TwoWheels test javadoc" />
@@ -1329,7 +1328,8 @@
     <MESSAGE value="Default game precision final" />
     <MESSAGE value="Increase DEFAULT_GAME_PRECISION" />
     <MESSAGE value="Minor Finals reordering" />
-    <option name="LAST_COMMIT_MESSAGE" value="Minor Finals reordering" />
+    <MESSAGE value="Complexity javadoc on MovePointer" />
+    <option name="LAST_COMMIT_MESSAGE" value="Complexity javadoc on MovePointer" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -1702,26 +1702,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/gr/james/socialinfluence/helper/Helper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="22" column="19" selection-start-line="22" selection-start-column="19" selection-end-line="22" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/gr/james/socialinfluence/graph/algorithms/Degree.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="17" column="5" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/gr/james/socialinfluence/helper/Finals.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="27" column="41" selection-start-line="27" selection-start-column="41" selection-end-line="27" selection-end-column="41" />
           <folding />
         </state>
       </provider>
@@ -1736,8 +1720,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/gr/james/socialinfluence/game/MovePointer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334">
-          <caret line="26" column="34" selection-start-line="26" selection-start-column="34" selection-end-line="26" selection-end-column="34" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="31" column="69" selection-start-line="31" selection-start-column="69" selection-end-line="31" selection-end-column="69" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/gr/james/socialinfluence/helper/Helper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="22" column="19" selection-start-line="22" selection-start-column="19" selection-end-line="22" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/gr/james/socialinfluence/helper/Finals.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.07692308">
+          <caret line="3" column="17" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
           <folding />
         </state>
       </provider>

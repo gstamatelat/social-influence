@@ -1,6 +1,9 @@
 package gr.james.socialinfluence.helper;
 
 public class Finals {
+    /* Version */
+    public static final String VERSION = "ALPHA";
+
     /* Default values */
     public static final String DEFAULT_GRAPH_NAME = "G";
     public static final double DEFAULT_EDGE_WEIGHT = 1.0;
