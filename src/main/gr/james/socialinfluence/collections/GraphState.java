@@ -1,4 +1,4 @@
-package gr.james.socialinfluence.graph.collections;
+package gr.james.socialinfluence.collections;
 
 import gr.james.socialinfluence.graph.Graph;
 import gr.james.socialinfluence.graph.Vertex;

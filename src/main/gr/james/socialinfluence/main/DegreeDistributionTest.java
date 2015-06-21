@@ -1,9 +1,9 @@
 package gr.james.socialinfluence.main;
 
+import gr.james.socialinfluence.collections.GraphState;
 import gr.james.socialinfluence.graph.Graph;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.graph.algorithms.Degree;
-import gr.james.socialinfluence.graph.collections.GraphState;
 import gr.james.socialinfluence.graph.generators.BarabasiAlbert;
 import gr.james.socialinfluence.helper.RandomHelper;
 

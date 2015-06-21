@@ -1,6 +1,6 @@
 package gr.james.socialinfluence.graph;
 
-import gr.james.socialinfluence.graph.collections.VertexPair;
+import gr.james.socialinfluence.collections.VertexPair;
 import gr.james.socialinfluence.helper.Finals;
 import gr.james.socialinfluence.helper.Helper;
 

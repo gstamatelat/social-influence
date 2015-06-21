@@ -1,5 +1,7 @@
 package gr.james.socialinfluence;
 
+import gr.james.socialinfluence.collections.GraphState;
+import gr.james.socialinfluence.collections.VertexPair;
 import gr.james.socialinfluence.graph.Edge;
 import gr.james.socialinfluence.graph.Graph;
 import gr.james.socialinfluence.graph.Vertex;
@@ -7,8 +9,6 @@ import gr.james.socialinfluence.graph.algorithms.*;
 import gr.james.socialinfluence.graph.algorithms.iterators.InDegreeIterator;
 import gr.james.socialinfluence.graph.algorithms.iterators.IndexIterator;
 import gr.james.socialinfluence.graph.algorithms.iterators.RandomSurferIterator;
-import gr.james.socialinfluence.graph.collections.GraphState;
-import gr.james.socialinfluence.graph.collections.VertexPair;
 import gr.james.socialinfluence.graph.generators.BarabasiAlbert;
 import gr.james.socialinfluence.graph.generators.BarabasiAlbertCluster;
 import gr.james.socialinfluence.graph.generators.RandomG;
