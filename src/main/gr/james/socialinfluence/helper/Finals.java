@@ -2,9 +2,9 @@ package gr.james.socialinfluence.helper;
 
 public class Finals {
     /* Default values */
+    public static final String DEFAULT_GRAPH_NAME = "G";
     public static final double DEFAULT_EDGE_WEIGHT = 1.0;
     public static final double DEFAULT_GRAPH_STATE = 0.5;
-    public static final String DEFAULT_GRAPH_NAME = "G";
     public static final double DEFAULT_DEGROOT_PRECISION = 0.0;
     public static final double DEFAULT_PAGERANK_PRECISION = 0.0;
     public static final double DEFAULT_GAME_PRECISION = 1.0e-8;
