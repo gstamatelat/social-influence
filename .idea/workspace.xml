@@ -6,7 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d584793e-3e99-4c99-962d-98344dab3943" name="Default" comment="Complexity javadoc on MovePointer">
+    <list default="true" id="d584793e-3e99-4c99-962d-98344dab3943" name="Default" comment="Version final">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/helper/Finals.java" afterPath="$PROJECT_DIR$/src/main/gr/james/socialinfluence/helper/Finals.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -135,7 +135,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/gr/james/socialinfluence/helper/Finals.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.07692308">
-              <caret line="3" column="17" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
+              <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -913,12 +913,6 @@
       <workItem from="1390549192770" duration="36385000" />
       <workItem from="1390703827822" duration="9771000" />
     </task>
-    <task id="LOCAL-00232" summary="README additions">
-      <created>1433494697897</created>
-      <option name="number" value="00232" />
-      <option name="project" value="LOCAL" />
-      <updated>1433494697897</updated>
-    </task>
     <task id="LOCAL-00233" summary="Removed the call to normalizeWeights() from the players since it's not needed any more">
       <created>1433529042387</created>
       <option name="number" value="00233" />
@@ -1207,7 +1201,13 @@
       <option name="project" value="LOCAL" />
       <updated>1434906440649</updated>
     </task>
-    <option name="localTasksCounter" value="281" />
+    <task id="LOCAL-00281" summary="Version final">
+      <created>1434906549630</created>
+      <option name="number" value="00281" />
+      <option name="project" value="LOCAL" />
+      <updated>1434906549630</updated>
+    </task>
+    <option name="localTasksCounter" value="282" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -1304,7 +1304,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Fixed TwoWheels generation bug" />
     <MESSAGE value="Update TwoWheel generator &amp; test" />
     <MESSAGE value="TwoWheels test javadoc" />
     <MESSAGE value="2 more bullets in TODO (and counting)" />
@@ -1329,7 +1328,8 @@
     <MESSAGE value="Increase DEFAULT_GAME_PRECISION" />
     <MESSAGE value="Minor Finals reordering" />
     <MESSAGE value="Complexity javadoc on MovePointer" />
-    <option name="LAST_COMMIT_MESSAGE" value="Complexity javadoc on MovePointer" />
+    <MESSAGE value="Version final" />
+    <option name="LAST_COMMIT_MESSAGE" value="Version final" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -1737,7 +1737,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/gr/james/socialinfluence/helper/Finals.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.07692308">
-          <caret line="3" column="17" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
+          <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
           <folding />
         </state>
       </provider>
