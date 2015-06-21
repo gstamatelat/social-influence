@@ -5,8 +5,10 @@ public class Finals {
     public static final double DEFAULT_EDGE_WEIGHT = 1.0;
     public static final double DEFAULT_GRAPH_STATE = 0.5;
     public static final String DEFAULT_GRAPH_NAME = "G";
-    public static final double DEFAULT_EPSILON = 0.0;
-    public static final boolean DEFAULT_HISTORY = true;
+    public static final double DEFAULT_DEGROOT_PRECISION = 0.0;
+    public static final double DEFAULT_PAGERANK_PRECISION = 0.0;
+    public static final double DEFAULT_GAME_PRECISION = 1.0e-5;
+    public static final boolean DEFAULT_DEGROOT_HISTORY = true;
 
     /* Warnings: these finals must be arguments to Helper.logError() */
     public static final String W_PLAYER_WAITING = "WARNING: Been waiting %d seconds for %s to terminate gracefully.";

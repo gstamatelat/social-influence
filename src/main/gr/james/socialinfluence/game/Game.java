@@ -145,6 +145,6 @@ public class Game {
     }
 
     public GameResult runGame(GameDefinition d) {
-        return runGame(d, Finals.DEFAULT_EPSILON);
+        return runGame(d, Finals.DEFAULT_GAME_PRECISION);
     }
 }

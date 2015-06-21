@@ -55,6 +55,6 @@ public class PageRank {
     }
 
     public static GraphState execute(Graph g, double dampingFactor) {
-        return execute(g, dampingFactor, Finals.DEFAULT_EPSILON);
+        return execute(g, dampingFactor, Finals.DEFAULT_PAGERANK_PRECISION);
     }
 }

@@ -8,7 +8,6 @@ import gr.james.socialinfluence.graph.Graph;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.graph.algorithms.iterators.RandomSurferIterator;
 import gr.james.socialinfluence.graph.algorithms.iterators.RandomVertexIterator;
-import gr.james.socialinfluence.helper.Finals;
 import gr.james.socialinfluence.helper.Helper;
 import gr.james.socialinfluence.helper.RandomHelper;
 
@@ -104,7 +103,7 @@ public class BruteForcePlayer extends Player {
     @Override
     public Player putDefaultOptions() {
         this.options.put("weight_levels", "10");
-        this.options.put("epsilon", String.valueOf(Finals.DEFAULT_EPSILON));
+        this.options.put("epsilon", "0.0");
         this.options.put("clever", "false");
         return this;
     }

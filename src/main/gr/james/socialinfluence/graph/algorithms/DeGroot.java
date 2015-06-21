@@ -49,7 +49,7 @@ public class DeGroot {
                 lastState = nextState;
             }
             /*reps++;
-            if (reps > 10000) {
+            if (reps > 50000) {
                 Set<Vertex> stubborn = g.getStubbornVertices();
                 Map<Vertex, Set<Edge>> stubbornEdges = new HashMap<Vertex, Set<Edge>>();
                 for (Vertex v : stubborn) {
@@ -69,14 +69,14 @@ public class DeGroot {
     }
 
     public static GraphState execute(Graph g, GraphState initialOpinions, double epsilon) {
-        return execute(g, initialOpinions, epsilon, Finals.DEFAULT_HISTORY);
+        return execute(g, initialOpinions, epsilon, Finals.DEFAULT_DEGROOT_HISTORY);
     }
 
     public static GraphState execute(Graph g, GraphState initialOpinions, boolean keepHistory) {
-        return execute(g, initialOpinions, Finals.DEFAULT_EPSILON, keepHistory);
+        return execute(g, initialOpinions, Finals.DEFAULT_DEGROOT_PRECISION, keepHistory);
     }
 
     public static GraphState execute(Graph g, GraphState initialOpinions) {
-        return execute(g, initialOpinions, Finals.DEFAULT_EPSILON, Finals.DEFAULT_HISTORY);
+        return execute(g, initialOpinions, Finals.DEFAULT_DEGROOT_PRECISION, Finals.DEFAULT_DEGROOT_HISTORY);
     }
 }

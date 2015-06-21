@@ -42,7 +42,7 @@ public class GraphState extends HashMap<Vertex, Double> {
     }
 
     /**
-     * <p>Checks if all values in this object are less than a specified value.</p>
+     * <p>Checks if all values in this object are less than or equal a specified value.</p>
      * <p><b>Running Time:</b> Fast</p>
      *
      * @param e which value to check against
@@ -51,7 +51,7 @@ public class GraphState extends HashMap<Vertex, Double> {
     public boolean lessThan(double e) {
         boolean ret = true;
         for (double k : this.values()) {
-            if (k >= e) {
+            if (k > e) {
                 ret = false;
                 break;
             }

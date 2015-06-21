@@ -10,4 +10,9 @@ public class GameResult {
         this.score = score;
         this.fullState = fullState;
     }
+
+    @Override
+    public String toString() {
+        return String.format("{score=%d,state=%.2f}", score, fullState.getMean());
+    }
 }
