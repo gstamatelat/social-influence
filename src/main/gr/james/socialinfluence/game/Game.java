@@ -134,8 +134,10 @@ public class Game {
         int score;
 
         if (am * bm > 0) {
+            Helper.logError("am * bm > 0");
             score = 0;
         } else if (am * bm == 0.0) {
+            Helper.logError("am * bm == 0.0");
             score = 0;
         } else {
             score = Double.compare(am, 0);
