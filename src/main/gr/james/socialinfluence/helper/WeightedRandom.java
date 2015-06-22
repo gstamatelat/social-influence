@@ -19,7 +19,7 @@ public class WeightedRandom {
         return finalSelections;
     }
 
-    private static class ObjectWithWeight<E> implements Comparable {
+    public static class ObjectWithWeight<E> implements Comparable {
         public E e;
         public double w;
 
