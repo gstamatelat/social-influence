@@ -28,6 +28,8 @@ public class Pair<T> {
 
     /**
      * <p>Returns the first element.</p>
+     *
+     * @return the first element
      */
     public T getFirst() {
         return first;
@@ -35,6 +37,8 @@ public class Pair<T> {
 
     /**
      * <p>Returns the second element.</p>
+     *
+     * @return the second element
      */
     public T getSecond() {
         return second;

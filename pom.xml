@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>gr.james.socialinfluence</groupId>
-    <artifactId>SocialInfluence</artifactId>
+    <artifactId>social-influence</artifactId>
     <version>0.50</version>
 
     <packaging>jar</packaging>
