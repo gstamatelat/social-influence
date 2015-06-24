@@ -1,12 +1,13 @@
 package gr.james.socialinfluence.graph.generators;
 
 import gr.james.socialinfluence.graph.Graph;
-import gr.james.socialinfluence.graph.MemoryGraph;
 import gr.james.socialinfluence.graph.Vertex;
+import gr.james.socialinfluence.helper.Helper;
 
 public class Path {
-    public static Graph generate(int totalVertices, boolean cycle) {
-        Graph g = new MemoryGraph();
+    public static <T extends Graph> Graph generate(Class<T> type, int totalVertices, boolean cycle) {
+        Graph g = Helper.instantiateGeneric(type);
+
         Vertex startVertex = g.addVertex(), previousVertex = startVertex;
         while (g.getVerticesCount() < totalVertices) {
             Vertex newVertex = g.addVertex();

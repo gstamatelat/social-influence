@@ -11,12 +11,12 @@ import java.util.HashMap;
 import java.util.List;
 
 public class BarabasiAlbert {
-    public static Graph generate(int totalVertices, int initialClique, int stepEdges, double a) {
+    public static <T extends Graph> Graph generate(Class<T> type, int totalVertices, int initialClique, int stepEdges, double a) {
         if (stepEdges > initialClique) {
             throw new GraphException(Finals.E_BARABASI_STEP);
         }
 
-        Graph g = Clique.generate(initialClique);
+        Graph g = Clique.generate(type, initialClique);
         while (g.getVerticesCount() < totalVertices) {
             HashMap<Vertex, Double> weightMap = Degree.execute(g, true);
             for (Vertex v : weightMap.keySet()) {

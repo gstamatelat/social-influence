@@ -1,6 +1,7 @@
 package gr.james.socialinfluence.helper;
 
 import gr.james.socialinfluence.graph.Edge;
+import gr.james.socialinfluence.graph.Graph;
 import gr.james.socialinfluence.graph.MemoryGraph;
 import gr.james.socialinfluence.graph.Vertex;
 
@@ -35,9 +36,9 @@ public class Helper {
         return t;
     }
 
-    public static MemoryGraph combineGraphs(MemoryGraph[] graphs) {
+    public static Graph combineGraphs(Graph[] graphs) {
         MemoryGraph r = new MemoryGraph();
-        for (MemoryGraph g : graphs) {
+        for (Graph g : graphs) {
             for (Vertex v : g.getVertices()) {
                 //v.parentGraph = r;
                 r.addVertex(v);
@@ -48,7 +49,7 @@ public class Helper {
                 //r.edges.add(e);
             }
         }
-        for (MemoryGraph g : graphs) {
+        for (Graph g : graphs) {
             g.clear();
             //g.vertices.clear();
             //g.edges.clear();

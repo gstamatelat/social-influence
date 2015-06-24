@@ -1,14 +1,13 @@
 package gr.james.socialinfluence.graph.generators;
 
-import gr.james.socialinfluence.graph.MemoryGraph;
+import gr.james.socialinfluence.graph.Graph;
+import gr.james.socialinfluence.helper.Helper;
 
 public class Clique {
-    public static MemoryGraph generate(int totalVertices) {
-        MemoryGraph g = new MemoryGraph();
+    public static <T extends Graph> Graph generate(Class<T> type, int totalVertices) {
+        Graph g = Helper.instantiateGeneric(type);
         g.addVertices(totalVertices);
         g.connectAllVertices();
-        g.setName("Clique");
-        g.setMeta(String.format("%s,totalVertices=%d", "Clique", totalVertices));
-        return g;
+        return g.setName("Clique").setMeta(String.format("%s,totalVertices=%d", "Clique", totalVertices));
     }
 }
