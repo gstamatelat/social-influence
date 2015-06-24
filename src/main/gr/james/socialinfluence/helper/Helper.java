@@ -2,7 +2,6 @@ package gr.james.socialinfluence.helper;
 
 import gr.james.socialinfluence.graph.Edge;
 import gr.james.socialinfluence.graph.Graph;
-import gr.james.socialinfluence.graph.MemoryGraph;
 import gr.james.socialinfluence.graph.Vertex;
 
 import java.text.SimpleDateFormat;
@@ -36,23 +35,18 @@ public class Helper {
         return t;
     }
 
-    public static Graph combineGraphs(Graph[] graphs) {
-        MemoryGraph r = new MemoryGraph();
+    public static <T extends Graph> Graph combineGraphs(Class<T> type, Graph[] graphs) {
+        Graph r = Helper.instantiateGeneric(type);
         for (Graph g : graphs) {
             for (Vertex v : g.getVertices()) {
-                //v.parentGraph = r;
                 r.addVertex(v);
-                //r.vertices.add(v);
             }
             for (Edge e : g.getEdges()) {
                 r.addEdge(e.getSource(), e.getTarget()).setWeight(e.getWeight());
-                //r.edges.add(e);
             }
         }
         for (Graph g : graphs) {
             g.clear();
-            //g.vertices.clear();
-            //g.edges.clear();
         }
         return r;
     }

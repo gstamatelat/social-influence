@@ -70,7 +70,7 @@ public class Tests {
     public void degreeEigenvectorTest() {
         for (int vertexCount = 10; vertexCount < 250; vertexCount += 10) {
             /* Make the graph */
-            Graph g = BarabasiAlbert.generate(vertexCount, 2, 2, 1.0);
+            Graph g = BarabasiAlbert.generate(MemoryGraph.class, vertexCount, 2, 2, 1.0);
 
             /* Get PageRank and Degree */
             GraphState degree = Degree.execute(g, true);
@@ -139,24 +139,24 @@ public class Tests {
     public void combineGraphsTest() {
         int GRAPHS = 10;
 
-        MemoryGraph[] graphs = new MemoryGraph[GRAPHS];
+        Graph[] graphs = new Graph[GRAPHS];
         for (int i = 0; i < GRAPHS; i++) {
-            graphs[i] = (MemoryGraph) RandomG.generate(MemoryGraph.class, RandomHelper.getRandom().nextInt(50) + 50, RandomHelper.getRandom().nextDouble());
+            graphs[i] = RandomG.generate(MemoryGraph.class, RandomHelper.getRandom().nextInt(50) + 50, RandomHelper.getRandom().nextDouble());
         }
 
         int vertexCount = 0;
         int edgeCount = 0;
-        for (MemoryGraph g : graphs) {
+        for (Graph g : graphs) {
             vertexCount += g.getVerticesCount();
             edgeCount += g.getEdgesCount();
         }
 
-        MemoryGraph g = Helper.combineGraphs(graphs);
+        Graph g = Helper.combineGraphs(MemoryGraph.class, graphs);
 
         Assert.assertEquals("combineGraphsTest - vertexCount", vertexCount, g.getVerticesCount());
         Assert.assertEquals("combineGraphsTest - edgeCount", edgeCount, g.getEdgesCount());
 
-        for (MemoryGraph u : graphs) {
+        for (Graph u : graphs) {
             Assert.assertEquals("combineGraphsTest - subGraph - vertices", 0, u.getVerticesCount());
             Assert.assertEquals("combineGraphsTest - subGraph - edges", 0, u.getEdgesCount());
         }
@@ -169,21 +169,21 @@ public class Tests {
 
         for (int _clusters : clusters) {
             for (int _clusterSize : clusterSize) {
-                Graph g = BarabasiAlbertCluster.generate(_clusterSize, 2, 2, 1.0, _clusters);
+                Graph g = BarabasiAlbertCluster.generate(MemoryGraph.class, _clusterSize, 2, 2, 1.0, _clusters);
                 Assert.assertEquals("clustersTest", _clusters * _clusterSize, g.getVerticesCount());
             }
         }
     }
 
     /**
-     * <p>In the {@link TwoWheels} graph, the maximum degree should be {@code max(6, n-1)}, where {@code n} is the input
-     * of {@link TwoWheels#generate(int)}</p>
+     * <p>In the {@link TwoWheels} graph, the maximum degree should be {@code max(6, n-1)}, where {@code n} is the
+     * {@code int} input of {@link TwoWheels#generate(Class, int)}</p>
      */
     @Test
     public void twoWheelsMaxDegreeTest() {
         for (int k = 4; k < 100; k++) {
             /* Generate TwoWheels(k) */
-            Graph g = TwoWheels.generate(k);
+            Graph g = TwoWheels.generate(MemoryGraph.class, k);
 
             /* Get max degree */
             int max = new InDegreeIterator(g).next().getOutDegree();
@@ -200,7 +200,7 @@ public class Tests {
     public void getVertexFromIndexTest() {
         for (int k = 4; k < 100; k++) {
             /* Generate TwoWheels(k) */
-            Graph g = TwoWheels.generate(k);
+            Graph g = TwoWheels.generate(MemoryGraph.class, k);
 
             /* Get max degree */
             int max = new InDegreeIterator(g).next().getOutDegree();
@@ -215,7 +215,7 @@ public class Tests {
 
     @Test
     public void indexIteratorTest() {
-        Graph g = TwoWheels.generate(RandomHelper.getRandom().nextInt(25) + 5);
+        Graph g = TwoWheels.generate(MemoryGraph.class, RandomHelper.getRandom().nextInt(25) + 5);
         IndexIterator it = new IndexIterator(g);
         int total = 0;
         Vertex pre = null;
