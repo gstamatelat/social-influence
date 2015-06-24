@@ -1,6 +1,6 @@
 package gr.james.socialinfluence.graph;
 
-public enum GraphOptions {
+public enum MemoryGraphOptions {
     /**
      * <p>Use a {@link java.util.LinkedHashSet} as container for the vertices instead of a {@link java.util.HashSet}. A
      * {@code LinkedHashSet} has slightly slower add() but faster next(). This setting has an effect on the iterator of

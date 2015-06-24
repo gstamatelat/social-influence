@@ -32,27 +32,27 @@ public class MemoryGraph implements Graph {
 
     /**
      * <p>Creates a new empty graph with name {@link Finals#DEFAULT_GRAPH_NAME} and default
-     * {@link GraphOptions options}.</p>
+     * {@link MemoryGraphOptions options}.</p>
      */
     public MemoryGraph() {
-        this(EnumSet.noneOf(GraphOptions.class));
+        this(EnumSet.noneOf(MemoryGraphOptions.class));
     }
 
     /**
      * <p>Creates a new empty graph with name {@link Finals#DEFAULT_GRAPH_NAME} and the specified
-     * {@link GraphOptions options}.</p>
+     * {@link MemoryGraphOptions options}.</p>
      *
      * @param e the options to use when constructing this Graph
      */
-    public MemoryGraph(EnumSet<GraphOptions> e) {
+    public MemoryGraph(EnumSet<MemoryGraphOptions> e) {
         this.name = Finals.DEFAULT_GRAPH_NAME;
         this.meta = "";
-        if (e.contains(GraphOptions.VERTEX_USE_LINKED_HASH_SET)) {
+        if (e.contains(MemoryGraphOptions.VERTEX_USE_LINKED_HASH_SET)) {
             this.vertices = new LinkedHashSet<>();
         } else {
             this.vertices = new HashSet<>();
         }
-        if (e.contains(GraphOptions.EDGE_USE_LINKED_HASH_SET)) {
+        if (e.contains(MemoryGraphOptions.EDGE_USE_LINKED_HASH_SET)) {
             this.edges = new LinkedHashSet<>();
         } else {
             this.edges = new HashSet<>();
