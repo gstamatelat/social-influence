@@ -18,7 +18,6 @@ Running time - Complexity:
 - There needs to be a helper function or some `Graph` member method that can return if a graph is aperiodic or not.
 - Consider converting `Move` to immutable.
 - Considering converting `Move` to `Map`.
-- Rename `get()` and `set()` on `MovePointer` to `get()` and `submit()` or soemthing else
 - `Player` should not be able to mutate the `Graph` object `g`. Consider passing a copy instead.
 - Create a `MutableGraph` class that will derive `Graph`. 
 - `getVertexFromId()` is confusing and needs to go.

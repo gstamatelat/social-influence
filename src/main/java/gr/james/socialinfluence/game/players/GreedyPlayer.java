@@ -104,7 +104,7 @@ public class GreedyPlayer extends Player {
 
             /* Find the best move, aka the one with min vector sum */
             Move minMove = getMinimum(treeMoves);
-            this.movePtr.set(minMove);
+            this.movePtr.submit(minMove);
 
             /* This helps when computation takes a long time */
             if (!this.d.getTournament()) {

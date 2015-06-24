@@ -22,7 +22,7 @@ public class MovePointer {
      *
      * @return a deep copy of the internal {@link Move} object
      */
-    public Move get() {
+    public Move recall() {
         synchronized (lock) {
             return ref.deepCopy();
         }
@@ -32,11 +32,11 @@ public class MovePointer {
      * <p>Sets the internal {@link Move} object of this instance.</p>
      * <p><b>Complexity:</b> O(n)</p>
      *
-     * @param e the {@link Move} to set. This input will be deep-copied before it is set as part of the
+     * @param e the {@link Move} to submit. This input will be deep-copied before it is submit as part of the
      *          {@link MovePointer} thread-safety.
      * @throws GraphException when the input move is {@code null}
      */
-    public void set(Move e) {
+    public void submit(Move e) {
         synchronized (lock) {
             if (e == null) {
                 throw new GraphException(Finals.E_MOVEPOINTER_SET_NULL);

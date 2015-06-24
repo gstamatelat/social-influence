@@ -61,7 +61,7 @@ public abstract class Player implements Runnable {
             t.start();
             t.join(this.d.getExecution());
             this.interrupted = true;
-            m = this.movePtr.get();
+            m = this.movePtr.recall();
             int count = 0;
             while (t.isAlive()) {
                 if (count > 0) {

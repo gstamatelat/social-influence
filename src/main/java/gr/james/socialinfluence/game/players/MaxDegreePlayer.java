@@ -13,7 +13,7 @@ public class MaxDegreePlayer extends Player {
         while (m.getVerticesCount() < d.getActions()) {
             m.putVertex(pri.next(), 1.0);
         }
-        this.movePtr.set(m);
+        this.movePtr.submit(m);
         if (!this.d.getTournament()) {
             Helper.log("Max PageRank player: %s", m);
         }

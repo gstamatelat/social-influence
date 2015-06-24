@@ -92,7 +92,7 @@ public class BruteForcePlayer extends Player {
                 }
                 moveDraws.clear();
                 bestMove = newMove;
-                this.movePtr.set(bestMove);
+                this.movePtr.submit(bestMove);
                 if (!this.d.getTournament()) {
                     Helper.log("New best move %s", newMove.toString());
                 }
