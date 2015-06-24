@@ -74,6 +74,8 @@ public abstract class Graph {
      */
     public abstract Graph removeVertex(Vertex v);
 
+    public abstract Graph clear();
+
     public abstract Vertex getVertexFromId(int id);
 
     /**

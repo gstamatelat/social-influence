@@ -14,6 +14,7 @@ import gr.james.socialinfluence.graph.generators.BarabasiAlbert;
 import gr.james.socialinfluence.graph.generators.BarabasiAlbertCluster;
 import gr.james.socialinfluence.graph.generators.RandomG;
 import gr.james.socialinfluence.graph.generators.TwoWheels;
+import gr.james.socialinfluence.helper.Helper;
 import gr.james.socialinfluence.helper.RandomHelper;
 import org.junit.Assert;
 import org.junit.Test;
@@ -150,7 +151,7 @@ public class Tests {
             edgeCount += g.getEdgesCount();
         }
 
-        MemoryGraph g = MemoryGraph.combineGraphs(graphs);
+        MemoryGraph g = Helper.combineGraphs(graphs);
 
         Assert.assertEquals("combineGraphsTest - vertexCount", vertexCount, g.getVerticesCount());
         Assert.assertEquals("combineGraphsTest - edgeCount", edgeCount, g.getEdgesCount());

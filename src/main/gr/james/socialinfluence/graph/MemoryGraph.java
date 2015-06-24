@@ -43,24 +43,6 @@ public class MemoryGraph extends Graph {
         }
     }
 
-    public static MemoryGraph combineGraphs(MemoryGraph[] graphs) {
-        MemoryGraph r = new MemoryGraph();
-        for (MemoryGraph g : graphs) {
-            for (Vertex v : g.vertices) {
-                v.parentGraph = r;
-                r.vertices.add(v);
-            }
-            for (Edge e : g.edges) {
-                r.edges.add(e);
-            }
-        }
-        for (MemoryGraph g : graphs) {
-            g.vertices.clear();
-            g.edges.clear();
-        }
-        return r;
-    }
-
     public Vertex addVertex() {
         Vertex v = new Vertex();
         v.parentGraph = this;
@@ -69,9 +51,10 @@ public class MemoryGraph extends Graph {
     }
 
     public Vertex addVertex(Vertex v) {
-        if (v.getParentGraph() != null && v.getParentGraph() != this) {
+        // TODO: parentGraph will be removed anyway
+        /*if (v.getParentGraph() != null && v.getParentGraph() != this) {
             throw new GraphException(Finals.E_GRAPH_VERTEX_BOUND);
-        }
+        }*/
         v.parentGraph = this;
         this.vertices.add(v);
         return v;
@@ -94,6 +77,13 @@ public class MemoryGraph extends Graph {
         }
         this.vertices.remove(v);
         v.parentGraph = null;
+        return this;
+    }
+
+    public Graph clear() {
+        // TODO: Obviously need to use .removeVertex because parentGraph remains unmodified but this will break Helper.combineGraphs so we leave it for now
+        this.vertices.clear();
+        this.edges.clear();
         return this;
     }
 
