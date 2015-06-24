@@ -4,14 +4,18 @@ Java network/graph framework with emphasis on social influence
 
 ## Complexity notation
 
-Running time - Complexity:
-
-* Very Fast - Constant (few cycles)
-* Fast - Linear
-* Slow - Polynomial (not linear - n^2)
-* Very Slow - Exponential (use a different programming language)
-
 > See: [Java Collections - Performance (Time Complexity)](http://infotechgems.blogspot.com/2011/11/java-collections-performance-time.html)
+
+## Usage
+
+### Graph creation
+
+```java
+Graph g = new MemoryGraph();
+Vertex v1 = g.addVertex();
+Vertex v2 = g.addVertex();
+g.addEdge(v1, v2);
+```
 
 ## TODO
 
