@@ -9,7 +9,7 @@ public class MaxPageRankPlayer extends Player {
     public void getMove() {
         Move m = new Move();
         PageRankIterator pri = new PageRankIterator(this.g, 0.15);
-        while (m.getVerticesCount() < this.d.getNumOfMoves()) {
+        while (m.getVerticesCount() < this.d.getActions()) {
             m.putVertex(pri.next(), 1.0);
         }
         this.movePtr.set(m);

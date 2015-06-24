@@ -12,7 +12,7 @@ public class SlowPlayer extends Player {
         while (System.currentTimeMillis() - now < 5 * this.d.getExecution()) {
             Move m = new Move();
             RandomVertexIterator rvi = new RandomVertexIterator(this.g);
-            while (m.getVerticesCount() < this.d.getNumOfMoves()) {
+            while (m.getVerticesCount() < this.d.getActions()) {
                 m.putVertex(rvi.next(), 1.0);
             }
             this.movePtr.set(m);

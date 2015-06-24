@@ -1,20 +1,20 @@
 package gr.james.socialinfluence.game;
 
 public class GameDefinition {
-    private int numOfMoves;
+    private int actions;
     private double budget;
     private long execution;
     private boolean tournament;
 
-    public GameDefinition(int numOfMoves, double budget, long execution, boolean tournament) {
-        this.numOfMoves = numOfMoves;
+    public GameDefinition(int actions, double budget, long execution, boolean tournament) {
+        this.actions = actions;
         this.budget = budget;
         this.execution = execution;
         this.tournament = tournament;
     }
 
-    public int getNumOfMoves() {
-        return this.numOfMoves;
+    public int getActions() {
+        return this.actions;
     }
 
     public double getBudget() {
@@ -31,6 +31,6 @@ public class GameDefinition {
 
     @Override
     public String toString() {
-        return String.format("{numOfMoves=%d, budget=%f, execution=%d, tournament=%b}", numOfMoves, budget, execution, tournament);
+        return String.format("{actions=%d, budget=%f, execution=%d, tournament=%b}", actions, budget, execution, tournament);
     }
 }

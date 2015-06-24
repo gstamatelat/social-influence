@@ -20,7 +20,6 @@ Running time - Complexity:
 - Considering converting `Move` to `Map`.
 - Rename `get()` and `set()` on `MovePointer` to `get()` and `submit()` or soemthing else
 - `Player` should not be able to mutate the `Graph` object `g`. Consider passing a copy instead.
-- Consider renaming `numOfMoves` to `actions` or something else.
 - Create a `MutableGraph` class that will derive `Graph`. 
 - `getVertexFromId()` is confusing and needs to go.
 - `Game` should accept `Player`s not `Move`s.

@@ -10,7 +10,7 @@ public class MaxDegreePlayer extends Player {
         // TODO: This isn't degree player
         Move m = new Move();
         PageRankIterator pri = new PageRankIterator(this.g, 0.15);
-        while (m.getVerticesCount() < d.getNumOfMoves()) {
+        while (m.getVerticesCount() < d.getActions()) {
             m.putVertex(pri.next(), 1.0);
         }
         this.movePtr.set(m);

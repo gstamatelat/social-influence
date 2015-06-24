@@ -76,7 +76,7 @@ public class GreedyPlayer extends Player {
             updateVector(distanceMap, vector, firstGuess);
 
             /* Simulation loop */
-            while (m.getVerticesCount() < d.getNumOfMoves()) {
+            while (m.getVerticesCount() < d.getActions()) {
                 HashMap<Vertex, Double> sumMap = new HashMap<Vertex, Double>();
                 for (Vertex v : this.g.getVertices()) {
                     HashMap<Vertex, Double> tmpVector = new HashMap<Vertex, Double>();

@@ -68,11 +68,11 @@ public class BruteForcePlayer extends Player {
         HashSet<Move> movesHistory = new HashSet<Move>();
         HashSet<Move> moveDraws = new HashSet<Move>();
 
-        Move bestMove = getRandomMove(this.g, this.d.getNumOfMoves(), Integer.parseInt(this.options.get("weight_levels")), null, false);
+        Move bestMove = getRandomMove(this.g, this.d.getActions(), Integer.parseInt(this.options.get("weight_levels")), null, false);
         movesHistory.add(bestMove);
 
         while (!this.isInterrupted()) {
-            Move newMove = getRandomMove(this.g, this.d.getNumOfMoves(), Integer.parseInt(this.options.get("weight_levels")), game.getPlayerAMove(), Boolean.parseBoolean(this.options.get("clever")));
+            Move newMove = getRandomMove(this.g, this.d.getActions(), Integer.parseInt(this.options.get("weight_levels")), game.getPlayerAMove(), Boolean.parseBoolean(this.options.get("clever")));
             game.setPlayer(PlayerEnum.A, bestMove);
             game.setPlayer(PlayerEnum.B, newMove);
             int gameScore = game.runGame(this.d, Double.parseDouble(this.options.get("epsilon"))).score;

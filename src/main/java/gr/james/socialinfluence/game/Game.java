@@ -80,15 +80,15 @@ public class Game {
 
     public GameResult runGame(GameDefinition d, double deGrootEpsilon) {
         if (d != null) {
-            if (this.playerAMove.getVerticesCount() > d.getNumOfMoves()) {
+            if (this.playerAMove.getVerticesCount() > d.getActions()) {
                 String oldMove = this.playerAMove.toString();
-                this.playerAMove.sliceMove(d.getNumOfMoves());
-                Helper.logError(Finals.W_GAME_MOVE_EXCEED, oldMove, d.getNumOfMoves(), this.playerAMove.toString());
+                this.playerAMove.sliceMove(d.getActions());
+                Helper.logError(Finals.W_GAME_MOVE_EXCEED, oldMove, d.getActions(), this.playerAMove.toString());
             }
-            if (this.playerBMove.getVerticesCount() > d.getNumOfMoves()) {
+            if (this.playerBMove.getVerticesCount() > d.getActions()) {
                 String oldMove = this.playerBMove.toString();
-                this.playerBMove.sliceMove(d.getNumOfMoves());
-                Helper.logError(Finals.W_GAME_MOVE_EXCEED, oldMove, d.getNumOfMoves(), this.playerBMove.toString());
+                this.playerBMove.sliceMove(d.getActions());
+                Helper.logError(Finals.W_GAME_MOVE_EXCEED, oldMove, d.getActions(), this.playerBMove.toString());
             }
 
             this.playerAMove.normalizeWeights(d.getBudget());

@@ -9,7 +9,7 @@ public class RandomPlayer extends Player {
     public void getMove() {
         Move m = new Move();
         RandomVertexIterator rvi = new RandomVertexIterator(this.g);
-        while (m.getVerticesCount() < this.d.getNumOfMoves()) {
+        while (m.getVerticesCount() < this.d.getActions()) {
             m.putVertex(rvi.next(), 1.0);
         }
         this.movePtr.set(m);
