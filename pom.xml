@@ -24,7 +24,8 @@
     </dependencies>
 
     <build>
-        <sourceDirectory>src/main</sourceDirectory>
+
+    <sourceDirectory>src/main</sourceDirectory>
         <testSourceDirectory>src/test</testSourceDirectory>
 
         <plugins>
