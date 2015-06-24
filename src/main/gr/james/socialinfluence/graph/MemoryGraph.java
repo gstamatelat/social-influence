@@ -31,8 +31,6 @@ public class MemoryGraph extends Graph {
      * @param e the options to use when constructing this Graph
      */
     public MemoryGraph(EnumSet<MemoryGraphOptions> e) {
-        this.name = Finals.DEFAULT_GRAPH_NAME;
-        this.meta = "";
         if (e.contains(MemoryGraphOptions.VERTEX_USE_LINKED_HASH_SET)) {
             this.vertices = new LinkedHashSet<>();
         } else {

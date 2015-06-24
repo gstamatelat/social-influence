@@ -1,5 +1,6 @@
 package gr.james.socialinfluence.graph;
 
+import gr.james.socialinfluence.helper.Finals;
 import gr.james.socialinfluence.helper.GraphException;
 
 import java.io.IOException;
@@ -24,6 +25,11 @@ import java.util.Set;
 public abstract class Graph {
     protected String name;
     protected String meta;
+
+    public Graph() {
+        this.name = Finals.DEFAULT_GRAPH_NAME;
+        this.meta = "";
+    }
 
     /**
      * <p>Sets a new name for this graph. The name is used on printing and other exporting functionality.</p>
