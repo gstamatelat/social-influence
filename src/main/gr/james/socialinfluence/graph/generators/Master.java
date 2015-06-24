@@ -1,11 +1,12 @@
 package gr.james.socialinfluence.graph.generators;
 
+import gr.james.socialinfluence.graph.Graph;
 import gr.james.socialinfluence.graph.MemoryGraph;
 import gr.james.socialinfluence.graph.Vertex;
 
 public class Master {
-    public static MemoryGraph generate() {
-        MemoryGraph g = new MemoryGraph();
+    public static Graph generate() {
+        Graph g = new MemoryGraph();
 
         Vertex v1 = g.addVertex();
         Vertex v2 = g.addVertex();

@@ -2,7 +2,7 @@ package gr.james.socialinfluence.graph.algorithms;
 
 import gr.james.socialinfluence.collections.GraphState;
 import gr.james.socialinfluence.graph.Edge;
-import gr.james.socialinfluence.graph.MemoryGraph;
+import gr.james.socialinfluence.graph.Graph;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.helper.Finals;
 
@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.Map;
 
 public class PageRank {
-    public static GraphState execute(MemoryGraph g, double dampingFactor, double epsilon) {
+    public static GraphState execute(Graph g, double dampingFactor, double epsilon) {
         HashSet<GraphState> stateHistory = new HashSet<GraphState>();
         GraphState lastState = new GraphState(g, 1.0);
         stateHistory.add(lastState);
@@ -54,7 +54,7 @@ public class PageRank {
         return lastState;
     }
 
-    public static GraphState execute(MemoryGraph g, double dampingFactor) {
+    public static GraphState execute(Graph g, double dampingFactor) {
         return execute(g, dampingFactor, Finals.DEFAULT_PAGERANK_PRECISION);
     }
 }

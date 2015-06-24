@@ -1,6 +1,6 @@
 package gr.james.socialinfluence.graph.generators;
 
-import gr.james.socialinfluence.graph.MemoryGraph;
+import gr.james.socialinfluence.graph.Graph;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.graph.algorithms.Degree;
 import gr.james.socialinfluence.helper.Finals;
@@ -11,12 +11,12 @@ import java.util.HashMap;
 import java.util.List;
 
 public class BarabasiAlbert {
-    public static MemoryGraph generate(int totalVertices, int initialClique, int stepEdges, double a) {
+    public static Graph generate(int totalVertices, int initialClique, int stepEdges, double a) {
         if (stepEdges > initialClique) {
             throw new GraphException(Finals.E_BARABASI_STEP);
         }
 
-        MemoryGraph g = Clique.generate(initialClique);
+        Graph g = Clique.generate(initialClique);
         while (g.getVerticesCount() < totalVertices) {
             HashMap<Vertex, Double> weightMap = Degree.execute(g, true);
             for (Vertex v : weightMap.keySet()) {

@@ -1,6 +1,6 @@
 package gr.james.socialinfluence.graph.algorithms.iterators;
 
-import gr.james.socialinfluence.graph.MemoryGraph;
+import gr.james.socialinfluence.graph.Graph;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.helper.RandomHelper;
 
@@ -10,7 +10,7 @@ import java.util.Iterator;
 public class RandomVertexIterator implements Iterator<Vertex> {
     private ArrayList<Vertex> nodes;
 
-    public RandomVertexIterator(MemoryGraph g) {
+    public RandomVertexIterator(Graph g) {
         this.nodes = new ArrayList<Vertex>();
         this.nodes.addAll(g.getVertices());
     }

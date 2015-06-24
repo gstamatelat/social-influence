@@ -2,7 +2,7 @@ package gr.james.socialinfluence.graph.algorithms;
 
 import gr.james.socialinfluence.collections.VertexPair;
 import gr.james.socialinfluence.graph.Edge;
-import gr.james.socialinfluence.graph.MemoryGraph;
+import gr.james.socialinfluence.graph.Graph;
 import gr.james.socialinfluence.graph.Vertex;
 
 import java.util.HashMap;
@@ -16,7 +16,7 @@ import java.util.Map;
  * not return details of the paths themselves.</p>
  */
 public class FloydWarshall {
-    public static Map<VertexPair, Double> execute(MemoryGraph g) {
+    public static Map<VertexPair, Double> execute(Graph g) {
         Map<VertexPair, Double> dist = new HashMap<VertexPair, Double>();
 
         for (Vertex u : g.getVertices()) {

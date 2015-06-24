@@ -1,14 +1,15 @@
 package gr.james.socialinfluence.graph.generators;
 
+import gr.james.socialinfluence.graph.Graph;
 import gr.james.socialinfluence.graph.MemoryGraph;
 import gr.james.socialinfluence.graph.Vertex;
 
 import java.util.Iterator;
 
 public class TwoWheels {
-    public static MemoryGraph generate(int wheelVertices) {
-        MemoryGraph g1 = Wheel.generate(wheelVertices);
-        MemoryGraph g2 = Wheel.generate(wheelVertices);
+    public static Graph generate(int wheelVertices) {
+        MemoryGraph g1 = (MemoryGraph) Wheel.generate(wheelVertices);
+        MemoryGraph g2 = (MemoryGraph) Wheel.generate(wheelVertices);
 
         Vertex a, b;
         Iterator<Vertex> it1 = g1.getVertices().iterator();

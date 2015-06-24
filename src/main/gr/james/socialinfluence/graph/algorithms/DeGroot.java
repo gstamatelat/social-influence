@@ -2,6 +2,7 @@ package gr.james.socialinfluence.graph.algorithms;
 
 import gr.james.socialinfluence.collections.GraphState;
 import gr.james.socialinfluence.graph.Edge;
+import gr.james.socialinfluence.graph.Graph;
 import gr.james.socialinfluence.graph.MemoryGraph;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.helper.Finals;
@@ -12,7 +13,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class DeGroot {
-    public static GraphState execute(MemoryGraph g, GraphState initialOpinions, double epsilon, boolean keepHistory) {
+    public static GraphState execute(Graph g, GraphState initialOpinions, double epsilon, boolean keepHistory) {
         HashSet<GraphState> stateHistory = new HashSet<GraphState>();
         GraphState lastState = initialOpinions;
         stateHistory.add(initialOpinions);

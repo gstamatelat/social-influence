@@ -1,11 +1,11 @@
 package gr.james.socialinfluence.graph.generators;
 
-import gr.james.socialinfluence.graph.MemoryGraph;
+import gr.james.socialinfluence.graph.Graph;
 import gr.james.socialinfluence.graph.Vertex;
 
 public class Wheel {
-    public static MemoryGraph generate(int totalVertices) {
-        MemoryGraph g = Path.generate(totalVertices - 1, true);
+    public static Graph generate(int totalVertices) {
+        Graph g = Path.generate(totalVertices - 1, true);
         Vertex n = g.addVertex();
         for (Vertex v : g.getVertices()) {
             if (!v.equals(n)) {

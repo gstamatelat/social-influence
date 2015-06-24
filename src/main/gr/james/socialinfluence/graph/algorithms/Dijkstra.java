@@ -1,14 +1,14 @@
 package gr.james.socialinfluence.graph.algorithms;
 
 import gr.james.socialinfluence.graph.Edge;
-import gr.james.socialinfluence.graph.MemoryGraph;
+import gr.james.socialinfluence.graph.Graph;
 import gr.james.socialinfluence.graph.Vertex;
 
 import java.util.HashMap;
 import java.util.PriorityQueue;
 
 public class Dijkstra {
-    public static HashMap<Vertex, Double> execute(MemoryGraph g, Vertex source) {
+    public static HashMap<Vertex, Double> execute(Graph g, Vertex source) {
         HashMap<Vertex, DijkstraNode> nodeMap = new HashMap<Vertex, DijkstraNode>();
         for (Vertex v : g.getVertices()) {
             nodeMap.put(v, new DijkstraNode(v, null, Double.POSITIVE_INFINITY));

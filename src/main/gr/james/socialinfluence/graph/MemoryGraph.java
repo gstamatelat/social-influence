@@ -24,7 +24,7 @@ import java.util.*;
  * these collections after they have been returned, you need to call the method again. The elements themselves,
  * however, are shallow copies and can be used to change the state of the graph.</p>
  */
-public class MemoryGraph {
+public class MemoryGraph implements Graph {
     private String name;
     private String meta;
     private Set<Vertex> vertices;
@@ -77,14 +77,7 @@ public class MemoryGraph {
         return r;
     }
 
-    /**
-     * <p>Sets a new name for this graph. The name is used on printing and other exporting functionality.</p>
-     * <p><b>Complexity:</b> O(1)</p>
-     *
-     * @param name The new name for this graph
-     * @return this instance
-     */
-    public MemoryGraph setName(String name) {
+    public Graph setName(String name) {
         this.name = name;
         return this;
     }
@@ -93,17 +86,11 @@ public class MemoryGraph {
         return this.meta;
     }
 
-    public MemoryGraph setMeta(String meta) {
+    public Graph setMeta(String meta) {
         this.meta = meta;
         return this;
     }
 
-    /**
-     * <p>Inserts a new vertex to the graph and returns it. Use {@link #addVertices} for bulk inserts.</p>
-     * <p><b>Complexity:</b> O(1)</p>
-     *
-     * @return the new vertex object
-     */
     public Vertex addVertex() {
         Vertex v = new Vertex();
         v.parentGraph = this;
@@ -128,15 +115,7 @@ public class MemoryGraph {
         return Collections.unmodifiableSet(newVertices);
     }
 
-    /**
-     * <p>Removes a vertex from the graph. This method will also remove the inbound and outbound edges of that vertex.
-     * </p>
-     * <p><b>Running Time:</b> Fast</p>
-     *
-     * @param v the vertex to be removed
-     * @return the current instance
-     */
-    public MemoryGraph removeVertex(Vertex v) {
+    public Graph removeVertex(Vertex v) {
         for (Iterator<Edge> i = this.edges.iterator(); i.hasNext(); ) {
             Edge e = i.next();
             if (e.getSource().equals(v) || e.getTarget().equals(v)) {
@@ -157,16 +136,6 @@ public class MemoryGraph {
         return null;
     }
 
-    /**
-     * <p>Get a {@link Vertex} of this graph based on its index. Index is a deterministic, per-graph attribute between
-     * {@code 0} (inclusive) and {@link #getVerticesCount()} (exclusive), indicating the rank of the ID of the specific
-     * vertex in the ordered ID list.</p>
-     *
-     * @param index the index of the vertex
-     * @return the vertex reference with the provided index
-     * @throws GraphException if {@code index} is outside of {@code 0} (inclusive) and {@link #getVerticesCount()}
-     *                        (exclusive)
-     */
     public Vertex getVertexFromIndex(int index) {
         if (index < 0 || index >= this.getVerticesCount()) {
             throw new GraphException(Finals.E_GRAPH_INDEX_OUT_OF_BOUNDS, index);
@@ -181,13 +150,6 @@ public class MemoryGraph {
         return v;
     }
 
-    /**
-     * <p>Fuses two or more vertices into a single one. This method may cause information loss
-     * if there are conflicts on the edges.</p>
-     *
-     * @param f an array of vertices to be fused
-     * @return the vertex that is the result of the fusion
-     */
     public Vertex fuseVertices(Vertex[] f) {
         Vertex v = this.addVertex();
 
@@ -220,13 +182,7 @@ public class MemoryGraph {
         return Collections.unmodifiableSet(stubborn);
     }
 
-    /**
-     * <p>Connects all the vertices in the graph. Does not create self-connections (loops).</p>
-     * <p><b>Complexity:</b> O(n<sup>2</sup>)</p>
-     *
-     * @return the current instance
-     */
-    public MemoryGraph connectAllVertices() {
+    public Graph connectAllVertices() {
         for (Vertex v : vertices) {
             for (Vertex w : vertices) {
                 if (!v.equals(w)) {
@@ -241,13 +197,6 @@ public class MemoryGraph {
         return Collections.unmodifiableSet(this.edges);
     }
 
-    /**
-     * <p>Calculates the total amount of directed edges that this graph has. This method is a little faster than using
-     * {@code getEdges().size()}.</p>
-     * <p><b>Complexity:</b> O(1)</p>
-     *
-     * @return the number of directed edges in this graph
-     */
     public int getEdgesCount() {
         return this.edges.size();
     }
@@ -273,12 +222,12 @@ public class MemoryGraph {
         return Collections.unmodifiableSet(addedEdges);
     }
 
-    public MemoryGraph removeEdge(Edge e) {
+    public Graph removeEdge(Edge e) {
         this.edges.remove(e);
         return this;
     }
 
-    public MemoryGraph removeEdge(Vertex source, Vertex target) {
+    public Graph removeEdge(Vertex source, Vertex target) {
         // TODO: Consider doing something like this.remove(new Edge(source, target))
         Edge candidate = null;
         for (Edge e : this.edges) {
@@ -381,13 +330,6 @@ public class MemoryGraph {
         return this.getInEdges(v).size();
     }
 
-    /**
-     * <p>Returns true if for every edge with source S and target T where S and T are different,
-     * there is always an edge with source T and target S.</p>
-     * <p><b>Running Time:</b> Slow - Very Slow (depends on the graph)</p>
-     *
-     * @return true if the graph is undirected, otherwise false
-     */
     public boolean isUndirected() {
         // TODO: Not sure if this method is slow. Could be very slow.
         // TODO: Not tested
@@ -413,7 +355,7 @@ public class MemoryGraph {
         return edgeList.size() == 0;
     }
 
-    public MemoryGraph createCircle(boolean undirected) {
+    public Graph createCircle(boolean undirected) {
         // TODO: Not tested
         Iterator<Vertex> vertexIterator = this.vertices.iterator();
         Vertex previous = vertexIterator.next();
@@ -428,22 +370,10 @@ public class MemoryGraph {
         return this;
     }
 
-    /**
-     * <p>Returns an unmodifiable Set of vertices that this graph consists of.</p>
-     * <p><b>Complexity:</b> O(1)</p>
-     *
-     * @return the list of vertices of this graph
-     */
     public Set<Vertex> getVertices() {
         return Collections.unmodifiableSet(this.vertices);
     }
 
-    /**
-     * <p>Returns the number of vertices in this graph. This method is faster than using getVertices().size()</p>
-     * <p><b>Complexity:</b> O(1)</p>
-     *
-     * @return the number of vertices in this graph
-     */
     public int getVerticesCount() {
         return this.vertices.size();
     }
@@ -479,15 +409,7 @@ public class MemoryGraph {
         return diameter;
     }
 
-    /**
-     * <p>Exports this graph in DOT format. If the graph is undirected, then the undirected DOT format will be used.
-     * This method uses UTF-8 as character set when writing to the stream.</p>
-     * <p><b>Running Time:</b> Slow - Very Slow (depends on the graph)</p>
-     *
-     * @param out the OutputStream to write the DOT file to
-     * @return the current instance
-     */
-    public MemoryGraph exportToDot(OutputStream out) {
+    public Graph exportToDot(OutputStream out) {
         if (this.isUndirected()) {
             ArrayList<Vertex[]> edgeList = new ArrayList<>();
             for (Edge e : this.edges) {

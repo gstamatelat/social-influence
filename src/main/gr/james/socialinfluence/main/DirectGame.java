@@ -6,7 +6,7 @@ import gr.james.socialinfluence.game.PlayerEnum;
 import gr.james.socialinfluence.game.players.MaxPageRankPlayer;
 import gr.james.socialinfluence.game.players.Player;
 import gr.james.socialinfluence.game.players.RandomPlayer;
-import gr.james.socialinfluence.graph.MemoryGraph;
+import gr.james.socialinfluence.graph.Graph;
 import gr.james.socialinfluence.graph.generators.BarabasiAlbert;
 import gr.james.socialinfluence.helper.Helper;
 import gr.james.socialinfluence.helper.RandomHelper;
@@ -16,7 +16,7 @@ public class DirectGame {
         while (true) {
             RandomHelper.initRandom(3724);
             GameDefinition d = new GameDefinition(5, 5.0, 5000L, true);
-            MemoryGraph g = BarabasiAlbert.generate(25, 2, 2, 1);
+            Graph g = BarabasiAlbert.generate(25, 2, 2, 1);
             Player p1 = new MaxPageRankPlayer();
             Player p2 = new RandomPlayer();
             Game game = new Game(g);

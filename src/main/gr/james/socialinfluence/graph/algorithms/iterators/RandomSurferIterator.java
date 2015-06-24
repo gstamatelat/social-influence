@@ -1,6 +1,6 @@
 package gr.james.socialinfluence.graph.algorithms.iterators;
 
-import gr.james.socialinfluence.graph.MemoryGraph;
+import gr.james.socialinfluence.graph.Graph;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.helper.RandomHelper;
 
@@ -11,15 +11,15 @@ import java.util.Iterator;
  * and its structure while using any iterator on this framework.</p>
  */
 public class RandomSurferIterator implements Iterator<Vertex> {
-    private MemoryGraph g;
+    private Graph g;
     private double dampingFactor;
     private Vertex current;
 
-    public RandomSurferIterator(MemoryGraph g, double dampingFactor) {
+    public RandomSurferIterator(Graph g, double dampingFactor) {
         this(g, dampingFactor, null);
     }
 
-    public RandomSurferIterator(MemoryGraph g, double dampingFactor, Vertex initialVertex) {
+    public RandomSurferIterator(Graph g, double dampingFactor, Vertex initialVertex) {
         this.g = g;
         this.dampingFactor = dampingFactor;
         this.current = initialVertex;
