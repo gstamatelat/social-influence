@@ -10,16 +10,7 @@ import gr.james.socialinfluence.helper.WeightedRandom;
 import java.util.*;
 
 /**
- * <p>Represents a collection of vertices and edges. The graph is weighted directed and there can't be more than one
- * edge from node {@code i} to node {@code j} (it's not a multigraph).</p><p><b>Remark on performance &ndash; </b>Some
- * methods have both single-vertex and multi-vertex variants, for example {@code getDegree(Vertex v)} and {@code
- * getDegree()}. You should prefer the latter when your algorithm needs all the degrees and avoid iterating through all
- * vertices and calling the single-vertex method each time. {@code for (Vertex v: g.getVertices()) { v.getInEdges(); }}
- * construct is to be avoided.</p><p><b>Collections returned &ndash; </b>Methods that return collections
- * ({@link java.util.Map Maps} or {@link java.util.Set Sets}) return read-only versions of them, meaning that you can't
- * insert or remove elements. These collections are also not backed by the graph, changes to the graph won't affect
- * these collections after they have been returned, you need to call the method again. The elements themselves,
- * however, are shallow copies and can be used to change the state of the graph.</p>
+ * <p>Represents an in-memory {@link Graph}.</p>
  */
 public class MemoryGraph extends Graph {
     private Set<Vertex> vertices;
