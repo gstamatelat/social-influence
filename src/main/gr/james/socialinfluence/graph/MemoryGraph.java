@@ -24,7 +24,7 @@ import java.util.*;
  * these collections after they have been returned, you need to call the method again. The elements themselves,
  * however, are shallow copies and can be used to change the state of the graph.</p>
  */
-public class MemoryGraph implements Graph {
+public class MemoryGraph extends Graph {
     private String name;
     private String meta;
     private Set<Vertex> vertices;
