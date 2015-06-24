@@ -14,7 +14,7 @@ public class InDegreeIterator implements Iterator<Vertex> {
     private HashMap<Vertex, Integer> nodes;
 
     public InDegreeIterator(Graph g) {
-        nodes = new HashMap<Vertex, Integer>();
+        nodes = new HashMap<>();
         for (Vertex v : g.getVertices()) {
             this.nodes.put(v, v.getInDegree());
         }
@@ -35,7 +35,7 @@ public class InDegreeIterator implements Iterator<Vertex> {
             }
         }
 
-        ArrayList<Vertex> maxVertices = new ArrayList<Vertex>();
+        ArrayList<Vertex> maxVertices = new ArrayList<>();
         for (Map.Entry<Vertex, Integer> e : this.nodes.entrySet()) {
             if (e.getValue().equals(maxDegree)) {
                 maxVertices.add(e.getKey());
