@@ -12,7 +12,7 @@ public class Move implements Iterable<MovePoint> {
     private Set<MovePoint> moveObject;
 
     public Move() {
-        this.moveObject = new TreeSet<MovePoint>();
+        this.moveObject = new TreeSet<>();
     }
 
     public int getVerticesCount() {
