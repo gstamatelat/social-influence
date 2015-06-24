@@ -10,7 +10,7 @@ import gr.james.socialinfluence.helper.WeightedRandom;
 import java.util.*;
 
 /**
- * <p>Represents an in-memory {@link Graph}, implemented using adjacency lists.</p>
+ * <p>Represents an in-memory {@link Graph}, implemented using adjacency lists. Suitable for sparse graphs.</p>
  */
 public class MemoryGraph extends Graph {
     private Set<Vertex> vertices;
