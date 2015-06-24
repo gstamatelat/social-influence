@@ -58,7 +58,7 @@ public class Tests {
 
         /* Assert if maps not approx. equal */
         for (Vertex v : g.getVertices()) {
-            Assert.assertEquals("randomSurferTest - " + g.getMeta(), gs.get(v), pr.get(v), 0.01);
+            Assert.assertEquals("randomSurferTest - " + g.getMeta(), gs.get(v), pr.get(v), 1.0e-2);
         }
     }
 
@@ -84,7 +84,7 @@ public class Tests {
 
             /* Assert if maps not approx. equal */
             for (Vertex v : g.getVertices()) {
-                Assert.assertEquals("degreeEigenvectorTest - " + g.getMeta(), degree.get(v), pagerank.get(v), 0.01);
+                Assert.assertEquals("degreeEigenvectorTest - " + g.getMeta(), degree.get(v), pagerank.get(v), 1.0e-2);
             }
         }
     }
@@ -128,7 +128,7 @@ public class Tests {
                         // TODO: Also, 10^{-5} is too hardcoded for a quantity that could very well be really close to 10^{-5}
                         // TODO: It's better to just compare 1 (one) with the ratio of distFloyd/distDijkstra
                         Assert.assertEquals("FloydWarshallTest - " + g.getMeta(), distFloyd.get(new VertexPair(u, v)),
-                                distDijkstra.get(new VertexPair(u, v)), Math.pow(10, -5));
+                                distDijkstra.get(new VertexPair(u, v)), 1.0e-5);
                     }
                 }
             }
@@ -246,7 +246,7 @@ public class Tests {
         double avg = finalState.getMean();
 
         for (double e : finalState.values()) {
-            Assert.assertEquals("deGrootTest", avg, e, 0.00001);
+            Assert.assertEquals("deGrootTest", avg, e, 1.0e-5);
         }
     }
 }
