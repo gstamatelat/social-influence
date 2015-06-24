@@ -1,7 +1,7 @@
 package gr.james.socialinfluence.game;
 
 import gr.james.socialinfluence.collections.GraphState;
-import gr.james.socialinfluence.graph.Graph;
+import gr.james.socialinfluence.graph.MemoryGraph;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.graph.algorithms.DeGroot;
 import gr.james.socialinfluence.helper.Finals;
@@ -9,11 +9,11 @@ import gr.james.socialinfluence.helper.GraphException;
 import gr.james.socialinfluence.helper.Helper;
 
 public class Game {
-    private Graph g;
+    private MemoryGraph g;
     private Move playerAMove;
     private Move playerBMove;
 
-    public Game(Graph g) {
+    public Game(MemoryGraph g) {
         this.g = g;
         this.playerAMove = new Move();
         this.playerBMove = new Move();

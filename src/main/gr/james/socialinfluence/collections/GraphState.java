@@ -1,6 +1,6 @@
 package gr.james.socialinfluence.collections;
 
-import gr.james.socialinfluence.graph.Graph;
+import gr.james.socialinfluence.graph.MemoryGraph;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.helper.Finals;
 
@@ -19,13 +19,13 @@ public class GraphState extends HashMap<Vertex, Double> {
     public GraphState() {
     }
 
-    public GraphState(Graph g) {
+    public GraphState(MemoryGraph g) {
         for (Vertex v : g.getVertices()) {
             this.put(v, Finals.DEFAULT_GRAPH_STATE);
         }
     }
 
-    public GraphState(Graph g, double initialState) {
+    public GraphState(MemoryGraph g, double initialState) {
         for (Vertex v : g.getVertices()) {
             this.put(v, initialState);
         }

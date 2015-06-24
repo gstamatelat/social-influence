@@ -4,7 +4,7 @@ import gr.james.socialinfluence.game.Game;
 import gr.james.socialinfluence.game.Move;
 import gr.james.socialinfluence.game.MovePoint;
 import gr.james.socialinfluence.game.PlayerEnum;
-import gr.james.socialinfluence.graph.Graph;
+import gr.james.socialinfluence.graph.MemoryGraph;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.graph.algorithms.iterators.RandomSurferIterator;
 import gr.james.socialinfluence.graph.algorithms.iterators.RandomVertexIterator;
@@ -25,7 +25,7 @@ import java.util.HashSet;
  * </ul>
  */
 public class BruteForcePlayer extends Player {
-    public static Move getRandomMove(Graph g, int numOfMoves, int weightLevels, Move lastMove, boolean clever) {
+    public static Move getRandomMove(MemoryGraph g, int numOfMoves, int weightLevels, Move lastMove, boolean clever) {
         if (!clever) {
             return getRandomMoveWithoutMutation(g, numOfMoves, weightLevels);
         } else {
@@ -33,7 +33,7 @@ public class BruteForcePlayer extends Player {
         }
     }
 
-    public static Move getRandomMoveWithoutMutation(Graph g, int numOfMoves, int weightLevels) {
+    public static Move getRandomMoveWithoutMutation(MemoryGraph g, int numOfMoves, int weightLevels) {
         Move moves = new Move();
         RandomVertexIterator it = new RandomVertexIterator(g);
         while (moves.getVerticesCount() < numOfMoves) {
@@ -43,7 +43,7 @@ public class BruteForcePlayer extends Player {
         return moves;
     }
 
-    public static Move getRandomMoveWithMutation(Graph g, int numOfMoves, int weightLevels, Move lastMove) {
+    public static Move getRandomMoveWithMutation(MemoryGraph g, int numOfMoves, int weightLevels, Move lastMove) {
         double jump_probability = 0.2; // TODO: Make it an option, or even better adaptive since it should depend on the diameter of the graph
 
         Move moves = new Move();

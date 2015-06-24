@@ -1,7 +1,7 @@
 package gr.james.socialinfluence.graph.algorithms.iterators;
 
 import gr.james.socialinfluence.collections.GraphState;
-import gr.james.socialinfluence.graph.Graph;
+import gr.james.socialinfluence.graph.MemoryGraph;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.graph.algorithms.PageRank;
 import gr.james.socialinfluence.helper.RandomHelper;
@@ -14,7 +14,7 @@ public class PageRankIterator implements Iterator<Vertex> {
     // TODO: Consider using PriorityQueue
     private GraphState nodes;
 
-    public PageRankIterator(Graph g, double dampingFactor) {
+    public PageRankIterator(MemoryGraph g, double dampingFactor) {
         nodes = PageRank.execute(g, dampingFactor);
     }
 

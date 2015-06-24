@@ -1,6 +1,6 @@
 package gr.james.socialinfluence.graph.algorithms.iterators;
 
-import gr.james.socialinfluence.graph.Graph;
+import gr.james.socialinfluence.graph.MemoryGraph;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.helper.RandomHelper;
 
@@ -13,7 +13,7 @@ public class InDegreeIterator implements Iterator<Vertex> {
     // TODO: Consider using PriorityQueue
     private HashMap<Vertex, Integer> nodes;
 
-    public InDegreeIterator(Graph g) {
+    public InDegreeIterator(MemoryGraph g) {
         nodes = new HashMap<Vertex, Integer>();
         for (Vertex v : g.getVertices()) {
             this.nodes.put(v, v.getInDegree());

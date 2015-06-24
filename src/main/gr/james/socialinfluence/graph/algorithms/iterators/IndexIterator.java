@@ -1,6 +1,6 @@
 package gr.james.socialinfluence.graph.algorithms.iterators;
 
-import gr.james.socialinfluence.graph.Graph;
+import gr.james.socialinfluence.graph.MemoryGraph;
 import gr.james.socialinfluence.graph.Vertex;
 
 import java.util.Iterator;
@@ -9,7 +9,7 @@ import java.util.TreeSet;
 public class IndexIterator implements Iterator<Vertex> {
     TreeSet<Vertex> vertices = new TreeSet<Vertex>();
 
-    public IndexIterator(Graph g) {
+    public IndexIterator(MemoryGraph g) {
         this.vertices.addAll(g.getVertices());
     }
 

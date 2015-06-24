@@ -16,12 +16,12 @@ public class Vertex implements Comparable<Vertex> {
      */
     private static int nextId = 1;
     String label;
-    Graph parentGraph;
+    MemoryGraph parentGraph;
     private int id;
 
     /**
      * <p>Creates a new {@link Vertex} that doesn't belong to a graph. You must bind it to a graph using
-     * {@link Graph#addVertex(Vertex)} or {@link #setParentGraph(Graph)} in order to be able to use it.</p>
+     * {@link MemoryGraph#addVertex(Vertex)} or {@link #setParentGraph(MemoryGraph)} in order to be able to use it.</p>
      */
     Vertex() {
         this.id = Vertex.getNextId();
@@ -73,11 +73,11 @@ public class Vertex implements Comparable<Vertex> {
         return this;
     }
 
-    public Graph getParentGraph() {
+    public MemoryGraph getParentGraph() {
         return this.parentGraph;
     }
 
-    public Graph setParentGraph(Graph g) {
+    public MemoryGraph setParentGraph(MemoryGraph g) {
         g.addVertex(this);
         return g;
     }

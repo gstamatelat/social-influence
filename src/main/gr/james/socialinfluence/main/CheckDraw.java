@@ -1,7 +1,7 @@
 package gr.james.socialinfluence.main;
 
 import gr.james.socialinfluence.game.*;
-import gr.james.socialinfluence.graph.Graph;
+import gr.james.socialinfluence.graph.MemoryGraph;
 import gr.james.socialinfluence.graph.io.Csv;
 import gr.james.socialinfluence.helper.Helper;
 
@@ -10,7 +10,7 @@ import java.net.URL;
 
 public class CheckDraw {
     public static void main(String[] args) throws IOException {
-        Graph g = Csv.from(new URL("http://loki.ee.duth.gr/school.csv").openStream());
+        MemoryGraph g = Csv.from(new URL("http://loki.ee.duth.gr/school.csv").openStream());
 
         Game game = new Game(g);
 

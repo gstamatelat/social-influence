@@ -3,7 +3,7 @@ package gr.james.socialinfluence;
 import gr.james.socialinfluence.collections.GraphState;
 import gr.james.socialinfluence.collections.VertexPair;
 import gr.james.socialinfluence.graph.Edge;
-import gr.james.socialinfluence.graph.Graph;
+import gr.james.socialinfluence.graph.MemoryGraph;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.graph.algorithms.*;
 import gr.james.socialinfluence.graph.algorithms.iterators.InDegreeIterator;
@@ -34,7 +34,7 @@ public class Tests {
         int vertexCount = 40;
 
         /* Create graph and randomize edge weights */
-        Graph g = RandomG.generate(vertexCount, p);
+        MemoryGraph g = RandomG.generate(vertexCount, p);
         for (Edge e : g.getEdges()) {
             e.setWeight(RandomHelper.getRandom().nextDouble());
         }
@@ -68,7 +68,7 @@ public class Tests {
     public void degreeEigenvectorTest() {
         for (int vertexCount = 10; vertexCount < 250; vertexCount += 10) {
             /* Make the graph */
-            Graph g = BarabasiAlbert.generate(vertexCount, 2, 2, 1.0);
+            MemoryGraph g = BarabasiAlbert.generate(vertexCount, 2, 2, 1.0);
 
             /* Get PageRank and Degree */
             GraphState degree = Degree.execute(g, true);
@@ -99,7 +99,7 @@ public class Tests {
         for (int vertexCount : counts) {
             for (double p : ps) {
                 /* Create graph and randomize edge weights */
-                Graph g = RandomG.generate(vertexCount, p);
+                MemoryGraph g = RandomG.generate(vertexCount, p);
                 for (Edge e : g.getEdges()) {
                     e.setWeight(RandomHelper.getRandom().nextDouble());
                 }
@@ -137,24 +137,24 @@ public class Tests {
     public void combineGraphsTest() {
         int GRAPHS = 10;
 
-        Graph[] graphs = new Graph[GRAPHS];
+        MemoryGraph[] graphs = new MemoryGraph[GRAPHS];
         for (int i = 0; i < GRAPHS; i++) {
             graphs[i] = RandomG.generate(RandomHelper.getRandom().nextInt(50) + 50, RandomHelper.getRandom().nextDouble());
         }
 
         int vertexCount = 0;
         int edgeCount = 0;
-        for (Graph g : graphs) {
+        for (MemoryGraph g : graphs) {
             vertexCount += g.getVerticesCount();
             edgeCount += g.getEdgesCount();
         }
 
-        Graph g = Graph.combineGraphs(graphs);
+        MemoryGraph g = MemoryGraph.combineGraphs(graphs);
 
         Assert.assertEquals("combineGraphsTest - vertexCount", vertexCount, g.getVerticesCount());
         Assert.assertEquals("combineGraphsTest - edgeCount", edgeCount, g.getEdgesCount());
 
-        for (Graph u : graphs) {
+        for (MemoryGraph u : graphs) {
             Assert.assertEquals("combineGraphsTest - subGraph - vertices", 0, u.getVerticesCount());
             Assert.assertEquals("combineGraphsTest - subGraph - edges", 0, u.getEdgesCount());
         }
@@ -167,7 +167,7 @@ public class Tests {
 
         for (int _clusters : clusters) {
             for (int _clusterSize : clusterSize) {
-                Graph g = BarabasiAlbertCluster.generate(_clusterSize, 2, 2, 1.0, _clusters);
+                MemoryGraph g = BarabasiAlbertCluster.generate(_clusterSize, 2, 2, 1.0, _clusters);
                 Assert.assertEquals("clustersTest", _clusters * _clusterSize, g.getVerticesCount());
             }
         }
@@ -181,7 +181,7 @@ public class Tests {
     public void twoWheelsMaxDegreeTest() {
         for (int k = 4; k < 100; k++) {
             /* Generate TwoWheels(k) */
-            Graph g = TwoWheels.generate(k);
+            MemoryGraph g = TwoWheels.generate(k);
 
             /* Get max degree */
             int max = new InDegreeIterator(g).next().getOutDegree();
@@ -192,13 +192,13 @@ public class Tests {
     }
 
     /**
-     * <p>Test for {@link Graph#getVertexFromIndex(int)} on the {@link TwoWheels} graph.</p>
+     * <p>Test for {@link MemoryGraph#getVertexFromIndex(int)} on the {@link TwoWheels} graph.</p>
      */
     @Test
     public void getVertexFromIndexTest() {
         for (int k = 4; k < 100; k++) {
             /* Generate TwoWheels(k) */
-            Graph g = TwoWheels.generate(k);
+            MemoryGraph g = TwoWheels.generate(k);
 
             /* Get max degree */
             int max = new InDegreeIterator(g).next().getOutDegree();
@@ -213,7 +213,7 @@ public class Tests {
 
     @Test
     public void indexIteratorTest() {
-        Graph g = TwoWheels.generate(RandomHelper.getRandom().nextInt(25) + 5);
+        MemoryGraph g = TwoWheels.generate(RandomHelper.getRandom().nextInt(25) + 5);
         IndexIterator it = new IndexIterator(g);
         int total = 0;
         Vertex pre = null;
@@ -233,7 +233,7 @@ public class Tests {
      */
     @Test
     public void deGrootTest() {
-        Graph g = RandomG.generate(100, 0.05);
+        MemoryGraph g = RandomG.generate(100, 0.05);
 
         GraphState initialState = new GraphState(g, 0.0);
         for (Vertex v : g.getVertices()) {

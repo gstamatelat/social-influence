@@ -1,6 +1,6 @@
 package gr.james.socialinfluence.graph.io;
 
-import gr.james.socialinfluence.graph.Graph;
+import gr.james.socialinfluence.graph.MemoryGraph;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.graph.algorithms.iterators.IndexIterator;
 
@@ -11,8 +11,8 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 
 public class Csv {
-    public static Graph from(InputStream source) throws IOException {
-        Graph g = new Graph();
+    public static MemoryGraph from(InputStream source) throws IOException {
+        MemoryGraph g = new MemoryGraph();
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(source, "UTF8"));
         String line;

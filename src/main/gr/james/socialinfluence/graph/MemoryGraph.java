@@ -24,7 +24,7 @@ import java.util.*;
  * these collections after they have been returned, you need to call the method again. The elements themselves,
  * however, are shallow copies and can be used to change the state of the graph.</p>
  */
-public class Graph {
+public class MemoryGraph {
     private String name;
     private String meta;
     private Set<Vertex> vertices;
@@ -34,7 +34,7 @@ public class Graph {
      * <p>Creates a new empty graph with name {@link Finals#DEFAULT_GRAPH_NAME} and default
      * {@link GraphOptions options}.</p>
      */
-    public Graph() {
+    public MemoryGraph() {
         this(EnumSet.noneOf(GraphOptions.class));
     }
 
@@ -44,7 +44,7 @@ public class Graph {
      *
      * @param e the options to use when constructing this Graph
      */
-    public Graph(EnumSet<GraphOptions> e) {
+    public MemoryGraph(EnumSet<GraphOptions> e) {
         this.name = Finals.DEFAULT_GRAPH_NAME;
         this.meta = "";
         if (e.contains(GraphOptions.VERTEX_USE_LINKED_HASH_SET)) {
@@ -59,9 +59,9 @@ public class Graph {
         }
     }
 
-    public static Graph combineGraphs(Graph[] graphs) {
-        Graph r = new Graph();
-        for (Graph g : graphs) {
+    public static MemoryGraph combineGraphs(MemoryGraph[] graphs) {
+        MemoryGraph r = new MemoryGraph();
+        for (MemoryGraph g : graphs) {
             for (Vertex v : g.vertices) {
                 v.parentGraph = r;
                 r.vertices.add(v);
@@ -70,7 +70,7 @@ public class Graph {
                 r.edges.add(e);
             }
         }
-        for (Graph g : graphs) {
+        for (MemoryGraph g : graphs) {
             g.vertices.clear();
             g.edges.clear();
         }
@@ -84,7 +84,7 @@ public class Graph {
      * @param name The new name for this graph
      * @return this instance
      */
-    public Graph setName(String name) {
+    public MemoryGraph setName(String name) {
         this.name = name;
         return this;
     }
@@ -93,7 +93,7 @@ public class Graph {
         return this.meta;
     }
 
-    public Graph setMeta(String meta) {
+    public MemoryGraph setMeta(String meta) {
         this.meta = meta;
         return this;
     }
@@ -136,7 +136,7 @@ public class Graph {
      * @param v the vertex to be removed
      * @return the current instance
      */
-    public Graph removeVertex(Vertex v) {
+    public MemoryGraph removeVertex(Vertex v) {
         for (Iterator<Edge> i = this.edges.iterator(); i.hasNext(); ) {
             Edge e = i.next();
             if (e.getSource().equals(v) || e.getTarget().equals(v)) {
@@ -226,7 +226,7 @@ public class Graph {
      *
      * @return the current instance
      */
-    public Graph connectAllVertices() {
+    public MemoryGraph connectAllVertices() {
         for (Vertex v : vertices) {
             for (Vertex w : vertices) {
                 if (!v.equals(w)) {
@@ -273,12 +273,12 @@ public class Graph {
         return Collections.unmodifiableSet(addedEdges);
     }
 
-    public Graph removeEdge(Edge e) {
+    public MemoryGraph removeEdge(Edge e) {
         this.edges.remove(e);
         return this;
     }
 
-    public Graph removeEdge(Vertex source, Vertex target) {
+    public MemoryGraph removeEdge(Vertex source, Vertex target) {
         // TODO: Consider doing something like this.remove(new Edge(source, target))
         Edge candidate = null;
         for (Edge e : this.edges) {
@@ -413,7 +413,7 @@ public class Graph {
         return edgeList.size() == 0;
     }
 
-    public Graph createCircle(boolean undirected) {
+    public MemoryGraph createCircle(boolean undirected) {
         // TODO: Not tested
         Iterator<Vertex> vertexIterator = this.vertices.iterator();
         Vertex previous = vertexIterator.next();
@@ -487,7 +487,7 @@ public class Graph {
      * @param out the OutputStream to write the DOT file to
      * @return the current instance
      */
-    public Graph exportToDot(OutputStream out) {
+    public MemoryGraph exportToDot(OutputStream out) {
         if (this.isUndirected()) {
             ArrayList<Vertex[]> edgeList = new ArrayList<>();
             for (Edge e : this.edges) {
