@@ -12,11 +12,11 @@ import java.util.Map;
 
 public class PageRank {
     public static GraphState execute(Graph g, double dampingFactor, double epsilon) {
-        HashSet<GraphState> stateHistory = new HashSet<GraphState>();
+        HashSet<GraphState> stateHistory = new HashSet<>();
         GraphState lastState = new GraphState(g, 1.0);
         stateHistory.add(lastState);
 
-        HashMap<Vertex, Double> outWeightSums = new HashMap<Vertex, Double>();
+        HashMap<Vertex, Double> outWeightSums = new HashMap<>();
         for (Vertex v : g.getVertices()) {
             outWeightSums.put(v, 0.0);
         }
