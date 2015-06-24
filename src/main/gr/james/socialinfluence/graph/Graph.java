@@ -48,14 +48,14 @@ public class Graph {
         this.name = Finals.DEFAULT_GRAPH_NAME;
         this.meta = "";
         if (e.contains(GraphOptions.VERTEX_USE_LINKED_HASH_SET)) {
-            this.vertices = new LinkedHashSet<Vertex>();
+            this.vertices = new LinkedHashSet<>();
         } else {
-            this.vertices = new HashSet<Vertex>();
+            this.vertices = new HashSet<>();
         }
         if (e.contains(GraphOptions.EDGE_USE_LINKED_HASH_SET)) {
-            this.edges = new LinkedHashSet<Edge>();
+            this.edges = new LinkedHashSet<>();
         } else {
-            this.edges = new HashSet<Edge>();
+            this.edges = new HashSet<>();
         }
     }
 
@@ -121,7 +121,7 @@ public class Graph {
     }
 
     public Set<Vertex> addVertices(int count) {
-        Set<Vertex> newVertices = new HashSet<Vertex>();
+        Set<Vertex> newVertices = new HashSet<>();
         for (int i = 0; i < count; i++) {
             newVertices.add(this.addVertex());
         }
@@ -171,7 +171,7 @@ public class Graph {
         if (index < 0 || index >= this.getVerticesCount()) {
             throw new GraphException(Finals.E_GRAPH_INDEX_OUT_OF_BOUNDS, index);
         }
-        TreeSet<Vertex> allVertices = new TreeSet<Vertex>();
+        TreeSet<Vertex> allVertices = new TreeSet<>();
         allVertices.addAll(this.vertices);
         Iterator<Vertex> it = allVertices.iterator();
         Vertex v = it.next();
@@ -211,7 +211,7 @@ public class Graph {
     }
 
     public Set<Vertex> getStubbornVertices() {
-        Set<Vertex> stubborn = new TreeSet<Vertex>();
+        Set<Vertex> stubborn = new TreeSet<>();
         for (Vertex v : this.vertices) {
             if (v.getOutDegree() == 1 && v.getOutEdges().iterator().next().getTarget().equals(v)) {
                 stubborn.add(v);
@@ -265,7 +265,7 @@ public class Graph {
     }
 
     public Set<Edge> addEdge(Vertex source, Vertex target, boolean undirected) {
-        Set<Edge> addedEdges = new HashSet<Edge>();
+        Set<Edge> addedEdges = new HashSet<>();
         addedEdges.add(this.addEdge(source, target));
         if (undirected) {
             addedEdges.add(this.addEdge(target, source));
@@ -294,14 +294,14 @@ public class Graph {
     }
 
     public Map<Vertex, Set<Edge>> getOutEdges() {
-        Map<Vertex, Set<Edge>> map = new HashMap<Vertex, Set<Edge>>();
+        Map<Vertex, Set<Edge>> map = new HashMap<>();
         for (Vertex v : this.vertices) {
             map.put(v, new HashSet<Edge>());
         }
         for (Edge e : this.edges) {
             map.get(e.getSource()).add(e);
         }
-        Map<Vertex, Set<Edge>> unmodifiableMap = new HashMap<Vertex, Set<Edge>>();
+        Map<Vertex, Set<Edge>> unmodifiableMap = new HashMap<>();
         for (Vertex v : map.keySet()) {
             unmodifiableMap.put(v, Collections.unmodifiableSet(map.get(v)));
         }
@@ -309,7 +309,7 @@ public class Graph {
     }
 
     public Set<Edge> getOutEdges(Vertex v) {
-        Set<Edge> outEdges = new HashSet<Edge>();
+        Set<Edge> outEdges = new HashSet<>();
         for (Edge e : this.edges) {
             if (e.getSource().equals(v)) {
                 outEdges.add(e);
@@ -319,14 +319,14 @@ public class Graph {
     }
 
     public Map<Vertex, Set<Edge>> getInEdges() {
-        Map<Vertex, Set<Edge>> map = new HashMap<Vertex, Set<Edge>>();
+        Map<Vertex, Set<Edge>> map = new HashMap<>();
         for (Vertex v : this.vertices) {
             map.put(v, new HashSet<Edge>());
         }
         for (Edge e : this.edges) {
             map.get(e.getTarget()).add(e);
         }
-        Map<Vertex, Set<Edge>> unmodifiableMap = new HashMap<Vertex, Set<Edge>>();
+        Map<Vertex, Set<Edge>> unmodifiableMap = new HashMap<>();
         for (Vertex v : map.keySet()) {
             unmodifiableMap.put(v, Collections.unmodifiableSet(map.get(v)));
         }
@@ -334,7 +334,7 @@ public class Graph {
     }
 
     public Set<Edge> getInEdges(Vertex v) {
-        Set<Edge> inEdges = new HashSet<Edge>();
+        Set<Edge> inEdges = new HashSet<>();
         for (Edge e : this.edges) {
             if (e.getTarget().equals(v)) {
                 inEdges.add(e);
@@ -352,7 +352,7 @@ public class Graph {
     }
 
     public Map<Vertex, Integer> getOutDegree() {
-        Map<Vertex, Integer> outDegrees = new HashMap<Vertex, Integer>();
+        Map<Vertex, Integer> outDegrees = new HashMap<>();
         for (Vertex v : this.vertices) {
             outDegrees.put(v, 0);
         }
@@ -367,7 +367,7 @@ public class Graph {
     }
 
     public Map<Vertex, Integer> getInDegree() {
-        Map<Vertex, Integer> inDegrees = new HashMap<Vertex, Integer>();
+        Map<Vertex, Integer> inDegrees = new HashMap<>();
         for (Vertex v : this.vertices) {
             inDegrees.put(v, 0);
         }
@@ -391,7 +391,7 @@ public class Graph {
     public boolean isUndirected() {
         // TODO: Not sure if this method is slow. Could be very slow.
         // TODO: Not tested
-        ArrayList<Vertex[]> edgeList = new ArrayList<Vertex[]>();
+        ArrayList<Vertex[]> edgeList = new ArrayList<>();
         for (Edge e : this.edges) {
             Vertex v = e.getSource();
             Vertex w = e.getTarget();
@@ -449,7 +449,7 @@ public class Graph {
     }
 
     public Edge getRandomOutEdge(Vertex from, boolean weighted) {
-        HashMap<Edge, Double> weightMap = new HashMap<Edge, Double>();
+        HashMap<Edge, Double> weightMap = new HashMap<>();
         Set<Edge> outEdges = this.getOutEdges(from);
         for (Edge e : outEdges) {
             weightMap.put(e, (weighted ? e.getWeight() : 1.0));
@@ -460,7 +460,7 @@ public class Graph {
 
     public double getDiameter() {
         // TODO: Should return a list/path/walk of vertices to show both the weight sum and the steps
-        HashMap<Vertex[], Double> distanceMap = new HashMap<Vertex[], Double>();
+        HashMap<Vertex[], Double> distanceMap = new HashMap<>();
 
         for (Vertex v : this.getVertices()) {
             HashMap<Vertex, Double> temp = Dijkstra.execute(this, v);
@@ -489,7 +489,7 @@ public class Graph {
      */
     public Graph exportToDot(OutputStream out) {
         if (this.isUndirected()) {
-            ArrayList<Vertex[]> edgeList = new ArrayList<Vertex[]>();
+            ArrayList<Vertex[]> edgeList = new ArrayList<>();
             for (Edge e : this.edges) {
                 Vertex v = e.getSource();
                 Vertex w = e.getTarget();
