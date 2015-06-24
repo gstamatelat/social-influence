@@ -18,7 +18,6 @@ Running time - Complexity:
 - There needs to be a helper function or some `Graph` member method that can return if a graph is aperiodic or not.
 - Consider converting `Move` to immutable.
 - Considering converting `Move` to `Map`.
-- `Player` should not be able to mutate the `Graph` object `g`. Consider passing a copy instead.
 - Create a `MutableGraph` class that will derive `Graph`. 
 - `getVertexFromId()` is confusing and needs to go.
 - `Game` should accept `Player`s not `Move`s.
@@ -26,3 +25,4 @@ Running time - Complexity:
 - Method "stretch" that extends edges
 - Restore the inputs Graph and GameDefinition on Player and create seperate class `PlayerExecutor` that executes it. `PlayerExecutor` should extend ThreadPool or sth and will be able to execute 2 players at once
 - `public static MemoryGraph combineGraphs` must be part of `Graph`, not `MemoryGraph`
+- `meta` field should be json or `Map`
