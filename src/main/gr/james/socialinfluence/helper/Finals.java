@@ -36,4 +36,6 @@ public class Finals {
     public static final String E_GRAPH_INDEX_OUT_OF_BOUNDS = "Vertex index must be between 0 (inclusive) and getVerticesCount() (exclusive). Got %d.";
 
     public static final String E_PAIR_NULL = "Pair cannot contain null values";
+
+    public static final String E_HELPER_INSTANTIATE = "Cannot instantiate object of type %s";
 }

@@ -22,4 +22,14 @@ public class Helper {
         }
         return sum;
     }
+
+    public static <T> T instantiateGeneric(Class<T> type) {
+        T t = null;
+        try {
+            t = type.newInstance();
+        } catch (Exception e) {
+            throw new GraphException(Finals.E_HELPER_INSTANTIATE, type.getSimpleName());
+        }
+        return t;
+    }
 }

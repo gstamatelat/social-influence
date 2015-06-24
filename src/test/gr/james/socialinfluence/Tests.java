@@ -35,7 +35,7 @@ public class Tests {
         int vertexCount = 40;
 
         /* Create graph and randomize edge weights */
-        Graph g = RandomG.generate(vertexCount, p);
+        Graph g = RandomG.generate(MemoryGraph.class, vertexCount, p);
         for (Edge e : g.getEdges()) {
             e.setWeight(RandomHelper.getRandom().nextDouble());
         }
@@ -100,7 +100,7 @@ public class Tests {
         for (int vertexCount : counts) {
             for (double p : ps) {
                 /* Create graph and randomize edge weights */
-                Graph g = RandomG.generate(vertexCount, p);
+                Graph g = RandomG.generate(MemoryGraph.class, vertexCount, p);
                 for (Edge e : g.getEdges()) {
                     e.setWeight(RandomHelper.getRandom().nextDouble());
                 }
@@ -140,7 +140,7 @@ public class Tests {
 
         MemoryGraph[] graphs = new MemoryGraph[GRAPHS];
         for (int i = 0; i < GRAPHS; i++) {
-            graphs[i] = (MemoryGraph) RandomG.generate(RandomHelper.getRandom().nextInt(50) + 50, RandomHelper.getRandom().nextDouble());
+            graphs[i] = (MemoryGraph) RandomG.generate(MemoryGraph.class, RandomHelper.getRandom().nextInt(50) + 50, RandomHelper.getRandom().nextDouble());
         }
 
         int vertexCount = 0;
@@ -234,7 +234,7 @@ public class Tests {
      */
     @Test
     public void deGrootTest() {
-        Graph g = RandomG.generate(100, 0.05);
+        Graph g = RandomG.generate(MemoryGraph.class, 100, 0.05);
 
         GraphState initialState = new GraphState(g, 0.0);
         for (Vertex v : g.getVertices()) {
