@@ -3,7 +3,6 @@ package gr.james.socialinfluence.graph.algorithms;
 import gr.james.socialinfluence.collections.GraphState;
 import gr.james.socialinfluence.graph.Edge;
 import gr.james.socialinfluence.graph.Graph;
-import gr.james.socialinfluence.graph.MemoryGraph;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.helper.Finals;
 import gr.james.socialinfluence.helper.Helper;
@@ -69,15 +68,15 @@ public class DeGroot {
         return lastState;
     }
 
-    public static GraphState execute(MemoryGraph g, GraphState initialOpinions, double epsilon) {
+    public static GraphState execute(Graph g, GraphState initialOpinions, double epsilon) {
         return execute(g, initialOpinions, epsilon, Finals.DEFAULT_DEGROOT_HISTORY);
     }
 
-    public static GraphState execute(MemoryGraph g, GraphState initialOpinions, boolean keepHistory) {
+    public static GraphState execute(Graph g, GraphState initialOpinions, boolean keepHistory) {
         return execute(g, initialOpinions, Finals.DEFAULT_DEGROOT_PRECISION, keepHistory);
     }
 
-    public static GraphState execute(MemoryGraph g, GraphState initialOpinions) {
+    public static GraphState execute(Graph g, GraphState initialOpinions) {
         return execute(g, initialOpinions, Finals.DEFAULT_DEGROOT_PRECISION, Finals.DEFAULT_DEGROOT_HISTORY);
     }
 }
