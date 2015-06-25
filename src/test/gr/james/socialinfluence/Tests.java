@@ -41,7 +41,7 @@ public class Tests {
             e.setWeight(RandomHelper.getRandom().nextDouble());
         }
 
-        /* Emulate the random surfer until mean of the map values is MEAN, aka for MEAN * N steps */
+        /* Emulate the random surfer until mean of the map values average is MEAN, aka for MEAN * N steps */
         GraphState gs = new GraphState(g, 0.0);
         RandomSurferIterator rsi = new RandomSurferIterator(g, dampingFactor);
         int steps = mean * g.getVerticesCount();
