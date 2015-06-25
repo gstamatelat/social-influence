@@ -78,6 +78,10 @@ public class MemoryGraph extends Graph {
         return null;
     }
 
+    public boolean containsVertex(Vertex v) {
+        return this.vertices.contains(v);
+    }
+
     public Vertex getVertexFromIndex(int index) {
         if (index < 0 || index >= this.getVerticesCount()) {
             throw new GraphException(Finals.E_GRAPH_INDEX_OUT_OF_BOUNDS, index);

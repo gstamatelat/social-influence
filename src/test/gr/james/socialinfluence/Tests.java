@@ -249,4 +249,13 @@ public class Tests {
             Assert.assertEquals("deGrootTest", avg, e, 1.0e-5);
         }
     }
+
+    @Test
+    public void deepCopyTest() {
+        Graph g = RandomG.generate(MemoryGraph.class, 100, 0.05);
+        Graph e = g.deepCopy(MemoryGraph.class);
+        e.addVertex();
+        Assert.assertEquals("deepCopyTest", g.getVerticesCount() + 1, e.getVerticesCount());
+        Assert.assertEquals("deepCopyTest", g.getEdgesCount(), e.getEdgesCount());
+    }
 }

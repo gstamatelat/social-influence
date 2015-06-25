@@ -2,6 +2,7 @@ package gr.james.socialinfluence.graph;
 
 import gr.james.socialinfluence.helper.Finals;
 import gr.james.socialinfluence.helper.GraphException;
+import gr.james.socialinfluence.helper.Helper;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -63,12 +64,36 @@ public abstract class Graph {
 
     public abstract Vertex addVertex(Vertex v);
 
+    public abstract boolean containsVertex(Vertex v);
+
     public Set<Vertex> addVertices(int count) {
         Set<Vertex> newVertices = new HashSet<>();
         for (int i = 0; i < count; i++) {
             newVertices.add(this.addVertex());
         }
         return Collections.unmodifiableSet(newVertices);
+    }
+
+    public <T extends Graph> Graph deepCopy(Class<T> type) {
+        return deepCopy(type, this.getVertices());
+    }
+
+    public <T extends Graph> Graph deepCopy(Class<T> type, Set<Vertex> includeOnly) {
+        Graph g = Helper.instantiateGeneric(type);
+
+        for (Vertex v : includeOnly) {
+            if (!this.containsVertex(v)) {
+                throw new GraphException(Finals.E_GRAPH_VERTEX_NOT_CONTAINED, "deepCopy");
+            }
+            g.addVertex(v);
+        }
+
+        for (Edge e : this.getEdges()) {
+            if (g.containsVertex(e.getSource()) && g.containsVertex(e.getTarget())) {
+                g.addEdge(e.getSource(), e.getTarget()).setWeight(e.getWeight());
+            }
+        }
+        return g;
     }
 
     /**
