@@ -126,28 +126,6 @@ public class Vertex implements Comparable<Vertex> {
         return this.parentGraph.getOutDegree(this);
     }*/
 
-    /**
-     * <p>Returns the sum of the weights of outbound edges from this vertex.</p>
-     * <p><b>Running Time:</b> Slow</p>
-     *
-     * @return the sum of weights of all outbound edges from this vertex
-     * @see #getInWeightSum()
-     */
-    /*public double getOutWeightSum() {
-        return this.parentGraph.getOutWeightSum(this);
-    }*/
-
-    /**
-     * <p>Returns the sum of the weights of inbound edges to this vertex.</p>
-     * <p><b>Running Time:</b> Slow</p>
-     *
-     * @return the sum of weights of all inbound edges to this vertex
-     * @see #getOutWeightSum()
-     */
-    /*public double getInWeightSum() {
-        return this.parentGraph.getInWeightSum(this);
-    }*/
-
     /*public Edge addEdge(Vertex target) {
         return this.parentGraph.addEdge(this, target);
     }*/

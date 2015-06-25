@@ -144,8 +144,22 @@ public abstract class Graph {
 
     public abstract Set<Edge> getInEdges(Vertex v);
 
+    /**
+     * <p>Returns the sum of the outbound edge weights of a vertex.</p>
+     *
+     * @param v the vertex
+     * @return the sum of weights of all outbound edges of vertex {@code v}
+     * @see #getInWeightSum(Vertex)
+     */
     public abstract double getOutWeightSum(Vertex v);
 
+    /**
+     * <p>Returns the sum of the inbound edge weights of a vertex.</p>
+     *
+     * @param v the vertex
+     * @return the sum of weights of all inbound edges of vertex {@code v}
+     * @see #getOutWeightSum(Vertex)
+     */
     public abstract double getInWeightSum(Vertex v);
 
     public abstract Map<Vertex, Integer> getOutDegree();
