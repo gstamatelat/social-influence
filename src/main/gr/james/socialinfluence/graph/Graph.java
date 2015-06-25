@@ -218,7 +218,6 @@ public abstract class Graph {
     /**
      * <p>Returns true if for every edge with source S and target T where S and T are different,
      * there is always an edge with source T and target S.</p>
-     * <p><b>Running Time:</b> Slow - Very Slow (depends on the graph)</p>
      *
      * @return true if the graph is undirected, otherwise false
      */
