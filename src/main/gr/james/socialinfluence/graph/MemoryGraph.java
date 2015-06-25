@@ -43,19 +43,7 @@ public class MemoryGraph extends Graph {
         }
     }
 
-    public Vertex addVertex() {
-        Vertex v = new Vertex();
-        /*v.parentGraph = this;*/
-        this.vertices.add(v);
-        return v;
-    }
-
     public Vertex addVertex(Vertex v) {
-        // TODO: parentGraph will be removed anyway
-        /*if (v.getParentGraph() != null && v.getParentGraph() != this) {
-            throw new GraphException(Finals.E_GRAPH_VERTEX_BOUND);
-        }*/
-        /*v.parentGraph = this;*/
         this.vertices.add(v);
         return v;
     }

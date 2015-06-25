@@ -58,7 +58,10 @@ public abstract class Graph {
      *
      * @return the new vertex object
      */
-    public abstract Vertex addVertex();
+    public Vertex addVertex() {
+        Vertex v = new Vertex();
+        return this.addVertex(v);
+    }
 
     public abstract Vertex addVertex(Vertex v);
 
@@ -121,8 +124,6 @@ public abstract class Graph {
      * @return the number of directed edges in this graph
      */
     public abstract int getEdgesCount();
-
-    /*public abstract Edge addEdge(Edge e);*/
 
     public abstract Edge addEdge(Vertex source, Vertex target);
 
