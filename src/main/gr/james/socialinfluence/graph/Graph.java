@@ -22,7 +22,7 @@ import java.util.*;
  * these collections after they have been returned, you need to call the method again. The elements themselves,
  * however, are shallow copies and can be used to change the state of the graph.</p>
  */
-public abstract class Graph {
+public abstract class Graph<V, E> {
     protected String name;
     protected String meta;
 
