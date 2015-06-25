@@ -1,5 +1,6 @@
 package gr.james.socialinfluence.graph;
 
+import gr.james.socialinfluence.graph.algorithms.iterators.RandomVertexIterator;
 import gr.james.socialinfluence.helper.Finals;
 import gr.james.socialinfluence.helper.GraphException;
 import gr.james.socialinfluence.helper.Helper;
@@ -128,11 +129,37 @@ public abstract class Graph {
      * @param f an array of vertices to be fused
      * @return the vertex that is the result of the fusion
      */
-    public abstract Vertex fuseVertices(Vertex[] f);
+    public Vertex fuseVertices(Vertex[] f) {
+        Vertex v = this.addVertex();
 
-    public abstract Vertex getRandomVertex();
+        for (Vertex y : f) {
+            for (Edge e : this.getOutEdges(y)) {
+                this.addEdge(v, e.getTarget()).setWeight(e.getWeight());
+            }
+            for (Edge e : this.getInEdges(y)) {
+                this.addEdge(e.getSource(), v).setWeight(e.getWeight());
+            }
+            this.removeVertex(y);
+        }
 
-    public abstract Set<Vertex> getStubbornVertices();
+        return v;
+    }
+
+    public Vertex getRandomVertex() {
+        // TODO: There must be some better way ...
+        RandomVertexIterator rvi = new RandomVertexIterator(this);
+        return rvi.next();
+    }
+
+    public Set<Vertex> getStubbornVertices() {
+        Set<Vertex> stubborn = new TreeSet<>();
+        for (Vertex v : this.getVertices()) {
+            if (this.getOutDegree(v) == 1 && this.getOutEdges(v).iterator().next().getTarget().equals(v)) {
+                stubborn.add(v);
+            }
+        }
+        return Collections.unmodifiableSet(stubborn);
+    }
 
     /**
      * <p>Connects all the vertices in the graph. Does not create self-connections (loops).</p>
@@ -140,7 +167,16 @@ public abstract class Graph {
      *
      * @return the current instance
      */
-    public abstract Graph connectAllVertices();
+    public Graph connectAllVertices() {
+        for (Vertex v : this.getVertices()) {
+            for (Vertex w : this.getVertices()) {
+                if (!v.equals(w)) {
+                    this.addEdge(v, w);
+                }
+            }
+        }
+        return this;
+    }
 
     public abstract Set<Edge> getEdges();
 
