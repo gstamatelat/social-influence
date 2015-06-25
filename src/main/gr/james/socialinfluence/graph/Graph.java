@@ -122,7 +122,7 @@ public abstract class Graph {
      */
     public abstract int getEdgesCount();
 
-    public abstract Edge addEdge(Edge e);
+    /*public abstract Edge addEdge(Edge e);*/
 
     public abstract Edge addEdge(Vertex source, Vertex target);
 

@@ -45,7 +45,7 @@ public class MemoryGraph extends Graph {
 
     public Vertex addVertex() {
         Vertex v = new Vertex();
-        v.parentGraph = this;
+        /*v.parentGraph = this;*/
         this.vertices.add(v);
         return v;
     }
@@ -55,7 +55,7 @@ public class MemoryGraph extends Graph {
         /*if (v.getParentGraph() != null && v.getParentGraph() != this) {
             throw new GraphException(Finals.E_GRAPH_VERTEX_BOUND);
         }*/
-        v.parentGraph = this;
+        /*v.parentGraph = this;*/
         this.vertices.add(v);
         return v;
     }
@@ -76,7 +76,7 @@ public class MemoryGraph extends Graph {
             }
         }
         this.vertices.remove(v);
-        v.parentGraph = null;
+        /*v.parentGraph = null;*/
         return this;
     }
 
@@ -114,10 +114,10 @@ public class MemoryGraph extends Graph {
         Vertex v = this.addVertex();
 
         for (Vertex y : f) {
-            for (Edge e : y.getOutEdges()) {
+            for (Edge e : this.getOutEdges(y)) {
                 this.addEdge(v, e.getTarget()).setWeight(e.getWeight());
             }
-            for (Edge e : y.getInEdges()) {
+            for (Edge e : this.getInEdges(y)) {
                 this.addEdge(e.getSource(), v).setWeight(e.getWeight());
             }
             this.removeVertex(y);
@@ -135,7 +135,7 @@ public class MemoryGraph extends Graph {
     public Set<Vertex> getStubbornVertices() {
         Set<Vertex> stubborn = new TreeSet<>();
         for (Vertex v : this.vertices) {
-            if (v.getOutDegree() == 1 && v.getOutEdges().iterator().next().getTarget().equals(v)) {
+            if (this.getOutDegree(v) == 1 && this.getOutEdges(v).iterator().next().getTarget().equals(v)) {
                 stubborn.add(v);
             }
         }
@@ -161,16 +161,21 @@ public class MemoryGraph extends Graph {
         return this.edges.size();
     }
 
-    public Edge addEdge(Edge e) {
+    /*public Edge addEdge(Edge e) {
         if (e.getSource().getParentGraph() != this || e.getTarget().getParentGraph() != this) {
             throw new GraphException(Finals.E_GRAPH_EDGE_DIFFERENT);
         }
         this.edges.add(e);
         return e;
-    }
+    }*/
 
     public Edge addEdge(Vertex source, Vertex target) {
-        return this.addEdge(new Edge(source, target));
+        if (!this.vertices.contains(source) || !this.vertices.contains(target)) {
+            throw new GraphException(Finals.E_GRAPH_EDGE_DIFFERENT);
+        }
+        Edge e = new Edge(source, target);
+        this.edges.add(e);
+        return e;
     }
 
     public Set<Edge> addEdge(Vertex source, Vertex target, boolean undirected) {

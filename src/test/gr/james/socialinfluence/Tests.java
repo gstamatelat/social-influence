@@ -186,7 +186,7 @@ public class Tests {
             Graph g = TwoWheels.generate(MemoryGraph.class, k);
 
             /* Get max degree */
-            int max = new InDegreeIterator(g).next().getOutDegree();
+            int max = g.getOutDegree(new InDegreeIterator(g).next());
 
             /* The max has to be k or 6 if k is too low */
             Assert.assertEquals("twoWheelsMaxDegreeTest - " + k, Math.max(6, k - 1), max);
@@ -203,13 +203,13 @@ public class Tests {
             Graph g = TwoWheels.generate(MemoryGraph.class, k);
 
             /* Get max degree */
-            int max = new InDegreeIterator(g).next().getOutDegree();
+            int max = g.getOutDegree(new InDegreeIterator(g).next());
 
             /* getVertexFromIndex(N) must always return the center vertex */
-            Assert.assertEquals("getVertexFromIndexTest - " + k, 6, g.getVertexFromIndex(g.getVerticesCount() - 1).getOutDegree());
+            Assert.assertEquals("getVertexFromIndexTest - " + k, 6, g.getOutDegree(g.getVertexFromIndex(g.getVerticesCount() - 1)));
 
             /* getVertexFromIndex(N-1) must always return the wheel center vertex */
-            Assert.assertEquals("getVertexFromIndexTest - " + k, k - 1, g.getVertexFromIndex(g.getVerticesCount() - 2).getOutDegree());
+            Assert.assertEquals("getVertexFromIndexTest - " + k, k - 1, g.getOutDegree(g.getVertexFromIndex(g.getVerticesCount() - 2)));
         }
     }
 

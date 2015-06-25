@@ -27,13 +27,13 @@ public class RandomSurferIterator implements Iterator<Vertex> {
 
     @Override
     public boolean hasNext() {
-        return (this.current.getParentGraph().getVerticesCount() > 0);
+        return (g.getVerticesCount() > 0);
     }
 
     @Override
     public Vertex next() {
         if (this.current != null && RandomHelper.getRandom().nextDouble() > dampingFactor) {
-            this.current = this.current.getRandomOutEdge(true).getTarget();
+            this.current = g.getRandomOutEdge(this.current, true).getTarget();
             if (this.current == null) {
                 this.current = new RandomVertexIterator(g).next();
             }

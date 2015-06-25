@@ -22,7 +22,7 @@ public class Dijkstra {
         while (!pq.isEmpty()) {
             DijkstraNode u = pq.poll();
 
-            for (Edge e : u.vertex.getOutEdges()) {
+            for (Edge e : g.getOutEdges(u.vertex)) {
                 DijkstraNode v = nodeMap.get(e.getTarget());
                 double weight = e.getWeight();
                 double distanceThroughU = u.distance + weight;

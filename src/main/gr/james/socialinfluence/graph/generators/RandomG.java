@@ -14,10 +14,10 @@ public class RandomG {
             for (Vertex y : g.getVertices()) {
                 if (!v.equals(y)) {
                     if (RandomHelper.getRandom().nextDouble() < p) {
-                        v.addEdge(y);
+                        g.addEdge(v, y);
                     }
                     if (RandomHelper.getRandom().nextDouble() < p) {
-                        y.addEdge(v);
+                        g.addEdge(y, v);
                     }
                 }
             }
