@@ -70,7 +70,6 @@ public abstract class Graph {
     /**
      * <p>Removes a vertex from the graph. This method will also remove the inbound and outbound edges of that vertex.
      * </p>
-     * <p><b>Running Time:</b> Fast</p>
      *
      * @param v the vertex to be removed
      * @return the current instance

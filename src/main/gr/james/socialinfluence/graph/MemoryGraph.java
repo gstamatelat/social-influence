@@ -56,6 +56,10 @@ public class MemoryGraph extends Graph {
         return Collections.unmodifiableSet(newVertices);
     }
 
+    /**
+     * {@inheritDoc}
+     * <p><b>Running Time:</b> O(n)</p>
+     */
     public Graph removeVertex(Vertex v) {
         for (Iterator<Edge> i = this.edges.iterator(); i.hasNext(); ) {
             Edge e = i.next();
@@ -64,7 +68,6 @@ public class MemoryGraph extends Graph {
             }
         }
         this.vertices.remove(v);
-        /*v.parentGraph = null;*/
         return this;
     }
 
