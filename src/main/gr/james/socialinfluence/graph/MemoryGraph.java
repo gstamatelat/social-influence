@@ -1,5 +1,6 @@
 package gr.james.socialinfluence.graph;
 
+import gr.james.socialinfluence.collections.Pair;
 import gr.james.socialinfluence.graph.algorithms.Dijkstra;
 import gr.james.socialinfluence.helper.Finals;
 import gr.james.socialinfluence.helper.GraphException;
@@ -12,38 +13,15 @@ import java.util.*;
  * <p>Represents an in-memory {@link Graph}, implemented using adjacency lists. Suitable for sparse graphs.</p>
  */
 public class MemoryGraph extends Graph {
-    private Set<Vertex> vertices;
-    private Set<Edge> edges;
+    private Map<Vertex, Pair<Map<Vertex, Edge>>> adj;
 
-    /**
-     * <p>Creates a new empty graph with name {@link Finals#DEFAULT_GRAPH_NAME} and default
-     * {@link MemoryGraphOptions options}.</p>
-     */
     public MemoryGraph() {
-        this(EnumSet.noneOf(MemoryGraphOptions.class));
-    }
-
-    /**
-     * <p>Creates a new empty graph with name {@link Finals#DEFAULT_GRAPH_NAME} and the specified
-     * {@link MemoryGraphOptions options}.</p>
-     *
-     * @param e the options to use when constructing this Graph
-     */
-    public MemoryGraph(EnumSet<MemoryGraphOptions> e) {
-        if (e.contains(MemoryGraphOptions.VERTEX_USE_LINKED_HASH_SET)) {
-            this.vertices = new LinkedHashSet<>();
-        } else {
-            this.vertices = new HashSet<>();
-        }
-        if (e.contains(MemoryGraphOptions.EDGE_USE_LINKED_HASH_SET)) {
-            this.edges = new LinkedHashSet<>();
-        } else {
-            this.edges = new HashSet<>();
-        }
+        this.adj = new LinkedHashMap<>();
     }
 
     public Vertex addVertex(Vertex v) {
-        this.vertices.add(v);
+        Pair<Map<Vertex, Edge>> pp = new Pair<Map<Vertex, Edge>>(new LinkedHashMap<Vertex, Edge>(), new LinkedHashMap<Vertex, Edge>());
+        this.adj.put(v, pp);
         return v;
     }
 
@@ -51,42 +29,24 @@ public class MemoryGraph extends Graph {
         if (!this.containsVertex(v)) {
             throw new GraphException(Finals.E_GRAPH_VERTEX_NOT_CONTAINED, "removeVertex");
         }
-        for (Iterator<Edge> i = this.edges.iterator(); i.hasNext(); ) {
-            Edge e = i.next();
-            if (e.getSource().equals(v) || e.getTarget().equals(v)) {
-                i.remove();
-            }
-        }
-        this.vertices.remove(v);
+        this.adj.remove(v);
         return this;
     }
 
     public Graph clear() {
-        this.vertices.clear();
-        this.edges.clear();
+        this.adj.clear();
         return this;
     }
 
-    /*public Vertex getVertexFromId(int id) {
-        for (Vertex v : this.vertices) {
-            if (v.getId() == id) {
-                return v;
-            }
-        }
-        return null;
-    }*/
-
     public boolean containsVertex(Vertex v) {
-        return this.vertices.contains(v);
+        return this.adj.containsKey(v);
     }
 
     public Vertex getVertexFromIndex(int index) {
         if (index < 0 || index >= this.getVerticesCount()) {
             throw new GraphException(Finals.E_GRAPH_INDEX_OUT_OF_BOUNDS, index);
         }
-        TreeSet<Vertex> allVertices = new TreeSet<>();
-        allVertices.addAll(this.vertices);
-        Iterator<Vertex> it = allVertices.iterator();
+        Iterator<Vertex> it = this.adj.keySet().iterator();
         Vertex v = it.next();
         while (index-- > 0) {
             v = it.next();
@@ -103,12 +63,17 @@ public class MemoryGraph extends Graph {
     }
 
     public Edge addEdge(Vertex source, Vertex target) {
-        if (!this.vertices.contains(source) || !this.vertices.contains(target)) {
+        if (!this.containsVertex(source) || !this.containsVertex(target)) {
             throw new GraphException(Finals.E_GRAPH_EDGE_DIFFERENT);
         }
-        Edge e = new Edge(source, target);
-        this.edges.add(e);
-        return e;
+        Edge e = new Edge();
+        if (!this.adj.get(source).getFirst().containsKey(target)) {
+            this.adj.get(source).getFirst().put(target, e);
+            this.adj.get(target).getSecond().put(source, e);
+            return e;
+        } else {
+            return null;
+        }
     }
 
     public Set<Edge> addEdge(Vertex source, Vertex target, boolean undirected) {
@@ -269,11 +234,11 @@ public class MemoryGraph extends Graph {
     }
 
     public Set<Vertex> getVertices() {
-        return Collections.unmodifiableSet(this.vertices);
+        return Collections.unmodifiableSet(this.adj.keySet());
     }
 
     public int getVerticesCount() {
-        return this.vertices.size();
+        return this.adj.size();
     }
 
     public Edge getRandomOutEdge(Vertex from, boolean weighted) {
