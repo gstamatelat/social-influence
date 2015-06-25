@@ -69,14 +69,14 @@ public class MemoryGraph extends Graph {
         return this;
     }
 
-    public Vertex getVertexFromId(int id) {
+    /*public Vertex getVertexFromId(int id) {
         for (Vertex v : this.vertices) {
             if (v.getId() == id) {
                 return v;
             }
         }
         return null;
-    }
+    }*/
 
     public boolean containsVertex(Vertex v) {
         return this.vertices.contains(v);

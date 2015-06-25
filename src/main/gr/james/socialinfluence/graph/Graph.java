@@ -107,7 +107,7 @@ public abstract class Graph {
 
     public abstract Graph clear();
 
-    public abstract Vertex getVertexFromId(int id);
+    /*public abstract Vertex getVertexFromId(int id);*/
 
     /**
      * <p>Get a {@link Vertex} of this graph based on its index. Index is a deterministic, per-graph attribute between
