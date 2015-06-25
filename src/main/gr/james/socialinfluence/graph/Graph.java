@@ -189,11 +189,31 @@ public abstract class Graph {
 
     public abstract Map<Vertex, Integer> getOutDegree();
 
+    /**
+     * <p>Returns the outbound degree of a vertex, aka the number of outbound edges. Edge to self is included (if
+     * present).</p>
+     *
+     * @param v the vertex
+     * @return the outbound degree of vertex {@code v}
+     * @see #getInDegree(Vertex)
+     * @see #getInDegree()
+     * @see #getOutDegree()
+     */
     public abstract int getOutDegree(Vertex v);
 
-    public abstract Map<Vertex, Integer> getInDegree();
-
+    /**
+     * <p>Returns the inbound degree of a vertex, aka the number of inbound edges. Edge to self is included (if
+     * present).</p>
+     *
+     * @param v the vertex
+     * @return the inbound degree of vertex {@code v}
+     * @see #getOutDegree(Vertex)
+     * @see #getInDegree()
+     * @see #getOutDegree()
+     */
     public abstract int getInDegree(Vertex v);
+
+    public abstract Map<Vertex, Integer> getInDegree();
 
     /**
      * <p>Returns true if for every edge with source S and target T where S and T are different,

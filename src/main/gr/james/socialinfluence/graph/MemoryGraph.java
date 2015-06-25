@@ -147,14 +147,6 @@ public class MemoryGraph extends Graph {
         return this.edges.size();
     }
 
-    /*public Edge addEdge(Edge e) {
-        if (e.getSource().getParentGraph() != this || e.getTarget().getParentGraph() != this) {
-            throw new GraphException(Finals.E_GRAPH_EDGE_DIFFERENT);
-        }
-        this.edges.add(e);
-        return e;
-    }*/
-
     public Edge addEdge(Vertex source, Vertex target) {
         if (!this.vertices.contains(source) || !this.vertices.contains(target)) {
             throw new GraphException(Finals.E_GRAPH_EDGE_DIFFERENT);

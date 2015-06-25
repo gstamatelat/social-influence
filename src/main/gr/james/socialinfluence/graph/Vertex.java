@@ -102,29 +102,7 @@ public class Vertex implements Comparable<Vertex> {
         return this.parentGraph.getOutEdges(this);
     }*/
 
-    /**
-     * <p>Returns the inbound degree of this vertex, aka the number of inbound edges.
-     * Edge from self is included (if present).</p>
-     * <p><b>Running Time:</b> Slow</p>
-     *
-     * @return the inbound degree of this vertex
-     * @see #getOutDegree()
-     */
-    /*public int getInDegree() {
-        return this.parentGraph.getInDegree(this);
-    }*/
 
-    /**
-     * <p>Returns the outbound degree of this vertex, aka the number of outbound edges.
-     * Edge to self is included (if present).</p>
-     * <p><b>Running Time:</b> Slow</p>
-     *
-     * @return the outbound degree of this vertex
-     * @see #getInDegree()
-     */
-    /*public int getOutDegree() {
-        return this.parentGraph.getOutDegree(this);
-    }*/
 
     /*public Edge addEdge(Vertex target) {
         return this.parentGraph.addEdge(this, target);
