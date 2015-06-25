@@ -48,14 +48,6 @@ public class MemoryGraph extends Graph {
         return v;
     }
 
-    public Set<Vertex> addVertices(int count) {
-        Set<Vertex> newVertices = new HashSet<>();
-        for (int i = 0; i < count; i++) {
-            newVertices.add(this.addVertex());
-        }
-        return Collections.unmodifiableSet(newVertices);
-    }
-
     /**
      * {@inheritDoc}
      * <p><b>Running Time:</b> O(n)</p>
@@ -72,7 +64,6 @@ public class MemoryGraph extends Graph {
     }
 
     public Graph clear() {
-        // TODO: Obviously need to use .removeVertex because parentGraph remains unmodified but this will break Helper.combineGraphs so we leave it for now
         this.vertices.clear();
         this.edges.clear();
         return this;

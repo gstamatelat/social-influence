@@ -6,9 +6,7 @@ import gr.james.socialinfluence.helper.GraphException;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * <p>Represents a collection of vertices and edges. The graph is weighted directed and there can't be more than one
@@ -65,7 +63,13 @@ public abstract class Graph {
 
     public abstract Vertex addVertex(Vertex v);
 
-    public abstract Set<Vertex> addVertices(int count);
+    public Set<Vertex> addVertices(int count) {
+        Set<Vertex> newVertices = new HashSet<>();
+        for (int i = 0; i < count; i++) {
+            newVertices.add(this.addVertex());
+        }
+        return Collections.unmodifiableSet(newVertices);
+    }
 
     /**
      * <p>Removes a vertex from the graph. This method will also remove the inbound and outbound edges of that vertex.
