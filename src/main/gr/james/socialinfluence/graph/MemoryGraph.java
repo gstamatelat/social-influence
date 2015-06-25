@@ -47,11 +47,10 @@ public class MemoryGraph extends Graph {
         return v;
     }
 
-    /**
-     * {@inheritDoc}
-     * <p><b>Running Time:</b> O(n)</p>
-     */
     public Graph removeVertex(Vertex v) {
+        if (!this.containsVertex(v)) {
+            throw new GraphException(Finals.E_GRAPH_VERTEX_NOT_CONTAINED, "removeVertex");
+        }
         for (Iterator<Edge> i = this.edges.iterator(); i.hasNext(); ) {
             Edge e = i.next();
             if (e.getSource().equals(v) || e.getTarget().equals(v)) {
