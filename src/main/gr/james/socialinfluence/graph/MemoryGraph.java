@@ -1,11 +1,10 @@
 package gr.james.socialinfluence.graph;
 
 import gr.james.socialinfluence.collections.Pair;
-import gr.james.socialinfluence.graph.algorithms.Dijkstra;
 import gr.james.socialinfluence.helper.Finals;
 import gr.james.socialinfluence.helper.GraphException;
-import gr.james.socialinfluence.helper.Helper;
 import gr.james.socialinfluence.helper.WeightedRandom;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.*;
 
@@ -54,13 +53,9 @@ public class MemoryGraph extends Graph {
         return v;
     }
 
-    public Set<Edge> getEdges() {
+    /*public Set<Edge> getEdges() {
         return Collections.unmodifiableSet(this.edges);
-    }
-
-    public int getEdgesCount() {
-        return this.edges.size();
-    }
+    }*/
 
     public Edge addEdge(Vertex source, Vertex target) {
         if (!this.containsVertex(source) || !this.containsVertex(target)) {
@@ -76,36 +71,18 @@ public class MemoryGraph extends Graph {
         }
     }
 
-    public Set<Edge> addEdge(Vertex source, Vertex target, boolean undirected) {
-        Set<Edge> addedEdges = new HashSet<>();
-        addedEdges.add(this.addEdge(source, target));
-        if (undirected) {
-            addedEdges.add(this.addEdge(target, source));
-        }
-        return Collections.unmodifiableSet(addedEdges);
-    }
-
-    public Graph removeEdge(Edge e) {
+    /*public Graph removeEdge(Edge e) {
         this.edges.remove(e);
         return this;
-    }
+    }*/
 
     public Graph removeEdge(Vertex source, Vertex target) {
-        // TODO: Consider doing something like this.remove(new Edge(source, target))
-        Edge candidate = null;
-        for (Edge e : this.edges) {
-            if (e.getSource().equals(source) && e.getTarget().equals(target)) {
-                candidate = e;
-                break;
-            }
-        }
-        if (candidate != null) {
-            this.removeEdge(candidate);
-        }
+        this.adj.get(source).getFirst().remove(target);
+        this.adj.get(target).getSecond().remove(source);
         return this;
     }
 
-    public Map<Vertex, Set<Edge>> getOutEdges() {
+    /*public Map<Vertex, Set<Edge>> getOutEdges() {
         Map<Vertex, Set<Edge>> map = new HashMap<>();
         for (Vertex v : this.vertices) {
             map.put(v, new HashSet<Edge>());
@@ -118,19 +95,17 @@ public class MemoryGraph extends Graph {
             unmodifiableMap.put(v, Collections.unmodifiableSet(map.get(v)));
         }
         return Collections.unmodifiableMap(unmodifiableMap);
+    }*/
+
+    public Map<Vertex, Edge> getOutEdges(Vertex v) {
+        return Collections.unmodifiableMap(this.adj.get(v).getFirst());
     }
 
-    public Set<Edge> getOutEdges(Vertex v) {
-        Set<Edge> outEdges = new HashSet<>();
-        for (Edge e : this.edges) {
-            if (e.getSource().equals(v)) {
-                outEdges.add(e);
-            }
-        }
-        return Collections.unmodifiableSet(outEdges);
+    public Map<Vertex, Edge> getInEdges(Vertex v) {
+        return Collections.unmodifiableMap(this.adj.get(v).getSecond());
     }
 
-    public Map<Vertex, Set<Edge>> getInEdges() {
+    /*public Map<Vertex, Set<Edge>> getInEdges() {
         Map<Vertex, Set<Edge>> map = new HashMap<>();
         for (Vertex v : this.vertices) {
             map.put(v, new HashSet<Edge>());
@@ -143,27 +118,9 @@ public class MemoryGraph extends Graph {
             unmodifiableMap.put(v, Collections.unmodifiableSet(map.get(v)));
         }
         return Collections.unmodifiableMap(unmodifiableMap);
-    }
+    }*/
 
-    public Set<Edge> getInEdges(Vertex v) {
-        Set<Edge> inEdges = new HashSet<>();
-        for (Edge e : this.edges) {
-            if (e.getTarget().equals(v)) {
-                inEdges.add(e);
-            }
-        }
-        return Collections.unmodifiableSet(inEdges);
-    }
-
-    public double getOutWeightSum(Vertex v) {
-        return Helper.getWeightSum(this.getOutEdges(v));
-    }
-
-    public double getInWeightSum(Vertex v) {
-        return Helper.getWeightSum(this.getInEdges(v));
-    }
-
-    public Map<Vertex, Integer> getOutDegree() {
+    /*public Map<Vertex, Integer> getOutDegree() {
         Map<Vertex, Integer> outDegrees = new HashMap<>();
         for (Vertex v : this.vertices) {
             outDegrees.put(v, 0);
@@ -172,13 +129,9 @@ public class MemoryGraph extends Graph {
             outDegrees.put(e.getSource(), outDegrees.get(e.getSource()) + 1);
         }
         return Collections.unmodifiableMap(outDegrees);
-    }
+    }*/
 
-    public int getOutDegree(Vertex v) {
-        return this.getOutEdges(v).size();
-    }
-
-    public Map<Vertex, Integer> getInDegree() {
+    /*public Map<Vertex, Integer> getInDegree() {
         Map<Vertex, Integer> inDegrees = new HashMap<>();
         for (Vertex v : this.vertices) {
             inDegrees.put(v, 0);
@@ -187,16 +140,10 @@ public class MemoryGraph extends Graph {
             inDegrees.put(e.getTarget(), inDegrees.get(e.getTarget()) + 1);
         }
         return Collections.unmodifiableMap(inDegrees);
-    }
-
-    public int getInDegree(Vertex v) {
-        return this.getInEdges(v).size();
-    }
+    }*/
 
     public boolean isUndirected() {
-        // TODO: Not sure if this method is slow. Could be very slow.
-        // TODO: Not tested
-        ArrayList<Vertex[]> edgeList = new ArrayList<>();
+        /*ArrayList<Vertex[]> edgeList = new ArrayList<>();
         for (Edge e : this.edges) {
             Vertex v = e.getSource();
             Vertex w = e.getTarget();
@@ -215,12 +162,13 @@ public class MemoryGraph extends Graph {
                 }
             }
         }
-        return edgeList.size() == 0;
+        return edgeList.size() == 0;*/
+        throw new NotImplementedException();
     }
 
     public Graph createCircle(boolean undirected) {
         // TODO: Not tested
-        Iterator<Vertex> vertexIterator = this.vertices.iterator();
+        Iterator<Vertex> vertexIterator = this.adj.keySet().iterator();
         Vertex previous = vertexIterator.next();
         Vertex first = previous;
         while (vertexIterator.hasNext()) {
@@ -237,38 +185,13 @@ public class MemoryGraph extends Graph {
         return Collections.unmodifiableSet(this.adj.keySet());
     }
 
-    public int getVerticesCount() {
-        return this.adj.size();
-    }
-
-    public Edge getRandomOutEdge(Vertex from, boolean weighted) {
-        HashMap<Edge, Double> weightMap = new HashMap<>();
-        Set<Edge> outEdges = this.getOutEdges(from);
-        for (Edge e : outEdges) {
-            weightMap.put(e, (weighted ? e.getWeight() : 1.0));
+    public Vertex getRandomOutEdge(Vertex from, boolean weighted) {
+        HashMap<Vertex, Double> weightMap = new HashMap<>();
+        Map<Vertex, Edge> outEdges = this.getOutEdges(from);
+        for (Map.Entry<Vertex, Edge> e : outEdges.entrySet()) {
+            weightMap.put(e.getKey(), (weighted ? e.getValue().getWeight() : 1.0));
         }
-        List<Edge> edges = WeightedRandom.makeRandomSelection(weightMap, 1);
+        List<Vertex> edges = WeightedRandom.makeRandomSelection(weightMap, 1);
         return edges.get(0);
-    }
-
-    public double getDiameter() {
-        // TODO: Should return a list/path/walk of vertices to show both the weight sum and the steps
-        HashMap<Vertex[], Double> distanceMap = new HashMap<>();
-
-        for (Vertex v : this.getVertices()) {
-            HashMap<Vertex, Double> temp = Dijkstra.execute(this, v);
-            for (Map.Entry<Vertex, Double> e : temp.entrySet()) {
-                distanceMap.put(new Vertex[]{v, e.getKey()}, e.getValue());
-            }
-        }
-
-        double diameter = 0;
-        for (Double d : distanceMap.values()) {
-            if (d > diameter) {
-                diameter = d;
-            }
-        }
-
-        return diameter;
     }
 }

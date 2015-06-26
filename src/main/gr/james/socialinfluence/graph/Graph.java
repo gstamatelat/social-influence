@@ -1,13 +1,13 @@
 package gr.james.socialinfluence.graph;
 
+import gr.james.socialinfluence.graph.algorithms.Dijkstra;
 import gr.james.socialinfluence.graph.algorithms.iterators.RandomVertexIterator;
 import gr.james.socialinfluence.helper.Finals;
 import gr.james.socialinfluence.helper.GraphException;
 import gr.james.socialinfluence.helper.Helper;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-import java.io.IOException;
 import java.io.OutputStream;
-import java.nio.charset.Charset;
 import java.util.*;
 
 /**
@@ -81,17 +81,15 @@ public abstract class Graph {
 
     public <T extends Graph> Graph deepCopy(Class<T> type, Set<Vertex> includeOnly) {
         Graph g = Helper.instantiateGeneric(type);
-
         for (Vertex v : includeOnly) {
             if (!this.containsVertex(v)) {
                 throw new GraphException(Finals.E_GRAPH_VERTEX_NOT_CONTAINED, "deepCopy");
             }
             g.addVertex(v);
         }
-
-        for (Edge e : this.getEdges()) {
+        for (FullEdge e : this.getEdges()) {
             if (g.containsVertex(e.getSource()) && g.containsVertex(e.getTarget())) {
-                g.addEdge(e.getSource(), e.getTarget()).setWeight(e.getWeight());
+                g.addEdge(e.getSource(), e.getTarget()).setWeight(e.getEdge().getWeight());
             }
         }
         return g;
@@ -140,11 +138,11 @@ public abstract class Graph {
         Vertex v = this.addVertex();
 
         for (Vertex y : f) {
-            for (Edge e : this.getOutEdges(y)) {
-                this.addEdge(v, e.getTarget()).setWeight(e.getWeight());
+            for (Map.Entry<Vertex, Edge> e : this.getOutEdges(y).entrySet()) {
+                this.addEdge(v, e.getKey()).setWeight(e.getValue().getWeight());
             }
-            for (Edge e : this.getInEdges(y)) {
-                this.addEdge(e.getSource(), v).setWeight(e.getWeight());
+            for (Map.Entry<Vertex, Edge> e : this.getInEdges(y).entrySet()) {
+                this.addEdge(e.getKey(), v).setWeight(e.getValue().getWeight());
             }
             this.removeVertex(y);
         }
@@ -161,11 +159,21 @@ public abstract class Graph {
     public Set<Vertex> getStubbornVertices() {
         Set<Vertex> stubborn = new TreeSet<>();
         for (Vertex v : this.getVertices()) {
-            if (this.getOutDegree(v) == 1 && this.getOutEdges(v).iterator().next().getTarget().equals(v)) {
+            if (this.getOutDegree(v) == 1 && this.getOutEdges(v).containsKey(v)) {
                 stubborn.add(v);
             }
         }
         return Collections.unmodifiableSet(stubborn);
+    }
+
+    public Set<FullEdge> getEdges() {
+        Set<FullEdge> edges = new HashSet<>();
+        for (Vertex v : this.getVertices()) {
+            for (Map.Entry<Vertex, Edge> e : this.getOutEdges(v).entrySet()) {
+                edges.add(new FullEdge(v, e.getKey(), e.getValue()));
+            }
+        }
+        return Collections.unmodifiableSet(edges);
     }
 
     /**
@@ -185,7 +193,7 @@ public abstract class Graph {
         return this;
     }
 
-    public abstract Set<Edge> getEdges();
+    /*public abstract Set<Edge> getEdges();*/
 
     /**
      * <p>Calculates the total amount of directed edges that this graph has. This method is a little faster than using
@@ -194,23 +202,32 @@ public abstract class Graph {
      *
      * @return the number of directed edges in this graph
      */
-    public abstract int getEdgesCount();
+    public int getEdgesCount() {
+        throw new NotImplementedException();
+    }
 
     public abstract Edge addEdge(Vertex source, Vertex target);
 
-    public abstract Set<Edge> addEdge(Vertex source, Vertex target, boolean undirected);
+    public Set<Edge> addEdge(Vertex source, Vertex target, boolean undirected) {
+        Set<Edge> addedEdges = new HashSet<>();
+        addedEdges.add(this.addEdge(source, target));
+        if (undirected) {
+            addedEdges.add(this.addEdge(target, source));
+        }
+        return Collections.unmodifiableSet(addedEdges);
+    }
 
-    public abstract Graph removeEdge(Edge e);
+    /*public abstract Graph removeEdge(Edge e);*/
 
     public abstract Graph removeEdge(Vertex source, Vertex target);
 
-    public abstract Map<Vertex, Set<Edge>> getOutEdges();
+    /*public abstract Map<Vertex, Set<Edge>> getOutEdges();*/
 
-    public abstract Set<Edge> getOutEdges(Vertex v);
+    /*public abstract Map<Vertex, Set<Edge>> getInEdges();*/
 
-    public abstract Map<Vertex, Set<Edge>> getInEdges();
+    public abstract Map<Vertex, Edge> getOutEdges(Vertex v);
 
-    public abstract Set<Edge> getInEdges(Vertex v);
+    public abstract Map<Vertex, Edge> getInEdges(Vertex v);
 
     /**
      * <p>Returns the sum of the outbound edge weights of a vertex.</p>
@@ -219,7 +236,9 @@ public abstract class Graph {
      * @return the sum of weights of all outbound edges of vertex {@code v}
      * @see #getInWeightSum(Vertex)
      */
-    public abstract double getOutWeightSum(Vertex v);
+    public double getOutWeightSum(Vertex v) {
+        return Helper.getWeightSum(this.getOutEdges(v).values());
+    }
 
     /**
      * <p>Returns the sum of the inbound edge weights of a vertex.</p>
@@ -228,9 +247,9 @@ public abstract class Graph {
      * @return the sum of weights of all inbound edges of vertex {@code v}
      * @see #getOutWeightSum(Vertex)
      */
-    public abstract double getInWeightSum(Vertex v);
-
-    public abstract Map<Vertex, Integer> getOutDegree();
+    public double getInWeightSum(Vertex v) {
+        return Helper.getWeightSum(this.getInEdges(v).values());
+    }
 
     /**
      * <p>Returns the outbound degree of a vertex, aka the number of outbound edges. Edge to self is included (if
@@ -242,7 +261,9 @@ public abstract class Graph {
      * @see #getInDegree()
      * @see #getOutDegree()
      */
-    public abstract int getOutDegree(Vertex v);
+    public int getOutDegree(Vertex v) {
+        return this.getOutEdges(v).size();
+    }
 
     /**
      * <p>Returns the inbound degree of a vertex, aka the number of inbound edges. Edge to self is included (if
@@ -254,9 +275,13 @@ public abstract class Graph {
      * @see #getInDegree()
      * @see #getOutDegree()
      */
-    public abstract int getInDegree(Vertex v);
+    public int getInDegree(Vertex v) {
+        return this.getInEdges(v).size();
+    }
 
-    public abstract Map<Vertex, Integer> getInDegree();
+    /*public abstract Map<Vertex, Integer> getInDegree();*/
+
+    /*public abstract Map<Vertex, Integer> getOutDegree();*/
 
     /**
      * <p>Returns true if for every edge with source S and target T where S and T are different,
@@ -282,11 +307,32 @@ public abstract class Graph {
      *
      * @return the number of vertices in this graph
      */
-    public abstract int getVerticesCount();
+    public int getVerticesCount() {
+        return this.getVertices().size();
+    }
 
-    public abstract Edge getRandomOutEdge(Vertex from, boolean weighted);
+    public abstract Vertex getRandomOutEdge(Vertex from, boolean weighted);
 
-    public abstract double getDiameter();
+    public double getDiameter() {
+        // TODO: Should return a list/path/walk of vertices to show both the weight sum and the steps
+        HashMap<Vertex[], Double> distanceMap = new HashMap<>();
+
+        for (Vertex v : this.getVertices()) {
+            HashMap<Vertex, Double> temp = Dijkstra.execute(this, v);
+            for (Map.Entry<Vertex, Double> e : temp.entrySet()) {
+                distanceMap.put(new Vertex[]{v, e.getKey()}, e.getValue());
+            }
+        }
+
+        double diameter = 0;
+        for (Double d : distanceMap.values()) {
+            if (d > diameter) {
+                diameter = d;
+            }
+        }
+
+        return diameter;
+    }
 
     /**
      * <p>Exports this graph in DOT format. If the graph is undirected, then the undirected DOT format will be used.
@@ -297,7 +343,7 @@ public abstract class Graph {
      * @return the current instance
      */
     public Graph exportToDot(OutputStream out) {
-        if (this.isUndirected()) {
+        /*if (this.isUndirected()) {
             ArrayList<Vertex[]> edgeList = new ArrayList<>();
             for (Edge e : this.getEdges()) {
                 Vertex v = e.getSource();
@@ -351,8 +397,8 @@ public abstract class Graph {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
-        return this;
+        }*/
+        throw new NotImplementedException();
     }
 
     @Override

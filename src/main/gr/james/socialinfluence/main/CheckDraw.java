@@ -1,16 +1,17 @@
 package gr.james.socialinfluence.main;
 
-import gr.james.socialinfluence.game.*;
+import gr.james.socialinfluence.game.GameDefinition;
+import gr.james.socialinfluence.game.players.BruteForcePlayer;
+import gr.james.socialinfluence.game.players.Player;
 import gr.james.socialinfluence.graph.Graph;
-import gr.james.socialinfluence.graph.io.Csv;
-import gr.james.socialinfluence.helper.Helper;
+import gr.james.socialinfluence.graph.MemoryGraph;
+import gr.james.socialinfluence.graph.generators.Wheel;
 
 import java.io.IOException;
-import java.net.URL;
 
 public class CheckDraw {
     public static void main(String[] args) throws IOException {
-        Graph g = Csv.from(new URL("http://loki.ee.duth.gr/school.csv").openStream());
+        /*Graph g = Csv.from(new URL("http://loki.ee.duth.gr/school.csv").openStream());
 
         Game game = new Game(g);
 
@@ -29,6 +30,9 @@ public class CheckDraw {
 
         GameResult gr = game.runGame(d, 1.0e-5);
 
-        Helper.log("%s", gr);
+        Helper.log("%s", gr);*/
+        Graph g = Wheel.generate(MemoryGraph.class, 13);
+        Player p = new BruteForcePlayer();
+        p.findMove(g, new GameDefinition(6, 6.0, 0, false));
     }
 }
