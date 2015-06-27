@@ -69,6 +69,8 @@ public abstract class Graph {
 
     public abstract boolean containsVertex(Vertex v);
 
+    public abstract boolean containsEdge(Vertex source, Vertex target);
+
     public Set<Vertex> addVertices(int count) {
         Set<Vertex> newVertices = new HashSet<>();
         for (int i = 0; i < count; i++) {

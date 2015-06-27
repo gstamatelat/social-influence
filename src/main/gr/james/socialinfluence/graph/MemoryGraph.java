@@ -43,6 +43,10 @@ public class MemoryGraph extends Graph {
         return this.m.containsKey(v);
     }
 
+    public boolean containsEdge(Vertex source, Vertex target) {
+        return this.m.get(source).getFirst().containsKey(target);
+    }
+
     public Vertex getVertexFromIndex(int index) {
         if (index < 0 || index >= this.getVerticesCount()) {
             throw new GraphException(Finals.E_GRAPH_INDEX_OUT_OF_BOUNDS, index);
