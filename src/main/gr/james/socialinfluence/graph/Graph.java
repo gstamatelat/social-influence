@@ -117,8 +117,6 @@ public abstract class Graph {
 
     public abstract Graph clear();
 
-    /*public abstract Vertex getVertexFromId(int id);*/
-
     /**
      * <p>Get a {@link Vertex} of this graph based on its index. Index is a deterministic, per-graph attribute between
      * {@code 0} (inclusive) and {@link #getVerticesCount()} (exclusive), indicating the rank of the ID of the specific
@@ -207,7 +205,11 @@ public abstract class Graph {
      * @return the number of directed edges in this graph
      */
     public int getEdgesCount() {
-        return this.getEdges().size();
+        int count = 0;
+        for (Vertex v : this.getVertices()) {
+            count += this.getOutEdges(v).size();
+        }
+        return count;
     }
 
     public abstract Edge addEdge(Vertex source, Vertex target);
@@ -221,13 +223,7 @@ public abstract class Graph {
         return Collections.unmodifiableSet(addedEdges);
     }
 
-    /*public abstract Graph removeEdge(Edge e);*/
-
     public abstract Graph removeEdge(Vertex source, Vertex target);
-
-    /*public abstract Map<Vertex, Set<Edge>> getOutEdges();*/
-
-    /*public abstract Map<Vertex, Set<Edge>> getInEdges();*/
 
     public abstract Map<Vertex, Edge> getOutEdges(Vertex v);
 
@@ -315,7 +311,6 @@ public abstract class Graph {
     }
 
     public Graph createCircle(boolean undirected) {
-        // TODO: Not tested
         Iterator<Vertex> vertexIterator = this.getVertices().iterator();
         Vertex previous = vertexIterator.next();
         Vertex first = previous;
