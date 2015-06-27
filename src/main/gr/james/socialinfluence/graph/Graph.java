@@ -5,6 +5,7 @@ import gr.james.socialinfluence.graph.algorithms.iterators.RandomVertexIterator;
 import gr.james.socialinfluence.helper.Finals;
 import gr.james.socialinfluence.helper.GraphException;
 import gr.james.socialinfluence.helper.Helper;
+import gr.james.socialinfluence.helper.WeightedRandom;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -311,7 +312,20 @@ public abstract class Graph {
         return true;
     }
 
-    public abstract Graph createCircle(boolean undirected);
+    public Graph createCircle(boolean undirected) {
+        // TODO: Not tested
+        Iterator<Vertex> vertexIterator = this.getVertices().iterator();
+        Vertex previous = vertexIterator.next();
+        Vertex first = previous;
+        while (vertexIterator.hasNext()) {
+            Vertex next = vertexIterator.next();
+            // TODO: Should only add if not exists in order to leave the weight unmodified
+            this.addEdge(previous, next, undirected);
+            previous = next;
+        }
+        this.addEdge(previous, first, undirected);
+        return this;
+    }
 
     /**
      * <p>Returns an unmodifiable Set of vertices that this graph consists of.</p>
@@ -331,7 +345,15 @@ public abstract class Graph {
         return this.getVertices().size();
     }
 
-    public abstract Vertex getRandomOutEdge(Vertex from, boolean weighted);
+    public Vertex getRandomOutEdge(Vertex from, boolean weighted) {
+        HashMap<Vertex, Double> weightMap = new HashMap<>();
+        Map<Vertex, Edge> outEdges = this.getOutEdges(from);
+        for (Map.Entry<Vertex, Edge> e : outEdges.entrySet()) {
+            weightMap.put(e.getKey(), (weighted ? e.getValue().getWeight() : 1.0));
+        }
+        List<Vertex> edges = WeightedRandom.makeRandomSelection(weightMap, 1);
+        return edges.get(0);
+    }
 
     public double getDiameter() {
         // TODO: Should return a list/path/walk of vertices to show both the weight sum and the steps
