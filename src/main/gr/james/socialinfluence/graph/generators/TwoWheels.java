@@ -17,8 +17,6 @@ public class TwoWheels {
         Iterator<Vertex> it2 = g2.getVertices().iterator();
         while (g1.getOutDegree((a = it1.next())) != 3) ;
         while (g2.getOutDegree((b = it2.next())) != 3) ;
-        /*while ((a = it1.next()).getOutDegree() != 3) ;
-        while ((b = it2.next()).getOutDegree() != 3) ;*/
 
         Graph g = Helper.combineGraphs(MemoryGraph.class, new Graph[]{g1, g2});
         g.fuseVertices(new Vertex[]{a, b});

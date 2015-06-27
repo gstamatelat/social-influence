@@ -33,7 +33,7 @@ public class RandomSurferIterator implements Iterator<Vertex> {
     @Override
     public Vertex next() {
         if (this.current != null && RandomHelper.getRandom().nextDouble() > dampingFactor) {
-            this.current = g.getRandomOutEdge(this.current, true).getTarget();
+            this.current = g.getRandomOutEdge(this.current, true);
             if (this.current == null) {
                 this.current = new RandomVertexIterator(g).next();
             }

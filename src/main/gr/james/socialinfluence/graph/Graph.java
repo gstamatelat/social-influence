@@ -5,9 +5,10 @@ import gr.james.socialinfluence.graph.algorithms.iterators.RandomVertexIterator;
 import gr.james.socialinfluence.helper.Finals;
 import gr.james.socialinfluence.helper.GraphException;
 import gr.james.socialinfluence.helper.Helper;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.charset.Charset;
 import java.util.*;
 
 /**
@@ -203,7 +204,7 @@ public abstract class Graph {
      * @return the number of directed edges in this graph
      */
     public int getEdgesCount() {
-        throw new NotImplementedException();
+        return this.getEdges().size();
     }
 
     public abstract Edge addEdge(Vertex source, Vertex target);
@@ -258,8 +259,6 @@ public abstract class Graph {
      * @param v the vertex
      * @return the outbound degree of vertex {@code v}
      * @see #getInDegree(Vertex)
-     * @see #getInDegree()
-     * @see #getOutDegree()
      */
     public int getOutDegree(Vertex v) {
         return this.getOutEdges(v).size();
@@ -272,8 +271,6 @@ public abstract class Graph {
      * @param v the vertex
      * @return the inbound degree of vertex {@code v}
      * @see #getOutDegree(Vertex)
-     * @see #getInDegree()
-     * @see #getOutDegree()
      */
     public int getInDegree(Vertex v) {
         return this.getInEdges(v).size();
@@ -289,7 +286,30 @@ public abstract class Graph {
      *
      * @return true if the graph is undirected, otherwise false
      */
-    public abstract boolean isUndirected();
+    public boolean isUndirected() {
+        // TODO: Implement
+        /*ArrayList<Vertex[]> edgeList = new ArrayList<>();
+        for (Edge e : this.edges) {
+            Vertex v = e.getSource();
+            Vertex w = e.getTarget();
+            if (!v.equals(w)) {
+                int indexOfOpposite = -1;
+                for (int i = 0; i < edgeList.size(); i++) {
+                    if (edgeList.get(i)[0].equals(w) && edgeList.get(i)[1].equals(v)) {
+                        indexOfOpposite = i;
+                        break;
+                    }
+                }
+                if (indexOfOpposite > -1) {
+                    edgeList.remove(indexOfOpposite);
+                } else {
+                    edgeList.add(new Vertex[]{v, w});
+                }
+            }
+        }
+        return edgeList.size() == 0;*/
+        return true;
+    }
 
     public abstract Graph createCircle(boolean undirected);
 
@@ -343,9 +363,9 @@ public abstract class Graph {
      * @return the current instance
      */
     public Graph exportToDot(OutputStream out) {
-        /*if (this.isUndirected()) {
+        if (this.isUndirected()) {
             ArrayList<Vertex[]> edgeList = new ArrayList<>();
-            for (Edge e : this.getEdges()) {
+            for (FullEdge e : this.getEdges()) {
                 Vertex v = e.getSource();
                 Vertex w = e.getTarget();
                 int indexOfOpposite = -1;
@@ -385,7 +405,7 @@ public abstract class Graph {
             dot += "  overlap = false;" + System.lineSeparator();
             dot += "  bgcolor = transparent;" + System.lineSeparator();
             dot += "  splines = true;" + System.lineSeparator();
-            for (Edge e : this.getEdges()) {
+            for (FullEdge e : this.getEdges()) {
                 Vertex v = e.getSource();
                 Vertex w = e.getTarget();
                 dot += "  " + v.toString() + " -> " + w.toString() + System.lineSeparator();
@@ -397,8 +417,8 @@ public abstract class Graph {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }*/
-        throw new NotImplementedException();
+        }
+        return this;
     }
 
     @Override

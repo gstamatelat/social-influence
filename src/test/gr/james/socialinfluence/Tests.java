@@ -2,7 +2,7 @@ package gr.james.socialinfluence;
 
 import gr.james.socialinfluence.collections.GraphState;
 import gr.james.socialinfluence.collections.VertexPair;
-import gr.james.socialinfluence.graph.Edge;
+import gr.james.socialinfluence.graph.FullEdge;
 import gr.james.socialinfluence.graph.Graph;
 import gr.james.socialinfluence.graph.MemoryGraph;
 import gr.james.socialinfluence.graph.Vertex;
@@ -37,8 +37,8 @@ public class Tests {
 
         /* Create graph and randomize edge weights */
         Graph g = RandomG.generate(MemoryGraph.class, vertexCount, p);
-        for (Edge e : g.getEdges()) {
-            e.setWeight(RandomHelper.getRandom().nextDouble());
+        for (FullEdge e : g.getEdges()) {
+            e.getEdge().setWeight(RandomHelper.getRandom().nextDouble());
         }
 
         /* Emulate the random surfer until mean of the map values average is MEAN, aka for MEAN * N steps */
@@ -102,8 +102,8 @@ public class Tests {
             for (double p : ps) {
                 /* Create graph and randomize edge weights */
                 Graph g = RandomG.generate(MemoryGraph.class, vertexCount, p);
-                for (Edge e : g.getEdges()) {
-                    e.setWeight(RandomHelper.getRandom().nextDouble());
+                for (FullEdge e : g.getEdges()) {
+                    e.getEdge().setWeight(RandomHelper.getRandom().nextDouble());
                 }
 
                 /* Floyd-Warshall */
@@ -206,10 +206,10 @@ public class Tests {
             int max = g.getOutDegree(new InDegreeIterator(g).next());
 
             /* getVertexFromIndex(N) must always return the center vertex */
-            Assert.assertEquals("getVertexFromIndexTest - " + k, 6, g.getOutDegree(g.getVertexFromIndex(g.getVerticesCount() - 1)));
+            Assert.assertEquals("getVertexFromIndexTest - N - " + k, 6, g.getOutDegree(g.getVertexFromIndex(g.getVerticesCount() - 1)));
 
             /* getVertexFromIndex(N-1) must always return the wheel center vertex */
-            Assert.assertEquals("getVertexFromIndexTest - " + k, k - 1, g.getOutDegree(g.getVertexFromIndex(g.getVerticesCount() - 2)));
+            Assert.assertEquals("getVertexFromIndexTest - N-1 - " + k, k - 1, g.getOutDegree(g.getVertexFromIndex(g.getVerticesCount() - 2)));
         }
     }
 

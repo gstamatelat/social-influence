@@ -5,6 +5,7 @@ import gr.james.socialinfluence.graph.Graph;
 import gr.james.socialinfluence.graph.Vertex;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.PriorityQueue;
 
 public class Dijkstra {
@@ -22,9 +23,9 @@ public class Dijkstra {
         while (!pq.isEmpty()) {
             DijkstraNode u = pq.poll();
 
-            for (Edge e : g.getOutEdges(u.vertex)) {
-                DijkstraNode v = nodeMap.get(e.getTarget());
-                double weight = e.getWeight();
+            for (Map.Entry<Vertex, Edge> e : g.getOutEdges(u.vertex).entrySet()) {
+                DijkstraNode v = nodeMap.get(e.getKey());
+                double weight = e.getValue().getWeight();
                 double distanceThroughU = u.distance + weight;
                 if (distanceThroughU < v.distance) {
                     pq.remove(v);

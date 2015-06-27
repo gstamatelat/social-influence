@@ -1,7 +1,7 @@
 package gr.james.socialinfluence.graph.algorithms;
 
 import gr.james.socialinfluence.collections.VertexPair;
-import gr.james.socialinfluence.graph.Edge;
+import gr.james.socialinfluence.graph.FullEdge;
 import gr.james.socialinfluence.graph.Graph;
 import gr.james.socialinfluence.graph.Vertex;
 
@@ -29,8 +29,8 @@ public class FloydWarshall {
             }
         }
 
-        for (Edge e : g.getEdges()) {
-            dist.put(new VertexPair(e.getSource(), e.getTarget()), e.getWeight());
+        for (FullEdge e : g.getEdges()) {
+            dist.put(new VertexPair(e.getSource(), e.getTarget()), e.getEdge().getWeight());
         }
 
         for (Vertex k : g.getVertices()) {

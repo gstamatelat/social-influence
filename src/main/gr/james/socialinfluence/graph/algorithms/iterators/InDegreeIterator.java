@@ -13,7 +13,10 @@ public class InDegreeIterator implements Iterator<Vertex> {
     private Map<Vertex, Integer> nodes;
 
     public InDegreeIterator(Graph g) {
-        nodes = new HashMap<>(g.getInDegree());
+        nodes = new HashMap<>();
+        for (Vertex v : g.getVertices()) {
+            nodes.put(v, g.getInDegree(v));
+        }
     }
 
     @Override

@@ -5,6 +5,7 @@ import gr.james.socialinfluence.graph.Edge;
 import gr.james.socialinfluence.graph.Graph;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.helper.Finals;
+import gr.james.socialinfluence.helper.Helper;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -18,22 +19,25 @@ public class PageRank {
 
         HashMap<Vertex, Double> outWeightSums = new HashMap<>();
         for (Vertex v : g.getVertices()) {
-            outWeightSums.put(v, 0.0);
-        }
-        for (Edge e : g.getEdges()) {
-            outWeightSums.put(e.getSource(), outWeightSums.get(e.getSource()) + e.getWeight());
+            outWeightSums.put(v, Helper.getWeightSum(g.getOutEdges(v).values()));
         }
 
         boolean stabilized = false;
         while (!stabilized) {
             GraphState nextState = new GraphState(g, 0.0);
-            for (Edge e : g.getEdges()) {
+            for (Vertex v : g.getVertices()) {
+                Map<Vertex, Edge> inEdges = g.getInEdges(v);
+                for (Map.Entry<Vertex, Edge> e : inEdges.entrySet()) {
+                    nextState.put(v, nextState.get(v) + lastState.get(e.getKey()) / outWeightSums.get(e.getKey()));
+                }
+            }
+            /*for (FullEdge e : g.getEdges()) {
                 nextState.put(e.getTarget(),
                         nextState.get(e.getTarget()) + (
                                 e.getWeight() * lastState.get(e.getSource()) / outWeightSums.get(e.getSource())
                         )
                 );
-            }
+            }*/
             for (Map.Entry<Vertex, Double> k : nextState.entrySet()) {
                 k.setValue(dampingFactor + (1 - dampingFactor) * k.getValue());
             }

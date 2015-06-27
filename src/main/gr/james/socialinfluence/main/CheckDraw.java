@@ -1,11 +1,8 @@
 package gr.james.socialinfluence.main;
 
-import gr.james.socialinfluence.game.GameDefinition;
-import gr.james.socialinfluence.game.players.BruteForcePlayer;
-import gr.james.socialinfluence.game.players.Player;
 import gr.james.socialinfluence.graph.Graph;
 import gr.james.socialinfluence.graph.MemoryGraph;
-import gr.james.socialinfluence.graph.generators.Wheel;
+import gr.james.socialinfluence.graph.generators.TwoWheels;
 
 import java.io.IOException;
 
@@ -31,8 +28,7 @@ public class CheckDraw {
         GameResult gr = game.runGame(d, 1.0e-5);
 
         Helper.log("%s", gr);*/
-        Graph g = Wheel.generate(MemoryGraph.class, 13);
-        Player p = new BruteForcePlayer();
-        p.findMove(g, new GameDefinition(6, 6.0, 0, false));
+        Graph g = TwoWheels.generate(MemoryGraph.class, 4);
+        System.out.println();
     }
 }

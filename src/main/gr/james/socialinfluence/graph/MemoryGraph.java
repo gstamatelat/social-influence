@@ -4,7 +4,6 @@ import gr.james.socialinfluence.collections.Pair;
 import gr.james.socialinfluence.helper.Finals;
 import gr.james.socialinfluence.helper.GraphException;
 import gr.james.socialinfluence.helper.WeightedRandom;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.*;
 
@@ -12,15 +11,15 @@ import java.util.*;
  * <p>Represents an in-memory {@link Graph}, implemented using adjacency lists. Suitable for sparse graphs.</p>
  */
 public class MemoryGraph extends Graph {
-    private Map<Vertex, Pair<Map<Vertex, Edge>>> adj;
+    private Map<Vertex, Pair<Map<Vertex, Edge>>> m;
 
     public MemoryGraph() {
-        this.adj = new LinkedHashMap<>();
+        this.m = new LinkedHashMap<>();
     }
 
     public Vertex addVertex(Vertex v) {
         Pair<Map<Vertex, Edge>> pp = new Pair<Map<Vertex, Edge>>(new LinkedHashMap<Vertex, Edge>(), new LinkedHashMap<Vertex, Edge>());
-        this.adj.put(v, pp);
+        this.m.put(v, pp);
         return v;
     }
 
@@ -28,24 +27,28 @@ public class MemoryGraph extends Graph {
         if (!this.containsVertex(v)) {
             throw new GraphException(Finals.E_GRAPH_VERTEX_NOT_CONTAINED, "removeVertex");
         }
-        this.adj.remove(v);
+        for (Map.Entry<Vertex, Pair<Map<Vertex, Edge>>> e : this.m.entrySet()) {
+            e.getValue().getFirst().remove(v);
+            e.getValue().getSecond().remove(v);
+        }
+        this.m.remove(v);
         return this;
     }
 
     public Graph clear() {
-        this.adj.clear();
+        this.m.clear();
         return this;
     }
 
     public boolean containsVertex(Vertex v) {
-        return this.adj.containsKey(v);
+        return this.m.containsKey(v);
     }
 
     public Vertex getVertexFromIndex(int index) {
         if (index < 0 || index >= this.getVerticesCount()) {
             throw new GraphException(Finals.E_GRAPH_INDEX_OUT_OF_BOUNDS, index);
         }
-        Iterator<Vertex> it = this.adj.keySet().iterator();
+        Iterator<Vertex> it = this.m.keySet().iterator();
         Vertex v = it.next();
         while (index-- > 0) {
             v = it.next();
@@ -53,18 +56,14 @@ public class MemoryGraph extends Graph {
         return v;
     }
 
-    /*public Set<Edge> getEdges() {
-        return Collections.unmodifiableSet(this.edges);
-    }*/
-
     public Edge addEdge(Vertex source, Vertex target) {
         if (!this.containsVertex(source) || !this.containsVertex(target)) {
             throw new GraphException(Finals.E_GRAPH_EDGE_DIFFERENT);
         }
         Edge e = new Edge();
-        if (!this.adj.get(source).getFirst().containsKey(target)) {
-            this.adj.get(source).getFirst().put(target, e);
-            this.adj.get(target).getSecond().put(source, e);
+        if (!this.m.get(source).getFirst().containsKey(target)) {
+            this.m.get(source).getFirst().put(target, e);
+            this.m.get(target).getSecond().put(source, e);
             return e;
         } else {
             return null;
@@ -77,8 +76,8 @@ public class MemoryGraph extends Graph {
     }*/
 
     public Graph removeEdge(Vertex source, Vertex target) {
-        this.adj.get(source).getFirst().remove(target);
-        this.adj.get(target).getSecond().remove(source);
+        this.m.get(source).getFirst().remove(target);
+        this.m.get(target).getSecond().remove(source);
         return this;
     }
 
@@ -98,11 +97,11 @@ public class MemoryGraph extends Graph {
     }*/
 
     public Map<Vertex, Edge> getOutEdges(Vertex v) {
-        return Collections.unmodifiableMap(this.adj.get(v).getFirst());
+        return Collections.unmodifiableMap(this.m.get(v).getFirst());
     }
 
     public Map<Vertex, Edge> getInEdges(Vertex v) {
-        return Collections.unmodifiableMap(this.adj.get(v).getSecond());
+        return Collections.unmodifiableMap(this.m.get(v).getSecond());
     }
 
     /*public Map<Vertex, Set<Edge>> getInEdges() {
@@ -142,33 +141,9 @@ public class MemoryGraph extends Graph {
         return Collections.unmodifiableMap(inDegrees);
     }*/
 
-    public boolean isUndirected() {
-        /*ArrayList<Vertex[]> edgeList = new ArrayList<>();
-        for (Edge e : this.edges) {
-            Vertex v = e.getSource();
-            Vertex w = e.getTarget();
-            if (!v.equals(w)) {
-                int indexOfOpposite = -1;
-                for (int i = 0; i < edgeList.size(); i++) {
-                    if (edgeList.get(i)[0].equals(w) && edgeList.get(i)[1].equals(v)) {
-                        indexOfOpposite = i;
-                        break;
-                    }
-                }
-                if (indexOfOpposite > -1) {
-                    edgeList.remove(indexOfOpposite);
-                } else {
-                    edgeList.add(new Vertex[]{v, w});
-                }
-            }
-        }
-        return edgeList.size() == 0;*/
-        throw new NotImplementedException();
-    }
-
     public Graph createCircle(boolean undirected) {
         // TODO: Not tested
-        Iterator<Vertex> vertexIterator = this.adj.keySet().iterator();
+        Iterator<Vertex> vertexIterator = this.m.keySet().iterator();
         Vertex previous = vertexIterator.next();
         Vertex first = previous;
         while (vertexIterator.hasNext()) {
@@ -182,7 +157,7 @@ public class MemoryGraph extends Graph {
     }
 
     public Set<Vertex> getVertices() {
-        return Collections.unmodifiableSet(this.adj.keySet());
+        return Collections.unmodifiableSet(this.m.keySet());
     }
 
     public Vertex getRandomOutEdge(Vertex from, boolean weighted) {

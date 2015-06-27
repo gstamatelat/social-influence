@@ -5,7 +5,7 @@ public class FullEdge {
     private Vertex target;
     private Edge edge;
 
-    public FullEdge(Vertex source, Vertex target, Edge e) {
+    public FullEdge(Vertex source, Vertex target, Edge edge) {
         // TODO: throw exception is some field is null
         this.source = source;
         this.target = target;
