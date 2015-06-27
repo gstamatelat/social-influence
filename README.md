@@ -23,7 +23,6 @@ g.addEdge(v1, v2);
 - Consider converting `Move` to immutable.
 - Considering converting `Move` to `Map`.
 - Create a `UnmodifiableGraph` class that will derive `MemoryGraph`.
-- `getVertexFromId()` is confusing and needs to go.
 - `Game` should accept `Player`s not `Move`s.
 - Grid generator and maybe some edge randomizer: http://www.cs.cornell.edu/home/kleinber/swn.d/swn.html
 - Method "stretch" that extends edges
