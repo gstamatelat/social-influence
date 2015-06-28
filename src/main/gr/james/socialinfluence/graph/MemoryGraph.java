@@ -22,6 +22,13 @@ public class MemoryGraph extends Graph {
         return v;
     }
 
+
+    /**
+     * {@inheritDoc}
+     * <dl><dt><b>Complexity:</b></dt><dd>O(n)</dd></dl>
+     *
+     * @throws GraphException {@inheritDoc}
+     */
     public Graph removeVertex(Vertex v) {
         if (!this.containsVertex(v)) {
             throw new GraphException(Finals.E_GRAPH_VERTEX_NOT_CONTAINED, "removeVertex");

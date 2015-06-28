@@ -35,7 +35,7 @@ public abstract class Graph {
 
     /**
      * <p>Sets a new name for this graph. The name is used on printing and other exporting functionality.</p>
-     * <p><b>Complexity:</b> O(1)</p>
+     * <dl><dt><b>Complexity:</b></dt><dd>O(1)</dd></dl>
      *
      * @param name The new name for this graph
      * @return this instance
@@ -56,7 +56,7 @@ public abstract class Graph {
 
     /**
      * <p>Inserts a new vertex to the graph and returns it. Use {@link #addVertices} for bulk inserts.</p>
-     * <p><b>Complexity:</b> O(1)</p>
+     * <dl><dt><b>Complexity:</b></dt><dd>O(1)</dd></dl>
      *
      * @return the new vertex object
      */
@@ -105,6 +105,7 @@ public abstract class Graph {
      *
      * @param v the vertex to be removed
      * @return the current instance
+     * @throws GraphException if {@code v} does not belong in the graph
      */
     public abstract Graph removeVertex(Vertex v);
 
@@ -180,7 +181,7 @@ public abstract class Graph {
 
     /**
      * <p>Connects all the vertices in the graph. Does not create self-connections (loops).</p>
-     * <p><b>Complexity:</b> O(n<sup>2</sup>)</p>
+     * <dl><dt><b>Complexity:</b></dt><dd>O(n<sup>2</sup>)</dd></dl>
      *
      * @return the current instance
      */
@@ -200,7 +201,7 @@ public abstract class Graph {
     /**
      * <p>Calculates the total amount of directed edges that this graph has. This method is a little faster than using
      * {@code getEdges().size()}.</p>
-     * <p><b>Complexity:</b> O(1)</p>
+     * <dl><dt><b>Complexity:</b></dt><dd>O(1)</dd></dl>
      *
      * @return the number of directed edges in this graph
      */
@@ -275,10 +276,6 @@ public abstract class Graph {
         return this.getInEdges(v).size();
     }
 
-    /*public abstract Map<Vertex, Integer> getInDegree();*/
-
-    /*public abstract Map<Vertex, Integer> getOutDegree();*/
-
     /**
      * <p>Returns true if for every edge with source S and target T where S and T are different,
      * there is always an edge with source T and target S.</p>
@@ -326,7 +323,7 @@ public abstract class Graph {
 
     /**
      * <p>Returns an unmodifiable Set of vertices that this graph consists of.</p>
-     * <p><b>Complexity:</b> O(1)</p>
+     * <dl><dt><b>Complexity:</b></dt><dd>O(1)</dd></dl>
      *
      * @return the list of vertices of this graph
      */
@@ -376,7 +373,6 @@ public abstract class Graph {
     /**
      * <p>Exports this graph in DOT format. If the graph is undirected, then the undirected DOT format will be used.
      * This method uses UTF-8 as character set when writing to the stream.</p>
-     * <p><b>Running Time:</b> Slow - Very Slow (depends on the graph)</p>
      *
      * @param out the OutputStream to write the DOT file to
      * @return the current instance

@@ -6,6 +6,10 @@ Java network/graph framework with emphasis on social influence
 
 > See: [Java Collections - Performance (Time Complexity)](http://infotechgems.blogspot.com/2011/11/java-collections-performance-time.html)
 
+```
+<dl><dt><b>Complexity:</b></dt><dd>O(n)</dd></dl>
+```
+
 ## Usage
 
 ### Graph creation
