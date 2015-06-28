@@ -40,16 +40,16 @@ public abstract class Graph {
      * @param name The new name for this graph
      * @return this instance
      */
-    public Graph setName(String name) {
+    public final Graph setName(String name) {
         this.name = name;
         return this;
     }
 
-    public String getMeta() {
+    public final String getMeta() {
         return this.meta;
     }
 
-    public Graph setMeta(String meta) {
+    public final Graph setMeta(String meta) {
         this.meta = meta;
         return this;
     }
