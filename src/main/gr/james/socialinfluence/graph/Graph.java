@@ -25,32 +25,24 @@ import java.util.*;
  * however, are shallow copies and can be used to change the state of the graph.</p>
  */
 public abstract class Graph {
-    /*protected String name;*/
     protected Map<String, String> meta;
 
     public Graph() {
-        /*this.name = Finals.DEFAULT_GRAPH_NAME;*/
         this.meta = new HashMap<>();
-        this.meta.put("name", Finals.DEFAULT_GRAPH_NAME);
+        this.setName(Finals.DEFAULT_GRAPH_NAME);
     }
 
-    /**
-     * <p>Sets a new name for this graph. The name is used on printing and other exporting functionality.</p>
-     * <dl><dt><b>Complexity:</b></dt><dd>O(1)</dd></dl>
-     *
-     * @param name The new name for this graph
-     * @return this instance
-     */
-    /*public final Graph setName(String name) {
-        this.name = name;
-        return this;
-    }*/
     public final String getMeta(String key) {
         return this.meta.get(key);
     }
 
     public final Graph setMeta(String key, String value) {
         this.meta.put(key, value);
+        return this;
+    }
+
+    public final Graph setName(String name) {
+        this.meta.put("name", name);
         return this;
     }
 
