@@ -21,6 +21,7 @@ public class TwoWheels {
         Graph g = Helper.combineGraphs(MemoryGraph.class, new Graph[]{g1, g2});
         g.fuseVertices(new Vertex[]{a, b});
 
-        return g.setName("TwoWheels").setMeta(String.format("%s,wheelVertices=%d", "TwoWheels", wheelVertices));
+        return g.setMeta("name", "TwoWheels")
+                .setMeta("wheelVertices", String.valueOf(wheelVertices));
     }
 }

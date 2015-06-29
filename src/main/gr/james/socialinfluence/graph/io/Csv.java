@@ -40,6 +40,7 @@ public class Csv {
         }
         reader.close();
 
-        return g.setName("CSVImport").setMeta(String.format("CSV,source=%s", source));
+        return g.setMeta("name", "CSVImport")
+                .setMeta("source", source.toString());
     }
 }

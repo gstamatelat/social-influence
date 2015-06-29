@@ -13,6 +13,7 @@ public class Wheel {
             }
         }
 
-        return g.setName("Wheel").setMeta(String.format("%s,totalVertices=%d", "Wheel", totalVertices));
+        return g.setMeta("name", "Wheel")
+                .setMeta("totalVertices", String.valueOf(totalVertices));
     }
 }

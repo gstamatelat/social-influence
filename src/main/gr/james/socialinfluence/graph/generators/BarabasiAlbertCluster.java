@@ -26,6 +26,11 @@ public class BarabasiAlbertCluster {
             g.addEdge(s, t, true);
         }
 
-        return g.setName("BarabasiAlbertCluster").setMeta(String.format("%s,totalVertices=%d,initialClique=%d,stepEdges=%d,a=%f,clusters=%d", "BarabasiAlbertCluster", totalVertices, initialClique, stepEdges, a, clusters));
+        return g.setMeta("name", "BarabasiAlbertCluster")
+                .setMeta("totalVertices", String.valueOf(totalVertices))
+                .setMeta("initialClique", String.valueOf(initialClique))
+                .setMeta("stepEdges", String.valueOf(stepEdges))
+                .setMeta("a", String.valueOf(a))
+                .setMeta("clusters", String.valueOf(clusters));
     }
 }

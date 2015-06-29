@@ -25,12 +25,13 @@ import java.util.*;
  * however, are shallow copies and can be used to change the state of the graph.</p>
  */
 public abstract class Graph {
-    protected String name;
-    protected String meta;
+    /*protected String name;*/
+    protected Map<String, String> meta;
 
     public Graph() {
-        this.name = Finals.DEFAULT_GRAPH_NAME;
-        this.meta = "";
+        /*this.name = Finals.DEFAULT_GRAPH_NAME;*/
+        this.meta = new HashMap<>();
+        this.meta.put("name", Finals.DEFAULT_GRAPH_NAME);
     }
 
     /**
@@ -40,17 +41,16 @@ public abstract class Graph {
      * @param name The new name for this graph
      * @return this instance
      */
-    public final Graph setName(String name) {
+    /*public final Graph setName(String name) {
         this.name = name;
         return this;
+    }*/
+    public final String getMeta(String key) {
+        return this.meta.get(key);
     }
 
-    public final String getMeta() {
-        return this.meta;
-    }
-
-    public final Graph setMeta(String meta) {
-        this.meta = meta;
+    public final Graph setMeta(String key, String value) {
+        this.meta.put(key, value);
         return this;
     }
 
@@ -395,7 +395,7 @@ public abstract class Graph {
                 }
             }
 
-            String dot = "graph " + this.name + " {" + System.lineSeparator();
+            String dot = "graph " + this.getMeta("name") + " {" + System.lineSeparator();
             dot += "  overlap = false;" + System.lineSeparator();
             dot += "  bgcolor = transparent;" + System.lineSeparator();
             dot += "  splines = true;" + System.lineSeparator();
@@ -438,6 +438,6 @@ public abstract class Graph {
 
     @Override
     public String toString() {
-        return String.format("{type=%s, name=%s, meta=%s}", this.getClass().getSimpleName(), name, meta);
+        return String.format("{type=%s, meta=%s}", this.getClass().getSimpleName(), meta);
     }
 }

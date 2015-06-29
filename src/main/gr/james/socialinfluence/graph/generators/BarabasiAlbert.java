@@ -30,6 +30,10 @@ public class BarabasiAlbert {
             }
         }
 
-        return g.setName("BarabasiAlbert").setMeta(String.format("%s,totalVertices=%d,initialClique=%d,stepEdges=%d,a=%f", "BarabasiAlbert", totalVertices, initialClique, stepEdges, a));
+        return g.setMeta("name", "BarabasiAlbert")
+                .setMeta("totalVertices", String.valueOf(totalVertices))
+                .setMeta("initialClique", String.valueOf(initialClique))
+                .setMeta("stepEdges", String.valueOf(stepEdges))
+                .setMeta("a", String.valueOf(a));
     }
 }

@@ -26,6 +26,8 @@ public class RandomG {
         /* Make sure it's strongly connected */
         g.createCircle(false);
 
-        return g.setName("RandomG").setMeta(String.format("%s,totalVertices=%d,p=%f", "RandomG", totalVertices, p));
+        return g.setMeta("name", "RandomG")
+                .setMeta("totalVertices", String.valueOf(totalVertices))
+                .setMeta("p", String.valueOf(p));
     }
 }

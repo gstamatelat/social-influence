@@ -16,6 +16,6 @@ public class Master {
         g.addEdge(v3, v2);
         g.addEdge(v2, v1);
 
-        return g.setName("Master").setMeta("Master");
+        return g.setMeta("name", "Master");
     }
 }

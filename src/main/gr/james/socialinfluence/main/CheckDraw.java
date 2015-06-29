@@ -29,6 +29,6 @@ public class CheckDraw {
 
         Helper.log("%s", gr);*/
         Graph g = TwoWheels.generate(MemoryGraph.class, 4);
-        System.out.println();
+        System.out.println(g);
     }
 }

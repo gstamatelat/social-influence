@@ -18,6 +18,12 @@ public class Path {
             g.addEdge(previousVertex, startVertex, true);
         }
 
-        return g.setName("Path").setMeta(String.format("%s,totalVertices=%d,cycle=%b", "Path", totalVertices, cycle));
+        if (cycle) {
+            g.setMeta("name", "cycle");
+        } else {
+            g.setMeta("name", "path");
+        }
+
+        return g.setMeta("totalVertices", String.valueOf(totalVertices));
     }
 }
