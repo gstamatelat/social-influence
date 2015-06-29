@@ -28,7 +28,7 @@ public abstract class Graph {
     protected Map<String, String> meta;
 
     public Graph() {
-        this.meta = new HashMap<>();
+        this.meta = new TreeMap<>();
         this.setName(Finals.DEFAULT_GRAPH_NAME);
     }
 
