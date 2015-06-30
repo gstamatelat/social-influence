@@ -1,5 +1,6 @@
 package gr.james.socialinfluence.game.players;
 
+import gr.james.socialinfluence.api.Player;
 import gr.james.socialinfluence.game.GameDefinition;
 import gr.james.socialinfluence.game.Move;
 import gr.james.socialinfluence.game.MovePointer;
@@ -12,7 +13,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class Player implements Runnable {
+public abstract class AbstractPlayer implements Runnable, Player {
     protected final Logger log = Finals.LOG;
 
     protected Map<String, String> options = new HashMap<>();
@@ -23,7 +24,7 @@ public abstract class Player implements Runnable {
 
     private boolean interrupted = false;
 
-    public Player() {
+    public AbstractPlayer() {
         putDefaultOptions();
     }
 
@@ -79,7 +80,7 @@ public abstract class Player implements Runnable {
         return m;
     }
 
-    protected Player putDefaultOptions() {
+    public Player putDefaultOptions() {
         return this;
     }
 

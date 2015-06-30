@@ -8,7 +8,7 @@ import gr.james.socialinfluence.graph.algorithms.iterators.PageRankIterator;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GreedyPlayer extends Player {
+public class GreedyPlayer extends AbstractPlayer {
     public static Move getMinimum(HashMap<Move, Double> treeMoves) {
         Double minSumMove = Double.POSITIVE_INFINITY;
         Move minMove = null;

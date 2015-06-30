@@ -1,5 +1,6 @@
 package gr.james.socialinfluence.main;
 
+import gr.james.socialinfluence.api.Player;
 import gr.james.socialinfluence.game.Game;
 import gr.james.socialinfluence.game.GameDefinition;
 import gr.james.socialinfluence.game.PlayerEnum;

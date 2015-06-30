@@ -235,7 +235,7 @@ public class Tests {
      */
     @Test
     public void deGrootTest() {
-        Graph g = RandomG.generate(MemoryGraph.class, 100, 0.05);
+        Graph g = RandomG.generate(MemoryGraph.class, 100, 0.1);
 
         GraphState initialState = new GraphState(g, 0.0);
         for (Vertex v : g.getVertices()) {

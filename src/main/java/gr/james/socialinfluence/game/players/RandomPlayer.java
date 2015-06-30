@@ -3,7 +3,7 @@ package gr.james.socialinfluence.game.players;
 import gr.james.socialinfluence.game.Move;
 import gr.james.socialinfluence.graph.algorithms.iterators.RandomVertexIterator;
 
-public class RandomPlayer extends Player {
+public class RandomPlayer extends AbstractPlayer {
     @Override
     public void getMove() {
         Move m = new Move();

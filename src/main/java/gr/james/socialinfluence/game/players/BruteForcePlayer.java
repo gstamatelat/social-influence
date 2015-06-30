@@ -1,5 +1,6 @@
 package gr.james.socialinfluence.game.players;
 
+import gr.james.socialinfluence.api.Player;
 import gr.james.socialinfluence.game.Game;
 import gr.james.socialinfluence.game.Move;
 import gr.james.socialinfluence.game.MovePoint;
@@ -23,7 +24,7 @@ import java.util.HashSet;
  * enabled by default.</li>
  * </ul>
  */
-public class BruteForcePlayer extends Player {
+public class BruteForcePlayer extends AbstractPlayer {
     public static Move getRandomMove(Graph g, int numOfMoves, int weightLevels, Move lastMove, boolean clever) {
         if (!clever) {
             return getRandomMoveWithoutMutation(g, numOfMoves, weightLevels);

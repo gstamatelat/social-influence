@@ -1,8 +1,8 @@
 package gr.james.socialinfluence.main;
 
+import gr.james.socialinfluence.api.Player;
 import gr.james.socialinfluence.game.GameDefinition;
 import gr.james.socialinfluence.game.players.BruteForcePlayer;
-import gr.james.socialinfluence.game.players.Player;
 import gr.james.socialinfluence.graph.Graph;
 import gr.james.socialinfluence.graph.MemoryGraph;
 import gr.james.socialinfluence.graph.generators.Wheel;

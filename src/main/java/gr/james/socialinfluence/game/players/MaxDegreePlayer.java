@@ -3,7 +3,7 @@ package gr.james.socialinfluence.game.players;
 import gr.james.socialinfluence.game.Move;
 import gr.james.socialinfluence.graph.algorithms.iterators.PageRankIterator;
 
-public class MaxDegreePlayer extends Player {
+public class MaxDegreePlayer extends AbstractPlayer {
     @Override
     public void getMove() {
         // TODO: This isn't degree player

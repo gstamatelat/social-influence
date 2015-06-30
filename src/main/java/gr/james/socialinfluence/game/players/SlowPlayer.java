@@ -3,7 +3,7 @@ package gr.james.socialinfluence.game.players;
 import gr.james.socialinfluence.game.Move;
 import gr.james.socialinfluence.graph.algorithms.iterators.RandomVertexIterator;
 
-public class SlowPlayer extends Player {
+public class SlowPlayer extends AbstractPlayer {
     @Override
     public void getMove() {
         long now = System.currentTimeMillis();
