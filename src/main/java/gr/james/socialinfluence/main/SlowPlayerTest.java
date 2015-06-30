@@ -7,7 +7,7 @@ import gr.james.socialinfluence.game.players.SlowPlayer;
 import gr.james.socialinfluence.graph.Graph;
 import gr.james.socialinfluence.graph.MemoryGraph;
 import gr.james.socialinfluence.graph.generators.BarabasiAlbertCluster;
-import gr.james.socialinfluence.helper.Helper;
+import gr.james.socialinfluence.helper.Finals;
 
 public class SlowPlayerTest {
     public static void main(String[] args) {
@@ -16,6 +16,6 @@ public class SlowPlayerTest {
 
         Player slowPlayer = new SlowPlayer();
         Move m = slowPlayer.findMove(g, d);
-        Helper.log("Final move: %s", m);
+        Finals.LOG.info("Final move: {}", m);
     }
 }

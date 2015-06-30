@@ -2,7 +2,6 @@ package gr.james.socialinfluence.game.players;
 
 import gr.james.socialinfluence.game.Move;
 import gr.james.socialinfluence.graph.algorithms.iterators.RandomVertexIterator;
-import gr.james.socialinfluence.helper.Helper;
 
 public class RandomPlayer extends Player {
     @Override
@@ -14,7 +13,7 @@ public class RandomPlayer extends Player {
         }
         this.movePtr.submit(m);
         if (!this.d.getTournament()) {
-            Helper.log("RandomG player: %s", m);
+            log.info("RandomG player: {}", m);
         }
     }
 }

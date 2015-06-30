@@ -6,7 +6,6 @@ import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.graph.algorithms.DeGroot;
 import gr.james.socialinfluence.helper.Finals;
 import gr.james.socialinfluence.helper.GraphException;
-import gr.james.socialinfluence.helper.Helper;
 
 public class Game {
     private Graph g;
@@ -54,7 +53,7 @@ public class Game {
             try {
                 g.addEdge(e.vertex, playerA).setWeight(e.weight);
             } catch (GraphException x) {
-                Helper.logError(Finals.W_GAME_INVALID_VERTEX);
+                Finals.LOG.warn(Finals.L_GAME_INVALID_VERTEX);
             }
         }
 
@@ -62,7 +61,7 @@ public class Game {
             try {
                 g.addEdge(e.vertex, playerB).setWeight(e.weight);
             } catch (GraphException x) {
-                Helper.logError(Finals.W_GAME_INVALID_VERTEX);
+                Finals.LOG.warn(Finals.L_GAME_INVALID_VERTEX);
             }
         }
 
@@ -83,12 +82,12 @@ public class Game {
             if (this.playerAMove.getVerticesCount() > d.getActions()) {
                 String oldMove = this.playerAMove.toString();
                 this.playerAMove.sliceMove(d.getActions());
-                Helper.logError(Finals.W_GAME_MOVE_EXCEED, oldMove, d.getActions(), this.playerAMove.toString());
+                Finals.LOG.warn(Finals.L_GAME_MOVE_EXCEED, oldMove, d.getActions(), this.playerAMove.toString());
             }
             if (this.playerBMove.getVerticesCount() > d.getActions()) {
                 String oldMove = this.playerBMove.toString();
                 this.playerBMove.sliceMove(d.getActions());
-                Helper.logError(Finals.W_GAME_MOVE_EXCEED, oldMove, d.getActions(), this.playerBMove.toString());
+                Finals.LOG.warn(Finals.L_GAME_MOVE_EXCEED, oldMove, d.getActions(), this.playerBMove.toString());
             }
 
             this.playerAMove.normalizeWeights(d.getBudget());
@@ -97,7 +96,7 @@ public class Game {
 
         /* If one of the players didn't submit a move, the other one is obviously the winner */
         if ((this.playerAMove.getVerticesCount() == 0) ^ (this.playerBMove.getVerticesCount() == 0)) {
-            Helper.logError(Finals.W_GAME_EMPTY_MOVE);
+            Finals.LOG.warn(Finals.L_GAME_EMPTY_MOVE);
             Vertex s1 = g.addVertex();
             Vertex s2 = g.addVertex();
             g.removeVertex(s1).removeVertex(s2);
@@ -134,10 +133,10 @@ public class Game {
         int score;
 
         if (am * bm > 0) {
-            Helper.logError("am * bm > 0");
+            Finals.LOG.warn("am * bm > 0");
             score = 0;
         } else if (am * bm == 0.0) {
-            Helper.logError("am * bm == 0.0");
+            Finals.LOG.warn("am * bm == 0.0");
             score = 0;
         } else {
             score = Double.compare(am, 0);

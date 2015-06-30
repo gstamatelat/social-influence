@@ -9,7 +9,7 @@ import gr.james.socialinfluence.game.players.RandomPlayer;
 import gr.james.socialinfluence.graph.Graph;
 import gr.james.socialinfluence.graph.MemoryGraph;
 import gr.james.socialinfluence.graph.generators.BarabasiAlbert;
-import gr.james.socialinfluence.helper.Helper;
+import gr.james.socialinfluence.helper.Finals;
 import gr.james.socialinfluence.helper.RandomHelper;
 
 public class DirectGame {
@@ -23,7 +23,7 @@ public class DirectGame {
             Game game = new Game(g);
             game.setPlayer(PlayerEnum.A, p1.findMove(g, d));
             game.setPlayer(PlayerEnum.B, p2.findMove(g, d));
-            Helper.log("%s", game.runGame(d, 0.01));
+            Finals.LOG.info(game.runGame(d, 0.01).toString());
             return;
         }
     }

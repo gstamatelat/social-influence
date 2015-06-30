@@ -1,6 +1,12 @@
 package gr.james.socialinfluence.helper;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class Finals {
+    /* Root logger */
+    public static final Logger LOG = LoggerFactory.getLogger("");
+
     /* Default values */
     public static final String DEFAULT_GRAPH_NAME = "G";
     public static final double DEFAULT_EDGE_WEIGHT = 1.0;
@@ -10,18 +16,18 @@ public class Finals {
     public static final double DEFAULT_GAME_PRECISION = 1.0e-8;
     public static final boolean DEFAULT_DEGROOT_HISTORY = true;
 
-    /* Warnings: these finals must be arguments to Helper.logError() */
-    public static final String W_PLAYER_WAITING = "WARNING: Been waiting %d seconds for %s to terminate gracefully.";
-    public static final String W_EDGE_WEIGHT_NEGATIVE = "WARNING: Edge weight must be positive. Got %f. No change done.";
-    public static final String W_GAME_MOVE_EXCEED = "WARNING: Move %s contains more than %d vertices. Slicing to %s. This indicates a mistake in your player.";
-    public static final String W_GAME_INVALID_VERTEX = "WARNING: A player requested a move vertex that doesn't belong in the graph. This indicates a mistake in the engine.";
-    public static final String W_GAME_EMPTY_MOVE = "WARNING: A player submitted an empty move or didn't terminate before submitting a move.";
-    public static final String W_DEGROOT_PERIODIC = "WARNING: DeGroot periodicity on {%s}.";
+    /* Warnings and other logging messages */
+    public static final String L_PLAYER_WAITING = "Been waiting {} seconds for {} to terminate gracefully.";
+    public static final String L_EDGE_WEIGHT_NEGATIVE = "Edge weight must be positive. Got {}. No change done.";
+    public static final String L_GAME_MOVE_EXCEED = "Move {} contains more than {} vertices. Slicing to {}. This indicates a mistake in your player.";
+    public static final String L_GAME_INVALID_VERTEX = "A player requested a move vertex that doesn't belong in the graph. This indicates a mistake in the engine.";
+    public static final String L_GAME_EMPTY_MOVE = "A player submitted an empty move or didn't terminate before submitting a move.";
+    public static final String L_DEGROOT_PERIODIC = "DeGroot periodicity on {{}}.";
+    public static final String L_PLAYER_EXCEPTION = "Player {} triggered exception <{}> on graph {} and definition {}";
 
     /* Exceptions: these finals must be arguments to GraphException(). Format: E_CLASSNAME_IDENTIFIER. */
     public static final String E_PLAYER_NO_PARAMETER = "%s doesn't have any parameter with name %s.";
     public static final String E_PLAYER_OPTION_NULL = "Player option value can't be null.";
-    public static final String E_PLAYER_EXCEPTION = "Player %s triggered exception <%s> on graph %s and definition %s";
 
     public static final String E_RANDOM_HELPER_INIT = "Global Random instance has been already initialized";
 

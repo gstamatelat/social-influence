@@ -2,7 +2,6 @@ package gr.james.socialinfluence.game.players;
 
 import gr.james.socialinfluence.game.Move;
 import gr.james.socialinfluence.graph.algorithms.iterators.RandomVertexIterator;
-import gr.james.socialinfluence.helper.Helper;
 
 public class SlowPlayer extends Player {
     @Override
@@ -17,7 +16,7 @@ public class SlowPlayer extends Player {
             }
             this.movePtr.submit(m);
             if (!this.d.getTournament()) {
-                Helper.log("Slow player: %s", m);
+                log.info("Slow player: {}", m);
             }
         }
     }

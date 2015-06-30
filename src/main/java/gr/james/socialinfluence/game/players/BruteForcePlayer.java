@@ -8,7 +8,6 @@ import gr.james.socialinfluence.graph.Graph;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.graph.algorithms.iterators.RandomSurferIterator;
 import gr.james.socialinfluence.graph.algorithms.iterators.RandomVertexIterator;
-import gr.james.socialinfluence.helper.Helper;
 import gr.james.socialinfluence.helper.RandomHelper;
 
 import java.util.HashSet;
@@ -80,21 +79,21 @@ public class BruteForcePlayer extends Player {
             } else if (gameScore == 0) {
                 if (moveDraws.add(game.getPlayerBMove())) {
                     if (!this.d.getTournament()) {
-                        Helper.log("Draw with move %s", game.getPlayerBMove());
+                        log.info("Draw with move {}", game.getPlayerBMove());
                     }
                 }
             } else {
                 boolean contained = movesHistory.add(newMove);
                 if (!contained) {
                     if (!this.d.getTournament()) {
-                        Helper.log("Going in circles after %s", game.getPlayerBMove());
+                        log.info("Going in circles after {}", game.getPlayerBMove());
                     }
                 }
                 moveDraws.clear();
                 bestMove = newMove;
                 this.movePtr.submit(bestMove);
                 if (!this.d.getTournament()) {
-                    Helper.log("New best move %s", newMove.toString());
+                    log.info("New best move {}", newMove.toString());
                 }
             }
         }

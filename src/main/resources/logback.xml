@@ -6,9 +6,7 @@
         </encoder>
     </appender>
 
-    <logger name="gr.james.academy" level="debug"/>
-
-    <root level="info">
+    <root level="debug">
         <appender-ref ref="STDOUT"/>
     </root>
 

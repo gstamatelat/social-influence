@@ -6,13 +6,15 @@ import gr.james.socialinfluence.game.MovePointer;
 import gr.james.socialinfluence.graph.Graph;
 import gr.james.socialinfluence.helper.Finals;
 import gr.james.socialinfluence.helper.GraphException;
-import gr.james.socialinfluence.helper.Helper;
+import org.slf4j.Logger;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 public abstract class Player implements Runnable {
+    protected final Logger log = Finals.LOG;
+
     protected Map<String, String> options = new HashMap<String, String>();
 
     protected Graph g;
@@ -44,7 +46,7 @@ public abstract class Player implements Runnable {
         try {
             getMove();
         } catch (Exception e) {
-            Helper.logError(Finals.E_PLAYER_EXCEPTION, this.getClass().getSimpleName(), e, g, d);
+            log.warn(Finals.L_PLAYER_EXCEPTION, this.getClass().getSimpleName(), e, g, d);
         }
     }
 
@@ -65,7 +67,7 @@ public abstract class Player implements Runnable {
             int count = 0;
             while (t.isAlive()) {
                 if (count > 0) {
-                    Helper.logError(Finals.W_PLAYER_WAITING, count * d.getExecution() / 1000, this.getClass().getSimpleName());
+                    log.warn(Finals.L_PLAYER_WAITING, count * d.getExecution() / 1000, this.getClass().getSimpleName());
                 }
                 t.join(d.getExecution());
                 count++;

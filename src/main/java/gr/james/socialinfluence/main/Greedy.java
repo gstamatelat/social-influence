@@ -7,7 +7,7 @@ import gr.james.socialinfluence.game.players.Player;
 import gr.james.socialinfluence.graph.Graph;
 import gr.james.socialinfluence.graph.MemoryGraph;
 import gr.james.socialinfluence.graph.generators.BarabasiAlbertCluster;
-import gr.james.socialinfluence.helper.Helper;
+import gr.james.socialinfluence.helper.Finals;
 
 public class Greedy {
     public static void main(String[] args) {
@@ -23,6 +23,6 @@ public class Greedy {
 
         Player greedyPlayer = new GreedyPlayer();
         Move m = greedyPlayer.findMove(g, new GameDefinition(movesCount, (double) movesCount, 60000L, false));
-        Helper.log("Final move: %s", m);
+        Finals.LOG.info("Final move: {}", m);
     }
 }

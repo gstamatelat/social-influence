@@ -4,7 +4,6 @@ import gr.james.socialinfluence.game.Move;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.graph.algorithms.Dijkstra;
 import gr.james.socialinfluence.graph.algorithms.iterators.PageRankIterator;
-import gr.james.socialinfluence.helper.Helper;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -108,7 +107,7 @@ public class GreedyPlayer extends Player {
 
             /* This helps when computation takes a long time */
             if (!this.d.getTournament()) {
-                Helper.log("%s : %s", firstGuess, minMove);
+                log.info("{} : {}", firstGuess, minMove);
             }
         }
     }

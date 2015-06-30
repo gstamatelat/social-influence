@@ -1,7 +1,6 @@
 package gr.james.socialinfluence.graph;
 
 import gr.james.socialinfluence.helper.Finals;
-import gr.james.socialinfluence.helper.Helper;
 
 public class Edge {
     private double weight;
@@ -16,7 +15,7 @@ public class Edge {
 
     public Edge setWeight(double weight) {
         if (weight <= 0) {
-            Helper.logError(Finals.W_EDGE_WEIGHT_NEGATIVE, weight);
+            Finals.LOG.warn(Finals.L_EDGE_WEIGHT_NEGATIVE, weight);
         } else {
             this.weight = weight;
         }

@@ -22,6 +22,7 @@ public class RandomHelper {
      */
     public static void initRandom(long seed) {
         if (R == null) {
+            Finals.LOG.info("Initialized new global random with seed {}", seed);
             R = new Random(seed);
         } else {
             throw new GraphException(Finals.E_RANDOM_HELPER_INIT);
