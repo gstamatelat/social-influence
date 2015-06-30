@@ -4,6 +4,8 @@ import gr.james.socialinfluence.graph.Edge;
 import gr.james.socialinfluence.graph.FullEdge;
 import gr.james.socialinfluence.graph.Graph;
 import gr.james.socialinfluence.graph.Vertex;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -11,7 +13,9 @@ import java.util.Collection;
 
 public class Helper {
     public static void log(String messagePattern, Object... arguments) {
-        System.out.println(new SimpleDateFormat("dd/MM/yyyy HH:mm").format(Calendar.getInstance().getTime()) + " | " + String.format(messagePattern, arguments));
+        Logger log = LoggerFactory.getLogger(Helper.class);
+        log.info(messagePattern, arguments);
+        /*System.out.println(new SimpleDateFormat("dd/MM/yyyy HH:mm").format(Calendar.getInstance().getTime()) + " | " + String.format(messagePattern, arguments));*/
     }
 
     public static void logError(String messagePattern, Object... arguments) {
