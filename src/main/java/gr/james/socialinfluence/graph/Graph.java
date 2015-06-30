@@ -47,7 +47,7 @@ public abstract class Graph {
     }
 
     /**
-     * <p>Inserts a new vertex to the graph and returns it. Use {@link #addVertices} for bulk inserts.</p>
+     * <p>Inserts a new vertex to the graph and returns it. Use {@link #addVertices(int)} for bulk inserts.</p>
      * <dl><dt><b>Complexity:</b></dt><dd>O(1)</dd></dl>
      *
      * @return the new vertex object
