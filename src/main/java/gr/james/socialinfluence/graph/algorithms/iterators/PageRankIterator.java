@@ -33,7 +33,7 @@ public class PageRankIterator implements Iterator<Vertex> {
             }
         }
 
-        ArrayList<Vertex> maxVertices = new ArrayList<Vertex>();
+        ArrayList<Vertex> maxVertices = new ArrayList<>();
         for (Map.Entry<Vertex, Double> e : this.nodes.entrySet()) {
             if (e.getValue().equals(maxPr)) {
                 maxVertices.add(e.getKey());

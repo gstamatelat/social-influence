@@ -8,10 +8,10 @@ import java.util.PriorityQueue;
 public class WeightedRandom {
     // Efraimidis, Spirakis. "Weighted random sampling with a reservoir.".
     public static <E> List<E> makeRandomSelection(Map<E, Double> weightMap, int selections) {
-        ArrayList<E> finalSelections = new ArrayList<E>();
-        PriorityQueue<ObjectWithWeight<E>> keyQueue = new PriorityQueue<ObjectWithWeight<E>>();
+        ArrayList<E> finalSelections = new ArrayList<>();
+        PriorityQueue<ObjectWithWeight<E>> keyQueue = new PriorityQueue<>();
         for (Map.Entry<E, Double> e : weightMap.entrySet()) {
-            keyQueue.add(new ObjectWithWeight<E>(e.getKey(), Math.pow(RandomHelper.getRandom().nextDouble(), 1.0 / e.getValue())));
+            keyQueue.add(new ObjectWithWeight<>(e.getKey(), Math.pow(RandomHelper.getRandom().nextDouble(), 1.0 / e.getValue())));
         }
         while (finalSelections.size() < selections) {
             finalSelections.add(keyQueue.poll().e);

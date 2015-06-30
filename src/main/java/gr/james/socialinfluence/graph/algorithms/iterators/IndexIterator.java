@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.TreeSet;
 
 public class IndexIterator implements Iterator<Vertex> {
-    TreeSet<Vertex> vertices = new TreeSet<Vertex>();
+    TreeSet<Vertex> vertices = new TreeSet<>();
 
     public IndexIterator(Graph g) {
         this.vertices.addAll(g.getVertices());

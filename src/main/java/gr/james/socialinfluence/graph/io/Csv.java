@@ -5,14 +5,12 @@ import gr.james.socialinfluence.graph.MemoryGraph;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.graph.algorithms.iterators.IndexIterator;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.Arrays;
 
-public class Csv {
-    public static Graph from(InputStream source) throws IOException {
+public class Csv implements GraphImporter, GraphExporter {
+    @Override
+    public Graph from(InputStream source) throws IOException {
         Graph g = new MemoryGraph();
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(source, "UTF8"));
@@ -42,5 +40,10 @@ public class Csv {
 
         return g.setMeta("name", "CSVImport")
                 .setMeta("source", source.toString());
+    }
+
+    @Override
+    public void to(Graph g, OutputStream out) throws IOException {
+        throw new UnsupportedOperationException();
     }
 }

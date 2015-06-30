@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class DeGroot {
     public static GraphState execute(Graph g, GraphState initialOpinions, double epsilon, boolean keepHistory) {
-        HashSet<GraphState> stateHistory = new HashSet<GraphState>();
+        HashSet<GraphState> stateHistory = new HashSet<>();
         GraphState lastState = initialOpinions;
         stateHistory.add(initialOpinions);
 

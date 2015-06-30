@@ -17,7 +17,7 @@ public class Tests {
         int rounds = 5; // CHANGE THIS (USUALLY NO NEED)
 
         for (long execution : execution_t) {
-            HashMap<Player, Double> players = new HashMap<Player, Double>();
+            HashMap<Player, Double> players = new HashMap<>();
             players.put(new RandomPlayer(), 0.0);
             players.put(new MaxPageRankPlayer(), 0.0);
             players.put(new GreedyPlayer(), 0.0);

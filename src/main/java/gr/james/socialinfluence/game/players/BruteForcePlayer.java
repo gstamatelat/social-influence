@@ -64,8 +64,8 @@ public class BruteForcePlayer extends Player {
     public void getMove() {
         Game game = new Game(this.g);
 
-        HashSet<Move> movesHistory = new HashSet<Move>();
-        HashSet<Move> moveDraws = new HashSet<Move>();
+        HashSet<Move> movesHistory = new HashSet<>();
+        HashSet<Move> moveDraws = new HashSet<>();
 
         Move bestMove = getRandomMove(this.g, this.d.getActions(), Integer.parseInt(this.options.get("weight_levels")), null, false);
         movesHistory.add(bestMove);

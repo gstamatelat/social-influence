@@ -41,8 +41,8 @@ public class GreedyPlayer extends Player {
     @Override
     public void getMove() {
         /* Here be distanceMap and vector */
-        HashMap<Vertex[], Double> distanceMap = new HashMap<Vertex[], Double>();
-        HashMap<Vertex, Double> vector = new HashMap<Vertex, Double>();
+        HashMap<Vertex[], Double> distanceMap = new HashMap<>();
+        HashMap<Vertex, Double> vector = new HashMap<>();
 
         /* Fill the distanceMap */
         // TODO: Replace this snippet with FloydWarshall method, but care, this map has (t,s) rather than (s,t)
@@ -57,7 +57,7 @@ public class GreedyPlayer extends Player {
             e.setValue(1 / Math.exp(e.getValue()));
         }
 
-        HashMap<Move, Double> treeMoves = new HashMap<Move, Double>();
+        HashMap<Move, Double> treeMoves = new HashMap<>();
 
         PageRankIterator pri = new PageRankIterator(this.g, 0.0);
         while (pri.hasNext() && !this.isInterrupted()) {
@@ -76,9 +76,9 @@ public class GreedyPlayer extends Player {
 
             /* Simulation loop */
             while (m.getVerticesCount() < d.getActions()) {
-                HashMap<Vertex, Double> sumMap = new HashMap<Vertex, Double>();
+                HashMap<Vertex, Double> sumMap = new HashMap<>();
                 for (Vertex v : this.g.getVertices()) {
-                    HashMap<Vertex, Double> tmpVector = new HashMap<Vertex, Double>();
+                    HashMap<Vertex, Double> tmpVector = new HashMap<>();
                     for (Map.Entry<Vertex, Double> e : vector.entrySet()) {
                         tmpVector.put(e.getKey(), e.getValue());
                     }

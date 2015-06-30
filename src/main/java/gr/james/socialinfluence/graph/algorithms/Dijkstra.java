@@ -10,12 +10,12 @@ import java.util.PriorityQueue;
 
 public class Dijkstra {
     public static HashMap<Vertex, Double> execute(Graph g, Vertex source) {
-        HashMap<Vertex, DijkstraNode> nodeMap = new HashMap<Vertex, DijkstraNode>();
+        HashMap<Vertex, DijkstraNode> nodeMap = new HashMap<>();
         for (Vertex v : g.getVertices()) {
             nodeMap.put(v, new DijkstraNode(v, null, Double.POSITIVE_INFINITY));
         }
 
-        PriorityQueue<DijkstraNode> pq = new PriorityQueue<DijkstraNode>();
+        PriorityQueue<DijkstraNode> pq = new PriorityQueue<>();
 
         nodeMap.get(source).distance = 0.0;
         pq.offer(nodeMap.get(source));
@@ -36,7 +36,7 @@ public class Dijkstra {
             }
         }
 
-        HashMap<Vertex, Double> r = new HashMap<Vertex, Double>();
+        HashMap<Vertex, Double> r = new HashMap<>();
         for (DijkstraNode e : nodeMap.values()) {
             r.put(e.vertex, e.distance);
         }

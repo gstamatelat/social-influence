@@ -110,7 +110,7 @@ public class Tests {
                 Map<VertexPair, Double> distFloyd = FloydWarshall.execute(g);
 
                 /* Dijkstra */
-                HashMap<VertexPair, Double> distDijkstra = new HashMap<VertexPair, Double>();
+                HashMap<VertexPair, Double> distDijkstra = new HashMap<>();
                 for (Vertex v : g.getVertices()) {
                     HashMap<Vertex, Double> temp = Dijkstra.execute(g, v);
                     for (Map.Entry<Vertex, Double> e : temp.entrySet()) {

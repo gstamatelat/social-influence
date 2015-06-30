@@ -17,7 +17,7 @@ import java.util.Map;
  */
 public class FloydWarshall {
     public static Map<VertexPair, Double> execute(Graph g) {
-        Map<VertexPair, Double> dist = new HashMap<VertexPair, Double>();
+        Map<VertexPair, Double> dist = new HashMap<>();
 
         for (Vertex u : g.getVertices()) {
             for (Vertex v : g.getVertices()) {

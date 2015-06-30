@@ -15,7 +15,7 @@ import java.util.Map;
 public abstract class Player implements Runnable {
     protected final Logger log = Finals.LOG;
 
-    protected Map<String, String> options = new HashMap<String, String>();
+    protected Map<String, String> options = new HashMap<>();
 
     protected Graph g;
     protected GameDefinition d;
