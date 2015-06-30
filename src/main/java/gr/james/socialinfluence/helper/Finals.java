@@ -24,12 +24,12 @@ public class Finals {
     public static final String L_GAME_EMPTY_MOVE = "A player submitted an empty move or didn't terminate before submitting a move.";
     public static final String L_DEGROOT_PERIODIC = "DeGroot periodicity on {{}}.";
     public static final String L_PLAYER_EXCEPTION = "Player {} triggered exception <{}> on graph {} and definition {}";
+    public static final String L_RANDOM_SEED = "Initialized new global random with seed {}";
+    public static final String L_RANDOM_ERROR = "Global Random instance has been already initialized";
 
     /* Exceptions: these finals must be arguments to GraphException(). Format: E_CLASSNAME_IDENTIFIER. */
     public static final String E_PLAYER_NO_PARAMETER = "%s doesn't have any parameter with name %s.";
     public static final String E_PLAYER_OPTION_NULL = "Player option value can't be null.";
-
-    public static final String E_RANDOM_HELPER_INIT = "Global Random instance has been already initialized";
 
     public static final String E_MOVEPOINTER_SET_NULL = "Cannot submit a null move.";
 

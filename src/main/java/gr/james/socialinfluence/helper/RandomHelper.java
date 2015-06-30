@@ -22,10 +22,10 @@ public class RandomHelper {
      */
     public static void initRandom(long seed) {
         if (R == null) {
-            Finals.LOG.info("Initialized new global random with seed {}", seed);
+            Finals.LOG.info(Finals.L_RANDOM_SEED, seed);
             R = new Random(seed);
         } else {
-            throw new GraphException(Finals.E_RANDOM_HELPER_INIT);
+            Finals.LOG.warn(Finals.L_RANDOM_ERROR);
         }
     }
 
