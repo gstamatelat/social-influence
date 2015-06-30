@@ -1,4 +1,4 @@
-package gr.james.socialinfluence.graph.io;
+package gr.james.socialinfluence.api;
 
 import gr.james.socialinfluence.graph.Graph;
 

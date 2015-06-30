@@ -1,5 +1,7 @@
 package gr.james.socialinfluence.graph.io;
 
+import gr.james.socialinfluence.api.GraphExporter;
+import gr.james.socialinfluence.api.GraphImporter;
 import gr.james.socialinfluence.graph.FullEdge;
 import gr.james.socialinfluence.graph.Graph;
 import gr.james.socialinfluence.graph.Vertex;
