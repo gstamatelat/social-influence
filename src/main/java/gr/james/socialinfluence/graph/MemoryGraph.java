@@ -24,7 +24,6 @@ public class MemoryGraph extends AbstractGraph {
         return v;
     }
 
-
     /**
      * {@inheritDoc}
      * <dl><dt><b>Complexity:</b></dt><dd>O(n)</dd></dl>

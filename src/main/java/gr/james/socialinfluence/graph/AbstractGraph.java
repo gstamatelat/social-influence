@@ -30,15 +30,18 @@ public abstract class AbstractGraph implements Graph {
         this.setName(Finals.DEFAULT_GRAPH_NAME);
     }
 
+    @Override
     public final String getMeta(String key) {
         return this.meta.get(key);
     }
 
+    @Override
     public final Graph setMeta(String key, String value) {
         this.meta.put(key, value);
         return this;
     }
 
+    @Override
     public final Graph setName(String name) {
         this.meta.put("name", name);
         return this;
@@ -50,17 +53,22 @@ public abstract class AbstractGraph implements Graph {
      *
      * @return the new vertex object
      */
+    @Override
     public Vertex addVertex() {
         Vertex v = new Vertex();
         return this.addVertex(v);
     }
 
+    @Override
     public abstract Vertex addVertex(Vertex v);
 
+    @Override
     public abstract boolean containsVertex(Vertex v);
 
+    @Override
     public abstract boolean containsEdge(Vertex source, Vertex target);
 
+    @Override
     public Set<Vertex> addVertices(int count) {
         Set<Vertex> newVertices = new HashSet<>();
         for (int i = 0; i < count; i++) {
@@ -69,10 +77,12 @@ public abstract class AbstractGraph implements Graph {
         return Collections.unmodifiableSet(newVertices);
     }
 
+    @Override
     public <T extends Graph> Graph deepCopy(Class<T> type) {
         return deepCopy(type, this.getVertices());
     }
 
+    @Override
     public <T extends Graph> Graph deepCopy(Class<T> type, Set<Vertex> includeOnly) {
         Graph g = Helper.instantiateGeneric(type);
         for (Vertex v : includeOnly) {
@@ -97,8 +107,10 @@ public abstract class AbstractGraph implements Graph {
      * @return the current instance
      * @throws GraphException if {@code v} does not belong in the graph
      */
+    @Override
     public abstract Graph removeVertex(Vertex v);
 
+    @Override
     public Graph removeVertices(Collection<Vertex> vertices) {
         for (Vertex v : vertices) {
             this.removeVertex(v);
@@ -106,6 +118,7 @@ public abstract class AbstractGraph implements Graph {
         return this;
     }
 
+    @Override
     public abstract Graph clear();
 
     /**
@@ -118,6 +131,7 @@ public abstract class AbstractGraph implements Graph {
      * @throws GraphException if {@code index} is outside of {@code 0} (inclusive) and {@link #getVerticesCount()}
      *                        (exclusive)
      */
+    @Override
     public abstract Vertex getVertexFromIndex(int index);
 
     /**
@@ -127,6 +141,7 @@ public abstract class AbstractGraph implements Graph {
      * @param f an array of vertices to be fused
      * @return the vertex that is the result of the fusion
      */
+    @Override
     public Vertex fuseVertices(Vertex[] f) {
         Vertex v = this.addVertex();
 
@@ -143,12 +158,14 @@ public abstract class AbstractGraph implements Graph {
         return v;
     }
 
+    @Override
     public Vertex getRandomVertex() {
         // TODO: There must be some better way ...
         RandomVertexIterator rvi = new RandomVertexIterator(this);
         return rvi.next();
     }
 
+    @Override
     public Set<Vertex> getStubbornVertices() {
         Set<Vertex> stubborn = new TreeSet<>();
         for (Vertex v : this.getVertices()) {
@@ -159,6 +176,7 @@ public abstract class AbstractGraph implements Graph {
         return Collections.unmodifiableSet(stubborn);
     }
 
+    @Override
     public Set<FullEdge> getEdges() {
         Set<FullEdge> edges = new HashSet<>();
         for (Vertex v : this.getVertices()) {
@@ -175,6 +193,7 @@ public abstract class AbstractGraph implements Graph {
      *
      * @return the current instance
      */
+    @Override
     public Graph connectAllVertices() {
         for (Vertex v : this.getVertices()) {
             for (Vertex w : this.getVertices()) {
@@ -195,6 +214,7 @@ public abstract class AbstractGraph implements Graph {
      *
      * @return the number of directed edges in this graph
      */
+    @Override
     public int getEdgesCount() {
         int count = 0;
         for (Vertex v : this.getVertices()) {
@@ -203,8 +223,10 @@ public abstract class AbstractGraph implements Graph {
         return count;
     }
 
+    @Override
     public abstract Edge addEdge(Vertex source, Vertex target);
 
+    @Override
     public Set<Edge> addEdge(Vertex source, Vertex target, boolean undirected) {
         Set<Edge> addedEdges = new HashSet<>();
         addedEdges.add(this.addEdge(source, target));
@@ -214,10 +236,13 @@ public abstract class AbstractGraph implements Graph {
         return Collections.unmodifiableSet(addedEdges);
     }
 
+    @Override
     public abstract Graph removeEdge(Vertex source, Vertex target);
 
+    @Override
     public abstract Map<Vertex, Edge> getOutEdges(Vertex v);
 
+    @Override
     public abstract Map<Vertex, Edge> getInEdges(Vertex v);
 
     /**
@@ -227,6 +252,7 @@ public abstract class AbstractGraph implements Graph {
      * @return the sum of weights of all outbound edges of vertex {@code v}
      * @see #getInWeightSum(Vertex)
      */
+    @Override
     public double getOutWeightSum(Vertex v) {
         return Helper.getWeightSum(this.getOutEdges(v).values());
     }
@@ -238,6 +264,7 @@ public abstract class AbstractGraph implements Graph {
      * @return the sum of weights of all inbound edges of vertex {@code v}
      * @see #getOutWeightSum(Vertex)
      */
+    @Override
     public double getInWeightSum(Vertex v) {
         return Helper.getWeightSum(this.getInEdges(v).values());
     }
@@ -250,6 +277,7 @@ public abstract class AbstractGraph implements Graph {
      * @return the outbound degree of vertex {@code v}
      * @see #getInDegree(Vertex)
      */
+    @Override
     public int getOutDegree(Vertex v) {
         return this.getOutEdges(v).size();
     }
@@ -262,6 +290,7 @@ public abstract class AbstractGraph implements Graph {
      * @return the inbound degree of vertex {@code v}
      * @see #getOutDegree(Vertex)
      */
+    @Override
     public int getInDegree(Vertex v) {
         return this.getInEdges(v).size();
     }
@@ -272,6 +301,7 @@ public abstract class AbstractGraph implements Graph {
      *
      * @return true if the graph is undirected, otherwise false
      */
+    @Override
     public boolean isUndirected() {
         // TODO: Implement
         /*ArrayList<Vertex[]> edgeList = new ArrayList<>();
@@ -297,6 +327,7 @@ public abstract class AbstractGraph implements Graph {
         return true;
     }
 
+    @Override
     public Graph createCircle(boolean undirected) {
         Iterator<Vertex> vertexIterator = this.getVertices().iterator();
         Vertex previous = vertexIterator.next();
@@ -317,6 +348,7 @@ public abstract class AbstractGraph implements Graph {
      *
      * @return the list of vertices of this graph
      */
+    @Override
     public abstract Set<Vertex> getVertices();
 
     /**
@@ -325,10 +357,12 @@ public abstract class AbstractGraph implements Graph {
      *
      * @return the number of vertices in this graph
      */
+    @Override
     public int getVerticesCount() {
         return this.getVertices().size();
     }
 
+    @Override
     public Vertex getRandomOutEdge(Vertex from, boolean weighted) {
         HashMap<Vertex, Double> weightMap = new HashMap<>();
         Map<Vertex, Edge> outEdges = this.getOutEdges(from);
@@ -339,6 +373,7 @@ public abstract class AbstractGraph implements Graph {
         return edges.get(0);
     }
 
+    @Override
     public double getDiameter() {
         // TODO: Should return a list/path/walk of vertices to show both the weight sum and the steps
         HashMap<Vertex[], Double> distanceMap = new HashMap<>();
