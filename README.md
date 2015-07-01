@@ -15,12 +15,12 @@ g.addEdge(v1, v2);
 
 ### Graph generation
 
-Inspect available generators in `gr.james.socialinfluence.graph.generators` package.
-
 ```java
 Graph g = RandomG.generate(MemoryGraph.class, 100, 0.05);
 System.out.println(g);
 ```
+
+Inspect available generators in `gr.james.socialinfluence.graph.generators` package.
 
 ## TODO
 
