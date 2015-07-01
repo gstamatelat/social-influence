@@ -17,6 +17,7 @@ public class MemoryGraph extends AbstractGraph {
         this.m = new LinkedHashMap<>();
     }
 
+    @Override
     public Vertex addVertex(Vertex v) {
         Pair<Map<Vertex, Edge>> pp = new Pair<Map<Vertex, Edge>>(new LinkedHashMap<Vertex, Edge>(), new LinkedHashMap<Vertex, Edge>());
         this.m.put(v, pp);
@@ -30,6 +31,7 @@ public class MemoryGraph extends AbstractGraph {
      *
      * @throws GraphException {@inheritDoc}
      */
+    @Override
     public Graph removeVertex(Vertex v) {
         if (!this.containsVertex(v)) {
             throw new GraphException(Finals.E_GRAPH_VERTEX_NOT_CONTAINED, "removeVertex");
@@ -42,19 +44,23 @@ public class MemoryGraph extends AbstractGraph {
         return this;
     }
 
+    @Override
     public Graph clear() {
         this.m.clear();
         return this;
     }
 
+    @Override
     public boolean containsVertex(Vertex v) {
         return this.m.containsKey(v);
     }
 
+    @Override
     public boolean containsEdge(Vertex source, Vertex target) {
         return this.m.get(source).getFirst().containsKey(target);
     }
 
+    @Override
     public Vertex getVertexFromIndex(int index) {
         if (index < 0 || index >= this.getVerticesCount()) {
             throw new GraphException(Finals.E_GRAPH_INDEX_OUT_OF_BOUNDS, index);
@@ -67,6 +73,7 @@ public class MemoryGraph extends AbstractGraph {
         return v;
     }
 
+    @Override
     public Edge addEdge(Vertex source, Vertex target) {
         if (!this.containsVertex(source) || !this.containsVertex(target)) {
             throw new GraphException(Finals.E_GRAPH_EDGE_DIFFERENT);
@@ -81,20 +88,24 @@ public class MemoryGraph extends AbstractGraph {
         }
     }
 
+    @Override
     public Graph removeEdge(Vertex source, Vertex target) {
         this.m.get(source).getFirst().remove(target);
         this.m.get(target).getSecond().remove(source);
         return this;
     }
 
+    @Override
     public Map<Vertex, Edge> getOutEdges(Vertex v) {
         return Collections.unmodifiableMap(this.m.get(v).getFirst());
     }
 
+    @Override
     public Map<Vertex, Edge> getInEdges(Vertex v) {
         return Collections.unmodifiableMap(this.m.get(v).getSecond());
     }
 
+    @Override
     public Set<Vertex> getVertices() {
         return Collections.unmodifiableSet(this.m.keySet());
     }
