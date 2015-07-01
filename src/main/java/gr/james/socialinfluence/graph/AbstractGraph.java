@@ -205,8 +205,6 @@ public abstract class AbstractGraph implements Graph {
         return this;
     }
 
-    /*public abstract Set<Edge> getEdges();*/
-
     /**
      * <p>Calculates the total amount of directed edges that this graph has. This method is a little faster than using
      * {@code getEdges().size()}.</p>
