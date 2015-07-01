@@ -4,7 +4,6 @@ import gr.james.socialinfluence.graph.Edge;
 import gr.james.socialinfluence.graph.FullEdge;
 import gr.james.socialinfluence.graph.Vertex;
 
-import java.io.OutputStream;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
@@ -79,6 +78,4 @@ public interface Graph {
     Vertex getRandomOutEdge(Vertex from, boolean weighted);
 
     double getDiameter();
-
-    Graph exportToDot(OutputStream out);
 }

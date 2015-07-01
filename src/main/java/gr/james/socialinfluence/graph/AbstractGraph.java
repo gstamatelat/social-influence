@@ -8,9 +8,6 @@ import gr.james.socialinfluence.helper.GraphException;
 import gr.james.socialinfluence.helper.Helper;
 import gr.james.socialinfluence.helper.WeightedRandom;
 
-import java.io.IOException;
-import java.io.OutputStream;
-import java.nio.charset.Charset;
 import java.util.*;
 
 /**
@@ -361,72 +358,6 @@ public abstract class AbstractGraph implements Graph {
         }
 
         return diameter;
-    }
-
-    /**
-     * <p>Exports this graph in DOT format. If the graph is undirected, then the undirected DOT format will be used.
-     * This method uses UTF-8 as character set when writing to the stream.</p>
-     *
-     * @param out the OutputStream to write the DOT file to
-     * @return the current instance
-     */
-    public Graph exportToDot(OutputStream out) {
-        if (this.isUndirected()) {
-            ArrayList<Vertex[]> edgeList = new ArrayList<>();
-            for (FullEdge e : this.getEdges()) {
-                Vertex v = e.getSource();
-                Vertex w = e.getTarget();
-                int indexOfOpposite = -1;
-                for (int i = 0; i < edgeList.size(); i++) {
-                    if (edgeList.get(i)[0].equals(w) && edgeList.get(i)[1].equals(v)) {
-                        indexOfOpposite = i;
-                        break;
-                    }
-                }
-                if (indexOfOpposite == -1) {
-                    edgeList.add(new Vertex[]{v, w});
-                }
-            }
-
-            String dot = "graph " + this.getMeta("name") + " {" + System.lineSeparator();
-            dot += "  overlap = false;" + System.lineSeparator();
-            dot += "  bgcolor = transparent;" + System.lineSeparator();
-            dot += "  splines = true;" + System.lineSeparator();
-            dot += "  dpi = 192;" + System.lineSeparator();
-            dot += System.lineSeparator();
-            dot += "  graph [fontname = \"Noto Sans\"];" + System.lineSeparator();
-            dot += "  node [fontname = \"Noto Sans\", shape = circle, fixedsize = shape, penwidth = 2.0, color = \"#444444\", style = \"filled\", fillcolor = \"#CCCCCC\"];" + System.lineSeparator();
-            dot += "  edge [fontname = \"Noto Sans\", penwidth = 2.0, color = \"#444444\"];" + System.lineSeparator();
-            dot += System.lineSeparator();
-            for (Vertex[] v : edgeList) {
-                dot += "  " + v[0].toString() + " -- " + v[1].toString() + System.lineSeparator();
-            }
-            dot += "}" + System.lineSeparator();
-
-            try {
-                out.write(dot.getBytes(Charset.forName("UTF-8")));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else {
-            String dot = "digraph G {" + System.lineSeparator();
-            dot += "  overlap = false;" + System.lineSeparator();
-            dot += "  bgcolor = transparent;" + System.lineSeparator();
-            dot += "  splines = true;" + System.lineSeparator();
-            for (FullEdge e : this.getEdges()) {
-                Vertex v = e.getSource();
-                Vertex w = e.getTarget();
-                dot += "  " + v.toString() + " -> " + w.toString() + System.lineSeparator();
-            }
-            dot += "}" + System.lineSeparator();
-
-            try {
-                out.write(dot.getBytes(Charset.forName("UTF-8")));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return this;
     }
 
     @Override
