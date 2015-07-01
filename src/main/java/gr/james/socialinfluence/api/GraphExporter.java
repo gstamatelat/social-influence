@@ -1,7 +1,5 @@
 package gr.james.socialinfluence.api;
 
-import gr.james.socialinfluence.graph.Graph;
-
 import java.io.IOException;
 import java.io.OutputStream;
 

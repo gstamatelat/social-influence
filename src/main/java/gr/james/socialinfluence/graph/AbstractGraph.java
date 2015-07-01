@@ -1,5 +1,6 @@
 package gr.james.socialinfluence.graph;
 
+import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.graph.algorithms.Dijkstra;
 import gr.james.socialinfluence.graph.algorithms.iterators.RandomVertexIterator;
 import gr.james.socialinfluence.helper.Finals;
@@ -24,10 +25,10 @@ import java.util.*;
  * these collections after they have been returned, you need to call the method again. The elements themselves,
  * however, are shallow copies and can be used to change the state of the graph.</p>
  */
-public abstract class Graph {
+public abstract class AbstractGraph implements Graph {
     protected Map<String, String> meta;
 
-    public Graph() {
+    public AbstractGraph() {
         this.meta = new TreeMap<>();
         this.setName(Finals.DEFAULT_GRAPH_NAME);
     }

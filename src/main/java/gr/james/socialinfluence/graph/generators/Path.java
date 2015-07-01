@@ -1,6 +1,6 @@
 package gr.james.socialinfluence.graph.generators;
 
-import gr.james.socialinfluence.graph.Graph;
+import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.helper.Helper;
 

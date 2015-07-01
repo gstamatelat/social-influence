@@ -1,8 +1,8 @@
 package gr.james.socialinfluence.helper;
 
+import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.graph.Edge;
 import gr.james.socialinfluence.graph.FullEdge;
-import gr.james.socialinfluence.graph.Graph;
 import gr.james.socialinfluence.graph.Vertex;
 
 import java.util.Collection;

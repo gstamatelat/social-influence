@@ -1,11 +1,11 @@
 package gr.james.socialinfluence.game.players;
 
+import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.api.Player;
 import gr.james.socialinfluence.game.Game;
 import gr.james.socialinfluence.game.Move;
 import gr.james.socialinfluence.game.MovePoint;
 import gr.james.socialinfluence.game.PlayerEnum;
-import gr.james.socialinfluence.graph.Graph;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.graph.algorithms.iterators.RandomSurferIterator;
 import gr.james.socialinfluence.graph.algorithms.iterators.RandomVertexIterator;

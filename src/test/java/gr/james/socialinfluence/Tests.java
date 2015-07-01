@@ -1,9 +1,9 @@
 package gr.james.socialinfluence;
 
+import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.collections.GraphState;
 import gr.james.socialinfluence.collections.VertexPair;
 import gr.james.socialinfluence.graph.FullEdge;
-import gr.james.socialinfluence.graph.Graph;
 import gr.james.socialinfluence.graph.MemoryGraph;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.graph.algorithms.*;

@@ -1,7 +1,7 @@
 package gr.james.socialinfluence.main;
 
+import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.collections.GraphState;
-import gr.james.socialinfluence.graph.Graph;
 import gr.james.socialinfluence.graph.MemoryGraph;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.graph.algorithms.Degree;

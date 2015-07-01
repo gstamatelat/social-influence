@@ -1,5 +1,6 @@
 package gr.james.socialinfluence.graph;
 
+import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.collections.Pair;
 import gr.james.socialinfluence.helper.Finals;
 import gr.james.socialinfluence.helper.GraphException;
@@ -9,7 +10,7 @@ import java.util.*;
 /**
  * <p>Represents an in-memory {@link Graph}, implemented using adjacency lists. Suitable for sparse graphs.</p>
  */
-public class MemoryGraph extends Graph {
+public class MemoryGraph extends AbstractGraph {
     private Map<Vertex, Pair<Map<Vertex, Edge>>> m;
 
     public MemoryGraph() {

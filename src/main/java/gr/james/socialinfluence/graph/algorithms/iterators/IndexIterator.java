@@ -1,6 +1,6 @@
 package gr.james.socialinfluence.graph.algorithms.iterators;
 
-import gr.james.socialinfluence.graph.Graph;
+import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.graph.Vertex;
 
 import java.util.Iterator;

@@ -2,7 +2,6 @@ package gr.james.socialinfluence.api;
 
 import gr.james.socialinfluence.game.GameDefinition;
 import gr.james.socialinfluence.game.Move;
-import gr.james.socialinfluence.graph.Graph;
 
 import java.util.Map;
 
