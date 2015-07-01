@@ -115,6 +115,7 @@ public class Game {
 
         /* If moves are both empty or equal, it's obviously a draw */
         if (this.playerAMove.equals(this.playerBMove)) {
+            Finals.LOG.info(Finals.L_GAME_EMPTY_MOVES);
             Vertex s1 = g.addVertex();
             Vertex s2 = g.addVertex();
             g.removeVertex(s1).removeVertex(s2);

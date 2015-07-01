@@ -16,8 +16,6 @@ public class DeGroot {
         GraphState lastState = initialOpinions;
         stateHistory.add(initialOpinions);
 
-        //Map<Vertex, Set<Edge>> outEdgesMap = g.getOutEdges();
-
         boolean stabilized = false;
         /*int reps = 0;*/
         while (!stabilized) {
@@ -32,16 +30,6 @@ public class DeGroot {
                 }
                 nextState.put(v, vNewValue / Helper.getWeightSum(g.getOutEdges(v).values()));
             }
-
-            /*for (Vertex v : outEdgesMap.keySet()) {
-                double vNewValue = 0.0;
-                for (Edge e : outEdgesMap.get(v)) {
-                    vNewValue = vNewValue + (
-                            e.getWeight() * lastState.get(e.getTarget())
-                    );
-                }
-                nextState.put(v, vNewValue / Helper.getWeightSum(outEdgesMap.get(v)));
-            }*/
 
             if (nextState.subtractAbs(lastState).lessThan(epsilon)) {
                 stabilized = true;
