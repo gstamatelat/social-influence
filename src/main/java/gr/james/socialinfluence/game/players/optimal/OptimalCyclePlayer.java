@@ -38,7 +38,7 @@ public class OptimalCyclePlayer extends AbstractPlayer {
             c += period;
         }
 
-        /* We can print stuff if we aren't competing in tournament */
+        /* Log move for demonstration */
         log.info("Final move: {}", m);
 
         /* Submit the move */
