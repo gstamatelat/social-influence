@@ -5,6 +5,7 @@ import gr.james.socialinfluence.api.GraphExporter;
 import gr.james.socialinfluence.api.GraphImporter;
 import gr.james.socialinfluence.graph.FullEdge;
 import gr.james.socialinfluence.graph.Vertex;
+import gr.james.socialinfluence.helper.Finals;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,6 +14,11 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 
 public class Dot implements GraphImporter, GraphExporter {
+    @Override
+    public Graph from(InputStream in) throws IOException {
+        throw new UnsupportedOperationException();
+    }
+
     @Override
     public void to(Graph g, OutputStream out) throws IOException {
         if (g.isUndirected()) {
@@ -48,7 +54,7 @@ public class Dot implements GraphImporter, GraphExporter {
             dot += "}" + System.lineSeparator();
 
             try {
-                out.write(dot.getBytes(Charset.forName("UTF-8")));
+                out.write(dot.getBytes(Charset.forName(Finals.DEFAULT_IO_ENCODING)));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -65,15 +71,10 @@ public class Dot implements GraphImporter, GraphExporter {
             dot += "}" + System.lineSeparator();
 
             try {
-                out.write(dot.getBytes(Charset.forName("UTF-8")));
+                out.write(dot.getBytes(Charset.forName(Finals.DEFAULT_IO_ENCODING)));
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-    }
-
-    @Override
-    public Graph from(InputStream in) throws IOException {
-        throw new UnsupportedOperationException();
     }
 }

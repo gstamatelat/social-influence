@@ -13,17 +13,17 @@ public interface Graph {
 
     Graph setMeta(String key, String value);
 
-    Graph setName(String name);
+    String getName();
 
     Vertex addVertex();
 
     Vertex addVertex(Vertex v);
 
+    Set<Vertex> addVertices(int count);
+
     boolean containsVertex(Vertex v);
 
     boolean containsEdge(Vertex source, Vertex target);
-
-    Set<Vertex> addVertices(int count);
 
     <T extends Graph> Graph deepCopy(Class<T> type);
 

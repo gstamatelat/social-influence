@@ -24,8 +24,8 @@ public class ImmutableGraph implements Graph {
     }
 
     @Override
-    public Graph setName(String name) {
-        throw new UnsupportedOperationException();
+    public String getName() {
+        return this.g.getName();
     }
 
     @Override

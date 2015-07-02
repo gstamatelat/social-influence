@@ -27,7 +27,7 @@ public abstract class AbstractGraph implements Graph {
 
     public AbstractGraph() {
         this.meta = new TreeMap<>();
-        this.setName(Finals.DEFAULT_GRAPH_NAME);
+        this.meta.put("name", Finals.DEFAULT_GRAPH_NAME);
     }
 
     @Override
@@ -42,9 +42,8 @@ public abstract class AbstractGraph implements Graph {
     }
 
     @Override
-    public final Graph setName(String name) {
-        this.meta.put("name", name);
-        return this;
+    public String getName() {
+        return this.meta.get("name");
     }
 
     /**

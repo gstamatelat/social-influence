@@ -9,6 +9,7 @@ public class Finals {
 
     /* Default values */
     public static final String DEFAULT_GRAPH_NAME = "G";
+    public static final String DEFAULT_IO_ENCODING = "UTF-8";
     public static final double DEFAULT_EDGE_WEIGHT = 1.0;
     public static final double DEFAULT_GRAPH_STATE = 0.5;
     public static final double DEFAULT_DEGROOT_PRECISION = 0.0;

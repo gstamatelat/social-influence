@@ -6,6 +6,7 @@ import gr.james.socialinfluence.api.GraphImporter;
 import gr.james.socialinfluence.graph.MemoryGraph;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.graph.algorithms.iterators.IndexIterator;
+import gr.james.socialinfluence.helper.Finals;
 
 import java.io.*;
 import java.util.Arrays;
@@ -15,7 +16,7 @@ public class Csv implements GraphImporter, GraphExporter {
     public Graph from(InputStream source) throws IOException {
         Graph g = new MemoryGraph();
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(source, "UTF8"));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(source, Finals.DEFAULT_IO_ENCODING));
         String line;
         boolean firstLine = true;
         IndexIterator it = null;

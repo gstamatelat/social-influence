@@ -15,11 +15,13 @@ import gr.james.socialinfluence.graph.generators.BarabasiAlbert;
 import gr.james.socialinfluence.graph.generators.BarabasiAlbertCluster;
 import gr.james.socialinfluence.graph.generators.RandomGenerator;
 import gr.james.socialinfluence.graph.generators.TwoWheels;
+import gr.james.socialinfluence.graph.io.Json;
 import gr.james.socialinfluence.helper.Helper;
 import gr.james.socialinfluence.helper.RandomHelper;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -258,6 +260,11 @@ public class Tests {
     @Test
     public void deepCopyTest() {
         Graph g = new RandomGenerator<>(MemoryGraph.class, 100, 0.05).create();
+        try {
+            new Json().to(g, System.out);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         GraphTransformations.createCircle(g, true);
         Graph e = g.deepCopy(MemoryGraph.class);
         e.addVertex();
