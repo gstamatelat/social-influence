@@ -48,7 +48,6 @@ public class GraphTransformations {
      * <dl><dt><b>Complexity:</b></dt><dd>O(n<sup>2</sup>)</dd></dl>
      *
      * @param g the graph to apply the transformation to
-     * @return the current instance
      */
     public static void connectAllVertices(Graph g) {
         for (Vertex v : g.getVertices()) {

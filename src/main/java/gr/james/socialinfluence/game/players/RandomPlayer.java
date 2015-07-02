@@ -12,8 +12,6 @@ public class RandomPlayer extends AbstractPlayer {
             m.putVertex(rvi.next(), 1.0);
         }
         this.movePtr.submit(m);
-        if (!this.d.getTournament()) {
-            log.info("RandomG player: {}", m);
-        }
+        log.info("RandomG player: {}", m);
     }
 }

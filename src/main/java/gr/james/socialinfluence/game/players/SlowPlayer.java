@@ -15,9 +15,7 @@ public class SlowPlayer extends AbstractPlayer {
                 m.putVertex(rvi.next(), 1.0);
             }
             this.movePtr.submit(m);
-            if (!this.d.getTournament()) {
-                log.info("Slow player: {}", m);
-            }
+            log.info("Slow player: {}", m);
         }
     }
 }

@@ -12,8 +12,6 @@ public class MaxPageRankPlayer extends AbstractPlayer {
             m.putVertex(pri.next(), 1.0);
         }
         this.movePtr.submit(m);
-        if (!this.d.getTournament()) {
-            log.info("Max PageRank player: {}", m);
-        }
+        log.info("Max PageRank player: {}", m);
     }
 }

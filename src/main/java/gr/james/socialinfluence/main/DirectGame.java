@@ -16,7 +16,7 @@ public class DirectGame {
     public static void main(String[] args) {
         while (true) {
             RandomHelper.initRandom(3724);
-            GameDefinition d = new GameDefinition(5, 5.0, 5000L, true);
+            GameDefinition d = new GameDefinition(5, 5.0, 5000L);
             Graph g = BarabasiAlbert.generate(MemoryGraph.class, 25, 2, 2, 1);
             Player p1 = new MaxPageRankPlayer();
             Player p2 = new RandomPlayer();

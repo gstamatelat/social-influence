@@ -106,9 +106,7 @@ public class GreedyPlayer extends AbstractPlayer {
             this.movePtr.submit(minMove);
 
             /* This helps when computation takes a long time */
-            if (!this.d.getTournament()) {
-                log.info("{} : {}", firstGuess, minMove);
-            }
+            log.info("{} : {}", firstGuess, minMove);
         }
     }
 }

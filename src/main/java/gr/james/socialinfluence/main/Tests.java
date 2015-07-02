@@ -31,7 +31,7 @@ public class Tests {
                         for (int i = 0; i < rounds; i++) {
                             Graph g = TwoWheels.generate(MemoryGraph.class, 6); // CHANGE THIS
                             Game game = new Game(g);
-                            GameDefinition d = new GameDefinition(maxMoves, maxMoves * 1.0, execution, true);
+                            GameDefinition d = new GameDefinition(maxMoves, maxMoves * 1.0, execution);
                             game.setPlayer(PlayerEnum.A, p1.findMove(g, d));
                             game.setPlayer(PlayerEnum.B, p2.findMove(g, d));
                             int result = game.runGame(d).score;

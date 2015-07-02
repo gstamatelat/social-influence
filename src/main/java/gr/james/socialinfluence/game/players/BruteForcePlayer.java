@@ -79,23 +79,17 @@ public class BruteForcePlayer extends AbstractPlayer {
             if (gameScore < 0) {
             } else if (gameScore == 0) {
                 if (moveDraws.add(game.getPlayerBMove())) {
-                    if (!this.d.getTournament()) {
-                        log.info("Draw with move {}", game.getPlayerBMove());
-                    }
+                    log.info("Draw with move {}", game.getPlayerBMove());
                 }
             } else {
                 boolean contained = movesHistory.add(newMove);
                 if (!contained) {
-                    if (!this.d.getTournament()) {
-                        log.info("Going in circles after {}", game.getPlayerBMove());
-                    }
+                    log.info("Going in circles after {}", game.getPlayerBMove());
                 }
                 moveDraws.clear();
                 bestMove = newMove;
                 this.movePtr.submit(bestMove);
-                if (!this.d.getTournament()) {
-                    log.info("New best move {}", newMove.toString());
-                }
+                log.info("New best move {}", newMove.toString());
             }
         }
     }
