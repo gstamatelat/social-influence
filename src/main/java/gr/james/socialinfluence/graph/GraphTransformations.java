@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 public class GraphTransformations {
-    public static <T extends Graph> void createCircle(T g, boolean undirected) {
+    public static void createCircle(Graph g, boolean undirected) {
         Iterator<Vertex> vertexIterator = g.getVertices().iterator();
         Vertex previous = vertexIterator.next();
         Vertex first = previous;
