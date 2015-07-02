@@ -5,7 +5,7 @@ import gr.james.socialinfluence.graph.Vertex;
 
 public class Wheel {
     public static <T extends Graph> Graph generate(Class<T> type, int totalVertices) {
-        Graph g = Path.generate(type, totalVertices - 1, true);
+        Graph g = new CycleGenerator<>(type, totalVertices - 1).create();
         Vertex n = g.addVertex();
         for (Vertex v : g.getVertices()) {
             if (!v.equals(n)) {

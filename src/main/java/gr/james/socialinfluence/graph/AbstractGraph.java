@@ -134,30 +134,6 @@ public abstract class AbstractGraph implements Graph {
     @Override
     public abstract Vertex getVertexFromIndex(int index);
 
-    /**
-     * <p>Fuses two or more vertices into a single one. This method may cause information loss
-     * if there are conflicts on the edges.</p>
-     *
-     * @param f an array of vertices to be fused
-     * @return the vertex that is the result of the fusion
-     */
-    @Override
-    public Vertex fuseVertices(Vertex[] f) {
-        Vertex v = this.addVertex();
-
-        for (Vertex y : f) {
-            for (Map.Entry<Vertex, Edge> e : this.getOutEdges(y).entrySet()) {
-                this.addEdge(v, e.getKey()).setWeight(e.getValue().getWeight());
-            }
-            for (Map.Entry<Vertex, Edge> e : this.getInEdges(y).entrySet()) {
-                this.addEdge(e.getKey(), v).setWeight(e.getValue().getWeight());
-            }
-            this.removeVertex(y);
-        }
-
-        return v;
-    }
-
     @Override
     public Vertex getRandomVertex() {
         // TODO: There must be some better way ...
@@ -185,24 +161,6 @@ public abstract class AbstractGraph implements Graph {
             }
         }
         return Collections.unmodifiableSet(edges);
-    }
-
-    /**
-     * <p>Connects all the vertices in the graph. Does not create self-connections (loops).</p>
-     * <dl><dt><b>Complexity:</b></dt><dd>O(n<sup>2</sup>)</dd></dl>
-     *
-     * @return the current instance
-     */
-    @Override
-    public Graph connectAllVertices() {
-        for (Vertex v : this.getVertices()) {
-            for (Vertex w : this.getVertices()) {
-                if (!v.equals(w)) {
-                    this.addEdge(v, w);
-                }
-            }
-        }
-        return this;
     }
 
     /**
@@ -323,21 +281,6 @@ public abstract class AbstractGraph implements Graph {
         }
         return edgeList.size() == 0;*/
         return true;
-    }
-
-    @Override
-    public Graph createCircle(boolean undirected) {
-        Iterator<Vertex> vertexIterator = this.getVertices().iterator();
-        Vertex previous = vertexIterator.next();
-        Vertex first = previous;
-        while (vertexIterator.hasNext()) {
-            Vertex next = vertexIterator.next();
-            // TODO: Should only add if not exists in order to leave the weight unmodified
-            this.addEdge(previous, next, undirected);
-            previous = next;
-        }
-        this.addEdge(previous, first, undirected);
-        return this;
     }
 
     /**

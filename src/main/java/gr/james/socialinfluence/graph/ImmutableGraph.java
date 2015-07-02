@@ -84,11 +84,6 @@ public class ImmutableGraph implements Graph {
     }
 
     @Override
-    public Vertex fuseVertices(Vertex[] f) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
     public Vertex getRandomVertex() {
         return this.g.getRandomVertex();
     }
@@ -101,11 +96,6 @@ public class ImmutableGraph implements Graph {
     @Override
     public Set<FullEdge> getEdges() {
         return this.g.getEdges();
-    }
-
-    @Override
-    public Graph connectAllVertices() {
-        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -161,11 +151,6 @@ public class ImmutableGraph implements Graph {
     @Override
     public boolean isUndirected() {
         return this.g.isUndirected();
-    }
-
-    @Override
-    public Graph createCircle(boolean undirected) {
-        throw new UnsupportedOperationException();
     }
 
     @Override

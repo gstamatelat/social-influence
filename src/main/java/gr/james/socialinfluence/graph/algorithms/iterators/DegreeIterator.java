@@ -9,13 +9,17 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-public class InDegreeIterator implements Iterator<Vertex> {
+public class DegreeIterator implements Iterator<Vertex> {
     private Map<Vertex, Integer> nodes;
 
-    public InDegreeIterator(Graph g) {
+    public DegreeIterator(Graph g, boolean in) {
         nodes = new HashMap<>();
         for (Vertex v : g.getVertices()) {
-            nodes.put(v, g.getInDegree(v));
+            if (in) {
+                nodes.put(v, g.getInDegree(v));
+            } else {
+                nodes.put(v, g.getOutDegree(v));
+            }
         }
     }
 

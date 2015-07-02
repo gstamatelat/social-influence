@@ -1,6 +1,7 @@
 package gr.james.socialinfluence.graph.generators;
 
 import gr.james.socialinfluence.api.Graph;
+import gr.james.socialinfluence.graph.GraphTransformations;
 import gr.james.socialinfluence.graph.MemoryGraph;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.helper.Helper;
@@ -19,7 +20,7 @@ public class TwoWheels {
         while (g2.getOutDegree((b = it2.next())) != 3) ;
 
         Graph g = Helper.combineGraphs(MemoryGraph.class, new Graph[]{g1, g2});
-        g.fuseVertices(new Vertex[]{a, b});
+        GraphTransformations.fuseVertices(g, new Vertex[]{a, b});
 
         return g.setMeta("name", "TwoWheels")
                 .setMeta("wheelVertices", String.valueOf(wheelVertices));

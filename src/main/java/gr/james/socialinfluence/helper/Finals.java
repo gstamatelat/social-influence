@@ -32,6 +32,8 @@ public class Finals {
     public static final String E_PLAYER_NO_PARAMETER = "%s doesn't have any parameter with name %s.";
     public static final String E_PLAYER_OPTION_NULL = "Player option value can't be null.";
 
+    public static final String E_CYCLE_EDGES = "The result of a path graph must have only 2 vertices with degree 1.";
+
     public static final String E_MOVEPOINTER_SET_NULL = "Cannot submit a null move.";
 
     public static final String E_BARABASI_STEP = "stepEdges <= initialClique is a constraint";

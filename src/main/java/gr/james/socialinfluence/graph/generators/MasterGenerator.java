@@ -5,18 +5,24 @@ import gr.james.socialinfluence.api.GraphGenerator;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.helper.Helper;
 
-public class Master<T extends Graph> implements GraphGenerator<T> {
-    Class<T> type;
+public class MasterGenerator<T extends Graph> implements GraphGenerator<T> {
+    private Class<T> type;
 
-    public Master(Class<T> type) {
+    private T g;
+
+    public MasterGenerator(Class<T> type) {
         this.type = type;
+        reset();
+    }
+
+    private void reset() {
+        g = Helper.instantiateGeneric(type);
+        g.setMeta("name", "Master");
     }
 
     @Override
     public T create() {
-        T g = Helper.instantiateGeneric(type);
-
-        g.setMeta("name", "Master");
+        reset();
 
         Vertex v1 = g.addVertex();
         Vertex v2 = g.addVertex();

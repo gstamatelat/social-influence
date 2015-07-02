@@ -1,6 +1,7 @@
 package gr.james.socialinfluence.graph.generators;
 
 import gr.james.socialinfluence.api.Graph;
+import gr.james.socialinfluence.graph.GraphTransformations;
 import gr.james.socialinfluence.helper.Helper;
 
 public class Clique {
@@ -8,7 +9,7 @@ public class Clique {
         Graph g = Helper.instantiateGeneric(type);
 
         g.addVertices(totalVertices);
-        g.connectAllVertices();
+        GraphTransformations.connectAllVertices(g);
 
         return g.setMeta("name", "Clique")
                 .setMeta("totalVertices", String.valueOf(totalVertices));

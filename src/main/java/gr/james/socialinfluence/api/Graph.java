@@ -37,15 +37,11 @@ public interface Graph {
 
     Vertex getVertexFromIndex(int index);
 
-    Vertex fuseVertices(Vertex[] f);
-
     Vertex getRandomVertex();
 
     Set<Vertex> getStubbornVertices();
 
     Set<FullEdge> getEdges();
-
-    Graph connectAllVertices();
 
     int getEdgesCount();
 
@@ -68,8 +64,6 @@ public interface Graph {
     int getInDegree(Vertex v);
 
     boolean isUndirected();
-
-    Graph createCircle(boolean undirected);
 
     Set<Vertex> getVertices();
 
