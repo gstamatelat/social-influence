@@ -16,7 +16,7 @@ public class BarabasiAlbert {
             throw new GraphException(Finals.E_BARABASI_STEP);
         }
 
-        Graph g = Clique.generate(type, initialClique);
+        Graph g = new CliqueGenerator<>(type, initialClique).create();
         while (g.getVerticesCount() < totalVertices) {
             HashMap<Vertex, Double> weightMap = Degree.execute(g, true);
             for (Vertex v : weightMap.keySet()) {
