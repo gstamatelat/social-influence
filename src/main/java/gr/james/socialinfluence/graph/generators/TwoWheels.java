@@ -10,8 +10,9 @@ import java.util.Iterator;
 
 public class TwoWheels {
     public static <T extends Graph> Graph generate(Class<T> type, int wheelVertices) {
-        Graph g1 = Wheel.generate(type, wheelVertices);
-        Graph g2 = Wheel.generate(type, wheelVertices);
+        WheelGenerator wheelGenerator = new WheelGenerator<>(type, wheelVertices);
+        Graph g1 = wheelGenerator.create();
+        Graph g2 = wheelGenerator.create();
 
         Vertex a, b;
         Iterator<Vertex> it1 = g1.getVertices().iterator();
