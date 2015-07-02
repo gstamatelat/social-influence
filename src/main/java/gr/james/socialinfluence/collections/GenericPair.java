@@ -7,7 +7,7 @@ import gr.james.socialinfluence.helper.Finals;
  * and may be used as indices or map keys. Note that they do not protect from malevolent behavior: if one or another
  * object in the tuple is mutable, then it can be changed with the usual bad effects.</p>
  */
-public class DiffPair<K, V> {
+public class GenericPair<K, V> {
     private K first;
     private V second;
 
@@ -18,7 +18,7 @@ public class DiffPair<K, V> {
      * @param value2 the second value in the new {@code Pair}
      * @throws IllegalArgumentException if either argument is {@code null}
      */
-    public DiffPair(K value1, V value2) {
+    public GenericPair(K value1, V value2) {
         if (value1 == null || value2 == null) {
             throw new IllegalArgumentException(Finals.E_PAIR_NULL);
         }
@@ -49,9 +49,9 @@ public class DiffPair<K, V> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        DiffPair<?, ?> diffPair = (DiffPair<?, ?>) o;
+        GenericPair<?, ?> genericPair = (GenericPair<?, ?>) o;
 
-        return first.equals(diffPair.first) && second.equals(diffPair.second);
+        return first.equals(genericPair.first) && second.equals(genericPair.second);
 
     }
 
