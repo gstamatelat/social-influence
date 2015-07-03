@@ -1,4 +1,4 @@
-# Social Influence
+# Social Influence [![Build Status](https://travis-ci.org/gstamatelat/social-influence.svg?branch=master)](https://travis-ci.org/gstamatelat/social-influence)
 
 Java network/graph framework with emphasis on social influence
 
