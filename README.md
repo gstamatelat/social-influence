@@ -22,7 +22,8 @@ System.out.println(randomGraph);
 ```
 
 ```java
-Graph scaleFreeGraph = BarabasiAlbert.generate(MemoryGraph.class, 25, 2, 2, 1.0);
+GraphGenerator generator = new BarabasiAlbertGenerator<>(MemoryGraph.class, 25, 2, 2, 1.0);
+Graph scaleFreeGraph = generator.create();
 System.out.println(scaleFreeGraph);
 ```
 
