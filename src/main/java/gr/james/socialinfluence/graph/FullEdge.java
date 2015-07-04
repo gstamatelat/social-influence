@@ -19,8 +19,7 @@ public class FullEdge {
 
         FullEdge fullEdge = (FullEdge) o;
 
-        if (!source.equals(fullEdge.source)) return false;
-        return target.equals(fullEdge.target);
+        return source.equals(fullEdge.source) && target.equals(fullEdge.target);
 
     }
 

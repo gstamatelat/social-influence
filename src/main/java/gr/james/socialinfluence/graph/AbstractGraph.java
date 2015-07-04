@@ -42,6 +42,12 @@ public abstract class AbstractGraph implements Graph {
     }
 
     @Override
+    public Graph clearMeta() {
+        this.meta.clear();
+        return this;
+    }
+
+    @Override
     public String getName() {
         return this.meta.get("name");
     }

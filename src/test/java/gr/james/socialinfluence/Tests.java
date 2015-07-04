@@ -4,7 +4,7 @@ import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.collections.GraphState;
 import gr.james.socialinfluence.collections.VertexPair;
 import gr.james.socialinfluence.graph.FullEdge;
-import gr.james.socialinfluence.graph.GraphTransformations;
+import gr.james.socialinfluence.graph.GraphOperations;
 import gr.james.socialinfluence.graph.MemoryGraph;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.graph.algorithms.*;
@@ -15,7 +15,6 @@ import gr.james.socialinfluence.graph.generators.BarabasiAlbert;
 import gr.james.socialinfluence.graph.generators.BarabasiAlbertCluster;
 import gr.james.socialinfluence.graph.generators.RandomGenerator;
 import gr.james.socialinfluence.graph.generators.TwoWheels;
-import gr.james.socialinfluence.helper.Helper;
 import gr.james.socialinfluence.helper.RandomHelper;
 import org.junit.Assert;
 import org.junit.Test;
@@ -38,7 +37,7 @@ public class Tests {
 
         /* Create graph and randomize edge weights */
         Graph g = new RandomGenerator<>(MemoryGraph.class, vertexCount, p).create();
-        GraphTransformations.createCircle(g, true);
+        GraphOperations.createCircle(g, true);
         for (FullEdge e : g.getEdges()) {
             e.getEdge().setWeight(RandomHelper.getRandom().nextDouble());
         }
@@ -104,7 +103,7 @@ public class Tests {
             for (double p : ps) {
                 /* Create graph and randomize edge weights */
                 Graph g = new RandomGenerator<>(MemoryGraph.class, vertexCount, p).create();
-                GraphTransformations.createCircle(g, true);
+                GraphOperations.createCircle(g, true);
                 for (FullEdge e : g.getEdges()) {
                     e.getEdge().setWeight(RandomHelper.getRandom().nextDouble());
                 }
@@ -145,7 +144,7 @@ public class Tests {
         Graph[] graphs = new Graph[GRAPHS];
         for (int i = 0; i < GRAPHS; i++) {
             graphs[i] = new RandomGenerator<>(MemoryGraph.class, RandomHelper.getRandom().nextInt(50) + 50, RandomHelper.getRandom().nextDouble()).create();
-            GraphTransformations.createCircle(graphs[i], true);
+            GraphOperations.createCircle(graphs[i], true);
         }
 
         int vertexCount = 0;
@@ -155,7 +154,7 @@ public class Tests {
             edgeCount += g.getEdgesCount();
         }
 
-        Graph g = Helper.combineGraphs(MemoryGraph.class, graphs);
+        Graph g = GraphOperations.combineGraphs(MemoryGraph.class, graphs);
 
         Assert.assertEquals("combineGraphsTest - vertexCount", vertexCount, g.getVerticesCount());
         Assert.assertEquals("combineGraphsTest - edgeCount", edgeCount, g.getEdgesCount());
@@ -240,7 +239,7 @@ public class Tests {
     @Test
     public void deGrootTest() {
         Graph g = new RandomGenerator<>(MemoryGraph.class, 100, 0.1).create();
-        GraphTransformations.createCircle(g, true);
+        GraphOperations.createCircle(g, true);
 
         GraphState initialState = new GraphState(g, 0.0);
         for (Vertex v : g.getVertices()) {
@@ -258,7 +257,7 @@ public class Tests {
     @Test
     public void deepCopyTest() {
         Graph g = new RandomGenerator<>(MemoryGraph.class, 100, 0.05).create();
-        GraphTransformations.createCircle(g, true);
+        GraphOperations.createCircle(g, true);
         Graph e = g.deepCopy(MemoryGraph.class);
         e.addVertex();
         Assert.assertEquals("deepCopyTest", g.getVerticesCount() + 1, e.getVerticesCount());

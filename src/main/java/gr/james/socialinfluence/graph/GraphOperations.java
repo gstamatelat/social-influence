@@ -1,11 +1,12 @@
 package gr.james.socialinfluence.graph;
 
 import gr.james.socialinfluence.api.Graph;
+import gr.james.socialinfluence.helper.Helper;
 
 import java.util.Iterator;
 import java.util.Map;
 
-public class GraphTransformations {
+public class GraphOperations {
     public static void createCircle(Graph g, boolean undirected) {
         Iterator<Vertex> vertexIterator = g.getVertices().iterator();
         Vertex previous = vertexIterator.next();
@@ -57,5 +58,21 @@ public class GraphTransformations {
                 }
             }
         }
+    }
+
+    public static <T extends Graph> Graph combineGraphs(Class<T> type, Graph[] graphs) {
+        Graph r = Helper.instantiateGeneric(type);
+        for (Graph g : graphs) {
+            for (Vertex v : g.getVertices()) {
+                r.addVertex(v);
+            }
+            for (FullEdge e : g.getEdges()) {
+                r.addEdge(e.getSource(), e.getTarget()).setWeight(e.getEdge().getWeight());
+            }
+        }
+        for (Graph g : graphs) {
+            g.clear();
+        }
+        return r;
     }
 }

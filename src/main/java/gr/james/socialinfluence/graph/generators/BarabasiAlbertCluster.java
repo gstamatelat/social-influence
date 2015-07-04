@@ -1,9 +1,9 @@
 package gr.james.socialinfluence.graph.generators;
 
 import gr.james.socialinfluence.api.Graph;
+import gr.james.socialinfluence.graph.GraphOperations;
 import gr.james.socialinfluence.graph.MemoryGraph;
 import gr.james.socialinfluence.graph.Vertex;
-import gr.james.socialinfluence.helper.Helper;
 
 public class BarabasiAlbertCluster {
     public static <T extends Graph> Graph generate(Class<T> type, int totalVertices, int initialClique, int stepEdges, double a, int clusters) {
@@ -18,7 +18,7 @@ public class BarabasiAlbertCluster {
             randomVertices[i] = c[i].getRandomVertex();
         }
 
-        Graph g = Helper.combineGraphs(MemoryGraph.class, c);
+        Graph g = GraphOperations.combineGraphs(MemoryGraph.class, c);
 
         for (int i = 0; i < clusters; i++) {
             Vertex s = randomVertices[i];

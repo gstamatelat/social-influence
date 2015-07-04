@@ -9,22 +9,14 @@ public class CycleGenerator<T extends Graph> implements GraphGenerator<T> {
     private Class<T> type;
     private int totalVertices;
 
-    private T g;
-
     public CycleGenerator(Class<T> type, int totalVertices) {
         this.type = type;
         this.totalVertices = totalVertices;
     }
 
-    private void reset() {
-        g = Helper.instantiateGeneric(type);
-        g.setMeta("name", "cycle")
-                .setMeta("totalVertices", String.valueOf(totalVertices));
-    }
-
     @Override
     public T create() {
-        reset();
+        T g = Helper.instantiateGeneric(type);
 
         Vertex startVertex = g.addVertex(), previousVertex = startVertex;
         while (g.getVerticesCount() < totalVertices) {
@@ -33,6 +25,9 @@ public class CycleGenerator<T extends Graph> implements GraphGenerator<T> {
             previousVertex = newVertex;
         }
         g.addEdge(startVertex, previousVertex, true);
+
+        g.setMeta("name", "cycle")
+                .setMeta("totalVertices", String.valueOf(totalVertices));
 
         return g;
     }

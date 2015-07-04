@@ -13,6 +13,8 @@ public interface Graph {
 
     Graph setMeta(String key, String value);
 
+    Graph clearMeta();
+
     String getName();
 
     Vertex addVertex();

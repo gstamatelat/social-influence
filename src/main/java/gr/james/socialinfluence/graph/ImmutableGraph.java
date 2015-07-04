@@ -24,6 +24,11 @@ public class ImmutableGraph implements Graph {
     }
 
     @Override
+    public Graph clearMeta() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public String getName() {
         return this.g.getName();
     }

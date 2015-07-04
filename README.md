@@ -16,8 +16,14 @@ g.addEdge(v1, v2);
 ### Graph generation
 
 ```java
-Graph g = RandomG.generate(MemoryGraph.class, 100, 0.05);
-System.out.println(g);
+GraphGenerator generator = new RandomGenerator<>(MemoryGraph.class, 100, 0.05);
+Graph randomGraph = generator.create();
+System.out.println(randomGraph);
+```
+
+```java
+Graph scaleFreeGraph = BarabasiAlbert.generate(MemoryGraph.class, 25, 2, 2, 1.0);
+System.out.println(scaleFreeGraph);
 ```
 
 Inspect available generators in `gr.james.socialinfluence.graph.generators` package.

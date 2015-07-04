@@ -99,24 +99,4 @@ public class GraphState extends HashMap<Vertex, Double> {
         }
         return sum;
     }
-
-    /*@Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-
-        GraphState other = (GraphState) obj;
-        if (state == null) {
-            if (other.state != null) {
-                return false;
-            }
-        } else if (!state.equals(other.state)) {
-            return false;
-        }
-        return true;
-    }*/
 }

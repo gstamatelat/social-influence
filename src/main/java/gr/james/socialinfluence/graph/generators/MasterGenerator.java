@@ -5,24 +5,20 @@ import gr.james.socialinfluence.api.GraphGenerator;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.helper.Helper;
 
+/**
+ * <p>Jackson, Matthew O. Social and economic networks. Vol. 3. Princeton: Princeton University Press, 2008, Figure
+ * 8.3.2. A Society with a Convergent Updating Process.</p>
+ */
 public class MasterGenerator<T extends Graph> implements GraphGenerator<T> {
     private Class<T> type;
 
-    private T g;
-
     public MasterGenerator(Class<T> type) {
         this.type = type;
-        reset();
-    }
-
-    private void reset() {
-        g = Helper.instantiateGeneric(type);
-        g.setMeta("name", "Master");
     }
 
     @Override
     public T create() {
-        reset();
+        T g = Helper.instantiateGeneric(type);
 
         Vertex v1 = g.addVertex();
         Vertex v2 = g.addVertex();
@@ -31,6 +27,8 @@ public class MasterGenerator<T extends Graph> implements GraphGenerator<T> {
         g.addEdge(v1, v2);
         g.addEdge(v3, v2);
         g.addEdge(v2, v1);
+
+        g.setMeta("name", "Master");
 
         return g;
     }
