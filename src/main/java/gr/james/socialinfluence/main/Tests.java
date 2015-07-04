@@ -7,7 +7,7 @@ import gr.james.socialinfluence.game.GameDefinition;
 import gr.james.socialinfluence.game.PlayerEnum;
 import gr.james.socialinfluence.game.players.*;
 import gr.james.socialinfluence.graph.MemoryGraph;
-import gr.james.socialinfluence.graph.generators.TwoWheels;
+import gr.james.socialinfluence.graph.generators.TwoWheelsGenerator;
 
 import java.util.HashMap;
 
@@ -29,7 +29,7 @@ public class Tests {
                 for (Player p2 : players.keySet()) {
                     if (p1 != p2) {
                         for (int i = 0; i < rounds; i++) {
-                            Graph g = TwoWheels.generate(MemoryGraph.class, 6); // CHANGE THIS
+                            Graph g = new TwoWheelsGenerator<>(MemoryGraph.class, 6).create(); // CHANGE THIS
                             Game game = new Game(g);
                             GameDefinition d = new GameDefinition(maxMoves, maxMoves * 1.0, execution);
                             game.setPlayer(PlayerEnum.A, p1.findMove(g, d));

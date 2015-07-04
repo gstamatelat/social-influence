@@ -14,7 +14,7 @@ import gr.james.socialinfluence.graph.algorithms.iterators.RandomSurferIterator;
 import gr.james.socialinfluence.graph.generators.BarabasiAlbert;
 import gr.james.socialinfluence.graph.generators.BarabasiAlbertCluster;
 import gr.james.socialinfluence.graph.generators.RandomGenerator;
-import gr.james.socialinfluence.graph.generators.TwoWheels;
+import gr.james.socialinfluence.graph.generators.TwoWheelsGenerator;
 import gr.james.socialinfluence.helper.RandomHelper;
 import org.junit.Assert;
 import org.junit.Test;
@@ -179,14 +179,14 @@ public class Tests {
     }
 
     /**
-     * <p>In the {@link TwoWheels} graph, the maximum degree should be {@code max(6, n-1)}, where {@code n} is the
-     * {@code int} input of {@link TwoWheels#generate(Class, int)}</p>
+     * <p>In the {@link TwoWheelsGenerator} graph, the maximum degree should be {@code max(6, n-1)}, where {@code n} is
+     * the {@code int} input of {@link TwoWheelsGenerator#TwoWheelsGenerator(Class, int)}</p>
      */
     @Test
     public void twoWheelsMaxDegreeTest() {
         for (int k = 4; k < 100; k++) {
             /* Generate TwoWheels(k) */
-            Graph g = TwoWheels.generate(MemoryGraph.class, k);
+            Graph g = new TwoWheelsGenerator<>(MemoryGraph.class, k).create();
 
             /* Get max degree */
             int max = g.getOutDegree(new DegreeIterator(g, true).next());
@@ -197,13 +197,13 @@ public class Tests {
     }
 
     /**
-     * <p>Test for {@link MemoryGraph#getVertexFromIndex(int)} on the {@link TwoWheels} graph.</p>
+     * <p>Test for {@link MemoryGraph#getVertexFromIndex(int)} on the {@link TwoWheelsGenerator} graph.</p>
      */
     @Test
     public void getVertexFromIndexTest() {
         for (int k = 4; k < 100; k++) {
             /* Generate TwoWheels(k) */
-            Graph g = TwoWheels.generate(MemoryGraph.class, k);
+            Graph g = new TwoWheelsGenerator<>(MemoryGraph.class, k).create();
 
             /* Get max degree */
             int max = g.getOutDegree(new DegreeIterator(g, true).next());
@@ -218,7 +218,7 @@ public class Tests {
 
     @Test
     public void indexIteratorTest() {
-        Graph g = TwoWheels.generate(MemoryGraph.class, RandomHelper.getRandom().nextInt(25) + 5);
+        Graph g = new TwoWheelsGenerator<>(MemoryGraph.class, RandomHelper.getRandom().nextInt(25) + 5).create();
         IndexIterator it = new IndexIterator(g);
         int total = 0;
         Vertex pre = null;

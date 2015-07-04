@@ -60,8 +60,8 @@ public class GraphOperations {
         }
     }
 
-    public static <T extends Graph> Graph combineGraphs(Class<T> type, Graph[] graphs) {
-        Graph r = Helper.instantiateGeneric(type);
+    public static <T extends Graph> T combineGraphs(Class<T> type, Graph[] graphs) {
+        T r = Helper.instantiateGeneric(type);
         for (Graph g : graphs) {
             for (Vertex v : g.getVertices()) {
                 r.addVertex(v);
