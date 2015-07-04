@@ -5,7 +5,7 @@ import gr.james.socialinfluence.collections.GraphState;
 import gr.james.socialinfluence.graph.MemoryGraph;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.graph.algorithms.Degree;
-import gr.james.socialinfluence.graph.generators.BarabasiAlbert;
+import gr.james.socialinfluence.graph.generators.BarabasiAlbertGenerator;
 import gr.james.socialinfluence.helper.RandomHelper;
 
 import java.util.Arrays;
@@ -13,7 +13,7 @@ import java.util.Map;
 
 /**
  * <p>Test class to demonstrate that certain generators (mostly the scale-free ones) produce the correct degree
- * distributions. {@link gr.james.socialinfluence.graph.generators.BarabasiAlbert} produces a
+ * distributions. {@link BarabasiAlbertGenerator} produces a
  * network whose degree distribution follows a power law and {@code m} doesn't contribute to the exponent &gamma;.</p>
  */
 public class DegreeDistributionTest {
@@ -24,7 +24,7 @@ public class DegreeDistributionTest {
          * [c_1, e_1] = [c_2, e_2] = ... = [c_p, e_p] in order for the graph to have scale-free degree
          * distribution. On this example p = coefficient_count / 2. Press Ctrl+C to terminate.
          */
-        Graph g = BarabasiAlbert.generate(MemoryGraph.class, 10000, 2, 1, 1.2);
+        Graph g = new BarabasiAlbertGenerator<>(MemoryGraph.class, 10000, 2, 1, 1.2).create();
         int coefficient_count = 2;
         double speed = 1.0;
 

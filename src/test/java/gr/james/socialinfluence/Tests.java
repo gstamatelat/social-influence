@@ -11,8 +11,8 @@ import gr.james.socialinfluence.graph.algorithms.*;
 import gr.james.socialinfluence.graph.algorithms.iterators.DegreeIterator;
 import gr.james.socialinfluence.graph.algorithms.iterators.IndexIterator;
 import gr.james.socialinfluence.graph.algorithms.iterators.RandomSurferIterator;
-import gr.james.socialinfluence.graph.generators.BarabasiAlbert;
 import gr.james.socialinfluence.graph.generators.BarabasiAlbertCluster;
+import gr.james.socialinfluence.graph.generators.BarabasiAlbertGenerator;
 import gr.james.socialinfluence.graph.generators.RandomGenerator;
 import gr.james.socialinfluence.graph.generators.TwoWheelsGenerator;
 import gr.james.socialinfluence.helper.RandomHelper;
@@ -71,7 +71,7 @@ public class Tests {
     public void degreeEigenvectorTest() {
         for (int vertexCount = 10; vertexCount < 250; vertexCount += 10) {
             /* Make the graph */
-            Graph g = BarabasiAlbert.generate(MemoryGraph.class, vertexCount, 2, 2, 1.0);
+            Graph g = new BarabasiAlbertGenerator<>(MemoryGraph.class, vertexCount, 2, 2, 1.0).create();
 
             /* Get PageRank and Degree */
             GraphState degree = Degree.execute(g, true);

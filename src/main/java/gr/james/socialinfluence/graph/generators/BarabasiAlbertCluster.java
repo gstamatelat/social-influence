@@ -1,6 +1,7 @@
 package gr.james.socialinfluence.graph.generators;
 
 import gr.james.socialinfluence.api.Graph;
+import gr.james.socialinfluence.api.GraphGenerator;
 import gr.james.socialinfluence.graph.GraphOperations;
 import gr.james.socialinfluence.graph.MemoryGraph;
 import gr.james.socialinfluence.graph.Vertex;
@@ -9,8 +10,9 @@ public class BarabasiAlbertCluster {
     public static <T extends Graph> Graph generate(Class<T> type, int totalVertices, int initialClique, int stepEdges, double a, int clusters) {
         Graph[] c = new Graph[clusters];
 
+        GraphGenerator scaleFreeGenerator = new BarabasiAlbertGenerator<>(type, totalVertices, stepEdges, initialClique, a);
         for (int i = 0; i < clusters; i++) {
-            c[i] = BarabasiAlbert.generate(type, totalVertices, stepEdges, initialClique, a);
+            c[i] = scaleFreeGenerator.create();
         }
 
         Vertex[] randomVertices = new Vertex[clusters];

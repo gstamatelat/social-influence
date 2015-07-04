@@ -1,12 +1,11 @@
 package gr.james.socialinfluence.graph.generators;
 
-import gr.james.socialinfluence.api.EvolvingGraphGenerator;
 import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.helper.Helper;
 import gr.james.socialinfluence.helper.RandomHelper;
 
-public class RandomGenerator<T extends Graph> implements EvolvingGraphGenerator<T> {
+public class RandomGenerator<T extends Graph> extends AbstractEvolvingGenerator<T> {
     private Class<T> type;
     private int totalVertices;
     private double p;
@@ -47,15 +46,5 @@ public class RandomGenerator<T extends Graph> implements EvolvingGraphGenerator<
         g.setMeta("type", "Random")
                 .setMeta("totalVertices", String.valueOf(totalVertices))
                 .setMeta("p", String.valueOf(p));
-    }
-
-    @Override
-    public T create() {
-        while (this.canEvolve()) {
-            this.evolve();
-        }
-        T r = g;
-        this.reset();
-        return r;
     }
 }

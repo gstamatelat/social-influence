@@ -27,7 +27,7 @@ public abstract class AbstractGraph implements Graph {
 
     public AbstractGraph() {
         this.meta = new TreeMap<>();
-        this.meta.put("name", Finals.DEFAULT_GRAPH_NAME);
+        /*this.meta.put("name", Finals.DEFAULT_GRAPH_NAME);*/
     }
 
     @Override
