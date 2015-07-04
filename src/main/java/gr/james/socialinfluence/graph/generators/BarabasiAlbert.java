@@ -30,7 +30,7 @@ public class BarabasiAlbert {
             }
         }
 
-        return g.setMeta("name", "BarabasiAlbert")
+        return g.setMeta("type", "BarabasiAlbert")
                 .setMeta("totalVertices", String.valueOf(totalVertices))
                 .setMeta("initialClique", String.valueOf(initialClique))
                 .setMeta("stepEdges", String.valueOf(stepEdges))

@@ -48,8 +48,8 @@ public abstract class AbstractGraph implements Graph {
     }
 
     @Override
-    public String getName() {
-        return this.meta.get("name");
+    public String getGraphType() {
+        return this.meta.get("type");
     }
 
     /**

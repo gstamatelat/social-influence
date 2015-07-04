@@ -15,7 +15,7 @@ public interface Graph {
 
     Graph clearMeta();
 
-    String getName();
+    String getGraphType();
 
     Vertex addVertex();
 

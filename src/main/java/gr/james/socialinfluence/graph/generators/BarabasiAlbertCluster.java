@@ -26,7 +26,7 @@ public class BarabasiAlbertCluster {
             g.addEdge(s, t, true);
         }
 
-        return g.setMeta("name", "BarabasiAlbertCluster")
+        return g.setMeta("type", "BarabasiAlbertCluster")
                 .setMeta("totalVertices", String.valueOf(totalVertices))
                 .setMeta("initialClique", String.valueOf(initialClique))
                 .setMeta("stepEdges", String.valueOf(stepEdges))

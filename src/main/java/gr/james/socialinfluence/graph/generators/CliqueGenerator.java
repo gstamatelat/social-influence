@@ -21,7 +21,7 @@ public class CliqueGenerator<T extends Graph> implements GraphGenerator<T> {
         g.addVertices(totalVertices);
         GraphOperations.connectAllVertices(g);
 
-        g.setMeta("name", "Clique")
+        g.setMeta("type", "Clique")
                 .setMeta("totalVertices", String.valueOf(totalVertices));
 
         return g;

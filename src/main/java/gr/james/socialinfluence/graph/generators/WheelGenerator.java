@@ -25,7 +25,7 @@ public class WheelGenerator<T extends Graph> implements GraphGenerator<T> {
         }
 
         g.clearMeta()
-                .setMeta("name", "Wheel")
+                .setMeta("type", "Wheel")
                 .setMeta("totalVertices", String.valueOf(totalVertices));
 
         return g;

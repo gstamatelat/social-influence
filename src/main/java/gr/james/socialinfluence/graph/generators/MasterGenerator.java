@@ -28,7 +28,7 @@ public class MasterGenerator<T extends Graph> implements GraphGenerator<T> {
         g.addEdge(v3, v2);
         g.addEdge(v2, v1);
 
-        g.setMeta("name", "Master");
+        g.setMeta("type", "Master");
 
         return g;
     }

@@ -29,8 +29,8 @@ public class ImmutableGraph implements Graph {
     }
 
     @Override
-    public String getName() {
-        return this.g.getName();
+    public String getGraphType() {
+        return this.g.getGraphType();
     }
 
     @Override

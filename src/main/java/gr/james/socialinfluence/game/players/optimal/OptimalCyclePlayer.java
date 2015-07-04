@@ -8,7 +8,7 @@ public class OptimalCyclePlayer extends AbstractPlayer {
     @Override
     public void getMove() {
         /* This player only works in the cycle graph */
-        if (!this.g.getName().equals("cycle")) {
+        if (!this.g.getGraphType().equals("Cycle")) {
             log.warn("Graph {} is not a cycle. OptimalCyclePlayer only works for cycles. Aborting now.", g);
             return;
         }
