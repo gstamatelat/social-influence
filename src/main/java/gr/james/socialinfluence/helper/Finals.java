@@ -8,7 +8,6 @@ public class Finals {
     public static final Logger LOG = LoggerFactory.getLogger("");
 
     /* Default values */
-    /*public static final String DEFAULT_GRAPH_NAME = "G";*/
     public static final String DEFAULT_IO_ENCODING = "UTF-8";
     public static final double DEFAULT_EDGE_WEIGHT = 1.0;
     public static final double DEFAULT_GRAPH_STATE = 0.5;
