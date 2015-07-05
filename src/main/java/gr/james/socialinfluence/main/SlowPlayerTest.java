@@ -15,7 +15,7 @@ public class SlowPlayerTest {
         GameDefinition d = new GameDefinition(5, 5.0, 5000L);
 
         Player slowPlayer = new SlowPlayer();
-        Move m = slowPlayer.findMove(g, d);
+        Move m = slowPlayer.getMove(g, d);
         Finals.LOG.info("Final move: {}", m);
     }
 }

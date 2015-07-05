@@ -1,24 +1,27 @@
 package gr.james.socialinfluence.game.players.optimal;
 
+import gr.james.socialinfluence.api.Graph;
+import gr.james.socialinfluence.api.Player;
+import gr.james.socialinfluence.game.GameDefinition;
 import gr.james.socialinfluence.game.Move;
-import gr.james.socialinfluence.game.players.AbstractPlayer;
+import gr.james.socialinfluence.game.MovePointer;
 import gr.james.socialinfluence.graph.Vertex;
 
-public class OptimalCyclePlayer extends AbstractPlayer {
+public class OptimalCyclePlayer extends Player {
     @Override
-    public void getMove() {
+    public void suggestMove(Graph g, GameDefinition d, MovePointer movePtr) {
         /* This player only works in the cycle graph */
-        if (!this.g.getGraphType().equals("Cycle")) {
+        if (!g.getGraphType().equals("Cycle")) {
             log.warn("Graph {} is not a cycle. OptimalCyclePlayer only works for cycles. Aborting now.", g);
             return;
         }
 
         /* Optimal spreading distance */
-        final double period = (double) this.g.getVerticesCount() / this.d.getActions();
+        final double period = (double) g.getVerticesCount() / d.getActions();
 
         /* Log some graph info */
         log.info("Working on a {}-vertex cycle graph for {} actions. Optimal splitting is {} vertices.",
-                g.getVerticesCount(), this.d.getActions(), period);
+                g.getVerticesCount(), d.getActions(), period);
 
         /* Initialize a new move without any vertices */
         Move m = new Move();
@@ -27,9 +30,9 @@ public class OptimalCyclePlayer extends AbstractPlayer {
         double c = 0;
 
         /* Repeat until m is full */
-        while (m.getVerticesCount() < this.d.getActions()) {
+        while (m.getVerticesCount() < d.getActions()) {
             /* Select the vertex that corresponds to round(c) */
-            Vertex n = this.g.getVertexFromIndex((int) (c + 0.5));
+            Vertex n = g.getVertexFromIndex((int) (c + 0.5));
 
             /* Add the vertex to m */
             m.putVertex(n, 1.0);
@@ -42,6 +45,6 @@ public class OptimalCyclePlayer extends AbstractPlayer {
         log.info("Final move: {}", m);
 
         /* Submit the move */
-        this.movePtr.submit(m);
+        movePtr.submit(m);
     }
 }

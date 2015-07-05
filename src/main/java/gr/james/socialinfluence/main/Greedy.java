@@ -22,7 +22,7 @@ public class Greedy {
         int movesCount = 5;
 
         Player greedyPlayer = new GreedyPlayer();
-        Move m = greedyPlayer.findMove(g, new GameDefinition(movesCount, (double) movesCount, 60000L));
+        Move m = greedyPlayer.getMove(g, new GameDefinition(movesCount, (double) movesCount, 60000L));
         Finals.LOG.info("Final move: {}", m);
     }
 }

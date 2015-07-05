@@ -14,6 +14,6 @@ public class CheckDraw {
     public static void main(String[] args) throws IOException {
         Graph g = new CycleGenerator<>(MemoryGraph.class, 2789).create();
         Player p = new OptimalCyclePlayer();
-        Move m = p.findMove(g, new GameDefinition(3, 3.0, 0));
+        Move m = p.getMove(g, new GameDefinition(3, 3.0, 0));
     }
 }

@@ -7,6 +7,7 @@ import gr.james.socialinfluence.graph.MemoryGraph;
 import gr.james.socialinfluence.graph.Vertex;
 
 public class BarabasiAlbertCluster {
+    // TODO: Convert to GraphGenerator
     public static <T extends Graph> Graph generate(Class<T> type, int totalVertices, int initialClique, int stepEdges, double a, int clusters) {
         Graph[] c = new Graph[clusters];
 

@@ -1,6 +1,10 @@
 package gr.james.socialinfluence.game.players;
 
+import gr.james.socialinfluence.api.Graph;
+import gr.james.socialinfluence.api.Player;
+import gr.james.socialinfluence.game.GameDefinition;
 import gr.james.socialinfluence.game.Move;
+import gr.james.socialinfluence.game.MovePointer;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.graph.algorithms.Dijkstra;
 import gr.james.socialinfluence.graph.algorithms.iterators.PageRankIterator;
@@ -8,7 +12,7 @@ import gr.james.socialinfluence.graph.algorithms.iterators.PageRankIterator;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GreedyPlayer extends AbstractPlayer {
+public class GreedyPlayer extends Player {
     public static Move getMinimum(HashMap<Move, Double> treeMoves) {
         Double minSumMove = Double.POSITIVE_INFINITY;
         Move minMove = null;
@@ -39,15 +43,15 @@ public class GreedyPlayer extends AbstractPlayer {
     }
 
     @Override
-    public void getMove() {
+    public void suggestMove(Graph g, GameDefinition d, MovePointer movePtr) {
         /* Here be distanceMap and vector */
         HashMap<Vertex[], Double> distanceMap = new HashMap<>();
         HashMap<Vertex, Double> vector = new HashMap<>();
 
         /* Fill the distanceMap */
         // TODO: Replace this snippet with FloydWarshall method, but care, this map has (t,s) rather than (s,t)
-        for (Vertex v : this.g.getVertices()) {
-            HashMap<Vertex, Double> temp = Dijkstra.execute(this.g, v);
+        for (Vertex v : g.getVertices()) {
+            HashMap<Vertex, Double> temp = Dijkstra.execute(g, v);
             for (Map.Entry<Vertex, Double> e : temp.entrySet()) {
                 distanceMap.put(new Vertex[]{e.getKey(), v}, e.getValue());
             }
@@ -59,13 +63,13 @@ public class GreedyPlayer extends AbstractPlayer {
 
         HashMap<Move, Double> treeMoves = new HashMap<>();
 
-        PageRankIterator pri = new PageRankIterator(this.g, 0.0);
+        PageRankIterator pri = new PageRankIterator(g, 0.0);
         while (pri.hasNext() && !this.isInterrupted()) {
             Vertex firstGuess = pri.next();
 
             /* Initialize the vector */
             vector.clear();
-            for (Vertex v : this.g.getVertices()) {
+            for (Vertex v : g.getVertices()) {
                 vector.put(v, 1.0);
             }
 
@@ -77,7 +81,7 @@ public class GreedyPlayer extends AbstractPlayer {
             /* Simulation loop */
             while (m.getVerticesCount() < d.getActions()) {
                 HashMap<Vertex, Double> sumMap = new HashMap<>();
-                for (Vertex v : this.g.getVertices()) {
+                for (Vertex v : g.getVertices()) {
                     HashMap<Vertex, Double> tmpVector = new HashMap<>();
                     for (Map.Entry<Vertex, Double> e : vector.entrySet()) {
                         tmpVector.put(e.getKey(), e.getValue());
@@ -103,7 +107,7 @@ public class GreedyPlayer extends AbstractPlayer {
 
             /* Find the best move, aka the one with min vector sum */
             Move minMove = getMinimum(treeMoves);
-            this.movePtr.submit(minMove);
+            movePtr.submit(minMove);
 
             /* This helps when computation takes a long time */
             log.info("{} : {}", firstGuess, minMove);

@@ -1,17 +1,21 @@
 package gr.james.socialinfluence.game.players;
 
+import gr.james.socialinfluence.api.Graph;
+import gr.james.socialinfluence.api.Player;
+import gr.james.socialinfluence.game.GameDefinition;
 import gr.james.socialinfluence.game.Move;
+import gr.james.socialinfluence.game.MovePointer;
 import gr.james.socialinfluence.graph.algorithms.iterators.RandomVertexIterator;
 
-public class RandomPlayer extends AbstractPlayer {
+public class RandomPlayer extends Player {
     @Override
-    public void getMove() {
+    public void suggestMove(Graph g, GameDefinition d, MovePointer movePtr) {
         Move m = new Move();
-        RandomVertexIterator rvi = new RandomVertexIterator(this.g);
-        while (m.getVerticesCount() < this.d.getActions()) {
+        RandomVertexIterator rvi = new RandomVertexIterator(g);
+        while (m.getVerticesCount() < d.getActions()) {
             m.putVertex(rvi.next(), 1.0);
         }
-        this.movePtr.submit(m);
-        log.info("RandomG player: {}", m);
+        movePtr.submit(m);
+        log.info("{}", m);
     }
 }

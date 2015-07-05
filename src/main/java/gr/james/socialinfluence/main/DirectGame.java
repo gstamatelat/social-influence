@@ -20,8 +20,8 @@ public class DirectGame {
         Player p1 = new MaxPageRankPlayer();
         Player p2 = new RandomPlayer();
         Game game = new Game(g);
-        game.setPlayer(PlayerEnum.A, p1.findMove(g, d));
-        game.setPlayer(PlayerEnum.B, p2.findMove(g, d));
+        game.setPlayer(PlayerEnum.A, p1.getMove(g, d));
+        game.setPlayer(PlayerEnum.B, p2.getMove(g, d));
         Finals.LOG.info(game.runGame(d, 0.01).toString());
     }
 }

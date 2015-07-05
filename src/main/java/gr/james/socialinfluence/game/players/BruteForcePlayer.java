@@ -2,10 +2,7 @@ package gr.james.socialinfluence.game.players;
 
 import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.api.Player;
-import gr.james.socialinfluence.game.Game;
-import gr.james.socialinfluence.game.Move;
-import gr.james.socialinfluence.game.MovePoint;
-import gr.james.socialinfluence.game.PlayerEnum;
+import gr.james.socialinfluence.game.*;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.graph.algorithms.iterators.RandomSurferIterator;
 import gr.james.socialinfluence.graph.algorithms.iterators.RandomVertexIterator;
@@ -24,7 +21,7 @@ import java.util.HashSet;
  * enabled by default.</li>
  * </ul>
  */
-public class BruteForcePlayer extends AbstractPlayer {
+public class BruteForcePlayer extends Player {
     public static Move getRandomMove(Graph g, int numOfMoves, int weightLevels, Move lastMove, boolean clever) {
         if (!clever) {
             return getRandomMoveWithoutMutation(g, numOfMoves, weightLevels);
@@ -62,43 +59,42 @@ public class BruteForcePlayer extends AbstractPlayer {
     }
 
     @Override
-    public void getMove() {
-        Game game = new Game(this.g);
+    public Player putDefaultOptions() {
+        this.options.put("weight_levels", "10");
+        this.options.put("epsilon", "0.0");
+        this.options.put("clever", "false");
+        return this;
+    }
+
+    @Override
+    public void suggestMove(Graph g, GameDefinition d, MovePointer movePtr) {
+        Game game = new Game(g);
 
         HashSet<Move> movesHistory = new HashSet<>();
         HashSet<Move> moveDraws = new HashSet<>();
 
-        Move bestMove = getRandomMove(this.g, this.d.getActions(), Integer.parseInt(this.options.get("weight_levels")), null, false);
+        Move bestMove = getRandomMove(g, d.getActions(), Integer.parseInt(this.options.get("weight_levels")), null, false);
         movesHistory.add(bestMove);
 
         while (!this.isInterrupted()) {
-            Move newMove = getRandomMove(this.g, this.d.getActions(), Integer.parseInt(this.options.get("weight_levels")), game.getPlayerAMove(), Boolean.parseBoolean(this.options.get("clever")));
+            Move newMove = getRandomMove(g, d.getActions(), Integer.parseInt(this.options.get("weight_levels")), game.getPlayerAMove(), Boolean.parseBoolean(this.options.get("clever")));
             game.setPlayer(PlayerEnum.A, bestMove);
             game.setPlayer(PlayerEnum.B, newMove);
-            int gameScore = game.runGame(this.d, Double.parseDouble(this.options.get("epsilon"))).score;
-            if (gameScore < 0) {
-            } else if (gameScore == 0) {
+            int gameScore = game.runGame(d, Double.parseDouble(this.options.get("epsilon"))).score;
+            if (gameScore == 0) {
                 if (moveDraws.add(game.getPlayerBMove())) {
                     log.info("Draw with move {}", game.getPlayerBMove());
                 }
-            } else {
+            } else if (gameScore > 0) {
                 boolean contained = movesHistory.add(newMove);
                 if (!contained) {
                     log.info("Going in circles after {}", game.getPlayerBMove());
                 }
                 moveDraws.clear();
                 bestMove = newMove;
-                this.movePtr.submit(bestMove);
+                movePtr.submit(bestMove);
                 log.info("New best move {}", newMove.toString());
             }
         }
-    }
-
-    @Override
-    public Player putDefaultOptions() {
-        this.options.put("weight_levels", "10");
-        this.options.put("epsilon", "0.0");
-        this.options.put("clever", "false");
-        return this;
     }
 }

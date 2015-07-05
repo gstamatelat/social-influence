@@ -1,21 +1,24 @@
 package gr.james.socialinfluence.game.players;
 
+import gr.james.socialinfluence.api.Graph;
+import gr.james.socialinfluence.api.Player;
+import gr.james.socialinfluence.game.GameDefinition;
 import gr.james.socialinfluence.game.Move;
+import gr.james.socialinfluence.game.MovePointer;
 import gr.james.socialinfluence.graph.algorithms.iterators.RandomVertexIterator;
 
-public class SlowPlayer extends AbstractPlayer {
+public class SlowPlayer extends Player {
     @Override
-    public void getMove() {
+    public void suggestMove(Graph g, GameDefinition d, MovePointer movePtr) {
         long now = System.currentTimeMillis();
 
-        while (System.currentTimeMillis() - now < 5 * this.d.getExecution()) {
+        while (System.currentTimeMillis() - now < 5 * d.getExecution()) {
             Move m = new Move();
-            RandomVertexIterator rvi = new RandomVertexIterator(this.g);
-            while (m.getVerticesCount() < this.d.getActions()) {
+            RandomVertexIterator rvi = new RandomVertexIterator(g);
+            while (m.getVerticesCount() < d.getActions()) {
                 m.putVertex(rvi.next(), 1.0);
             }
-            this.movePtr.submit(m);
-            log.info("Slow player: {}", m);
+            movePtr.submit(m);
         }
     }
 }

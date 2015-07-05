@@ -32,8 +32,8 @@ public class Tests {
                             Graph g = new TwoWheelsGenerator<>(MemoryGraph.class, 6).create(); // CHANGE THIS
                             Game game = new Game(g);
                             GameDefinition d = new GameDefinition(maxMoves, maxMoves * 1.0, execution);
-                            game.setPlayer(PlayerEnum.A, p1.findMove(g, d));
-                            game.setPlayer(PlayerEnum.B, p2.findMove(g, d));
+                            game.setPlayer(PlayerEnum.A, p1.getMove(g, d));
+                            game.setPlayer(PlayerEnum.B, p2.getMove(g, d));
                             int result = game.runGame(d).score;
                             if (result == 0) {
                                 players.put(p1, players.get(p1) + 0.5);
