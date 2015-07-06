@@ -34,6 +34,5 @@ Inspect available generators in `gr.james.socialinfluence.graph.generators` pack
 - There needs to be a helper function or some `Graph` member method that can return if a graph is aperiodic or not.
 - Consider converting `Move` to immutable.
 - Considering converting `Move` to `Map`.
-- `Game` should accept `Player`s not `Move`s.
 - Grid generator and maybe some edge randomizer: http://www.cs.cornell.edu/home/kleinber/swn.d/swn.html
 - Transformation "stretch" that extends edges

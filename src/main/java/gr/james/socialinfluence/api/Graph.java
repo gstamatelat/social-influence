@@ -1,7 +1,7 @@
 package gr.james.socialinfluence.api;
 
+import gr.james.socialinfluence.collections.VertexPair;
 import gr.james.socialinfluence.graph.Edge;
-import gr.james.socialinfluence.graph.FullEdge;
 import gr.james.socialinfluence.graph.Vertex;
 
 import java.util.Collection;
@@ -43,7 +43,7 @@ public interface Graph {
 
     Set<Vertex> getStubbornVertices();
 
-    Set<FullEdge> getEdges();
+    Map<VertexPair, Edge> getEdges();
 
     int getEdgesCount();
 

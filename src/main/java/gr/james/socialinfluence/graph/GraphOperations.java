@@ -1,6 +1,7 @@
 package gr.james.socialinfluence.graph;
 
 import gr.james.socialinfluence.api.Graph;
+import gr.james.socialinfluence.collections.VertexPair;
 import gr.james.socialinfluence.helper.Helper;
 
 import java.util.Iterator;
@@ -66,8 +67,8 @@ public class GraphOperations {
             for (Vertex v : g.getVertices()) {
                 r.addVertex(v);
             }
-            for (FullEdge e : g.getEdges()) {
-                r.addEdge(e.getSource(), e.getTarget()).setWeight(e.getEdge().getWeight());
+            for (Map.Entry<VertexPair, Edge> e : g.getEdges().entrySet()) {
+                r.addEdge(e.getKey().getFirst(), e.getKey().getSecond()).setWeight(e.getValue().getWeight());
             }
         }
         for (Graph g : graphs) {

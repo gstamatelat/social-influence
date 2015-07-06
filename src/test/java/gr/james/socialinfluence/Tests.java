@@ -3,7 +3,7 @@ package gr.james.socialinfluence;
 import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.collections.GraphState;
 import gr.james.socialinfluence.collections.VertexPair;
-import gr.james.socialinfluence.graph.FullEdge;
+import gr.james.socialinfluence.graph.Edge;
 import gr.james.socialinfluence.graph.GraphOperations;
 import gr.james.socialinfluence.graph.MemoryGraph;
 import gr.james.socialinfluence.graph.Vertex;
@@ -38,8 +38,8 @@ public class Tests {
         /* Create graph and randomize edge weights */
         Graph g = new RandomGenerator<>(MemoryGraph.class, vertexCount, p).create();
         GraphOperations.createCircle(g, true);
-        for (FullEdge e : g.getEdges()) {
-            e.getEdge().setWeight(RandomHelper.getRandom().nextDouble());
+        for (Map.Entry<VertexPair, Edge> e : g.getEdges().entrySet()) {
+            e.getValue().setWeight(RandomHelper.getRandom().nextDouble());
         }
 
         /* Emulate the random surfer until mean of the map values average is MEAN, aka for MEAN * N steps */
@@ -104,8 +104,8 @@ public class Tests {
                 /* Create graph and randomize edge weights */
                 Graph g = new RandomGenerator<>(MemoryGraph.class, vertexCount, p).create();
                 GraphOperations.createCircle(g, true);
-                for (FullEdge e : g.getEdges()) {
-                    e.getEdge().setWeight(RandomHelper.getRandom().nextDouble());
+                for (Map.Entry<VertexPair, Edge> e : g.getEdges().entrySet()) {
+                    e.getValue().setWeight(RandomHelper.getRandom().nextDouble());
                 }
 
                 /* Floyd-Warshall */

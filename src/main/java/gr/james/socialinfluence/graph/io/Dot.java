@@ -3,7 +3,8 @@ package gr.james.socialinfluence.graph.io;
 import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.api.GraphExporter;
 import gr.james.socialinfluence.api.GraphImporter;
-import gr.james.socialinfluence.graph.FullEdge;
+import gr.james.socialinfluence.collections.VertexPair;
+import gr.james.socialinfluence.graph.Edge;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.helper.Finals;
 
@@ -12,6 +13,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class Dot implements GraphImporter, GraphExporter {
     @Override
@@ -23,9 +25,9 @@ public class Dot implements GraphImporter, GraphExporter {
     public void to(Graph g, OutputStream out) throws IOException {
         if (g.isUndirected()) {
             ArrayList<Vertex[]> edgeList = new ArrayList<>();
-            for (FullEdge e : g.getEdges()) {
-                Vertex v = e.getSource();
-                Vertex w = e.getTarget();
+            for (Map.Entry<VertexPair, Edge> e : g.getEdges().entrySet()) {
+                Vertex v = e.getKey().getFirst();
+                Vertex w = e.getKey().getSecond();
                 int indexOfOpposite = -1;
                 for (int i = 0; i < edgeList.size(); i++) {
                     if (edgeList.get(i)[0].equals(w) && edgeList.get(i)[1].equals(v)) {
@@ -63,9 +65,9 @@ public class Dot implements GraphImporter, GraphExporter {
             dot += "  overlap = false;" + System.lineSeparator();
             dot += "  bgcolor = transparent;" + System.lineSeparator();
             dot += "  splines = true;" + System.lineSeparator();
-            for (FullEdge e : g.getEdges()) {
-                Vertex v = e.getSource();
-                Vertex w = e.getTarget();
+            for (Map.Entry<VertexPair, Edge> e : g.getEdges().entrySet()) {
+                Vertex v = e.getKey().getFirst();
+                Vertex w = e.getKey().getSecond();
                 dot += "  " + v.toString() + " -> " + w.toString() + System.lineSeparator();
             }
             dot += "}" + System.lineSeparator();

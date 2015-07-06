@@ -31,13 +31,7 @@ public class PageRank {
                     nextState.put(v, nextState.get(v) + lastState.get(e.getKey()) / outWeightSums.get(e.getKey()));
                 }
             }
-            /*for (FullEdge e : g.getEdges()) {
-                nextState.put(e.getTarget(),
-                        nextState.get(e.getTarget()) + (
-                                e.getWeight() * lastState.get(e.getSource()) / outWeightSums.get(e.getSource())
-                        )
-                );
-            }*/
+
             for (Map.Entry<Vertex, Double> k : nextState.entrySet()) {
                 k.setValue(dampingFactor + (1 - dampingFactor) * k.getValue());
             }

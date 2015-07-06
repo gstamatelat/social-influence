@@ -1,7 +1,7 @@
 package gr.james.socialinfluence.api;
 
+import gr.james.socialinfluence.collections.VertexPair;
 import gr.james.socialinfluence.graph.Edge;
-import gr.james.socialinfluence.graph.FullEdge;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.graph.algorithms.Dijkstra;
 import gr.james.socialinfluence.graph.algorithms.iterators.RandomVertexIterator;
@@ -97,9 +97,9 @@ public abstract class AbstractGraph implements Graph {
             }
             g.addVertex(v);
         }
-        for (FullEdge e : this.getEdges()) {
-            if (g.containsVertex(e.getSource()) && g.containsVertex(e.getTarget())) {
-                g.addEdge(e.getSource(), e.getTarget()).setWeight(e.getEdge().getWeight());
+        for (Map.Entry<VertexPair, Edge> e : this.getEdges().entrySet()) {
+            if ((g.containsVertex(e.getKey().getFirst())) && g.containsVertex(e.getKey().getSecond())) {
+                g.addEdge(e.getKey().getFirst(), e.getKey().getSecond()).setWeight(e.getValue().getWeight());
             }
         }
         return g;
@@ -159,14 +159,14 @@ public abstract class AbstractGraph implements Graph {
     }
 
     @Override
-    public Set<FullEdge> getEdges() {
-        Set<FullEdge> edges = new HashSet<>();
+    public Map<VertexPair, Edge> getEdges() {
+        Map<VertexPair, Edge> edges = new HashMap<>();
         for (Vertex v : this.getVertices()) {
             for (Map.Entry<Vertex, Edge> e : this.getOutEdges(v).entrySet()) {
-                edges.add(new FullEdge(v, e.getKey(), e.getValue()));
+                edges.put(new VertexPair(v, e.getKey()), e.getValue());
             }
         }
-        return Collections.unmodifiableSet(edges);
+        return Collections.unmodifiableMap(edges);
     }
 
     /**
