@@ -3,12 +3,15 @@ package gr.james.socialinfluence.helper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+
 public class Finals {
     /* Root logger */
     public static final Logger LOG = LoggerFactory.getLogger("");
 
     /* Default values */
-    public static final String DEFAULT_IO_ENCODING = "UTF-8";
+    public static final Charset DEFAULT_IO_ENCODING = StandardCharsets.UTF_8;
     public static final double DEFAULT_EDGE_WEIGHT = 1.0;
     public static final double DEFAULT_GRAPH_STATE = 0.5;
     public static final double DEFAULT_DEGROOT_PRECISION = 0.0;

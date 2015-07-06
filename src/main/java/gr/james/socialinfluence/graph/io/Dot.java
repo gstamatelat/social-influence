@@ -11,7 +11,6 @@ import gr.james.socialinfluence.helper.Finals;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -56,7 +55,7 @@ public class Dot implements GraphImporter, GraphExporter {
             dot += "}" + System.lineSeparator();
 
             try {
-                out.write(dot.getBytes(Charset.forName(Finals.DEFAULT_IO_ENCODING)));
+                out.write(dot.getBytes(Finals.DEFAULT_IO_ENCODING));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -73,7 +72,7 @@ public class Dot implements GraphImporter, GraphExporter {
             dot += "}" + System.lineSeparator();
 
             try {
-                out.write(dot.getBytes(Charset.forName(Finals.DEFAULT_IO_ENCODING)));
+                out.write(dot.getBytes(Finals.DEFAULT_IO_ENCODING));
             } catch (IOException e) {
                 e.printStackTrace();
             }
