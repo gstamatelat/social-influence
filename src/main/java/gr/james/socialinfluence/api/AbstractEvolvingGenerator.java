@@ -1,7 +1,4 @@
-package gr.james.socialinfluence.graph.generators;
-
-import gr.james.socialinfluence.api.EvolvingGraphGenerator;
-import gr.james.socialinfluence.api.Graph;
+package gr.james.socialinfluence.api;
 
 public abstract class AbstractEvolvingGenerator<T extends Graph> implements EvolvingGraphGenerator<T> {
     @Override

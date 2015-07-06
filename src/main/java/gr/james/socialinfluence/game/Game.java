@@ -1,6 +1,7 @@
 package gr.james.socialinfluence.game;
 
 import gr.james.socialinfluence.api.Graph;
+import gr.james.socialinfluence.api.Player;
 import gr.james.socialinfluence.collections.GraphState;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.graph.algorithms.DeGroot;
@@ -16,6 +17,20 @@ public class Game {
         this.g = g;
         this.playerAMove = new Move();
         this.playerBMove = new Move();
+    }
+
+    public static GameResult runPlayers(Player a, Player b, Graph g, GameDefinition d, double deDrootEpsilon) {
+        Game game = new Game(g);
+        game.setPlayer(PlayerEnum.A, a.getMove(g, d));
+        game.setPlayer(PlayerEnum.B, b.getMove(g, d));
+        return game.runGame(d, deDrootEpsilon);
+    }
+
+    public static GameResult runPlayers(Player a, Player b, Graph g, GameDefinition d) {
+        Game game = new Game(g);
+        game.setPlayer(PlayerEnum.A, a.getMove(g, d));
+        game.setPlayer(PlayerEnum.B, b.getMove(g, d));
+        return game.runGame(d);
     }
 
     public Move getPlayerAMove() {
@@ -35,7 +50,7 @@ public class Game {
         return this;
     }
 
-    public Game swapPlayers() {
+    private Game swapPlayers() {
         Move tmp = this.playerAMove;
         this.playerAMove = this.playerBMove;
         this.playerBMove = tmp;

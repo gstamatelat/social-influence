@@ -1,6 +1,8 @@
-package gr.james.socialinfluence.graph;
+package gr.james.socialinfluence.api;
 
-import gr.james.socialinfluence.api.Graph;
+import gr.james.socialinfluence.graph.Edge;
+import gr.james.socialinfluence.graph.FullEdge;
+import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.graph.algorithms.Dijkstra;
 import gr.james.socialinfluence.graph.algorithms.iterators.RandomVertexIterator;
 import gr.james.socialinfluence.helper.Finals;
