@@ -21,9 +21,16 @@ public class Examples {
         Vertex v1 = g.addVertex();
         Vertex v2 = g.addVertex();
         Vertex v3 = g.addVertex();
+        Vertex v4 = g.addVertex();
+        Vertex v5 = g.addVertex();
+        Vertex v6 = g.addVertex();
         g.addEdge(v1, v2);
-        g.addEdge(v2, v3, true);
-        g.addEdge(v3, v1);
+        g.addEdge(v2, v3);
+        g.addEdge(v1, v4);
+        g.addEdge(v4, v5);
+        g.addEdge(v5, v6);
+        g.addEdge(v2, v5);
+        g.addEdge(v3, v6);
 
         Dot dot = new Dot();
         dot.to(g, System.out);
