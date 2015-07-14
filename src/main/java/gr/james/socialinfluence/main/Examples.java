@@ -1,3 +1,5 @@
+//NOT FINISHED
+
 package gr.james.socialinfluence.main;
 
 import gr.james.socialinfluence.api.Graph;
@@ -13,24 +15,39 @@ import gr.james.socialinfluence.graph.generators.RandomGenerator;
 import gr.james.socialinfluence.graph.io.Dot;
 
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.Set;
+import java.util.Scanner;
 
 public class Examples {
     public static void main(String[] args) throws IOException {
+
+        Scanner scan= new Scanner(System.in);
+        System.out.println("print rows");
+        int rows= scan.nextInt();
+        System.out.println("print columns");
+        int columns= scan.nextInt();
+
+        LinkedList<Vertex> list = new LinkedList<>();
+
+
         Graph g = new MemoryGraph();
+
+        Vertex v = g.addVertex();
+
+
+        for (int i=1; i<=rows; i++){
+            for (int j=1; j<=columns; j++){
+                if(j>1){
+                    g.addEdge(v1, v2, true);
+                }
+            }
+        }
+
+
         Vertex v1 = g.addVertex();
         Vertex v2 = g.addVertex();
-        Vertex v3 = g.addVertex();
-        Vertex v4 = g.addVertex();
-        Vertex v5 = g.addVertex();
-        Vertex v6 = g.addVertex();
-        g.addEdge(v1, v2);
-        g.addEdge(v2, v3);
-        g.addEdge(v1, v4);
-        g.addEdge(v4, v5);
-        g.addEdge(v5, v6);
-        g.addEdge(v2, v5);
-        g.addEdge(v3, v6);
+        g.addEdge(v1, v2, true);
 
         Dot dot = new Dot();
         dot.to(g, System.out);
