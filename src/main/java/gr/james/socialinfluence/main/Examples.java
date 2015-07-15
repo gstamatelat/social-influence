@@ -1,5 +1,3 @@
-//NOT FINISHED
-
 package gr.james.socialinfluence.main;
 
 import gr.james.socialinfluence.api.Graph;
@@ -15,6 +13,7 @@ import gr.james.socialinfluence.graph.generators.RandomGenerator;
 import gr.james.socialinfluence.graph.io.Dot;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;
 import java.util.Scanner;
@@ -27,27 +26,31 @@ public class Examples {
         int rows= scan.nextInt();
         System.out.println("print columns");
         int columns= scan.nextInt();
+        int count = 0;
 
-        LinkedList<Vertex> list = new LinkedList<>();
 
 
         Graph g = new MemoryGraph();
+        Set<Vertex> set = new HashSet<>();
 
-        Vertex v = g.addVertex();
 
 
-        for (int i=1; i<=rows; i++){
-            for (int j=1; j<=columns; j++){
-                if(j>1){
-                    g.addEdge(v1, v2, true);
+        g.addVertices((rows + 1) * (columns + 1));
+        set.addAll(g.getVertices());
+        Vertex[] a = set.toArray(new Vertex[(rows+1)*(columns+1)]);
+
+        for (int i=0; i<=rows; i++){
+            for (int j=0; j<=columns; j++){
+                if(j!=columns) {
+                    g.addEdge(a[count], a[count + 1], true);
                 }
+                if(i!=rows) {
+                    g.addEdge(a[count], a[count + columns + 1], true);
+                }
+
+                count=count+1;
             }
         }
-
-
-        Vertex v1 = g.addVertex();
-        Vertex v2 = g.addVertex();
-        g.addEdge(v1, v2, true);
 
         Dot dot = new Dot();
         dot.to(g, System.out);
