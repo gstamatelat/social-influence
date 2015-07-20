@@ -6,12 +6,20 @@ import gr.james.socialinfluence.graph.generators.*;
 import org.junit.Assert;
 import org.junit.Test;
 
+
 public class GridTest {
 
     @Test
     public void GridTest(){
-        Graph g = new GridGenerator<>(MemoryGraph.class, 11, 23).create();
-        Assert.assertEquals("gridGenerator.invalidVertexCount", g.getVerticesCount(), 11*23);
-        Assert.assertEquals("gridGenerator.invalidEdgeCount", g.getEdgesCount(), 2*(2*11*23-11-23));
+        int[] N = {1, 6, 7, 8, 23, 34, 55};
+        int[] M = {1, 2, 3, 7, 21, 40, 49};
+        for(int i : N) {
+            for(int j : M) {
+                Graph g = new GridGenerator<>(MemoryGraph.class, i, j).create();
+                Assert.assertEquals("gridGenerator.invalidVertexCount", g.getVerticesCount(), i*j);
+                Assert.assertEquals("gridGenerator.invalidEdgeCount", g.getEdgesCount(), 2 *(2*i*j-i-j));
+            }
+        }
     }
+
 }
