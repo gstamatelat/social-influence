@@ -1,0 +1,17 @@
+package gr.james.socialinfluence;
+
+import gr.james.socialinfluence.api.Graph;
+import gr.james.socialinfluence.graph.MemoryGraph;
+import gr.james.socialinfluence.graph.generators.*;
+import org.junit.Assert;
+import org.junit.Test;
+
+public class GridTest {
+
+    @Test
+    public void GridTest(){
+        Graph g = new GridGenerator<>(MemoryGraph.class, 11, 23).create();
+        Assert.assertEquals("gridGenerator.invalidVertexCount", g.getVerticesCount(), 11*23);
+        Assert.assertEquals("gridGenerator.invalidEdgeCount", g.getEdgesCount(), 2*(2*11*23-11-23));
+    }
+}
