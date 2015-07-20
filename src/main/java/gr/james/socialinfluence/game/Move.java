@@ -15,6 +15,13 @@ public class Move implements Iterable<MovePoint> {
         this.moveObject = new TreeSet<>();
     }
 
+    public Move(Vertex... args) {
+        this();
+        for (Vertex v : args) {
+            this.putVertex(v, 1.0);
+        }
+    }
+
     public int getVerticesCount() {
         return this.moveObject.size();
     }
