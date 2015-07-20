@@ -37,8 +37,16 @@ public class Game {
         return playerAMove;
     }
 
+    public Game setPlayerAMove(Move move) {
+        return setPlayer(PlayerEnum.A, move);
+    }
+
     public Move getPlayerBMove() {
         return playerBMove;
+    }
+
+    public Game setPlayerBMove(Move move) {
+        return setPlayer(PlayerEnum.B, move);
     }
 
     public Game setPlayer(PlayerEnum player, Move move) {
@@ -68,7 +76,7 @@ public class Game {
             try {
                 g.addEdge(e.vertex, playerA).setWeight(e.weight);
             } catch (GraphException x) {
-                Finals.LOG.warn(Finals.L_GAME_INVALID_VERTEX);
+                Finals.LOG.error(Finals.L_GAME_INVALID_VERTEX);
             }
         }
 
@@ -76,7 +84,7 @@ public class Game {
             try {
                 g.addEdge(e.vertex, playerB).setWeight(e.weight);
             } catch (GraphException x) {
-                Finals.LOG.warn(Finals.L_GAME_INVALID_VERTEX);
+                Finals.LOG.error(Finals.L_GAME_INVALID_VERTEX);
             }
         }
 
