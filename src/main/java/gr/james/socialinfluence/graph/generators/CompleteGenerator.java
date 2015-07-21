@@ -5,11 +5,11 @@ import gr.james.socialinfluence.api.GraphGenerator;
 import gr.james.socialinfluence.graph.GraphOperations;
 import gr.james.socialinfluence.helper.Helper;
 
-public class CliqueGenerator<T extends Graph> implements GraphGenerator<T> {
+public class CompleteGenerator<T extends Graph> implements GraphGenerator<T> {
     private Class<T> type;
     private int totalVertices;
 
-    public CliqueGenerator(Class<T> type, int totalVertices) {
+    public CompleteGenerator(Class<T> type, int totalVertices) {
         this.type = type;
         this.totalVertices = totalVertices;
     }
@@ -21,7 +21,7 @@ public class CliqueGenerator<T extends Graph> implements GraphGenerator<T> {
         g.addVertices(totalVertices);
         GraphOperations.connectAllVertices(g);
 
-        g.setMeta("type", "Clique")
+        g.setMeta("type", "Complete")
                 .setMeta("totalVertices", String.valueOf(totalVertices));
 
         return g;

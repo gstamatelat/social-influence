@@ -62,7 +62,7 @@ public class BarabasiAlbertGenerator<T extends Graph> extends AbstractEvolvingGe
 
     @Override
     public void reset() {
-        g = new CliqueGenerator<>(type, initialClique).create();
+        g = new CompleteGenerator<>(type, initialClique).create();
         g.clearMeta()
                 .setMeta("type", "BarabasiAlbert")
                 .setMeta("totalVertices", String.valueOf(totalVertices))
