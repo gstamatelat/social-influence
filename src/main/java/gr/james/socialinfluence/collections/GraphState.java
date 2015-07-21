@@ -13,16 +13,14 @@ import java.util.Set;
  * This class also contains useful methods for statistical analysis of that metric.</p>
  */
 public class GraphState extends HashMap<Vertex, Double> {
-    // TODO: This class doesn't seem right, constructor accepting graph? maybe convert to subclass of HashMap
+    // TODO: This class doesn't seem right, constructor accepting graph?
     // TODO: GraphState<E> extends HashMap<Vertex, E>?
 
     public GraphState() {
     }
 
     public GraphState(Graph g) {
-        for (Vertex v : g.getVertices()) {
-            this.put(v, Finals.DEFAULT_GRAPH_STATE);
-        }
+        this(g, Finals.DEFAULT_GRAPH_STATE);
     }
 
     public GraphState(Graph g, double initialState) {
