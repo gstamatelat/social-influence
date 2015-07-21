@@ -1,29 +1,42 @@
 package gr.james.socialinfluence.main;
 
 import gr.james.socialinfluence.api.Graph;
-import gr.james.socialinfluence.api.GraphGenerator;
-import gr.james.socialinfluence.api.Player;
+import gr.james.socialinfluence.game.Game;
 import gr.james.socialinfluence.game.GameDefinition;
-import gr.james.socialinfluence.game.players.ExceptionPlayer;
-import gr.james.socialinfluence.graph.Edge;
+import gr.james.socialinfluence.game.GameResult;
+import gr.james.socialinfluence.game.Move;
 import gr.james.socialinfluence.graph.MemoryGraph;
-import gr.james.socialinfluence.graph.Vertex;
-import gr.james.socialinfluence.graph.generators.BarabasiAlbertGenerator;
-import gr.james.socialinfluence.graph.generators.GridGenerator;
-import gr.james.socialinfluence.graph.generators.RandomGenerator;
-import gr.james.socialinfluence.graph.io.Dot;
+import gr.james.socialinfluence.graph.generators.CycleGenerator;
 
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Set;
-import java.util.Scanner;
 
 public class Examples {
     public static void main(String[] args) throws IOException {
+        Graph g = new CycleGenerator<>(MemoryGraph.class, 3).create();
+        /*for (Map.Entry<VertexPair, Edge> e : g.getEdges().entrySet()) {
+            e.getValue().setWeight(RandomHelper.getRandom().nextDouble());
+        }*/
 
-        GridGenerator generator = new GridGenerator<>(MemoryGraph.class, 25, 35);
-        Graph gridGraph = generator.create();
-        System.out.println(gridGraph);
+        Game game = new Game(g);
+
+        Move m1 = new Move();
+        m1.putVertex(g.getVertexFromIndex(0), 1.5);
+        m1.putVertex(g.getVertexFromIndex(1), 1.5);
+        /*m1.putVertex(g.getVertexFromIndex(2), 0.02);*/
+
+        Move m2 = new Move();
+        /*m2.putVertex(g.getVertexFromIndex(0), 0.5);
+        m2.putVertex(g.getVertexFromIndex(1), 0.5);
+        m2.putVertex(g.getVertexFromIndex(2), 2.0);*/
+        m2.putVertex(g.getVertexFromIndex(0), 0.5);
+        m2.putVertex(g.getVertexFromIndex(1), 0.5);
+        m2.putVertex(g.getVertexFromIndex(2), 2.0);
+
+        game.setPlayerAMove(m1);
+        game.setPlayerBMove(m2);
+
+        GameResult r = game.runGame(new GameDefinition(3, 3.0, 50000L), 0.0);
+        System.out.println(r);
+        System.out.println(r.fullState);
     }
 }

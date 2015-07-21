@@ -7,47 +7,45 @@ import gr.james.socialinfluence.helper.Helper;
 
 import java.util.Set;
 
+/**
+ * <p>Generates a two-dimensional, undirected, n x m grid graph.</p>
+ *
+ * @see <a href="http://mathworld.wolfram.com/GridGraph.html">http://mathworld.wolfram.com/GridGraph.html</a>
+ */
 public class GridGenerator<T extends Graph> implements GraphGenerator<T> {
     private Class<T> type;
-    private int rows,columns;
+    private int n, m;
 
-    /**
-     * Generates a Grid Graph, see http://mathworld.wolfram.com/GridGraph.html
-     * @param type
-     * @param rows
-     * @param columns
-     */
-
-    public GridGenerator(Class<T> type, int rows, int columns) {
+    public GridGenerator(Class<T> type, int n, int m) {
         this.type = type;
-        this.rows = rows;
-        this.columns = columns;
+        this.n = n;
+        this.m = m;
     }
-    
 
     @Override
     public T create() {
         T g = Helper.instantiateGeneric(type);
 
         int count = 0;
-        Set<Vertex> set = g.addVertices(rows * columns);
-        Vertex[] a = set.toArray(new Vertex[rows * columns]);
+        Set<Vertex> set = g.addVertices(n * m);
+        Vertex[] a = set.toArray(new Vertex[n * m]);
 
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
-                if (j != columns - 1) {
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (j != m - 1) {
                     g.addEdge(a[count], a[count + 1], true);
                 }
-                if (i != rows - 1) {
-                    g.addEdge(a[count], a[count + columns], true);
+                if (i != n - 1) {
+                    g.addEdge(a[count], a[count + m], true);
                 }
 
                 count = count + 1;
             }
         }
+
         g.setMeta("type", "Grid")
-                .setMeta("rows", String.valueOf(rows))
-                .setMeta("columns", String.valueOf(columns));
+                .setMeta("n", String.valueOf(n))
+                .setMeta("m", String.valueOf(m));
 
         return g;
     }
