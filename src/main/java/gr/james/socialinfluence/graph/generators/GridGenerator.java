@@ -11,6 +11,13 @@ public class GridGenerator<T extends Graph> implements GraphGenerator<T> {
     private Class<T> type;
     private int rows,columns;
 
+    /**
+     * Generates a Grid Graph, see http://mathworld.wolfram.com/GridGraph.html
+     * @param type
+     * @param rows
+     * @param columns
+     */
+
     public GridGenerator(Class<T> type, int rows, int columns) {
         this.type = type;
         this.rows = rows;
