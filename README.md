@@ -27,6 +27,12 @@ Graph scaleFreeGraph = generator.create();
 System.out.println(scaleFreeGraph);
 ```
 
+```java
+GridGenerator generator = new GridGenerator<>(MemoryGraph.class, 25 35);
+Graph gridGraph = generator.create();
+System.out.println(gridGraph);
+```
+
 Inspect available generators in `gr.james.socialinfluence.graph.generators` package.
 
 ## TODO
