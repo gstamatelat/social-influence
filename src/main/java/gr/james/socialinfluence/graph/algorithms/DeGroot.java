@@ -1,7 +1,7 @@
 package gr.james.socialinfluence.graph.algorithms;
 
 import gr.james.socialinfluence.api.Graph;
-import gr.james.socialinfluence.collections.GraphState;
+import gr.james.socialinfluence.collections.states.DoubleGraphState;
 import gr.james.socialinfluence.graph.Edge;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.helper.Finals;
@@ -11,15 +11,15 @@ import java.util.HashSet;
 import java.util.Map;
 
 public class DeGroot {
-    public static GraphState execute(Graph g, GraphState initialOpinions, double epsilon, boolean keepHistory) {
-        HashSet<GraphState> stateHistory = new HashSet<>();
-        GraphState lastState = initialOpinions;
+    public static DoubleGraphState execute(Graph g, DoubleGraphState initialOpinions, double epsilon, boolean keepHistory) {
+        HashSet<DoubleGraphState> stateHistory = new HashSet<>();
+        DoubleGraphState lastState = initialOpinions;
         stateHistory.add(initialOpinions);
 
         boolean stabilized = false;
         /*int reps = 0;*/
         while (!stabilized) {
-            GraphState nextState = new GraphState(g, 0.0);
+            DoubleGraphState nextState = new DoubleGraphState(g, 0.0);
 
             for (Vertex v : g.getVertices()) {
                 double vNewValue = 0.0;
@@ -31,7 +31,7 @@ public class DeGroot {
                 nextState.put(v, vNewValue / Helper.getWeightSum(g.getOutEdges(v).values()));
             }
 
-            if (nextState.subtractAbs(lastState).lessThan(epsilon)) {
+            if (nextState.subtract(lastState).abs().lessThan(epsilon)) {
                 stabilized = true;
             }
             if (keepHistory) {
@@ -65,15 +65,15 @@ public class DeGroot {
         return lastState;
     }
 
-    public static GraphState execute(Graph g, GraphState initialOpinions, double epsilon) {
+    public static DoubleGraphState execute(Graph g, DoubleGraphState initialOpinions, double epsilon) {
         return execute(g, initialOpinions, epsilon, Finals.DEFAULT_DEGROOT_HISTORY);
     }
 
-    public static GraphState execute(Graph g, GraphState initialOpinions, boolean keepHistory) {
+    public static DoubleGraphState execute(Graph g, DoubleGraphState initialOpinions, boolean keepHistory) {
         return execute(g, initialOpinions, Finals.DEFAULT_DEGROOT_PRECISION, keepHistory);
     }
 
-    public static GraphState execute(Graph g, GraphState initialOpinions) {
+    public static DoubleGraphState execute(Graph g, DoubleGraphState initialOpinions) {
         return execute(g, initialOpinions, Finals.DEFAULT_DEGROOT_PRECISION, Finals.DEFAULT_DEGROOT_HISTORY);
     }
 }

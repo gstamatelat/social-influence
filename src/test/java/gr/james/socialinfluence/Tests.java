@@ -1,8 +1,9 @@
 package gr.james.socialinfluence;
 
 import gr.james.socialinfluence.api.Graph;
-import gr.james.socialinfluence.collections.GraphState;
 import gr.james.socialinfluence.collections.VertexPair;
+import gr.james.socialinfluence.collections.states.DoubleGraphState;
+import gr.james.socialinfluence.collections.states.IntegerGraphState;
 import gr.james.socialinfluence.graph.Edge;
 import gr.james.socialinfluence.graph.GraphOperations;
 import gr.james.socialinfluence.graph.MemoryGraph;
@@ -43,7 +44,7 @@ public class Tests {
         }
 
         /* Emulate the random surfer until mean of the map values average is MEAN, aka for MEAN * N steps */
-        GraphState gs = new GraphState(g, 0.0);
+        DoubleGraphState gs = new DoubleGraphState(g, 0.0);
         RandomSurferIterator rsi = new RandomSurferIterator(g, dampingFactor);
         int steps = mean * g.getVerticesCount();
         while (--steps > 0) {
@@ -52,7 +53,7 @@ public class Tests {
         }
 
         /* Get the PageRank and normalize gs to it */
-        GraphState pr = PageRank.execute(g, dampingFactor);
+        DoubleGraphState pr = PageRank.execute(g, dampingFactor);
         for (Vertex v : gs.keySet()) {
             gs.put(v, pr.getSum() * gs.get(v) / (g.getVerticesCount() * mean));
         }
@@ -74,13 +75,13 @@ public class Tests {
             Graph g = new BarabasiAlbertGenerator<>(MemoryGraph.class, vertexCount, 2, 2, 1.0).create();
 
             /* Get PageRank and Degree */
-            GraphState degree = Degree.execute(g, true);
-            GraphState pagerank = PageRank.execute(g, 0.0);
+            IntegerGraphState degree = Degree.execute(g, true);
+            DoubleGraphState pagerank = PageRank.execute(g, 0.0);
 
-            /* Normalize degree */
+            /* Normalize pagerank */
             double mean = degree.getMean();
             for (Vertex v : g.getVertices()) {
-                degree.put(v, degree.get(v) / mean);
+                pagerank.put(v, pagerank.get(v) * mean);
             }
 
             /* Assert if maps not approx. equal */
@@ -241,12 +242,12 @@ public class Tests {
         Graph g = new RandomGenerator<>(MemoryGraph.class, 100, 0.1).create();
         GraphOperations.createCircle(g, true);
 
-        GraphState initialState = new GraphState(g, 0.0);
+        DoubleGraphState initialState = new DoubleGraphState(g, 0.0);
         for (Vertex v : g.getVertices()) {
             initialState.put(v, RandomHelper.getRandom().nextDouble());
         }
 
-        GraphState finalState = DeGroot.execute(g, initialState, 0.0, true);
+        DoubleGraphState finalState = DeGroot.execute(g, initialState, 0.0, true);
         double avg = finalState.getMean();
 
         for (double e : finalState.values()) {

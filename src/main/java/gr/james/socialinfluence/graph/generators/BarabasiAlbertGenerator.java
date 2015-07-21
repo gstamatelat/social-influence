@@ -2,6 +2,7 @@ package gr.james.socialinfluence.graph.generators;
 
 import gr.james.socialinfluence.api.AbstractEvolvingGenerator;
 import gr.james.socialinfluence.api.Graph;
+import gr.james.socialinfluence.collections.states.IntegerGraphState;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.graph.algorithms.Degree;
 import gr.james.socialinfluence.helper.Finals;
@@ -10,6 +11,7 @@ import gr.james.socialinfluence.helper.WeightedRandom;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class BarabasiAlbertGenerator<T extends Graph> extends AbstractEvolvingGenerator<T> {
     private Class<T> type;
@@ -36,16 +38,20 @@ public class BarabasiAlbertGenerator<T extends Graph> extends AbstractEvolvingGe
 
     @Override
     public T evolve() {
-        HashMap<Vertex, Double> weightMap = Degree.execute(g, true);
-        for (Vertex v : weightMap.keySet()) {
-            weightMap.put(v, Math.pow(weightMap.get(v), a));
+        IntegerGraphState degree = Degree.execute(g, true);
+
+        Map<Vertex, Double> weightMap = new HashMap<>();
+        for (Vertex v : degree.keySet()) {
+            weightMap.put(v, Math.pow((double) degree.get(v), a));
         }
+
         List<Vertex> newVertices = WeightedRandom.makeRandomSelection(weightMap, stepEdges);
 
         Vertex v = g.addVertex();
         for (Vertex w : newVertices) {
             g.addEdge(v, w, true);
         }
+
         return g;
     }
 

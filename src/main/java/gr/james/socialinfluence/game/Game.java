@@ -2,7 +2,7 @@ package gr.james.socialinfluence.game;
 
 import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.api.Player;
-import gr.james.socialinfluence.collections.GraphState;
+import gr.james.socialinfluence.collections.states.DoubleGraphState;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.graph.algorithms.DeGroot;
 import gr.james.socialinfluence.helper.Finals;
@@ -65,7 +65,7 @@ public class Game {
         return this;
     }
 
-    private GraphState runPrimitiveGame(Double deGrootEpsilon) {
+    private DoubleGraphState runPrimitiveGame(Double deGrootEpsilon) {
         Vertex playerA = this.g.addVertex();
         Vertex playerB = this.g.addVertex();
 
@@ -88,12 +88,12 @@ public class Game {
             }
         }
 
-        GraphState initialOpinions = new GraphState(g, 0.5);
+        DoubleGraphState initialOpinions = new DoubleGraphState(g, 0.5);
 
         initialOpinions.put(playerA, 0.0);
         initialOpinions.put(playerB, 1.0);
 
-        GraphState lastState = DeGroot.execute(g, initialOpinions, deGrootEpsilon, false);
+        DoubleGraphState lastState = DeGroot.execute(g, initialOpinions, deGrootEpsilon, false);
 
         this.g.removeVertex(playerA).removeVertex(playerB);
 
@@ -124,12 +124,12 @@ public class Game {
             Vertex s2 = g.addVertex();
             g.removeVertex(s1).removeVertex(s2);
             if (this.playerAMove.getVerticesCount() > 0) {
-                GraphState gs = new GraphState(g, 0.0);
+                DoubleGraphState gs = new DoubleGraphState(g, 0.0);
                 gs.put(s1, 0.0);
                 gs.put(s2, 1.0);
                 return new GameResult(-1, gs);
             } else if (this.playerBMove.getVerticesCount() > 0) {
-                GraphState gs = new GraphState(g, 1.0);
+                DoubleGraphState gs = new DoubleGraphState(g, 1.0);
                 gs.put(s1, 0.0);
                 gs.put(s2, 1.0);
                 return new GameResult(1, gs);
@@ -142,14 +142,14 @@ public class Game {
             Vertex s1 = g.addVertex();
             Vertex s2 = g.addVertex();
             g.removeVertex(s1).removeVertex(s2);
-            GraphState gs = new GraphState(g, 0.5);
+            DoubleGraphState gs = new DoubleGraphState(g, 0.5);
             gs.put(s1, 0.0);
             gs.put(s2, 1.0);
             return new GameResult(0, gs);
         }
 
-        GraphState b = this.swapPlayers().runPrimitiveGame(deGrootEpsilon);
-        GraphState a = this.swapPlayers().runPrimitiveGame(deGrootEpsilon);
+        DoubleGraphState b = this.swapPlayers().runPrimitiveGame(deGrootEpsilon);
+        DoubleGraphState a = this.swapPlayers().runPrimitiveGame(deGrootEpsilon);
 
         double am = a.getMean() - 0.5;
         double bm = b.getMean() - 0.5;

@@ -1,12 +1,12 @@
 package gr.james.socialinfluence.game;
 
-import gr.james.socialinfluence.collections.GraphState;
+import gr.james.socialinfluence.collections.states.DoubleGraphState;
 
 public class GameResult {
     public int score = 0;
-    public GraphState fullState = null;
+    public DoubleGraphState fullState = null;
 
-    public GameResult(int score, GraphState fullState) {
+    public GameResult(int score, DoubleGraphState fullState) {
         this.score = score;
         this.fullState = fullState;
     }

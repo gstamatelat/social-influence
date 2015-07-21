@@ -1,7 +1,7 @@
 package gr.james.socialinfluence.main;
 
 import gr.james.socialinfluence.api.Graph;
-import gr.james.socialinfluence.collections.GraphState;
+import gr.james.socialinfluence.collections.states.IntegerGraphState;
 import gr.james.socialinfluence.graph.MemoryGraph;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.graph.algorithms.Degree;
@@ -30,17 +30,17 @@ public class DegreeDistributionTest {
 
         // Find largest degree
         int largestDegree = 0;
-        GraphState degrees = Degree.execute(g, true);
-        for (Double d : degrees.values()) {
-            if (d.intValue() > largestDegree) {
-                largestDegree = d.intValue();
+        IntegerGraphState degrees = Degree.execute(g, true);
+        for (int d : degrees.values()) {
+            if (d > largestDegree) {
+                largestDegree = d;
             }
         }
 
         // Get degree distribution
         double[] degreeDistribution = new double[largestDegree];
-        for (Map.Entry<Vertex, Double> e : degrees.entrySet()) {
-            degreeDistribution[e.getValue().intValue() - 1]++;
+        for (Map.Entry<Vertex, Integer> e : degrees.entrySet()) {
+            degreeDistribution[e.getValue() - 1]++;
         }
 
         // Brute-force curve fitting
