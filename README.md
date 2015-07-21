@@ -28,7 +28,7 @@ System.out.println(scaleFreeGraph);
 ```
 
 ```java
-GridGenerator generator = new GridGenerator<>(MemoryGraph.class, 25 35);
+GridGenerator generator = new GridGenerator<>(MemoryGraph.class, 25, 35);
 Graph gridGraph = generator.create();
 System.out.println(gridGraph);
 ```
