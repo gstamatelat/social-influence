@@ -2,7 +2,7 @@ package gr.james.socialinfluence.graph.generators;
 
 import gr.james.socialinfluence.api.AbstractEvolvingGenerator;
 import gr.james.socialinfluence.api.Graph;
-import gr.james.socialinfluence.collections.states.IntegerGraphState;
+import gr.james.socialinfluence.api.GraphState;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.graph.algorithms.Degree;
 import gr.james.socialinfluence.helper.Finals;
@@ -38,7 +38,7 @@ public class BarabasiAlbertGenerator<T extends Graph> extends AbstractEvolvingGe
 
     @Override
     public T evolve() {
-        IntegerGraphState degree = Degree.execute(g, true);
+        GraphState<Integer> degree = Degree.execute(g, true);
 
         Map<Vertex, Double> weightMap = new HashMap<>();
         for (Vertex v : degree.keySet()) {

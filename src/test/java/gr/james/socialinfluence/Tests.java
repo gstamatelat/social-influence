@@ -1,9 +1,9 @@
 package gr.james.socialinfluence;
 
 import gr.james.socialinfluence.api.Graph;
+import gr.james.socialinfluence.api.GraphState;
 import gr.james.socialinfluence.collections.VertexPair;
 import gr.james.socialinfluence.collections.states.DoubleGraphState;
-import gr.james.socialinfluence.collections.states.IntegerGraphState;
 import gr.james.socialinfluence.graph.Edge;
 import gr.james.socialinfluence.graph.GraphOperations;
 import gr.james.socialinfluence.graph.MemoryGraph;
@@ -44,7 +44,7 @@ public class Tests {
         }
 
         /* Emulate the random surfer until mean of the map values average is MEAN, aka for MEAN * N steps */
-        DoubleGraphState gs = new DoubleGraphState(g, 0.0);
+        GraphState<Double> gs = new DoubleGraphState(g, 0.0);
         RandomSurferIterator rsi = new RandomSurferIterator(g, dampingFactor);
         int steps = mean * g.getVerticesCount();
         while (--steps > 0) {
@@ -53,7 +53,7 @@ public class Tests {
         }
 
         /* Get the PageRank and normalize gs to it */
-        DoubleGraphState pr = PageRank.execute(g, dampingFactor);
+        GraphState<Double> pr = PageRank.execute(g, dampingFactor);
         for (Vertex v : gs.keySet()) {
             gs.put(v, pr.getSum() * gs.get(v) / (g.getVerticesCount() * mean));
         }
@@ -75,8 +75,8 @@ public class Tests {
             Graph g = new BarabasiAlbertGenerator<>(MemoryGraph.class, vertexCount, 2, 2, 1.0).create();
 
             /* Get PageRank and Degree */
-            IntegerGraphState degree = Degree.execute(g, true);
-            DoubleGraphState pagerank = PageRank.execute(g, 0.0);
+            GraphState<Integer> degree = Degree.execute(g, true);
+            GraphState<Double> pagerank = PageRank.execute(g, 0.0);
 
             /* Normalize pagerank */
             double mean = degree.getMean();
@@ -242,12 +242,12 @@ public class Tests {
         Graph g = new RandomGenerator<>(MemoryGraph.class, 100, 0.1).create();
         GraphOperations.createCircle(g, true);
 
-        DoubleGraphState initialState = new DoubleGraphState(g, 0.0);
+        GraphState<Double> initialState = new DoubleGraphState(g, 0.0);
         for (Vertex v : g.getVertices()) {
             initialState.put(v, RandomHelper.getRandom().nextDouble());
         }
 
-        DoubleGraphState finalState = DeGroot.execute(g, initialState, 0.0, true);
+        GraphState<Double> finalState = DeGroot.execute(g, initialState, 0.0, true);
         double avg = finalState.getMean();
 
         for (double e : finalState.values()) {

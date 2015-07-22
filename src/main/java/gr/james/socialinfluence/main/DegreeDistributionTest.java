@@ -1,7 +1,7 @@
 package gr.james.socialinfluence.main;
 
 import gr.james.socialinfluence.api.Graph;
-import gr.james.socialinfluence.collections.states.IntegerGraphState;
+import gr.james.socialinfluence.api.GraphState;
 import gr.james.socialinfluence.graph.MemoryGraph;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.graph.algorithms.Degree;
@@ -30,7 +30,7 @@ public class DegreeDistributionTest {
 
         // Find largest degree
         int largestDegree = 0;
-        IntegerGraphState degrees = Degree.execute(g, true);
+        GraphState<Integer> degrees = Degree.execute(g, true);
         for (int d : degrees.values()) {
             if (d > largestDegree) {
                 largestDegree = d;

@@ -1,6 +1,7 @@
 package gr.james.socialinfluence.graph.algorithms;
 
 import gr.james.socialinfluence.api.Graph;
+import gr.james.socialinfluence.api.GraphState;
 import gr.james.socialinfluence.collections.states.DoubleGraphState;
 import gr.james.socialinfluence.graph.Edge;
 import gr.james.socialinfluence.graph.Vertex;
@@ -10,11 +11,12 @@ import gr.james.socialinfluence.helper.Helper;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class PageRank {
-    public static DoubleGraphState execute(Graph g, double dampingFactor, double epsilon) {
-        HashSet<DoubleGraphState> stateHistory = new HashSet<>();
-        DoubleGraphState lastState = new DoubleGraphState(g, 1.0);
+    public static GraphState<Double> execute(Graph g, double dampingFactor, double epsilon) {
+        Set<GraphState<Double>> stateHistory = new HashSet<>();
+        GraphState<Double> lastState = new DoubleGraphState(g, 1.0);
         stateHistory.add(lastState);
 
         HashMap<Vertex, Double> outWeightSums = new HashMap<>();
@@ -24,7 +26,7 @@ public class PageRank {
 
         boolean stabilized = false;
         while (!stabilized) {
-            DoubleGraphState nextState = new DoubleGraphState(g, 0.0);
+            GraphState<Double> nextState = new DoubleGraphState(g, 0.0);
             for (Vertex v : g.getVertices()) {
                 Map<Vertex, Edge> inEdges = g.getInEdges(v);
                 for (Map.Entry<Vertex, Edge> e : inEdges.entrySet()) {
@@ -52,7 +54,7 @@ public class PageRank {
         return lastState;
     }
 
-    public static DoubleGraphState execute(Graph g, double dampingFactor) {
+    public static GraphState<Double> execute(Graph g, double dampingFactor) {
         return execute(g, dampingFactor, Finals.DEFAULT_PAGERANK_PRECISION);
     }
 }

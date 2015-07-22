@@ -45,7 +45,7 @@ public abstract class Player {
 
     public abstract void suggestMove(Graph g, GameDefinition d, MovePointer movePtr);
 
-    public Move getMove(Graph g, GameDefinition d) {
+    public final Move getMove(Graph g, GameDefinition d) {
         PlayerRunnable runnable = new PlayerRunnable(this, g, d);
 
         try {
