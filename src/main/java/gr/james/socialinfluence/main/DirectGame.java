@@ -19,7 +19,7 @@ public class DirectGame {
 
         Game game = new Game(g);
         Player p1 = new MaxPageRankPlayer();
-        Player p2 = new mccPlayer();
+        Player p2 = new MaxPageRankPlayer();
 
         GameResult r = Game.runPlayers(p1, p2, g, d, 0.0);
 
