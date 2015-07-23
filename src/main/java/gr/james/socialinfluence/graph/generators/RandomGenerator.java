@@ -6,6 +6,12 @@ import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.helper.Helper;
 import gr.james.socialinfluence.helper.RandomHelper;
 
+/**
+ * <p>Random graph evolving generator implementing the G(n,p) model of Edgar Gilbert.</p>
+ *
+ * @see <a href="https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93R%C3%A9nyi_model">
+ * https://en.wikipedia.org/wiki/Erdős–Rényi_model</a>
+ */
 public class RandomGenerator<T extends Graph> extends AbstractEvolvingGenerator<T> {
     private Class<T> type;
     private int totalVertices;
