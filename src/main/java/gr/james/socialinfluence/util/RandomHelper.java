@@ -1,4 +1,4 @@
-package gr.james.socialinfluence.helper;
+package gr.james.socialinfluence.util;
 
 import java.util.Random;
 

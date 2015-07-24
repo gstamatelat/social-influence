@@ -1,7 +1,7 @@
 package gr.james.socialinfluence.game;
 
-import gr.james.socialinfluence.helper.Finals;
-import gr.james.socialinfluence.helper.GraphException;
+import gr.james.socialinfluence.util.Finals;
+import gr.james.socialinfluence.util.GraphException;
 
 /**
  * <p>Simple thread-safe wrapper class to avoid illegal calls on a {@link gr.james.socialinfluence.game.Move} object

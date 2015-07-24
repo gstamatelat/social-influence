@@ -1,6 +1,6 @@
 package gr.james.socialinfluence.collections;
 
-import gr.james.socialinfluence.helper.Finals;
+import gr.james.socialinfluence.util.Finals;
 
 /**
  * <p>Stores exactly 2 non-null objects and is not mutable. They respect {@link #equals(Object)} and {@link #hashCode()}

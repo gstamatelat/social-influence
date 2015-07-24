@@ -3,7 +3,7 @@ package gr.james.socialinfluence.graph.generators;
 import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.api.GraphGenerator;
 import gr.james.socialinfluence.graph.Vertex;
-import gr.james.socialinfluence.helper.Helper;
+import gr.james.socialinfluence.util.Helper;
 
 public class CycleGenerator<T extends Graph> implements GraphGenerator<T> {
     private Class<T> type;

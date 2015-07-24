@@ -6,7 +6,7 @@ import gr.james.socialinfluence.api.GraphImporter;
 import gr.james.socialinfluence.graph.MemoryGraph;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.graph.algorithms.iterators.IndexIterator;
-import gr.james.socialinfluence.helper.Finals;
+import gr.james.socialinfluence.util.Finals;
 
 import java.io.*;
 import java.util.Arrays;

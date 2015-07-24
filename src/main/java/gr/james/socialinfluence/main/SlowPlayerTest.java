@@ -7,7 +7,7 @@ import gr.james.socialinfluence.game.Move;
 import gr.james.socialinfluence.game.players.SlowPlayer;
 import gr.james.socialinfluence.graph.MemoryGraph;
 import gr.james.socialinfluence.graph.generators.BarabasiAlbertCluster;
-import gr.james.socialinfluence.helper.Finals;
+import gr.james.socialinfluence.util.Finals;
 
 public class SlowPlayerTest {
     public static void main(String[] args) {

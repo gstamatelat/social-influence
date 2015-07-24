@@ -2,7 +2,7 @@ package gr.james.socialinfluence.game;
 
 import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.api.Player;
-import gr.james.socialinfluence.helper.Finals;
+import gr.james.socialinfluence.util.Finals;
 
 public class PlayerRunnable implements Runnable {
     private Player p;

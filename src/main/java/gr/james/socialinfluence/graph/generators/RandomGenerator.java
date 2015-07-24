@@ -3,8 +3,8 @@ package gr.james.socialinfluence.graph.generators;
 import gr.james.socialinfluence.api.AbstractEvolvingGenerator;
 import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.graph.Vertex;
-import gr.james.socialinfluence.helper.Helper;
-import gr.james.socialinfluence.helper.RandomHelper;
+import gr.james.socialinfluence.util.Helper;
+import gr.james.socialinfluence.util.RandomHelper;
 
 /**
  * <p>Random graph evolving generator implementing the G(n,p) model of Edgar Gilbert.</p>

@@ -6,8 +6,8 @@ import gr.james.socialinfluence.api.Player;
 import gr.james.socialinfluence.collections.states.DoubleGraphState;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.graph.algorithms.DeGroot;
-import gr.james.socialinfluence.helper.Finals;
-import gr.james.socialinfluence.helper.GraphException;
+import gr.james.socialinfluence.util.Finals;
+import gr.james.socialinfluence.util.GraphException;
 
 public class Game {
     private Graph g;

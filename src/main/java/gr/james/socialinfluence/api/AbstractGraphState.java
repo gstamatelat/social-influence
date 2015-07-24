@@ -1,7 +1,7 @@
 package gr.james.socialinfluence.api;
 
 import gr.james.socialinfluence.graph.Vertex;
-import gr.james.socialinfluence.helper.Helper;
+import gr.james.socialinfluence.util.Helper;
 
 import java.util.HashMap;
 import java.util.Map;

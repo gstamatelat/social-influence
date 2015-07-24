@@ -4,8 +4,8 @@ import gr.james.socialinfluence.game.GameDefinition;
 import gr.james.socialinfluence.game.Move;
 import gr.james.socialinfluence.game.MovePointer;
 import gr.james.socialinfluence.game.PlayerRunnable;
-import gr.james.socialinfluence.helper.Finals;
-import gr.james.socialinfluence.helper.GraphException;
+import gr.james.socialinfluence.util.Finals;
+import gr.james.socialinfluence.util.GraphException;
 import org.slf4j.Logger;
 
 import java.util.Collections;

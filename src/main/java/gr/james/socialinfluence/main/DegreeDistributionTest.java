@@ -6,7 +6,7 @@ import gr.james.socialinfluence.graph.MemoryGraph;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.graph.algorithms.Degree;
 import gr.james.socialinfluence.graph.generators.BarabasiAlbertGenerator;
-import gr.james.socialinfluence.helper.RandomHelper;
+import gr.james.socialinfluence.util.RandomHelper;
 
 import java.util.Arrays;
 import java.util.Map;

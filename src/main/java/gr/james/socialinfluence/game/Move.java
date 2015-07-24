@@ -1,8 +1,8 @@
 package gr.james.socialinfluence.game;
 
 import gr.james.socialinfluence.graph.Vertex;
-import gr.james.socialinfluence.helper.Finals;
-import gr.james.socialinfluence.helper.GraphException;
+import gr.james.socialinfluence.util.Finals;
+import gr.james.socialinfluence.util.GraphException;
 
 import java.util.Iterator;
 import java.util.Set;

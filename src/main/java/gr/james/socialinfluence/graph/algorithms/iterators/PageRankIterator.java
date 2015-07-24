@@ -4,7 +4,7 @@ import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.api.GraphState;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.graph.algorithms.PageRank;
-import gr.james.socialinfluence.helper.RandomHelper;
+import gr.james.socialinfluence.util.RandomHelper;
 
 import java.util.ArrayList;
 import java.util.Iterator;

@@ -1,6 +1,6 @@
 package gr.james.socialinfluence.graph;
 
-import gr.james.socialinfluence.helper.Finals;
+import gr.james.socialinfluence.util.Finals;
 
 public class Edge {
     private double weight;

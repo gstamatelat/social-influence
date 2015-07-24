@@ -5,8 +5,8 @@ import gr.james.socialinfluence.api.GraphState;
 import gr.james.socialinfluence.collections.states.DoubleGraphState;
 import gr.james.socialinfluence.graph.Edge;
 import gr.james.socialinfluence.graph.Vertex;
-import gr.james.socialinfluence.helper.Finals;
-import gr.james.socialinfluence.helper.Helper;
+import gr.james.socialinfluence.util.Finals;
+import gr.james.socialinfluence.util.Helper;
 
 import java.util.HashMap;
 import java.util.HashSet;

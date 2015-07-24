@@ -16,7 +16,7 @@ import gr.james.socialinfluence.graph.generators.BarabasiAlbertCluster;
 import gr.james.socialinfluence.graph.generators.BarabasiAlbertGenerator;
 import gr.james.socialinfluence.graph.generators.RandomGenerator;
 import gr.james.socialinfluence.graph.generators.TwoWheelsGenerator;
-import gr.james.socialinfluence.helper.RandomHelper;
+import gr.james.socialinfluence.util.RandomHelper;
 import org.junit.Assert;
 import org.junit.Test;
 

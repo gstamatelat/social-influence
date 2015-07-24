@@ -6,7 +6,7 @@ import gr.james.socialinfluence.game.*;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.graph.algorithms.iterators.RandomSurferIterator;
 import gr.james.socialinfluence.graph.algorithms.iterators.RandomVertexIterator;
-import gr.james.socialinfluence.helper.RandomHelper;
+import gr.james.socialinfluence.util.RandomHelper;
 
 import java.util.HashSet;
 

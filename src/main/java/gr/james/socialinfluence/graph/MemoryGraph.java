@@ -3,8 +3,8 @@ package gr.james.socialinfluence.graph;
 import gr.james.socialinfluence.api.AbstractGraph;
 import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.collections.Pair;
-import gr.james.socialinfluence.helper.Finals;
-import gr.james.socialinfluence.helper.GraphException;
+import gr.james.socialinfluence.util.Finals;
+import gr.james.socialinfluence.util.GraphException;
 
 import java.util.*;
 
