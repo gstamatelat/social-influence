@@ -65,7 +65,7 @@ public class GreedyPlayer extends Player {
 
         PageRankIterator pri = new PageRankIterator(g, 0.0);
         while (pri.hasNext() && !this.isInterrupted()) {
-            Vertex firstGuess = pri.next();
+            Vertex firstGuess = pri.next().getObject();
 
             /* Initialize the vector */
             vector.clear();

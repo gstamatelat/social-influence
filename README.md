@@ -42,3 +42,4 @@ Inspect available generators in `gr.james.socialinfluence.graph.generators` pack
 - Considering converting `Move` to `Map`.
 - Grid generator and maybe some edge randomizer: http://www.cs.cornell.edu/home/kleinber/swn.d/swn.html
 - Transformation "stretch" that extends edges
+- Perhaps define an `interface VertexSimilarity` with one member `double compute(Vertex v1, Vertex v2, Graph g)` as well as an `interface VertexSimilarityMatrix` replacing `Map<VertexPair, Double>`. See '3.2.4. Definitions based on vertex similarity' in 'Community detection in graphs, Santo Fortunato'

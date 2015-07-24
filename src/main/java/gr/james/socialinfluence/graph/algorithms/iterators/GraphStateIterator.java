@@ -9,7 +9,7 @@ import java.util.Iterator;
 import java.util.PriorityQueue;
 
 public class GraphStateIterator<T extends Comparable<T>> implements Iterator<Weighted<Vertex, T>> {
-    private PriorityQueue<Weighted<Vertex, T>> p;
+    protected PriorityQueue<Weighted<Vertex, T>> p;
 
     public GraphStateIterator(GraphState<T> state) {
         p = new PriorityQueue<>(state.size(), Collections.reverseOrder());
