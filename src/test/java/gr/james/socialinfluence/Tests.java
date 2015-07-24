@@ -9,7 +9,7 @@ import gr.james.socialinfluence.graph.GraphOperations;
 import gr.james.socialinfluence.graph.MemoryGraph;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.graph.algorithms.*;
-import gr.james.socialinfluence.graph.algorithms.iterators.DegreeIterator;
+import gr.james.socialinfluence.graph.algorithms.iterators.GraphStateIterator;
 import gr.james.socialinfluence.graph.algorithms.iterators.IndexIterator;
 import gr.james.socialinfluence.graph.algorithms.iterators.RandomSurferIterator;
 import gr.james.socialinfluence.graph.generators.BarabasiAlbertCluster;
@@ -190,7 +190,7 @@ public class Tests {
             Graph g = new TwoWheelsGenerator<>(MemoryGraph.class, k).create();
 
             /* Get max degree */
-            int max = g.getOutDegree(new DegreeIterator(g, true).next());
+            int max = new GraphStateIterator<>(Degree.execute(g, true)).next().getWeight();
 
             /* The max has to be k or 6 if k is too low */
             Assert.assertEquals("twoWheelsMaxDegreeTest - " + k, Math.max(6, k - 1), max);
@@ -205,9 +205,6 @@ public class Tests {
         for (int k = 4; k < 100; k++) {
             /* Generate TwoWheels(k) */
             Graph g = new TwoWheelsGenerator<>(MemoryGraph.class, k).create();
-
-            /* Get max degree */
-            int max = g.getOutDegree(new DegreeIterator(g, true).next());
 
             /* getVertexFromIndex(N) must always return the center vertex */
             Assert.assertEquals("getVertexFromIndexTest - N - " + k, 6, g.getOutDegree(g.getVertexFromIndex(g.getVerticesCount() - 1)));

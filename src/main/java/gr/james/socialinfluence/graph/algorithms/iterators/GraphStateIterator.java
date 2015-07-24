@@ -4,13 +4,15 @@ import gr.james.socialinfluence.api.GraphState;
 import gr.james.socialinfluence.collections.Weighted;
 import gr.james.socialinfluence.graph.Vertex;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.PriorityQueue;
 
-public class GraphStateIterator<T extends Comparable<T>> implements Iterator<Vertex> {
-    private PriorityQueue<Weighted<Vertex, T>> p = new PriorityQueue<>();
+public class GraphStateIterator<T extends Comparable<T>> implements Iterator<Weighted<Vertex, T>> {
+    private PriorityQueue<Weighted<Vertex, T>> p;
 
     public GraphStateIterator(GraphState<T> state) {
+        p = new PriorityQueue<>(state.size(), Collections.reverseOrder());
         for (Vertex v : state.keySet()) {
             p.add(new Weighted<>(v, state.get(v)));
         }
@@ -22,8 +24,8 @@ public class GraphStateIterator<T extends Comparable<T>> implements Iterator<Ver
     }
 
     @Override
-    public Vertex next() {
-        return p.poll().getObject();
+    public Weighted<Vertex, T> next() {
+        return p.poll();
     }
 
     @Override

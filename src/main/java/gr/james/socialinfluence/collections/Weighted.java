@@ -13,6 +13,10 @@ public class Weighted<T, W extends Comparable<W>> implements Comparable<Weighted
         return o;
     }
 
+    public W getWeight() {
+        return w;
+    }
+
     @Override
     public int compareTo(Weighted<T, W> o) {
         return this.w.compareTo(o.w);
