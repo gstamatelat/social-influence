@@ -10,6 +10,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 
+/**
+ * @deprecated Replaced by {@link GraphStateIterator}
+ */
+@Deprecated
 public class PageRankIterator implements Iterator<Vertex> {
     // TODO: Consider using PriorityQueue
     private GraphState<Double> nodes;

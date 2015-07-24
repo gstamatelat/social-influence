@@ -9,6 +9,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+/**
+ * @deprecated Replaced by {@link GraphStateIterator}
+ */
+@Deprecated
 public class DegreeIterator implements Iterator<Vertex> {
     private Map<Vertex, Integer> nodes;
 
