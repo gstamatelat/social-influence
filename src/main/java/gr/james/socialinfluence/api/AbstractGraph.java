@@ -8,7 +8,6 @@ import gr.james.socialinfluence.graph.algorithms.iterators.RandomVertexIterator;
 import gr.james.socialinfluence.helper.Finals;
 import gr.james.socialinfluence.helper.GraphException;
 import gr.james.socialinfluence.helper.Helper;
-import gr.james.socialinfluence.helper.WeightedRandom;
 
 import java.util.*;
 
@@ -316,7 +315,7 @@ public abstract class AbstractGraph implements Graph {
         for (Map.Entry<Vertex, Edge> e : outEdges.entrySet()) {
             weightMap.put(e.getKey(), (weighted ? e.getValue().getWeight() : 1.0));
         }
-        List<Vertex> edges = WeightedRandom.makeRandomSelection(weightMap, 1);
+        List<Vertex> edges = Helper.weightedRandom(weightMap, 1);
         return edges.get(0);
     }
 
