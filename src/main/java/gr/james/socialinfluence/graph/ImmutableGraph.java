@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class ImmutableGraph implements Graph {
+    // TODO: Edge has setWeight method, which can be used to change the graph
     private Graph g;
 
     public ImmutableGraph(Graph g) {
