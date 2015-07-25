@@ -1,8 +1,8 @@
 package gr.james.socialinfluence;
 
+import gr.james.socialinfluence.algorithms.generators.GridGenerator;
 import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.graph.MemoryGraph;
-import gr.james.socialinfluence.graph.generators.GridGenerator;
 import org.junit.Assert;
 import org.junit.Test;
 

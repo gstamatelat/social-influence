@@ -1,7 +1,7 @@
 package gr.james.socialinfluence.graph;
 
 import gr.james.socialinfluence.api.Graph;
-import gr.james.socialinfluence.collections.VertexPair;
+import gr.james.socialinfluence.util.collections.VertexPair;
 
 import java.util.Collection;
 import java.util.Map;

@@ -1,13 +1,13 @@
 package gr.james.socialinfluence.api;
 
-import gr.james.socialinfluence.collections.VertexPair;
+import gr.james.socialinfluence.algorithms.distance.Dijkstra;
+import gr.james.socialinfluence.algorithms.iterators.RandomVertexIterator;
 import gr.james.socialinfluence.graph.Edge;
 import gr.james.socialinfluence.graph.Vertex;
-import gr.james.socialinfluence.graph.algorithms.Dijkstra;
-import gr.james.socialinfluence.graph.algorithms.iterators.RandomVertexIterator;
 import gr.james.socialinfluence.util.Finals;
 import gr.james.socialinfluence.util.GraphException;
 import gr.james.socialinfluence.util.Helper;
+import gr.james.socialinfluence.util.collections.VertexPair;
 
 import java.util.*;
 

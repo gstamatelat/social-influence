@@ -33,7 +33,7 @@ Graph gridGraph = generator.create();
 System.out.println(gridGraph);
 ```
 
-Inspect available generators in `gr.james.socialinfluence.graph.generators` package.
+Inspect available generators in `gr.james.socialinfluence.algorithms.generators` package.
 
 ## TODO
 

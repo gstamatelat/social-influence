@@ -1,10 +1,10 @@
 package gr.james.socialinfluence.main;
 
+import gr.james.socialinfluence.algorithms.generators.BarabasiAlbertGenerator;
+import gr.james.socialinfluence.algorithms.scoring.Closeness;
 import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.api.GraphState;
 import gr.james.socialinfluence.graph.MemoryGraph;
-import gr.james.socialinfluence.graph.algorithms.Closeness;
-import gr.james.socialinfluence.graph.generators.BarabasiAlbertGenerator;
 
 public class DirectGame {
     public static void main(String[] args) {

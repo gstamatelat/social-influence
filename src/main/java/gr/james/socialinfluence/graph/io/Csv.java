@@ -1,11 +1,11 @@
 package gr.james.socialinfluence.graph.io;
 
+import gr.james.socialinfluence.algorithms.iterators.IndexIterator;
 import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.api.GraphExporter;
 import gr.james.socialinfluence.api.GraphImporter;
 import gr.james.socialinfluence.graph.MemoryGraph;
 import gr.james.socialinfluence.graph.Vertex;
-import gr.james.socialinfluence.graph.algorithms.iterators.IndexIterator;
 import gr.james.socialinfluence.util.Finals;
 
 import java.io.*;

@@ -1,7 +1,7 @@
 package gr.james.socialinfluence.util;
 
-import gr.james.socialinfluence.collections.Weighted;
 import gr.james.socialinfluence.graph.Edge;
+import gr.james.socialinfluence.util.collections.Weighted;
 
 import java.util.*;
 

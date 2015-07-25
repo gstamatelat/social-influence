@@ -3,10 +3,10 @@ package gr.james.socialinfluence.graph.io;
 import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.api.GraphExporter;
 import gr.james.socialinfluence.api.GraphImporter;
-import gr.james.socialinfluence.collections.VertexPair;
 import gr.james.socialinfluence.graph.Edge;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.util.Finals;
+import gr.james.socialinfluence.util.collections.VertexPair;
 
 import java.io.IOException;
 import java.io.InputStream;

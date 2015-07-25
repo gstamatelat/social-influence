@@ -1,22 +1,26 @@
 package gr.james.socialinfluence;
 
+import gr.james.socialinfluence.algorithms.distance.Dijkstra;
+import gr.james.socialinfluence.algorithms.distance.FloydWarshall;
+import gr.james.socialinfluence.algorithms.generators.BarabasiAlbertCluster;
+import gr.james.socialinfluence.algorithms.generators.BarabasiAlbertGenerator;
+import gr.james.socialinfluence.algorithms.generators.RandomGenerator;
+import gr.james.socialinfluence.algorithms.generators.TwoWheelsGenerator;
+import gr.james.socialinfluence.algorithms.iterators.GraphStateIterator;
+import gr.james.socialinfluence.algorithms.iterators.IndexIterator;
+import gr.james.socialinfluence.algorithms.iterators.RandomSurferIterator;
+import gr.james.socialinfluence.algorithms.scoring.DeGroot;
+import gr.james.socialinfluence.algorithms.scoring.Degree;
+import gr.james.socialinfluence.algorithms.scoring.PageRank;
 import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.api.GraphState;
-import gr.james.socialinfluence.collections.VertexPair;
-import gr.james.socialinfluence.collections.states.DoubleGraphState;
 import gr.james.socialinfluence.graph.Edge;
 import gr.james.socialinfluence.graph.GraphOperations;
 import gr.james.socialinfluence.graph.MemoryGraph;
 import gr.james.socialinfluence.graph.Vertex;
-import gr.james.socialinfluence.graph.algorithms.*;
-import gr.james.socialinfluence.graph.algorithms.iterators.GraphStateIterator;
-import gr.james.socialinfluence.graph.algorithms.iterators.IndexIterator;
-import gr.james.socialinfluence.graph.algorithms.iterators.RandomSurferIterator;
-import gr.james.socialinfluence.graph.generators.BarabasiAlbertCluster;
-import gr.james.socialinfluence.graph.generators.BarabasiAlbertGenerator;
-import gr.james.socialinfluence.graph.generators.RandomGenerator;
-import gr.james.socialinfluence.graph.generators.TwoWheelsGenerator;
 import gr.james.socialinfluence.util.RandomHelper;
+import gr.james.socialinfluence.util.collections.VertexPair;
+import gr.james.socialinfluence.util.collections.states.DoubleGraphState;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -26,8 +30,8 @@ import java.util.Map;
 public class Tests {
     /**
      * <p>Test to demonstrate the equivalence between
-     * {@link gr.james.socialinfluence.graph.algorithms.iterators.RandomSurferIterator} and
-     * {@link gr.james.socialinfluence.graph.algorithms.PageRank} algorithm.</p>
+     * {@link gr.james.socialinfluence.algorithms.iterators.RandomSurferIterator} and
+     * {@link PageRank} algorithm.</p>
      */
     @Test
     public void randomSurferTest() {

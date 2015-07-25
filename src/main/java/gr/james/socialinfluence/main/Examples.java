@@ -1,12 +1,12 @@
 package gr.james.socialinfluence.main;
 
+import gr.james.socialinfluence.algorithms.generators.CycleGenerator;
 import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.game.Game;
 import gr.james.socialinfluence.game.GameDefinition;
 import gr.james.socialinfluence.game.GameResult;
 import gr.james.socialinfluence.game.Move;
 import gr.james.socialinfluence.graph.MemoryGraph;
-import gr.james.socialinfluence.graph.generators.CycleGenerator;
 
 import java.io.IOException;
 
