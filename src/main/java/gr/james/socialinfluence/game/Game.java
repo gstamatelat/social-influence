@@ -89,7 +89,7 @@ public class Game {
             }
         }
 
-        GraphState<Double> initialOpinions = new DoubleGraphState(g, 0.5);
+        GraphState<Double> initialOpinions = new DoubleGraphState(g, Finals.DEFAULT_GAME_OPINIONS);
 
         initialOpinions.put(playerA, 0.0);
         initialOpinions.put(playerB, 1.0);

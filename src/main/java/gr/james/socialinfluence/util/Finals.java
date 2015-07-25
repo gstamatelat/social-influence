@@ -13,8 +13,8 @@ public class Finals {
     /* Default values */
     public static final Charset DEFAULT_IO_ENCODING = StandardCharsets.UTF_8;
     public static final double DEFAULT_EDGE_WEIGHT = 1.0;
-    public static final double DEFAULT_GRAPH_STATE = 0.5;
     public static final double DEFAULT_DEGROOT_PRECISION = 0.0;
+    public static final double DEFAULT_GAME_OPINIONS = 0.5;
     public static final double DEFAULT_PAGERANK_PRECISION = 0.0;
     public static final double DEFAULT_GAME_PRECISION = 1.0e-8;
     public static final boolean DEFAULT_DEGROOT_HISTORY = true;
