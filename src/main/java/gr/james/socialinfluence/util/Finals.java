@@ -23,7 +23,7 @@ public class Finals {
     public static final String L_PLAYER_WAITING = "Been waiting {} seconds for {} to terminate gracefully.";
     public static final String L_GAME_MOVE_EXCEED = "Move {} contains more than {} vertices. Slicing to {}. This indicates a mistake in your player.";
     public static final String L_GAME_EMPTY_MOVE = "A player submitted an empty move or didn't terminate before submitting a move.";
-    public static final String L_GAME_EMPTY_MOVES = "Both moves were empty. By definition, draw.";
+    public static final String L_GAME_EMPTY_MOVES = "Identical moves. By definition, draw.";
     public static final String L_DEGROOT_PERIODIC = "DeGroot periodicity on {}.";
     public static final String L_PLAYER_EXCEPTION = "Player {} triggered exception <{}> on graph {} and definition {}";
     public static final String L_RANDOM_SEED = "Initialized new global random with seed {}";
