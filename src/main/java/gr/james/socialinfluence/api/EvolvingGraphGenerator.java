@@ -6,4 +6,13 @@ public interface EvolvingGraphGenerator<T extends Graph> extends GraphGenerator<
     boolean canEvolve();
 
     void reset();
+
+    default T create() {
+        T r = null;
+        while (this.canEvolve()) {
+            r = this.evolve();
+        }
+        this.reset();
+        return r;
+    }
 }

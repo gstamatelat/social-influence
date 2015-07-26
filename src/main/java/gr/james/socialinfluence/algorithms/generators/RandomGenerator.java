@@ -1,6 +1,6 @@
 package gr.james.socialinfluence.algorithms.generators;
 
-import gr.james.socialinfluence.api.AbstractEvolvingGenerator;
+import gr.james.socialinfluence.api.EvolvingGraphGenerator;
 import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.util.Helper;
@@ -12,7 +12,7 @@ import gr.james.socialinfluence.util.RandomHelper;
  * @see <a href="https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93R%C3%A9nyi_model">
  * https://en.wikipedia.org/wiki/Erdős–Rényi_model</a>
  */
-public class RandomGenerator<T extends Graph> extends AbstractEvolvingGenerator<T> {
+public class RandomGenerator<T extends Graph> implements EvolvingGraphGenerator<T> {
     private Class<T> type;
     private int totalVertices;
     private double p;

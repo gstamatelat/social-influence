@@ -315,8 +315,8 @@ public abstract class AbstractGraph implements Graph {
         for (Map.Entry<Vertex, Edge> e : outEdges.entrySet()) {
             weightMap.put(e.getKey(), (weighted ? e.getValue().getWeight() : 1.0));
         }
-        List<Vertex> edges = Helper.weightedRandom(weightMap, 1);
-        return edges.get(0);
+        Set<Vertex> edges = Helper.weightedRandom(weightMap, 1);
+        return edges.iterator().next();
     }
 
     @Override

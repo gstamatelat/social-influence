@@ -1,7 +1,7 @@
 package gr.james.socialinfluence.algorithms.generators;
 
 import gr.james.socialinfluence.algorithms.scoring.Degree;
-import gr.james.socialinfluence.api.AbstractEvolvingGenerator;
+import gr.james.socialinfluence.api.EvolvingGraphGenerator;
 import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.api.GraphState;
 import gr.james.socialinfluence.graph.Vertex;
@@ -10,10 +10,10 @@ import gr.james.socialinfluence.util.GraphException;
 import gr.james.socialinfluence.util.Helper;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
-public class BarabasiAlbertGenerator<T extends Graph> extends AbstractEvolvingGenerator<T> {
+public class BarabasiAlbertGenerator<T extends Graph> implements EvolvingGraphGenerator<T> {
     private Class<T> type;
     private int totalVertices;
     private int initialClique;
@@ -45,7 +45,7 @@ public class BarabasiAlbertGenerator<T extends Graph> extends AbstractEvolvingGe
             weightMap.put(v, Math.pow((double) degree.get(v), a));
         }
 
-        List<Vertex> newVertices = Helper.weightedRandom(weightMap, stepEdges);
+        Set<Vertex> newVertices = Helper.weightedRandom(weightMap, stepEdges);
 
         Vertex v = g.addVertex();
         for (Vertex w : newVertices) {
