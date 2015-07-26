@@ -38,7 +38,6 @@ public class Helper {
         for (E e : weightMap.keySet()) {
             keyQueue.add(new Weighted<>(e, Math.pow(RandomHelper.getRandom().nextDouble(), 1.0 / weightMap.get(e))));
         }
-
         Set<E> finalSelections = new HashSet<>();
         while (finalSelections.size() < selections) {
             finalSelections.add(keyQueue.poll().getObject());

@@ -30,7 +30,7 @@ public class PageRank {
             for (Vertex v : g.getVertices()) {
                 Map<Vertex, Edge> inEdges = g.getInEdges(v);
                 for (Map.Entry<Vertex, Edge> e : inEdges.entrySet()) {
-                    nextState.put(v, nextState.get(v) + lastState.get(e.getKey()) / outWeightSums.get(e.getKey()));
+                    nextState.put(v, nextState.get(v) + e.getValue().getWeight() * lastState.get(e.getKey()) / outWeightSums.get(e.getKey()));
                 }
             }
 

@@ -30,6 +30,27 @@ import java.util.Map;
 
 public class Tests {
     /**
+     * <p>PageRank values in a graph with N vertices must sum to N.</p>
+     */
+    @Test
+    public void pageRankSum() {
+        double dampingFactor = RandomHelper.getRandom().nextDouble() * 0.3;
+        double p = RandomHelper.getRandom().nextDouble() * 0.2 + 0.1;
+        int vertexCount = 40;
+
+        /* Create graph and randomize edge weights */
+        Graph g = new RandomGenerator<>(MemoryGraph.class, vertexCount, p).create();
+        GraphOperations.createCircle(g, true);
+        for (Map.Entry<VertexPair, Edge> e : g.getEdges().entrySet()) {
+            e.getValue().setWeight(RandomHelper.getRandom().nextDouble());
+        }
+
+        /* PageRank values must sum to vertexCount */
+        GraphState<Double> pr = PageRank.execute(g, dampingFactor);
+        Assert.assertEquals("pageRankSum", 1.0, pr.getMean(), 1.0e-2);
+    }
+
+    /**
      * <p>Test to demonstrate the equivalence between
      * {@link gr.james.socialinfluence.algorithms.iterators.RandomSurferIterator} and
      * {@link PageRank} algorithm.</p>
@@ -38,7 +59,7 @@ public class Tests {
     public void randomSurferTest() {
         int mean = 500000;
         double dampingFactor = RandomHelper.getRandom().nextDouble() * 0.3;
-        double p = RandomHelper.getRandom().nextDouble() * 0.15 + 0.05;
+        double p = RandomHelper.getRandom().nextDouble() * 0.2 + 0.1;
         int vertexCount = 40;
 
         /* Create graph and randomize edge weights */
@@ -63,9 +84,9 @@ public class Tests {
             gs.put(v, pr.getSum() * gs.get(v) / (g.getVerticesCount() * mean));
         }
 
-        /* Assert if maps not approx. equal */
+        /* Assert if maps not approx. equal with 1% error */
         for (Vertex v : g.getVertices()) {
-            Assert.assertEquals("randomSurferTest - " + g, gs.get(v), pr.get(v), 1.0e-2);
+            Assert.assertEquals("randomSurferTest - " + g, 1.0, gs.get(v) / pr.get(v), 1.0e-2);
         }
     }
 
