@@ -8,6 +8,8 @@ import gr.james.socialinfluence.util.GraphException;
  * only be positive.</p>
  */
 public class Edge {
+    // TODO: Edge has setWeight method, which can be used to change the graph, even if it is an immutable graph.
+    // TODO: It is better to convert edge to immutable if it is possible
     private double weight;
 
     /**

@@ -1,17 +1,16 @@
 package gr.james.socialinfluence.graph;
 
 import gr.james.socialinfluence.api.Graph;
+import gr.james.socialinfluence.api.ImmutableGraph;
 import gr.james.socialinfluence.util.collections.VertexPair;
 
-import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 
-public class ImmutableGraph implements Graph {
-    // TODO: Edge has setWeight method, which can be used to change the graph
+public class ImmutableGraphWrapper implements ImmutableGraph {
     private Graph g;
 
-    public ImmutableGraph(Graph g) {
+    public ImmutableGraphWrapper(Graph g) {
         this.g = g;
     }
 
@@ -21,28 +20,8 @@ public class ImmutableGraph implements Graph {
     }
 
     @Override
-    public Graph setMeta(String key, String value) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public Graph clearMeta() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
     public String getGraphType() {
         return this.g.getGraphType();
-    }
-
-    @Override
-    public Vertex addVertex() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public Vertex addVertex(Vertex v) {
-        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -56,11 +35,6 @@ public class ImmutableGraph implements Graph {
     }
 
     @Override
-    public Set<Vertex> addVertices(int count) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
     public <T extends Graph> Graph deepCopy(Class<T> type) {
         return this.g.deepCopy(type);
     }
@@ -68,21 +42,6 @@ public class ImmutableGraph implements Graph {
     @Override
     public <T extends Graph> Graph deepCopy(Class<T> type, Set<Vertex> includeOnly) {
         return this.g.deepCopy(type, includeOnly);
-    }
-
-    @Override
-    public Graph removeVertex(Vertex v) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public Graph removeVertices(Collection<Vertex> vertices) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public Graph clear() {
-        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -108,21 +67,6 @@ public class ImmutableGraph implements Graph {
     @Override
     public int getEdgesCount() {
         return this.g.getEdgesCount();
-    }
-
-    @Override
-    public Edge addEdge(Vertex source, Vertex target) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public Set<Edge> addEdge(Vertex source, Vertex target, boolean undirected) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public Graph removeEdge(Vertex source, Vertex target) {
-        throw new UnsupportedOperationException();
     }
 
     @Override
