@@ -2,9 +2,8 @@ package gr.james.socialinfluence.game.players;
 
 import gr.james.socialinfluence.algorithms.iterators.RandomSurferIterator;
 import gr.james.socialinfluence.algorithms.iterators.RandomVertexIterator;
-import gr.james.socialinfluence.api.Graph;
-import gr.james.socialinfluence.api.Player;
 import gr.james.socialinfluence.game.*;
+import gr.james.socialinfluence.graph.ImmutableGraph;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.util.RandomHelper;
 
@@ -22,7 +21,7 @@ import java.util.HashSet;
  * </ul>
  */
 public class BruteForcePlayer extends Player {
-    public static Move getRandomMove(Graph g, int numOfMoves, int weightLevels, Move lastMove, boolean clever) {
+    public static Move getRandomMove(ImmutableGraph g, int numOfMoves, int weightLevels, Move lastMove, boolean clever) {
         if (!clever) {
             return getRandomMoveWithoutMutation(g, numOfMoves, weightLevels);
         } else {
@@ -30,7 +29,7 @@ public class BruteForcePlayer extends Player {
         }
     }
 
-    public static Move getRandomMoveWithoutMutation(Graph g, int numOfMoves, int weightLevels) {
+    public static Move getRandomMoveWithoutMutation(ImmutableGraph g, int numOfMoves, int weightLevels) {
         Move moves = new Move();
         RandomVertexIterator it = new RandomVertexIterator(g);
         while (moves.getVerticesCount() < numOfMoves) {
@@ -40,7 +39,7 @@ public class BruteForcePlayer extends Player {
         return moves;
     }
 
-    public static Move getRandomMoveWithMutation(Graph g, int numOfMoves, int weightLevels, Move lastMove) {
+    public static Move getRandomMoveWithMutation(ImmutableGraph g, int numOfMoves, int weightLevels, Move lastMove) {
         double jump_probability = 0.2; // TODO: Make it an option, or even better adaptive since it should depend on the diameter of the graph
 
         Move moves = new Move();
@@ -67,7 +66,7 @@ public class BruteForcePlayer extends Player {
     }
 
     @Override
-    public void suggestMove(Graph g, GameDefinition d, MovePointer movePtr) {
+    public void suggestMove(ImmutableGraph g, GameDefinition d, MovePointer movePtr) {
         Game game = new Game(g);
 
         HashSet<Move> movesHistory = new HashSet<>();

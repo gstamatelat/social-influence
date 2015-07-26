@@ -1,16 +1,15 @@
 package gr.james.socialinfluence.game;
 
-import gr.james.socialinfluence.api.Graph;
-import gr.james.socialinfluence.api.Player;
+import gr.james.socialinfluence.graph.ImmutableGraph;
 import gr.james.socialinfluence.util.Finals;
 
 public class PlayerRunnable implements Runnable {
     private Player p;
-    private Graph g;
+    private ImmutableGraph g;
     private GameDefinition d;
     private MovePointer movePtr;
 
-    public PlayerRunnable(Player p, Graph g, GameDefinition d) {
+    public PlayerRunnable(Player p, ImmutableGraph g, GameDefinition d) {
         this.p = p;
         this.g = g;
         this.d = d;

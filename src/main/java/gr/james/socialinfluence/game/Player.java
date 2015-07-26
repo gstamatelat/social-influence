@@ -1,9 +1,7 @@
-package gr.james.socialinfluence.api;
+package gr.james.socialinfluence.game;
 
-import gr.james.socialinfluence.game.GameDefinition;
-import gr.james.socialinfluence.game.Move;
-import gr.james.socialinfluence.game.MovePointer;
-import gr.james.socialinfluence.game.PlayerRunnable;
+import gr.james.socialinfluence.api.Graph;
+import gr.james.socialinfluence.graph.ImmutableGraph;
 import gr.james.socialinfluence.util.Finals;
 import gr.james.socialinfluence.util.GraphException;
 import org.slf4j.Logger;
@@ -43,10 +41,12 @@ public abstract class Player {
         this.interrupted = true;
     }
 
-    public abstract void suggestMove(Graph g, GameDefinition d, MovePointer movePtr);
+    // TODO: Convert this to protected so it's not visible on mains etc (but then PlayerRunnable would complain)
+    public abstract void suggestMove(ImmutableGraph g, GameDefinition d, MovePointer movePtr);
 
     public final Move getMove(Graph g, GameDefinition d) {
-        PlayerRunnable runnable = new PlayerRunnable(this, g, d);
+        ImmutableGraph ig = new ImmutableGraph(g);
+        PlayerRunnable runnable = new PlayerRunnable(this, ig, d);
 
         try {
             Thread t = new Thread(runnable);

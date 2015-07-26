@@ -3,7 +3,6 @@ package gr.james.socialinfluence.game;
 import gr.james.socialinfluence.algorithms.scoring.DeGroot;
 import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.api.GraphState;
-import gr.james.socialinfluence.api.Player;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.util.Finals;
 import gr.james.socialinfluence.util.collections.states.DoubleGraphState;

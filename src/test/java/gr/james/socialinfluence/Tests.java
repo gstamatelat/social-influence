@@ -2,10 +2,7 @@ package gr.james.socialinfluence;
 
 import gr.james.socialinfluence.algorithms.distance.Dijkstra;
 import gr.james.socialinfluence.algorithms.distance.FloydWarshall;
-import gr.james.socialinfluence.algorithms.generators.BarabasiAlbertClusterGenerator;
-import gr.james.socialinfluence.algorithms.generators.BarabasiAlbertGenerator;
-import gr.james.socialinfluence.algorithms.generators.RandomGenerator;
-import gr.james.socialinfluence.algorithms.generators.TwoWheelsGenerator;
+import gr.james.socialinfluence.algorithms.generators.*;
 import gr.james.socialinfluence.algorithms.iterators.GraphStateIterator;
 import gr.james.socialinfluence.algorithms.iterators.IndexIterator;
 import gr.james.socialinfluence.algorithms.iterators.RandomSurferIterator;
@@ -14,6 +11,10 @@ import gr.james.socialinfluence.algorithms.scoring.Degree;
 import gr.james.socialinfluence.algorithms.scoring.PageRank;
 import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.api.GraphState;
+import gr.james.socialinfluence.game.Game;
+import gr.james.socialinfluence.game.GameDefinition;
+import gr.james.socialinfluence.game.GameResult;
+import gr.james.socialinfluence.game.Move;
 import gr.james.socialinfluence.graph.Edge;
 import gr.james.socialinfluence.graph.GraphOperations;
 import gr.james.socialinfluence.graph.MemoryGraph;
@@ -140,6 +141,28 @@ public class Tests {
                 }
             }
         }
+    }
+
+    @Test
+    public void lessisTest() {
+        Graph g = new CycleGenerator<>(MemoryGraph.class, 3).create();
+
+        Game game = new Game(g);
+
+        Move m1 = new Move();
+        m1.putVertex(g.getVertexFromIndex(0), 1.5);
+        m1.putVertex(g.getVertexFromIndex(1), 1.5);
+
+        Move m2 = new Move();
+        m2.putVertex(g.getVertexFromIndex(0), 0.5);
+        m2.putVertex(g.getVertexFromIndex(1), 0.5);
+        m2.putVertex(g.getVertexFromIndex(2), 2.0);
+
+        game.setPlayerAMove(m1);
+        game.setPlayerBMove(m2);
+
+        GameResult r = game.runGame(new GameDefinition(3, 3.0, 50000L), 0.0);
+        Assert.assertEquals("lessisTest", 0, r.score);
     }
 
     @Test

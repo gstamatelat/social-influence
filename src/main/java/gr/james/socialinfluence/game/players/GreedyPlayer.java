@@ -2,11 +2,11 @@ package gr.james.socialinfluence.game.players;
 
 import gr.james.socialinfluence.algorithms.distance.Dijkstra;
 import gr.james.socialinfluence.algorithms.iterators.PageRankIterator;
-import gr.james.socialinfluence.api.Graph;
-import gr.james.socialinfluence.api.Player;
 import gr.james.socialinfluence.game.GameDefinition;
 import gr.james.socialinfluence.game.Move;
 import gr.james.socialinfluence.game.MovePointer;
+import gr.james.socialinfluence.game.Player;
+import gr.james.socialinfluence.graph.ImmutableGraph;
 import gr.james.socialinfluence.graph.Vertex;
 
 import java.util.HashMap;
@@ -43,7 +43,7 @@ public class GreedyPlayer extends Player {
     }
 
     @Override
-    public void suggestMove(Graph g, GameDefinition d, MovePointer movePtr) {
+    public void suggestMove(ImmutableGraph g, GameDefinition d, MovePointer movePtr) {
         /* Here be distanceMap and vector */
         HashMap<Vertex[], Double> distanceMap = new HashMap<>();
         HashMap<Vertex, Double> vector = new HashMap<>();
