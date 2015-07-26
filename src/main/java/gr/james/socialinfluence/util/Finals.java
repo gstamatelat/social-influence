@@ -16,13 +16,12 @@ public class Finals {
     public static final double DEFAULT_DEGROOT_PRECISION = 0.0;
     public static final double DEFAULT_GAME_OPINIONS = 0.5;
     public static final double DEFAULT_PAGERANK_PRECISION = 0.0;
-    public static final double DEFAULT_GAME_PRECISION = 1.0e-8;
+    public static final double DEFAULT_GAME_PRECISION = 0.0;
     public static final boolean DEFAULT_DEGROOT_HISTORY = true;
 
     /* Logging messages */
     public static final String L_PLAYER_WAITING = "Been waiting {} seconds for {} to terminate gracefully.";
     public static final String L_GAME_MOVE_EXCEED = "Move {} contains more than {} vertices. Slicing to {}. This indicates a mistake in your player.";
-    public static final String L_GAME_INVALID_VERTEX = "A player requested a move vertex that doesn't belong in the graph. This indicates a mistake in the engine.";
     public static final String L_GAME_EMPTY_MOVE = "A player submitted an empty move or didn't terminate before submitting a move.";
     public static final String L_GAME_EMPTY_MOVES = "Both moves were empty. By definition, draw.";
     public static final String L_DEGROOT_PERIODIC = "DeGroot periodicity on {}.";
@@ -34,7 +33,7 @@ public class Finals {
     public static final String E_PLAYER_NO_PARAMETER = "%s doesn't have any parameter with name %s.";
     public static final String E_PLAYER_OPTION_NULL = "Player option value can't be null.";
 
-    public static final String E_EDGE_WEIGHT_NEGATIVE = "Edge weight must be positive. Got %s.";
+    public static final String E_EDGE_WEIGHT_NEGATIVE = "Edge weight must be positive. Got %f.";
 
     public static final String E_MOVEPOINTER_SET_NULL = "Cannot submit a null move.";
 

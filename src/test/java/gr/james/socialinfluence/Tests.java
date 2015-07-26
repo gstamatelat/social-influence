@@ -2,7 +2,7 @@ package gr.james.socialinfluence;
 
 import gr.james.socialinfluence.algorithms.distance.Dijkstra;
 import gr.james.socialinfluence.algorithms.distance.FloydWarshall;
-import gr.james.socialinfluence.algorithms.generators.BarabasiAlbertCluster;
+import gr.james.socialinfluence.algorithms.generators.BarabasiAlbertClusterGenerator;
 import gr.james.socialinfluence.algorithms.generators.BarabasiAlbertGenerator;
 import gr.james.socialinfluence.algorithms.generators.RandomGenerator;
 import gr.james.socialinfluence.algorithms.generators.TwoWheelsGenerator;
@@ -177,7 +177,7 @@ public class Tests {
 
         for (int _clusters : clusters) {
             for (int _clusterSize : clusterSize) {
-                Graph g = BarabasiAlbertCluster.generate(MemoryGraph.class, _clusterSize, 2, 2, 1.0, _clusters);
+                Graph g = new BarabasiAlbertClusterGenerator<>(MemoryGraph.class, _clusterSize, 2, 2, 1.0, _clusters).create();
                 Assert.assertEquals("clustersTest", _clusters * _clusterSize, g.getVerticesCount());
             }
         }

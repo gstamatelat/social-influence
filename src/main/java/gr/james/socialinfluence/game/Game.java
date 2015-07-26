@@ -6,7 +6,6 @@ import gr.james.socialinfluence.api.GraphState;
 import gr.james.socialinfluence.api.Player;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.util.Finals;
-import gr.james.socialinfluence.util.GraphException;
 import gr.james.socialinfluence.util.collections.states.DoubleGraphState;
 
 public class Game {
@@ -74,19 +73,11 @@ public class Game {
         this.g.addEdge(playerB, playerB);
 
         for (MovePoint e : this.playerAMove) {
-            try {
-                g.addEdge(e.vertex, playerA).setWeight(e.weight);
-            } catch (GraphException x) {
-                Finals.LOG.error(Finals.L_GAME_INVALID_VERTEX);
-            }
+            g.addEdge(e.vertex, playerA).setWeight(e.weight);
         }
 
         for (MovePoint e : this.playerBMove) {
-            try {
-                g.addEdge(e.vertex, playerB).setWeight(e.weight);
-            } catch (GraphException x) {
-                Finals.LOG.error(Finals.L_GAME_INVALID_VERTEX);
-            }
+            g.addEdge(e.vertex, playerB).setWeight(e.weight);
         }
 
         GraphState<Double> initialOpinions = new DoubleGraphState(g, Finals.DEFAULT_GAME_OPINIONS);
