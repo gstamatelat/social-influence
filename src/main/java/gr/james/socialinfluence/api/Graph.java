@@ -75,19 +75,7 @@ public interface Graph {
     Vertex getVertexFromIndex(int index);
 
     default Vertex getRandomVertex() {
-        // TODO: There must be some better way ...
-        RandomVertexIterator rvi = new RandomVertexIterator(this);
-        return rvi.next();
-    }
-
-    default Set<Vertex> getStubbornVertices() {
-        Set<Vertex> stubborn = new TreeSet<>();
-        for (Vertex v : this.getVertices()) {
-            if (this.getOutDegree(v) == 1 && this.getOutEdges(v).containsKey(v)) {
-                stubborn.add(v);
-            }
-        }
-        return Collections.unmodifiableSet(stubborn);
+        return new RandomVertexIterator(this).next();
     }
 
     default Map<VertexPair, Edge> getEdges() {

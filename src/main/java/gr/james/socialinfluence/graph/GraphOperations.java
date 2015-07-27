@@ -4,8 +4,7 @@ import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.util.Helper;
 import gr.james.socialinfluence.util.collections.VertexPair;
 
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 public class GraphOperations {
     public static void createCircle(Graph g, boolean undirected) {
@@ -81,5 +80,15 @@ public class GraphOperations {
             }
         }
         return r;
+    }
+
+    public Set<Vertex> getStubbornVertices(Graph g) {
+        Set<Vertex> stubborn = new TreeSet<>();
+        for (Vertex v : g.getVertices()) {
+            if (g.getOutDegree(v) == 1 && g.getOutEdges(v).containsKey(v)) {
+                stubborn.add(v);
+            }
+        }
+        return Collections.unmodifiableSet(stubborn);
     }
 }
