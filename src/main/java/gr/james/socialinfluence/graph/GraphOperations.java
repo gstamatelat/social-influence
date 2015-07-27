@@ -61,6 +61,15 @@ public class GraphOperations {
         }
     }
 
+    /**
+     * <p>Combine several graphs into a single one. When combining, the vertices of the input graphs will be inserted to
+     * the output along with their edges. The original graphs will not be modified.</p>
+     *
+     * @param type   the type of the output graph
+     * @param graphs the graph objects to combine
+     * @param <T>    the type of the output graph
+     * @return the combined graph
+     */
     public static <T extends Graph> T combineGraphs(Class<T> type, Graph[] graphs) {
         T r = Helper.instantiateGeneric(type);
         for (Graph g : graphs) {
@@ -70,9 +79,6 @@ public class GraphOperations {
             for (Map.Entry<VertexPair, Edge> e : g.getEdges().entrySet()) {
                 r.addEdge(e.getKey().getFirst(), e.getKey().getSecond()).setWeight(e.getValue().getWeight());
             }
-        }
-        for (Graph g : graphs) {
-            g.clear();
         }
         return r;
     }

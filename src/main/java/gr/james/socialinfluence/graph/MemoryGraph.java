@@ -20,7 +20,7 @@ public class MemoryGraph extends AbstractGraph {
 
     @Override
     public Vertex addVertex(Vertex v) {
-        Pair<Map<Vertex, Edge>> pp = new Pair<Map<Vertex, Edge>>(new LinkedHashMap<Vertex, Edge>(), new LinkedHashMap<Vertex, Edge>());
+        Pair<Map<Vertex, Edge>> pp = new Pair<>(new LinkedHashMap<>(), new LinkedHashMap<>());
         this.m.put(v, pp);
         return v;
     }

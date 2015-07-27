@@ -207,11 +207,6 @@ public class Tests {
 
         Assert.assertEquals("combineGraphsTest - vertexCount", vertexCount, g.getVerticesCount());
         Assert.assertEquals("combineGraphsTest - edgeCount", edgeCount, g.getEdgesCount());
-
-        for (Graph u : graphs) {
-            Assert.assertEquals("combineGraphsTest - subGraph - vertices", 0, u.getVerticesCount());
-            Assert.assertEquals("combineGraphsTest - subGraph - edges", 0, u.getEdgesCount());
-        }
     }
 
     @Test
