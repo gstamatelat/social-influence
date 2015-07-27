@@ -3,6 +3,7 @@ package gr.james.socialinfluence.algorithms.generators;
 import gr.james.socialinfluence.api.EvolvingGraphGenerator;
 import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.graph.Vertex;
+import gr.james.socialinfluence.util.Finals;
 import gr.james.socialinfluence.util.Helper;
 import gr.james.socialinfluence.util.RandomHelper;
 
@@ -50,7 +51,7 @@ public class RandomGenerator<T extends Graph> implements EvolvingGraphGenerator<
     @Override
     public void reset() {
         g = Helper.instantiateGeneric(type);
-        g.setMeta("type", "Random")
+        g.setMeta(Finals.DEFAULT_TYPE_META, "Random")
                 .setMeta("totalVertices", String.valueOf(totalVertices))
                 .setMeta("p", String.valueOf(p));
     }

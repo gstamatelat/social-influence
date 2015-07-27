@@ -44,3 +44,4 @@ Inspect available generators in `gr.james.socialinfluence.algorithms.generators`
 - Transformation "stretch" that extends edges
 - Perhaps define an `interface VertexSimilarity` with one member `double compute(Vertex v1, Vertex v2, Graph g)` as well as an `interface VertexSimilarityMatrix` replacing `Map<VertexPair, Double>`. See '3.2.4. Definitions based on vertex similarity' in 'Community detection in graphs, Santo Fortunato'
 - A PageRank test on a known graph
+- GraphOperations.combineGraphs seems like a generalization of Graph.deepCopy 

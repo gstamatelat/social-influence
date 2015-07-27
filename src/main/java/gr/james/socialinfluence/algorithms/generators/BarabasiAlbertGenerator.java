@@ -64,7 +64,7 @@ public class BarabasiAlbertGenerator<T extends Graph> implements EvolvingGraphGe
     public void reset() {
         g = new CompleteGenerator<>(type, initialClique).create();
         g.clearMeta()
-                .setMeta("type", "BarabasiAlbert")
+                .setMeta(Finals.DEFAULT_TYPE_META, "BarabasiAlbert")
                 .setMeta("totalVertices", String.valueOf(totalVertices))
                 .setMeta("initialClique", String.valueOf(initialClique))
                 .setMeta("stepEdges", String.valueOf(stepEdges))

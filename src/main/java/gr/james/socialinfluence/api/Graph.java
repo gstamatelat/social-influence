@@ -31,7 +31,7 @@ public interface Graph {
     Graph clearMeta();
 
     default String getGraphType() {
-        return this.getMeta("type");
+        return this.getMeta(Finals.DEFAULT_TYPE_META);
     }
 
     default boolean containsVertex(Vertex v) {

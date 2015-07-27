@@ -18,6 +18,7 @@ public class Finals {
     public static final double DEFAULT_PAGERANK_PRECISION = 0.0;
     public static final double DEFAULT_GAME_PRECISION = 0.0;
     public static final boolean DEFAULT_DEGROOT_HISTORY = true;
+    public static final String DEFAULT_TYPE_META = "type";
 
     /* Logging messages */
     public static final String L_PLAYER_WAITING = "Been waiting {} seconds for {} to terminate gracefully.";
