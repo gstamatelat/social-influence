@@ -35,7 +35,7 @@ public class TwoWheelsGenerator<T extends Graph> implements GraphGenerator<T> {
         T g = GraphOperations.combineGraphs(type, new Graph[]{g1, g2});
         GraphOperations.fuseVertices(g, new Vertex[]{a, b});
 
-        g.setMeta(Finals.DEFAULT_TYPE_META, "TwoWheels")
+        g.setMeta(Finals.TYPE_META, "TwoWheels")
                 .setMeta("wheelVertices", String.valueOf(wheelVertices));
 
         return g;

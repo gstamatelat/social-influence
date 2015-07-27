@@ -29,7 +29,7 @@ public class MasterGenerator<T extends Graph> implements GraphGenerator<T> {
         g.addEdge(v3, v2);
         g.addEdge(v2, v1);
 
-        g.setMeta(Finals.DEFAULT_TYPE_META, "Master");
+        g.setMeta(Finals.TYPE_META, "Master");
 
         return g;
     }

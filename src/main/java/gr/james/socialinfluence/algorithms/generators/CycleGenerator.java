@@ -27,7 +27,7 @@ public class CycleGenerator<T extends Graph> implements GraphGenerator<T> {
         }
         g.addEdge(startVertex, previousVertex, true);
 
-        g.setMeta(Finals.DEFAULT_TYPE_META, "Cycle")
+        g.setMeta(Finals.TYPE_META, "Cycle")
                 .setMeta("totalVertices", String.valueOf(totalVertices));
 
         return g;

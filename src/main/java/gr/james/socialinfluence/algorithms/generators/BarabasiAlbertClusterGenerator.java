@@ -45,7 +45,7 @@ public class BarabasiAlbertClusterGenerator<T extends Graph> implements GraphGen
             g.addEdge(s, t, true);
         }
 
-        g.setMeta(Finals.DEFAULT_TYPE_META, "BarabasiAlbertCluster")
+        g.setMeta(Finals.TYPE_META, "BarabasiAlbertCluster")
                 .setMeta("totalVertices", String.valueOf(totalVertices))
                 .setMeta("initialClique", String.valueOf(initialClique))
                 .setMeta("stepEdges", String.valueOf(stepEdges))

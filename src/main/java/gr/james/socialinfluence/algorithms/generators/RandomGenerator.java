@@ -51,7 +51,7 @@ public class RandomGenerator<T extends Graph> implements EvolvingGraphGenerator<
     @Override
     public void reset() {
         g = Helper.instantiateGeneric(type);
-        g.setMeta(Finals.DEFAULT_TYPE_META, "Random")
+        g.setMeta(Finals.TYPE_META, "Random")
                 .setMeta("totalVertices", String.valueOf(totalVertices))
                 .setMeta("p", String.valueOf(p));
     }

@@ -26,7 +26,7 @@ public class PathGenerator<T extends Graph> implements GraphGenerator<T> {
             previousVertex = newVertex;
         }
 
-        g.setMeta(Finals.DEFAULT_TYPE_META, "Path")
+        g.setMeta(Finals.TYPE_META, "Path")
                 .setMeta("totalVertices", String.valueOf(totalVertices));
 
         return g;

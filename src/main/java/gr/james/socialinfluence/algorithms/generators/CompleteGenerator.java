@@ -22,7 +22,7 @@ public class CompleteGenerator<T extends Graph> implements GraphGenerator<T> {
         g.addVertices(totalVertices);
         GraphOperations.connectAllVertices(g);
 
-        g.setMeta(Finals.DEFAULT_TYPE_META, "Complete")
+        g.setMeta(Finals.TYPE_META, "Complete")
                 .setMeta("totalVertices", String.valueOf(totalVertices));
 
         return g;

@@ -44,7 +44,7 @@ public class GridGenerator<T extends Graph> implements GraphGenerator<T> {
             }
         }
 
-        g.setMeta(Finals.DEFAULT_TYPE_META, "Grid")
+        g.setMeta(Finals.TYPE_META, "Grid")
                 .setMeta("n", String.valueOf(n))
                 .setMeta("m", String.valueOf(m));
 

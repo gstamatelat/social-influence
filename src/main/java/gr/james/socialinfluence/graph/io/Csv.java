@@ -16,7 +16,7 @@ public class Csv implements GraphImporter, GraphExporter {
     public Graph from(InputStream source) throws IOException {
         Graph g = new MemoryGraph();
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(source, Finals.DEFAULT_IO_ENCODING));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(source, Finals.IO_ENCODING));
         String line;
         boolean firstLine = true;
         IndexIterator it = null;

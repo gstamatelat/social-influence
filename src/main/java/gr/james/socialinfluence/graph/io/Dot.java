@@ -55,7 +55,7 @@ public class Dot implements GraphImporter, GraphExporter {
             dot += "}" + System.lineSeparator();
 
             try {
-                out.write(dot.getBytes(Finals.DEFAULT_IO_ENCODING));
+                out.write(dot.getBytes(Finals.IO_ENCODING));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -72,7 +72,7 @@ public class Dot implements GraphImporter, GraphExporter {
             dot += "}" + System.lineSeparator();
 
             try {
-                out.write(dot.getBytes(Finals.DEFAULT_IO_ENCODING));
+                out.write(dot.getBytes(Finals.IO_ENCODING));
             } catch (IOException e) {
                 e.printStackTrace();
             }
