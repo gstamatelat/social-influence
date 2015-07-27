@@ -29,16 +29,6 @@ public class ImmutableGraph implements Graph {
     }
 
     @Override
-    public boolean containsVertex(Vertex v) {
-        return this.g.containsVertex(v);
-    }
-
-    @Override
-    public boolean containsEdge(Vertex source, Vertex target) {
-        return this.g.containsEdge(source, target);
-    }
-
-    @Override
     public Vertex getVertexFromIndex(int index) {
         return this.g.getVertexFromIndex(index);
     }

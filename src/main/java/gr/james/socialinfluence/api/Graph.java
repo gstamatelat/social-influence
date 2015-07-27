@@ -34,9 +34,13 @@ public interface Graph {
         return this.getMeta("type");
     }
 
-    boolean containsVertex(Vertex v);
+    default boolean containsVertex(Vertex v) {
+        return this.getVertices().contains(v);
+    }
 
-    boolean containsEdge(Vertex source, Vertex target);
+    default boolean containsEdge(Vertex source, Vertex target) {
+        return this.getOutEdges(source).containsKey(target);
+    }
 
     default <T extends Graph> Graph deepCopy(Class<T> type) {
         return deepCopy(type, this.getVertices());

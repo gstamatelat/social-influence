@@ -51,16 +51,6 @@ public class MemoryGraph extends AbstractGraph {
     }
 
     @Override
-    public boolean containsVertex(Vertex v) {
-        return this.m.containsKey(v);
-    }
-
-    @Override
-    public boolean containsEdge(Vertex source, Vertex target) {
-        return this.m.get(source).getFirst().containsKey(target);
-    }
-
-    @Override
     public Vertex getVertexFromIndex(int index) {
         if (index < 0 || index >= this.getVerticesCount()) {
             throw new GraphException(Finals.E_GRAPH_INDEX_OUT_OF_BOUNDS, index);
