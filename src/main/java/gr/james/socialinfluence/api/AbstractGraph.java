@@ -1,10 +1,6 @@
 package gr.james.socialinfluence.api;
 
-import gr.james.socialinfluence.graph.Edge;
-import gr.james.socialinfluence.graph.Vertex;
-
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
 
 public abstract class AbstractGraph implements Graph {
@@ -32,40 +28,7 @@ public abstract class AbstractGraph implements Graph {
     }
 
     @Override
-    public abstract Vertex addVertex(Vertex v);
-
-    @Override
-    public abstract boolean containsVertex(Vertex v);
-
-    @Override
-    public abstract boolean containsEdge(Vertex source, Vertex target);
-
-    @Override
-    public abstract Graph removeVertex(Vertex v);
-
-    @Override
-    public abstract Graph clear();
-
-    @Override
-    public abstract Vertex getVertexFromIndex(int index);
-
-    @Override
-    public abstract Edge addEdge(Vertex source, Vertex target);
-
-    @Override
-    public abstract Graph removeEdge(Vertex source, Vertex target);
-
-    @Override
-    public abstract Map<Vertex, Edge> getOutEdges(Vertex v);
-
-    @Override
-    public abstract Map<Vertex, Edge> getInEdges(Vertex v);
-
-    @Override
-    public abstract Set<Vertex> getVertices();
-
-    @Override
     public String toString() {
-        return String.format("{type=%s, meta=%s}", this.getClass().getSimpleName(), meta);
+        return String.format("{type=%s, meta=%s}", this.getClass().getSimpleName(), this.meta);
     }
 }

@@ -26,6 +26,10 @@ import java.util.*;
 public interface Graph {
     String getMeta(String key);
 
+    Graph setMeta(String key, String value);
+
+    Graph clearMeta();
+
     default String getGraphType() {
         return this.getMeta("type");
     }
@@ -236,10 +240,6 @@ public interface Graph {
 
         return diameter;
     }
-
-    Graph setMeta(String key, String value);
-
-    Graph clearMeta();
 
     /**
      * <p>Inserts a new vertex to the graph and returns it. Use {@link #addVertices(int)} for bulk inserts.</p>
