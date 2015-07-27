@@ -26,7 +26,9 @@ import java.util.*;
 public interface Graph {
     String getMeta(String key);
 
-    String getGraphType();
+    default String getGraphType() {
+        return this.getMeta("type");
+    }
 
     boolean containsVertex(Vertex v);
 

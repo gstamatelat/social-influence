@@ -32,11 +32,6 @@ public abstract class AbstractGraph implements Graph {
     }
 
     @Override
-    public String getGraphType() {
-        return this.meta.get("type");
-    }
-
-    @Override
     public abstract Vertex addVertex(Vertex v);
 
     @Override
