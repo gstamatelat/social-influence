@@ -35,6 +35,39 @@ System.out.println(gridGraph);
 
 Inspect available generators in `gr.james.socialinfluence.algorithms.generators` package.
 
+### Vertex iteration
+
+```java
+Graph g = new RandomGenerator<>(MemoryGraph.class, 100, 0.05).create();
+for (Vertex v : g.getVertices()) {
+    // Do something with v
+}
+```
+
+The order at which the default iterator traverses vertices depends on the graph implementation. You should use this construct if you don't care about the iteration order. If you do, consider using a specific iterator.
+
+`RandomVertexIterator` iterates over vertices in a random order.
+
+```java
+Graph g = new RandomGenerator<>(MemoryGraph.class, 100, 0.05).create();
+RandomVertexIterator vi = new RandomVertexIterator(g);
+while (vi.hasNext()) {
+    Vertex v = vi.next();
+    // Do something with v
+}
+```
+
+`IndexIterator` iterates over vertices based on their index.
+
+```java
+Graph g = new RandomGenerator<>(MemoryGraph.class, 100, 0.05).create();
+IndexIterator vi = new IndexIterator(g);
+while (vi.hasNext()) {
+    Vertex v = vi.next();
+    // Do something with v
+}
+```
+
 ## TODO
 
 - There needs to be a helper function or some `Graph` member method that can return if a graph is aperiodic or not.

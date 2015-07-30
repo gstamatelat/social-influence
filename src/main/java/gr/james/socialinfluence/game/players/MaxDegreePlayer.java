@@ -1,6 +1,7 @@
 package gr.james.socialinfluence.game.players;
 
-import gr.james.socialinfluence.algorithms.iterators.PageRankIterator;
+import gr.james.socialinfluence.algorithms.iterators.GraphStateIterator;
+import gr.james.socialinfluence.algorithms.scoring.Degree;
 import gr.james.socialinfluence.game.GameDefinition;
 import gr.james.socialinfluence.game.Move;
 import gr.james.socialinfluence.game.MovePointer;
@@ -10,11 +11,10 @@ import gr.james.socialinfluence.graph.ImmutableGraph;
 public class MaxDegreePlayer extends Player {
     @Override
     public void suggestMove(ImmutableGraph g, GameDefinition d, MovePointer movePtr) {
-        // TODO: This isn't degree player
         Move m = new Move();
-        PageRankIterator pri = new PageRankIterator(g, 0.15);
+        GraphStateIterator<Integer> it = new GraphStateIterator<>(Degree.execute(g, true));
         while (m.getVerticesCount() < d.getActions()) {
-            m.putVertex(pri.next().getObject(), 1.0);
+            m.putVertex(it.next().getObject(), 1.0);
         }
         movePtr.submit(m);
         log.info("{}", m);
