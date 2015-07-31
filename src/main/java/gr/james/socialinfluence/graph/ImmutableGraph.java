@@ -49,6 +49,11 @@ public class ImmutableGraph implements Graph {
     }
 
     @Override
+    public Vertex[] getVerticesAsArray() {
+        return this.g.getVerticesAsArray();
+    }
+
+    @Override
     public Vertex addVertex(Vertex v) {
         throw new UnsupportedOperationException();
     }

@@ -12,16 +12,12 @@ import gr.james.socialinfluence.util.collections.VertexPair;
 import java.util.*;
 
 /**
- * <p>Represents a collection of vertices and edges. The graph is weighted directed and there can't be more than one
- * edge from node {@code i} to node {@code j} (it's not a multigraph).</p><p><b>Remark on performance &ndash; </b>Some
- * methods have both single-vertex and multi-vertex variants, for example {@code getDegree(Vertex v)} and {@code
- * getDegree()}. You should prefer the latter when your algorithm needs all the degrees and avoid iterating through all
- * vertices and calling the single-vertex method each time. {@code for (Vertex v: g.getVertices()) { v.getInEdges(); }}
- * construct is to be avoided.</p><p><b>Collections returned &ndash; </b>Methods that return collections
- * ({@link Map Maps} or {@link Set Sets}) return read-only versions of them, meaning that you can't
- * insert or remove elements. These collections are also not backed by the graph, changes to the graph won't affect
- * these collections after they have been returned, you need to call the method again. The elements themselves,
- * however, are shallow copies and can be used to change the state of the graph.</p>
+ * <p>Represents a collection of vertices and edges. The graph is weighted, directed and there can't be more than one
+ * edge from node {@code i} to node {@code j} (it's not a multigraph).</p>
+ * <dl><dt><b>Collections returned:</b></dt><dd>Methods that return collections ({@link Map Maps} or {@link Set Sets})
+ * return read-only versions of them, meaning that you can't insert or remove elements. These collections are also not
+ * backed by the graph, changes to the graph won't affect these collections after they have been returned; you need to
+ * call the method again.</dd></dl>
  */
 public interface Graph {
     String getMeta(String key);
@@ -64,8 +60,8 @@ public interface Graph {
 
     /**
      * <p>Get a {@link Vertex} of this graph based on its index. Index is a deterministic, per-graph attribute between
-     * {@code 0} (inclusive) and {@link #getVerticesCount()} (exclusive), indicating the rank of the ID of the specific
-     * vertex in the ordered ID list.</p>
+     * {@code 0} (inclusive) and {@link #getVerticesCount()} (exclusive), indicating the order at which the vertices
+     * were inserted in the graph.</p>
      *
      * @param index the index of the vertex
      * @return the vertex reference with the provided index
@@ -189,8 +185,18 @@ public interface Graph {
      * <dl><dt><b>Complexity:</b></dt><dd>O(1)</dd></dl>
      *
      * @return the list of vertices of this graph
+     * @deprecated You should use {@link #getVerticesAsArray()} instead.
      */
+    @Deprecated
     Set<Vertex> getVertices();
+
+    /**
+     * <p>Returns an array of the vertices contained in this graph. The array is indexed at the order at which the
+     * vertices were inserted in the graph.</p>
+     *
+     * @return the array of vertices in this graph
+     */
+    Vertex[] getVerticesAsArray();
 
     /**
      * <p>Returns the number of vertices in this graph. This method is faster than using getVertices().size()</p>

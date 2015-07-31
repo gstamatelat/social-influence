@@ -50,17 +50,18 @@ public class MemoryGraph extends AbstractGraph {
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     * <dl><dt><b>Complexity:</b></dt><dd>O(n)</dd></dl>
+     *
+     * @throws GraphException {@inheritDoc}
+     */
     @Override
     public Vertex getVertexFromIndex(int index) {
         if (index < 0 || index >= this.getVerticesCount()) {
             throw new GraphException(Finals.E_GRAPH_INDEX_OUT_OF_BOUNDS, index);
         }
-        Iterator<Vertex> it = this.m.keySet().iterator();
-        Vertex v = it.next();
-        while (index-- > 0) {
-            v = it.next();
-        }
-        return v;
+        return this.getVerticesAsArray()[index];
     }
 
     @Override
@@ -98,5 +99,20 @@ public class MemoryGraph extends AbstractGraph {
     @Override
     public Set<Vertex> getVertices() {
         return Collections.unmodifiableSet(this.m.keySet());
+    }
+
+    /**
+     * {@inheritDoc}
+     * <dl><dt><b>Complexity:</b></dt><dd>O(n)</dd></dl>
+     */
+    @Override
+    public Vertex[] getVerticesAsArray() {
+        Vertex[] r = new Vertex[this.getVerticesCount()];
+        Iterator<Vertex> it = this.m.keySet().iterator();
+        int i = 0;
+        while (it.hasNext()) {
+            r[i++] = it.next();
+        }
+        return r;
     }
 }
