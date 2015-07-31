@@ -34,38 +34,22 @@ public class SmallWorldNetworkGenerator<T extends Graph> implements GraphGenerat
         g.addVertices(n);
         Vertex sub;
 
-        for (int i = 0; i < n; i++) {
-            for (int j = 1; j <= k / 2; j++) {
-                if (i + j < n) {
-                    g.addEdge(g.getVertexFromIndex(i), g.getVertexFromIndex(i + j), true);
-                } else {
-                    g.addEdge(g.getVertexFromIndex(i), g.getVertexFromIndex(i + j - n), true);
-                }
+        for (int i=0; i<n; i++){
+            for (int j=1; j<=k/2; j++){
+                    g.addEdge(g.getVertexFromIndex(i), g.getVertexFromIndex((i + j)%n), true);
             }
         }
 
-        for (int i = 0; i < n; i++) {
-            for (int j = 1; j <= k / 2; j++) {
-                if (i + j < n) {
-                    if (p >= RandomHelper.getRandom().nextDouble()) {
-                        g.removeEdge(g.getVertexFromIndex(i), g.getVertexFromIndex(i + j));
-                        g.removeEdge(g.getVertexFromIndex(i + j), g.getVertexFromIndex(i));
+        for (int i=0; i<n; i++){
+            for (int j=1; j<=k/2; j++){
+                if (p >= RandomHelper.getRandom().nextDouble()) {
+                    g.removeEdge(g.getVertexFromIndex(i), g.getVertexFromIndex((i + j)%n));
+                    g.removeEdge(g.getVertexFromIndex((i + j)%n), g.getVertexFromIndex(i));
+                    sub = g.getRandomVertex();
+                    while (sub == g.getVertexFromIndex(i) || sub == g.getVertexFromIndex((i + j)%n) || g.containsEdge(g.getVertexFromIndex(i), sub) || g.containsEdge(sub, g.getVertexFromIndex(i))) {
                         sub = g.getRandomVertex();
-                        while (sub == g.getVertexFromIndex(i) || sub == g.getVertexFromIndex(i + j) || g.containsEdge(g.getVertexFromIndex(i), sub) || g.containsEdge(sub, g.getVertexFromIndex(i))) {
-                            sub = g.getRandomVertex();
-                        }
-                        g.addEdge(g.getVertexFromIndex(i), sub, true);
                     }
-                } else {
-                    if (p >= RandomHelper.getRandom().nextDouble()) {
-                        g.removeEdge(g.getVertexFromIndex(i), g.getVertexFromIndex(i + j - n));
-                        g.removeEdge(g.getVertexFromIndex(i + j - n), g.getVertexFromIndex(i));
-                        sub = g.getRandomVertex();
-                        while (sub == g.getVertexFromIndex(i) || sub == g.getVertexFromIndex(i + j - n) || g.containsEdge(g.getVertexFromIndex(i), sub) || g.containsEdge(sub, g.getVertexFromIndex(i))) {
-                            sub = g.getRandomVertex();
-                        }
-                        g.addEdge(g.getVertexFromIndex(i), sub, true);
-                    }
+                    g.addEdge(g.getVertexFromIndex(i), sub, true);
                 }
             }
         }
