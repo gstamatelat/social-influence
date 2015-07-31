@@ -6,6 +6,7 @@ import gr.james.socialinfluence.graph.Vertex;
 import java.util.Iterator;
 import java.util.TreeSet;
 
+@Deprecated
 public class OrderedVertexIterator implements Iterator<Vertex> {
     private TreeSet<Vertex> vertices = new TreeSet<>();
 

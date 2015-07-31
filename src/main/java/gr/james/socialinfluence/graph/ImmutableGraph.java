@@ -30,11 +30,6 @@ public class ImmutableGraph implements Graph {
     }
 
     @Override
-    public Vertex getVertexFromIndex(int index) {
-        return this.g.getVertexFromIndex(index);
-    }
-
-    @Override
     public Map<Vertex, Edge> getOutEdges(Vertex v) {
         return this.g.getOutEdges(v);
     }

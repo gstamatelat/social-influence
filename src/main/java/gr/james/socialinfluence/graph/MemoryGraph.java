@@ -53,20 +53,6 @@ public class MemoryGraph extends AbstractGraph {
         return this;
     }
 
-    /**
-     * {@inheritDoc}
-     * <dl><dt><b>Complexity:</b></dt><dd>O(n)</dd></dl>
-     *
-     * @throws GraphException {@inheritDoc}
-     */
-    @Override
-    public Vertex getVertexFromIndex(int index) {
-        if (index < 0 || index >= this.getVerticesCount()) {
-            throw new GraphException(Finals.E_GRAPH_INDEX_OUT_OF_BOUNDS, index);
-        }
-        return this.getVerticesAsList().get(index);
-    }
-
     @Override
     public Edge addEdge(Vertex source, Vertex target) {
         if (!this.containsVertex(source) || !this.containsVertex(target)) {
@@ -110,13 +96,6 @@ public class MemoryGraph extends AbstractGraph {
      */
     @Override
     public List<Vertex> getVerticesAsList() {
-        return new ArrayList<>(this.m.keySet());
-        /*Vertex[] r = new Vertex[this.getVerticesCount()];
-        Iterator<Vertex> it = this.m.keySet().iterator();
-        int i = 0;
-        while (it.hasNext()) {
-            r[i++] = it.next();
-        }
-        return r;*/
+        return Collections.unmodifiableList(new ArrayList<>(this.m.keySet()));
     }
 }

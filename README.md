@@ -39,29 +39,29 @@ Inspect available generators in `gr.james.socialinfluence.algorithms.generators`
 
 ```java
 Graph g = new RandomGenerator<>(MemoryGraph.class, 100, 0.05).create();
-for (Vertex v : g.getVertices()) {
+for (Vertex v : g.getVerticesAsList()) {
     // Do something with v
 }
 ```
 
-The order at which the default iterator traverses vertices depends on the graph implementation. You should use this construct if you don't care about the iteration order. If you do, consider using a specific iterator. Iterators (unless stated) are not backed by the graph; changes on the graph structure while an iteration is in progress won't reflect on the iterators.
+The above construct will traverse the graph vertices in the order they were inserted in the graph. If you need to perform an index-based iteration, you should use
+
+```java
+Graph g = new RandomGenerator<>(MemoryGraph.class, 100, 0.05).create();
+List<Vertex> vertexList = g.getVerticesAsList();
+for (int i = 0; i < g.getVerticesCount(); i++) {
+    Vertex v = vertexList.get(i);
+    // Do something with v
+}
+```
+
+Iterators (unless stated) are generally not backed by the graph; changes on the graph structure while an iteration is in progress won't reflect on the iterators.
 
 `RandomVertexIterator` iterates over vertices in a random order.
 
 ```java
 Graph g = new RandomGenerator<>(MemoryGraph.class, 100, 0.05).create();
 RandomVertexIterator vi = new RandomVertexIterator(g);
-while (vi.hasNext()) {
-    Vertex v = vi.next();
-    // Do something with v
-}
-```
-
-`IndexVertexIterator` iterates over vertices based on their index.
-
-```java
-Graph g = new RandomGenerator<>(MemoryGraph.class, 100, 0.05).create();
-IndexVertexIterator vi = new IndexVertexIterator(g);
 while (vi.hasNext()) {
     Vertex v = vi.next();
     // Do something with v

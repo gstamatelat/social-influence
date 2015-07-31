@@ -34,8 +34,20 @@ public interface Graph {
         return this.getVertices().contains(v);
     }
 
+    @Deprecated
     default boolean containsEdge(Vertex source, Vertex target) {
         return this.getOutEdges(source).containsKey(target);
+    }
+
+    /**
+     * <p>Returns the {@code Edge} from {@code source} to {@code target}, or {@code null} if there is no such edge.</p>
+     *
+     * @param source the source vertex of the edge
+     * @param target the target vertex of the edge
+     * @return the {@code Edge} from {@code source} to {@code target}, or {@code null} if there is no such edge
+     */
+    default Edge findEdge(Vertex source, Vertex target) {
+        return this.getOutEdges(source).get(target);
     }
 
     default <T extends Graph> Graph deepCopy(Class<T> type) {
@@ -61,14 +73,20 @@ public interface Graph {
     /**
      * <p>Get a {@link Vertex} of this graph based on its index. Index is a deterministic, per-graph attribute between
      * {@code 0} (inclusive) and {@link #getVerticesCount()} (exclusive), indicating the order at which the vertices
-     * were inserted in the graph.</p>
+     * were inserted in the graph. This method will internally invoke {@code getVerticesAsList().get(index)}.</p>
+     * <p>It is generally not recommended to perform a vertex iteration based on this method.</p>
      *
      * @param index the index of the vertex
      * @return the vertex reference with the provided index
      * @throws GraphException if {@code index} is outside of {@code 0} (inclusive) and {@link #getVerticesCount()}
      *                        (exclusive)
      */
-    Vertex getVertexFromIndex(int index);
+    default Vertex getVertexFromIndex(int index) {
+        if (index < 0 || index >= this.getVerticesCount()) {
+            throw new GraphException(Finals.E_GRAPH_INDEX_OUT_OF_BOUNDS, index);
+        }
+        return this.getVerticesAsList().get(index);
+    }
 
     default Vertex getRandomVertex() {
         return new RandomVertexIterator(this).next();
@@ -289,4 +307,12 @@ public interface Graph {
     }
 
     Graph removeEdge(Vertex source, Vertex target);
+
+    default Graph removeEdge(Vertex source, Vertex target, boolean undirected) {
+        if (undirected) {
+            return removeEdge(source, target).removeEdge(target, source);
+        } else {
+            return removeEdge(source, target);
+        }
+    }
 }
