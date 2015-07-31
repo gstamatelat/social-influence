@@ -14,6 +14,9 @@ import java.util.*;
 public class MemoryGraph extends AbstractGraph {
     private Map<Vertex, Pair<Map<Vertex, Edge>>> m;
 
+    /**
+     * <p>Constructs an empty {@code MemoryGraph}.</p>
+     */
     public MemoryGraph() {
         this.m = new LinkedHashMap<>();
     }
@@ -61,7 +64,7 @@ public class MemoryGraph extends AbstractGraph {
         if (index < 0 || index >= this.getVerticesCount()) {
             throw new GraphException(Finals.E_GRAPH_INDEX_OUT_OF_BOUNDS, index);
         }
-        return this.getVerticesAsArray()[index];
+        return this.getVerticesAsList().get(index);
     }
 
     @Override
@@ -106,13 +109,14 @@ public class MemoryGraph extends AbstractGraph {
      * <dl><dt><b>Complexity:</b></dt><dd>O(n)</dd></dl>
      */
     @Override
-    public Vertex[] getVerticesAsArray() {
-        Vertex[] r = new Vertex[this.getVerticesCount()];
+    public List<Vertex> getVerticesAsList() {
+        return new ArrayList<>(this.m.keySet());
+        /*Vertex[] r = new Vertex[this.getVerticesCount()];
         Iterator<Vertex> it = this.m.keySet().iterator();
         int i = 0;
         while (it.hasNext()) {
             r[i++] = it.next();
         }
-        return r;
+        return r;*/
     }
 }

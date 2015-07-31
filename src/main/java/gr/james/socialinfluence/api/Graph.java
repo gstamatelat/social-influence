@@ -185,18 +185,18 @@ public interface Graph {
      * <dl><dt><b>Complexity:</b></dt><dd>O(1)</dd></dl>
      *
      * @return the list of vertices of this graph
-     * @deprecated You should use {@link #getVerticesAsArray()} instead.
+     * @deprecated You should use {@link #getVerticesAsList()} instead.
      */
     @Deprecated
     Set<Vertex> getVertices();
 
     /**
-     * <p>Returns an array of the vertices contained in this graph. The array is indexed at the order at which the
+     * <p>Returns an list view of the vertices contained in this graph. The list is indexed at the order at which the
      * vertices were inserted in the graph.</p>
      *
-     * @return the array of vertices in this graph
+     * @return a list view of vertices in this graph
      */
-    Vertex[] getVerticesAsArray();
+    List<Vertex> getVerticesAsList();
 
     /**
      * <p>Returns the number of vertices in this graph. This method is faster than using getVertices().size()</p>

@@ -2,6 +2,7 @@ package gr.james.socialinfluence.graph;
 
 import gr.james.socialinfluence.api.Graph;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -49,8 +50,8 @@ public class ImmutableGraph implements Graph {
     }
 
     @Override
-    public Vertex[] getVerticesAsArray() {
-        return this.g.getVerticesAsArray();
+    public List<Vertex> getVerticesAsList() {
+        return this.g.getVerticesAsList();
     }
 
     @Override
