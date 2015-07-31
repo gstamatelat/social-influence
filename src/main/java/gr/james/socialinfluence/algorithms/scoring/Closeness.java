@@ -7,21 +7,21 @@ import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.util.collections.VertexPair;
 import gr.james.socialinfluence.util.collections.states.DoubleGraphState;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * <p>Closeness centrality as defined in <a href="https://en.wikipedia.org/wiki/Centrality#Closeness_centrality">
  * https://en.wikipedia.org/wiki/Centrality#Closeness_centrality</a>.</p>
  */
 public class Closeness {
-    public static GraphState<Double> execute(Graph g, boolean in, Set<Vertex> includeOnly, ClosenessHandler handler) {
+    public static GraphState<Double> execute(Graph g, boolean in, Collection<Vertex> includeOnly, ClosenessHandler handler) {
         Map<VertexPair, Double> distanceMap = FloydWarshall.execute(g);
 
         GraphState<Double> state = new DoubleGraphState();
 
-        for (Vertex v : g.getVertices()) {
+        for (Vertex v : g.getVerticesAsList()) {
             Map<Vertex, Double> dist = new HashMap<>();
             for (VertexPair p : distanceMap.keySet()) {
                 Vertex current = in ? p.getTarget() : p.getSource();

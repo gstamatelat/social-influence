@@ -8,7 +8,7 @@ import gr.james.socialinfluence.util.collections.states.IntegerGraphState;
 public class Degree {
     public static GraphState<Integer> execute(Graph g, boolean in) {
         GraphState<Integer> degreesState = new IntegerGraphState();
-        for (Vertex v : g.getVertices()) {
+        for (Vertex v : g.getVerticesAsList()) {
             degreesState.put(v, (in) ? g.getInDegree(v) : g.getOutDegree(v));
         }
         return degreesState;

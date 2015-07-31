@@ -85,7 +85,7 @@ public class Tests {
         }
 
         /* Assert if maps not approx. equal with 1% error */
-        for (Vertex v : g.getVertices()) {
+        for (Vertex v : g.getVerticesAsList()) {
             Assert.assertEquals("randomSurferTest - " + g, 1.0, gs.get(v) / pr.get(v), 1.0e-2);
         }
     }
@@ -106,12 +106,12 @@ public class Tests {
 
             /* Normalize pagerank */
             double mean = degree.getMean();
-            for (Vertex v : g.getVertices()) {
+            for (Vertex v : g.getVerticesAsList()) {
                 pagerank.put(v, pagerank.get(v) * mean);
             }
 
             /* Assert if maps not approx. equal */
-            for (Vertex v : g.getVertices()) {
+            for (Vertex v : g.getVerticesAsList()) {
                 Assert.assertEquals("degreeEigenvectorTest - " + g, degree.get(v), pagerank.get(v), 1.0e-2);
             }
         }
@@ -140,7 +140,7 @@ public class Tests {
 
                 /* Dijkstra */
                 HashMap<VertexPair, Double> distDijkstra = new HashMap<>();
-                for (Vertex v : g.getVertices()) {
+                for (Vertex v : g.getVerticesAsList()) {
                     HashMap<Vertex, Double> temp = Dijkstra.execute(g, v);
                     for (Map.Entry<Vertex, Double> e : temp.entrySet()) {
                         distDijkstra.put(new VertexPair(v, e.getKey()), e.getValue());
@@ -151,8 +151,8 @@ public class Tests {
                 Assert.assertEquals("FloydWarshallTest - length - " + g, distFloyd.size(), distDijkstra.size());
 
                 /* Value assertions */
-                for (Vertex u : g.getVertices()) {
-                    for (Vertex v : g.getVertices()) {
+                for (Vertex u : g.getVerticesAsList()) {
+                    for (Vertex v : g.getVerticesAsList()) {
                         // TODO: Both Dijkstra and Floyd-Warshall use additions, it is intuitive that there won't be any double rounding issues
                         // TODO: Also, 10^{-5} is too hardcoded for a quantity that could very well be really close to 10^{-5}
                         // TODO: It's better to just compare 1 (one) with the ratio of distFloyd/distDijkstra
@@ -283,7 +283,7 @@ public class Tests {
         GraphOperations.createCircle(g, true);
 
         GraphState<Double> initialState = new DoubleGraphState(g, 0.0);
-        for (Vertex v : g.getVertices()) {
+        for (Vertex v : g.getVerticesAsList()) {
             initialState.put(v, RandomHelper.getRandom().nextDouble());
         }
 

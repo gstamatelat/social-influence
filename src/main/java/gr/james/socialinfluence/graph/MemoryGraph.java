@@ -9,20 +9,24 @@ import gr.james.socialinfluence.util.collections.Pair;
 import java.util.*;
 
 /**
- * <p>Represents an in-memory {@link Graph}, implemented using adjacency lists. Suitable for sparse graphs.</p>
+ * <p>Represents an in-memory {@link Graph}, implemented using adjacency lists. Suitable for sparse graphs. This class
+ * is using a cache mechanism; refer to individual methods for more information.</p>
  */
 public class MemoryGraph extends AbstractGraph {
     private Map<Vertex, Pair<Map<Vertex, Edge>>> m;
+    private List<Vertex> vertexCache;
 
     /**
      * <p>Constructs an empty {@code MemoryGraph}.</p>
      */
     public MemoryGraph() {
         this.m = new LinkedHashMap<>();
+        this.vertexCache = null;
     }
 
     @Override
     public Vertex addVertex(Vertex v) {
+        this.vertexCache = null;
         Pair<Map<Vertex, Edge>> pp = new Pair<>(new LinkedHashMap<>(), new LinkedHashMap<>());
         this.m.put(v, pp);
         return v;
@@ -43,6 +47,7 @@ public class MemoryGraph extends AbstractGraph {
             e.getValue().getFirst().remove(v);
             e.getValue().getSecond().remove(v);
         }
+        this.vertexCache = null;
         this.m.remove(v);
         return this;
     }
@@ -92,10 +97,14 @@ public class MemoryGraph extends AbstractGraph {
 
     /**
      * {@inheritDoc}
-     * <dl><dt><b>Complexity:</b></dt><dd>O(n)</dd></dl>
+     * <dl><dt><b>Complexity:</b></dt><dd><p>O(n)</p><p>This method is using cache; a hit will cause the method to run
+     * in O(1). Cache is cleared when a vertex is added or removed.</p></dd></dl>
      */
     @Override
     public List<Vertex> getVerticesAsList() {
-        return Collections.unmodifiableList(new ArrayList<>(this.m.keySet()));
+        if (this.vertexCache == null) {
+            this.vertexCache = new ArrayList<>(this.m.keySet());
+        }
+        return Collections.unmodifiableList(vertexCache);
     }
 }

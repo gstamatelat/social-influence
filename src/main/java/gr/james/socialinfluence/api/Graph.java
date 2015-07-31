@@ -94,7 +94,7 @@ public interface Graph {
 
     default Map<VertexPair, Edge> getEdges() {
         Map<VertexPair, Edge> edges = new HashMap<>();
-        for (Vertex v : this.getVertices()) {
+        for (Vertex v : this.getVerticesAsList()) {
             for (Map.Entry<Vertex, Edge> e : this.getOutEdges(v).entrySet()) {
                 edges.put(new VertexPair(v, e.getKey()), e.getValue());
             }
@@ -175,8 +175,8 @@ public interface Graph {
      */
     default boolean isUndirected() {
         // TODO: Implement
-        /*ArrayList<Vertex[]> edgeList = new ArrayList<>();
-        for (Edge e : this.edges) {
+        /*ArrayList<VertexPair> edgeList = new ArrayList<>();
+        for (VertexPair e : this.getEdges().keySet()) {
             Vertex v = e.getSource();
             Vertex w = e.getTarget();
             if (!v.equals(w)) {
@@ -195,7 +195,7 @@ public interface Graph {
             }
         }
         return edgeList.size() == 0;*/
-        return true;
+        return false;
     }
 
     /**
@@ -223,7 +223,7 @@ public interface Graph {
      * @return the number of vertices in this graph
      */
     default int getVerticesCount() {
-        return this.getVertices().size();
+        return this.getVerticesAsList().size();
     }
 
     default Vertex getRandomOutEdge(Vertex from, boolean weighted) {
@@ -240,7 +240,7 @@ public interface Graph {
         // TODO: Should return a list/path/walk of vertices to show both the weight sum and the steps
         HashMap<Vertex[], Double> distanceMap = new HashMap<>();
 
-        for (Vertex v : this.getVertices()) {
+        for (Vertex v : this.getVerticesAsList()) {
             HashMap<Vertex, Double> temp = Dijkstra.execute(this, v);
             for (Map.Entry<Vertex, Double> e : temp.entrySet()) {
                 distanceMap.put(new Vertex[]{v, e.getKey()}, e.getValue());
