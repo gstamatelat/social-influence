@@ -44,7 +44,7 @@ for (Vertex v : g.getVertices()) {
 }
 ```
 
-The order at which the default iterator traverses vertices depends on the graph implementation. You should use this construct if you don't care about the iteration order. If you do, consider using a specific iterator.
+The order at which the default iterator traverses vertices depends on the graph implementation. You should use this construct if you don't care about the iteration order. If you do, consider using a specific iterator. Iterators (unless stated) are not backed by the graph; changes on the graph structure while an iteration is in progress won't reflect on the iterators.
 
 `RandomVertexIterator` iterates over vertices in a random order.
 
@@ -57,11 +57,11 @@ while (vi.hasNext()) {
 }
 ```
 
-`IndexIterator` iterates over vertices based on their index.
+`IndexVertexIterator` iterates over vertices based on their index.
 
 ```java
 Graph g = new RandomGenerator<>(MemoryGraph.class, 100, 0.05).create();
-IndexIterator vi = new IndexIterator(g);
+IndexVertexIterator vi = new IndexVertexIterator(g);
 while (vi.hasNext()) {
     Vertex v = vi.next();
     // Do something with v
@@ -77,4 +77,4 @@ while (vi.hasNext()) {
 - Transformation "stretch" that extends edges
 - Perhaps define an `interface VertexSimilarity` with one member `double compute(Vertex v1, Vertex v2, Graph g)` as well as an `interface VertexSimilarityMatrix` replacing `Map<VertexPair, Double>`. See '3.2.4. Definitions based on vertex similarity' in 'Community detection in graphs, Santo Fortunato'
 - A PageRank test on a known graph
-- GraphOperations.combineGraphs seems like a generalization of Graph.deepCopy 
+- GraphOperations.combineGraphs seems like a generalization of Graph.deepCopy

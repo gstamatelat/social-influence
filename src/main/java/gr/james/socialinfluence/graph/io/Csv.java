@@ -1,6 +1,6 @@
 package gr.james.socialinfluence.graph.io;
 
-import gr.james.socialinfluence.algorithms.iterators.IndexIterator;
+import gr.james.socialinfluence.algorithms.iterators.IndexVertexIterator;
 import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.api.GraphExporter;
 import gr.james.socialinfluence.api.GraphImporter;
@@ -19,16 +19,16 @@ public class Csv implements GraphImporter, GraphExporter {
         BufferedReader reader = new BufferedReader(new InputStreamReader(source, Finals.IO_ENCODING));
         String line;
         boolean firstLine = true;
-        IndexIterator it = null;
+        IndexVertexIterator it = null;
         while ((line = reader.readLine()) != null) {
             if (firstLine) {
                 g.addVertices(line.split(";").length - 1);
-                it = new IndexIterator(g);
+                it = new IndexVertexIterator(g);
             } else {
                 Vertex v = it.next();
                 String[] splitted = line.split(";");
                 splitted = Arrays.copyOfRange(splitted, 1, splitted.length);
-                IndexIterator it2 = new IndexIterator(g);
+                IndexVertexIterator it2 = new IndexVertexIterator(g);
                 for (String t : splitted) {
                     Vertex u = it2.next();
                     double value = Double.parseDouble(t);

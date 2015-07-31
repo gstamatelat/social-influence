@@ -15,5 +15,6 @@ public class CheckDraw {
         Graph g = new CycleGenerator<>(MemoryGraph.class, 2789).create();
         Player p = new OptimalCyclePlayer();
         Move m = p.getMove(g, new GameDefinition(3, 3.0, 0));
+        m = p.getMove(g, new GameDefinition(3, 3.0, 0));
     }
 }

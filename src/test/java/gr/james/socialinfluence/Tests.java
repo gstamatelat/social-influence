@@ -4,7 +4,7 @@ import gr.james.socialinfluence.algorithms.distance.Dijkstra;
 import gr.james.socialinfluence.algorithms.distance.FloydWarshall;
 import gr.james.socialinfluence.algorithms.generators.*;
 import gr.james.socialinfluence.algorithms.iterators.GraphStateIterator;
-import gr.james.socialinfluence.algorithms.iterators.IndexIterator;
+import gr.james.socialinfluence.algorithms.iterators.IndexVertexIterator;
 import gr.james.socialinfluence.algorithms.iterators.RandomSurferIterator;
 import gr.james.socialinfluence.algorithms.scoring.DeGroot;
 import gr.james.socialinfluence.algorithms.scoring.Degree;
@@ -260,7 +260,7 @@ public class Tests {
     @Test
     public void indexIteratorTest() {
         Graph g = new TwoWheelsGenerator<>(MemoryGraph.class, RandomHelper.getRandom().nextInt(25) + 5).create();
-        IndexIterator it = new IndexIterator(g);
+        IndexVertexIterator it = new IndexVertexIterator(g);
         int total = 0;
         Vertex pre = null;
         while (it.hasNext()) {

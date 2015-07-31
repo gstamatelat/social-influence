@@ -8,7 +8,7 @@ import java.util.Iterator;
 
 /**
  * <p>Represents a random surfer, implemented as iterator. It is generally recommended to avoid changes on the graph
- * and its structure while using any iterator on this framework.</p>
+ * and its structure while using this iterator as it is backed by the {@link Graph} object.</p>
  */
 public class RandomSurferIterator implements Iterator<Vertex> {
     private Graph g;
