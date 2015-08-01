@@ -31,7 +31,7 @@ public class Helper {
      * @param selections how many objects to select from the keys of {@code weightMap}
      * @param <E>        the type of objects
      * @return a {@code Set} of objects as the weighted random selection
-     * @see "Efraimidis, Spirakis. "Weighted random sampling with a reservoir"
+     * @see "Efraimidis, Spirakis. Weighted random sampling with a reservoir."
      */
     public static <E> Set<E> weightedRandom(Map<E, Double> weightMap, int selections) {
         PriorityQueue<Weighted<E, Double>> keyQueue = new PriorityQueue<>(11, Collections.reverseOrder());
