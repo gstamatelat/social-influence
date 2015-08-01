@@ -1,7 +1,5 @@
 package gr.james.socialinfluence;
 
-import gr.james.socialinfluence.algorithms.distance.Dijkstra;
-import gr.james.socialinfluence.algorithms.distance.FloydWarshall;
 import gr.james.socialinfluence.algorithms.generators.*;
 import gr.james.socialinfluence.algorithms.iterators.GraphStateIterator;
 import gr.james.socialinfluence.algorithms.iterators.OrderedVertexIterator;
@@ -25,7 +23,6 @@ import gr.james.socialinfluence.util.collections.states.DoubleGraphState;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class Tests {
@@ -113,53 +110,6 @@ public class Tests {
             /* Assert if maps not approx. equal */
             for (Vertex v : g.getVerticesAsList()) {
                 Assert.assertEquals("degreeEigenvectorTest - " + g, degree.get(v), pagerank.get(v), 1.0e-2);
-            }
-        }
-    }
-
-    /**
-     * <p>This test demonstrates that {@link FloydWarshall} yields the same result as multiple executions of
-     * {@link Dijkstra}.</p>
-     */
-    @Test
-    public void floydWarshallTest() {
-        int counts[] = {10, 20, 50, 100, 250};
-        double ps[] = {0.05, 0.1, 0.2};
-
-        for (int vertexCount : counts) {
-            for (double p : ps) {
-                /* Create graph and randomize edge weights */
-                Graph g = new RandomGenerator<>(MemoryGraph.class, vertexCount, p).create();
-                GraphOperations.createCircle(g, true);
-                for (Map.Entry<VertexPair, Edge> e : g.getEdges().entrySet()) {
-                    e.getValue().setWeight(RandomHelper.getRandom().nextDouble());
-                }
-
-                /* Floyd-Warshall */
-                Map<VertexPair, Double> distFloyd = FloydWarshall.execute(g);
-
-                /* Dijkstra */
-                HashMap<VertexPair, Double> distDijkstra = new HashMap<>();
-                for (Vertex v : g.getVerticesAsList()) {
-                    HashMap<Vertex, Double> temp = Dijkstra.execute(g, v);
-                    for (Map.Entry<Vertex, Double> e : temp.entrySet()) {
-                        distDijkstra.put(new VertexPair(v, e.getKey()), e.getValue());
-                    }
-                }
-
-                /* Length assertion */
-                Assert.assertEquals("FloydWarshallTest - length - " + g, distFloyd.size(), distDijkstra.size());
-
-                /* Value assertions */
-                for (Vertex u : g.getVerticesAsList()) {
-                    for (Vertex v : g.getVerticesAsList()) {
-                        // TODO: Both Dijkstra and Floyd-Warshall use additions, it is intuitive that there won't be any double rounding issues
-                        // TODO: Also, 10^{-5} is too hardcoded for a quantity that could very well be really close to 10^{-5}
-                        // TODO: It's better to just compare 1 (one) with the ratio of distFloyd/distDijkstra
-                        Assert.assertEquals("FloydWarshallTest - " + g, distFloyd.get(new VertexPair(u, v)),
-                                distDijkstra.get(new VertexPair(u, v)), 1.0e-5);
-                    }
-                }
             }
         }
     }

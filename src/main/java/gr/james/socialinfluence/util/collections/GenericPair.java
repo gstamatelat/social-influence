@@ -1,6 +1,6 @@
 package gr.james.socialinfluence.util.collections;
 
-import gr.james.socialinfluence.util.Finals;
+import java.util.Objects;
 
 /**
  * <p>Stores exactly 2 non-null objects and is not mutable. They respect {@link #equals(Object)} and {@link #hashCode()}
@@ -16,14 +16,11 @@ public class GenericPair<K, V> {
      *
      * @param value1 the first value in the new {@code Pair}
      * @param value2 the second value in the new {@code Pair}
-     * @throws IllegalArgumentException if either argument is {@code null}
+     * @throws NullPointerException if either argument is {@code null}
      */
     public GenericPair(K value1, V value2) {
-        if (value1 == null || value2 == null) {
-            throw new IllegalArgumentException(Finals.E_PAIR_NULL);
-        }
-        first = value1;
-        second = value2;
+        first = Objects.requireNonNull(value1);
+        second = Objects.requireNonNull(value2);
     }
 
     /**

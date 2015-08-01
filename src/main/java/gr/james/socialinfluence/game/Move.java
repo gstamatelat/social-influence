@@ -36,7 +36,6 @@ public class Move implements Iterable<MovePoint> {
 
     /**
      * <p>Adds or replaces a specific move point to this move object.</p>
-     * <p><b>Running Time:</b> ???</p>
      *
      * @param v      the vertex of this move point, can't be null
      * @param weight the weight of this move point

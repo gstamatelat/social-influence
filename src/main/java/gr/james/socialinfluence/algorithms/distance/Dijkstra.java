@@ -3,16 +3,28 @@ package gr.james.socialinfluence.algorithms.distance;
 import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.graph.Edge;
 import gr.james.socialinfluence.graph.Vertex;
+import gr.james.socialinfluence.util.collections.VertexSequence;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.PriorityQueue;
+import java.util.*;
 
 public class Dijkstra {
-    public static HashMap<Vertex, Double> execute(Graph g, Vertex source) {
-        HashMap<Vertex, DijkstraNode> nodeMap = new HashMap<>();
-        for (Vertex v : g.getVertices()) {
-            nodeMap.put(v, new DijkstraNode(v, null, Double.POSITIVE_INFINITY));
+    public static Map<Vertex, Double> execute(Graph g, Vertex source) {
+        Map<Vertex, Collection<VertexSequence>> paths = executeWithPathInternal(g, source, true);
+        Map<Vertex, Double> r = new HashMap<>();
+        for (Vertex v : paths.keySet()) {
+            r.put(v, paths.get(v).iterator().next().getDistance());
+        }
+        return Collections.unmodifiableMap(r);
+    }
+
+    public static Map<Vertex, Collection<VertexSequence>> executeWithPath(Graph g, Vertex source) {
+        return executeWithPathInternal(g, source, false);
+    }
+
+    private static Map<Vertex, Collection<VertexSequence>> executeWithPathInternal(Graph g, Vertex source, boolean dummyPaths) {
+        Map<Vertex, DijkstraNode> nodeMap = new HashMap<>();
+        for (Vertex v : g.getVerticesAsList()) {
+            nodeMap.put(v, new DijkstraNode(v, Double.POSITIVE_INFINITY));
         }
 
         PriorityQueue<DijkstraNode> pq = new PriorityQueue<>();
@@ -27,48 +39,88 @@ public class Dijkstra {
                 DijkstraNode v = nodeMap.get(e.getKey());
                 double weight = e.getValue().getWeight();
                 double distanceThroughU = u.distance + weight;
-                if (distanceThroughU < v.distance) {
+                if (distanceThroughU <= v.distance) {
                     pq.remove(v);
                     v.distance = distanceThroughU;
-                    v.parent = u.vertex;
+                    v.parents.add(nodeMap.get(u.vertex));
                     pq.add(v);
                 }
             }
         }
 
-        HashMap<Vertex, Double> r = new HashMap<>();
+        Map<Vertex, Collection<VertexSequence>> r = new HashMap<>();
         for (DijkstraNode e : nodeMap.values()) {
-            r.put(e.vertex, e.distance);
+            Collection<VertexSequence> shortestRoutes;
+            if (dummyPaths) {
+                VertexSequence h = new VertexSequence(new ArrayList<>(), e.distance);
+                shortestRoutes = new ArrayList<>();
+                shortestRoutes.add(h);
+            } else {
+                shortestRoutes = e.getShortestPaths();
+            }
+            r.put(e.vertex, shortestRoutes);
         }
-        return r;
+        return Collections.unmodifiableMap(r);
     }
 
     private static class DijkstraNode implements Comparable {
-        // TODO: We already have ObjectWithWeight, maybe use it here and ditch this class
         public Vertex vertex;
         public double distance;
-        public Vertex parent;
+        public Set<DijkstraNode> parents;
 
-        public DijkstraNode(Vertex vertex, Vertex parent, double distance) {
+        public DijkstraNode(Vertex vertex, double distance) {
             this.vertex = vertex;
-            this.parent = parent;
+            this.parents = new HashSet<>();
             this.distance = distance;
+        }
+
+        public Collection<VertexSequence> getShortestPaths() {
+            Collection<List<DijkstraNode>> r = this.getPathsToTop();
+
+            Collection<VertexSequence> u = new ArrayList<>();
+            for (List<DijkstraNode> l : r) {
+                List<Vertex> ll = new ArrayList<>();
+                ListIterator<DijkstraNode> li = l.listIterator(l.size() - 1);
+                while (li.hasPrevious()) {
+                    ll.add(li.previous().vertex);
+                }
+                u.add(new VertexSequence(ll, this.distance));
+            }
+
+            return Collections.unmodifiableCollection(u);
+        }
+
+        private Collection<List<DijkstraNode>> getPathsToTop() {
+            Collection<List<DijkstraNode>> r = new ArrayList<>();
+            List<DijkstraNode> first = new ArrayList<>();
+            first.add(this);
+            r.add(first);
+
+            boolean done = false;
+            while (!done) {
+                done = true;
+                for (List<DijkstraNode> e : r) {
+                    DijkstraNode v = e.get(e.size() - 1);
+                    if (!v.parents.isEmpty()) {
+                        done = false;
+                        r.remove(e);
+                        for (DijkstraNode n : v.parents) {
+                            List<DijkstraNode> copy = new ArrayList<>(e);
+                            copy.add(n);
+                            r.add(copy);
+                        }
+                        break;
+                    }
+                }
+            }
+
+            return r;
         }
 
         @Override
         public int compareTo(Object o) {
             DijkstraNode other = (DijkstraNode) o;
             return Double.compare(this.distance, other.distance);
-        }
-
-        @Override
-        public int hashCode() {
-            return this.vertex.hashCode();
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            return this.vertex.equals(obj);
         }
     }
 }

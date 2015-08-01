@@ -48,9 +48,8 @@ The above construct will traverse the graph vertices in the order they were inse
 
 ```java
 Graph g = new RandomGenerator<>(MemoryGraph.class, 100, 0.05).create();
-List<Vertex> vertexList = g.getVerticesAsList();
 for (int i = 0; i < g.getVerticesCount(); i++) {
-    Vertex v = vertexList.get(i);
+    Vertex v = g.getVertexFromIndex(i);
     // Do something with v
 }
 ```

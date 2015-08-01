@@ -212,13 +212,12 @@ public interface Graph {
      * <p>Returns an list view of the vertices contained in this graph. The list is indexed at the order at which the
      * vertices were inserted in the graph.</p>
      *
-     * @return a list view of vertices in this graph
+     * @return an unmodifiable list of vertices in this graph
      */
     List<Vertex> getVerticesAsList();
 
     /**
-     * <p>Returns the number of vertices in this graph. This method is faster than using getVertices().size()</p>
-     * <p><b>Complexity:</b> O(1)</p>
+     * <p>Returns the number of vertices in this graph.</p>
      *
      * @return the number of vertices in this graph
      */
@@ -241,7 +240,7 @@ public interface Graph {
         HashMap<Vertex[], Double> distanceMap = new HashMap<>();
 
         for (Vertex v : this.getVerticesAsList()) {
-            HashMap<Vertex, Double> temp = Dijkstra.execute(this, v);
+            Map<Vertex, Double> temp = Dijkstra.execute(this, v);
             for (Map.Entry<Vertex, Double> e : temp.entrySet()) {
                 distanceMap.put(new Vertex[]{v, e.getKey()}, e.getValue());
             }

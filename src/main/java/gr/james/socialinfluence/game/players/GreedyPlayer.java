@@ -51,7 +51,7 @@ public class GreedyPlayer extends Player {
         /* Fill the distanceMap */
         // TODO: Replace this snippet with FloydWarshall method, but care, this map has (t,s) rather than (s,t)
         for (Vertex v : g.getVertices()) {
-            HashMap<Vertex, Double> temp = Dijkstra.execute(g, v);
+            Map<Vertex, Double> temp = Dijkstra.execute(g, v);
             for (Map.Entry<Vertex, Double> e : temp.entrySet()) {
                 distanceMap.put(new Vertex[]{e.getKey(), v}, e.getValue());
             }
