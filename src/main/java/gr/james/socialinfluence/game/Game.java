@@ -118,12 +118,12 @@ public class Game {
                 GraphState<Double> gs = new DoubleGraphState(g, 0.0);
                 gs.put(s1, 0.0);
                 gs.put(s2, 1.0);
-                return new GameResult(-1, gs);
+                return new GameResult(-1, gs, this.playerAMove, this.playerBMove);
             } else if (this.playerBMove.getVerticesCount() > 0) {
                 GraphState<Double> gs = new DoubleGraphState(g, 1.0);
                 gs.put(s1, 0.0);
                 gs.put(s2, 1.0);
-                return new GameResult(1, gs);
+                return new GameResult(1, gs, this.playerAMove, this.playerBMove);
             }
         }
 
@@ -136,7 +136,7 @@ public class Game {
             GraphState<Double> gs = new DoubleGraphState(g, 0.5);
             gs.put(s1, 0.0);
             gs.put(s2, 1.0);
-            return new GameResult(0, gs);
+            return new GameResult(0, gs, this.playerAMove, this.playerBMove);
         }
 
         GraphState<Double> b = this.swapPlayers().runPrimitiveGame(deGrootEpsilon);
@@ -157,7 +157,7 @@ public class Game {
             score = Double.compare(am, 0);
         }
 
-        return new GameResult(score, a);
+        return new GameResult(score, a, this.playerAMove, this.playerBMove);
     }
 
     public GameResult runGame(GameDefinition d) {
