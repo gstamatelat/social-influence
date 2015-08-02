@@ -54,7 +54,7 @@ public interface Graph {
         return deepCopy(type, this.getVertices());
     }
 
-    default <T extends Graph> Graph deepCopy(Class<T> type, Set<Vertex> includeOnly) {
+    default <T extends Graph> Graph deepCopy(Class<T> type, Collection<Vertex> includeOnly) {
         Graph g = Helper.instantiateGeneric(type);
         for (Vertex v : includeOnly) {
             if (!this.containsVertex(v)) {
