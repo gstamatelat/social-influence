@@ -9,9 +9,10 @@ import org.slf4j.Logger;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public abstract class Player {
-    protected final Logger log = Finals.LOG;
+    protected static final Logger log = Finals.LOG;
     protected Map<String, String> options = new HashMap<>(); // TODO: Convert this field to private
     private boolean interrupted = false;
 
@@ -85,10 +86,10 @@ public abstract class Player {
     }
 
     public final Player setOption(String name, String value) {
+        name = Objects.requireNonNull(name);
+        value = Objects.requireNonNull(value);
         if (!this.options.containsKey(name)) {
             throw new GraphException(Finals.E_PLAYER_NO_PARAMETER, this.getClass().getSimpleName(), name);
-        } else if (value == null) {
-            throw new GraphException(Finals.E_PLAYER_OPTION_NULL);
         } else {
             this.options.put(name, value);
         }
