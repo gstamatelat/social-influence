@@ -1,5 +1,6 @@
 package gr.james.socialinfluence;
 
+import com.google.common.math.LongMath;
 import gr.james.socialinfluence.algorithms.distance.Dijkstra;
 import gr.james.socialinfluence.algorithms.distance.FloydWarshall;
 import gr.james.socialinfluence.algorithms.generators.GridGenerator;
@@ -9,7 +10,6 @@ import gr.james.socialinfluence.graph.Edge;
 import gr.james.socialinfluence.graph.GraphUtils;
 import gr.james.socialinfluence.graph.MemoryGraph;
 import gr.james.socialinfluence.graph.Vertex;
-import gr.james.socialinfluence.util.Helper;
 import gr.james.socialinfluence.util.RandomHelper;
 import gr.james.socialinfluence.util.collections.VertexPair;
 import gr.james.socialinfluence.util.collections.VertexSequence;
@@ -91,6 +91,7 @@ public class DistanceTests {
 
         Map<Vertex, Collection<VertexSequence>> r = Dijkstra.executeWithPath(g, largestPair.getSource());
         int num = r.get(largestPair.getTarget()).size();
-        Assert.assertEquals("dijkstraPathsTest", Helper.binomial(n + m - 2, n - 1), num);
+
+        Assert.assertEquals("dijkstraPathsTest", LongMath.binomial(n + m - 2, n - 1), num);
     }
 }

@@ -59,7 +59,7 @@ public class DegreeDistributionTest {
             if (diff < minDiff) {
                 minDiff = diff;
                 minCoefficients = coefficients;
-                System.out.println(Arrays.toString(minCoefficients) + " - " + minDiff);
+                System.out.printf("%s - %5.2e\n", Arrays.toString(minCoefficients), minDiff);
             }
         }
     }
