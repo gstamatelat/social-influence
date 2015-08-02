@@ -2,7 +2,7 @@ package gr.james.socialinfluence.algorithms.generators;
 
 import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.api.GraphGenerator;
-import gr.james.socialinfluence.graph.GraphOperations;
+import gr.james.socialinfluence.graph.GraphUtils;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.util.Finals;
 
@@ -37,7 +37,7 @@ public class BarabasiAlbertClusterGenerator<T extends Graph> implements GraphGen
             randomVertices[i] = c[i].getRandomVertex();
         }
 
-        T g = GraphOperations.combineGraphs(type, c);
+        T g = GraphUtils.combineGraphs(type, c);
 
         for (int i = 0; i < clusters; i++) {
             Vertex s = randomVertices[i];

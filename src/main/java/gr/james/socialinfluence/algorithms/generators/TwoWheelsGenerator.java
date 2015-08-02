@@ -2,7 +2,7 @@ package gr.james.socialinfluence.algorithms.generators;
 
 import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.api.GraphGenerator;
-import gr.james.socialinfluence.graph.GraphOperations;
+import gr.james.socialinfluence.graph.GraphUtils;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.util.Finals;
 
@@ -32,8 +32,8 @@ public class TwoWheelsGenerator<T extends Graph> implements GraphGenerator<T> {
         //noinspection StatementWithEmptyBody
         while (g2.getOutDegree((b = it2.next())) != 3) ;
 
-        T g = GraphOperations.combineGraphs(type, new Graph[]{g1, g2});
-        GraphOperations.fuseVertices(g, new Vertex[]{a, b});
+        T g = GraphUtils.combineGraphs(type, new Graph[]{g1, g2});
+        GraphUtils.fuseVertices(g, new Vertex[]{a, b});
 
         g.setMeta(Finals.TYPE_META, "TwoWheels")
                 .setMeta("wheelVertices", String.valueOf(wheelVertices));

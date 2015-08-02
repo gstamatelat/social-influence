@@ -6,7 +6,7 @@ import gr.james.socialinfluence.algorithms.generators.GridGenerator;
 import gr.james.socialinfluence.algorithms.generators.RandomGenerator;
 import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.graph.Edge;
-import gr.james.socialinfluence.graph.GraphOperations;
+import gr.james.socialinfluence.graph.GraphUtils;
 import gr.james.socialinfluence.graph.MemoryGraph;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.util.Helper;
@@ -34,7 +34,7 @@ public class DistanceTests {
             for (double p : ps) {
                 /* Create graph and randomize edge weights */
                 Graph g = new RandomGenerator<>(MemoryGraph.class, vertexCount, p).create();
-                GraphOperations.createCircle(g, true);
+                GraphUtils.createCircle(g, true);
                 for (Map.Entry<VertexPair, Edge> e : g.getEdges().entrySet()) {
                     e.getValue().setWeight(RandomHelper.getRandom().nextDouble());
                 }

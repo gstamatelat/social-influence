@@ -8,7 +8,7 @@ import gr.james.socialinfluence.util.collections.VertexPair;
 
 import java.util.*;
 
-public class GraphOperations {
+public class GraphUtils {
     public static void createCircle(Graph g, boolean undirected) {
         Iterator<Vertex> vertexIterator = g.getVertices().iterator();
         Vertex previous = vertexIterator.next();
