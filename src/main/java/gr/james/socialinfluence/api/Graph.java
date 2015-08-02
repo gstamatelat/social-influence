@@ -88,9 +88,7 @@ public interface Graph {
     }
 
     /**
-     * <p>Calculates the total amount of directed edges that this graph has. This method is a little faster than using
-     * {@code getEdges().size()}.</p>
-     * <dl><dt><b>Complexity:</b></dt><dd>O(1)</dd></dl>
+     * <p>Calculates the total amount of directed edges that this graph has.</p>
      *
      * @return the number of directed edges in this graph
      */

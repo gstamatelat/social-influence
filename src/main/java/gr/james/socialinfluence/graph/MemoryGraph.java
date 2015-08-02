@@ -21,9 +21,9 @@ import java.util.*;
  * <br>
  * Remove Edge: O(1)
  * <br>
- * Get Out Edges: O(1)
+ * Get Out Edges of Vertex: O(1)
  * <br>
- * Get In Edges: O(1)
+ * Get In Edges of Vertex: O(1)
  * <br>
  * Get Vertices: O(1)
  * </dd></dl>
