@@ -1,4 +1,6 @@
-package gr.james.socialinfluence.api;
+package gr.james.socialinfluence.graph;
+
+import gr.james.socialinfluence.api.Graph;
 
 import java.util.Map;
 import java.util.TreeMap;
