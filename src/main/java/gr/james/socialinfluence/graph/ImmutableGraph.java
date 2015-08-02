@@ -146,7 +146,7 @@ public final class ImmutableGraph implements Graph {
     }
 
     @Override
-    public Set<Vertex> addVertices(int count) {
+    public List<Vertex> addVertices(int count) {
         throw new UnsupportedOperationException();
     }
 

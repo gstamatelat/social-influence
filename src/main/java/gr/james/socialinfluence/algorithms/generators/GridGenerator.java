@@ -6,7 +6,7 @@ import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.util.Finals;
 import gr.james.socialinfluence.util.Helper;
 
-import java.util.Set;
+import java.util.List;
 
 /**
  * <p>Generates a two-dimensional, undirected, n x m grid graph.</p>
@@ -28,18 +28,16 @@ public class GridGenerator<T extends Graph> implements GraphGenerator<T> {
         T g = Helper.instantiateGeneric(type);
 
         int count = 0;
-        Set<Vertex> set = g.addVertices(n * m);
-        Vertex[] a = set.toArray(new Vertex[n * m]);
+        List<Vertex> set = g.addVertices(n * m);
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
                 if (j != m - 1) {
-                    g.addEdge(a[count], a[count + 1], true);
+                    g.addEdge(set.get(count), set.get(count + 1), true);
                 }
                 if (i != n - 1) {
-                    g.addEdge(a[count], a[count + m], true);
+                    g.addEdge(set.get(count), set.get(count + m), true);
                 }
-
                 count = count + 1;
             }
         }

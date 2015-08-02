@@ -71,7 +71,7 @@ public interface Graph {
     /**
      * <p>Return a uniformly distributed random vertex of this graph.</p>
      *
-     * @return a random vertex in this graph
+     * @return a random vertex of this graph
      */
     default Vertex getRandomVertex() {
         return new RandomVertexIterator(this).next();
@@ -240,7 +240,8 @@ public interface Graph {
     }
 
     /**
-     * <p>Inserts a new vertex to the graph and returns it. Use {@link #addVertices(int)} for bulk inserts.</p>
+     * <p>Inserts a new unconnected vertex to the graph and returns it. Use {@link #addVertices(int)} for bulk inserts.
+     * </p>
      * <dl><dt><b>Complexity:</b></dt><dd>O(1)</dd></dl>
      *
      * @return the new vertex object
@@ -260,12 +261,18 @@ public interface Graph {
      */
     boolean addVertex(Vertex v);
 
-    default Set<Vertex> addVertices(int count) {
-        Set<Vertex> newVertices = new HashSet<>();
+    /**
+     * <p>Insert {@code count} unconnected vertices in the graph.</p>
+     *
+     * @param count how many new vertices to add
+     * @return a unmodifiable list view of the vertices in the order that they were added
+     */
+    default List<Vertex> addVertices(int count) {
+        List<Vertex> newVertices = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             newVertices.add(this.addVertex());
         }
-        return Collections.unmodifiableSet(newVertices);
+        return Collections.unmodifiableList(newVertices);
     }
 
     /**
