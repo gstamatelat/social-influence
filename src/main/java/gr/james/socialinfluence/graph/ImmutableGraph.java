@@ -50,17 +50,12 @@ public class ImmutableGraph implements Graph {
     }
 
     @Override
-    public Vertex addVertex(Vertex v) {
+    public boolean addVertex(Vertex v) {
         throw new UnsupportedOperationException();
     }
 
     @Override
     public Graph removeVertex(Vertex v) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public Graph clear() {
         throw new UnsupportedOperationException();
     }
 

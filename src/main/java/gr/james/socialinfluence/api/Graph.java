@@ -269,10 +269,18 @@ public interface Graph {
      */
     default Vertex addVertex() {
         Vertex v = new Vertex();
-        return this.addVertex(v);
+        this.addVertex(v);
+        return v;
     }
 
-    Vertex addVertex(Vertex v);
+    /**
+     * <p>Insert the specified vertex to the graph. If the vertex is already contained in the graph, this method is a
+     * no-op.</p>
+     *
+     * @param v the vertex to insert to the graph
+     * @return {@code false} if the graph previously already contained the vertex, otherwise {@code true}
+     */
+    boolean addVertex(Vertex v);
 
     default Set<Vertex> addVertices(int count) {
         Set<Vertex> newVertices = new HashSet<>();
@@ -297,7 +305,9 @@ public interface Graph {
         return this;
     }
 
-    Graph clear();
+    default void clear() {
+        this.removeVertices(this.getVerticesAsList());
+    }
 
     Edge addEdge(Vertex source, Vertex target);
 

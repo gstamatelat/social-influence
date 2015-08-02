@@ -11,6 +11,23 @@ import java.util.*;
 /**
  * <p>Represents an in-memory {@link Graph}, implemented using adjacency lists. Suitable for sparse graphs. This
  * implementation is using a cache mechanism; refer to individual methods for more information.</p>
+ * <dl><dt><b>Complexity:</b></dt><dd>
+ * Add Vertex: O(1)
+ * <br/>
+ * Remove Vertex: O(n)
+ * <br/>
+ * Contains Vertex: O(1)
+ * <br/>
+ * Add Edge: O(1)
+ * <br/>
+ * Remove Edge: O(1)
+ * <br/>
+ * Get Out Edges: O(1)
+ * <br/>
+ * Get In Edges: O(1)
+ * <br/>
+ * Get Vertices: O(1)
+ * </dd></dl>
  */
 public class MemoryGraph extends AbstractGraph {
     private Map<Vertex, Pair<Map<Vertex, Edge>>> m;
@@ -25,19 +42,22 @@ public class MemoryGraph extends AbstractGraph {
     }
 
     @Override
-    public Vertex addVertex(Vertex v) {
-        this.vertexCache = null;
-        Pair<Map<Vertex, Edge>> pp = new Pair<>(new LinkedHashMap<>(), new LinkedHashMap<>());
-        this.m.put(v, pp);
-        return v;
+    public boolean containsVertex(Vertex v) {
+        return this.m.containsKey(v);
     }
 
-    /**
-     * {@inheritDoc}
-     * <dl><dt><b>Complexity:</b></dt><dd>O(n)</dd></dl>
-     *
-     * @throws GraphException {@inheritDoc}
-     */
+    @Override
+    public boolean addVertex(Vertex v) {
+        if (this.containsVertex(v)) {
+            return false;
+        } else {
+            this.vertexCache = null;
+            Pair<Map<Vertex, Edge>> pp = new Pair<>(new LinkedHashMap<>(), new LinkedHashMap<>());
+            this.m.put(v, pp);
+            return true;
+        }
+    }
+
     @Override
     public Graph removeVertex(Vertex v) {
         if (!this.containsVertex(v)) {
@@ -53,9 +73,8 @@ public class MemoryGraph extends AbstractGraph {
     }
 
     @Override
-    public Graph clear() {
+    public void clear() {
         this.m.clear();
-        return this;
     }
 
     @Override
@@ -95,11 +114,6 @@ public class MemoryGraph extends AbstractGraph {
         return Collections.unmodifiableSet(this.m.keySet());
     }
 
-    /**
-     * {@inheritDoc}
-     * <dl><dt><b>Complexity:</b></dt><dd><p>O(n)</p><p>This method is using cache; a hit will cause the method to run
-     * in O(1). Cache is cleared when a vertex is added or removed.</p></dd></dl>
-     */
     @Override
     public List<Vertex> getVerticesAsList() {
         if (this.vertexCache == null) {
