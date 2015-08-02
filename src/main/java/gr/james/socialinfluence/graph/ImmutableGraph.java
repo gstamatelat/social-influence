@@ -4,14 +4,23 @@ import gr.james.socialinfluence.api.Graph;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
+/**
+ * <p>Unmodifiable decorator of a {@link Graph}.</p>
+ */
 public class ImmutableGraph implements Graph {
     // TODO: Edge has setWeight method, which can be used to change the graph
     private Graph g;
 
+    /**
+     * <p>Construct a new {@code ImmutableGraph} from a given {@code Graph} g.</p>
+     *
+     * @param g the {@code Graph} to decorate
+     */
     public ImmutableGraph(Graph g) {
-        this.g = g;
+        this.g = Objects.requireNonNull(g);
     }
 
     @Override
