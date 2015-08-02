@@ -73,8 +73,8 @@ public interface Graph {
     /**
      * <p>Get a {@link Vertex} of this graph based on its index. Index is a deterministic, per-graph attribute between
      * {@code 0} (inclusive) and {@link #getVerticesCount()} (exclusive), indicating the order at which the vertices
-     * were inserted in the graph. This method will internally invoke {@code getVerticesAsList().get(index)}.</p>
-     * <p>It is generally not recommended to perform a vertex iteration based on this method.</p>
+     * were inserted in the graph. The default implementation of this method will internally invoke
+     * {@code getVerticesAsList().get(index)}.</p>
      *
      * @param index the index of the vertex
      * @return the vertex reference with the provided index
@@ -88,6 +88,11 @@ public interface Graph {
         return this.getVerticesAsList().get(index);
     }
 
+    /**
+     * <p>Return a uniformly distributed random vertex of this graph.</p>
+     *
+     * @return a random vertex in this graph
+     */
     default Vertex getRandomVertex() {
         return new RandomVertexIterator(this).next();
     }
