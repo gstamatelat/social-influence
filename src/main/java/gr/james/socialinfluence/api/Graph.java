@@ -50,26 +50,6 @@ public interface Graph {
         return this.getOutEdges(source).get(target);
     }
 
-    default <T extends Graph> Graph deepCopy(Class<T> type) {
-        return deepCopy(type, this.getVertices());
-    }
-
-    default <T extends Graph> Graph deepCopy(Class<T> type, Collection<Vertex> includeOnly) {
-        Graph g = Helper.instantiateGeneric(type);
-        for (Vertex v : includeOnly) {
-            if (!this.containsVertex(v)) {
-                throw new GraphException(Finals.E_GRAPH_VERTEX_NOT_CONTAINED, "deepCopy");
-            }
-            g.addVertex(v);
-        }
-        for (Map.Entry<VertexPair, Edge> e : this.getEdges().entrySet()) {
-            if ((g.containsVertex(e.getKey().getFirst())) && g.containsVertex(e.getKey().getSecond())) {
-                g.addEdge(e.getKey().getFirst(), e.getKey().getSecond()).setWeight(e.getValue().getWeight());
-            }
-        }
-        return g;
-    }
-
     /**
      * <p>Get a {@link Vertex} of this graph based on its index. Index is a deterministic, per-graph attribute between
      * {@code 0} (inclusive) and {@link #getVerticesCount()} (exclusive), indicating the order at which the vertices

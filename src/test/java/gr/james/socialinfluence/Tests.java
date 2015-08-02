@@ -249,7 +249,7 @@ public class Tests {
     public void deepCopyTest() {
         Graph g = new RandomGenerator<>(MemoryGraph.class, 100, 0.05).create();
         GraphOperations.createCircle(g, true);
-        Graph e = g.deepCopy(MemoryGraph.class);
+        Graph e = GraphOperations.deepCopy(MemoryGraph.class, g);
         e.addVertex();
         Assert.assertEquals("deepCopyTest", g.getVerticesCount() + 1, e.getVerticesCount());
         Assert.assertEquals("deepCopyTest", g.getEdgesCount(), e.getEdgesCount());

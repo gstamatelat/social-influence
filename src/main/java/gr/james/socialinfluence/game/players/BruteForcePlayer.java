@@ -4,6 +4,7 @@ import gr.james.socialinfluence.algorithms.iterators.RandomSurferIterator;
 import gr.james.socialinfluence.algorithms.iterators.RandomVertexIterator;
 import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.game.*;
+import gr.james.socialinfluence.graph.GraphOperations;
 import gr.james.socialinfluence.graph.ImmutableGraph;
 import gr.james.socialinfluence.graph.MemoryGraph;
 import gr.james.socialinfluence.graph.Vertex;
@@ -69,8 +70,8 @@ public class BruteForcePlayer extends Player {
 
     @Override
     public void suggestMove(ImmutableGraph g, GameDefinition d, MovePointer movePtr) {
-        Graph ig = g.deepCopy(MemoryGraph.class); // TODO: Sure this MemoryGraph thing is OK?
-        Game game = new Game(ig);
+        Graph mg = GraphOperations.deepCopy(MemoryGraph.class, g); // TODO: Sure this MemoryGraph thing is OK?
+        Game game = new Game(mg);
 
         HashSet<Move> movesHistory = new HashSet<>();
         HashSet<Move> moveDraws = new HashSet<>();
