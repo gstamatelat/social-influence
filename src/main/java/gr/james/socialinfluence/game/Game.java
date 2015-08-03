@@ -86,7 +86,8 @@ public class Game {
 
         GraphState<Double> lastState = DeGroot.execute(g, initialOpinions, deGrootEpsilon, false);
 
-        this.g.removeVertex(playerA).removeVertex(playerB);
+        this.g.removeVertex(playerA);
+        this.g.removeVertex(playerB);
 
         return lastState;
     }
@@ -111,9 +112,8 @@ public class Game {
         /* If one of the players didn't submit a move, the other one is obviously the winner */
         if ((this.playerAMove.getVerticesCount() == 0) ^ (this.playerBMove.getVerticesCount() == 0)) {
             Finals.LOG.warn(Finals.L_GAME_EMPTY_MOVE);
-            Vertex s1 = g.addVertex();
-            Vertex s2 = g.addVertex();
-            g.removeVertex(s1).removeVertex(s2);
+            Vertex s1 = new Vertex();
+            Vertex s2 = new Vertex();
             if (this.playerAMove.getVerticesCount() > 0) {
                 GraphState<Double> gs = new DoubleGraphState(g, 0.0);
                 gs.put(s1, 0.0);
@@ -130,9 +130,8 @@ public class Game {
         /* If moves are both empty or equal, it's obviously a draw */
         if (this.playerAMove.equals(this.playerBMove)) {
             Finals.LOG.info(Finals.L_GAME_EMPTY_MOVES);
-            Vertex s1 = g.addVertex();
-            Vertex s2 = g.addVertex();
-            g.removeVertex(s1).removeVertex(s2);
+            Vertex s1 = new Vertex();
+            Vertex s2 = new Vertex();
             GraphState<Double> gs = new DoubleGraphState(g, 0.5);
             gs.put(s1, 0.0);
             gs.put(s2, 1.0);

@@ -151,7 +151,7 @@ public final class ImmutableGraph implements Graph {
     }
 
     @Override
-    public Graph removeVertex(Vertex v) {
+    public boolean removeVertex(Vertex v) {
         throw new UnsupportedOperationException();
     }
 

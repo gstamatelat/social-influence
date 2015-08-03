@@ -242,7 +242,6 @@ public interface Graph {
     /**
      * <p>Inserts a new unconnected vertex to the graph and returns it. Use {@link #addVertices(int)} for bulk inserts.
      * </p>
-     * <dl><dt><b>Complexity:</b></dt><dd>O(1)</dd></dl>
      *
      * @return the new vertex object
      */
@@ -258,6 +257,7 @@ public interface Graph {
      *
      * @param v the vertex to insert to the graph
      * @return {@code false} if the graph previously already contained the vertex, otherwise {@code true}
+     * @throws NullPointerException if {@code v} is {@code null}
      */
     boolean addVertex(Vertex v);
 
@@ -276,14 +276,14 @@ public interface Graph {
     }
 
     /**
-     * <p>Removes a vertex from the graph. This method will also remove the inbound and outbound edges of that vertex.
-     * </p>
+     * <p>Removes a vertex from the graph if it is present. This method will also remove the inbound and outbound edges
+     * of that vertex.</p>
      *
      * @param v the vertex to be removed
-     * @return the current instance
-     * @throws GraphException if {@code v} does not belong in the graph
+     * @return {@code true} is the graph previously contained this vertex, otherwise {@code false}
+     * @throws NullPointerException if {@code v} is {@code null}
      */
-    Graph removeVertex(Vertex v);
+    boolean removeVertex(Vertex v);
 
     default Graph removeVertices(Collection<Vertex> vertices) {
         vertices.forEach(this::removeVertex);

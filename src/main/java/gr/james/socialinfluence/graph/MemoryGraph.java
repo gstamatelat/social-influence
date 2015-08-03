@@ -47,6 +47,7 @@ public class MemoryGraph extends AbstractGraph {
 
     @Override
     public boolean addVertex(Vertex v) {
+        Objects.requireNonNull(v);
         if (this.containsVertex(v)) {
             return false;
         } else {
@@ -58,9 +59,10 @@ public class MemoryGraph extends AbstractGraph {
     }
 
     @Override
-    public Graph removeVertex(Vertex v) {
+    public boolean removeVertex(Vertex v) {
+        Objects.requireNonNull(v);
         if (!this.containsVertex(v)) {
-            throw new GraphException(Finals.E_GRAPH_VERTEX_NOT_CONTAINED, "removeVertex");
+            return false;
         }
         for (Map.Entry<Vertex, Pair<Map<Vertex, Edge>>> e : this.m.entrySet()) {
             e.getValue().getFirst().remove(v);
@@ -68,7 +70,7 @@ public class MemoryGraph extends AbstractGraph {
         }
         this.vertexCache = null;
         this.m.remove(v);
-        return this;
+        return true;
     }
 
     @Override
