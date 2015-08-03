@@ -8,25 +8,7 @@ import gr.james.socialinfluence.util.collections.Pair;
 import java.util.*;
 
 /**
- * <p>Represents an in-memory {@link Graph}, implemented using adjacency lists. Suitable for sparse graphs. This
- * implementation is using a cache mechanism; refer to individual methods for more information.</p>
- * <dl><dt><b>Complexity:</b></dt><dd>
- * Add Vertex: O(1)
- * <br>
- * Remove Vertex: O(n)
- * <br>
- * Contains Vertex: O(1)
- * <br>
- * Add Edge: O(1)
- * <br>
- * Remove Edge: O(1)
- * <br>
- * Get Out Edges of Vertex: O(1)
- * <br>
- * Get In Edges of Vertex: O(1)
- * <br>
- * Get Vertices: O(1)
- * </dd></dl>
+ * <p>Represents an in-memory {@link Graph}, implemented using adjacency lists.</p>
  */
 public class MemoryGraph extends AbstractGraph {
     private Map<Vertex, Pair<Map<Vertex, Edge>>> m;

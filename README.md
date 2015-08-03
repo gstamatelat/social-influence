@@ -71,6 +71,18 @@ while (vi.hasNext()) {
 }
 ```
 
+### Graph implementations
+
+                | MemoryGraph
+--------------- | ---------------
+Storage         | O(n+m)
+Add vertex      | O(1)
+Add edge        | O(1)
+Remove vertex   | O(m)
+Remove edge     | O(1)
+Contains vertex | O(1)
+Contains edge   | O(1)
+
 ## TODO
 
 - There needs to be a helper function or some `Graph` member method that can return if a graph is aperiodic or not.
