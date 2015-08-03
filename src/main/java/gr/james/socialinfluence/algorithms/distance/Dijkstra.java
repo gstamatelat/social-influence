@@ -3,6 +3,7 @@ package gr.james.socialinfluence.algorithms.distance;
 import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.graph.Edge;
 import gr.james.socialinfluence.graph.Vertex;
+import gr.james.socialinfluence.util.collections.VertexPair;
 import gr.james.socialinfluence.util.collections.VertexSequence;
 
 import java.util.*;
@@ -19,6 +20,17 @@ public class Dijkstra {
 
     public static Map<Vertex, Collection<VertexSequence>> executeWithPath(Graph g, Vertex source) {
         return executeWithPathInternal(g, source, false);
+    }
+
+    public static Map<VertexPair, Double> executeDistanceMap(Graph g) {
+        HashMap<VertexPair, Double> dist = new HashMap<>();
+        for (Vertex v : g.getVerticesAsList()) {
+            Map<Vertex, Double> temp = Dijkstra.execute(g, v);
+            for (Map.Entry<Vertex, Double> e : temp.entrySet()) {
+                dist.put(new VertexPair(v, e.getKey()), e.getValue());
+            }
+        }
+        return Collections.unmodifiableMap(dist);
     }
 
     private static Map<Vertex, Collection<VertexSequence>> executeWithPathInternal(Graph g, Vertex source, boolean dummyPaths) {

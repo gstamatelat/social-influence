@@ -5,6 +5,7 @@ import gr.james.socialinfluence.graph.Edge;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.util.collections.VertexPair;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -45,6 +46,6 @@ public class FloydWarshall {
             }
         }
 
-        return dist;
+        return Collections.unmodifiableMap(dist);
     }
 }

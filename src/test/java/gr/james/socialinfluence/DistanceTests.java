@@ -17,7 +17,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
 
 public class DistanceTests {
@@ -43,13 +42,7 @@ public class DistanceTests {
                 Map<VertexPair, Double> distFloyd = FloydWarshall.execute(g);
 
                 /* Dijkstra */
-                HashMap<VertexPair, Double> distDijkstra = new HashMap<>();
-                for (Vertex v : g.getVerticesAsList()) {
-                    Map<Vertex, Double> temp = Dijkstra.execute(g, v);
-                    for (Map.Entry<Vertex, Double> e : temp.entrySet()) {
-                        distDijkstra.put(new VertexPair(v, e.getKey()), e.getValue());
-                    }
-                }
+                Map<VertexPair, Double> distDijkstra = Dijkstra.executeDistanceMap(g);
 
                 /* Length assertion */
                 Assert.assertEquals("FloydWarshallTest - length - " + g, distFloyd.size(), distDijkstra.size());

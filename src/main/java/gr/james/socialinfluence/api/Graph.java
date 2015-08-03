@@ -253,8 +253,8 @@ public interface Graph {
     }
 
     /**
-     * <p>Insert the specified vertex to the graph. If the vertex is already contained in the graph, this method is a
-     * no-op.</p>
+     * <p>Insert the specified vertex {@code v} to the graph. If the vertex is already contained in the graph, this
+     * method is a no-op.</p>
      *
      * @param v the vertex to insert to the graph
      * @return {@code false} if the graph previously already contained the vertex, otherwise {@code true}
@@ -265,7 +265,7 @@ public interface Graph {
      * <p>Insert {@code count} unconnected vertices in the graph.</p>
      *
      * @param count how many new vertices to add
-     * @return a unmodifiable list view of the vertices in the order that they were added
+     * @return an unmodifiable list view of the vertices in the order that they were added
      */
     default List<Vertex> addVertices(int count) {
         List<Vertex> newVertices = new ArrayList<>();
@@ -290,6 +290,9 @@ public interface Graph {
         return this;
     }
 
+    /**
+     * <p>Removes all vertices and all edges from this graph.</p>
+     */
     default void clear() {
         this.removeVertices(this.getVerticesAsList());
     }
