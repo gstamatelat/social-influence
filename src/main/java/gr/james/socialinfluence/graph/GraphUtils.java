@@ -10,7 +10,7 @@ import java.util.*;
 
 public class GraphUtils {
     public static void createCircle(Graph g, boolean undirected) {
-        Iterator<Vertex> vertexIterator = g.getVertices().iterator();
+        Iterator<Vertex> vertexIterator = g.getVerticesAsList().iterator();
         Vertex previous = vertexIterator.next();
         Vertex first = previous;
         while (vertexIterator.hasNext()) {
@@ -53,8 +53,8 @@ public class GraphUtils {
      * @param g the graph to apply the transformation to
      */
     public static void connectAllVertices(Graph g) {
-        for (Vertex v : g.getVertices()) {
-            for (Vertex w : g.getVertices()) {
+        for (Vertex v : g.getVerticesAsList()) {
+            for (Vertex w : g.getVerticesAsList()) {
                 if (!v.equals(w)) {
                     g.addEdge(v, w);
                 }

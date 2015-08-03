@@ -5,7 +5,6 @@ import gr.james.socialinfluence.algorithms.iterators.RandomVertexIterator;
 import gr.james.socialinfluence.graph.Edge;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.util.Finals;
-import gr.james.socialinfluence.util.GraphException;
 import gr.james.socialinfluence.util.Helper;
 import gr.james.socialinfluence.util.collections.VertexPair;
 
@@ -31,12 +30,12 @@ public interface Graph {
     }
 
     default boolean containsVertex(Vertex v) {
-        return this.getVertices().contains(v);
+        return this.getVerticesAsList().contains(v);
     }
 
     @Deprecated
     default boolean containsEdge(Vertex source, Vertex target) {
-        return this.getOutEdges(source).containsKey(target);
+        return findEdge(source, target) != null;
     }
 
     /**
@@ -45,9 +44,10 @@ public interface Graph {
      * @param source the source vertex of the edge
      * @param target the target vertex of the edge
      * @return the {@code Edge} from {@code source} to {@code target}, or {@code null} if there is no such edge
+     * @throws NullPointerException if either {@code source} or {@code target} is {@code null}
      */
     default Edge findEdge(Vertex source, Vertex target) {
-        return this.getOutEdges(source).get(target);
+        return this.getOutEdges(Objects.requireNonNull(source)).get(Objects.requireNonNull(target));
     }
 
     /**
@@ -58,13 +58,10 @@ public interface Graph {
      *
      * @param index the index of the vertex
      * @return the vertex reference with the provided index
-     * @throws GraphException if {@code index} is outside of {@code 0} (inclusive) and {@link #getVerticesCount()}
-     *                        (exclusive)
+     * @throws IndexOutOfBoundsException if the index is out of range
+     *                                   (<tt>index &lt; 0 || index &gt;= getVerticesCount()</tt>)
      */
     default Vertex getVertexFromIndex(int index) {
-        if (index < 0 || index >= this.getVerticesCount()) {
-            throw new GraphException(Finals.E_GRAPH_INDEX_OUT_OF_BOUNDS, index);
-        }
         return this.getVerticesAsList().get(index);
     }
 
@@ -94,7 +91,7 @@ public interface Graph {
      */
     default int getEdgesCount() {
         int count = 0;
-        for (Vertex v : this.getVertices()) {
+        for (Vertex v : this.getVerticesAsList()) {
             count += this.getOutEdges(v).size();
         }
         return count;
@@ -156,6 +153,7 @@ public interface Graph {
      *
      * @return true if the graph is undirected, otherwise false
      */
+    @Deprecated
     default boolean isUndirected() {
         // TODO: Implement
         /*ArrayList<VertexPair> edgeList = new ArrayList<>();
@@ -220,17 +218,10 @@ public interface Graph {
 
     default double getDiameter() {
         // TODO: Should return a list/path/walk of vertices to show both the weight sum and the steps
-        HashMap<Vertex[], Double> distanceMap = new HashMap<>();
-
-        for (Vertex v : this.getVerticesAsList()) {
-            Map<Vertex, Double> temp = Dijkstra.execute(this, v);
-            for (Map.Entry<Vertex, Double> e : temp.entrySet()) {
-                distanceMap.put(new Vertex[]{v, e.getKey()}, e.getValue());
-            }
-        }
+        Map<VertexPair, Double> distanceMap = Dijkstra.executeDistanceMap(this);
 
         double diameter = 0;
-        for (Double d : distanceMap.values()) {
+        for (double d : distanceMap.values()) {
             if (d > diameter) {
                 diameter = d;
             }

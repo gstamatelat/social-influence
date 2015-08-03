@@ -19,18 +19,20 @@ public class PageRank {
         GraphState<Double> lastState = new DoubleGraphState(g, 1.0);
         stateHistory.add(lastState);
 
+        /* Using this weight map, method is becoming a little faster */
         HashMap<Vertex, Double> outWeightSums = new HashMap<>();
-        for (Vertex v : g.getVertices()) {
+        for (Vertex v : g.getVerticesAsList()) {
             outWeightSums.put(v, Helper.getWeightSum(g.getOutEdges(v).values()));
         }
 
         boolean stabilized = false;
         while (!stabilized) {
             GraphState<Double> nextState = new DoubleGraphState(g, 0.0);
-            for (Vertex v : g.getVertices()) {
+            for (Vertex v : g.getVerticesAsList()) {
                 Map<Vertex, Edge> inEdges = g.getInEdges(v);
                 for (Map.Entry<Vertex, Edge> e : inEdges.entrySet()) {
-                    nextState.put(v, nextState.get(v) + e.getValue().getWeight() * lastState.get(e.getKey()) / outWeightSums.get(e.getKey()));
+                    nextState.put(v, nextState.get(v) +
+                            e.getValue().getWeight() * lastState.get(e.getKey()) / outWeightSums.get(e.getKey()));
                 }
             }
 

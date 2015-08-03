@@ -30,7 +30,7 @@ public class RandomGenerator<T extends Graph> implements EvolvingGraphGenerator<
     @Override
     public T evolve() {
         Vertex v = g.addVertex();
-        for (Vertex y : g.getVertices()) {
+        for (Vertex y : g.getVerticesAsList()) {
             if (!v.equals(y)) {
                 if (RandomHelper.getRandom().nextDouble() < p) {
                     g.addEdge(v, y);

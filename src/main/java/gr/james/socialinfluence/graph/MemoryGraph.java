@@ -76,6 +76,7 @@ public class MemoryGraph extends AbstractGraph {
     @Override
     public void clear() {
         this.m.clear();
+        this.vertexCache = null;
     }
 
     @Override

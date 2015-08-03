@@ -1,6 +1,6 @@
 package gr.james.socialinfluence.algorithms.scoring;
 
-import gr.james.socialinfluence.algorithms.distance.FloydWarshall;
+import gr.james.socialinfluence.algorithms.distance.Dijkstra;
 import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.api.GraphState;
 import gr.james.socialinfluence.graph.Vertex;
@@ -17,7 +17,7 @@ import java.util.Map;
  */
 public class Closeness {
     public static GraphState<Double> execute(Graph g, boolean in, Collection<Vertex> includeOnly, ClosenessHandler handler) {
-        Map<VertexPair, Double> distanceMap = FloydWarshall.execute(g);
+        Map<VertexPair, Double> distanceMap = Dijkstra.executeDistanceMap(g);
 
         GraphState<Double> state = new DoubleGraphState();
 

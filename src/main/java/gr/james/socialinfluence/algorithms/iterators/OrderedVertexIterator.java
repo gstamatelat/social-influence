@@ -8,10 +8,10 @@ import java.util.TreeSet;
 
 @Deprecated
 public class OrderedVertexIterator implements Iterator<Vertex> {
-    private TreeSet<Vertex> vertices = new TreeSet<>();
+    private TreeSet<Vertex> vertices;
 
     public OrderedVertexIterator(Graph g) {
-        this.vertices.addAll(g.getVertices());
+        vertices = new TreeSet<>(g.getVerticesAsList());
     }
 
     @Override
