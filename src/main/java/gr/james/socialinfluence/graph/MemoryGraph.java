@@ -51,9 +51,9 @@ public class MemoryGraph extends AbstractGraph {
         if (this.containsVertex(v)) {
             return false;
         } else {
-            graphStructureChanged();
             Pair<Map<Vertex, Edge>> pp = new Pair<>(new LinkedHashMap<>(), new LinkedHashMap<>());
             this.m.put(v, pp);
+            verticesChanged();
             return true;
         }
     }
@@ -64,19 +64,21 @@ public class MemoryGraph extends AbstractGraph {
         if (!this.containsVertex(v)) {
             return false;
         }
-        for (Map.Entry<Vertex, Pair<Map<Vertex, Edge>>> e : this.m.entrySet()) {
-            e.getValue().getFirst().remove(v);
-            e.getValue().getSecond().remove(v);
+        for (Vertex d : this.m.get(v).getFirst().keySet()) {
+            this.m.get(d).getSecond().remove(v);
         }
-        graphStructureChanged();
+        for (Vertex d : this.m.get(v).getSecond().keySet()) {
+            this.m.get(d).getFirst().remove(v);
+        }
         this.m.remove(v);
+        verticesChanged();
         return true;
     }
 
     @Override
     public void clear() {
         this.m.clear();
-        graphStructureChanged();
+        verticesChanged();
     }
 
     @Override
@@ -124,7 +126,7 @@ public class MemoryGraph extends AbstractGraph {
         return Collections.unmodifiableList(vertexCache);
     }
 
-    private void graphStructureChanged() {
+    private void verticesChanged() {
         this.vertexCache = null;
     }
 }

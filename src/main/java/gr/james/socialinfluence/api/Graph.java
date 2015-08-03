@@ -71,6 +71,7 @@ public interface Graph {
      * @return a random vertex of this graph
      */
     default Vertex getRandomVertex() {
+        // TODO: Return null or exception if the graph is empty
         return new RandomVertexIterator(this).next();
     }
 
