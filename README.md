@@ -56,7 +56,7 @@ for (int i = 0; i < g.getVerticesCount(); i++) {
 }
 ```
 
-**Index** is a deterministic, per-graph attribute between 0 (inclusive) and N (exclusive), where N the number of vertices in the graph, indicating the order at which the vertices were inserted in the graph.
+**Index** is a deterministic, per-graph attribute between *0* (inclusive) and *N* (exclusive), where N the number of vertices in the graph, indicating the order at which the vertices were inserted in the graph.
 
 Iterators (unless stated) are generally not backed by the graph; changes on the graph structure while an iteration is in progress won't reflect on the iterators.
 
