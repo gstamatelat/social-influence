@@ -6,8 +6,8 @@ import gr.james.socialinfluence.graph.Edge;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.util.Finals;
 import gr.james.socialinfluence.util.Helper;
-import gr.james.socialinfluence.util.VertexNotExistsException;
 import gr.james.socialinfluence.util.collections.VertexPair;
+import gr.james.socialinfluence.util.exceptions.VertexNotExistsException;
 
 import java.util.*;
 
@@ -130,6 +130,8 @@ public interface Graph {
      *
      * @param v the vertex
      * @return the sum of weights of all outbound edges of vertex {@code v}
+     * @throws NullPointerException     if {@code v} is {@code null}
+     * @throws VertexNotExistsException if {@code v} doesn't belong in the graph
      * @see #getInWeightSum(Vertex)
      */
     default double getOutWeightSum(Vertex v) {
@@ -141,6 +143,8 @@ public interface Graph {
      *
      * @param v the vertex
      * @return the sum of weights of all inbound edges of vertex {@code v}
+     * @throws NullPointerException     if {@code v} is {@code null}
+     * @throws VertexNotExistsException if {@code v} doesn't belong in the graph
      * @see #getOutWeightSum(Vertex)
      */
     default double getInWeightSum(Vertex v) {
@@ -153,6 +157,8 @@ public interface Graph {
      *
      * @param v the vertex
      * @return the outbound degree of vertex {@code v}
+     * @throws NullPointerException     if {@code v} is {@code null}
+     * @throws VertexNotExistsException if {@code v} doesn't belong in the graph
      * @see #getInDegree(Vertex)
      */
     default int getOutDegree(Vertex v) {
@@ -165,6 +171,8 @@ public interface Graph {
      *
      * @param v the vertex
      * @return the inbound degree of vertex {@code v}
+     * @throws NullPointerException     if {@code v} is {@code null}
+     * @throws VertexNotExistsException if {@code v} doesn't belong in the graph
      * @see #getOutDegree(Vertex)
      */
     default int getInDegree(Vertex v) {

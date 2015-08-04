@@ -1,5 +1,7 @@
 package gr.james.socialinfluence.util;
 
+import gr.james.socialinfluence.util.exceptions.GraphException;
+
 import java.util.Random;
 
 /**

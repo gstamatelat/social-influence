@@ -6,6 +6,7 @@ import gr.james.socialinfluence.graph.Vertex;
  * <p>Represents a move point, which consists of a vertex and a weight.
  * This class is mostly used as a structure.</p>
  */
+@Deprecated
 public class MovePoint implements Comparable {
     public Vertex vertex;
     public double weight;

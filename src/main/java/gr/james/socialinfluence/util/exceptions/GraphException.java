@@ -1,4 +1,4 @@
-package gr.james.socialinfluence.util;
+package gr.james.socialinfluence.util.exceptions;
 
 public class GraphException extends RuntimeException {
     /**

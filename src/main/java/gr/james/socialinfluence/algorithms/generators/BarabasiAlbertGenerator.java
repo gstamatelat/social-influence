@@ -6,8 +6,8 @@ import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.api.GraphState;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.util.Finals;
-import gr.james.socialinfluence.util.GraphException;
 import gr.james.socialinfluence.util.Helper;
+import gr.james.socialinfluence.util.exceptions.GraphException;
 
 import java.util.HashMap;
 import java.util.Map;

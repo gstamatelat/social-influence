@@ -19,7 +19,7 @@ import gr.james.socialinfluence.graph.MemoryGraph;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.util.RandomHelper;
 import gr.james.socialinfluence.util.collections.VertexPair;
-import gr.james.socialinfluence.util.collections.states.DoubleGraphState;
+import gr.james.socialinfluence.util.states.DoubleGraphState;
 import org.junit.Assert;
 import org.junit.Test;
 

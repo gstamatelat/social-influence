@@ -3,7 +3,7 @@ package gr.james.socialinfluence.game;
 import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.graph.ImmutableGraph;
 import gr.james.socialinfluence.util.Finals;
-import gr.james.socialinfluence.util.GraphException;
+import gr.james.socialinfluence.util.exceptions.GraphException;
 import org.slf4j.Logger;
 
 import java.util.Collections;

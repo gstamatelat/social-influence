@@ -85,11 +85,11 @@ Contains edge   | O(1)
 
 ## TODO
 
-- There needs to be a helper function or some `Graph` member method that can return if a graph is aperiodic or not.
-- Consider converting `Move` to immutable.
-- Considering converting `Move` to `Map`.
+- There needs to be a helper function or some `Graph` member method that can return if a graph is aperiodic or not
+- Consider converting `Move` to immutable
 - Grid generator and maybe some edge randomizer: http://www.cs.cornell.edu/home/kleinber/swn.d/swn.html
 - Transformation "stretch" that extends edges
 - Perhaps define an `interface VertexSimilarity` with one member `double compute(Vertex v1, Vertex v2, Graph g)` as well as an `interface VertexSimilarityMatrix` replacing `Map<VertexPair, Double>`. See '3.2.4. Definitions based on vertex similarity' in 'Community detection in graphs, Santo Fortunato'
 - A PageRank test on a known graph
 - GraphOperations.combineGraphs seems like a generalization of Graph.deepCopy
+- Consider changing the iterator of Move to Iterator<MovePoint> or Iterator<GenericPair<Vertex,Double>>

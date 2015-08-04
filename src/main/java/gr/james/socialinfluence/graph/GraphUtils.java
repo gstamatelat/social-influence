@@ -2,9 +2,9 @@ package gr.james.socialinfluence.graph;
 
 import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.util.Finals;
-import gr.james.socialinfluence.util.GraphException;
 import gr.james.socialinfluence.util.Helper;
 import gr.james.socialinfluence.util.collections.VertexPair;
+import gr.james.socialinfluence.util.exceptions.GraphException;
 
 import java.util.*;
 

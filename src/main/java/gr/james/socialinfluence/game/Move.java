@@ -2,17 +2,15 @@ package gr.james.socialinfluence.game;
 
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.util.Finals;
-import gr.james.socialinfluence.util.GraphException;
+import gr.james.socialinfluence.util.exceptions.WeightNonPositiveException;
 
-import java.util.Iterator;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
-public class Move implements Iterable<MovePoint> {
-    private Set<MovePoint> moveObject;
+public class Move implements Iterable<Vertex> {
+    private Map<Vertex, Double> m;
 
     public Move() {
-        this.moveObject = new TreeSet<>();
+        this.m = new TreeMap<>();
     }
 
     public Move(Vertex... args) {
@@ -23,15 +21,19 @@ public class Move implements Iterable<MovePoint> {
     }
 
     public int getVerticesCount() {
-        return this.moveObject.size();
+        return this.m.size();
     }
 
     public double getWeightSum() {
         double sum = 0.0;
-        for (MovePoint e : this.moveObject) {
-            sum += e.weight;
+        for (Double e : this.m.values()) {
+            sum += e;
         }
         return sum;
+    }
+
+    public double getWeight(Vertex v) {
+        return this.m.get(v);
     }
 
     /**
@@ -40,125 +42,80 @@ public class Move implements Iterable<MovePoint> {
      * @param v      the vertex of this move point, can't be null
      * @param weight the weight of this move point
      * @return the current instance
-     * @throws GraphException if {@code weight} input is non-positive
+     * @throws NullPointerException       if {@code v} is {@code null}
+     * @throws WeightNonPositiveException if {@code weight} input is non-positive
      */
     public Move putVertex(Vertex v, double weight) {
+        Objects.requireNonNull(v);
         if (weight <= 0) {
-            throw new GraphException(Finals.E_MOVE_WEIGHT_NEGATIVE, weight);
+            throw new WeightNonPositiveException(Finals.E_MOVE_WEIGHT_NEGATIVE, weight);
         }
 
-        boolean exists = false;
-        for (MovePoint e : this.moveObject) {
-            if (v.equals(e.vertex)) {
-                e.weight = weight;
-                exists = true;
-            }
-        }
-
-        if (!exists) {
-            MovePoint mv = new MovePoint();
-            mv.vertex = v;
-            mv.weight = weight;
-            this.moveObject.add(mv);
-        }
+        this.m.put(v, weight);
 
         return this;
     }
 
     public boolean containsVertex(Vertex v) {
-        for (MovePoint e : this.moveObject) {
-            if (v.equals(e.vertex)) {
-                return true;
-            }
-        }
-        return false;
+        return this.m.containsKey(v);
     }
 
     public Move removeVertex(Vertex v) {
-        MovePoint f = null;
-        for (MovePoint e : this.moveObject) {
-            if (v.equals(e.vertex)) {
-                f = e;
-            }
-        }
-
-        if (f != null) {
-            this.moveObject.remove(f);
-        }
-
+        this.m.remove(v);
         return this;
     }
 
     public Move deepCopy() {
         Move newMove = new Move();
-        for (MovePoint e : this) {
-            newMove.putVertex(e.vertex, e.weight);
+        for (Vertex v : this.m.keySet()) {
+            newMove.putVertex(v, this.m.get(v));
         }
         return newMove;
     }
 
     public Move clear() {
-        this.moveObject.clear();
+        this.m.clear();
         return this;
     }
 
     public Move normalizeWeights(double sum) {
         double sumBefore = this.getWeightSum();
-        for (MovePoint e : this.moveObject) {
-            e.weight = (e.weight * sum) / sumBefore;
+        for (Vertex v : this.m.keySet()) {
+            this.m.put(v, this.m.get(v) * sum / sumBefore);
         }
         return this;
     }
 
     public Move sliceMove(int amount) {
-        while (this.moveObject.size() > amount) {
-            Iterator it = this.moveObject.iterator();
-            it.next();
-            it.remove();
+        while (this.m.size() > amount) {
+            List<Vertex> list = new ArrayList<>(this.m.keySet());
+            this.m.remove(list.get(list.size() - 1));
         }
         return this;
     }
 
     @Override
-    public Iterator<MovePoint> iterator() {
-        return this.moveObject.iterator();
+    public Iterator<Vertex> iterator() {
+        return this.m.keySet().iterator();
     }
 
     @Override
     public String toString() {
-        if (this.moveObject.isEmpty()) {
-            return "[]";
-        }
-        String outStr = "[";
-        for (MovePoint t : this.moveObject) {
-            outStr += t.vertex.toString();
-            outStr += "=";
-            outStr += Math.round(100d * t.weight) / 100d;
-            outStr += ", ";
-        }
-        outStr = outStr.substring(0, outStr.length() - 2);
-        outStr += "]";
-        return outStr;
+        return this.m.toString();
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        Move other = (Move) obj;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
-        return this.moveObject.equals(other.moveObject);
+        Move vertexes = (Move) o;
+
+        return m.equals(vertexes.m);
     }
 
     @Override
     public int hashCode() {
-        return this.moveObject.hashCode();
+        return m.hashCode();
     }
 }

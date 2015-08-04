@@ -48,14 +48,12 @@ public class BruteForcePlayer extends Player {
         Move moves = new Move();
         // TODO: This loop is problematic. There is a chance that 2 nodes surf to the same node and thus create a move with less than numOfMoves nodes.
         // TODO: If this happens, it will never increase the nodes again
-        for (MovePoint mp : lastMove) {
-            Vertex v = mp.vertex;
-            RandomSurferIterator randomSurfer = new RandomSurferIterator(g, 0.0, v);
+        for (Vertex mp : lastMove) {
+            RandomSurferIterator randomSurfer = new RandomSurferIterator(g, 0.0, mp);
             while (RandomHelper.getRandom().nextDouble() < jump_probability) {
-                v = randomSurfer.next();
+                mp = randomSurfer.next();
             }
-
-            moves.putVertex(v, RandomHelper.getRandom().nextInt(weightLevels) + 1);
+            moves.putVertex(mp, RandomHelper.getRandom().nextInt(weightLevels) + 1);
         }
         return moves;
     }

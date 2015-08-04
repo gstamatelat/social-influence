@@ -1,4 +1,4 @@
-package gr.james.socialinfluence.util.collections.states;
+package gr.james.socialinfluence.util.states;
 
 import gr.james.socialinfluence.api.AbstractGraphState;
 

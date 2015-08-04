@@ -6,7 +6,7 @@ import gr.james.socialinfluence.graph.Edge;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.util.Finals;
 import gr.james.socialinfluence.util.Helper;
-import gr.james.socialinfluence.util.collections.states.DoubleGraphState;
+import gr.james.socialinfluence.util.states.DoubleGraphState;
 
 import java.util.HashMap;
 import java.util.HashSet;
