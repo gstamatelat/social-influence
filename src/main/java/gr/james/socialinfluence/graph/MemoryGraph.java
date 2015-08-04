@@ -3,6 +3,7 @@ package gr.james.socialinfluence.graph;
 import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.util.Finals;
 import gr.james.socialinfluence.util.GraphException;
+import gr.james.socialinfluence.util.VertexNotExistsException;
 import gr.james.socialinfluence.util.collections.Pair;
 
 import java.util.*;
@@ -87,12 +88,22 @@ public class MemoryGraph extends AbstractGraph {
 
     @Override
     public Map<Vertex, Edge> getOutEdges(Vertex v) {
-        return Collections.unmodifiableMap(this.m.get(v).getFirst());
+        Objects.requireNonNull(v);
+        Pair<Map<Vertex, Edge>> p = this.m.get(v);
+        if (p == null) {
+            throw new VertexNotExistsException();
+        }
+        return Collections.unmodifiableMap(p.getFirst());
     }
 
     @Override
     public Map<Vertex, Edge> getInEdges(Vertex v) {
-        return Collections.unmodifiableMap(this.m.get(v).getSecond());
+        Objects.requireNonNull(v);
+        Pair<Map<Vertex, Edge>> p = this.m.get(v);
+        if (p == null) {
+            throw new VertexNotExistsException();
+        }
+        return Collections.unmodifiableMap(p.getSecond());
     }
 
     @Override

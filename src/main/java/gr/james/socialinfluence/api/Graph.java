@@ -6,6 +6,7 @@ import gr.james.socialinfluence.graph.Edge;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.util.Finals;
 import gr.james.socialinfluence.util.Helper;
+import gr.james.socialinfluence.util.VertexNotExistsException;
 import gr.james.socialinfluence.util.collections.VertexPair;
 
 import java.util.*;
@@ -39,7 +40,9 @@ public interface Graph {
     }
 
     /**
-     * <p>Returns the {@code Edge} from {@code source} to {@code target}, or {@code null} if there is no such edge.</p>
+     * <p>Returns the {@code Edge} from {@code source} to {@code target}, or {@code null} if there is no such edge. This
+     * method will also return {@code null} if either input is outside the graph and thus, no edge is possible between
+     * them.</p>
      *
      * @param source the source vertex of the edge
      * @param target the target vertex of the edge
@@ -98,8 +101,26 @@ public interface Graph {
         return count;
     }
 
+    /**
+     * <p>Get all outbound edges of {@code v}. The result is a {@link Map} where the keys are the destination vertices and the values are the {@link Edge} objects.</p>
+     *
+     * @param v aa
+     * @return aa
+     * @throws NullPointerException     if {@code v} is {@code null}
+     * @throws VertexNotExistsException if {@code v} doesn't belong in the graph
+     * @see #getInEdges(Vertex)
+     */
     Map<Vertex, Edge> getOutEdges(Vertex v);
 
+    /**
+     * <p>Get all inbound edges of {@code v}. The result is a {@link Map} where the keys are the source vertices and the values are the {@link Edge} objects.</p>
+     *
+     * @param v aa
+     * @return aa
+     * @throws NullPointerException     if {@code v} is {@code null}
+     * @throws VertexNotExistsException if {@code v} doesn't belong in the graph
+     * @see #getOutEdges(Vertex)
+     */
     Map<Vertex, Edge> getInEdges(Vertex v);
 
     /**
