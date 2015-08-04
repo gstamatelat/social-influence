@@ -102,10 +102,11 @@ public interface Graph {
     }
 
     /**
-     * <p>Get all outbound edges of {@code v}. The result is a {@link Map} where the keys are the destination vertices and the values are the {@link Edge} objects.</p>
+     * <p>Get all outbound edges of {@code v}. The result is a {@link Map} where the keys are the destination vertices
+     * and the values are the {@link Edge} objects.</p>
      *
-     * @param v aa
-     * @return aa
+     * @param v the vertex to get the outbound edges of
+     * @return the outbound edges of {@code v} as a {@code Map<Vertex, Edge>}
      * @throws NullPointerException     if {@code v} is {@code null}
      * @throws VertexNotExistsException if {@code v} doesn't belong in the graph
      * @see #getInEdges(Vertex)
@@ -113,10 +114,11 @@ public interface Graph {
     Map<Vertex, Edge> getOutEdges(Vertex v);
 
     /**
-     * <p>Get all inbound edges of {@code v}. The result is a {@link Map} where the keys are the source vertices and the values are the {@link Edge} objects.</p>
+     * <p>Get all inbound edges of {@code v}. The result is a {@link Map} where the keys are the source vertices and the
+     * values are the {@link Edge} objects.</p>
      *
-     * @param v aa
-     * @return aa
+     * @param v the vertex to get the inbound edges of
+     * @return the inbound edges of {@code v} as a {@code Map<Vertex, Edge>}
      * @throws NullPointerException     if {@code v} is {@code null}
      * @throws VertexNotExistsException if {@code v} doesn't belong in the graph
      * @see #getOutEdges(Vertex)
