@@ -20,6 +20,10 @@ public class SmallWorldNetworkGenerator<T extends Graph> implements GraphGenerat
         if (p < 0 || p > 1){
             throw new GraphException("p must be between 0 and 1, found " + p);
         }
+        if (k >= n){
+            throw new GraphException("n must be bigger than k");
+        }
+
 
         this.type = type;
         this.n = n;
