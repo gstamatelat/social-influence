@@ -36,7 +36,7 @@ System.out.println(gridGraph);
 ```
 
 ```java
-GraphGenerator generator = new WattsStrogatzGenerator(MemoryGraph.class, 1000, 6, 0.4);
+GraphGenerator generator = new WattsStrogatzGenerator<>(MemoryGraph.class, 1000, 6, 0.4);
 Graph wattsStrogatzGraph = generator.create();
 System.out.println(wattsStrogatzGraph);
 ```
