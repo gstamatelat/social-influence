@@ -35,6 +35,12 @@ Graph gridGraph = generator.create();
 System.out.println(gridGraph);
 ```
 
+```java
+SmallWorldNetworkGenerator generator = new SmallWorldNetworkGenerator(MemoryGraph.class, 1000, 6, 0.4);
+Graph smallWorldGraph = generator.create();
+System.out.println(smallWorldGraph);
+```
+
 Inspect available generators in `gr.james.socialinfluence.algorithms.generators` package.
 
 ### Vertex iteration
