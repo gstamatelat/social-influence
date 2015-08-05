@@ -9,7 +9,7 @@ import gr.james.socialinfluence.util.exceptions.VertexNotExistsException;
 
 import java.util.*;
 
-public class Helper {
+public final class Helper {
     public static double getWeightSum(Collection<Edge> edges) {
         double sum = 0;
         for (Edge e : edges) {

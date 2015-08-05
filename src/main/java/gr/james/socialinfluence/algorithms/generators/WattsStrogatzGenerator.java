@@ -3,9 +3,9 @@ package gr.james.socialinfluence.algorithms.generators;
 import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.api.GraphGenerator;
 import gr.james.socialinfluence.graph.Vertex;
+import gr.james.socialinfluence.util.Conditions;
 import gr.james.socialinfluence.util.Helper;
 import gr.james.socialinfluence.util.RandomHelper;
-import gr.james.socialinfluence.util.exceptions.GraphException;
 
 public class WattsStrogatzGenerator<T extends Graph> implements GraphGenerator<T> {
     double p;
@@ -13,15 +13,9 @@ public class WattsStrogatzGenerator<T extends Graph> implements GraphGenerator<T
     private int n, k;
 
     public WattsStrogatzGenerator(Class<T> type, int n, int k, double p) {
-        if (k % 2 != 0) {
-            throw new GraphException("k must be an even number, found " + k);
-        }
-        if (p < 0 || p > 1) {
-            throw new GraphException("p must be between 0 and 1, found " + p);
-        }
-        if (k >= n) {
-            throw new GraphException("n must be smaller than k");
-        }
+        Conditions.checkArgument(k % 2 == 0, "k must be an even number, got %d", k);
+        Conditions.checkArgument(p >= 0 && p <= 1, "p must be between 0 and 1, got %f", p);
+        Conditions.checkArgument(k < n, "n must be smaller than k");
 
         this.type = type;
         this.n = n;
@@ -43,7 +37,7 @@ public class WattsStrogatzGenerator<T extends Graph> implements GraphGenerator<T
 
         for (int i = 0; i < n; i++) {
             for (int j = 1; j <= k / 2; j++) {
-                if (p >= RandomHelper.getRandom().nextDouble()) {
+                if (RandomHelper.getRandom().nextDouble() <= p) {
                     g.removeEdge(g.getVertexFromIndex(i), g.getVertexFromIndex((i + j) % n));
                     g.removeEdge(g.getVertexFromIndex((i + j) % n), g.getVertexFromIndex(i));
                     sub = g.getRandomVertex();

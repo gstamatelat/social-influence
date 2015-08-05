@@ -5,9 +5,9 @@ import gr.james.socialinfluence.api.EvolvingGraphGenerator;
 import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.api.GraphState;
 import gr.james.socialinfluence.graph.Vertex;
+import gr.james.socialinfluence.util.Conditions;
 import gr.james.socialinfluence.util.Finals;
 import gr.james.socialinfluence.util.Helper;
-import gr.james.socialinfluence.util.exceptions.GraphException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,9 +23,7 @@ public class BarabasiAlbertGenerator<T extends Graph> implements EvolvingGraphGe
     private T g;
 
     public BarabasiAlbertGenerator(Class<T> type, int totalVertices, int initialClique, int stepEdges, double a) {
-        if (stepEdges > initialClique) {
-            throw new GraphException(Finals.E_BARABASI_STEP);
-        }
+        Conditions.checkArgument(stepEdges <= initialClique, Finals.E_BARABASI_STEP);
 
         this.type = type;
         this.totalVertices = totalVertices;

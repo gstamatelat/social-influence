@@ -6,7 +6,7 @@ import java.util.Random;
  * <p>Singleton class encapsulating a {@link Random} instance. This object is framework-global. You may use it in order
  * to avoid instantiating new {@code Random} objects within your classes.</p>
  */
-public class RandomHelper {
+public final class RandomHelper {
     /**
      * <p>The internal {@link Random} object of this singleton class.</p>
      */

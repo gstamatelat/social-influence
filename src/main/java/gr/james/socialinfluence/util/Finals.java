@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
-public class Finals {
+public final class Finals {
     /* Root logger */
     public static final Logger LOG = LoggerFactory.getLogger("");
 
