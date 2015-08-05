@@ -103,7 +103,7 @@ public interface Graph {
 
     /**
      * <p>Get all outbound edges of {@code v}. The result is a {@link Map} where the keys are the destination vertices
-     * and the values are the {@link Edge} objects.</p>
+     * and the values are the respective {@link Edge} objects.</p>
      *
      * @param v the vertex to get the outbound edges of
      * @return the outbound edges of {@code v} as a {@code Map<Vertex, Edge>}
@@ -115,7 +115,7 @@ public interface Graph {
 
     /**
      * <p>Get all inbound edges of {@code v}. The result is a {@link Map} where the keys are the source vertices and the
-     * values are the {@link Edge} objects.</p>
+     * values are the respective {@link Edge} objects.</p>
      *
      * @param v the vertex to get the inbound edges of
      * @return the inbound edges of {@code v} as a {@code Map<Vertex, Edge>}

@@ -3,14 +3,14 @@ package gr.james.socialinfluence.graph;
 import gr.james.socialinfluence.api.Graph;
 
 /**
- * <p>Represents a single vertex. An object of type Vertex behaves like an immutable object, contains an id, a label
- * and is bound to a specific Graph object at any given point in time which can be obtained with getParentPath. The
- * id field may not be changed, but the label can be. It is safe to use this class in a collection since equals and
- * hashCode methods only depend on id, which is fixed. Vertex objects returned by methods are always shallow copies.
- * There is no deep copy of a Vertex as that would not be practical for the operations that can be performed.</p>
+ * <p>Represents a single vertex. An object of type Vertex behaves like an immutable object, contains an id and a label.
+ * The id field may not be changed, but the label can be. It is safe to use this class in a collection since
+ * {@link #equals(Object) equals} and {@link #hashCode() hashCode} methods only depend on id, which is fixed. Vertex
+ * objects returned by methods are always shallow copies (references).</p>
+ * <p>Vertex id is automatically set to an auto-increment value each time you instantiate a new vertex. A vertex can
+ * exist in multiple graphs.</p>
  */
 public class Vertex implements Comparable<Vertex> {
-
     /**
      * <p>This field holds a serial number needed by {@link #getNextId getNextId()}.</p>
      */
@@ -28,8 +28,8 @@ public class Vertex implements Comparable<Vertex> {
     }
 
     /**
-     * <p>Returns an integer id that is guaranteed to be unique for every framework session (execution). This method is
-     * used by the constructor {@link #Vertex()} to produce a unique id for the new vertex.</p>
+     * <p>Returns an integer id that is guaranteed to be unique for every framework session. This method is used by the
+     * constructor {@link #Vertex()} to produce a unique id for the new vertex.</p>
      *
      * @return the unique id
      */
