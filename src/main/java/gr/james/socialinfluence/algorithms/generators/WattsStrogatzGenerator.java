@@ -42,10 +42,9 @@ public class WattsStrogatzGenerator<T extends Graph> implements GraphGenerator<T
                     Vertex a = g.getVertexFromIndex(i);
                     Vertex b = g.getVertexFromIndex((i + j) % n);
                     g.removeEdges(a, b);
-                    sub = g.getRandomVertex();
-                    while (sub == a || sub == b || g.containsEdge(a, sub)) {
+                    do {
                         sub = g.getRandomVertex();
-                    }
+                    } while (sub == a || sub == b || g.containsEdge(a, sub));
                     g.addEdge(a, sub, true);
                 }
             }
