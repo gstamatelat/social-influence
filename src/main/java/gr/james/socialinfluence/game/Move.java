@@ -1,6 +1,7 @@
 package gr.james.socialinfluence.game;
 
 import gr.james.socialinfluence.graph.Vertex;
+import gr.james.socialinfluence.util.Conditions;
 import gr.james.socialinfluence.util.Finals;
 import gr.james.socialinfluence.util.exceptions.WeightNonPositiveException;
 
@@ -46,7 +47,7 @@ public class Move implements Iterable<Vertex> {
      * @throws WeightNonPositiveException if {@code weight} input is non-positive
      */
     public Move putVertex(Vertex v, double weight) {
-        Objects.requireNonNull(v);
+        Conditions.requireNonNull(v);
         if (weight <= 0) {
             throw new WeightNonPositiveException(Finals.E_MOVE_WEIGHT_NEGATIVE, weight);
         }

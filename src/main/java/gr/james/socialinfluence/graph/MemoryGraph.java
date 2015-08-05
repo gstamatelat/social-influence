@@ -1,8 +1,8 @@
 package gr.james.socialinfluence.graph;
 
 import gr.james.socialinfluence.api.Graph;
+import gr.james.socialinfluence.util.Conditions;
 import gr.james.socialinfluence.util.Finals;
-import gr.james.socialinfluence.util.Helper;
 import gr.james.socialinfluence.util.collections.Pair;
 import gr.james.socialinfluence.util.exceptions.GraphException;
 
@@ -30,7 +30,7 @@ public class MemoryGraph extends AbstractGraph {
 
     @Override
     public boolean addVertex(Vertex v) {
-        Objects.requireNonNull(v);
+        Conditions.requireNonNull(v);
         if (this.containsVertex(v)) {
             return false;
         } else {
@@ -43,7 +43,7 @@ public class MemoryGraph extends AbstractGraph {
 
     @Override
     public boolean removeVertex(Vertex v) {
-        Objects.requireNonNull(v);
+        Conditions.requireNonNull(v);
         if (!this.containsVertex(v)) {
             return false;
         }
@@ -88,13 +88,13 @@ public class MemoryGraph extends AbstractGraph {
 
     @Override
     public Map<Vertex, Edge> getOutEdges(Vertex v) {
-        Helper.requireNonNullAndExists(v, this);
+        Conditions.requireNonNullAndExists(v, this);
         return Collections.unmodifiableMap(this.m.get(v).getFirst());
     }
 
     @Override
     public Map<Vertex, Edge> getInEdges(Vertex v) {
-        Helper.requireNonNullAndExists(v, this);
+        Conditions.requireNonNullAndExists(v, this);
         return Collections.unmodifiableMap(this.m.get(v).getSecond());
     }
 

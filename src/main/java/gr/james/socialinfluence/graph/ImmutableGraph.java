@@ -1,9 +1,13 @@
 package gr.james.socialinfluence.graph;
 
 import gr.james.socialinfluence.api.Graph;
+import gr.james.socialinfluence.util.Conditions;
 import gr.james.socialinfluence.util.collections.VertexPair;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * <p>Unmodifiable decorator of a {@link Graph}.</p>
@@ -17,7 +21,7 @@ public final class ImmutableGraph implements Graph {
      * @param g the {@code Graph} to decorate
      */
     public ImmutableGraph(Graph g) {
-        this.g = Objects.requireNonNull(g);
+        this.g = Conditions.requireNonNull(g);
     }
 
     @Override

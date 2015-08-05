@@ -2,6 +2,7 @@ package gr.james.socialinfluence.game;
 
 import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.graph.ImmutableGraph;
+import gr.james.socialinfluence.util.Conditions;
 import gr.james.socialinfluence.util.Finals;
 import gr.james.socialinfluence.util.exceptions.GraphException;
 import org.slf4j.Logger;
@@ -9,7 +10,6 @@ import org.slf4j.Logger;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 public abstract class Player {
     protected static final Logger log = Finals.LOG;
@@ -86,8 +86,8 @@ public abstract class Player {
     }
 
     public final Player setOption(String name, String value) {
-        name = Objects.requireNonNull(name);
-        value = Objects.requireNonNull(value);
+        name = Conditions.requireNonNull(name);
+        value = Conditions.requireNonNull(value);
         if (!this.options.containsKey(name)) {
             throw new GraphException(Finals.E_PLAYER_NO_PARAMETER, this.getClass().getSimpleName(), name);
         } else {

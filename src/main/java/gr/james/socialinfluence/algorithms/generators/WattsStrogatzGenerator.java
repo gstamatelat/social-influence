@@ -14,7 +14,7 @@ public class WattsStrogatzGenerator<T extends Graph> implements GraphGenerator<T
 
     public WattsStrogatzGenerator(Class<T> type, int n, int k, double b) {
         Conditions.checkArgument(k % 2 == 0, "k must be an even number, got %d", k);
-        Conditions.checkArgument(b >= 0 && b <= 1, "b must be between 0 and 1, got %f", b);
+        Conditions.checkArgument(b >= 0 && b <= 1, "b must be inside [0,1], got %f", b);
         Conditions.checkArgument(k < n, "n must be smaller than k");
 
         this.type = type;

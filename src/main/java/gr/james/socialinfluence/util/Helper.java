@@ -1,11 +1,8 @@
 package gr.james.socialinfluence.util;
 
-import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.graph.Edge;
-import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.util.collections.Weighted;
 import gr.james.socialinfluence.util.exceptions.GraphException;
-import gr.james.socialinfluence.util.exceptions.VertexNotExistsException;
 
 import java.util.*;
 
@@ -47,13 +44,5 @@ public final class Helper {
             finalSelections.add(keyQueue.poll().getObject());
         }
         return finalSelections;
-    }
-
-    public static Vertex requireNonNullAndExists(Vertex v, Graph g) {
-        Objects.requireNonNull(v);
-        if (!g.containsVertex(v)) {
-            throw new VertexNotExistsException();
-        }
-        return v;
     }
 }

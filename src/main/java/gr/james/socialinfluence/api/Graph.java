@@ -4,6 +4,7 @@ import gr.james.socialinfluence.algorithms.distance.Dijkstra;
 import gr.james.socialinfluence.algorithms.iterators.RandomVertexIterator;
 import gr.james.socialinfluence.graph.Edge;
 import gr.james.socialinfluence.graph.Vertex;
+import gr.james.socialinfluence.util.Conditions;
 import gr.james.socialinfluence.util.Finals;
 import gr.james.socialinfluence.util.Helper;
 import gr.james.socialinfluence.util.collections.VertexPair;
@@ -50,7 +51,7 @@ public interface Graph {
      * @throws NullPointerException if either {@code source} or {@code target} is {@code null}
      */
     default Edge findEdge(Vertex source, Vertex target) {
-        return this.getOutEdges(Objects.requireNonNull(source)).get(Objects.requireNonNull(target));
+        return this.getOutEdges(Conditions.requireNonNull(source)).get(Conditions.requireNonNull(target));
     }
 
     /**

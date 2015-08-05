@@ -1,18 +1,18 @@
 package gr.james.socialinfluence.util.collections;
 
 import gr.james.socialinfluence.graph.Vertex;
+import gr.james.socialinfluence.util.Conditions;
 
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Objects;
 
 public class VertexSequence implements Iterable<Vertex> {
     private List<Vertex> sequence;
     private double distance;
 
     public VertexSequence(List<Vertex> sequence, double distance) {
-        this.sequence = Objects.requireNonNull(sequence);
+        this.sequence = Conditions.requireNonNull(sequence);
         this.distance = distance;
     }
 
