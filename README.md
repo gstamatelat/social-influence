@@ -36,9 +36,9 @@ System.out.println(gridGraph);
 ```
 
 ```java
-SmallWorldNetworkGenerator generator = new SmallWorldNetworkGenerator(MemoryGraph.class, 1000, 6, 0.4);
-Graph smallWorldGraph = generator.create();
-System.out.println(smallWorldGraph);
+GraphGenerator generator = new WattsStrogatzGenerator(MemoryGraph.class, 1000, 6, 0.4);
+Graph wattsStrogatzGraph = generator.create();
+System.out.println(wattsStrogatzGraph);
 ```
 
 Inspect available generators in `gr.james.socialinfluence.algorithms.generators` package.
