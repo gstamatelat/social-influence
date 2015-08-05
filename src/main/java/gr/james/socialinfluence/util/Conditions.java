@@ -5,7 +5,7 @@ import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.util.exceptions.VertexNotExistsException;
 
 public final class Conditions {
-    public static void checkArgument(boolean expression, String errorMessageTemplate, Object... errorMessageArgs) {
+    public static void requireArgument(boolean expression, String errorMessageTemplate, Object... errorMessageArgs) {
         if (!expression) {
             throw new IllegalArgumentException(String.format(errorMessageTemplate, errorMessageArgs));
         }

@@ -23,7 +23,7 @@ public class BarabasiAlbertGenerator<T extends Graph> implements EvolvingGraphGe
     private T g;
 
     public BarabasiAlbertGenerator(Class<T> type, int totalVertices, int initialClique, int stepEdges, double a) {
-        Conditions.checkArgument(stepEdges <= initialClique, Finals.E_BARABASI_STEP);
+        Conditions.requireArgument(stepEdges <= initialClique, Finals.E_BARABASI_STEP);
 
         this.type = type;
         this.totalVertices = totalVertices;
