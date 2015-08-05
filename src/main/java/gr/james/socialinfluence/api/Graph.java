@@ -35,30 +35,36 @@ public interface Graph {
         return this.getVerticesAsList().contains(v);
     }
 
-    @Deprecated
+    /**
+     * <p>Checks if this graph contains an edge with the specified {@code source} and {@code target}.</p>
+     *
+     * @param source the source of the edge
+     * @param target the target of the edge
+     * @return {@code true} if an edge with the specified {@code source} and {@code target} exists, otherwise false
+     * @throws NullPointerException     if either {@code source} or {@code target} is {@code null}
+     * @throws VertexNotExistsException if either {@code source} or {@code target} doesn't belong in the graph
+     */
     default boolean containsEdge(Vertex source, Vertex target) {
         return findEdge(source, target) != null;
     }
 
     /**
-     * <p>Returns the {@code Edge} from {@code source} to {@code target}, or {@code null} if there is no such edge. This
-     * method will also return {@code null} if either input is outside the graph and thus, no edge is possible between
-     * them.</p>
+     * <p>Returns the {@code Edge} from {@code source} to {@code target}, or {@code null} if there is no such edge.</p>
      *
      * @param source the source vertex of the edge
      * @param target the target vertex of the edge
      * @return the {@code Edge} from {@code source} to {@code target}, or {@code null} if there is no such edge
-     * @throws NullPointerException if either {@code source} or {@code target} is {@code null}
+     * @throws NullPointerException     if either {@code source} or {@code target} is {@code null}
+     * @throws VertexNotExistsException if either {@code source} or {@code target} doesn't belong in the graph
      */
     default Edge findEdge(Vertex source, Vertex target) {
-        return this.getOutEdges(Conditions.requireNonNull(source)).get(Conditions.requireNonNull(target));
+        return this.getOutEdges(source).get(Conditions.requireNonNullAndExists(target, this));
     }
 
     /**
      * <p>Get a {@link Vertex} of this graph based on its index. Index is a deterministic, per-graph attribute between
      * {@code 0} (inclusive) and {@link #getVerticesCount()} (exclusive), indicating the order at which the vertices
-     * were inserted in the graph. The default implementation of this method will internally invoke
-     * {@code getVerticesAsList().get(index)}.</p>
+     * were inserted in the graph.</p>
      *
      * @param index the index of the vertex
      * @return the vertex reference with the provided index
@@ -304,14 +310,20 @@ public interface Graph {
      * of that vertex.</p>
      *
      * @param v the vertex to be removed
-     * @return {@code true} is the graph previously contained this vertex, otherwise {@code false}
+     * @return {@code true} if the graph previously contained this vertex, otherwise {@code false}
      * @throws NullPointerException if {@code v} is {@code null}
      */
     boolean removeVertex(Vertex v);
 
-    default Graph removeVertices(Collection<Vertex> vertices) {
+    /**
+     * <p>Removes a collection of vertices from the graph.</p>
+     *
+     * @param vertices a collection of vertices to remove from the graph; you should prefer a collection with a fast
+     *                 {@code next()} implementation
+     * @throws NullPointerException if any of the vertices in {@code vertices} is {@code null}
+     */
+    default void removeVertices(Collection<Vertex> vertices) {
         vertices.forEach(this::removeVertex);
-        return this;
     }
 
     /**
@@ -332,14 +344,27 @@ public interface Graph {
         return Collections.unmodifiableSet(addedEdges);
     }
 
-    Graph removeEdge(Vertex source, Vertex target);
+    /**
+     * <p>Remove the edge with the specified {@code source} and {@code target}, if it exists.</p>
+     *
+     * @param source the source of the edge
+     * @param target the target of the edge
+     * @return {@code true} if there was previously a directed edge {@code (source,target)}, otherwise {@code false}
+     * @throws NullPointerException     if either {@code source} or {@code target} is {@code null}
+     * @throws VertexNotExistsException if either {@code source} or {@code target} doesn't belong in the graph
+     */
+    boolean removeEdge(Vertex source, Vertex target);
 
     /**
-     * <p>Removes all the edges of which both the source and the target are contained in {@code among}. Self-loops are
-     * excluded from the operation.</p>
+     * <p>Removes all the (existing) edges of which both the source and the target are contained in {@code among}.
+     * Self-loops are excluded from the operation. If {@code among} only contains 2 vertices {@code s} and {@code t},
+     * edges {@code (s,t)} and {@code (t,s)} will be removed (assuming they exist). If {@code among} only contains 1
+     * vertex, it's a no-op.</p>
      *
      * @param among a collection of vertices to strip the edges from; you should prefer a collection with a fast
      *              {@code next()} implementation
+     * @throws NullPointerException     if any vertex in {@code among} is {@code null}
+     * @throws VertexNotExistsException if any vertex in {@code among} doesn't belong in the graph
      */
     default void removeEdges(Collection<Vertex> among) {
         for (Vertex v : among) {
@@ -352,11 +377,15 @@ public interface Graph {
     }
 
     /**
-     * <p>Removes all the edges of which both the source and the target are contained in {@code among}. Self-loops are
-     * excluded from the operation.</p>
+     * <p>Removes all the (existing) edges of which both the source and the target are contained in {@code among}.
+     * Self-loops are excluded from the operation. If {@code among} only contains 2 vertices {@code s} and {@code t},
+     * edges {@code (s,t)} and {@code (t,s)} will be removed (assuming they exist). If {@code among} only contains 1
+     * vertex, it's a no-op.</p>
      *
      * @param among the vertices as variable arguments to strip the edges from; you should prefer a collection with a
      *              fast {@code next()} implementation
+     * @throws NullPointerException     if any vertex in {@code among} is {@code null}
+     * @throws VertexNotExistsException if any vertex in {@code among} doesn't belong in the graph
      */
     default void removeEdges(Vertex... among) {
         this.removeEdges(Arrays.asList(among));
@@ -365,9 +394,11 @@ public interface Graph {
     @Deprecated
     default Graph removeEdge(Vertex source, Vertex target, boolean undirected) {
         if (undirected) {
-            return removeEdge(source, target).removeEdge(target, source);
+            this.removeEdge(source, target);
+            this.removeEdge(target, source);
         } else {
-            return removeEdge(source, target);
+            this.removeEdge(source, target);
         }
+        return this;
     }
 }

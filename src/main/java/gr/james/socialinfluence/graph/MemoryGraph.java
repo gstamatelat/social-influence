@@ -80,10 +80,14 @@ public class MemoryGraph extends AbstractGraph {
     }
 
     @Override
-    public Graph removeEdge(Vertex source, Vertex target) {
-        this.m.get(source).getFirst().remove(target);
-        this.m.get(target).getSecond().remove(source);
-        return this;
+    public boolean removeEdge(Vertex source, Vertex target) {
+        if (!this.containsEdge(source, target)) {
+            return false;
+        } else {
+            this.m.get(source).getFirst().remove(target);
+            this.m.get(target).getSecond().remove(source);
+            return true;
+        }
     }
 
     @Override

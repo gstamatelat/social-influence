@@ -160,7 +160,7 @@ public final class ImmutableGraph implements Graph {
     }
 
     @Override
-    public Graph removeVertices(Collection<Vertex> vertices) {
+    public void removeVertices(Collection<Vertex> vertices) {
         throw new UnsupportedOperationException();
     }
 
@@ -180,7 +180,7 @@ public final class ImmutableGraph implements Graph {
     }
 
     @Override
-    public Graph removeEdge(Vertex source, Vertex target) {
+    public boolean removeEdge(Vertex source, Vertex target) {
         throw new UnsupportedOperationException();
     }
 

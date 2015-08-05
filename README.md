@@ -89,8 +89,8 @@ Remove edge     | O(1)
 Contains vertex | O(1)
 Contains edge   | O(1)
 
-            | Storage | Add vertex | Add edge | Remove vertex | Remove edge | Contains vertex | Contained edge
------------ | ------- | ---------- | -------- | ------------- | ----------- | --------------- | --------------
+            | Storage | Add vertex | Add edge | Remove vertex | Remove edge | Contains vertex | Contains edge
+----------- | ------- | ---------- | -------- | ------------- | ----------- | --------------- | -------------
 MemoryGraph | O(n+m)  | O(1)       | O(1)     | O(m)          | O(1)        | O(1)            | O(1)
 
 ## TODO
