@@ -334,6 +334,35 @@ public interface Graph {
 
     Graph removeEdge(Vertex source, Vertex target);
 
+    /**
+     * <p>Removes all the edges of which both the source and the target are contained in {@code among}. Self-loops are
+     * excluded from the operation.</p>
+     *
+     * @param among a collection of vertices to strip the edges from; you should prefer a collection with a fast
+     *              {@code next()} implementation
+     */
+    default void removeEdges(Collection<Vertex> among) {
+        for (Vertex v : among) {
+            for (Vertex u : among) {
+                if (!v.equals(u)) {
+                    this.removeEdge(v, u);
+                }
+            }
+        }
+    }
+
+    /**
+     * <p>Removes all the edges of which both the source and the target are contained in {@code among}. Self-loops are
+     * excluded from the operation.</p>
+     *
+     * @param among the vertices as variable arguments to strip the edges from; you should prefer a collection with a
+     *              fast {@code next()} implementation
+     */
+    default void removeEdges(Vertex... among) {
+        this.removeEdges(Arrays.asList(among));
+    }
+
+    @Deprecated
     default Graph removeEdge(Vertex source, Vertex target, boolean undirected) {
         if (undirected) {
             return removeEdge(source, target).removeEdge(target, source);

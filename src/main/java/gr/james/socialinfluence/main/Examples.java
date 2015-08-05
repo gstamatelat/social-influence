@@ -1,6 +1,6 @@
 package gr.james.socialinfluence.main;
 
-import gr.james.socialinfluence.algorithms.generators.RandomGenerator;
+import gr.james.socialinfluence.algorithms.generators.WattsStrogatzGenerator;
 import gr.james.socialinfluence.algorithms.scoring.Degree;
 import gr.james.socialinfluence.api.GraphState;
 import gr.james.socialinfluence.graph.MemoryGraph;
@@ -15,7 +15,9 @@ public class Examples {
         int n = 10000;
         double p = 0.2;
 
-        MemoryGraph g = new RandomGenerator<>(MemoryGraph.class, n, p).create();
+        long now = System.currentTimeMillis();
+        MemoryGraph g = new WattsStrogatzGenerator<>(MemoryGraph.class, 10000, 1000, 1.0).create();
+        System.out.println(System.currentTimeMillis() - now);
 
         // Find largest degree
         int largestDegree = 0;

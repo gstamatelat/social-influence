@@ -4,11 +4,12 @@ import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.api.GraphGenerator;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.util.Conditions;
+import gr.james.socialinfluence.util.Finals;
 import gr.james.socialinfluence.util.Helper;
 import gr.james.socialinfluence.util.RandomHelper;
 
 public class WattsStrogatzGenerator<T extends Graph> implements GraphGenerator<T> {
-    double p;
+    double b;
     private Class<T> type;
     private int n, k;
 
@@ -20,34 +21,40 @@ public class WattsStrogatzGenerator<T extends Graph> implements GraphGenerator<T
         this.type = type;
         this.n = n;
         this.k = k;
-        this.p = b;
+        this.b = b;
     }
 
     @Override
     public T create() {
         T g = Helper.instantiateGeneric(type);
-        g.addVertices(n);
-        Vertex sub;
 
+        g.addVertices(n);
         for (int i = 0; i < n; i++) {
             for (int j = 1; j <= k / 2; j++) {
                 g.addEdge(g.getVertexFromIndex(i), g.getVertexFromIndex((i + j) % n), true);
             }
         }
 
+        Vertex sub;
         for (int i = 0; i < n; i++) {
             for (int j = 1; j <= k / 2; j++) {
-                if (RandomHelper.getRandom().nextDouble() <= p) {
-                    g.removeEdge(g.getVertexFromIndex(i), g.getVertexFromIndex((i + j) % n));
-                    g.removeEdge(g.getVertexFromIndex((i + j) % n), g.getVertexFromIndex(i));
+                if (RandomHelper.getRandom().nextDouble() <= b) {
+                    Vertex a = g.getVertexFromIndex(i);
+                    Vertex b = g.getVertexFromIndex((i + j) % n);
+                    g.removeEdges(a, b);
                     sub = g.getRandomVertex();
-                    while (sub == g.getVertexFromIndex(i) || sub == g.getVertexFromIndex((i + j) % n) || g.containsEdge(g.getVertexFromIndex(i), sub) || g.containsEdge(sub, g.getVertexFromIndex(i))) {
+                    while (sub == a || sub == b || g.containsEdge(a, sub)) {
                         sub = g.getRandomVertex();
                     }
-                    g.addEdge(g.getVertexFromIndex(i), sub, true);
+                    g.addEdge(a, sub, true);
                 }
             }
         }
+
+        g.setMeta(Finals.TYPE_META, "WattsStrogatz")
+                .setMeta("n", String.valueOf(n))
+                .setMeta("k", String.valueOf(k))
+                .setMeta("b", String.valueOf(b));
 
         return g;
     }
