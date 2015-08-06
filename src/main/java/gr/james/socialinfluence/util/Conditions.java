@@ -2,7 +2,7 @@ package gr.james.socialinfluence.util;
 
 import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.graph.Vertex;
-import gr.james.socialinfluence.util.exceptions.VertexNotExistsException;
+import gr.james.socialinfluence.util.exceptions.InvalidVertexException;
 
 public final class Conditions {
     public static void requireArgument(boolean expression, String errorMessageTemplate, Object... errorMessageArgs) {
@@ -14,7 +14,7 @@ public final class Conditions {
     public static Vertex requireNonNullAndExists(Vertex v, Graph g) {
         Conditions.requireNonNull(v);
         if (!g.containsVertex(v)) {
-            throw new VertexNotExistsException();
+            throw new InvalidVertexException();
         }
         return v;
     }

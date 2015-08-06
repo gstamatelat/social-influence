@@ -8,7 +8,7 @@ import gr.james.socialinfluence.util.Conditions;
 import gr.james.socialinfluence.util.Finals;
 import gr.james.socialinfluence.util.Helper;
 import gr.james.socialinfluence.util.collections.VertexPair;
-import gr.james.socialinfluence.util.exceptions.VertexNotExistsException;
+import gr.james.socialinfluence.util.exceptions.InvalidVertexException;
 
 import java.util.*;
 
@@ -49,8 +49,8 @@ public interface Graph {
      * @param source the source of the edge
      * @param target the target of the edge
      * @return {@code true} if an edge with the specified {@code source} and {@code target} exists, otherwise false
-     * @throws NullPointerException     if either {@code source} or {@code target} is {@code null}
-     * @throws VertexNotExistsException if either {@code source} or {@code target} doesn't belong in the graph
+     * @throws NullPointerException   if either {@code source} or {@code target} is {@code null}
+     * @throws InvalidVertexException if either {@code source} or {@code target} doesn't belong in the graph
      */
     default boolean containsEdge(Vertex source, Vertex target) {
         return findEdge(source, target) != null;
@@ -62,8 +62,8 @@ public interface Graph {
      * @param source the source vertex of the edge
      * @param target the target vertex of the edge
      * @return the {@code Edge} from {@code source} to {@code target}, or {@code null} if there is no such edge
-     * @throws NullPointerException     if either {@code source} or {@code target} is {@code null}
-     * @throws VertexNotExistsException if either {@code source} or {@code target} doesn't belong in the graph
+     * @throws NullPointerException   if either {@code source} or {@code target} is {@code null}
+     * @throws InvalidVertexException if either {@code source} or {@code target} doesn't belong in the graph
      */
     default Edge findEdge(Vertex source, Vertex target) {
         return this.getOutEdges(source).get(Conditions.requireNonNullAndExists(target, this));
@@ -122,8 +122,8 @@ public interface Graph {
      *
      * @param v the vertex to get the outbound edges of
      * @return the outbound edges of {@code v} as a {@code Map<Vertex, Edge>}
-     * @throws NullPointerException     if {@code v} is {@code null}
-     * @throws VertexNotExistsException if {@code v} doesn't belong in the graph
+     * @throws NullPointerException   if {@code v} is {@code null}
+     * @throws InvalidVertexException if {@code v} doesn't belong in the graph
      * @see #getInEdges(Vertex)
      */
     Map<Vertex, Edge> getOutEdges(Vertex v);
@@ -134,8 +134,8 @@ public interface Graph {
      *
      * @param v the vertex to get the inbound edges of
      * @return the inbound edges of {@code v} as a {@code Map<Vertex, Edge>}
-     * @throws NullPointerException     if {@code v} is {@code null}
-     * @throws VertexNotExistsException if {@code v} doesn't belong in the graph
+     * @throws NullPointerException   if {@code v} is {@code null}
+     * @throws InvalidVertexException if {@code v} doesn't belong in the graph
      * @see #getOutEdges(Vertex)
      */
     Map<Vertex, Edge> getInEdges(Vertex v);
@@ -145,8 +145,8 @@ public interface Graph {
      *
      * @param v the vertex
      * @return the sum of weights of all outbound edges of vertex {@code v}
-     * @throws NullPointerException     if {@code v} is {@code null}
-     * @throws VertexNotExistsException if {@code v} doesn't belong in the graph
+     * @throws NullPointerException   if {@code v} is {@code null}
+     * @throws InvalidVertexException if {@code v} doesn't belong in the graph
      * @see #getInWeightSum(Vertex)
      */
     default double getOutWeightSum(Vertex v) {
@@ -158,8 +158,8 @@ public interface Graph {
      *
      * @param v the vertex
      * @return the sum of weights of all inbound edges of vertex {@code v}
-     * @throws NullPointerException     if {@code v} is {@code null}
-     * @throws VertexNotExistsException if {@code v} doesn't belong in the graph
+     * @throws NullPointerException   if {@code v} is {@code null}
+     * @throws InvalidVertexException if {@code v} doesn't belong in the graph
      * @see #getOutWeightSum(Vertex)
      */
     default double getInWeightSum(Vertex v) {
@@ -172,8 +172,8 @@ public interface Graph {
      *
      * @param v the vertex
      * @return the outbound degree of vertex {@code v}
-     * @throws NullPointerException     if {@code v} is {@code null}
-     * @throws VertexNotExistsException if {@code v} doesn't belong in the graph
+     * @throws NullPointerException   if {@code v} is {@code null}
+     * @throws InvalidVertexException if {@code v} doesn't belong in the graph
      * @see #getInDegree(Vertex)
      */
     default int getOutDegree(Vertex v) {
@@ -186,8 +186,8 @@ public interface Graph {
      *
      * @param v the vertex
      * @return the inbound degree of vertex {@code v}
-     * @throws NullPointerException     if {@code v} is {@code null}
-     * @throws VertexNotExistsException if {@code v} doesn't belong in the graph
+     * @throws NullPointerException   if {@code v} is {@code null}
+     * @throws InvalidVertexException if {@code v} doesn't belong in the graph
      * @see #getOutDegree(Vertex)
      */
     default int getInDegree(Vertex v) {
@@ -358,8 +358,8 @@ public interface Graph {
      * @param source the source of the edge
      * @param target the target of the edge
      * @return {@code true} if there was previously a directed edge {@code (source,target)}, otherwise {@code false}
-     * @throws NullPointerException     if either {@code source} or {@code target} is {@code null}
-     * @throws VertexNotExistsException if either {@code source} or {@code target} doesn't belong in the graph
+     * @throws NullPointerException   if either {@code source} or {@code target} is {@code null}
+     * @throws InvalidVertexException if either {@code source} or {@code target} doesn't belong in the graph
      */
     boolean removeEdge(Vertex source, Vertex target);
 
@@ -371,8 +371,8 @@ public interface Graph {
      *
      * @param among a collection of vertices to strip the edges from; you should prefer a collection with a fast
      *              {@code next()} implementation
-     * @throws NullPointerException     if any vertex in {@code among} is {@code null}
-     * @throws VertexNotExistsException if any vertex in {@code among} doesn't belong in the graph
+     * @throws NullPointerException   if any vertex in {@code among} is {@code null}
+     * @throws InvalidVertexException if any vertex in {@code among} doesn't belong in the graph
      */
     default void removeEdges(Collection<Vertex> among) {
         for (Vertex v : among) {
@@ -392,8 +392,8 @@ public interface Graph {
      *
      * @param among the vertices as variable arguments to strip the edges from; you should prefer a collection with a
      *              fast {@code next()} implementation
-     * @throws NullPointerException     if any vertex in {@code among} is {@code null}
-     * @throws VertexNotExistsException if any vertex in {@code among} doesn't belong in the graph
+     * @throws NullPointerException   if any vertex in {@code among} is {@code null}
+     * @throws InvalidVertexException if any vertex in {@code among} doesn't belong in the graph
      */
     default void removeEdges(Vertex... among) {
         this.removeEdges(Arrays.asList(among));
