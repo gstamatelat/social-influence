@@ -54,7 +54,7 @@ public abstract class Player {
     public abstract void suggestMove(ImmutableGraph g, GameDefinition d, MovePointer movePtr);
 
     public final Move getMove(Graph g, GameDefinition d) {
-        ImmutableGraph ig = new ImmutableGraph(g);
+        ImmutableGraph ig = ImmutableGraph.decorate(g);
         PlayerRunnable runnable = new PlayerRunnable(this, ig, d);
 
         Move m = null;

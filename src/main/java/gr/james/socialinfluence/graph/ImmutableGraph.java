@@ -15,13 +15,12 @@ import java.util.Set;
 public final class ImmutableGraph implements Graph {
     private Graph g;
 
-    /**
-     * <p>Construct a new {@code ImmutableGraph} from a given {@code Graph} g.</p>
-     *
-     * @param g the {@code Graph} to decorate
-     */
-    public ImmutableGraph(Graph g) {
+    private ImmutableGraph(Graph g) {
         this.g = Conditions.requireNonNull(g);
+    }
+
+    public static ImmutableGraph decorate(Graph g) {
+        return new ImmutableGraph(g);
     }
 
     @Override

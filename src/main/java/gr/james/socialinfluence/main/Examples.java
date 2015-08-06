@@ -13,12 +13,7 @@ import java.util.Map;
 
 public class Examples {
     public static void main(String[] args) throws IOException {
-        int n = 10000;
-        double p = 0.2;
-
-        long now = System.currentTimeMillis();
         Graph g = new WattsStrogatzGenerator<>(MemoryGraph.class, 10000, 1000, 1.0).create();
-        System.out.println(System.currentTimeMillis() - now);
 
         // Find largest degree
         int largestDegree = 0;
