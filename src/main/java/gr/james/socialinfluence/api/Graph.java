@@ -15,10 +15,11 @@ import java.util.*;
 /**
  * <p>Represents a collection of vertices and edges. The graph is weighted, directed and there can't be more than one
  * edge from node {@code i} to node {@code j} (it's not a multigraph).</p>
- * <dl><dt><b>Collections returned:</b></dt><dd>Methods that return collections ({@link Map Maps} or {@link Set Sets})
- * return read-only versions of them, meaning that you can't insert or remove elements. These collections are also not
- * backed by the graph, changes to the graph won't affect these collections after they have been returned; you need to
- * call the method again.</dd></dl>
+ * <dl><dt><b>Collections returned:</b></dt><dd>Methods that return collections ({@link Map Maps}, {@link Set Sets} and
+ * {@link List Lists}) return read-only views of the actual collections they represent, meaning that you can't insert,
+ * remove or reorder elements. These collections may also not be backed by the graph, changes to the graph may not
+ * affect these collections after they have been returned; you need to call the method again. This behavior depends on
+ * the underlying {@code Graph} implementation.</dd></dl>
  */
 public interface Graph {
     String getMeta(String key);
@@ -31,8 +32,15 @@ public interface Graph {
         return this.getMeta(Finals.TYPE_META);
     }
 
+    /**
+     * <p>Checks if the graph contains the specified vertex.</p>
+     *
+     * @param v the {@link Vertex} to check whether it is contained in the graph
+     * @return {@code true} if {@code v} exists in the graph, otherwise {@code false}
+     * @throws NullPointerException if {@code v} is {@code null}
+     */
     default boolean containsVertex(Vertex v) {
-        return this.getVerticesAsList().contains(v);
+        return this.getVerticesAsList().contains(Conditions.requireNonNull(v));
     }
 
     /**
