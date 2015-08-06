@@ -3,9 +3,9 @@ package gr.james.socialinfluence.api;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.util.Helper;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 public abstract class AbstractGraphState<T> extends HashMap<Vertex, T> implements GraphState<T> {
     @Override
@@ -14,7 +14,7 @@ public abstract class AbstractGraphState<T> extends HashMap<Vertex, T> implement
     }
 
     @Override
-    public double getMean(Set<Vertex> includeOnly) {
+    public double getMean(Collection<Vertex> includeOnly) {
         return getSum(includeOnly) / includeOnly.size();
     }
 
@@ -58,7 +58,7 @@ public abstract class AbstractGraphState<T> extends HashMap<Vertex, T> implement
     }
 
     @Override
-    public double getSum(Set<Vertex> includeOnly) {
+    public double getSum(Collection<Vertex> includeOnly) {
         double sum = 0.0;
 
         for (Map.Entry<Vertex, T> e : this.entrySet()) {
