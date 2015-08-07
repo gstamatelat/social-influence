@@ -89,13 +89,13 @@ public final class ImmutableGraph implements Graph {
     }
 
     @Override
-    public double getOutWeightSum(Vertex v) {
-        return this.g.getOutWeightSum(v);
+    public double getOutStrength(Vertex v) {
+        return this.g.getOutStrength(v);
     }
 
     @Override
-    public double getInWeightSum(Vertex v) {
-        return this.g.getInWeightSum(v);
+    public double getInStrength(Vertex v) {
+        return this.g.getInStrength(v);
     }
 
     @Override

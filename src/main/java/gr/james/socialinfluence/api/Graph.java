@@ -147,9 +147,9 @@ public interface Graph {
      * @return the sum of weights of all outbound edges of vertex {@code v}
      * @throws NullPointerException   if {@code v} is {@code null}
      * @throws InvalidVertexException if {@code v} doesn't belong in the graph
-     * @see #getInWeightSum(Vertex)
+     * @see #getInStrength(Vertex)
      */
-    default double getOutWeightSum(Vertex v) {
+    default double getOutStrength(Vertex v) {
         return Helper.getWeightSum(this.getOutEdges(v).values());
     }
 
@@ -160,9 +160,9 @@ public interface Graph {
      * @return the sum of weights of all inbound edges of vertex {@code v}
      * @throws NullPointerException   if {@code v} is {@code null}
      * @throws InvalidVertexException if {@code v} doesn't belong in the graph
-     * @see #getOutWeightSum(Vertex)
+     * @see #getOutStrength(Vertex)
      */
-    default double getInWeightSum(Vertex v) {
+    default double getInStrength(Vertex v) {
         return Helper.getWeightSum(this.getInEdges(v).values());
     }
 
