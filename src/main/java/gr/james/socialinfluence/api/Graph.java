@@ -21,7 +21,7 @@ import java.util.*;
  * affect these collections after they have been returned; you need to call the method again. This behavior depends on
  * the underlying {@code Graph} implementation.</dd></dl>
  */
-public interface Graph {
+public interface Graph extends Iterable<Vertex> {
     String getMeta(String key);
 
     Graph setMeta(String key, String value);
@@ -30,6 +30,10 @@ public interface Graph {
 
     default String getGraphType() {
         return this.getMeta(Finals.TYPE_META);
+    }
+
+    default Iterator<Vertex> iterator() {
+        return this.getVerticesAsList().iterator();
     }
 
     /**
@@ -93,6 +97,7 @@ public interface Graph {
         return new RandomVertexIterator(this).next();
     }
 
+    @Deprecated
     default Map<VertexPair, Edge> getEdges() {
         Map<VertexPair, Edge> edges = new HashMap<>();
         for (Vertex v : this.getVerticesAsList()) {

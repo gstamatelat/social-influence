@@ -4,10 +4,7 @@ import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.util.Conditions;
 import gr.james.socialinfluence.util.collections.VertexPair;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * <p>Unmodifiable decorator of a {@link Graph}.</p>
@@ -41,6 +38,11 @@ public final class ImmutableGraph implements Graph {
     @Override
     public String getGraphType() {
         return this.g.getGraphType();
+    }
+
+    @Override
+    public Iterator<Vertex> iterator() {
+        return this.g.iterator();
     }
 
     @Override

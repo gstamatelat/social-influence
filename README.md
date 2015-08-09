@@ -47,7 +47,7 @@ Inspect available generators in `gr.james.socialinfluence.algorithms.generators`
 
 ```java
 Graph g = new RandomGenerator<>(MemoryGraph.class, 100, 0.05).create();
-for (Vertex v : g.getVerticesAsList()) {
+for (Vertex v : g) {
     // Do something with v
 }
 ```
