@@ -104,17 +104,6 @@ public interface Graph extends Iterable<Vertex> {
         return new RandomVertexIterator(this).next();
     }
 
-    @Deprecated
-    default Map<VertexPair, Edge> getEdges() {
-        Map<VertexPair, Edge> edges = new HashMap<>();
-        for (Vertex v : this.getVertices()) {
-            for (Map.Entry<Vertex, Edge> e : this.getOutEdges(v).entrySet()) {
-                edges.put(new VertexPair(v, e.getKey()), e.getValue());
-            }
-        }
-        return Collections.unmodifiableMap(edges);
-    }
-
     /**
      * <p>Calculates the total amount of directed edges that this graph has.</p>
      *
@@ -437,6 +426,17 @@ public interface Graph extends Iterable<Vertex> {
      */
     default void removeEdges(Vertex... among) {
         this.removeEdges(Arrays.asList(among));
+    }
+
+    @Deprecated
+    default Map<VertexPair, Edge> getEdges() {
+        Map<VertexPair, Edge> edges = new HashMap<>();
+        for (Vertex v : this.getVertices()) {
+            for (Map.Entry<Vertex, Edge> e : this.getOutEdges(v).entrySet()) {
+                edges.put(new VertexPair(v, e.getKey()), e.getValue());
+            }
+        }
+        return Collections.unmodifiableMap(edges);
     }
 
     @Deprecated
