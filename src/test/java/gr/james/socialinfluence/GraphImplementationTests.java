@@ -37,4 +37,13 @@ public class GraphImplementationTests {
             Assert.assertEquals("vertexIndexText", g.getVertexFromIndex(i), g.getVertices().get(i));
         }
     }
+
+    /**
+     * <p>{@code Graph.verticesCountTest()} must return the same value as {@code Graph.getVertices().size()}</p>
+     */
+    @Test
+    public void verticesCountTest() {
+        Graph g = new RandomGenerator<>(MemoryGraph.class, 250, 0.2).create();
+        Assert.assertEquals("verticesCountTest", g.getVerticesCount(), g.getVertices().size());
+    }
 }

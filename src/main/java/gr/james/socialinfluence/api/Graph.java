@@ -247,7 +247,8 @@ public interface Graph extends Iterable<Vertex> {
     List<Vertex> getVertices();
 
     /**
-     * <p>Returns the number of vertices in this graph.</p>
+     * <p>Returns the number of vertices in this graph. {@code getVerticesCount()} will return the same value as
+     * {@code getVertices().size()} but could be faster depending on the {@code Graph} implementation.</p>
      *
      * @return the number of vertices in this graph
      */
@@ -280,6 +281,16 @@ public interface Graph extends Iterable<Vertex> {
     }
 
     /**
+     * <p>Insert the specified vertex {@code v} to the graph. If the vertex is already contained in the graph, this
+     * method is a no-op.</p>
+     *
+     * @param v the vertex to insert to the graph
+     * @return {@code false} if the graph previously already contained the vertex, otherwise {@code true}
+     * @throws NullPointerException if {@code v} is {@code null}
+     */
+    boolean addVertex(Vertex v);
+
+    /**
      * <p>Inserts a new unconnected vertex to the graph and returns it. Use {@link #addVertices(int)} for bulk inserts.
      * </p>
      *
@@ -290,16 +301,6 @@ public interface Graph extends Iterable<Vertex> {
         this.addVertex(v);
         return v;
     }
-
-    /**
-     * <p>Insert the specified vertex {@code v} to the graph. If the vertex is already contained in the graph, this
-     * method is a no-op.</p>
-     *
-     * @param v the vertex to insert to the graph
-     * @return {@code false} if the graph previously already contained the vertex, otherwise {@code true}
-     * @throws NullPointerException if {@code v} is {@code null}
-     */
-    boolean addVertex(Vertex v);
 
     /**
      * <p>Insert {@code count} unconnected vertices in the graph.</p>
@@ -343,15 +344,52 @@ public interface Graph extends Iterable<Vertex> {
         this.removeVertices(this.getVertices());
     }
 
+    /**
+     * <p>Creates an edge with the specified {@code source} and {@code target}.</p>
+     *
+     * @param source the source of the edge
+     * @param target the target of the edge
+     * @return the {@code Edge} object of the newly added edge
+     * @throws NullPointerException   if either {@code source} or {@code target} is {@code null}
+     * @throws InvalidVertexException if either {@code source} or {@code target} doesn't belong in the graph
+     */
+    // TODO: What if edge already exists?
     Edge addEdge(Vertex source, Vertex target);
 
-    default Set<Edge> addEdge(Vertex source, Vertex target, boolean undirected) {
-        Set<Edge> addedEdges = new HashSet<>();
-        addedEdges.add(this.addEdge(source, target));
-        if (undirected) {
-            addedEdges.add(this.addEdge(target, source));
+    /**
+     * <p>Connects every vertex in {@code among} with every other vertex in {@code among}; self-loops are excluded from
+     * the operation. After the operation, a complete subgraph of {@code among} will be created. If {@code among} only
+     * contains 2 (unique) vertices {@code s} and {@code t}, edges {@code (s,t)} and {@code (t,s)} will be created. If
+     * {@code among} only contains 1 (unique) vertex or less, it's a no-op.</p>
+     *
+     * @param among a collection of vertices of which each pair will be connected; you should prefer a collection with a
+     *              fast {@code next()} implementation
+     * @throws NullPointerException   if any vertex in {@code among} is {@code null}
+     * @throws InvalidVertexException if any vertex in {@code among} doesn't belong in the graph
+     */
+    default void addEdges(Collection<Vertex> among) {
+        for (Vertex v : among) {
+            for (Vertex u : among) {
+                if (!v.equals(u)) {
+                    this.addEdge(v, u);
+                }
+            }
         }
-        return Collections.unmodifiableSet(addedEdges);
+    }
+
+    /**
+     * <p>Connects every vertex in {@code among} with every other vertex in {@code among}; self-loops are excluded from
+     * the operation. After the operation, a complete subgraph of {@code among} will be created. If {@code among} only
+     * contains 2 (unique) vertices {@code s} and {@code t}, edges {@code (s,t)} and {@code (t,s)} will be created. If
+     * {@code among} only contains 1 (unique) vertex or less, it's a no-op.</p>
+     *
+     * @param among the vertices as variable arguments to connect each of its pairs; you should prefer a collection with
+     *              a fast {@code next()} implementation
+     * @throws NullPointerException   if any vertex in {@code among} is {@code null}
+     * @throws InvalidVertexException if any vertex in {@code among} doesn't belong in the graph
+     */
+    default void addEdges(Vertex... among) {
+        this.addEdges(Arrays.asList(among));
     }
 
     /**
@@ -367,9 +405,9 @@ public interface Graph extends Iterable<Vertex> {
 
     /**
      * <p>Removes all the (existing) edges of which both the source and the target are contained in {@code among}.
-     * Self-loops are excluded from the operation. If {@code among} only contains 2 vertices {@code s} and {@code t},
-     * edges {@code (s,t)} and {@code (t,s)} will be removed (assuming they exist). If {@code among} only contains 1
-     * vertex, it's a no-op.</p>
+     * Self-loops are excluded from the operation. If {@code among} only contains 2 (unique) vertices {@code s} and
+     * {@code t}, edges {@code (s,t)} and {@code (t,s)} will be removed (assuming they exist). If {@code among} only
+     * contains 1 (unique) vertex or less, it's a no-op.</p>
      *
      * @param among a collection of vertices to strip the edges from; you should prefer a collection with a fast
      *              {@code next()} implementation
@@ -388,9 +426,9 @@ public interface Graph extends Iterable<Vertex> {
 
     /**
      * <p>Removes all the (existing) edges of which both the source and the target are contained in {@code among}.
-     * Self-loops are excluded from the operation. If {@code among} only contains 2 vertices {@code s} and {@code t},
-     * edges {@code (s,t)} and {@code (t,s)} will be removed (assuming they exist). If {@code among} only contains 1
-     * vertex, it's a no-op.</p>
+     * Self-loops are excluded from the operation. If {@code among} only contains 2 (unique) vertices {@code s} and
+     * {@code t}, edges {@code (s,t)} and {@code (t,s)} will be removed (assuming they exist). If {@code among} only
+     * contains 1 (unique) vertex or less, it's a no-op.</p>
      *
      * @param among the vertices as variable arguments to strip the edges from; you should prefer a collection with a
      *              fast {@code next()} implementation
@@ -402,13 +440,12 @@ public interface Graph extends Iterable<Vertex> {
     }
 
     @Deprecated
-    default Graph removeEdge(Vertex source, Vertex target, boolean undirected) {
+    default Set<Edge> addEdge(Vertex source, Vertex target, boolean undirected) {
+        Set<Edge> addedEdges = new HashSet<>();
+        addedEdges.add(this.addEdge(source, target));
         if (undirected) {
-            this.removeEdge(source, target);
-            this.removeEdge(target, source);
-        } else {
-            this.removeEdge(source, target);
+            addedEdges.add(this.addEdge(target, source));
         }
-        return this;
+        return Collections.unmodifiableSet(addedEdges);
     }
 }

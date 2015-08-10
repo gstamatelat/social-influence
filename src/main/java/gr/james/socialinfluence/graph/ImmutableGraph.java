@@ -161,6 +161,16 @@ public final class ImmutableGraph implements Graph {
     }
 
     @Override
+    public void addEdges(Collection<Vertex> among) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void addEdges(Vertex... among) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public void clear() {
         throw new UnsupportedOperationException();
     }
@@ -187,11 +197,6 @@ public final class ImmutableGraph implements Graph {
 
     @Override
     public void removeEdges(Vertex... among) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public Graph removeEdge(Vertex source, Vertex target, boolean undirected) {
         throw new UnsupportedOperationException();
     }
 }
