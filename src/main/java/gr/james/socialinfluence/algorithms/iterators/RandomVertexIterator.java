@@ -11,7 +11,7 @@ public class RandomVertexIterator implements Iterator<Vertex> {
     private ArrayList<Vertex> nodes;
 
     public RandomVertexIterator(Graph g) {
-        this.nodes = new ArrayList<>(g.getVerticesAsList());
+        this.nodes = new ArrayList<>(g.getVertices());
     }
 
     @Override

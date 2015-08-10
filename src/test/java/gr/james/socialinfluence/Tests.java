@@ -82,7 +82,7 @@ public class Tests {
         }
 
         /* Assert if maps not approx. equal with 1% error */
-        for (Vertex v : g.getVerticesAsList()) {
+        for (Vertex v : g) {
             Assert.assertEquals("randomSurferTest - " + g, 1.0, gs.get(v) / pr.get(v), 1.0e-2);
         }
     }
@@ -103,12 +103,12 @@ public class Tests {
 
             /* Normalize pagerank */
             double mean = degree.getMean();
-            for (Vertex v : g.getVerticesAsList()) {
+            for (Vertex v : g) {
                 pagerank.put(v, pagerank.get(v) * mean);
             }
 
             /* Assert if maps not approx. equal */
-            for (Vertex v : g.getVerticesAsList()) {
+            for (Vertex v : g) {
                 Assert.assertEquals("degreeEigenvectorTest - " + g, degree.get(v), pagerank.get(v), 1.0e-2);
             }
         }
@@ -233,7 +233,7 @@ public class Tests {
         GraphUtils.createCircle(g, true);
 
         GraphState<Double> initialState = new DoubleGraphState(g, 0.0);
-        for (Vertex v : g.getVerticesAsList()) {
+        for (Vertex v : g) {
             initialState.put(v, RandomHelper.getRandom().nextDouble());
         }
 

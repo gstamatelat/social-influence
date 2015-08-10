@@ -10,7 +10,7 @@ import java.util.*;
 
 public class GraphUtils {
     public static void createCircle(Graph g, boolean undirected) {
-        Iterator<Vertex> vertexIterator = g.getVerticesAsList().iterator();
+        Iterator<Vertex> vertexIterator = g.iterator();
         Vertex previous = vertexIterator.next();
         Vertex first = previous;
         while (vertexIterator.hasNext()) {
@@ -53,8 +53,8 @@ public class GraphUtils {
      * @param g the graph to apply the transformation to
      */
     public static void connectAllVertices(Graph g) {
-        for (Vertex v : g.getVerticesAsList()) {
-            for (Vertex w : g.getVerticesAsList()) {
+        for (Vertex v : g) {
+            for (Vertex w : g) {
                 if (!v.equals(w)) {
                     g.addEdge(v, w);
                 }
@@ -74,7 +74,7 @@ public class GraphUtils {
     public static <T extends Graph> T combineGraphs(Class<T> type, Graph[] graphs) {
         T r = Helper.instantiateGeneric(type);
         for (Graph g : graphs) {
-            for (Vertex v : g.getVerticesAsList()) {
+            for (Vertex v : g) {
                 r.addVertex(v);
             }
             for (Map.Entry<VertexPair, Edge> e : g.getEdges().entrySet()) {
@@ -85,7 +85,7 @@ public class GraphUtils {
     }
 
     public static <T extends Graph> Graph deepCopy(Class<T> type, Graph g) {
-        return deepCopy(type, g, g.getVerticesAsList());
+        return deepCopy(type, g, g.getVertices());
     }
 
     public static <T extends Graph> Graph deepCopy(Class<T> type, Graph g, Collection<Vertex> includeOnly) {
@@ -106,7 +106,7 @@ public class GraphUtils {
 
     public static Set<Vertex> getStubbornVertices(Graph g) {
         Set<Vertex> stubborn = new TreeSet<>();
-        for (Vertex v : g.getVerticesAsList()) {
+        for (Vertex v : g) {
             if (g.getOutDegree(v) == 1 && g.getOutEdges(v).containsKey(v)) {
                 stubborn.add(v);
             }

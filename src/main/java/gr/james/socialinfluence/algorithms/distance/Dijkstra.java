@@ -24,7 +24,7 @@ public class Dijkstra {
 
     public static Map<VertexPair, Double> executeDistanceMap(Graph g) {
         HashMap<VertexPair, Double> dist = new HashMap<>();
-        for (Vertex v : g.getVerticesAsList()) {
+        for (Vertex v : g) {
             Map<Vertex, Double> temp = Dijkstra.execute(g, v);
             for (Map.Entry<Vertex, Double> e : temp.entrySet()) {
                 dist.put(new VertexPair(v, e.getKey()), e.getValue());
@@ -35,7 +35,7 @@ public class Dijkstra {
 
     private static Map<Vertex, Collection<VertexSequence>> executeWithPathInternal(Graph g, Vertex source, boolean dummyPaths) {
         Map<Vertex, DijkstraNode> nodeMap = new HashMap<>();
-        for (Vertex v : g.getVerticesAsList()) {
+        for (Vertex v : g) {
             nodeMap.put(v, new DijkstraNode(v, Double.POSITIVE_INFINITY));
         }
 

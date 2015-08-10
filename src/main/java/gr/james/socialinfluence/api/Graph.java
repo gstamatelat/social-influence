@@ -39,7 +39,7 @@ public interface Graph extends Iterable<Vertex> {
      * @return the index-based vertex iterator for this graph
      */
     default Iterator<Vertex> iterator() {
-        return this.getVerticesAsList().iterator();
+        return this.getVertices().iterator();
     }
 
     /**
@@ -50,7 +50,7 @@ public interface Graph extends Iterable<Vertex> {
      * @throws NullPointerException if {@code v} is {@code null}
      */
     default boolean containsVertex(Vertex v) {
-        return this.getVerticesAsList().contains(Conditions.requireNonNull(v));
+        return this.getVertices().contains(Conditions.requireNonNull(v));
     }
 
     /**
@@ -82,7 +82,8 @@ public interface Graph extends Iterable<Vertex> {
     /**
      * <p>Get a {@link Vertex} of this graph based on its index. Index is a deterministic, per-graph attribute between
      * {@code 0} (inclusive) and {@link #getVerticesCount()} (exclusive), indicating the order at which the vertices
-     * were inserted in the graph.</p>
+     * were inserted in the graph. {@code getVertexFromIndex(i)} will return the same vertex as
+     * {@code getVertices().get(i)} but could be faster depending on the {@code Graph} implementation.</p>
      *
      * @param index the index of the vertex
      * @return the vertex reference with the provided index
@@ -90,7 +91,7 @@ public interface Graph extends Iterable<Vertex> {
      *                                   (<tt>index &lt; 0 || index &gt;= getVerticesCount()</tt>)
      */
     default Vertex getVertexFromIndex(int index) {
-        return this.getVerticesAsList().get(index);
+        return this.getVertices().get(index);
     }
 
     /**
@@ -106,7 +107,7 @@ public interface Graph extends Iterable<Vertex> {
     @Deprecated
     default Map<VertexPair, Edge> getEdges() {
         Map<VertexPair, Edge> edges = new HashMap<>();
-        for (Vertex v : this.getVerticesAsList()) {
+        for (Vertex v : this.getVertices()) {
             for (Map.Entry<Vertex, Edge> e : this.getOutEdges(v).entrySet()) {
                 edges.put(new VertexPair(v, e.getKey()), e.getValue());
             }
@@ -121,7 +122,7 @@ public interface Graph extends Iterable<Vertex> {
      */
     default int getEdgesCount() {
         int count = 0;
-        for (Vertex v : this.getVerticesAsList()) {
+        for (Vertex v : this.getVertices()) {
             count += this.getOutEdges(v).size();
         }
         return count;
@@ -242,16 +243,6 @@ public interface Graph extends Iterable<Vertex> {
      * vertices were inserted in the graph.</p>
      *
      * @return an unmodifiable list of vertices in this graph
-     * @deprecated use {@link #getVertices()} instead
-     */
-    @Deprecated
-    List<Vertex> getVerticesAsList();
-
-    /**
-     * <p>Returns an list view of the vertices contained in this graph. The list is indexed at the order at which the
-     * vertices were inserted in the graph.</p>
-     *
-     * @return an unmodifiable list of vertices in this graph
      */
     List<Vertex> getVertices();
 
@@ -261,7 +252,7 @@ public interface Graph extends Iterable<Vertex> {
      * @return the number of vertices in this graph
      */
     default int getVerticesCount() {
-        return this.getVerticesAsList().size();
+        return this.getVertices().size();
     }
 
     default Vertex getRandomOutEdge(Vertex from, boolean weighted) {
@@ -349,7 +340,7 @@ public interface Graph extends Iterable<Vertex> {
      * <p>Removes all vertices and all edges from this graph.</p>
      */
     default void clear() {
-        this.removeVertices(this.getVerticesAsList());
+        this.removeVertices(this.getVertices());
     }
 
     Edge addEdge(Vertex source, Vertex target);

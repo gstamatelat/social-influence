@@ -48,8 +48,8 @@ public class DistanceTests {
                 Assert.assertEquals("FloydWarshallTest - length - " + g, distFloyd.size(), distDijkstra.size());
 
                 /* Value assertions */
-                for (Vertex u : g.getVerticesAsList()) {
-                    for (Vertex v : g.getVerticesAsList()) {
+                for (Vertex u : g) {
+                    for (Vertex v : g) {
                         // TODO: Both Dijkstra and Floyd-Warshall use additions, it is intuitive that there won't be any double rounding issues
                         // TODO: Also, 10^{-5} is too hardcoded for a quantity that could very well be really close to 10^{-5}
                         // TODO: It's better to just compare 1 (one) with the ratio of distFloyd/distDijkstra

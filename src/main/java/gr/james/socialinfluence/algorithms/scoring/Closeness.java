@@ -21,7 +21,7 @@ public class Closeness {
 
         GraphState<Double> state = new DoubleGraphState();
 
-        for (Vertex v : g.getVerticesAsList()) {
+        for (Vertex v : g) {
             Map<Vertex, Double> dist = new HashMap<>();
             for (VertexPair p : distanceMap.keySet()) {
                 Vertex current = in ? p.getTarget() : p.getSource();

@@ -116,11 +116,6 @@ public final class ImmutableGraph implements Graph {
     }
 
     @Override
-    public List<Vertex> getVerticesAsList() {
-        return this.g.getVerticesAsList();
-    }
-
-    @Override
     public List<Vertex> getVertices() {
         return this.g.getVertices();
     }

@@ -13,7 +13,7 @@ public class DoubleGraphState extends AbstractGraphState<Double> {
     }
 
     public DoubleGraphState(Graph g, double e) {
-        for (Vertex v : g.getVerticesAsList()) {
+        for (Vertex v : g) {
             this.put(v, e);
         }
     }

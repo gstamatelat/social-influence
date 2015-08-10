@@ -22,7 +22,7 @@ public class DeGroot {
         while (!stabilized) {
             GraphState<Double> nextState = new DoubleGraphState(g, 0.0);
 
-            for (Vertex v : g.getVerticesAsList()) {
+            for (Vertex v : g) {
                 double vNewValue = 0.0;
                 for (Map.Entry<Vertex, Edge> e : g.getOutEdges(v).entrySet()) {
                     vNewValue = vNewValue + (

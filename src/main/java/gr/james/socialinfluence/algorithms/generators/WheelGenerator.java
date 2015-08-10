@@ -19,7 +19,7 @@ public class WheelGenerator<T extends Graph> implements GraphGenerator<T> {
         T g = new CycleGenerator<>(type, totalVertices - 1).create();
 
         Vertex n = g.addVertex();
-        for (Vertex v : g.getVerticesAsList()) {
+        for (Vertex v : g) {
             if (!v.equals(n)) {
                 g.addEdge(v, n, true);
             }

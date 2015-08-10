@@ -24,8 +24,8 @@ public class FloydWarshall {
     public static Map<VertexPair, Double> execute(Graph g) {
         Map<VertexPair, Double> dist = new HashMap<>();
 
-        for (Vertex u : g.getVerticesAsList()) {
-            for (Vertex v : g.getVerticesAsList()) {
+        for (Vertex u : g) {
+            for (Vertex v : g) {
                 if (u.equals(v)) {
                     dist.put(new VertexPair(u, v), 0.0);
                 } else {
@@ -34,15 +34,15 @@ public class FloydWarshall {
             }
         }
 
-        for (Vertex v : g.getVerticesAsList()) {
+        for (Vertex v : g) {
             for (Map.Entry<Vertex, Edge> e : g.getOutEdges(v).entrySet()) {
                 dist.put(new VertexPair(v, e.getKey()), e.getValue().getWeight());
             }
         }
 
-        for (Vertex k : g.getVerticesAsList()) {
-            for (Vertex i : g.getVerticesAsList()) {
-                for (Vertex j : g.getVerticesAsList()) {
+        for (Vertex k : g) {
+            for (Vertex i : g) {
+                for (Vertex j : g) {
                     if (dist.get(new VertexPair(i, j)) > dist.get(new VertexPair(i, k)) + dist.get(new VertexPair(k, j))) {
                         dist.put(new VertexPair(i, j), dist.get(new VertexPair(i, k)) + dist.get(new VertexPair(k, j)));
                     }

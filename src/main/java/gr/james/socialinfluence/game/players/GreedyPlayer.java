@@ -50,7 +50,7 @@ public class GreedyPlayer extends Player {
 
         /* Fill the distanceMap */
         // TODO: Replace this snippet with FloydWarshall method, but care, this map has (t,s) rather than (s,t)
-        for (Vertex v : g.getVerticesAsList()) {
+        for (Vertex v : g) {
             Map<Vertex, Double> temp = Dijkstra.execute(g, v);
             for (Map.Entry<Vertex, Double> e : temp.entrySet()) {
                 distanceMap.put(new Vertex[]{e.getKey(), v}, e.getValue());
@@ -69,7 +69,7 @@ public class GreedyPlayer extends Player {
 
             /* Initialize the vector */
             vector.clear();
-            for (Vertex v : g.getVerticesAsList()) {
+            for (Vertex v : g) {
                 vector.put(v, 1.0);
             }
 
@@ -81,7 +81,7 @@ public class GreedyPlayer extends Player {
             /* Simulation loop */
             while (m.getVerticesCount() < d.getActions()) {
                 HashMap<Vertex, Double> sumMap = new HashMap<>();
-                for (Vertex v : g.getVerticesAsList()) {
+                for (Vertex v : g) {
                     HashMap<Vertex, Double> tmpVector = new HashMap<>();
                     for (Map.Entry<Vertex, Double> e : vector.entrySet()) {
                         tmpVector.put(e.getKey(), e.getValue());
