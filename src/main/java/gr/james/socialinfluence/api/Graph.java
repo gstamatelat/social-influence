@@ -32,6 +32,12 @@ public interface Graph extends Iterable<Vertex> {
         return this.getMeta(Finals.TYPE_META);
     }
 
+    /**
+     * <p>Get the index-based vertex iterator for this graph. {@code iterator()} will return the same iterator as
+     * {@code getVertices().iterator()} but could be faster depending on the {@code Graph} implementation.</p>
+     *
+     * @return the index-based vertex iterator for this graph
+     */
     default Iterator<Vertex> iterator() {
         return this.getVerticesAsList().iterator();
     }
