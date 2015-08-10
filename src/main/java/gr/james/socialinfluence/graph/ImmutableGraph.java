@@ -116,13 +116,13 @@ public final class ImmutableGraph implements Graph {
     }
 
     @Override
-    public Set<Vertex> getVertices() {
-        return this.g.getVertices();
+    public List<Vertex> getVerticesAsList() {
+        return this.g.getVerticesAsList();
     }
 
     @Override
-    public List<Vertex> getVerticesAsList() {
-        return this.g.getVerticesAsList();
+    public List<Vertex> getVertices() {
+        return this.g.getVertices();
     }
 
     @Override
@@ -182,6 +182,16 @@ public final class ImmutableGraph implements Graph {
 
     @Override
     public boolean removeEdge(Vertex source, Vertex target) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void removeEdges(Collection<Vertex> among) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void removeEdges(Vertex... among) {
         throw new UnsupportedOperationException();
     }
 

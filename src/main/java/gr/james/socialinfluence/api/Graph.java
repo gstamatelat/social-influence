@@ -238,14 +238,14 @@ public interface Graph extends Iterable<Vertex> {
     }
 
     /**
-     * <p>Returns an unmodifiable Set of vertices that this graph consists of.</p>
-     * <dl><dt><b>Complexity:</b></dt><dd>O(1)</dd></dl>
+     * <p>Returns an list view of the vertices contained in this graph. The list is indexed at the order at which the
+     * vertices were inserted in the graph.</p>
      *
-     * @return the list of vertices of this graph
-     * @deprecated You should use {@link #getVerticesAsList()} instead.
+     * @return an unmodifiable list of vertices in this graph
+     * @deprecated use {@link #getVertices()} instead
      */
     @Deprecated
-    Set<Vertex> getVertices();
+    List<Vertex> getVerticesAsList();
 
     /**
      * <p>Returns an list view of the vertices contained in this graph. The list is indexed at the order at which the
@@ -253,7 +253,7 @@ public interface Graph extends Iterable<Vertex> {
      *
      * @return an unmodifiable list of vertices in this graph
      */
-    List<Vertex> getVerticesAsList();
+    List<Vertex> getVertices();
 
     /**
      * <p>Returns the number of vertices in this graph.</p>
