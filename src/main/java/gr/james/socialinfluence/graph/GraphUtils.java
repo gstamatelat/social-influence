@@ -47,22 +47,6 @@ public class GraphUtils {
     }
 
     /**
-     * <p>Connects all the vertices in the graph. Does not create self-connections (loops).</p>
-     * <dl><dt><b>Complexity:</b></dt><dd>O(n<sup>2</sup>)</dd></dl>
-     *
-     * @param g the graph to apply the transformation to
-     */
-    public static void connectAllVertices(Graph g) {
-        for (Vertex v : g) {
-            for (Vertex w : g) {
-                if (!v.equals(w)) {
-                    g.addEdge(v, w);
-                }
-            }
-        }
-    }
-
-    /**
      * <p>Combine several graphs into a single one. When combining, the vertices of the input graphs will be inserted to
      * the output along with their edges. The original graphs will not be modified.</p>
      *
