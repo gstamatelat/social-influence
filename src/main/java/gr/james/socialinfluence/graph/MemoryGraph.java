@@ -2,9 +2,7 @@ package gr.james.socialinfluence.graph;
 
 import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.util.Conditions;
-import gr.james.socialinfluence.util.Finals;
 import gr.james.socialinfluence.util.collections.Pair;
-import gr.james.socialinfluence.util.exceptions.GraphException;
 
 import java.util.*;
 
@@ -66,11 +64,8 @@ public class MemoryGraph extends AbstractGraph {
 
     @Override
     public Edge addEdge(Vertex source, Vertex target) {
-        if (!this.containsVertex(source) || !this.containsVertex(target)) {
-            throw new GraphException(Finals.E_GRAPH_EDGE_DIFFERENT);
-        }
-        Edge e = new Edge();
-        if (!this.m.get(source).getFirst().containsKey(target)) {
+        if (!containsEdge(source, target)) {
+            Edge e = new Edge();
             this.m.get(source).getFirst().put(target, e);
             this.m.get(target).getSecond().put(source, e);
             return e;

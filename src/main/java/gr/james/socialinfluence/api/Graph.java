@@ -334,15 +334,15 @@ public interface Graph extends Iterable<Vertex> {
     }
 
     /**
-     * <p>Creates an edge with the specified {@code source} and {@code target}.</p>
+     * <p>Creates an edge with the specified {@code source} and {@code target}. If an edge with the same {@code source}
+     * and {@code target} exists, nothing happens.</p>
      *
      * @param source the source of the edge
      * @param target the target of the edge
-     * @return the {@code Edge} object of the newly added edge
+     * @return the {@code Edge} object of the newly added edge, or {@code null} if an edge already exists
      * @throws NullPointerException   if either {@code source} or {@code target} is {@code null}
      * @throws InvalidVertexException if either {@code source} or {@code target} doesn't belong in the graph
      */
-    // TODO: What if edge already exists?
     Edge addEdge(Vertex source, Vertex target);
 
     /**
