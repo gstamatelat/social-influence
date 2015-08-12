@@ -33,17 +33,6 @@ public interface Graph extends Iterable<Vertex> {
     }
 
     /**
-     * <p>Checks if the graph contains the specified vertex.</p>
-     *
-     * @param v the {@link Vertex} to check whether it is contained in the graph
-     * @return {@code true} if {@code v} exists in the graph, otherwise {@code false}
-     * @throws NullPointerException if {@code v} is {@code null}
-     */
-    default boolean containsVertex(Vertex v) {
-        return this.getVertices().contains(Conditions.requireNonNull(v));
-    }
-
-    /**
      * <p>Checks if this graph contains an edge with the specified {@code source} and {@code target}.</p>
      *
      * @param source the source of the edge
@@ -211,6 +200,18 @@ public interface Graph extends Iterable<Vertex> {
     List<Vertex> getVertices();
 
     /**
+     * <p>Checks if the graph contains the specified vertex. {@code containsVertex(v)} will return the same value as
+     * {@code getVertices().contains(v)} but could be faster depending on the {@code Graph} implementation.</p>
+     *
+     * @param v the {@link Vertex} to check whether it is contained in the graph
+     * @return {@code true} if {@code v} exists in the graph, otherwise {@code false}
+     * @throws NullPointerException if {@code v} is {@code null}
+     */
+    default boolean containsVertex(Vertex v) {
+        return this.getVertices().contains(Conditions.requireNonNull(v));
+    }
+
+    /**
      * <p>Returns the number of vertices in this graph. {@code getVerticesCount()} will return the same value as
      * {@code getVertices().size()} but could be faster depending on the {@code Graph} implementation.</p>
      *
@@ -236,37 +237,14 @@ public interface Graph extends Iterable<Vertex> {
     }
 
     /**
-     * <p>Get the index-based vertex iterator for this graph. {@code iterator()} will return the same iterator as
-     * {@code getVertices().iterator()} but could be faster depending on the {@code Graph} implementation.</p>
+     * <p>Get the read-only, index-based, vertex iterator for this graph. {@code iterator()} will return the same
+     * iterator as {@code getVertices().iterator()} but could be faster depending on the {@code Graph} implementation.
+     * </p>
      *
      * @return the index-based vertex iterator for this graph
      */
     default Iterator<Vertex> iterator() {
         return this.getVertices().iterator();
-    }
-
-    default Vertex getRandomOutEdge(Vertex from, boolean weighted) {
-        HashMap<Vertex, Double> weightMap = new HashMap<>();
-        Map<Vertex, Edge> outEdges = this.getOutEdges(from);
-        for (Map.Entry<Vertex, Edge> e : outEdges.entrySet()) {
-            weightMap.put(e.getKey(), (weighted ? e.getValue().getWeight() : 1.0));
-        }
-        Set<Vertex> edges = Helper.weightedRandom(weightMap, 1);
-        return edges.iterator().next();
-    }
-
-    default double getDiameter() {
-        // TODO: Should return a list/path/walk of vertices to show both the weight sum and the steps
-        Map<VertexPair, Double> distanceMap = Dijkstra.executeDistanceMap(this);
-
-        double diameter = 0;
-        for (double d : distanceMap.values()) {
-            if (d > diameter) {
-                diameter = d;
-            }
-        }
-
-        return diameter;
     }
 
     /**
@@ -426,6 +404,31 @@ public interface Graph extends Iterable<Vertex> {
      */
     default void removeEdges(Vertex... among) {
         this.removeEdges(Arrays.asList(among));
+    }
+
+    default Vertex getRandomOutEdge(Vertex from, boolean weighted) {
+        // TODO: Documentation and probably return a pair or vertex and edge
+        HashMap<Vertex, Double> weightMap = new HashMap<>();
+        Map<Vertex, Edge> outEdges = this.getOutEdges(from);
+        for (Map.Entry<Vertex, Edge> e : outEdges.entrySet()) {
+            weightMap.put(e.getKey(), (weighted ? e.getValue().getWeight() : 1.0));
+        }
+        Set<Vertex> edges = Helper.weightedRandom(weightMap, 1);
+        return edges.iterator().next();
+    }
+
+    default double getDiameter() {
+        // TODO: Should return a list/path/walk of vertices to show both the weight sum and the steps
+        Map<VertexPair, Double> distanceMap = Dijkstra.executeDistanceMap(this);
+
+        double diameter = 0;
+        for (double d : distanceMap.values()) {
+            if (d > diameter) {
+                diameter = d;
+            }
+        }
+
+        return diameter;
     }
 
     @Deprecated

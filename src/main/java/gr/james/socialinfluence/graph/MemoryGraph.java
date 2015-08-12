@@ -23,7 +23,7 @@ public class MemoryGraph extends AbstractGraph {
 
     @Override
     public boolean containsVertex(Vertex v) {
-        return this.m.containsKey(v);
+        return this.m.containsKey(Conditions.requireNonNull(v));
     }
 
     @Override
