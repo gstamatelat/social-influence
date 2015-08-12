@@ -33,16 +33,6 @@ public interface Graph extends Iterable<Vertex> {
     }
 
     /**
-     * <p>Get the index-based vertex iterator for this graph. {@code iterator()} will return the same iterator as
-     * {@code getVertices().iterator()} but could be faster depending on the {@code Graph} implementation.</p>
-     *
-     * @return the index-based vertex iterator for this graph
-     */
-    default Iterator<Vertex> iterator() {
-        return this.getVertices().iterator();
-    }
-
-    /**
      * <p>Checks if the graph contains the specified vertex.</p>
      *
      * @param v the {@link Vertex} to check whether it is contained in the graph
@@ -77,21 +67,6 @@ public interface Graph extends Iterable<Vertex> {
      */
     default Edge findEdge(Vertex source, Vertex target) {
         return this.getOutEdges(source).get(Conditions.requireNonNullAndExists(target, this));
-    }
-
-    /**
-     * <p>Get a {@link Vertex} of this graph based on its index. Index is a deterministic, per-graph attribute between
-     * {@code 0} (inclusive) and {@link #getVerticesCount()} (exclusive), indicating the order at which the vertices
-     * were inserted in the graph. {@code getVertexFromIndex(i)} will return the same vertex as
-     * {@code getVertices().get(i)} but could be faster depending on the {@code Graph} implementation.</p>
-     *
-     * @param index the index of the vertex
-     * @return the vertex reference with the provided index
-     * @throws IndexOutOfBoundsException if the index is out of range
-     *                                   (<tt>index &lt; 0 || index &gt;= getVerticesCount()</tt>)
-     */
-    default Vertex getVertexFromIndex(int index) {
-        return this.getVertices().get(index);
     }
 
     /**
@@ -243,6 +218,31 @@ public interface Graph extends Iterable<Vertex> {
      */
     default int getVerticesCount() {
         return this.getVertices().size();
+    }
+
+    /**
+     * <p>Get a {@link Vertex} of this graph based on its index. Index is a deterministic, per-graph attribute between
+     * {@code 0} (inclusive) and {@link #getVerticesCount()} (exclusive), indicating the order at which the vertices
+     * were inserted in the graph. {@code getVertexFromIndex(i)} will return the same vertex as
+     * {@code getVertices().get(i)} but could be faster depending on the {@code Graph} implementation.</p>
+     *
+     * @param index the index of the vertex
+     * @return the vertex reference with the provided index
+     * @throws IndexOutOfBoundsException if the index is out of range
+     *                                   (<tt>index &lt; 0 || index &gt;= getVerticesCount()</tt>)
+     */
+    default Vertex getVertexFromIndex(int index) {
+        return this.getVertices().get(index);
+    }
+
+    /**
+     * <p>Get the index-based vertex iterator for this graph. {@code iterator()} will return the same iterator as
+     * {@code getVertices().iterator()} but could be faster depending on the {@code Graph} implementation.</p>
+     *
+     * @return the index-based vertex iterator for this graph
+     */
+    default Iterator<Vertex> iterator() {
+        return this.getVertices().iterator();
     }
 
     default Vertex getRandomOutEdge(Vertex from, boolean weighted) {
