@@ -17,7 +17,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LineChartSample extends Application implements Runnable {
-    public static Thread JAVAFX;
     public static String TITLE = "Degree Distribution";
 
     public static void main(String[] args) {
@@ -35,7 +34,6 @@ public class LineChartSample extends Application implements Runnable {
 
     @Override
     public void start(Stage stage) {
-        LineChartSample.JAVAFX = Thread.currentThread();
         stage.setTitle("Line Chart Sample");
         //defining the axes
         final NumberAxis xAxis = new NumberAxis();
@@ -48,7 +46,7 @@ public class LineChartSample extends Application implements Runnable {
 
         lineChart.setTitle(LineChartSample.TITLE);
         //defining a series
-        XYChart.Series series = new XYChart.Series();
+        XYChart.Series<Number, Number> series = new XYChart.Series<>();
         series.setName("My portfolio");
         //populating the series with data
 
@@ -70,8 +68,8 @@ public class LineChartSample extends Application implements Runnable {
                 degreeDist.put(d, 1);
             }
         }
-        for (Number x : degreeDist.keySet()) {
-            series.getData().add(new XYChart.Data(x, degreeDist.get(x)));
+        for (Integer x : degreeDist.keySet()) {
+            series.getData().add(new XYChart.Data<>(x, degreeDist.get(x)));
         }
 
         Scene scene = new Scene(lineChart, 800, 600);

@@ -8,8 +8,6 @@ import gr.james.socialinfluence.util.exceptions.WeightNonPositiveException;
  * only be positive.</p>
  */
 public class Edge {
-    // TODO: Edge has setWeight method, which can be used to change the graph, even if it is an immutable graph.
-    // TODO: It is better to convert edge to immutable if it is possible
     private double weight;
 
     /**
@@ -36,7 +34,9 @@ public class Edge {
      * @return the current {@code Edge} instance to fulfill the builder pattern
      * @throws WeightNonPositiveException if weight is negative or zero
      * @see #getWeight()
+     * @deprecated This method will be removed because it violates the immutability of {@code Edge}
      */
+    @Deprecated
     public Edge setWeight(double weight) {
         if (weight <= 0) {
             throw new WeightNonPositiveException(Finals.E_EDGE_WEIGHT_NEGATIVE, weight);

@@ -6,7 +6,9 @@ import gr.james.socialinfluence.graph.Vertex;
 import java.util.Iterator;
 import java.util.TreeSet;
 
-@Deprecated
+/**
+ * <p>Iterates through vertices in a graph by their natural order, imposed by {@link Vertex#compareTo(Vertex)}.</p>
+ */
 public class OrderedVertexIterator implements Iterator<Vertex> {
     private TreeSet<Vertex> vertices;
 

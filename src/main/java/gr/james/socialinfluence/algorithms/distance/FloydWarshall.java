@@ -15,10 +15,8 @@ import java.util.Map;
  * weighted graph with positive or negative edge weights (but with no negative cycles). A single execution of the
  * algorithm will find the lengths (summed weights) of the shortest paths between all pairs of vertices, though it does
  * not return details of the paths themselves.</p>
- *
- * @deprecated You should use {@link Dijkstra#executeDistanceMap(Graph)}, which is faster
+ * <p>You should use {@link Dijkstra#executeDistanceMap(Graph)}, which is faster.</p>
  */
-@Deprecated
 public class FloydWarshall {
     // TODO: Why is this method so much slower than Dijkstra?
     public static Map<VertexPair, Double> execute(Graph g) {

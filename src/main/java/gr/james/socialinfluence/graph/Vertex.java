@@ -8,7 +8,7 @@ import gr.james.socialinfluence.api.Graph;
  * {@link #equals(Object) equals} and {@link #hashCode() hashCode} methods only depend on id, which is fixed. Vertex
  * objects returned by methods are always shallow copies (references).</p>
  * <p>Vertex id is automatically set to an auto-increment value each time you instantiate a new vertex. A vertex can
- * exist in multiple graphs.</p>
+ * exist in multiple graphs, if that makes sense for the application.</p>
  */
 public class Vertex implements Comparable<Vertex> {
     /**
