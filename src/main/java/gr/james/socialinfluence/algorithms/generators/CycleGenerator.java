@@ -22,10 +22,10 @@ public class CycleGenerator<T extends Graph> implements GraphGenerator<T> {
         Vertex startVertex = g.addVertex(), previousVertex = startVertex;
         while (g.getVerticesCount() < totalVertices) {
             Vertex newVertex = g.addVertex();
-            g.addEdge(previousVertex, newVertex, true);
+            g.addEdges(previousVertex, newVertex);
             previousVertex = newVertex;
         }
-        g.addEdge(startVertex, previousVertex, true);
+        g.addEdges(startVertex, previousVertex);
 
         g.setMeta(Finals.TYPE_META, "Cycle")
                 .setMeta("totalVertices", String.valueOf(totalVertices));

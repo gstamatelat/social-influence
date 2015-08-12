@@ -42,7 +42,7 @@ public class BarabasiAlbertClusterGenerator<T extends Graph> implements GraphGen
         for (int i = 0; i < clusters; i++) {
             Vertex s = randomVertices[i];
             Vertex t = randomVertices[(i + 1) % clusters];
-            g.addEdge(s, t, true);
+            g.addEdges(s, t);
         }
 
         g.setMeta(Finals.TYPE_META, "BarabasiAlbertCluster")

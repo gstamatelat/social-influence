@@ -4,7 +4,10 @@ import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.util.Conditions;
 import gr.james.socialinfluence.util.collections.VertexPair;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>Unmodifiable decorator of a {@link Graph}.</p>
@@ -177,11 +180,6 @@ public final class ImmutableGraph implements Graph {
 
     @Override
     public Edge addEdge(Vertex source, Vertex target) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public Set<Edge> addEdge(Vertex source, Vertex target, boolean undirected) {
         throw new UnsupportedOperationException();
     }
 

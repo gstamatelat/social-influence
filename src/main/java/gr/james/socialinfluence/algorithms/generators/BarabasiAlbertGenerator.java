@@ -47,7 +47,7 @@ public class BarabasiAlbertGenerator<T extends Graph> implements EvolvingGraphGe
 
         Vertex v = g.addVertex();
         for (Vertex w : newVertices) {
-            g.addEdge(v, w, true);
+            g.addEdges(v, w);
         }
 
         return g;

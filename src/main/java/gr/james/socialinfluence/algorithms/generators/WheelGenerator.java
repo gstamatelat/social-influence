@@ -21,7 +21,7 @@ public class WheelGenerator<T extends Graph> implements GraphGenerator<T> {
         Vertex n = g.addVertex();
         for (Vertex v : g) {
             if (!v.equals(n)) {
-                g.addEdge(v, n, true);
+                g.addEdges(v, n);
             }
         }
 

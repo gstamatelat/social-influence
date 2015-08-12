@@ -33,10 +33,10 @@ public class GridGenerator<T extends Graph> implements GraphGenerator<T> {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
                 if (j != m - 1) {
-                    g.addEdge(set.get(count), set.get(count + 1), true);
+                    g.addEdges(set.get(count), set.get(count + 1));
                 }
                 if (i != n - 1) {
-                    g.addEdge(set.get(count), set.get(count + m), true);
+                    g.addEdges(set.get(count), set.get(count + m));
                 }
                 count = count + 1;
             }

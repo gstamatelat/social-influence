@@ -438,14 +438,4 @@ public interface Graph extends Iterable<Vertex> {
         }
         return Collections.unmodifiableMap(edges);
     }
-
-    @Deprecated
-    default Set<Edge> addEdge(Vertex source, Vertex target, boolean undirected) {
-        Set<Edge> addedEdges = new HashSet<>();
-        addedEdges.add(this.addEdge(source, target));
-        if (undirected) {
-            addedEdges.add(this.addEdge(target, source));
-        }
-        return Collections.unmodifiableSet(addedEdges);
-    }
 }
