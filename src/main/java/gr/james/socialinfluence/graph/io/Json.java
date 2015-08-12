@@ -8,6 +8,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+/**
+ * https://github.com/jsongraph/json-graph-specification
+ */
 public class Json implements GraphImporter, GraphExporter {
     @Override
     public Graph from(InputStream in) throws IOException {
