@@ -3,6 +3,10 @@ package gr.james.socialinfluence.api;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * <p>Represents an object that contains metadata information. Metadata consists of a key-value map, in which keys and
+ * values are strings. Metadata cannot contain {@code null} keys or values and keys must be unique.</p>
+ */
 public interface Metadata {
     /**
      * <p>Gets the specified meta field.</p>

@@ -103,4 +103,4 @@ MemoryGraph | O(n+m)  | O(1)       | O(1)     | O(m)          | O(1)        | O(
 - A PageRank test on a known graph
 - GraphOperations.combineGraphs seems like a generalization of Graph.deepCopy
 - Consider changing the iterator of Move to Iterator<MovePoint> or Iterator<GenericPair<Vertex,Double>>
-- Make `interface HasMetadata` and implement it on `Graph`, `Vertex` and `Edge`
+- Implement `Metadata` on `Vertex` and `Edge`
