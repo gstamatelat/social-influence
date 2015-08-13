@@ -4,7 +4,6 @@ import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.api.GraphGenerator;
 import gr.james.socialinfluence.graph.GraphUtils;
 import gr.james.socialinfluence.graph.Vertex;
-import gr.james.socialinfluence.util.Finals;
 
 public class BarabasiAlbertClusterGenerator<T extends Graph> implements GraphGenerator<T> {
     private Class<T> type;
@@ -45,12 +44,12 @@ public class BarabasiAlbertClusterGenerator<T extends Graph> implements GraphGen
             g.addEdges(s, t);
         }
 
-        g.setMeta(Finals.TYPE_META, "BarabasiAlbertCluster")
-                .setMeta("totalVertices", String.valueOf(totalVertices))
-                .setMeta("initialClique", String.valueOf(initialClique))
-                .setMeta("stepEdges", String.valueOf(stepEdges))
-                .setMeta("a", String.valueOf(a))
-                .setMeta("clusters", String.valueOf(clusters));
+        g.setGraphType("BarabasiAlbertCluster");
+        g.setMeta("totalVertices", String.valueOf(totalVertices));
+        g.setMeta("initialClique", String.valueOf(initialClique));
+        g.setMeta("stepEdges", String.valueOf(stepEdges));
+        g.setMeta("a", String.valueOf(a));
+        g.setMeta("clusters", String.valueOf(clusters));
 
         return g;
     }

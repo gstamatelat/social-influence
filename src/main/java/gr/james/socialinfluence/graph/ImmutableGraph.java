@@ -29,18 +29,23 @@ public final class ImmutableGraph implements Graph {
     }
 
     @Override
-    public Graph setMeta(String key, String value) {
+    public void setMeta(String key, String value) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public Graph clearMeta() {
+    public void clearMeta() {
         throw new UnsupportedOperationException();
     }
 
     @Override
     public String getGraphType() {
         return this.g.getGraphType();
+    }
+
+    @Override
+    public void setGraphType(String type) {
+        this.g.setGraphType(type);
     }
 
     @Override

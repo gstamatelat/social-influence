@@ -3,7 +3,6 @@ package gr.james.socialinfluence.algorithms.generators;
 import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.api.GraphGenerator;
 import gr.james.socialinfluence.graph.Vertex;
-import gr.james.socialinfluence.util.Finals;
 import gr.james.socialinfluence.util.Helper;
 
 /**
@@ -29,7 +28,7 @@ public class MasterGenerator<T extends Graph> implements GraphGenerator<T> {
         g.addEdge(v3, v2);
         g.addEdge(v2, v1);
 
-        g.setMeta(Finals.TYPE_META, "Master");
+        g.setGraphType("Master");
 
         return g;
     }

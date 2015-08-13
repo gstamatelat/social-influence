@@ -3,7 +3,6 @@ package gr.james.socialinfluence.algorithms.generators;
 import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.api.GraphGenerator;
 import gr.james.socialinfluence.graph.Vertex;
-import gr.james.socialinfluence.util.Finals;
 import gr.james.socialinfluence.util.Helper;
 
 public class PathGenerator<T extends Graph> implements GraphGenerator<T> {
@@ -26,8 +25,8 @@ public class PathGenerator<T extends Graph> implements GraphGenerator<T> {
             previousVertex = newVertex;
         }
 
-        g.setMeta(Finals.TYPE_META, "Path")
-                .setMeta("totalVertices", String.valueOf(totalVertices));
+        g.setGraphType("Path");
+        g.setMeta("totalVertices", String.valueOf(totalVertices));
 
         return g;
     }

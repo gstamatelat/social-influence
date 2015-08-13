@@ -21,15 +21,13 @@ import java.util.*;
  * affect these collections after they have been returned; you need to call the method again. This behavior depends on
  * the underlying {@code Graph} implementation.</dd></dl>
  */
-public interface Graph extends Iterable<Vertex> {
-    String getMeta(String key);
-
-    Graph setMeta(String key, String value);
-
-    Graph clearMeta();
-
+public interface Graph extends Iterable<Vertex>, HasMetadata {
     default String getGraphType() {
-        return this.getMeta(Finals.TYPE_META);
+        return getMeta(Finals.TYPE_META);
+    }
+
+    default void setGraphType(String type) {
+        setMeta(Finals.TYPE_META, type);
     }
 
     /**
@@ -376,7 +374,7 @@ public interface Graph extends Iterable<Vertex> {
 
     default Vertex getRandomOutEdge(Vertex from, boolean weighted) {
         // TODO: Documentation and probably return a pair or vertex and edge
-        HashMap<Vertex, Double> weightMap = new HashMap<>();
+        Map<Vertex, Double> weightMap = new HashMap<>();
         Map<Vertex, Edge> outEdges = this.getOutEdges(from);
         for (Map.Entry<Vertex, Edge> e : outEdges.entrySet()) {
             weightMap.put(e.getKey(), (weighted ? e.getValue().getWeight() : 1.0));

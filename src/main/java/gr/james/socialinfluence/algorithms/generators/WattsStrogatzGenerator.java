@@ -4,7 +4,6 @@ import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.api.GraphGenerator;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.util.Conditions;
-import gr.james.socialinfluence.util.Finals;
 import gr.james.socialinfluence.util.Helper;
 import gr.james.socialinfluence.util.RandomHelper;
 
@@ -50,10 +49,10 @@ public class WattsStrogatzGenerator<T extends Graph> implements GraphGenerator<T
             }
         }
 
-        g.setMeta(Finals.TYPE_META, "WattsStrogatz")
-                .setMeta("n", String.valueOf(n))
-                .setMeta("k", String.valueOf(k))
-                .setMeta("b", String.valueOf(b));
+        g.setGraphType("WattsStrogatz");
+        g.setMeta("n", String.valueOf(n));
+        g.setMeta("k", String.valueOf(k));
+        g.setMeta("b", String.valueOf(b));
 
         return g;
     }

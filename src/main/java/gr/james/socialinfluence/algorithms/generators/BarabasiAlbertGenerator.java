@@ -61,11 +61,11 @@ public class BarabasiAlbertGenerator<T extends Graph> implements EvolvingGraphGe
     @Override
     public void reset() {
         g = new CompleteGenerator<>(type, initialClique).create();
-        g.clearMeta()
-                .setMeta(Finals.TYPE_META, "BarabasiAlbert")
-                .setMeta("totalVertices", String.valueOf(totalVertices))
-                .setMeta("initialClique", String.valueOf(initialClique))
-                .setMeta("stepEdges", String.valueOf(stepEdges))
-                .setMeta("a", String.valueOf(a));
+        g.clearMeta();
+        g.setGraphType("BarabasiAlbert");
+        g.setMeta("totalVertices", String.valueOf(totalVertices));
+        g.setMeta("initialClique", String.valueOf(initialClique));
+        g.setMeta("stepEdges", String.valueOf(stepEdges));
+        g.setMeta("a", String.valueOf(a));
     }
 }

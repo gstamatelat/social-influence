@@ -4,7 +4,6 @@ import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.api.GraphGenerator;
 import gr.james.socialinfluence.graph.GraphUtils;
 import gr.james.socialinfluence.graph.Vertex;
-import gr.james.socialinfluence.util.Finals;
 
 public class TwoWheelsGenerator<T extends Graph> implements GraphGenerator<T> {
     private Class<T> type;
@@ -27,8 +26,8 @@ public class TwoWheelsGenerator<T extends Graph> implements GraphGenerator<T> {
         T g = GraphUtils.combineGraphs(type, new Graph[]{g1, g2});
         GraphUtils.fuseVertices(g, new Vertex[]{a, b});
 
-        g.setMeta(Finals.TYPE_META, "TwoWheels")
-                .setMeta("wheelVertices", String.valueOf(wheelVertices));
+        g.setGraphType("TwoWheels");
+        g.setMeta("wheelVertices", String.valueOf(wheelVertices));
 
         return g;
     }

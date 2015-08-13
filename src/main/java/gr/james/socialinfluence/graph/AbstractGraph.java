@@ -18,15 +18,13 @@ public abstract class AbstractGraph implements Graph {
     }
 
     @Override
-    public final Graph setMeta(String key, String value) {
+    public final void setMeta(String key, String value) {
         this.meta.put(key, value);
-        return this;
     }
 
     @Override
-    public Graph clearMeta() {
+    public void clearMeta() {
         this.meta.clear();
-        return this;
     }
 
     @Override
