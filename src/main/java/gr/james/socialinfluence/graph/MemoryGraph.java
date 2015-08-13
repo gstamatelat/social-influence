@@ -7,7 +7,7 @@ import gr.james.socialinfluence.util.collections.Pair;
 import java.util.*;
 
 /**
- * <p>Represents an in-memory {@link Graph}, implemented using adjacency lists.</p>
+ * <p>Represents an in-memory {@link Graph}, implemented using adjacency lists. Suitable for sparse graphs.</p>
  */
 public class MemoryGraph extends AbstractGraph {
     private Map<Vertex, Pair<Map<Vertex, Edge>>> m;

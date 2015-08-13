@@ -4,10 +4,7 @@ import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.util.Conditions;
 import gr.james.socialinfluence.util.collections.VertexPair;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * <p>Unmodifiable decorator of a {@link Graph}.</p>
@@ -29,8 +26,18 @@ public final class ImmutableGraph implements Graph {
     }
 
     @Override
-    public void setMeta(String key, String value) {
+    public String setMeta(String key, String value) {
         throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public String removeMeta(String key) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Set<String> metaKeySet() {
+        return this.g.metaKeySet();
     }
 
     @Override

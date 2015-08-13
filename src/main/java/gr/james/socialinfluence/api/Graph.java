@@ -21,7 +21,7 @@ import java.util.*;
  * affect these collections after they have been returned; you need to call the method again. This behavior depends on
  * the underlying {@code Graph} implementation.</dd></dl>
  */
-public interface Graph extends Iterable<Vertex>, HasMetadata {
+public interface Graph extends Iterable<Vertex>, Metadata {
     default String getGraphType() {
         return getMeta(Finals.TYPE_META);
     }
@@ -35,7 +35,8 @@ public interface Graph extends Iterable<Vertex>, HasMetadata {
      *
      * @param source the source of the edge
      * @param target the target of the edge
-     * @return {@code true} if an edge with the specified {@code source} and {@code target} exists, otherwise false
+     * @return {@code true} if an edge with the specified {@code source} and {@code target} exists, otherwise
+     * {@code false}
      * @throws NullPointerException   if either {@code source} or {@code target} is {@code null}
      * @throws InvalidVertexException if either {@code source} or {@code target} doesn't belong in the graph
      */
@@ -412,7 +413,7 @@ public interface Graph extends Iterable<Vertex>, HasMetadata {
      * <p>Returns true if for every edge with source S and target T where S and T are different,
      * there is always an edge with source T and target S.</p>
      *
-     * @return true if the graph is undirected, otherwise false
+     * @return {@code true} if the graph is undirected, otherwise {@code false}
      */
     @Deprecated
     default boolean isUndirected() {
