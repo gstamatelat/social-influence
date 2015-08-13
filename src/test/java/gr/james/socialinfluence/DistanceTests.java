@@ -26,37 +26,33 @@ public class DistanceTests {
      */
     @Test
     public void floydWarshallTest() {
-        int counts[] = {10, 20, 50, 100, 250};
-        double ps[] = {0.05, 0.1, 0.2};
+        int vertexCount = RandomHelper.getRandom().nextInt(250) + 10;
+        double p = RandomHelper.getRandom().nextDouble();
 
-        for (int vertexCount : counts) {
-            for (double p : ps) {
-                /* Create graph and randomize edge weights */
-                Graph g = new RandomGenerator<>(MemoryGraph.class, vertexCount, p).create();
-                GraphUtils.createCircle(g, true);
-                for (Map.Entry<VertexPair, Edge> e : g.getEdges().entrySet()) {
-                    e.getValue().setWeight(RandomHelper.getRandom().nextDouble());
-                }
+        /* Create graph and randomize edge weights */
+        Graph g = new RandomGenerator<>(MemoryGraph.class, vertexCount, p).create();
+        GraphUtils.createCircle(g, true);
+        for (Map.Entry<VertexPair, Edge> e : g.getEdges().entrySet()) {
+            e.getValue().setWeight(RandomHelper.getRandom().nextDouble());
+        }
 
-                /* Floyd-Warshall */
-                Map<VertexPair, Double> distFloyd = FloydWarshall.execute(g);
+        /* Floyd-Warshall */
+        Map<VertexPair, Double> distFloyd = FloydWarshall.execute(g);
 
-                /* Dijkstra */
-                Map<VertexPair, Double> distDijkstra = Dijkstra.executeDistanceMap(g);
+        /* Dijkstra */
+        Map<VertexPair, Double> distDijkstra = Dijkstra.executeDistanceMap(g);
 
-                /* Length assertion */
-                Assert.assertEquals("FloydWarshallTest - length - " + g, distFloyd.size(), distDijkstra.size());
+        /* Length assertion */
+        Assert.assertEquals("FloydWarshallTest - length - " + g, distFloyd.size(), distDijkstra.size());
 
-                /* Value assertions */
-                for (Vertex u : g) {
-                    for (Vertex v : g) {
-                        // TODO: Both Dijkstra and Floyd-Warshall use additions, it is intuitive that there won't be any double rounding issues
-                        // TODO: Also, 10^{-5} is too hardcoded for a quantity that could very well be really close to 10^{-5}
-                        // TODO: It's better to just compare 1 (one) with the ratio of distFloyd/distDijkstra
-                        Assert.assertEquals("FloydWarshallTest - " + g, distFloyd.get(new VertexPair(u, v)),
-                                distDijkstra.get(new VertexPair(u, v)), 1.0e-5);
-                    }
-                }
+        /* Value assertions */
+        for (Vertex u : g) {
+            for (Vertex v : g) {
+                // TODO: Both Dijkstra and Floyd-Warshall use additions, it is intuitive that there won't be any double rounding issues
+                // TODO: Also, 10^{-5} is too hardcoded for a quantity that could very well be really close to 10^{-5}
+                // TODO: It's better to just compare 1 (one) with the ratio of distFloyd/distDijkstra
+                Assert.assertEquals("FloydWarshallTest - " + g, distFloyd.get(new VertexPair(u, v)),
+                        distDijkstra.get(new VertexPair(u, v)), 1.0e-5);
             }
         }
     }
