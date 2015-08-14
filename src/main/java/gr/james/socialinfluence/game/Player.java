@@ -92,7 +92,7 @@ public abstract class Player {
         return m;
     }
 
-    public Player putDefaultOptions() {
+    protected Player putDefaultOptions() {
         return this;
     }
 

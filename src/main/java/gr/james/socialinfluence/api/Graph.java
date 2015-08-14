@@ -1,12 +1,12 @@
 package gr.james.socialinfluence.api;
 
 import gr.james.socialinfluence.algorithms.distance.Dijkstra;
-import gr.james.socialinfluence.algorithms.iterators.RandomVertexIterator;
 import gr.james.socialinfluence.graph.Edge;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.util.Conditions;
 import gr.james.socialinfluence.util.Finals;
 import gr.james.socialinfluence.util.Helper;
+import gr.james.socialinfluence.util.RandomHelper;
 import gr.james.socialinfluence.util.collections.VertexPair;
 import gr.james.socialinfluence.util.exceptions.InvalidVertexException;
 
@@ -64,7 +64,7 @@ public interface Graph extends Iterable<Vertex>, Metadata {
      */
     default Vertex getRandomVertex() {
         // TODO: Return null or exception if the graph is empty
-        return new RandomVertexIterator(this).next();
+        return getVertexFromIndex(RandomHelper.getRandom().nextInt(getVerticesCount()));
     }
 
     /**
@@ -375,6 +375,7 @@ public interface Graph extends Iterable<Vertex>, Metadata {
 
     default Vertex getRandomOutEdge(Vertex from, boolean weighted) {
         // TODO: Documentation and probably return a pair or vertex and edge
+        // TODO: What is no out edge?
         Map<Vertex, Double> weightMap = new HashMap<>();
         Map<Vertex, Edge> outEdges = this.getOutEdges(from);
         for (Map.Entry<Vertex, Edge> e : outEdges.entrySet()) {

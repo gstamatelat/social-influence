@@ -2,6 +2,7 @@ package gr.james.socialinfluence.algorithms.iterators;
 
 import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.graph.Vertex;
+import gr.james.socialinfluence.util.Conditions;
 import gr.james.socialinfluence.util.RandomHelper;
 
 import java.util.Iterator;
@@ -16,13 +17,15 @@ public class RandomSurferIterator implements Iterator<Vertex> {
     private Vertex current;
 
     public RandomSurferIterator(Graph g, double dampingFactor) {
-        this(g, dampingFactor, null);
+        this(g, dampingFactor, g.getRandomVertex());
     }
 
     public RandomSurferIterator(Graph g, double dampingFactor, Vertex initialVertex) {
-        this.g = g;
+        this.g = Conditions.requireNonNull(g);
+        Conditions.requireArgument(dampingFactor >= 0 && dampingFactor <= 1,
+                "dampingFactor must be inside [0,1], got %f", dampingFactor);
         this.dampingFactor = dampingFactor;
-        this.current = initialVertex;
+        this.current = Conditions.requireNonNullAndExists(initialVertex, g);
     }
 
     @Override
@@ -32,13 +35,13 @@ public class RandomSurferIterator implements Iterator<Vertex> {
 
     @Override
     public Vertex next() {
-        if (this.current != null && RandomHelper.getRandom().nextDouble() > dampingFactor) {
+        if (RandomHelper.getRandom().nextDouble() > dampingFactor) {
             this.current = g.getRandomOutEdge(this.current, true);
             if (this.current == null) {
-                this.current = new RandomVertexIterator(g).next();
+                this.current = g.getRandomVertex();
             }
         } else {
-            this.current = new RandomVertexIterator(g).next();
+            this.current = g.getRandomVertex();
         }
         return this.current;
     }
