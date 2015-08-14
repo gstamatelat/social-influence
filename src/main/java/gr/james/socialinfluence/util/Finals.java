@@ -28,7 +28,7 @@ public final class Finals {
     public static final String L_GAME_EMPTY_MOVE = "A player submitted an empty move or didn't terminate before submitting a move.";
     public static final String L_GAME_EMPTY_MOVES = "Identical moves. By definition, draw.";
     public static final String L_DEGROOT_PERIODIC = "DeGroot periodicity on {}.";
-    public static final String L_PLAYER_EXCEPTION = "Player {} triggered exception <{}> on graph {} and definition {}";
+    public static final String L_PLAYER_EXCEPTION = "Player {} triggered exception on graph {} with definition {}\n{}";
     public static final String L_RANDOM_SEED = "Initialized new global random with seed {}";
     public static final String L_RANDOM_ERROR = "Global Random instance has been already initialized";
 

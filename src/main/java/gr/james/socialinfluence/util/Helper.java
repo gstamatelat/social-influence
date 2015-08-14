@@ -45,4 +45,12 @@ public final class Helper {
         }
         return finalSelections;
     }
+
+    public static String getExceptionString(Exception e) {
+        String exceptionAsString = String.format("\t%s: %s\n", e.getClass().getName(), e.getMessage());
+        for (StackTraceElement s : e.getStackTrace()) {
+            exceptionAsString += String.format("\t\t%s\n", s);
+        }
+        return exceptionAsString.substring(0, exceptionAsString.length() - 1);
+    }
 }

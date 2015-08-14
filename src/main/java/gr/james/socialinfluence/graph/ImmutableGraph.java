@@ -209,4 +209,9 @@ public final class ImmutableGraph implements Graph {
     public void removeEdges(Vertex... among) {
         throw new UnsupportedOperationException();
     }
+
+    @Override
+    public String toString() {
+        return this.g.toString();
+    }
 }

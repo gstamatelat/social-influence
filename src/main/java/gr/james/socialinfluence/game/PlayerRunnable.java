@@ -2,6 +2,7 @@ package gr.james.socialinfluence.game;
 
 import gr.james.socialinfluence.graph.ImmutableGraph;
 import gr.james.socialinfluence.util.Finals;
+import gr.james.socialinfluence.util.Helper;
 
 public class PlayerRunnable implements Runnable {
     private Player p;
@@ -25,7 +26,8 @@ public class PlayerRunnable implements Runnable {
         try {
             p.suggestMove(g, d, movePtr);
         } catch (Exception e) {
-            Finals.LOG.warn(Finals.L_PLAYER_EXCEPTION, p.getClass().getSimpleName(), e, g, d);
+            Finals.LOG.error(Finals.L_PLAYER_EXCEPTION, p.getClass().getSimpleName(), g, d,
+                    Helper.getExceptionString(e));
         }
     }
 }
