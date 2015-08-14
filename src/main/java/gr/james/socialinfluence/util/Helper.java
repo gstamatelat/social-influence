@@ -47,6 +47,7 @@ public final class Helper {
     }
 
     public static String getExceptionString(Exception e) {
+        // TODO: If e.getMessage() is null it becomes ugly
         String exceptionAsString = String.format("\t%s: %s\n", e.getClass().getName(), e.getMessage());
         for (StackTraceElement s : e.getStackTrace()) {
             exceptionAsString += String.format("\t\t%s\n", s);

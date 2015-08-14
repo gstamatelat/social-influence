@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/gstamatelat/social-influence.svg?branch=master)](https://travis-ci.org/gstamatelat/social-influence) [![Dependency Status](https://www.versioneye.com/user/projects/5596a989616634001b000007/badge.svg?style=flat)](https://www.versioneye.com/user/projects/5596a989616634001b000007)
 
-Java network/graph framework with emphasis on social influence
+Java 8 network/graph framework with emphasis on social influence and opinion dynamics.
 
 ## Usage
 

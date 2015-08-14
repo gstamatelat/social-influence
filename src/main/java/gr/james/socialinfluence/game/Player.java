@@ -4,6 +4,7 @@ import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.graph.ImmutableGraph;
 import gr.james.socialinfluence.util.Conditions;
 import gr.james.socialinfluence.util.Finals;
+import gr.james.socialinfluence.util.Helper;
 import gr.james.socialinfluence.util.exceptions.GraphException;
 import org.slf4j.Logger;
 
@@ -50,21 +51,31 @@ public abstract class Player {
         this.interrupted = true;
     }
 
-    // TODO: Convert this to protected so it's not visible on mains etc (but then PlayerRunnable would complain)
-    public abstract void suggestMove(ImmutableGraph g, GameDefinition d, MovePointer movePtr);
+    protected abstract void suggestMove(Graph g, GameDefinition d, MovePointer movePtr);
 
     public final Move getMove(Graph g, GameDefinition d) {
-        ImmutableGraph ig = ImmutableGraph.decorate(g);
-        PlayerRunnable runnable = new PlayerRunnable(this, ig, d);
+        if (!(g instanceof ImmutableGraph)) {
+            g = ImmutableGraph.decorate(g);
+        }
 
         Move m = null;
 
+        MovePointer movePtr = new MovePointer();
+        final Graph finalGraph = g;
+        Thread t = new Thread(() -> {
+            try {
+                suggestMove(finalGraph, d, movePtr);
+            } catch (Exception e) {
+                Finals.LOG.warn(Finals.L_PLAYER_EXCEPTION, this.getClass().getSimpleName(), finalGraph, d,
+                        Helper.getExceptionString(e));
+            }
+        });
+
         try {
-            Thread t = new Thread(runnable);
             t.start();
             t.join(d.getExecution());
             this.interrupt();
-            m = runnable.getMovePointer().recall();
+            m = movePtr.recall();
             int count = 0;
             while (t.isAlive()) {
                 if (count > 0) {

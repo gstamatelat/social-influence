@@ -2,6 +2,7 @@ package gr.james.socialinfluence.graph;
 
 import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.util.Conditions;
+import gr.james.socialinfluence.util.Finals;
 import gr.james.socialinfluence.util.collections.VertexPair;
 
 import java.util.*;
@@ -27,12 +28,12 @@ public final class ImmutableGraph implements Graph {
 
     @Override
     public String setMeta(String key, String value) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 
     @Override
     public String removeMeta(String key) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 
     @Override
@@ -42,7 +43,7 @@ public final class ImmutableGraph implements Graph {
 
     @Override
     public void clearMeta() {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 
     @Override
@@ -152,62 +153,62 @@ public final class ImmutableGraph implements Graph {
 
     @Override
     public Vertex addVertex() {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 
     @Override
     public boolean addVertex(Vertex v) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 
     @Override
     public List<Vertex> addVertices(int count) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 
     @Override
     public boolean removeVertex(Vertex v) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 
     @Override
     public void removeVertices(Collection<Vertex> vertices) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 
     @Override
     public void addEdges(Collection<Vertex> among) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 
     @Override
     public void addEdges(Vertex... among) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 
     @Override
     public void clear() {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 
     @Override
     public Edge addEdge(Vertex source, Vertex target) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 
     @Override
     public boolean removeEdge(Vertex source, Vertex target) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 
     @Override
     public void removeEdges(Collection<Vertex> among) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 
     @Override
     public void removeEdges(Vertex... among) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 
     @Override

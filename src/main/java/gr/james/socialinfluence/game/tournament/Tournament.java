@@ -66,7 +66,7 @@ public class Tournament {
 
         ch.qos.logback.classic.Logger logbackLogger = (ch.qos.logback.classic.Logger) Finals.LOG;
         ch.qos.logback.classic.Level previousLevel = logbackLogger.getLevel();
-        logbackLogger.setLevel(Level.ERROR);
+        logbackLogger.setLevel(Level.WARN);
 
         int done = 0;
         for (Player a : players.keySet()) {
