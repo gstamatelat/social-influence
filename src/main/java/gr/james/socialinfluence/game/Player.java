@@ -99,4 +99,9 @@ public abstract class Player {
     public final Map<String, String> getOptions() {
         return Collections.unmodifiableMap(this.options);
     }
+
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName();
+    }
 }
