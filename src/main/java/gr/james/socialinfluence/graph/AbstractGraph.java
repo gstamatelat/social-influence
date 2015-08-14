@@ -42,6 +42,6 @@ public abstract class AbstractGraph implements Graph {
 
     @Override
     public String toString() {
-        return String.format("{type=%s, meta=%s}", this.getClass().getSimpleName(), this.meta);
+        return String.format("{container=%s, meta=%s}", this.getClass().getSimpleName(), this.meta);
     }
 }

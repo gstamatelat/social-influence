@@ -25,6 +25,6 @@ public class GameDefinition {
 
     @Override
     public String toString() {
-        return String.format("{actions=%d, budget=%f, execution=%d}", actions, budget, execution);
+        return String.format("{actions=%d, budget=%.2f, execution=%d}", actions, budget, execution);
     }
 }
