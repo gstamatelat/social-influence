@@ -60,7 +60,7 @@ public interface Graph extends Iterable<Vertex>, Metadata {
     /**
      * <p>Return a uniformly distributed random vertex of this graph.</p>
      *
-     * @return a random vertex of this graph
+     * @return a random vertex contained in this graph
      */
     default Vertex getRandomVertex() {
         // TODO: Return null or exception if the graph is empty
@@ -375,7 +375,7 @@ public interface Graph extends Iterable<Vertex>, Metadata {
 
     default Vertex getRandomOutEdge(Vertex from, boolean weighted) {
         // TODO: Documentation and probably return a pair or vertex and edge
-        // TODO: What is no out edge?
+        // TODO: What if no out edge?
         Map<Vertex, Double> weightMap = new HashMap<>();
         Map<Vertex, Edge> outEdges = this.getOutEdges(from);
         for (Map.Entry<Vertex, Edge> e : outEdges.entrySet()) {

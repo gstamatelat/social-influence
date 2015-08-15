@@ -18,7 +18,11 @@ public final class ImmutableGraph implements Graph {
     }
 
     public static ImmutableGraph decorate(Graph g) {
-        return new ImmutableGraph(g);
+        if (g instanceof ImmutableGraph) {
+            return (ImmutableGraph) g;
+        } else {
+            return new ImmutableGraph(g);
+        }
     }
 
     @Override

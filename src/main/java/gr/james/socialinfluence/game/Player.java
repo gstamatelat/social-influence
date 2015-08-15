@@ -14,14 +14,16 @@ import java.util.Map;
 
 public abstract class Player {
     protected static final Logger log = Finals.LOG;
-    protected Map<String, String> options = new HashMap<>(); // TODO: Convert this field to private
+    private Map<String, String> options = new HashMap<>();
     private boolean interrupted = false;
 
     /**
      * <p>Constructs a {@code Player} with default options.</p>
      */
     public Player() {
-        putDefaultOptions();
+        for (Map.Entry<String, String> s : defaultOptions().entrySet()) {
+            options.put(s.getKey(), s.getValue());
+        }
     }
 
     /**
@@ -53,15 +55,17 @@ public abstract class Player {
 
     protected abstract void suggestMove(Graph g, GameDefinition d, MovePointer movePtr);
 
+    /**
+     * <p>Invokes {@link #suggestMove(Graph, GameDefinition, MovePointer)} on a separate thread.</p>
+     *
+     * @param g The {@link Graph} object that will be passed in {@code suggestMove()} as {@link ImmutableGraph}
+     * @param d The {@link GameDefinition} object that will be passed directly in {@code suggestMove()}
+     * @return the last move that was submitted in time from the player
+     */
     public final Move getMove(Graph g, GameDefinition d) {
-        if (!(g instanceof ImmutableGraph)) {
-            g = ImmutableGraph.decorate(g);
-        }
+        final Graph finalGraph = ImmutableGraph.decorate(g);
+        final MovePointer movePtr = new MovePointer();
 
-        Move m = null;
-
-        MovePointer movePtr = new MovePointer();
-        final Graph finalGraph = g;
         Thread t = new Thread(() -> {
             try {
                 suggestMove(finalGraph, d, movePtr);
@@ -70,6 +74,8 @@ public abstract class Player {
                         Helper.getExceptionString(e));
             }
         });
+
+        Move m;
 
         try {
             t.start();
@@ -86,14 +92,22 @@ public abstract class Player {
             }
             this.isInterrupted(); // This is called to clear the interrupt flag
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            throw new RuntimeException(String.format("InterruptedException: %s", e.getMessage()));
         }
 
         return m;
     }
 
-    protected Player putDefaultOptions() {
-        return this;
+    protected Map<String, String> defaultOptions() {
+        return Collections.<String, String>emptyMap();
+    }
+
+    public final String getOption(String name) {
+        Conditions.requireNonNull(name);
+        if (!this.options.containsKey(name)) {
+            throw new GraphException(Finals.E_PLAYER_NO_PARAMETER, this.getClass().getSimpleName(), name);
+        }
+        return this.options.get(name);
     }
 
     public final Player setOption(String name, String value) {

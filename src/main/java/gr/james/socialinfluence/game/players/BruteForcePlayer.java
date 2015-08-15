@@ -9,7 +9,9 @@ import gr.james.socialinfluence.graph.MemoryGraph;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.util.RandomHelper;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 
 /**
  * <p>Implements a simple brute-force player.</p>
@@ -58,11 +60,12 @@ public class BruteForcePlayer extends Player {
     }
 
     @Override
-    public Player putDefaultOptions() {
-        this.options.put("weight_levels", "10");
-        this.options.put("epsilon", "0.0");
-        this.options.put("clever", "false");
-        return this;
+    public Map<String, String> defaultOptions() {
+        Map<String, String> defaultOptions = new HashMap<>();
+        defaultOptions.put("weight_levels", "10");
+        defaultOptions.put("epsilon", "0.0");
+        defaultOptions.put("clever", "false");
+        return defaultOptions;
     }
 
     @Override
@@ -73,14 +76,14 @@ public class BruteForcePlayer extends Player {
         HashSet<Move> movesHistory = new HashSet<>();
         HashSet<Move> moveDraws = new HashSet<>();
 
-        Move bestMove = getRandomMove(g, d.getActions(), Integer.parseInt(this.options.get("weight_levels")), null, false);
+        Move bestMove = getRandomMove(g, d.getActions(), Integer.parseInt(getOption("weight_levels")), null, false);
         movesHistory.add(bestMove);
 
         while (!this.isInterrupted()) {
-            Move newMove = getRandomMove(g, d.getActions(), Integer.parseInt(this.options.get("weight_levels")), game.getPlayerAMove(), Boolean.parseBoolean(this.options.get("clever")));
+            Move newMove = getRandomMove(g, d.getActions(), Integer.parseInt(getOption("weight_levels")), game.getPlayerAMove(), Boolean.parseBoolean(getOption("clever")));
             game.setPlayer(PlayerEnum.A, bestMove);
             game.setPlayer(PlayerEnum.B, newMove);
-            int gameScore = game.runGame(d, Double.parseDouble(this.options.get("epsilon"))).score;
+            int gameScore = game.runGame(d, Double.parseDouble(getOption("epsilon"))).score;
             if (gameScore == 0) {
                 if (moveDraws.add(game.getPlayerBMove())) {
                     log.info("Draw with move {}", game.getPlayerBMove());

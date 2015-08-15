@@ -43,6 +43,14 @@ public class Tournament {
         }
     }
 
+    public Map<Player, Integer> getScores() {
+        return Collections.unmodifiableMap(players);
+    }
+
+    private void resetScores() {
+        players.replaceAll((player, integer) -> 0);
+    }
+
     public void run(GraphImporter i, InputStream s, GameDefinition d) {
         run(() -> {
             try {
@@ -51,14 +59,6 @@ public class Tournament {
                 throw new GraphException(e.getMessage());
             }
         }, d);
-    }
-
-    public Map<Player, Integer> getScores() {
-        return Collections.unmodifiableMap(players);
-    }
-
-    private void resetScores() {
-        players.replaceAll((player, integer) -> 0);
     }
 
     public void run(GraphGenerator generator, GameDefinition d) {
