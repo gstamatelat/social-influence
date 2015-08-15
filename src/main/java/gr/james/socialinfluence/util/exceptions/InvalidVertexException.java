@@ -13,7 +13,7 @@ public class InvalidVertexException extends GraphException {
      *
      * @param messagePattern The error message text pattern
      * @param arguments      Arguments referenced by the format specifiers in the format string
-     * @see java.lang.String#format(String, Object...)
+     * @see String#format(String, Object...)
      */
     public InvalidVertexException(String messagePattern, Object... arguments) {
         super(String.format(messagePattern, arguments));

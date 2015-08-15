@@ -1,6 +1,5 @@
 package gr.james.socialinfluence.game.tournament;
 
-import ch.qos.logback.classic.Level;
 import gr.james.socialinfluence.api.GraphGenerator;
 import gr.james.socialinfluence.api.GraphImporter;
 import gr.james.socialinfluence.game.Game;
@@ -9,7 +8,7 @@ import gr.james.socialinfluence.game.GameResult;
 import gr.james.socialinfluence.game.Player;
 import gr.james.socialinfluence.util.Conditions;
 import gr.james.socialinfluence.util.Finals;
-import gr.james.socialinfluence.util.exceptions.GraphException;
+import gr.james.socialinfluence.util.Helper;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -56,7 +55,7 @@ public class Tournament {
             try {
                 return i.from(s);
             } catch (IOException e) {
-                throw new GraphException(e.getMessage());
+                throw Helper.convertCheckedException(e);
             }
         }, d);
     }
@@ -66,7 +65,7 @@ public class Tournament {
 
         ch.qos.logback.classic.Logger logbackLogger = (ch.qos.logback.classic.Logger) Finals.LOG;
         ch.qos.logback.classic.Level previousLevel = logbackLogger.getLevel();
-        logbackLogger.setLevel(Level.WARN);
+        //logbackLogger.setLevel(Level.WARN);
 
         int done = 0;
         for (Player a : players.keySet()) {

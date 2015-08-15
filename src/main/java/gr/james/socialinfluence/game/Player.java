@@ -92,7 +92,7 @@ public abstract class Player {
             }
             this.isInterrupted(); // This is called to clear the interrupt flag
         } catch (InterruptedException e) {
-            throw new RuntimeException(String.format("InterruptedException: %s", e.getMessage()));
+            throw Helper.convertCheckedException(e);
         }
 
         return m;

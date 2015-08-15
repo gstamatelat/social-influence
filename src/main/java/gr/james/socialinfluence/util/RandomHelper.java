@@ -14,16 +14,17 @@ public final class RandomHelper {
 
     /**
      * <p>Initialize the global {@link Random} instance with a seed. You may not initialize the global {@code Random}
-     * instance once it has been used at least once.</p>
+     * instance once it has been used at least once and you may only initialize it once per framework instance.</p>
      *
      * @param seed the seed to initialize the global {@code Random} with
+     * @return {@code true} if the initialization was successful, otherwise {@code false}
      */
-    public static void initRandom(long seed) {
+    public static boolean initRandom(long seed) {
         if (r == null) {
-            Finals.LOG.info(Finals.L_RANDOM_SEED, seed);
             r = new Random(seed);
+            return true;
         } else {
-            Finals.LOG.warn(Finals.L_RANDOM_ERROR);
+            return false;
         }
     }
 

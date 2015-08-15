@@ -54,4 +54,8 @@ public final class Helper {
         }
         return exceptionAsString.substring(0, exceptionAsString.length() - 1);
     }
+
+    public static RuntimeException convertCheckedException(Exception e) {
+        throw new RuntimeException(String.format("%s: %s", e.getClass().getName(), e.getMessage()));
+    }
 }
