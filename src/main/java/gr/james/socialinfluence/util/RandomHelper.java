@@ -21,9 +21,11 @@ public final class RandomHelper {
      */
     public static boolean initRandom(long seed) {
         if (r == null) {
+            Finals.LOG.debug("Initialized global random with seed: {}", seed);
             r = new Random(seed);
             return true;
         } else {
+            Finals.LOG.debug("Initialization of global random failed with seed: {}", seed);
             return false;
         }
     }

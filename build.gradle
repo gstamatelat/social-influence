@@ -18,6 +18,10 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 
+jar {
+    exclude('logback.xml')
+}
+
 task sourcesJar(type: Jar, dependsOn: classes) {
     classifier = 'sources'
     from sourceSets.main.allSource
@@ -33,9 +37,9 @@ artifacts {
     archives javadocJar
 }
 
-allprojects {
+/*allprojects {
     tasks.withType(JavaCompile) {
         options.compilerArgs << "-Xlint:deprecation"
         options.compilerArgs << "-Xlint:unchecked"
     }
-}
+}*/

@@ -19,7 +19,7 @@ public final class ImmutableGraph implements Graph {
 
     public static ImmutableGraph decorate(Graph g) {
         if (g instanceof ImmutableGraph) {
-            Finals.LOG.debug("Graph {} is already instance of ImmutableGraph", g);
+            Finals.LOG.debug("Graph {} is already an instance of ImmutableGraph", g);
             return (ImmutableGraph) g;
         } else {
             return new ImmutableGraph(g);
