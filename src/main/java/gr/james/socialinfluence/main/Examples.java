@@ -47,6 +47,6 @@ public class Examples {
 
         // ---------------------------
 
-        System.out.println(tourney.getAllScoresInDsv());
+        System.out.println(tourney.getAllScoresInCsv());
     }
 }

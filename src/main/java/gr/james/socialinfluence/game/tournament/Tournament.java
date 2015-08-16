@@ -58,7 +58,7 @@ public class Tournament {
         return csv;
     }
 
-    public String getAllScoresInDsv() {
+    public String getAllScoresInCsv() {
         return getAllScoresInDsv(",");
     }
 
