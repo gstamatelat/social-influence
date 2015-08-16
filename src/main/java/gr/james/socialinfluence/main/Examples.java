@@ -18,7 +18,7 @@ import java.util.Map;
 public class Examples {
     public static void main(String[] args) throws IOException {
         Tournament tourney = new Tournament((done, total) -> {
-            /*System.out.printf("%d/%d\n", done, total);*/
+            System.out.printf("%d/%d\n", done, total);
         }, new GreedyPlayer(), new RandomPlayer(), new MaxPageRankPlayer(), new BruteForcePlayer());
 
         // ---------------------------
@@ -37,7 +37,7 @@ public class Examples {
 
         generator = new RandomGenerator<>(MemoryGraph.class, 100, 0.2);
         d = new GameDefinition(3, 3.0, 1000L);
-        score = tourney.run(generator, d);
+        score = tourney.run(generator, d, 2);
 
         System.out.println();
         System.out.printf("GRAPH:      %s\n", generator.create());
