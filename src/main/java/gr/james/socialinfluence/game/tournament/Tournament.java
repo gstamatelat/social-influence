@@ -1,17 +1,13 @@
 package gr.james.socialinfluence.game.tournament;
 
 import gr.james.socialinfluence.api.GraphGenerator;
-import gr.james.socialinfluence.api.GraphImporter;
 import gr.james.socialinfluence.game.Game;
 import gr.james.socialinfluence.game.GameDefinition;
 import gr.james.socialinfluence.game.GameResult;
 import gr.james.socialinfluence.game.Player;
 import gr.james.socialinfluence.util.Conditions;
-import gr.james.socialinfluence.util.Helper;
 import gr.james.socialinfluence.util.collections.GenericPair;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -33,16 +29,6 @@ public class Tournament {
 
     public Tournament(Player... players) {
         this(null, players);
-    }
-
-    public void run(GraphImporter i, InputStream s, GameDefinition d) {
-        run(() -> {
-            try {
-                return i.from(s);
-            } catch (IOException e) {
-                throw Helper.convertCheckedException(e);
-            }
-        }, d);
     }
 
     public String getAllScoresInDsv(String delimiter) {

@@ -1,9 +1,13 @@
 package gr.james.socialinfluence.util;
 
+import gr.james.socialinfluence.api.GraphGenerator;
+import gr.james.socialinfluence.api.GraphImporter;
 import gr.james.socialinfluence.graph.Edge;
 import gr.james.socialinfluence.util.collections.Weighted;
 import gr.james.socialinfluence.util.exceptions.GraphException;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.*;
 
 public final class Helper {
@@ -53,6 +57,16 @@ public final class Helper {
             exceptionAsString += String.format("\t\t%s\n", s);
         }
         return exceptionAsString.substring(0, exceptionAsString.length() - 1);
+    }
+
+    public static GraphGenerator convertImporterToGenerator(GraphImporter i, InputStream s) {
+        return () -> {
+            try {
+                return i.from(s);
+            } catch (IOException e) {
+                throw Helper.convertCheckedException(e);
+            }
+        };
     }
 
     public static RuntimeException convertCheckedException(Exception e) {
