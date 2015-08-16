@@ -17,6 +17,6 @@ public class MaxDegreePlayer extends Player {
             m.putVertex(it.next().getObject(), 1.0);
         }
         movePtr.submit(m);
-        log.info("{}", m);
+        log.debug("{}", m);
     }
 }

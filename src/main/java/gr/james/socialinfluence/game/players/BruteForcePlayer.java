@@ -86,17 +86,17 @@ public class BruteForcePlayer extends Player {
             int gameScore = game.runGame(d, Double.parseDouble(getOption("epsilon"))).score;
             if (gameScore == 0) {
                 if (moveDraws.add(game.getPlayerBMove())) {
-                    log.info("Draw with move {}", game.getPlayerBMove());
+                    log.debug("Draw with move {}", game.getPlayerBMove());
                 }
             } else if (gameScore > 0) {
                 boolean contained = movesHistory.add(newMove);
                 if (!contained) {
-                    log.info("Going in circles after {}", game.getPlayerBMove());
+                    log.debug("Going in circles after {}", game.getPlayerBMove());
                 }
                 moveDraws.clear();
                 bestMove = newMove;
                 movePtr.submit(bestMove);
-                log.info("New best move {}", newMove.toString());
+                log.debug("New best move {}", newMove.toString());
             }
         }
     }

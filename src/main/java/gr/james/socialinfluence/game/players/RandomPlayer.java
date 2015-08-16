@@ -16,6 +16,6 @@ public class RandomPlayer extends Player {
             m.putVertex(rvi.next(), 1.0);
         }
         movePtr.submit(m);
-        log.info("{}", m);
+        log.debug("{}", m);
     }
 }

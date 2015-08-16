@@ -110,7 +110,7 @@ public class GreedyPlayer extends Player {
             movePtr.submit(minMove);
 
             /* This helps when computation takes a long time */
-            log.info("{} : {}", firstGuess, minMove);
+            log.debug("{} : {}", firstGuess, minMove);
         }
     }
 }
