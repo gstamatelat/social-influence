@@ -96,7 +96,7 @@ public class BruteForcePlayer extends Player {
                 moveDraws.clear();
                 bestMove = newMove;
                 movePtr.submit(bestMove);
-                log.debug("New best move {}", newMove.toString());
+                log.info("New best move {}", newMove.toString());
             }
         }
     }

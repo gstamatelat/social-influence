@@ -8,7 +8,7 @@ import java.nio.charset.StandardCharsets;
 
 public final class Finals {
     /* Root logger */
-    public static final Logger LOG = LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
+    public static final Logger LOG = LoggerFactory.getLogger("gr.james.socialinfluence");
 
     /* Default values */
     public static final double DEFAULT_EDGE_WEIGHT = 1.0;
