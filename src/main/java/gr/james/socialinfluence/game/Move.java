@@ -113,7 +113,7 @@ public class Move implements Iterable<Vertex> {
     @Override
     public String toString() {
         return "{" + this.m.entrySet().stream().sorted((o1, o2) -> o1.getKey().compareTo(o2.getKey()))
-                .map(i -> String.format("%d->%.2f", i.getKey().getId(), i.getValue()))
+                .map(i -> String.format("%d [%.2f]", i.getKey().getId(), i.getValue()))
                 .collect(Collectors.joining(", ")) + "}";
     }
 
