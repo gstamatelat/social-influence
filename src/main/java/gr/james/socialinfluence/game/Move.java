@@ -27,7 +27,7 @@ public class Move implements Iterable<Vertex> {
 
     public double getWeightSum() {
         double sum = 0.0;
-        for (Double e : this.m.values()) {
+        for (double e : this.m.values()) {
             sum += e;
         }
         return sum;
@@ -35,6 +35,15 @@ public class Move implements Iterable<Vertex> {
 
     public double getWeight(Vertex v) {
         return this.m.get(v);
+    }
+
+    /**
+     * <p>Get an unmodifiable view of the vertices contained in this move.</p>
+     *
+     * @return an unmodifiable {@code Set} of vertices contained in this move
+     */
+    public Set<Vertex> vertexSet() {
+        return Collections.unmodifiableSet(this.m.keySet());
     }
 
     /**
