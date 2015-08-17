@@ -54,7 +54,7 @@ public class Tests {
      */
     @Test
     public void randomSurferTest() {
-        int mean = 500000;
+        int mean = 550000;
         double dampingFactor = RandomHelper.getRandom().nextDouble();
         double p = RandomHelper.getRandom().nextDouble();
         int vertexCount = 40;
