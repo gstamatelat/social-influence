@@ -11,7 +11,7 @@ public final class Game {
     private Game() {
     }
 
-    private static GraphState<Double> runPrimitiveGame(Graph g, Move playerAMove, Move playerBMove, Double deGrootEpsilon) {
+    private static GraphState<Double> runPrimitiveGame(Graph g, Move playerAMove, Move playerBMove, double deGrootEpsilon) {
         Vertex playerA = g.addVertex();
         Vertex playerB = g.addVertex();
 
@@ -31,7 +31,7 @@ public final class Game {
         initialOpinions.put(playerA, 0.0);
         initialOpinions.put(playerB, 1.0);
 
-        GraphState<Double> lastState = DeGroot.execute(g, initialOpinions, deGrootEpsilon, false);
+        GraphState<Double> lastState = DeGroot.execute(g, initialOpinions, deGrootEpsilon, 2);
 
         g.removeVertex(playerA);
         g.removeVertex(playerB);
@@ -52,6 +52,9 @@ public final class Game {
 
     public static GameResult runMoves(Graph g, GameDefinition d, Move playerAMove, Move playerBMove, double deGrootEpsilon) {
         if (d != null) {
+            playerAMove = playerAMove.deepCopy();
+            playerBMove = playerBMove.deepCopy();
+
             if (playerAMove.getVerticesCount() > d.getActions()) {
                 String oldMove = playerAMove.toString();
                 playerAMove.sliceMove(d.getActions());

@@ -1,6 +1,6 @@
 package gr.james.socialinfluence.game;
 
-import gr.james.socialinfluence.algorithms.scoring.DeGroot;
+import gr.james.socialinfluence.algorithms.scoring.DeGrootOld;
 import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.api.GraphState;
 import gr.james.socialinfluence.graph.Vertex;
@@ -85,7 +85,7 @@ public class GameOld {
         initialOpinions.put(playerA, 0.0);
         initialOpinions.put(playerB, 1.0);
 
-        GraphState<Double> lastState = DeGroot.execute(g, initialOpinions, deGrootEpsilon, false);
+        GraphState<Double> lastState = DeGrootOld.execute(g, initialOpinions, deGrootEpsilon, false);
 
         this.g.removeVertex(playerA);
         this.g.removeVertex(playerB);

@@ -234,7 +234,7 @@ public class Tests {
             initialState.put(v, RandomHelper.getRandom().nextDouble());
         }
 
-        GraphState<Double> finalState = DeGroot.execute(g, initialState, 0.0, true);
+        GraphState<Double> finalState = DeGroot.execute(g, initialState, 0.0, Integer.MAX_VALUE);
         double avg = finalState.getMean();
 
         for (double e : finalState.values()) {

@@ -32,4 +32,10 @@ public final class Conditions {
         }
         return o;
     }
+
+    public static void requireNonNull(Object... t) {
+        for (Object o : t) {
+            requireNonNull(o);
+        }
+    }
 }
