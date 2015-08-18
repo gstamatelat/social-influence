@@ -71,7 +71,6 @@ public class BruteForcePlayer extends Player {
     @Override
     public void suggestMove(Graph g, GameDefinition d, MovePointer movePtr) {
         Graph mg = GraphUtils.deepCopy(MemoryGraph.class, g); // TODO: Sure this MemoryGraph thing is OK?
-        Game game = new Game(mg);
 
         HashSet<Move> movesHistory = new HashSet<>();
         HashSet<Move> moveDraws = new HashSet<>();
@@ -80,18 +79,17 @@ public class BruteForcePlayer extends Player {
         movesHistory.add(bestMove);
 
         while (!this.isInterrupted()) {
-            Move newMove = getRandomMove(g, d.getActions(), Integer.parseInt(getOption("weight_levels")), game.getPlayerAMove(), Boolean.parseBoolean(getOption("clever")));
-            game.setPlayer(PlayerEnum.A, bestMove);
-            game.setPlayer(PlayerEnum.B, newMove);
-            int gameScore = game.runGame(d, Double.parseDouble(getOption("epsilon"))).score;
+            Move newMove = getRandomMove(g, d.getActions(), Integer.parseInt(getOption("weight_levels")), bestMove,
+                    Boolean.parseBoolean(getOption("clever")));
+            int gameScore = Game.runMoves(mg, d, bestMove, newMove, Double.parseDouble(getOption("epsilon"))).score;
             if (gameScore == 0) {
-                if (moveDraws.add(game.getPlayerBMove())) {
-                    log.debug("Draw with move {}", game.getPlayerBMove());
+                if (moveDraws.add(newMove)) {
+                    log.debug("Draw with move {}", newMove);
                 }
             } else if (gameScore > 0) {
                 boolean contained = movesHistory.add(newMove);
                 if (!contained) {
-                    log.debug("Going in circles after {}", game.getPlayerBMove());
+                    log.debug("Going in circles after {}", newMove);
                 }
                 moveDraws.clear();
                 bestMove = newMove;

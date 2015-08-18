@@ -7,76 +7,23 @@ import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.util.Finals;
 import gr.james.socialinfluence.util.states.DoubleGraphState;
 
-public class Game {
-    private Graph g;
-    private Move playerAMove;
-    private Move playerBMove;
-
-    public Game(Graph g) {
-        this.g = g;
-        this.playerAMove = new Move();
-        this.playerBMove = new Move();
+public final class Game {
+    private Game() {
     }
 
-    public static GameResult runPlayers(Player a, Player b, Graph g, GameDefinition d, double deDrootEpsilon) {
-        Game game = new Game(g);
-        game.setPlayer(PlayerEnum.A, a.getMove(g, d));
-        game.setPlayer(PlayerEnum.B, b.getMove(g, d));
-        return game.runGame(d, deDrootEpsilon);
-    }
+    private static GraphState<Double> runPrimitiveGame(Graph g, Move playerAMove, Move playerBMove, Double deGrootEpsilon) {
+        Vertex playerA = g.addVertex();
+        Vertex playerB = g.addVertex();
 
-    public static GameResult runPlayers(Player a, Player b, Graph g, GameDefinition d) {
-        Game game = new Game(g);
-        game.setPlayer(PlayerEnum.A, a.getMove(g, d));
-        game.setPlayer(PlayerEnum.B, b.getMove(g, d));
-        return game.runGame(d);
-    }
+        g.addEdge(playerA, playerA);
+        g.addEdge(playerB, playerB);
 
-    public Move getPlayerAMove() {
-        return playerAMove;
-    }
-
-    public Game setPlayerAMove(Move move) {
-        return setPlayer(PlayerEnum.A, move);
-    }
-
-    public Move getPlayerBMove() {
-        return playerBMove;
-    }
-
-    public Game setPlayerBMove(Move move) {
-        return setPlayer(PlayerEnum.B, move);
-    }
-
-    public Game setPlayer(PlayerEnum player, Move move) {
-        if (player == PlayerEnum.A) {
-            this.playerAMove = move.deepCopy();
-        } else {
-            this.playerBMove = move.deepCopy();
-        }
-        return this;
-    }
-
-    private Game swapPlayers() {
-        Move tmp = this.playerAMove;
-        this.playerAMove = this.playerBMove;
-        this.playerBMove = tmp;
-        return this;
-    }
-
-    private GraphState<Double> runPrimitiveGame(Double deGrootEpsilon) {
-        Vertex playerA = this.g.addVertex();
-        Vertex playerB = this.g.addVertex();
-
-        this.g.addEdge(playerA, playerA);
-        this.g.addEdge(playerB, playerB);
-
-        for (Vertex v : this.playerAMove) {
-            g.addEdge(v, playerA).setWeight(this.playerAMove.getWeight(v));
+        for (Vertex v : playerAMove) {
+            g.addEdge(v, playerA).setWeight(playerAMove.getWeight(v));
         }
 
-        for (Vertex v : this.playerBMove) {
-            g.addEdge(v, playerB).setWeight(this.playerBMove.getWeight(v));
+        for (Vertex v : playerBMove) {
+            g.addEdge(v, playerB).setWeight(playerBMove.getWeight(v));
         }
 
         GraphState<Double> initialOpinions = new DoubleGraphState(g, Finals.DEFAULT_GAME_OPINIONS);
@@ -86,31 +33,42 @@ public class Game {
 
         GraphState<Double> lastState = DeGroot.execute(g, initialOpinions, deGrootEpsilon, false);
 
-        this.g.removeVertex(playerA);
-        this.g.removeVertex(playerB);
+        g.removeVertex(playerA);
+        g.removeVertex(playerB);
+
+        lastState.remove(playerA);
+        lastState.remove(playerB);
 
         return lastState;
     }
 
-    public GameResult runGame(GameDefinition d, double deGrootEpsilon) {
+    public static GameResult runPlayers(Player a, Player b, Graph g, GameDefinition d, double deDrootEpsilon) {
+        return runMoves(g, d, a.getMove(g, d), b.getMove(g, d), deDrootEpsilon);
+    }
+
+    public static GameResult runPlayers(Player a, Player b, Graph g, GameDefinition d) {
+        return runMoves(g, d, a.getMove(g, d), b.getMove(g, d));
+    }
+
+    public static GameResult runMoves(Graph g, GameDefinition d, Move playerAMove, Move playerBMove, double deGrootEpsilon) {
         if (d != null) {
-            if (this.playerAMove.getVerticesCount() > d.getActions()) {
-                String oldMove = this.playerAMove.toString();
-                this.playerAMove.sliceMove(d.getActions());
-                Finals.LOG.warn(Finals.L_GAME_MOVE_EXCEED, oldMove, d.getActions(), this.playerAMove.toString());
+            if (playerAMove.getVerticesCount() > d.getActions()) {
+                String oldMove = playerAMove.toString();
+                playerAMove.sliceMove(d.getActions());
+                Finals.LOG.warn(Finals.L_GAME_MOVE_EXCEED, oldMove, d.getActions(), playerAMove.toString());
             }
-            if (this.playerBMove.getVerticesCount() > d.getActions()) {
-                String oldMove = this.playerBMove.toString();
-                this.playerBMove.sliceMove(d.getActions());
-                Finals.LOG.warn(Finals.L_GAME_MOVE_EXCEED, oldMove, d.getActions(), this.playerBMove.toString());
+            if (playerBMove.getVerticesCount() > d.getActions()) {
+                String oldMove = playerBMove.toString();
+                playerBMove.sliceMove(d.getActions());
+                Finals.LOG.warn(Finals.L_GAME_MOVE_EXCEED, oldMove, d.getActions(), playerBMove.toString());
             }
 
-            this.playerAMove.normalizeWeights(d.getBudget());
-            this.playerBMove.normalizeWeights(d.getBudget());
+            playerAMove.normalizeWeights(d.getBudget());
+            playerBMove.normalizeWeights(d.getBudget());
         }
 
         /* If one of the players didn't submit a move, the other one is obviously the winner */
-        if ((this.playerAMove.getVerticesCount() == 0) ^ (this.playerBMove.getVerticesCount() == 0)) {
+        /*if ((this.playerAMove.getVerticesCount() == 0) ^ (this.playerBMove.getVerticesCount() == 0)) {
             Finals.LOG.warn(Finals.L_GAME_EMPTY_MOVE);
             Vertex s1 = new Vertex();
             Vertex s2 = new Vertex();
@@ -125,10 +83,10 @@ public class Game {
                 gs.put(s2, 1.0);
                 return new GameResult(1, gs, this.playerAMove, this.playerBMove);
             }
-        }
+        }*/
 
         /* If moves are both empty or equal, it's obviously a draw */
-        if (this.playerAMove.equals(this.playerBMove)) {
+        /*if (this.playerAMove.equals(this.playerBMove)) {
             Finals.LOG.info(Finals.L_GAME_EMPTY_MOVES);
             Vertex s1 = new Vertex();
             Vertex s2 = new Vertex();
@@ -136,10 +94,10 @@ public class Game {
             gs.put(s1, 0.0);
             gs.put(s2, 1.0);
             return new GameResult(0, gs, this.playerAMove, this.playerBMove);
-        }
+        }*/
 
-        GraphState<Double> b = this.swapPlayers().runPrimitiveGame(deGrootEpsilon);
-        GraphState<Double> a = this.swapPlayers().runPrimitiveGame(deGrootEpsilon);
+        GraphState<Double> a = runPrimitiveGame(g, playerAMove, playerBMove, deGrootEpsilon);
+        GraphState<Double> b = runPrimitiveGame(g, playerBMove, playerAMove, deGrootEpsilon);
 
         double am = a.getMean() - 0.5;
         double bm = b.getMean() - 0.5;
@@ -150,16 +108,18 @@ public class Game {
             Finals.LOG.warn("am * bm > 0");
             score = 0;
         } else if (am * bm == 0.0) {
-            Finals.LOG.warn("am * bm == 0.0");
+            if (am + bm != 0.0) {
+                Finals.LOG.warn("am * bm == 0.0");
+            }
             score = 0;
         } else {
             score = Double.compare(am, 0);
         }
 
-        return new GameResult(score, a, this.playerAMove, this.playerBMove);
+        return new GameResult(score, a, playerAMove, playerBMove);
     }
 
-    public GameResult runGame(GameDefinition d) {
-        return runGame(d, Finals.DEFAULT_GAME_PRECISION);
+    public static GameResult runMoves(Graph g, GameDefinition d, Move playerAMove, Move playerBMove) {
+        return runMoves(g, d, playerAMove, playerBMove, Finals.DEFAULT_GAME_PRECISION);
     }
 }
