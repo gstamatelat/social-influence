@@ -4,6 +4,8 @@ import gr.james.socialinfluence.api.AbstractGraphState;
 import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.graph.Vertex;
 
+import java.util.stream.Collectors;
+
 /**
  * <p>GraphState maps every vertex in a graph with a double value. Useful as a holder for some metric, like PageRank.
  * This class also contains useful methods for statistical analysis of that metric.</p>
@@ -41,5 +43,11 @@ public class DoubleGraphState extends AbstractGraphState<Double> {
     @Override
     protected Double abs(Double x) {
         return Math.abs(x);
+    }
+
+    @Override
+    public String toString() {
+        return "{" + this.entrySet().stream().sorted((o1, o2) -> o1.getKey().compareTo(o2.getKey()))
+                .map(i -> String.format("%s=%.2f", i.getKey(), i.getValue())).collect(Collectors.joining(", ")) + "}";
     }
 }

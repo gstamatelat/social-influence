@@ -2,6 +2,8 @@ package gr.james.socialinfluence.util.states;
 
 import gr.james.socialinfluence.api.AbstractGraphState;
 
+import java.util.stream.Collectors;
+
 public class IntegerGraphState extends AbstractGraphState<Integer> {
     public IntegerGraphState() {
     }
@@ -29,5 +31,11 @@ public class IntegerGraphState extends AbstractGraphState<Integer> {
     @Override
     protected Integer abs(Integer x) {
         return Math.abs(x);
+    }
+
+    @Override
+    public String toString() {
+        return "{" + this.entrySet().stream().sorted((o1, o2) -> o1.getKey().compareTo(o2.getKey()))
+                .map(i -> String.format("%s=%d", i.getKey(), i.getValue())).collect(Collectors.joining(", ")) + "}";
     }
 }
