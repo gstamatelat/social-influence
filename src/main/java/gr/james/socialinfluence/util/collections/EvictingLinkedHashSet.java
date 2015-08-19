@@ -26,8 +26,4 @@ public class EvictingLinkedHashSet<E> {
         }
         return r;
     }
-
-    public boolean contains(E e) {
-        return s.contains(e);
-    }
 }

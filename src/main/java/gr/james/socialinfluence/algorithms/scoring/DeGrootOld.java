@@ -40,7 +40,7 @@ public class DeGrootOld {
                 if (stateHistory.contains(nextState)) {
                     stabilized = true;
                     if (!nextState.equals(lastState)) {
-                        Finals.LOG.warn(Finals.L_DEGROOT_PERIODIC, g);
+                        Finals.LOG.warn(Finals.L_PERIODIC, g);
                     }
                 }
                 stateHistory.add(lastState = nextState);
