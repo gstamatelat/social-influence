@@ -11,7 +11,7 @@ import gr.james.socialinfluence.util.states.DoubleGraphState;
 import java.util.Map;
 
 public class DeGroot {
-    public static final int DEFAULT_HISTORY = Integer.MAX_VALUE;
+    public static final int DEFAULT_HISTORY = 2;
 
     public static GraphState<Double> execute(Graph g, GraphState<Double> initialOpinions, double epsilon, int history) {
         IterativeAlgorithm a = oldState -> {

@@ -6,7 +6,7 @@ import java.util.LinkedHashSet;
 
 /**
  * <p>Represents a {@link LinkedHashSet} with a maximum capacity. When this maximum capacity is exceeded, the oldest
- * element is removed.</p>
+ * element is removed. This structure is often called buffer; this one has unique elements.</p>
  *
  * @param <E> the type of the elements
  */

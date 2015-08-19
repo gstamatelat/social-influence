@@ -10,7 +10,7 @@ public interface IterativeAlgorithm {
     GraphState<Double> nextState(GraphState<Double> oldState);
 
     default GraphState<Double> execute(Graph g, GraphState<Double> initialState, double epsilon, int history) {
-        Conditions.requireArgument(history >= 1, "DeGroot history must be >= 1");
+        Conditions.requireArgument(history >= 1, "History must be >= 1");
 
         EvictingLinkedHashSet<GraphState<Double>> stateHistory = new EvictingLinkedHashSet<>(history);
 

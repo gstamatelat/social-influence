@@ -12,6 +12,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class PageRank {
+    public static final int DEFAULT_HISTORY = 2;
+
     public static GraphState<Double> execute(Graph g, double dampingFactor, double epsilon) {
         /* Using this weight map, method is becoming a little faster */
         HashMap<Vertex, Double> outWeightSums = new HashMap<>();
@@ -34,7 +36,7 @@ public class PageRank {
             return nextState;
         };
 
-        return a.execute(g, new DoubleGraphState(g, 1.0), epsilon, Integer.MAX_VALUE);
+        return a.execute(g, new DoubleGraphState(g, 1.0), epsilon, DEFAULT_HISTORY);
     }
 
     public static GraphState<Double> execute(Graph g, double dampingFactor) {
