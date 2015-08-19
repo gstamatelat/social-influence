@@ -8,6 +8,8 @@ import java.util.Map;
 public interface GraphState<T> extends Map<Vertex, T> {
     GraphState<T> subtract(GraphState<T> r);
 
+    GraphState<T> power(int p);
+
     GraphState<T> abs();
 
     boolean lessThan(T e);

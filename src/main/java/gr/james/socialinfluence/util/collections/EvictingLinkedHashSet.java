@@ -15,8 +15,20 @@ public class EvictingLinkedHashSet<E> {
     private int maxSize;
 
     public EvictingLinkedHashSet(int maxSize) {
+        setMaxSize(maxSize);
+    }
+
+    public int getMaxSize() {
+        return maxSize;
+    }
+
+    public void setMaxSize(int maxSize) {
         Conditions.requireArgument(maxSize >= 1, "maxSize >= 1");
         this.maxSize = maxSize;
+    }
+
+    public void increaseMaxSize() {
+        setMaxSize(maxSize + 1);
     }
 
     public boolean add(E e) {

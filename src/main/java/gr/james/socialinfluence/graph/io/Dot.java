@@ -10,7 +10,7 @@ import gr.james.socialinfluence.util.collections.VertexPair;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -21,7 +21,7 @@ public class Dot implements GraphImporter, GraphExporter {
     }
 
     @Override
-    public void to(Graph g, OutputStream out) throws IOException {
+    public void to(Graph g, PrintStream out) {
         if (g.isUndirected()) {
             ArrayList<Vertex[]> edgeList = new ArrayList<>();
             for (Map.Entry<VertexPair, Edge> e : g.getEdges().entrySet()) {

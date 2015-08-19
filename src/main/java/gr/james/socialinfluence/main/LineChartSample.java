@@ -1,9 +1,8 @@
 package gr.james.socialinfluence.main;
 
-import gr.james.socialinfluence.algorithms.generators.BarabasiAlbertGenerator;
-import gr.james.socialinfluence.algorithms.scoring.Degree;
+import gr.james.socialinfluence.algorithms.generators.RandomGenerator;
+import gr.james.socialinfluence.algorithms.scoring.PageRank;
 import gr.james.socialinfluence.api.Graph;
-import gr.james.socialinfluence.api.GraphState;
 import gr.james.socialinfluence.graph.MemoryGraph;
 import gr.james.socialinfluence.util.Finals;
 import javafx.application.Application;
@@ -13,8 +12,8 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.stage.Stage;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LineChartSample extends Application implements Runnable {
     public static String TITLE = "Degree Distribution";
@@ -50,27 +49,19 @@ public class LineChartSample extends Application implements Runnable {
         series.setName("My portfolio");
         //populating the series with data
 
-        /*Graph g = new WattsStrogatzGenerator<>(MemoryGraph.class, 10000, 1000, 1.0).create();*/
-        Graph g = new BarabasiAlbertGenerator<>(MemoryGraph.class, 10000, 2, 2, 0.6).create();
-        /* Find largest degree */
-        int largestDegree = 0;
-        GraphState<Integer> degrees = Degree.execute(g, true);
-        for (int d : degrees.values()) {
-            if (d > largestDegree) {
-                largestDegree = d;
-            }
+        // -------------------------------------------------------------
+        Graph g = new RandomGenerator<>(MemoryGraph.class, 10000, 0.1).create();
+
+        List<Double> h = new ArrayList<>();
+
+        PageRank.execute(g, 0.15, 0.0, (oldState, newState) -> h.add(oldState.subtract(newState).power(2).getSum()));
+
+        Finals.LOG.debug("List size: {}", h.size());
+
+        for (int i = 0; i < h.size(); i++) {
+            series.getData().add(new XYChart.Data<>(i, h.get(i)));
         }
-        Map<Integer, Integer> degreeDist = new HashMap<>();
-        for (int d : degrees.values()) {
-            if (degreeDist.containsKey(d)) {
-                degreeDist.put(d, degreeDist.get(d) + 1);
-            } else {
-                degreeDist.put(d, 1);
-            }
-        }
-        for (Integer x : degreeDist.keySet()) {
-            series.getData().add(new XYChart.Data<>(x, degreeDist.get(x)));
-        }
+        // -------------------------------------------------------------
 
         Scene scene = new Scene(lineChart, 800, 600);
         lineChart.getData().add(series);

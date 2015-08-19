@@ -17,6 +17,7 @@ import gr.james.socialinfluence.graph.Edge;
 import gr.james.socialinfluence.graph.GraphUtils;
 import gr.james.socialinfluence.graph.MemoryGraph;
 import gr.james.socialinfluence.graph.Vertex;
+import gr.james.socialinfluence.util.Finals;
 import gr.james.socialinfluence.util.RandomHelper;
 import gr.james.socialinfluence.util.collections.VertexPair;
 import gr.james.socialinfluence.util.states.DoubleGraphState;
@@ -64,6 +65,8 @@ public class Tests {
         for (Map.Entry<VertexPair, Edge> e : g.getEdges().entrySet()) {
             e.getValue().setWeight(RandomHelper.getRandom().nextDouble());
         }
+
+        Finals.LOG.debug("damping factor = {}, p = {}", dampingFactor, p);
 
         /* Emulate the random surfer until mean of the map values average is MEAN, aka for MEAN * N steps */
         GraphState<Double> gs = new DoubleGraphState(g, 0.0);
@@ -234,7 +237,7 @@ public class Tests {
             initialState.put(v, RandomHelper.getRandom().nextDouble());
         }
 
-        GraphState<Double> finalState = DeGroot.execute(g, initialState, 0.0, Integer.MAX_VALUE);
+        GraphState<Double> finalState = DeGroot.execute(g, initialState, 0.0);
         double avg = finalState.getMean();
 
         for (double e : finalState.values()) {

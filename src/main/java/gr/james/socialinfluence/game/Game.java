@@ -31,7 +31,7 @@ public final class Game {
         initialOpinions.put(playerA, 0.0);
         initialOpinions.put(playerB, 1.0);
 
-        GraphState<Double> lastState = DeGroot.execute(g, initialOpinions, deGrootEpsilon, 2);
+        GraphState<Double> lastState = DeGroot.execute(g, initialOpinions, deGrootEpsilon);
 
         g.removeVertex(playerA);
         g.removeVertex(playerB);

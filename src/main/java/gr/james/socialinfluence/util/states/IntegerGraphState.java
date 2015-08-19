@@ -1,5 +1,6 @@
 package gr.james.socialinfluence.util.states;
 
+import com.google.common.math.IntMath;
 import gr.james.socialinfluence.api.AbstractGraphState;
 
 import java.util.stream.Collectors;
@@ -31,6 +32,11 @@ public class IntegerGraphState extends AbstractGraphState<Integer> {
     @Override
     protected Integer abs(Integer x) {
         return Math.abs(x);
+    }
+
+    @Override
+    protected Integer pow(Integer integer, int x) {
+        return IntMath.pow(integer, x);
     }
 
     @Override

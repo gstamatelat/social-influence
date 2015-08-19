@@ -11,9 +11,7 @@ import gr.james.socialinfluence.util.states.DoubleGraphState;
 import java.util.Map;
 
 public class DeGroot {
-    public static final int DEFAULT_HISTORY = 2;
-
-    public static GraphState<Double> execute(Graph g, GraphState<Double> initialOpinions, double epsilon, int history) {
+    public static GraphState<Double> execute(Graph g, GraphState<Double> initialOpinions, double epsilon) {
         IterativeAlgorithm a = oldState -> {
             GraphState<Double> nextState = new DoubleGraphState(g, 0.0);
             for (Vertex v : g) {
@@ -28,18 +26,10 @@ public class DeGroot {
             return nextState;
         };
 
-        return a.execute(g, initialOpinions, epsilon, history);
-    }
-
-    public static GraphState<Double> execute(Graph g, GraphState<Double> initialOpinions, double epsilon) {
-        return execute(g, initialOpinions, epsilon, DEFAULT_HISTORY);
-    }
-
-    public static GraphState<Double> execute(Graph g, GraphState<Double> initialOpinions, int history) {
-        return execute(g, initialOpinions, Finals.DEFAULT_DEGROOT_PRECISION, history);
+        return a.execute(g, initialOpinions, epsilon);
     }
 
     public static GraphState<Double> execute(Graph g, GraphState<Double> initialOpinions) {
-        return execute(g, initialOpinions, Finals.DEFAULT_DEGROOT_PRECISION, DEFAULT_HISTORY);
+        return execute(g, initialOpinions, Finals.DEFAULT_DEGROOT_PRECISION);
     }
 }

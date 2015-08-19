@@ -46,6 +46,11 @@ public class DoubleGraphState extends AbstractGraphState<Double> {
     }
 
     @Override
+    protected Double pow(Double aDouble, int x) {
+        return Math.pow(aDouble, x);
+    }
+
+    @Override
     public String toString() {
         return "{" + this.entrySet().stream().sorted((o1, o2) -> o1.getKey().compareTo(o2.getKey()))
                 .map(i -> String.format("%s=%.2f", i.getKey(), i.getValue())).collect(Collectors.joining(", ")) + "}";

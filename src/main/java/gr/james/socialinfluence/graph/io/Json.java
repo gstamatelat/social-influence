@@ -8,7 +8,7 @@ import gr.james.socialinfluence.graph.Vertex;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.*;
 
 /**
@@ -21,7 +21,7 @@ public class Json implements GraphImporter, GraphExporter {
     }
 
     @Override
-    public void to(Graph g, OutputStream out) throws IOException {
+    public void to(Graph g, PrintStream out) {
         throw new UnsupportedOperationException();
     }
 

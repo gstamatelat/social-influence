@@ -35,6 +35,17 @@ public abstract class AbstractGraphState<T> extends HashMap<Vertex, T> implement
     }
 
     @Override
+    public GraphState<T> power(int p) {
+        GraphState<T> ret = Helper.instantiateGeneric(this.getClass());
+        for (Map.Entry<Vertex, T> e : this.entrySet()) {
+            ret.put(e.getKey(),
+                    this.pow(e.getValue(), p)
+            );
+        }
+        return ret;
+    }
+
+    @Override
     public GraphState<T> abs() {
         GraphState<T> ret = Helper.instantiateGeneric(this.getClass());
         for (Map.Entry<Vertex, T> e : this.entrySet()) {
@@ -79,4 +90,6 @@ public abstract class AbstractGraphState<T> extends HashMap<Vertex, T> implement
     protected abstract boolean greaterThan(T x1, T x2);
 
     protected abstract T abs(T x);
+
+    protected abstract T pow(T t, int x);
 }
