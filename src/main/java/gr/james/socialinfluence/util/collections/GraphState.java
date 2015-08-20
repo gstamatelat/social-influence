@@ -7,6 +7,7 @@ import gr.james.socialinfluence.util.exceptions.GraphException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.function.ToDoubleFunction;
+import java.util.stream.Collectors;
 
 public class GraphState<T> extends HashMap<Vertex, T> {
     private ToDoubleFunction<T> converter;
@@ -32,7 +33,7 @@ public class GraphState<T> extends HashMap<Vertex, T> {
             if (t instanceof Number) {
                 return ((Number) t).doubleValue();
             } else {
-                throw new GraphException("You must provide a converter to GraphState");
+                throw new GraphException("You must provide a converter to GraphState if the type is not a number");
             }
         } else {
             return converter.applyAsDouble(this.get(v));
@@ -82,8 +83,8 @@ public class GraphState<T> extends HashMap<Vertex, T> {
         return getMax(this.keySet());
     }
 
-    public Weighted<Vertex, Double> getMax(Collection<Vertex> includeOnly) {
-        return this.entrySet().stream().filter(vertexTEntry -> includeOnly.contains(vertexTEntry.getKey()))
+    public Weighted<Vertex, Double> getMax(Collection<Vertex> filter) {
+        return this.entrySet().stream().filter(vertexTEntry -> filter.contains(vertexTEntry.getKey()))
                 .max((o1, o2) -> Double.compare(this.getAsDouble(o1.getKey()), this.getAsDouble(o2.getKey())))
                 .map(i -> new Weighted<>(i.getKey(), this.getAsDouble(i.getKey()))).get();
     }
@@ -92,8 +93,8 @@ public class GraphState<T> extends HashMap<Vertex, T> {
         return getMin(this.keySet());
     }
 
-    public Weighted<Vertex, Double> getMin(Collection<Vertex> includeOnly) {
-        return this.entrySet().stream().filter(vertexTEntry -> includeOnly.contains(vertexTEntry.getKey()))
+    public Weighted<Vertex, Double> getMin(Collection<Vertex> filter) {
+        return this.entrySet().stream().filter(vertexTEntry -> filter.contains(vertexTEntry.getKey()))
                 .min((o1, o2) -> Double.compare(this.getAsDouble(o1.getKey()), this.getAsDouble(o2.getKey())))
                 .map(i -> new Weighted<>(i.getKey(), this.getAsDouble(i.getKey()))).get();
     }
@@ -104,24 +105,36 @@ public class GraphState<T> extends HashMap<Vertex, T> {
     }
 
     @Deprecated
-    public double getMean(Collection<Vertex> includeOnly) {
-        return getSum(includeOnly) / includeOnly.size();
+    public double getMean(Collection<Vertex> filter) {
+        return getSum(filter) / filter.size();
     }
 
     public double getAverage() {
         return getAverage(this.keySet());
     }
 
-    public double getAverage(Collection<Vertex> includeOnly) {
-        return getSum(includeOnly) / includeOnly.size();
+    public double getAverage(Collection<Vertex> filter) {
+        return getSum(filter) / filter.size();
     }
 
     public double getSum() {
         return getSum(this.keySet());
     }
 
-    public double getSum(Collection<Vertex> includeOnly) {
-        return this.entrySet().stream().filter(vertexTEntry -> includeOnly.contains(vertexTEntry.getKey()))
+    public double getSum(Collection<Vertex> filter) {
+        return this.entrySet().stream().filter(vertexTEntry -> filter.contains(vertexTEntry.getKey()))
                 .mapToDouble(i -> this.getAsDouble(i.getKey())).sum();
+    }
+
+    @Override
+    public String toString() {
+        if (this.values().stream().findFirst().get() instanceof Double) {
+            return "{" + this.entrySet().stream().sorted((o1, o2) -> o1.getKey().compareTo(o2.getKey()))
+                    .map(i -> String.format("%s=%.2f", i.getKey(), this.getAsDouble(i.getKey())))
+                    .collect(Collectors.joining(", ")) + "}";
+        } else {
+            return "{" + this.entrySet().stream().sorted((o1, o2) -> o1.getKey().compareTo(o2.getKey()))
+                    .map(i -> String.format("%s=%s", i.getKey(), i.getValue())).collect(Collectors.joining(", ")) + "}";
+        }
     }
 }

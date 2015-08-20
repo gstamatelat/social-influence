@@ -266,6 +266,6 @@ public class Tests {
         GraphState<Double> p1 = PageRank.execute(g, dampingFactor);
         GraphState<Double> p2 = PageRank.execute(g, dampingFactor);
 
-        Assert.assertEquals("pageRankDeterministicTest", 0.0, p1.subtract(p2).power(2).getSum(), 0.0);
+        Assert.assertEquals("pageRankDeterministicTest", p1, p2);
     }
 }

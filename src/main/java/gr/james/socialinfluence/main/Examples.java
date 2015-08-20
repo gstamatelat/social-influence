@@ -12,6 +12,7 @@ public class Examples {
         state.put(new Vertex(), 2);
         double max = state.getMax().getWeight();
         double min = state.getMin().getWeight();
+        System.out.println(state);
         int ggg = 0;
     }
 }
