@@ -3,7 +3,7 @@ package gr.james.socialinfluence.game;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.util.Conditions;
 import gr.james.socialinfluence.util.Finals;
-import gr.james.socialinfluence.util.exceptions.WeightNonPositiveException;
+import gr.james.socialinfluence.util.exceptions.WeightException;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -53,13 +53,13 @@ public class Move implements Iterable<Vertex> {
      * @param v      the vertex of this move point, can't be null
      * @param weight the weight of this move point
      * @return the current instance
-     * @throws NullPointerException       if {@code v} is {@code null}
-     * @throws WeightNonPositiveException if {@code weight} input is non-positive
+     * @throws NullPointerException if {@code v} is {@code null}
+     * @throws WeightException      if {@code weight} input is non-positive
      */
     public Move putVertex(Vertex v, double weight) {
         Conditions.requireNonNull(v);
         if (weight <= 0) {
-            throw new WeightNonPositiveException(Finals.E_MOVE_WEIGHT_NEGATIVE, weight);
+            throw new WeightException(Finals.E_MOVE_WEIGHT_NEGATIVE, weight);
         }
 
         this.m.put(v, weight);

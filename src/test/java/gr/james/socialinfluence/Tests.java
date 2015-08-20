@@ -256,4 +256,17 @@ public class Tests {
         Assert.assertEquals("deepCopyTest", g.getVerticesCount() + 1, e.getVerticesCount());
         Assert.assertEquals("deepCopyTest", g.getEdgesCount(), e.getEdgesCount());
     }
+
+    @Test
+    public void pageRankDeterministicTest() {
+        int size = RandomHelper.getRandom().nextInt(50) + 50;
+        double p = RandomHelper.getRandom().nextDouble();
+        double dampingFactor = RandomHelper.getRandom().nextDouble();
+        Graph g = new RandomGenerator<>(MemoryGraph.class, size, p).create();
+
+        GraphState<Double> p1 = PageRank.execute(g, dampingFactor);
+        GraphState<Double> p2 = PageRank.execute(g, dampingFactor);
+
+        Assert.assertEquals("pageRankDeterministicTest", 0.0, p1.subtract(p2).power(2).getSum(), 0.0);
+    }
 }

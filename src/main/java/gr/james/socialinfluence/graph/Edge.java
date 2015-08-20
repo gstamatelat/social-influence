@@ -1,7 +1,7 @@
 package gr.james.socialinfluence.graph;
 
 import gr.james.socialinfluence.util.Finals;
-import gr.james.socialinfluence.util.exceptions.WeightNonPositiveException;
+import gr.james.socialinfluence.util.exceptions.WeightException;
 
 /**
  * <p>Represents a graph edge, which in its primitive form only contains a weight (double) value. An edge's weight can
@@ -32,14 +32,14 @@ public class Edge {
      *
      * @param weight the new weight of this edge
      * @return the current {@code Edge} instance to fulfill the builder pattern
-     * @throws WeightNonPositiveException if weight is negative or zero
+     * @throws WeightException if weight is negative or zero
      * @see #getWeight()
      * @deprecated This method will be removed because it violates the immutability of {@code Edge}
      */
     @Deprecated
     public Edge setWeight(double weight) {
         if (weight <= 0) {
-            throw new WeightNonPositiveException(Finals.E_EDGE_WEIGHT_NEGATIVE, weight);
+            throw new WeightException(Finals.E_EDGE_WEIGHT_NEGATIVE, weight);
         } else {
             this.weight = weight;
         }
