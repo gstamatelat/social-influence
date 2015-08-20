@@ -11,7 +11,7 @@ import gr.james.socialinfluence.util.states.DoubleGraphState;
 import java.util.Map;
 
 public class DeGroot {
-    public static GraphState<Double> execute(Graph g, GraphState<Double> initialOpinions, double epsilon) {
+    public static GraphState<Double> execute(Graph g, GraphState<Double> initialOpinions, double epsilon, IterativeAlgorithmHandler handler) {
         IterativeAlgorithm a = oldState -> {
             GraphState<Double> nextState = new DoubleGraphState(g, 0.0);
             for (Vertex v : g) {
@@ -23,10 +23,17 @@ public class DeGroot {
                 }
                 nextState.put(v, vNewValue / Helper.getWeightSum(g.getOutEdges(v).values()));
             }
+            if (handler != null) {
+                handler.newState(oldState, nextState);
+            }
             return nextState;
         };
 
         return a.execute(g, initialOpinions, epsilon);
+    }
+
+    public static GraphState<Double> execute(Graph g, GraphState<Double> initialOpinions, double epsilon) {
+        return execute(g, initialOpinions, epsilon, null);
     }
 
     public static GraphState<Double> execute(Graph g, GraphState<Double> initialOpinions) {

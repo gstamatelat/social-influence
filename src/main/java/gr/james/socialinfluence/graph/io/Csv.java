@@ -48,7 +48,7 @@ public class Csv implements GraphImporter, GraphExporter {
     }
 
     @Override
-    public void to(Graph g, PrintStream out) {
+    public void to(Graph g, OutputStream out) {
         throw new UnsupportedOperationException();
     }
 }

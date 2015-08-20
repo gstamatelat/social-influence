@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class PageRank {
-    public static GraphState<Double> execute(Graph g, double dampingFactor, double epsilon, PageRankHandler handler) {
+    public static GraphState<Double> execute(Graph g, double dampingFactor, double epsilon, IterativeAlgorithmHandler handler) {
         /* Using this weight map, method is becoming a little faster */
         HashMap<Vertex, Double> outWeightSums = new HashMap<>();
         for (Vertex v : g) {
@@ -46,9 +46,5 @@ public class PageRank {
 
     public static GraphState<Double> execute(Graph g, double dampingFactor) {
         return execute(g, dampingFactor, Finals.DEFAULT_PAGERANK_PRECISION);
-    }
-
-    public interface PageRankHandler {
-        void newState(GraphState<Double> oldState, GraphState<Double> newState);
     }
 }

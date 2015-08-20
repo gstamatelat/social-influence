@@ -5,6 +5,7 @@ import gr.james.socialinfluence.algorithms.scoring.PageRank;
 import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.graph.Edge;
 import gr.james.socialinfluence.graph.MemoryGraph;
+import gr.james.socialinfluence.graph.io.Dot;
 import gr.james.socialinfluence.util.RandomHelper;
 import gr.james.socialinfluence.util.collections.VertexPair;
 
@@ -26,7 +27,7 @@ public class Examples {
             }
 
             /* PageRank */
-            //new Dot().to(g, System.out);
+            new Dot().to(g, System.out);
             //Finals.LOG.debug("{}");
             PageRank.execute(g, dampingFactor);
         }

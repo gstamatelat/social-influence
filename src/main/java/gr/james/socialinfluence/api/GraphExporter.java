@@ -1,8 +1,9 @@
 package gr.james.socialinfluence.api;
 
-import java.io.PrintStream;
+import java.io.IOException;
+import java.io.OutputStream;
 
 @FunctionalInterface
 public interface GraphExporter {
-    void to(Graph g, PrintStream out);
+    void to(Graph g, OutputStream out) throws IOException;
 }
