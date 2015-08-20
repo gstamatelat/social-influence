@@ -8,7 +8,6 @@ import gr.james.socialinfluence.algorithms.scoring.DeGroot;
 import gr.james.socialinfluence.algorithms.scoring.Degree;
 import gr.james.socialinfluence.algorithms.scoring.PageRank;
 import gr.james.socialinfluence.api.Graph;
-import gr.james.socialinfluence.api.GraphState;
 import gr.james.socialinfluence.game.Game;
 import gr.james.socialinfluence.game.GameDefinition;
 import gr.james.socialinfluence.game.GameResult;
@@ -19,8 +18,8 @@ import gr.james.socialinfluence.graph.MemoryGraph;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.util.Finals;
 import gr.james.socialinfluence.util.RandomHelper;
+import gr.james.socialinfluence.util.collections.GraphState;
 import gr.james.socialinfluence.util.collections.VertexPair;
-import gr.james.socialinfluence.util.states.DoubleGraphState;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -69,7 +68,7 @@ public class Tests {
         Finals.LOG.debug("damping factor = {}, p = {}", dampingFactor, p);
 
         /* Emulate the random surfer until mean of the map values average is MEAN, aka for MEAN * N steps */
-        GraphState<Double> gs = new DoubleGraphState(g, 0.0);
+        GraphState<Double> gs = new GraphState<>(g, 0.0);
         RandomSurferIterator rsi = new RandomSurferIterator(g, dampingFactor);
         int steps = mean * g.getVerticesCount();
         while (--steps > 0) {
@@ -232,7 +231,7 @@ public class Tests {
         Graph g = new RandomGenerator<>(MemoryGraph.class, size, p).create();
         GraphUtils.createCircle(g, true);
 
-        GraphState<Double> initialState = new DoubleGraphState(g, 0.0);
+        GraphState<Double> initialState = new GraphState<>(g, 0.0);
         for (Vertex v : g) {
             initialState.put(v, RandomHelper.getRandom().nextDouble());
         }

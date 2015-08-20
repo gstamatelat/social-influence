@@ -1,6 +1,6 @@
 package gr.james.socialinfluence.game;
 
-import gr.james.socialinfluence.api.GraphState;
+import gr.james.socialinfluence.util.collections.GraphState;
 
 public class GameResult {
     public int score = 0;

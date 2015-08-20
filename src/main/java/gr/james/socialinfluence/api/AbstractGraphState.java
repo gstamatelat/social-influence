@@ -7,25 +7,11 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class AbstractGraphState<T> extends HashMap<Vertex, T> implements GraphState<T> {
+@Deprecated
+public abstract class AbstractGraphState<T> extends HashMap<Vertex, T> implements GraphStateOld<T> {
     @Override
-    public double getMean() {
-        return getMean(this.keySet());
-    }
-
-    @Override
-    public double getMean(Collection<Vertex> includeOnly) {
-        return getSum(includeOnly) / includeOnly.size();
-    }
-
-    @Override
-    public double getSum() {
-        return getSum(this.keySet());
-    }
-
-    @Override
-    public GraphState<T> subtract(GraphState<T> r) {
-        GraphState<T> ret = Helper.instantiateGeneric(this.getClass());
+    public GraphStateOld<T> subtract(GraphStateOld<T> r) {
+        GraphStateOld<T> ret = Helper.instantiateGeneric(this.getClass());
         for (Map.Entry<Vertex, T> e : this.entrySet()) {
             ret.put(e.getKey(),
                     this.subtract(e.getValue(), r.get(e.getKey()))
@@ -35,8 +21,8 @@ public abstract class AbstractGraphState<T> extends HashMap<Vertex, T> implement
     }
 
     @Override
-    public GraphState<T> power(int p) {
-        GraphState<T> ret = Helper.instantiateGeneric(this.getClass());
+    public GraphStateOld<T> power(int p) {
+        GraphStateOld<T> ret = Helper.instantiateGeneric(this.getClass());
         for (Map.Entry<Vertex, T> e : this.entrySet()) {
             ret.put(e.getKey(),
                     this.pow(e.getValue(), p)
@@ -46,8 +32,8 @@ public abstract class AbstractGraphState<T> extends HashMap<Vertex, T> implement
     }
 
     @Override
-    public GraphState<T> abs() {
-        GraphState<T> ret = Helper.instantiateGeneric(this.getClass());
+    public GraphStateOld<T> abs() {
+        GraphStateOld<T> ret = Helper.instantiateGeneric(this.getClass());
         for (Map.Entry<Vertex, T> e : this.entrySet()) {
             ret.put(e.getKey(),
                     this.abs(e.getValue())

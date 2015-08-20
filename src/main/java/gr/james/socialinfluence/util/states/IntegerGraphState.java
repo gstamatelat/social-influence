@@ -5,6 +5,7 @@ import gr.james.socialinfluence.api.AbstractGraphState;
 
 import java.util.stream.Collectors;
 
+@Deprecated
 public class IntegerGraphState extends AbstractGraphState<Integer> {
     public IntegerGraphState() {
     }

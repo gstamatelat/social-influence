@@ -1,19 +1,18 @@
 package gr.james.socialinfluence.algorithms.scoring;
 
 import gr.james.socialinfluence.api.Graph;
-import gr.james.socialinfluence.api.GraphState;
 import gr.james.socialinfluence.graph.Edge;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.util.Finals;
 import gr.james.socialinfluence.util.Helper;
-import gr.james.socialinfluence.util.states.DoubleGraphState;
+import gr.james.socialinfluence.util.collections.GraphState;
 
 import java.util.Map;
 
 public class DeGroot {
     public static GraphState<Double> execute(Graph g, GraphState<Double> initialOpinions, double epsilon, IterativeAlgorithmHandler handler) {
         IterativeAlgorithm a = oldState -> {
-            GraphState<Double> nextState = new DoubleGraphState(g, 0.0);
+            GraphState<Double> nextState = new GraphState<>(g, 0.0);
             for (Vertex v : g) {
                 double vNewValue = 0.0;
                 for (Map.Entry<Vertex, Edge> e : g.getOutEdges(v).entrySet()) {

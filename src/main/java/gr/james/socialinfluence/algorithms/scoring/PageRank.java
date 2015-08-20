@@ -1,12 +1,11 @@
 package gr.james.socialinfluence.algorithms.scoring;
 
 import gr.james.socialinfluence.api.Graph;
-import gr.james.socialinfluence.api.GraphState;
 import gr.james.socialinfluence.graph.Edge;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.util.Finals;
 import gr.james.socialinfluence.util.Helper;
-import gr.james.socialinfluence.util.states.DoubleGraphState;
+import gr.james.socialinfluence.util.collections.GraphState;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,7 +19,7 @@ public class PageRank {
         }
 
         IterativeAlgorithm a = oldState -> {
-            GraphState<Double> nextState = new DoubleGraphState(g, 0.0);
+            GraphState<Double> nextState = new GraphState<>(g, 0.0);
             for (Vertex v : g) {
                 Map<Vertex, Edge> inEdges = g.getInEdges(v);
                 for (Map.Entry<Vertex, Edge> e : inEdges.entrySet()) {
@@ -37,7 +36,7 @@ public class PageRank {
             return nextState;
         };
 
-        return a.execute(g, new DoubleGraphState(g, 1.0), epsilon);
+        return a.execute(g, new GraphState<>(g, 1.0), epsilon);
     }
 
     public static GraphState<Double> execute(Graph g, double dampingFactor, double epsilon) {

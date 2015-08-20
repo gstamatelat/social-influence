@@ -3,9 +3,9 @@ package gr.james.socialinfluence;
 import gr.james.socialinfluence.algorithms.generators.PathGenerator;
 import gr.james.socialinfluence.algorithms.scoring.Closeness;
 import gr.james.socialinfluence.api.Graph;
-import gr.james.socialinfluence.api.GraphState;
 import gr.james.socialinfluence.graph.MemoryGraph;
 import gr.james.socialinfluence.graph.Vertex;
+import gr.james.socialinfluence.util.collections.GraphState;
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -1,6 +1,6 @@
 package gr.james.socialinfluence.algorithms.scoring;
 
-import gr.james.socialinfluence.api.GraphState;
+import gr.james.socialinfluence.util.collections.GraphState;
 
 @Deprecated
 public interface IterativeAlgorithmHandler {

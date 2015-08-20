@@ -1,9 +1,9 @@
 package gr.james.socialinfluence.algorithms.scoring;
 
 import gr.james.socialinfluence.api.Graph;
-import gr.james.socialinfluence.api.GraphState;
 import gr.james.socialinfluence.util.Finals;
 import gr.james.socialinfluence.util.collections.EvictingLinkedHashSet;
+import gr.james.socialinfluence.util.collections.GraphState;
 
 public interface IterativeAlgorithm {
     int REPS_INCREASE = 1000;

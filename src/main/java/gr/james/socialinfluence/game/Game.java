@@ -2,10 +2,9 @@ package gr.james.socialinfluence.game;
 
 import gr.james.socialinfluence.algorithms.scoring.DeGroot;
 import gr.james.socialinfluence.api.Graph;
-import gr.james.socialinfluence.api.GraphState;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.util.Finals;
-import gr.james.socialinfluence.util.states.DoubleGraphState;
+import gr.james.socialinfluence.util.collections.GraphState;
 
 public final class Game {
     private Game() {
@@ -26,7 +25,7 @@ public final class Game {
             g.addEdge(v, playerB).setWeight(playerBMove.getWeight(v));
         }
 
-        GraphState<Double> initialOpinions = new DoubleGraphState(g, Finals.DEFAULT_GAME_OPINIONS);
+        GraphState<Double> initialOpinions = new GraphState<>(g, Finals.DEFAULT_GAME_OPINIONS);
 
         initialOpinions.put(playerA, 0.0);
         initialOpinions.put(playerB, 1.0);

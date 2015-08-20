@@ -3,11 +3,11 @@ package gr.james.socialinfluence.algorithms.generators;
 import gr.james.socialinfluence.algorithms.scoring.Degree;
 import gr.james.socialinfluence.api.EvolvingGraphGenerator;
 import gr.james.socialinfluence.api.Graph;
-import gr.james.socialinfluence.api.GraphState;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.util.Conditions;
 import gr.james.socialinfluence.util.Finals;
 import gr.james.socialinfluence.util.Helper;
+import gr.james.socialinfluence.util.collections.GraphState;
 
 import java.util.HashMap;
 import java.util.Map;

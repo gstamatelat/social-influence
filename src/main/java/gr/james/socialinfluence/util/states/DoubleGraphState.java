@@ -6,10 +6,7 @@ import gr.james.socialinfluence.graph.Vertex;
 
 import java.util.stream.Collectors;
 
-/**
- * <p>GraphState maps every vertex in a graph with a double value. Useful as a holder for some metric, like PageRank.
- * This class also contains useful methods for statistical analysis of that metric.</p>
- */
+@Deprecated
 public class DoubleGraphState extends AbstractGraphState<Double> {
     public DoubleGraphState() {
     }

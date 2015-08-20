@@ -3,10 +3,10 @@ package gr.james.socialinfluence.main;
 import gr.james.socialinfluence.algorithms.generators.BarabasiAlbertGenerator;
 import gr.james.socialinfluence.algorithms.scoring.Degree;
 import gr.james.socialinfluence.api.Graph;
-import gr.james.socialinfluence.api.GraphState;
 import gr.james.socialinfluence.graph.MemoryGraph;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.util.RandomHelper;
+import gr.james.socialinfluence.util.collections.GraphState;
 
 import java.util.Arrays;
 import java.util.Map;
