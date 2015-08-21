@@ -33,9 +33,10 @@ public final class Conditions {
         return o;
     }
 
-    public static void requireNonNull(Object... t) {
+    // TODO: This method creates an ambiguous call in combination with the above
+    /*public static void requireNonNull(Object... t) {
         for (Object o : t) {
             requireNonNull(o);
         }
-    }
+    }*/
 }
