@@ -1,23 +1,24 @@
 package gr.james.socialinfluence.util.collections;
 
+import com.google.common.collect.ForwardingMap;
 import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.util.exceptions.GraphException;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.function.ToDoubleFunction;
 import java.util.stream.Collectors;
 
-public class GraphState<T> extends HashMap<Vertex, T> {
-    private ToDoubleFunction<T> converter;
+public class GraphState<T> extends ForwardingMap<Vertex, T> {
+    private Map<Vertex, T> delegate = new HashMap<>();
+    private ToDoubleFunction<T> converter = null;
 
     public GraphState() {
-        this.converter = null;
     }
 
     public GraphState(Graph g, T i) {
-        this.converter = null;
         for (Vertex v : g) {
             this.put(v, i);
         }
@@ -25,6 +26,11 @@ public class GraphState<T> extends HashMap<Vertex, T> {
 
     public GraphState(ToDoubleFunction<T> converter) {
         this.converter = converter;
+    }
+
+    @Override
+    protected Map<Vertex, T> delegate() {
+        return delegate;
     }
 
     public double getAsDouble(Vertex v) {
@@ -50,7 +56,7 @@ public class GraphState<T> extends HashMap<Vertex, T> {
         return newState;
     }
 
-    public GraphState<Double> power(int p) {
+    public GraphState<Double> power(double p) {
         GraphState<Double> newState = new GraphState<>();
         for (Vertex v : this.keySet()) {
             newState.put(v,

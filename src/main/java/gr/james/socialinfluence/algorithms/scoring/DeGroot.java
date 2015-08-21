@@ -12,7 +12,7 @@ import java.util.Map;
 public class DeGroot {
     public static GraphState<Double> execute(Graph g, GraphState<Double> initialOpinions, double epsilon, IterativeAlgorithmHandler handler) {
         IterativeAlgorithm a = oldState -> {
-            GraphState<Double> nextState = new GraphState<>(g, 0.0);
+            GraphState<Double> nextState = new GraphState<>();
             for (Vertex v : g) {
                 double vNewValue = 0.0;
                 for (Map.Entry<Vertex, Edge> e : g.getOutEdges(v).entrySet()) {
