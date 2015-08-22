@@ -1,5 +1,6 @@
 package gr.james.socialinfluence.game.tournament;
 
+import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.api.GraphGenerator;
 import gr.james.socialinfluence.game.Game;
 import gr.james.socialinfluence.game.GameDefinition;
@@ -14,6 +15,9 @@ public class Tournament {
     public static final int WIN = 2;
     public static final int LOSE = 0;
     public static final int DRAW = 1;
+
+    public static final int DEFAULT_ROUNDS = 1;
+    public static final boolean DEFAULT_ONE_GRAPH_PER_ROUND = false;
 
     private TournamentHandler handler;
     private Set<Player> players = new HashSet<>();
@@ -47,7 +51,7 @@ public class Tournament {
         return getAllScoresInDsv(",");
     }
 
-    public Map<Player, Integer> run(GraphGenerator generator, GameDefinition d, int rounds) {
+    public Map<Player, Integer> run(GraphGenerator generator, GameDefinition d, int rounds, boolean oneGraphPerRound) {
         Map<Player, Integer> score = new HashMap<>();
         for (Player p : players) {
             score.put(p, 0);
@@ -55,11 +59,13 @@ public class Tournament {
 
         int done = 0;
         List playersList = new ArrayList<>(players);
-        for (Player a : players) {
-            for (Player b : players) {
-                if (playersList.indexOf(a) > playersList.indexOf(b)) {
-                    for (int i = 0; i < rounds; i++) {
-                        GameResult r = Game.runPlayers(a, b, generator.create(), d);
+        for (int i = 0; i < rounds; i++) {
+            Graph g = oneGraphPerRound ? generator.create() : null;
+            for (Player a : players) {
+                for (Player b : players) {
+                    if (playersList.indexOf(a) > playersList.indexOf(b)) {
+                        g = oneGraphPerRound ? g : generator.create();
+                        GameResult r = Game.runPlayers(a, b, g, d);
                         if (r.score < 0) {
                             score.put(a, score.get(a) + WIN);
                             score.put(b, score.get(b) + LOSE);
@@ -83,7 +89,11 @@ public class Tournament {
         return Collections.unmodifiableMap(score);
     }
 
+    public Map<Player, Integer> run(GraphGenerator generator, GameDefinition d, int rounds) {
+        return run(generator, d, rounds, DEFAULT_ONE_GRAPH_PER_ROUND);
+    }
+
     public Map<Player, Integer> run(GraphGenerator generator, GameDefinition d) {
-        return run(generator, d, 1);
+        return run(generator, d, DEFAULT_ROUNDS);
     }
 }

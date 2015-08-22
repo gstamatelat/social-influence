@@ -22,9 +22,7 @@ public abstract class Player {
      * <p>Constructs a {@code Player} with default options.</p>
      */
     public Player() {
-        for (Map.Entry<String, String> s : defaultOptions().entrySet()) {
-            options.put(s.getKey(), s.getValue());
-        }
+        options.putAll(defaultOptions());
     }
 
     /**
