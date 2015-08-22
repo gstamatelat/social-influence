@@ -32,6 +32,7 @@ public class Dot implements GraphImporter, GraphExporter {
 
         BufferedWriter w = new BufferedWriter(new OutputStreamWriter(out, Finals.IO_ENCODING));
         w.write(dot);
-        w.close();
+        w.flush();
+        //w.close(); // Don't close someone else's stream
     }
 }

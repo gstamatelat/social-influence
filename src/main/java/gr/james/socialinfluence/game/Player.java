@@ -14,6 +14,7 @@ import java.util.Map;
 
 public abstract class Player {
     protected static final Logger log = Finals.LOG;
+    private final Object lock = new Object();
     private Map<String, String> options = new HashMap<>();
     private boolean interrupted = false;
 
@@ -40,9 +41,11 @@ public abstract class Player {
      * @return {@code true} if the player was interrupted and must terminate, otherwise {@code false}
      */
     protected final boolean isInterrupted() {
-        boolean last_interrupt = this.interrupted;
-        this.interrupted = false;
-        return last_interrupt;
+        synchronized (lock) {
+            boolean last_interrupt = this.interrupted;
+            this.interrupted = false;
+            return last_interrupt;
+        }
     }
 
     /**
@@ -50,7 +53,9 @@ public abstract class Player {
      * flag.</p>
      */
     public final void interrupt() {
-        this.interrupted = true;
+        synchronized (lock) {
+            this.interrupted = true;
+        }
     }
 
     protected abstract void suggestMove(Graph g, GameDefinition d, MovePointer movePtr);
