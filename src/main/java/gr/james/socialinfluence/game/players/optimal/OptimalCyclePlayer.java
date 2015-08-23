@@ -42,7 +42,7 @@ public class OptimalCyclePlayer extends Player {
         }
 
         /* Log move for demonstration */
-        log.info("Final move: {}", m);
+        log.info("Submitting {}", m);
 
         /* Submit the move */
         movePtr.submit(m);

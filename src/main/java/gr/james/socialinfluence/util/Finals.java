@@ -16,7 +16,6 @@ public final class Finals {
     public static final double DEFAULT_GAME_OPINIONS = 0.5;
     public static final double DEFAULT_PAGERANK_PRECISION = 0.0;
     public static final double DEFAULT_GAME_PRECISION = 0.0;
-    public static final boolean DEFAULT_DEGROOT_HISTORY = true;
 
     /* Constants */
     public static final String TYPE_META = "type";
