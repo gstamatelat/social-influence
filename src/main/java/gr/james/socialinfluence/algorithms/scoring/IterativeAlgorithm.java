@@ -23,8 +23,10 @@ public interface IterativeAlgorithm {
         while (!stabilized) {
             GraphState<Double> nextState = nextState(lastState);
 
-            if (nextState.subtract(lastState).abs().lessThan(epsilon)) {
-                stabilized = true;
+            if (epsilon != 0.0) {
+                if (nextState.subtract(lastState).abs().lessThan(epsilon)) {
+                    stabilized = true;
+                }
             }
 
             if (!stateHistory.add(nextState)) {

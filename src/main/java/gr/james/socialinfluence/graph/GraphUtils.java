@@ -104,9 +104,10 @@ public class GraphUtils {
      * @return an unmodifiable {@code Set} of all the stubborn vertices of {@code g}
      */
     public static Set<Vertex> getStubbornVertices(Graph g) {
-        Set<Vertex> stubborn = g.getVertices().stream()
-                .filter(v -> g.getOutDegree(v) == 1 && g.getOutEdges(v).containsKey(v))
-                .collect(Collectors.toSet());
-        return Collections.unmodifiableSet(stubborn);
+        return Collections.unmodifiableSet(
+                g.getVertices().stream()
+                        .filter(v -> g.getOutDegree(v) == 1 && g.getOutEdges(v).containsKey(v))
+                        .collect(Collectors.toSet())
+        );
     }
 }
