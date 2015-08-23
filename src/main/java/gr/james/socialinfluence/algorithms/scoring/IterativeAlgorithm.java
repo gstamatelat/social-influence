@@ -6,7 +6,7 @@ import gr.james.socialinfluence.util.collections.EvictingLinkedHashSet;
 import gr.james.socialinfluence.util.collections.GraphState;
 
 public interface IterativeAlgorithm {
-    int REPS_INCREASE = 1000;
+    int REPS_INCREASE = 500;
     int INITIAL_SIZE = 2;
 
     GraphState<Double> nextState(GraphState<Double> oldState);

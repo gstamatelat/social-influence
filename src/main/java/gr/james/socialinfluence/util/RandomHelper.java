@@ -44,13 +44,23 @@ public final class RandomHelper {
     }
 
     /**
+     * <p>Get a new {@link Random} instance with an unspecified seed. This instance is distinct from the global
+     * {@code Random} instance.</p>
+     *
+     * @return the new {@code Random} object
+     */
+    public static Random getNewRandom() {
+        return new Random();
+    }
+
+    /**
      * <p>Get a new {@link Random} instance with the specified seed. This instance is distinct from the global
      * {@code Random} instance.</p>
      *
      * @param seed the seed to use
      * @return the new {@code Random} object
      */
-    public static Random getRandom(long seed) {
+    public static Random getNewRandom(long seed) {
         return new Random(seed);
     }
 }
