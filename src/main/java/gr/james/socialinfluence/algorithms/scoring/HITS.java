@@ -98,7 +98,7 @@ public class HITS {
 
         @Override
         public String toString() {
-            return String.format("{authority=%f,hub=%f}", this.authority, this.hub);
+            return String.format("{authority=%.2f,hub=%.2f}", this.authority, this.hub);
         }
     }
 }
