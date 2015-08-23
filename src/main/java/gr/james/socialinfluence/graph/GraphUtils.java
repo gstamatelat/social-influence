@@ -7,6 +7,7 @@ import gr.james.socialinfluence.util.collections.VertexPair;
 import gr.james.socialinfluence.util.exceptions.GraphException;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class GraphUtils {
     public static void createCircle(Graph g, boolean undirected) {
@@ -95,13 +96,17 @@ public class GraphUtils {
         return r;
     }
 
+    /**
+     * <p>Filters out and returns the stubborn vertices contained in {@code g}. A stubborn vertex is one that it's only
+     * outbound edge points to itself.</p>
+     *
+     * @param g the graph that the operation is to be performed
+     * @return an unmodifiable {@code Set} of all the stubborn vertices of {@code g}
+     */
     public static Set<Vertex> getStubbornVertices(Graph g) {
-        Set<Vertex> stubborn = new TreeSet<>();
-        for (Vertex v : g) {
-            if (g.getOutDegree(v) == 1 && g.getOutEdges(v).containsKey(v)) {
-                stubborn.add(v);
-            }
-        }
+        Set<Vertex> stubborn = g.getVertices().stream()
+                .filter(v -> g.getOutDegree(v) == 1 && g.getOutEdges(v).containsKey(v))
+                .collect(Collectors.toSet());
         return Collections.unmodifiableSet(stubborn);
     }
 }

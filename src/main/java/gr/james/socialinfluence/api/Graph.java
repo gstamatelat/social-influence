@@ -160,7 +160,7 @@ public interface Graph extends Iterable<Vertex>, Metadata {
 
     /**
      * <p>Returns an list view of the vertices contained in this graph. The list is indexed at the order at which the
-     * vertices were inserted in the graph.</p>
+     * vertices were inserted in the graph and will always contain distinct objects.</p>
      *
      * @return an unmodifiable list of vertices in this graph
      */
