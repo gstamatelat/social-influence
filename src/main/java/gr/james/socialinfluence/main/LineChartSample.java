@@ -54,7 +54,7 @@ public class LineChartSample extends Application implements Runnable {
 
         List<Double> h = new ArrayList<>();
 
-        PageRank.execute(g, 0.15, 0.0, (oldState, newState) -> h.add(oldState.subtract(newState).power(2).getSum()));
+        PageRank.execute(g, 0.15, 0.0);
 
         Finals.LOG.debug("List size: {}", h.size());
 

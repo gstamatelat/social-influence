@@ -1,6 +1,7 @@
 package gr.james.socialinfluence.util.collections;
 
 import com.google.common.collect.ForwardingMap;
+import gr.james.socialinfluence.algorithms.scoring.util.ConvergePredicate;
 import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.util.exceptions.GraphException;
@@ -31,6 +32,15 @@ public class GraphState<T> extends ForwardingMap<Vertex, T> {
     @Override
     protected Map<Vertex, T> delegate() {
         return delegate;
+    }
+
+    public boolean testConvergence(GraphState<T> o, ConvergePredicate<T> handler, double epsilon) {
+        for (Vertex v : this.keySet()) {
+            if (!handler.converges(this.get(v), o.get(v), epsilon)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public double getAsDouble(Vertex v) {
