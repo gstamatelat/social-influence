@@ -38,4 +38,10 @@ public final class Conditions {
             requireNonNull(o);
         }
     }
+
+    public static void assertion(boolean expression) {
+        if (!expression) {
+            throw new AssertionError();
+        }
+    }
 }

@@ -38,6 +38,7 @@ public final class RandomHelper {
      */
     public static Random getRandom() {
         if (r == null) {
+            Finals.LOG.info("Automatically initialized global random with unspecified seed");
             r = new Random();
         }
         return r;
