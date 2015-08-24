@@ -82,7 +82,6 @@ public class HITS {
             HITSScore hitsScore = (HITSScore) o;
 
             return Double.compare(hitsScore.authority, authority) == 0 && Double.compare(hitsScore.hub, hub) == 0;
-
         }
 
         @Override

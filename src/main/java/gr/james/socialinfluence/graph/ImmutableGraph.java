@@ -58,7 +58,7 @@ public final class ImmutableGraph implements Graph {
 
     @Override
     public void setGraphType(String type) {
-        this.g.setGraphType(type);
+        throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 
     @Override
