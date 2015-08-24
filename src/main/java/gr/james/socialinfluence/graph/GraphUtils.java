@@ -97,7 +97,7 @@ public class GraphUtils {
     }
 
     /**
-     * <p>Filters out and returns the stubborn vertices contained in {@code g}. A stubborn vertex is one that it's only
+     * <p>Filters out and returns the stubborn vertices contained in {@code g}. A stubborn vertex is one that its only
      * outbound edge points to itself.</p>
      *
      * @param g the graph that the operation is to be performed

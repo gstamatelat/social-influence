@@ -16,7 +16,7 @@ public class ClosenessTest {
     @Test
     public void sumClosenessTest() {
         Graph g = new PathGenerator<>(MemoryGraph.class, 4).create();
-        GraphState<Double> r = Closeness.execute(g, true, g.getVertices(), new Closeness.ClosenessSumHandler());
+        GraphState<Double> r = Closeness.executeSum(g, true, g.getVertices());
 
         Assert.assertEquals("sumClosenessTest", r.get(g.getVertexFromIndex(0)), 0.5, 0.0);
         Assert.assertEquals("sumClosenessTest", r.get(g.getVertexFromIndex(1)), 0.75, 0.0);
@@ -33,7 +33,7 @@ public class ClosenessTest {
         include.add(g.getVertexFromIndex(1));
         include.add(g.getVertexFromIndex(2));
 
-        GraphState<Double> r = Closeness.execute(g, true, include, new Closeness.ClosenessSumHandler());
+        GraphState<Double> r = Closeness.executeSum(g, true, include);
 
         Assert.assertEquals("sumClosenessTest", r.get(g.getVertexFromIndex(0)), 2.0 / 3.0, 0.0);
         Assert.assertEquals("sumClosenessTest", r.get(g.getVertexFromIndex(1)), 1.0, 0.0);
