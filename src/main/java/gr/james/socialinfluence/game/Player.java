@@ -8,12 +8,11 @@ import gr.james.socialinfluence.util.Helper;
 import gr.james.socialinfluence.util.exceptions.GraphException;
 import org.slf4j.Logger;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public abstract class Player {
     protected static final Logger log = Finals.LOG;
+
     private final Object lock = new Object();
     private Map<String, String> options = new HashMap<>();
     private boolean interrupted = false;
@@ -56,6 +55,7 @@ public abstract class Player {
         }
     }
 
+    // TODO: Document that this method can throw Exception but not Error
     protected abstract void suggestMove(Graph g, GameDefinition d, MovePointer movePtr);
 
     /**
@@ -69,18 +69,10 @@ public abstract class Player {
         final Graph finalGraph = ImmutableGraph.decorate(g);
         final MovePointer movePtr = new MovePointer();
 
-        Thread t = new Thread(() -> {
-            suggestMove(finalGraph, d, movePtr);
-        });
+        List<Throwable> thrown = new ArrayList<>();
 
-        t.setUncaughtExceptionHandler((t1, e) -> {
-            if (e instanceof Error) {
-                throw (Error) e;
-            } else {
-                Finals.LOG.warn(Finals.L_PLAYER_EXCEPTION, this.getClass().getSimpleName(), finalGraph, d,
-                        Helper.getExceptionString(e));
-            }
-        });
+        Thread t = new Thread(() -> suggestMove(finalGraph, d, movePtr));
+        t.setUncaughtExceptionHandler((t1, e) -> thrown.add(e));
 
         Move m;
 
@@ -97,9 +89,19 @@ public abstract class Player {
                 t.join(d.getExecution());
                 count++;
             }
-            this.isInterrupted(); // This is called to clear the interrupt flag
         } catch (InterruptedException e) {
             throw Helper.convertCheckedException(e);
+        }
+
+        this.isInterrupted(); // This is called to clear the interrupt flag
+
+        for (Throwable e : thrown) {
+            if ((e instanceof Error) && Helper.isAssertionEnabled()) {
+                throw new AssertionError(e);
+            } else {
+                Finals.LOG.warn(Finals.L_PLAYER_EXCEPTION, this.getClass().getSimpleName(), finalGraph, d,
+                        Helper.getExceptionString(e));
+            }
         }
 
         return m;

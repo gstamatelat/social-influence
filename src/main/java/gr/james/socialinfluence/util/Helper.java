@@ -63,6 +63,13 @@ public final class Helper {
         };
     }
 
+    @SuppressWarnings({"AssertWithSideEffects", "ConstantConditions", "UnusedAssignment"})
+    public static boolean isAssertionEnabled() {
+        boolean assertsEnabled = false;
+        assert assertsEnabled = true;
+        return assertsEnabled;
+    }
+
     public static RuntimeException convertCheckedException(Exception e) {
         throw new RuntimeException(String.format("%s: %s", e.getClass().getName(), e.getMessage()));
     }
