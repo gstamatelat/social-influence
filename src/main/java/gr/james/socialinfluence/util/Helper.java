@@ -41,7 +41,7 @@ public final class Helper {
         return finalSelections;
     }
 
-    public static String getExceptionString(Exception e) {
+    public static String getExceptionString(Throwable e) {
         // TODO: If e.getMessage() is null it becomes ugly
         String exceptionAsString = String.format("\t%s: %s\n", e.getClass().getName(), e.getMessage());
         for (StackTraceElement s : e.getStackTrace()) {

@@ -70,9 +70,13 @@ public abstract class Player {
         final MovePointer movePtr = new MovePointer();
 
         Thread t = new Thread(() -> {
-            try {
-                suggestMove(finalGraph, d, movePtr);
-            } catch (Exception e) {
+            suggestMove(finalGraph, d, movePtr);
+        });
+
+        t.setUncaughtExceptionHandler((t1, e) -> {
+            if (e instanceof Error) {
+                throw (Error) e;
+            } else {
                 Finals.LOG.warn(Finals.L_PLAYER_EXCEPTION, this.getClass().getSimpleName(), finalGraph, d,
                         Helper.getExceptionString(e));
             }
