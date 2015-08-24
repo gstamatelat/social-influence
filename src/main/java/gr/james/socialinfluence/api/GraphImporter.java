@@ -5,5 +5,5 @@ import java.io.InputStream;
 
 @FunctionalInterface
 public interface GraphImporter {
-    Graph from(InputStream in) throws IOException;
+    <T extends Graph> T from(InputStream in, GraphFactory<T> factory) throws IOException;
 }

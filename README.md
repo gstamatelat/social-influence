@@ -18,25 +18,25 @@ g.addEdge(v1, v2);
 ### Graph generation
 
 ```java
-GraphGenerator generator = new RandomGenerator<>(MemoryGraph.class, 100, 0.05);
+GraphGenerator generator = new RandomGenerator(100, 0.05);
 Graph randomGraph = generator.create();
 System.out.println(randomGraph);
 ```
 
 ```java
-GraphGenerator generator = new BarabasiAlbertGenerator<>(MemoryGraph.class, 25, 2, 2, 1.0);
+GraphGenerator generator = new BarabasiAlbertGenerator(25, 2, 2, 1.0);
 Graph scaleFreeGraph = generator.create();
 System.out.println(scaleFreeGraph);
 ```
 
 ```java
-GraphGenerator generator = new GridGenerator<>(MemoryGraph.class, 25, 35);
+GraphGenerator generator = new GridGenerator(25, 35);
 Graph gridGraph = generator.create();
 System.out.println(gridGraph);
 ```
 
 ```java
-GraphGenerator generator = new WattsStrogatzGenerator<>(MemoryGraph.class, 1000, 6, 0.4);
+GraphGenerator generator = new WattsStrogatzGenerator(1000, 6, 0.4);
 Graph wattsStrogatzGraph = generator.create();
 System.out.println(wattsStrogatzGraph);
 ```
@@ -46,7 +46,7 @@ Inspect available generators in `gr.james.socialinfluence.algorithms.generators`
 ### Vertex iteration
 
 ```java
-Graph g = new RandomGenerator<>(MemoryGraph.class, 100, 0.05).create();
+Graph g = new RandomGenerator(100, 0.05).create();
 for (Vertex v : g) {
     // Do something with v
 }
@@ -55,7 +55,7 @@ for (Vertex v : g) {
 The above construct will traverse the graph vertices in the order they were inserted in the graph. If you need to perform an index-based iteration, you should use
 
 ```java
-Graph g = new RandomGenerator<>(MemoryGraph.class, 100, 0.05).create();
+Graph g = new RandomGenerator(100, 0.05).create();
 for (int i = 0; i < g.getVerticesCount(); i++) {
     Vertex v = g.getVertexFromIndex(i);
     // Do something with v
@@ -69,7 +69,7 @@ Iterators (unless stated) are generally not backed by the graph; changes on the 
 `RandomVertexIterator` iterates over vertices in a random order.
 
 ```java
-Graph g = new RandomGenerator<>(MemoryGraph.class, 100, 0.05).create();
+Graph g = new RandomGenerator(100, 0.05).create();
 RandomVertexIterator vi = new RandomVertexIterator(g);
 while (vi.hasNext()) {
     Vertex v = vi.next();

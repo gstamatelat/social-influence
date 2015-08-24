@@ -3,7 +3,6 @@ package gr.james.socialinfluence;
 import gr.james.socialinfluence.algorithms.generators.PathGenerator;
 import gr.james.socialinfluence.algorithms.scoring.Closeness;
 import gr.james.socialinfluence.api.Graph;
-import gr.james.socialinfluence.graph.MemoryGraph;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.util.collections.GraphState;
 import org.junit.Assert;
@@ -15,7 +14,7 @@ import java.util.Set;
 public class ClosenessTest {
     @Test
     public void sumClosenessTest() {
-        Graph g = new PathGenerator<>(MemoryGraph.class, 4).create();
+        Graph g = new PathGenerator(4).create();
         GraphState<Double> r = Closeness.executeSum(g, true, g.getVertices());
 
         Assert.assertEquals("sumClosenessTest", r.get(g.getVertexFromIndex(0)), 0.5, 0.0);
@@ -26,7 +25,7 @@ public class ClosenessTest {
 
     @Test
     public void sumClosenessIncludeTest() {
-        Graph g = new PathGenerator<>(MemoryGraph.class, 4).create();
+        Graph g = new PathGenerator(4).create();
 
         Set<Vertex> include = new HashSet<>();
         include.add(g.getVertexFromIndex(0));

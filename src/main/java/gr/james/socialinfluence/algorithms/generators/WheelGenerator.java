@@ -1,21 +1,20 @@
 package gr.james.socialinfluence.algorithms.generators;
 
 import gr.james.socialinfluence.api.Graph;
+import gr.james.socialinfluence.api.GraphFactory;
 import gr.james.socialinfluence.api.GraphGenerator;
 import gr.james.socialinfluence.graph.Vertex;
 
-public class WheelGenerator<T extends Graph> implements GraphGenerator<T> {
-    private Class<T> type;
+public class WheelGenerator implements GraphGenerator {
     private int totalVertices;
 
-    public WheelGenerator(Class<T> type, int totalVertices) {
-        this.type = type;
+    public WheelGenerator(int totalVertices) {
         this.totalVertices = totalVertices;
     }
 
     @Override
-    public T create() {
-        T g = new CycleGenerator<>(type, totalVertices - 1).create();
+    public <T extends Graph> T create(GraphFactory<T> factory) {
+        T g = new CycleGenerator(totalVertices - 1).create(factory);
 
         Vertex n = g.addVertex();
         for (Vertex v : g) {

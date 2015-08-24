@@ -1,5 +1,7 @@
 package gr.james.socialinfluence.util;
 
+import gr.james.socialinfluence.api.GraphFactory;
+import gr.james.socialinfluence.graph.MemoryGraph;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,6 +18,7 @@ public final class Finals {
     public static final double DEFAULT_GAME_OPINIONS = 0.5;
     public static final double DEFAULT_PAGERANK_PRECISION = 0.0;
     public static final double DEFAULT_GAME_PRECISION = 0.0;
+    public static final GraphFactory<MemoryGraph> DEFAULT_GRAPH_FACTORY = MemoryGraph::new;
 
     /* Constants */
     public static final String TYPE_META = "type";

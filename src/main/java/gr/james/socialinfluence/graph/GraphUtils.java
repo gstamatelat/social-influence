@@ -1,6 +1,7 @@
 package gr.james.socialinfluence.graph;
 
 import gr.james.socialinfluence.api.Graph;
+import gr.james.socialinfluence.api.GraphFactory;
 import gr.james.socialinfluence.util.Finals;
 import gr.james.socialinfluence.util.Helper;
 import gr.james.socialinfluence.util.collections.VertexPair;
@@ -58,13 +59,13 @@ public class GraphUtils {
      * <p>Combine several graphs into a single one. When combining, the vertices of the input graphs will be inserted to
      * the output along with their edges. The original graphs will not be modified.</p>
      *
-     * @param type   the type of the output graph
+     * @param type   the factory that will used to create the output graph
      * @param graphs the graph objects to combine
      * @param <T>    the type of the output graph
      * @return the combined graph
      */
-    public static <T extends Graph> T combineGraphs(Class<T> type, Graph[] graphs) {
-        T r = Helper.instantiateGeneric(type);
+    public static <T extends Graph> T combineGraphs(GraphFactory<T> type, Graph[] graphs) {
+        T r = type.create();
         for (Graph g : graphs) {
             for (Vertex v : g) {
                 r.addVertex(v);
@@ -74,6 +75,10 @@ public class GraphUtils {
             }
         }
         return r;
+    }
+
+    public static Graph combineGraphs(Graph[] graphs) {
+        return combineGraphs(Finals.DEFAULT_GRAPH_FACTORY, graphs);
     }
 
     public static <T extends Graph> Graph deepCopy(Class<T> type, Graph g) {

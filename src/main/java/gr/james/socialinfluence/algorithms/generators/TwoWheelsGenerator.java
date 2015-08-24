@@ -1,29 +1,28 @@
 package gr.james.socialinfluence.algorithms.generators;
 
 import gr.james.socialinfluence.api.Graph;
+import gr.james.socialinfluence.api.GraphFactory;
 import gr.james.socialinfluence.api.GraphGenerator;
 import gr.james.socialinfluence.graph.GraphUtils;
 import gr.james.socialinfluence.graph.Vertex;
 
-public class TwoWheelsGenerator<T extends Graph> implements GraphGenerator<T> {
-    private Class<T> type;
+public class TwoWheelsGenerator implements GraphGenerator {
     private int wheelVertices;
 
-    public TwoWheelsGenerator(Class<T> type, int wheelVertices) {
-        this.type = type;
+    public TwoWheelsGenerator(int wheelVertices) {
         this.wheelVertices = wheelVertices;
     }
 
     @Override
-    public T create() {
-        WheelGenerator wheelGenerator = new WheelGenerator<>(type, wheelVertices);
-        Graph g1 = wheelGenerator.create();
-        Graph g2 = wheelGenerator.create();
+    public <T extends Graph> T create(GraphFactory<T> factory) {
+        WheelGenerator wheelGenerator = new WheelGenerator(wheelVertices);
+        T g1 = wheelGenerator.create(factory);
+        T g2 = wheelGenerator.create(factory);
 
         Vertex a = g1.getVertexFromIndex(0);
         Vertex b = g2.getVertexFromIndex(0);
 
-        T g = GraphUtils.combineGraphs(type, new Graph[]{g1, g2});
+        T g = GraphUtils.combineGraphs(factory, new Graph[]{g1, g2});
         GraphUtils.fuseVertices(g, new Vertex[]{a, b});
 
         g.setGraphType("TwoWheels");

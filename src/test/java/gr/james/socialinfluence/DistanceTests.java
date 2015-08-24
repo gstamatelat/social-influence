@@ -8,7 +8,6 @@ import gr.james.socialinfluence.algorithms.generators.RandomGenerator;
 import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.graph.Edge;
 import gr.james.socialinfluence.graph.GraphUtils;
-import gr.james.socialinfluence.graph.MemoryGraph;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.util.RandomHelper;
 import gr.james.socialinfluence.util.collections.VertexPair;
@@ -30,7 +29,7 @@ public class DistanceTests {
         double p = RandomHelper.getRandom().nextDouble();
 
         /* Create graph and randomize edge weights */
-        Graph g = new RandomGenerator<>(MemoryGraph.class, vertexCount, p).create();
+        Graph g = new RandomGenerator(vertexCount, p).create();
         GraphUtils.createCircle(g, true);
         for (Map.Entry<VertexPair, Edge> e : g.getEdges().entrySet()) {
             e.getValue().setWeight(RandomHelper.getRandom().nextDouble());
@@ -65,7 +64,7 @@ public class DistanceTests {
     public void dijkstraPathsTest() {
         int n = 7;
         int m = 6;
-        Graph g = new GridGenerator<>(MemoryGraph.class, n, m).create();
+        Graph g = new GridGenerator(n, m).create();
 
         Map<VertexPair, Double> distFloyd = FloydWarshall.execute(g);
 

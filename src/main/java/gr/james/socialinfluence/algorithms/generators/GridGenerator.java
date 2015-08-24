@@ -1,9 +1,9 @@
 package gr.james.socialinfluence.algorithms.generators;
 
 import gr.james.socialinfluence.api.Graph;
+import gr.james.socialinfluence.api.GraphFactory;
 import gr.james.socialinfluence.api.GraphGenerator;
 import gr.james.socialinfluence.graph.Vertex;
-import gr.james.socialinfluence.util.Helper;
 
 import java.util.List;
 
@@ -12,19 +12,17 @@ import java.util.List;
  *
  * @see <a href="http://mathworld.wolfram.com/GridGraph.html">http://mathworld.wolfram.com/GridGraph.html</a>
  */
-public class GridGenerator<T extends Graph> implements GraphGenerator<T> {
-    private Class<T> type;
+public class GridGenerator implements GraphGenerator {
     private int n, m;
 
-    public GridGenerator(Class<T> type, int n, int m) {
-        this.type = type;
+    public GridGenerator(int n, int m) {
         this.n = n;
         this.m = m;
     }
 
     @Override
-    public T create() {
-        T g = Helper.instantiateGeneric(type);
+    public <T extends Graph> T create(GraphFactory<T> factory) {
+        T g = factory.create();
 
         int count = 0;
         List<Vertex> set = g.addVertices(n * m);

@@ -1,31 +1,29 @@
 package gr.james.socialinfluence.algorithms.generators;
 
 import gr.james.socialinfluence.api.Graph;
+import gr.james.socialinfluence.api.GraphFactory;
 import gr.james.socialinfluence.api.GraphGenerator;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.util.Conditions;
-import gr.james.socialinfluence.util.Helper;
 import gr.james.socialinfluence.util.RandomHelper;
 
-public class WattsStrogatzGenerator<T extends Graph> implements GraphGenerator<T> {
+public class WattsStrogatzGenerator implements GraphGenerator {
     double b;
-    private Class<T> type;
     private int n, k;
 
-    public WattsStrogatzGenerator(Class<T> type, int n, int k, double b) {
+    public WattsStrogatzGenerator(int n, int k, double b) {
         Conditions.requireArgument(k % 2 == 0, "k must be an even number, got %d", k);
         Conditions.requireArgument(b >= 0 && b <= 1, "b must be inside [0,1], got %f", b);
         Conditions.requireArgument(k < n, "n must be smaller than k");
 
-        this.type = type;
         this.n = n;
         this.k = k;
         this.b = b;
     }
 
     @Override
-    public T create() {
-        T g = Helper.instantiateGeneric(type);
+    public <T extends Graph> T create(GraphFactory<T> factory) {
+        T g = factory.create();
 
         g.addVertices(n);
         for (int i = 0; i < n; i++) {

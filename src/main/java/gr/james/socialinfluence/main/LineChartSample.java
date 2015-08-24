@@ -3,7 +3,6 @@ package gr.james.socialinfluence.main;
 import gr.james.socialinfluence.algorithms.generators.RandomGenerator;
 import gr.james.socialinfluence.algorithms.scoring.PageRank;
 import gr.james.socialinfluence.api.Graph;
-import gr.james.socialinfluence.graph.MemoryGraph;
 import gr.james.socialinfluence.util.Finals;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -50,7 +49,7 @@ public class LineChartSample extends Application implements Runnable {
         //populating the series with data
 
         // -------------------------------------------------------------
-        Graph g = new RandomGenerator<>(MemoryGraph.class, 10000, 0.1).create();
+        Graph g = new RandomGenerator(10000, 0.1).create();
 
         List<Double> h = new ArrayList<>();
 

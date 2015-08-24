@@ -19,7 +19,7 @@ public class Examples {
         g.addEdge(v2, v3);
         HITS.execute(g, 0.0);
 
-        g = new BarabasiAlbertGenerator<>(MemoryGraph.class, 40, 2, 2, 1.0).create();
+        g = new BarabasiAlbertGenerator(40, 2, 2, 1.0).create();
         System.out.println(HITS.execute(g, 0.0));
         System.out.println(PageRank.execute(g, 0.0));
     }

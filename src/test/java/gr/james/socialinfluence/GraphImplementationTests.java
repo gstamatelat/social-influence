@@ -15,7 +15,7 @@ public class GraphImplementationTests {
      */
     @Test
     public void vertexIteratorTest() {
-        Graph g = new RandomGenerator<>(MemoryGraph.class, 250, 0.2).create();
+        Graph g = new RandomGenerator(250, 0.2).create(MemoryGraph::new);
 
         Iterator<Vertex> it1 = g.iterator();
         Iterator<Vertex> it2 = g.getVertices().iterator();
@@ -32,7 +32,7 @@ public class GraphImplementationTests {
      */
     @Test
     public void vertexIndexText() {
-        Graph g = new RandomGenerator<>(MemoryGraph.class, 250, 0.2).create();
+        Graph g = new RandomGenerator(250, 0.2).create(MemoryGraph::new);
         for (int i = 0; i < g.getVerticesCount(); i++) {
             Assert.assertEquals("vertexIndexText", g.getVertexFromIndex(i), g.getVertices().get(i));
         }
@@ -43,7 +43,7 @@ public class GraphImplementationTests {
      */
     @Test
     public void verticesCountTest() {
-        Graph g = new RandomGenerator<>(MemoryGraph.class, 250, 0.2).create();
+        Graph g = new RandomGenerator(250, 0.2).create(MemoryGraph::new);
         Assert.assertEquals("verticesCountTest", g.getVerticesCount(), g.getVertices().size());
     }
 }

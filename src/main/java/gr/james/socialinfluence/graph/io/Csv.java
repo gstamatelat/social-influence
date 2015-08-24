@@ -3,8 +3,8 @@ package gr.james.socialinfluence.graph.io;
 import gr.james.socialinfluence.algorithms.iterators.OrderedVertexIterator;
 import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.api.GraphExporter;
+import gr.james.socialinfluence.api.GraphFactory;
 import gr.james.socialinfluence.api.GraphImporter;
-import gr.james.socialinfluence.graph.MemoryGraph;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.util.Finals;
 
@@ -13,10 +13,10 @@ import java.util.Arrays;
 
 public class Csv implements GraphImporter, GraphExporter {
     @Override
-    public Graph from(InputStream source) throws IOException {
-        Graph g = new MemoryGraph();
+    public <T extends Graph> T from(InputStream in, GraphFactory<T> factory) throws IOException {
+        T g = factory.create();
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(source, Finals.IO_ENCODING));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(in, Finals.IO_ENCODING));
         String line;
         boolean firstLine = true;
         OrderedVertexIterator it = null;
@@ -42,7 +42,7 @@ public class Csv implements GraphImporter, GraphExporter {
         reader.close();
 
         g.setGraphType("CSVImport");
-        g.setMeta("source", source.toString());
+        g.setMeta("source", in.toString());
 
         return g;
     }

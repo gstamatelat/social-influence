@@ -2,6 +2,7 @@ package gr.james.socialinfluence.graph.io;
 
 import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.api.GraphExporter;
+import gr.james.socialinfluence.api.GraphFactory;
 import gr.james.socialinfluence.api.GraphImporter;
 import gr.james.socialinfluence.graph.Edge;
 import gr.james.socialinfluence.graph.Vertex;
@@ -16,7 +17,7 @@ import java.util.*;
  */
 public class Json implements GraphImporter, GraphExporter {
     @Override
-    public Graph from(InputStream in) throws IOException {
+    public <T extends Graph> T from(InputStream in, GraphFactory<T> factory) throws IOException {
         throw new UnsupportedOperationException();
     }
 

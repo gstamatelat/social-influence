@@ -1,5 +1,7 @@
 package gr.james.socialinfluence.util;
 
+import gr.james.socialinfluence.api.Graph;
+import gr.james.socialinfluence.api.GraphFactory;
 import gr.james.socialinfluence.api.GraphGenerator;
 import gr.james.socialinfluence.api.GraphImporter;
 import gr.james.socialinfluence.graph.Edge;
@@ -60,11 +62,14 @@ public final class Helper {
     }
 
     public static GraphGenerator convertImporterToGenerator(GraphImporter i, InputStream s) {
-        return () -> {
-            try {
-                return i.from(s);
-            } catch (IOException e) {
-                throw Helper.convertCheckedException(e);
+        return new GraphGenerator() {
+            @Override
+            public <T extends Graph> T create(GraphFactory<T> factory) {
+                try {
+                    return i.from(s, factory);
+                } catch (IOException e) {
+                    throw Helper.convertCheckedException(e);
+                }
             }
         };
     }

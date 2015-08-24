@@ -1,24 +1,21 @@
 package gr.james.socialinfluence.algorithms.generators;
 
 import gr.james.socialinfluence.api.Graph;
+import gr.james.socialinfluence.api.GraphFactory;
 import gr.james.socialinfluence.api.GraphGenerator;
 import gr.james.socialinfluence.graph.Vertex;
-import gr.james.socialinfluence.util.Helper;
 
 /**
  * <p>Jackson, Matthew O. Social and economic networks. Vol. 3. Princeton: Princeton University Press, 2008, Figure
  * 8.3.2. A Society with a Convergent Updating Process.</p>
  */
-public class MasterGenerator<T extends Graph> implements GraphGenerator<T> {
-    private Class<T> type;
-
-    public MasterGenerator(Class<T> type) {
-        this.type = type;
+public class MasterGenerator implements GraphGenerator {
+    public MasterGenerator() {
     }
 
     @Override
-    public T create() {
-        T g = Helper.instantiateGeneric(type);
+    public <T extends Graph> T create(GraphFactory<T> factory) {
+        T g = factory.create();
 
         Vertex v1 = g.addVertex();
         Vertex v2 = g.addVertex();

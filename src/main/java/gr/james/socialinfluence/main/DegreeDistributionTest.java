@@ -3,7 +3,6 @@ package gr.james.socialinfluence.main;
 import gr.james.socialinfluence.algorithms.generators.BarabasiAlbertGenerator;
 import gr.james.socialinfluence.algorithms.scoring.Degree;
 import gr.james.socialinfluence.api.Graph;
-import gr.james.socialinfluence.graph.MemoryGraph;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.util.RandomHelper;
 import gr.james.socialinfluence.util.collections.GraphState;
@@ -24,7 +23,7 @@ public class DegreeDistributionTest {
          * [c_1, e_1] = [c_2, e_2] = ... = [c_p, e_p] in order for the graph to have scale-free degree
          * distribution. On this example p = coefficient_count / 2. Press Ctrl+C to terminate.
          */
-        Graph g = new BarabasiAlbertGenerator<>(MemoryGraph.class, 10000, 2, 1, 1.2).create();
+        Graph g = new BarabasiAlbertGenerator(10000, 2, 1, 1.2).create();
         int coefficient_count = 2;
         double speed = 1.0;
 

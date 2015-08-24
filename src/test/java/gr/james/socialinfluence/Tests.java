@@ -36,7 +36,7 @@ public class Tests {
         int vertexCount = 40;
 
         /* Create graph and randomize edge weights */
-        Graph g = new RandomGenerator<>(MemoryGraph.class, vertexCount, p).create();
+        Graph g = new RandomGenerator(vertexCount, p).create();
         GraphUtils.createCircle(g, true);
         for (Map.Entry<VertexPair, Edge> e : g.getEdges().entrySet()) {
             e.getValue().setWeight(RandomHelper.getRandom().nextDouble());
@@ -59,7 +59,7 @@ public class Tests {
         int vertexCount = 40;
 
         /* Create graph and randomize edge weights */
-        Graph g = new RandomGenerator<>(MemoryGraph.class, vertexCount, p).create();
+        Graph g = new RandomGenerator(vertexCount, p).create();
         GraphUtils.createCircle(g, true);
         for (Map.Entry<VertexPair, Edge> e : g.getEdges().entrySet()) {
             e.getValue().setWeight(RandomHelper.getRandom().nextDouble());
@@ -97,7 +97,7 @@ public class Tests {
         int vertexCount = RandomHelper.getRandom().nextInt(240) + 10;
 
         /* Make the graph */
-        Graph g = new BarabasiAlbertGenerator<>(MemoryGraph.class, vertexCount, 2, 2, 1.0).create();
+        Graph g = new BarabasiAlbertGenerator(vertexCount, 2, 2, 1.0).create();
 
         /* Get PageRank and Degree */
         GraphState<Integer> degree = Degree.execute(g, true);
@@ -117,7 +117,7 @@ public class Tests {
 
     @Test
     public void lessisTest() {
-        Graph g = new CycleGenerator<>(MemoryGraph.class, 3).create();
+        Graph g = new CycleGenerator(3).create();
 
         Move m1 = new Move();
         m1.putVertex(g.getVertexFromIndex(0), 1.5);
@@ -139,7 +139,7 @@ public class Tests {
         Graph[] graphs = new Graph[GRAPHS];
         for (int i = 0; i < GRAPHS; i++) {
             int size = RandomHelper.getRandom().nextInt(50) + 50;
-            graphs[i] = new RandomGenerator<>(MemoryGraph.class, size, RandomHelper.getRandom().nextDouble()).create();
+            graphs[i] = new RandomGenerator(size, RandomHelper.getRandom().nextDouble()).create();
             GraphUtils.createCircle(graphs[i], true);
         }
 
@@ -150,7 +150,7 @@ public class Tests {
             edgeCount += g.getEdgesCount();
         }
 
-        Graph g = GraphUtils.combineGraphs(MemoryGraph.class, graphs);
+        Graph g = GraphUtils.combineGraphs(graphs);
 
         Assert.assertEquals("combineGraphsTest - vertexCount", vertexCount, g.getVerticesCount());
         Assert.assertEquals("combineGraphsTest - edgeCount", edgeCount, g.getEdgesCount());
@@ -161,20 +161,20 @@ public class Tests {
         int clusters = RandomHelper.getRandom().nextInt(5) + 5;
         int clusterSize = RandomHelper.getRandom().nextInt(10) + 10;
 
-        Graph g = new BarabasiAlbertClusterGenerator<>(MemoryGraph.class, clusterSize, 2, 2, 1.0, clusters).create();
+        Graph g = new BarabasiAlbertClusterGenerator(clusterSize, 2, 2, 1.0, clusters).create();
         Assert.assertEquals("clustersTest", clusters * clusterSize, g.getVerticesCount());
     }
 
     /**
      * <p>In the {@link TwoWheelsGenerator} graph, the maximum degree should be {@code max(6, n-1)}, where {@code n} is
-     * the {@code int} input of {@link TwoWheelsGenerator#TwoWheelsGenerator(Class, int)}</p>
+     * the {@code int} input of {@link TwoWheelsGenerator#TwoWheelsGenerator(int)}</p>
      */
     @Test
     public void twoWheelsMaxDegreeTest() {
         int k = RandomHelper.getRandom().nextInt(100) + 4;
 
         /* Generate TwoWheels(k) */
-        Graph g = new TwoWheelsGenerator<>(MemoryGraph.class, k).create();
+        Graph g = new TwoWheelsGenerator(k).create();
 
         /* Get max degree */
         int max = new GraphStateIterator<>(Degree.execute(g, true)).next().getWeight();
@@ -191,7 +191,7 @@ public class Tests {
         int k = RandomHelper.getRandom().nextInt(100) + 4;
 
         /* Generate TwoWheels(k) */
-        Graph g = new TwoWheelsGenerator<>(MemoryGraph.class, k).create();
+        Graph g = new TwoWheelsGenerator(k).create();
 
         /* getVertexFromIndex(N) must always return the center vertex */
         Assert.assertEquals("getVertexFromIndexTest - N - " + k, 6, g.getOutDegree(g.getVertexFromIndex(g.getVerticesCount() - 1)));
@@ -206,7 +206,7 @@ public class Tests {
     @Test
     public void orderedIteratorTest() {
         int size = RandomHelper.getRandom().nextInt(25) + 5;
-        Graph g = new TwoWheelsGenerator<>(MemoryGraph.class, size).create();
+        Graph g = new TwoWheelsGenerator(size).create();
         OrderedVertexIterator it = new OrderedVertexIterator(g);
         int total = 0;
         Vertex pre = null;
@@ -228,7 +228,7 @@ public class Tests {
     public void deGrootTest() {
         int size = RandomHelper.getRandom().nextInt(50) + 50;
         double p = RandomHelper.getRandom().nextDouble();
-        Graph g = new RandomGenerator<>(MemoryGraph.class, size, p).create();
+        Graph g = new RandomGenerator(size, p).create();
         GraphUtils.createCircle(g, true);
 
         GraphState<Double> initialState = new GraphState<>(g, 0.0);
@@ -248,7 +248,7 @@ public class Tests {
     public void deepCopyTest() {
         int size = RandomHelper.getRandom().nextInt(50) + 50;
         double p = RandomHelper.getRandom().nextDouble();
-        Graph g = new RandomGenerator<>(MemoryGraph.class, size, p).create();
+        Graph g = new RandomGenerator(size, p).create();
         GraphUtils.createCircle(g, true);
         Graph e = GraphUtils.deepCopy(MemoryGraph.class, g);
         e.addVertex();
@@ -261,7 +261,7 @@ public class Tests {
         int size = RandomHelper.getRandom().nextInt(50) + 50;
         double p = RandomHelper.getRandom().nextDouble();
         double dampingFactor = RandomHelper.getRandom().nextDouble();
-        Graph g = new RandomGenerator<>(MemoryGraph.class, size, p).create();
+        Graph g = new RandomGenerator(size, p).create();
 
         GraphState<Double> p1 = PageRank.execute(g, dampingFactor);
         GraphState<Double> p2 = PageRank.execute(g, dampingFactor);

@@ -1,20 +1,19 @@
 package gr.james.socialinfluence.algorithms.generators;
 
 import gr.james.socialinfluence.api.Graph;
+import gr.james.socialinfluence.api.GraphFactory;
 import gr.james.socialinfluence.api.GraphGenerator;
 import gr.james.socialinfluence.graph.GraphUtils;
 import gr.james.socialinfluence.graph.Vertex;
 
-public class BarabasiAlbertClusterGenerator<T extends Graph> implements GraphGenerator<T> {
-    private Class<T> type;
+public class BarabasiAlbertClusterGenerator implements GraphGenerator {
     private int totalVertices;
     private int initialClique;
     private int stepEdges;
     private double a;
     private int clusters;
 
-    public BarabasiAlbertClusterGenerator(Class<T> type, int totalVertices, int initialClique, int stepEdges, double a, int clusters) {
-        this.type = type;
+    public BarabasiAlbertClusterGenerator(int totalVertices, int initialClique, int stepEdges, double a, int clusters) {
         this.totalVertices = totalVertices;
         this.initialClique = initialClique;
         this.stepEdges = stepEdges;
@@ -23,12 +22,12 @@ public class BarabasiAlbertClusterGenerator<T extends Graph> implements GraphGen
     }
 
     @Override
-    public T create() {
+    public <T extends Graph> T create(GraphFactory<T> factory) {
         Graph[] c = new Graph[clusters];
 
-        GraphGenerator scaleFreeGenerator = new BarabasiAlbertGenerator<>(type, totalVertices, stepEdges, initialClique, a);
+        GraphGenerator scaleFreeGenerator = new BarabasiAlbertGenerator(totalVertices, stepEdges, initialClique, a);
         for (int i = 0; i < clusters; i++) {
-            c[i] = scaleFreeGenerator.create();
+            c[i] = scaleFreeGenerator.create(factory);
         }
 
         Vertex[] randomVertices = new Vertex[clusters];
@@ -36,7 +35,7 @@ public class BarabasiAlbertClusterGenerator<T extends Graph> implements GraphGen
             randomVertices[i] = c[i].getRandomVertex();
         }
 
-        T g = GraphUtils.combineGraphs(type, c);
+        T g = GraphUtils.combineGraphs(factory, c);
 
         for (int i = 0; i < clusters; i++) {
             Vertex s = randomVertices[i];

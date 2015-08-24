@@ -39,7 +39,7 @@ public final class IterativeAlgorithmHelper {
 
             if (++reps == REPS_INCREASE) {
                 stateHistory.increaseMaxSize();
-                Finals.LOG.debug("Increased maxSize to {}", stateHistory.getMaxSize());
+                Finals.LOG.trace("Increased maxSize to {}", stateHistory.getMaxSize());
                 reps = 0;
             }
 
