@@ -97,6 +97,7 @@ public class GraphUtils {
     }
 
     public static Graph deepCopy(Graph g) {
+        // TODO: We need to have a way to get a GraphFactory out of a Graph in order to produce same-typed graphs
         return deepCopy(Finals.DEFAULT_GRAPH_FACTORY, g, g.getVertices());
     }
 
