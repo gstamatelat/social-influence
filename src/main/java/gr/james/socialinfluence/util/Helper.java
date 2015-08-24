@@ -6,7 +6,6 @@ import gr.james.socialinfluence.api.GraphGenerator;
 import gr.james.socialinfluence.api.GraphImporter;
 import gr.james.socialinfluence.graph.Edge;
 import gr.james.socialinfluence.util.collections.Weighted;
-import gr.james.socialinfluence.util.exceptions.GraphException;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,16 +18,6 @@ public final class Helper {
             sum += e.getWeight();
         }
         return sum;
-    }
-
-    public static <T> T instantiateGeneric(Class<T> type) {
-        T t;
-        try {
-            t = type.newInstance();
-        } catch (Exception e) {
-            throw new GraphException(Finals.E_HELPER_INSTANTIATE, type.getSimpleName());
-        }
-        return t;
     }
 
     /**

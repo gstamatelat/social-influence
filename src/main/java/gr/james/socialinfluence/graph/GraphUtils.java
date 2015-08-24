@@ -3,7 +3,6 @@ package gr.james.socialinfluence.graph;
 import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.api.GraphFactory;
 import gr.james.socialinfluence.util.Finals;
-import gr.james.socialinfluence.util.Helper;
 import gr.james.socialinfluence.util.collections.VertexPair;
 import gr.james.socialinfluence.util.exceptions.GraphException;
 
@@ -81,12 +80,8 @@ public class GraphUtils {
         return combineGraphs(Finals.DEFAULT_GRAPH_FACTORY, graphs);
     }
 
-    public static <T extends Graph> Graph deepCopy(Class<T> type, Graph g) {
-        return deepCopy(type, g, g.getVertices());
-    }
-
-    public static <T extends Graph> Graph deepCopy(Class<T> type, Graph g, Collection<Vertex> includeOnly) {
-        Graph r = Helper.instantiateGeneric(type);
+    public static <T extends Graph> T deepCopy(GraphFactory<T> factory, Graph g, Collection<Vertex> includeOnly) {
+        T r = factory.create();
         for (Vertex v : includeOnly) {
             if (!g.containsVertex(v)) {
                 throw new GraphException(Finals.E_GRAPH_VERTEX_NOT_CONTAINED, "deepCopy");
@@ -99,6 +94,10 @@ public class GraphUtils {
             }
         }
         return r;
+    }
+
+    public static Graph deepCopy(Graph g) {
+        return deepCopy(Finals.DEFAULT_GRAPH_FACTORY, g, g.getVertices());
     }
 
     /**
