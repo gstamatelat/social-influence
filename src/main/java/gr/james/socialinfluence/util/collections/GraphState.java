@@ -115,16 +115,6 @@ public class GraphState<T> extends ForwardingMap<Vertex, T> {
                 .map(i -> new Weighted<>(i.getKey(), this.getAsDouble(i.getKey()))).get();
     }
 
-    @Deprecated
-    public double getMean() {
-        return getMean(this.keySet());
-    }
-
-    @Deprecated
-    public double getMean(Collection<Vertex> filter) {
-        return getSum(filter) / filter.size();
-    }
-
     public double getAverage() {
         return getAverage(this.keySet());
     }
