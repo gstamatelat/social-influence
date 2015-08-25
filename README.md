@@ -19,25 +19,25 @@ g.addEdge(v1, v2);
 
 ```java
 GraphGenerator generator = new RandomGenerator(100, 0.05);
-Graph randomGraph = generator.create();
+Graph randomGraph = generator.generate();
 System.out.println(randomGraph);
 ```
 
 ```java
 GraphGenerator generator = new BarabasiAlbertGenerator(25, 2, 2, 1.0);
-Graph scaleFreeGraph = generator.create();
+Graph scaleFreeGraph = generator.generate();
 System.out.println(scaleFreeGraph);
 ```
 
 ```java
 GraphGenerator generator = new GridGenerator(25, 35);
-Graph gridGraph = generator.create();
+Graph gridGraph = generator.generate();
 System.out.println(gridGraph);
 ```
 
 ```java
-GraphGenerator generator = new WattsStrogatzGenerator(1000, 6, 0.4);
-Graph wattsStrogatzGraph = generator.create();
+GraphGenerator generator = new WattsStrogatzGenerator(250, 10, 0.5);
+Graph wattsStrogatzGraph = generator.generate();
 System.out.println(wattsStrogatzGraph);
 ```
 
@@ -46,7 +46,7 @@ Inspect available generators in `gr.james.socialinfluence.algorithms.generators`
 ### Vertex iteration
 
 ```java
-Graph g = new RandomGenerator(100, 0.05).create();
+Graph g = new RandomGenerator(100, 0.05).generate();
 for (Vertex v : g) {
     // Do something with v
 }
@@ -55,7 +55,7 @@ for (Vertex v : g) {
 The above construct will traverse the graph vertices in the order they were inserted in the graph. If you need to perform an index-based iteration, you should use
 
 ```java
-Graph g = new RandomGenerator(100, 0.05).create();
+Graph g = new RandomGenerator(100, 0.05).generate();
 for (int i = 0; i < g.getVerticesCount(); i++) {
     Vertex v = g.getVertexFromIndex(i);
     // Do something with v
@@ -69,7 +69,7 @@ Iterators (unless stated) are generally not backed by the graph; changes on the 
 `RandomVertexIterator` iterates over vertices in a random order.
 
 ```java
-Graph g = new RandomGenerator(100, 0.05).create();
+Graph g = new RandomGenerator(100, 0.05).generate();
 RandomVertexIterator vi = new RandomVertexIterator(g);
 while (vi.hasNext()) {
     Vertex v = vi.next();
@@ -94,11 +94,9 @@ Contains edge   | O(1)
 ## TODO
 
 - There needs to be a helper function or some `Graph` member method that can return if a graph is aperiodic or not
-- Consider converting `Move` to immutable
 - http://www.cs.cornell.edu/home/kleinber/swn.d/swn.html
 - Transformation "stretch" that extends edges
 - Perhaps define an `interface VertexSimilarity` with one member `double compute(Vertex v1, Vertex v2, Graph g)` as well as an `interface VertexSimilarityMatrix` replacing `Map<VertexPair, Double>`. See '3.2.4. Definitions based on vertex similarity' in 'Community detection in graphs, Santo Fortunato'
 - PageRank and HITS test on a known graph
 - GraphOperations.combineGraphs seems like a generalization of Graph.deepCopy
-- Consider changing the iterator of Move to Iterator<MovePoint> or Iterator<GenericPair<Vertex,Double>>
 - Implement `Metadata` on `Vertex` and `Edge`

@@ -21,7 +21,7 @@ public class GridGenerator implements GraphGenerator {
     }
 
     @Override
-    public <T extends Graph> T create(GraphFactory<T> factory) {
+    public <T extends Graph> T generate(GraphFactory<T> factory) {
         T g = factory.create();
 
         int count = 0;

@@ -17,7 +17,7 @@ public class Tournament {
     public static final int DRAW = 1;
 
     public static final int DEFAULT_ROUNDS = 1;
-    public static final boolean DEFAULT_ONE_GRAPH_PER_ROUND = false;
+    public static final boolean DEFAULT_ONE_GRAPH_PER_ROUND = true;
 
     private TournamentHandler handler;
     private Set<Player> players = new HashSet<>();
@@ -42,7 +42,7 @@ public class Tournament {
         for (TournamentDefinition g : scores.keySet()) {
             String hilariousStreamExpression = scores.get(g).keySet().stream().sorted(pComparator)
                     .map(item -> scores.get(g).get(item).toString()).collect(Collectors.joining(delimiter));
-            csv += String.format("\"%s\"%s\"%s\"%s%d%s%b%s%s%n", g.getGenerator().create(), delimiter,
+            csv += String.format("\"%s\"%s\"%s\"%s%d%s%b%s%s%n", g.getGenerator().generate(), delimiter,
                     g.getDefinition(), delimiter, g.getRounds(), delimiter, g.getOneGraphPerRound(), delimiter,
                     hilariousStreamExpression);
         }
@@ -62,11 +62,11 @@ public class Tournament {
         int done = 0;
         List playersList = new ArrayList<>(players);
         for (int i = 0; i < rounds; i++) {
-            Graph g = oneGraphPerRound ? generator.create() : null;
+            Graph g = oneGraphPerRound ? generator.generate() : null;
             for (Player a : players) {
                 for (Player b : players) {
                     if (playersList.indexOf(a) > playersList.indexOf(b)) {
-                        g = oneGraphPerRound ? g : generator.create();
+                        g = oneGraphPerRound ? g : generator.generate();
                         GameResult r = Game.runPlayers(a, b, g, d);
                         if (r.score < 0) {
                             score.put(a, score.get(a) + WIN);

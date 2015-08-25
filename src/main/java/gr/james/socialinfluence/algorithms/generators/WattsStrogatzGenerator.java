@@ -25,7 +25,7 @@ public class WattsStrogatzGenerator implements GraphGenerator {
     }
 
     @Override
-    public <T extends Graph> T create(GraphFactory<T> factory) {
+    public <T extends Graph> T generate(GraphFactory<T> factory) {
         T g = factory.create();
 
         List<Vertex> l = g.addVertices(n);

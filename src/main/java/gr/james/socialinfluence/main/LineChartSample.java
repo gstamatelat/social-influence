@@ -49,7 +49,7 @@ public class LineChartSample extends Application implements Runnable {
         //populating the series with data
 
         // -------------------------------------------------------------
-        Graph g = new RandomGenerator(10000, 0.1).create();
+        Graph g = new RandomGenerator(10000, 0.1).generate();
 
         List<Double> h = new ArrayList<>();
 

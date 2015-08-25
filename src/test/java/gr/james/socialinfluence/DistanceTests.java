@@ -29,7 +29,7 @@ public class DistanceTests {
         double p = RandomHelper.getRandom().nextDouble();
 
         /* Create graph and randomize edge weights */
-        Graph g = new RandomGenerator(vertexCount, p).create();
+        Graph g = new RandomGenerator(vertexCount, p).generate();
         GraphUtils.createCircle(g, true);
         for (Map.Entry<VertexPair, Edge> e : g.getEdges().entrySet()) {
             e.getValue().setWeight(RandomHelper.getRandom().nextDouble());
@@ -64,7 +64,7 @@ public class DistanceTests {
     public void dijkstraPathsTest() {
         int n = 7;
         int m = 6;
-        Graph g = new GridGenerator(n, m).create();
+        Graph g = new GridGenerator(n, m).generate();
 
         Map<VertexPair, Double> distFloyd = FloydWarshall.execute(g);
 

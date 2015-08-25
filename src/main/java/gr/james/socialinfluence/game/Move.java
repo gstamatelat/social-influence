@@ -8,6 +8,8 @@ import gr.james.socialinfluence.util.exceptions.WeightException;
 import java.util.*;
 import java.util.stream.Collectors;
 
+// TODO: Consider converting `Move` to immutable
+// TODO: Consider changing the iterator of Move to Iterator<MovePoint> or Iterator<GenericPair<Vertex,Double>>
 public class Move implements Iterable<Vertex> {
     private Map<Vertex, Double> m;
 

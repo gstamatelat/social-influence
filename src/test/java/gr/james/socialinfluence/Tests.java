@@ -36,7 +36,7 @@ public class Tests {
         int vertexCount = 40;
 
         /* Create graph and randomize edge weights */
-        Graph g = new RandomGenerator(vertexCount, p).create();
+        Graph g = new RandomGenerator(vertexCount, p).generate();
         GraphUtils.createCircle(g, true);
         for (Map.Entry<VertexPair, Edge> e : g.getEdges().entrySet()) {
             e.getValue().setWeight(RandomHelper.getRandom().nextDouble());
@@ -59,7 +59,7 @@ public class Tests {
         int vertexCount = 40;
 
         /* Create graph and randomize edge weights */
-        Graph g = new RandomGenerator(vertexCount, p).create();
+        Graph g = new RandomGenerator(vertexCount, p).generate();
         GraphUtils.createCircle(g, true);
         for (Map.Entry<VertexPair, Edge> e : g.getEdges().entrySet()) {
             e.getValue().setWeight(RandomHelper.getRandom().nextDouble());
@@ -97,7 +97,7 @@ public class Tests {
         int vertexCount = RandomHelper.getRandom().nextInt(240) + 10;
 
         /* Make the graph */
-        Graph g = new BarabasiAlbertGenerator(vertexCount, 2, 2, 1.0).create();
+        Graph g = new BarabasiAlbertGenerator(vertexCount, 2, 2, 1.0).generate();
 
         /* Get PageRank and Degree */
         GraphState<Integer> degree = Degree.execute(g, true);
@@ -117,7 +117,7 @@ public class Tests {
 
     @Test
     public void lessisTest() {
-        Graph g = new CycleGenerator(3).create();
+        Graph g = new CycleGenerator(3).generate();
 
         Move m1 = new Move();
         m1.putVertex(g.getVertexFromIndex(0), 1.5);
@@ -139,7 +139,7 @@ public class Tests {
         Graph[] graphs = new Graph[GRAPHS];
         for (int i = 0; i < GRAPHS; i++) {
             int size = RandomHelper.getRandom().nextInt(50) + 50;
-            graphs[i] = new RandomGenerator(size, RandomHelper.getRandom().nextDouble()).create();
+            graphs[i] = new RandomGenerator(size, RandomHelper.getRandom().nextDouble()).generate();
             GraphUtils.createCircle(graphs[i], true);
         }
 
@@ -161,7 +161,7 @@ public class Tests {
         int clusters = RandomHelper.getRandom().nextInt(5) + 5;
         int clusterSize = RandomHelper.getRandom().nextInt(10) + 10;
 
-        Graph g = new BarabasiAlbertClusterGenerator(clusterSize, 2, 2, 1.0, clusters).create();
+        Graph g = new BarabasiAlbertClusterGenerator(clusterSize, 2, 2, 1.0, clusters).generate();
         Assert.assertEquals("clustersTest", clusters * clusterSize, g.getVerticesCount());
     }
 
@@ -174,7 +174,7 @@ public class Tests {
         int k = RandomHelper.getRandom().nextInt(100) + 4;
 
         /* Generate TwoWheels(k) */
-        Graph g = new TwoWheelsGenerator(k).create();
+        Graph g = new TwoWheelsGenerator(k).generate();
 
         /* Get max degree */
         int max = new GraphStateIterator<>(Degree.execute(g, true)).next().getWeight();
@@ -191,7 +191,7 @@ public class Tests {
         int k = RandomHelper.getRandom().nextInt(100) + 4;
 
         /* Generate TwoWheels(k) */
-        Graph g = new TwoWheelsGenerator(k).create();
+        Graph g = new TwoWheelsGenerator(k).generate();
 
         /* getVertexFromIndex(N) must always return the center vertex */
         Assert.assertEquals("getVertexFromIndexTest - N - " + k, 6, g.getOutDegree(g.getVertexFromIndex(g.getVerticesCount() - 1)));
@@ -206,7 +206,7 @@ public class Tests {
     @Test
     public void orderedIteratorTest() {
         int size = RandomHelper.getRandom().nextInt(25) + 5;
-        Graph g = new TwoWheelsGenerator(size).create();
+        Graph g = new TwoWheelsGenerator(size).generate();
         OrderedVertexIterator it = new OrderedVertexIterator(g);
         int total = 0;
         Vertex pre = null;
@@ -228,7 +228,7 @@ public class Tests {
     public void deGrootTest() {
         int size = RandomHelper.getRandom().nextInt(50) + 50;
         double p = RandomHelper.getRandom().nextDouble();
-        Graph g = new RandomGenerator(size, p).create();
+        Graph g = new RandomGenerator(size, p).generate();
         GraphUtils.createCircle(g, true);
 
         GraphState<Double> initialState = new GraphState<>(g, 0.0);
@@ -248,7 +248,7 @@ public class Tests {
     public void deepCopyTest() {
         int size = RandomHelper.getRandom().nextInt(50) + 50;
         double p = RandomHelper.getRandom().nextDouble();
-        Graph g = new RandomGenerator(size, p).create();
+        Graph g = new RandomGenerator(size, p).generate();
         GraphUtils.createCircle(g, true);
         Graph e = GraphUtils.deepCopy(g);
         e.addVertex();
@@ -261,7 +261,7 @@ public class Tests {
         int size = RandomHelper.getRandom().nextInt(50) + 50;
         double p = RandomHelper.getRandom().nextDouble();
         double dampingFactor = RandomHelper.getRandom().nextDouble();
-        Graph g = new RandomGenerator(size, p).create();
+        Graph g = new RandomGenerator(size, p).generate();
 
         GraphState<Double> p1 = PageRank.execute(g, dampingFactor);
         GraphState<Double> p2 = PageRank.execute(g, dampingFactor);

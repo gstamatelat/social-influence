@@ -14,7 +14,7 @@ import java.util.Set;
 public class ClosenessTest {
     @Test
     public void sumClosenessTest() {
-        Graph g = new PathGenerator(4).create();
+        Graph g = new PathGenerator(4).generate();
         GraphState<Double> r = Closeness.executeSum(g, true, g.getVertices());
 
         Assert.assertEquals("sumClosenessTest", r.get(g.getVertexFromIndex(0)), 0.5, 0.0);
@@ -25,7 +25,7 @@ public class ClosenessTest {
 
     @Test
     public void sumClosenessIncludeTest() {
-        Graph g = new PathGenerator(4).create();
+        Graph g = new PathGenerator(4).generate();
 
         Set<Vertex> include = new HashSet<>();
         include.add(g.getVertexFromIndex(0));

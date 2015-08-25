@@ -14,10 +14,10 @@ public class TwoWheelsGenerator implements GraphGenerator {
     }
 
     @Override
-    public <T extends Graph> T create(GraphFactory<T> factory) {
+    public <T extends Graph> T generate(GraphFactory<T> factory) {
         WheelGenerator wheelGenerator = new WheelGenerator(wheelVertices);
-        T g1 = wheelGenerator.create(factory);
-        T g2 = wheelGenerator.create(factory);
+        T g1 = wheelGenerator.generate(factory);
+        T g2 = wheelGenerator.generate(factory);
 
         Vertex a = g1.getVertexFromIndex(0);
         Vertex b = g2.getVertexFromIndex(0);

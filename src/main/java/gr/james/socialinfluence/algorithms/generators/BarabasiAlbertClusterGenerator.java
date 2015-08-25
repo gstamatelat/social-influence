@@ -22,12 +22,12 @@ public class BarabasiAlbertClusterGenerator implements GraphGenerator {
     }
 
     @Override
-    public <T extends Graph> T create(GraphFactory<T> factory) {
+    public <T extends Graph> T generate(GraphFactory<T> factory) {
         Graph[] c = new Graph[clusters];
 
         GraphGenerator scaleFreeGenerator = new BarabasiAlbertGenerator(totalVertices, stepEdges, initialClique, a);
         for (int i = 0; i < clusters; i++) {
-            c[i] = scaleFreeGenerator.create(factory);
+            c[i] = scaleFreeGenerator.generate(factory);
         }
 
         Vertex[] randomVertices = new Vertex[clusters];

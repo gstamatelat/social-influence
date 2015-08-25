@@ -13,8 +13,8 @@ public class WheelGenerator implements GraphGenerator {
     }
 
     @Override
-    public <T extends Graph> T create(GraphFactory<T> factory) {
-        T g = new CycleGenerator(totalVertices - 1).create(factory);
+    public <T extends Graph> T generate(GraphFactory<T> factory) {
+        T g = new CycleGenerator(totalVertices - 1).generate(factory);
 
         Vertex n = g.addVertex();
         for (Vertex v : g) {

@@ -30,8 +30,8 @@ public class BarabasiAlbertGenerator implements GraphGenerator {
     }
 
     @Override
-    public <T extends Graph> T create(GraphFactory<T> factory) {
-        T g = new CompleteGenerator(initialClique).create(factory);
+    public <T extends Graph> T generate(GraphFactory<T> factory) {
+        T g = new CompleteGenerator(initialClique).generate(factory);
 
         while (g.getVerticesCount() < totalVertices) {
             GraphState<Integer> degree = Degree.execute(g, true);
