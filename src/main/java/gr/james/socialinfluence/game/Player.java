@@ -55,7 +55,6 @@ public abstract class Player {
         }
     }
 
-    // TODO: Document that this method can throw Exception but not Error
     protected abstract void suggestMove(Graph g, GameDefinition d, MovePointer movePtr);
 
     /**

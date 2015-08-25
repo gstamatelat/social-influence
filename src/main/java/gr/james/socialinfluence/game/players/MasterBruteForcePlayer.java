@@ -23,7 +23,7 @@ import java.util.Map;
  * enabled by default.</li>
  * </ul>
  */
-public class BruteForcePlayer extends Player {
+public class MasterBruteForcePlayer extends Player {
     public static Move getRandomMove(Graph g, int numOfMoves, int weightLevels, Move lastMove, boolean clever) {
         if (!clever) {
             return getRandomMoveWithoutMutation(g, numOfMoves, weightLevels);
