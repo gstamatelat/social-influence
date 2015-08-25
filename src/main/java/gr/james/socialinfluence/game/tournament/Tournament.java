@@ -36,13 +36,15 @@ public class Tournament {
 
     public String getAllScoresInDsv(String delimiter) {
         Comparator<Player> pComparator = (o1, o2) -> o1.toString().compareTo(o2.toString());
-        String csv = String.format("%s%s%s%s%s%s%s%n", "GRAPH", delimiter, "DEFINITION", delimiter, "ROUNDS", delimiter,
+        String csv = String.format("%s%s%s%s%s%s%s%s%s%n", "GRAPH", delimiter, "DEFINITION", delimiter, "ROUNDS",
+                delimiter, "ONE_GRAPH_PER_ROUND", delimiter,
                 players.stream().sorted(pComparator).map(Player::toString).collect(Collectors.joining(delimiter)));
         for (TournamentDefinition g : scores.keySet()) {
             String hilariousStreamExpression = scores.get(g).keySet().stream().sorted(pComparator)
                     .map(item -> scores.get(g).get(item).toString()).collect(Collectors.joining(delimiter));
-            csv += String.format("\"%s\"%s\"%s\"%s%d%s%s%n", g.getGenerator().create(), delimiter, g.getDefinition(),
-                    delimiter, g.getRounds(), delimiter, hilariousStreamExpression);
+            csv += String.format("\"%s\"%s\"%s\"%s%d%s%b%s%s%n", g.getGenerator().create(), delimiter,
+                    g.getDefinition(), delimiter, g.getRounds(), delimiter, g.getOneGraphPerRound(), delimiter,
+                    hilariousStreamExpression);
         }
         return csv;
     }
