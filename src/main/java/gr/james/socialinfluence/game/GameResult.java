@@ -17,6 +17,6 @@ public class GameResult {
 
     @Override
     public String toString() {
-        return String.format("{score=%d,state=%.2f}", score, fullState.getMean());
+        return String.format("{score=%d,state=%.2f}", score, fullState.getAverage());
     }
 }

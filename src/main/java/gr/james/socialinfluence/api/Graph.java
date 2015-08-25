@@ -409,36 +409,4 @@ public interface Graph extends Iterable<Vertex>, Metadata {
         }
         return Collections.unmodifiableMap(edges);
     }
-
-    /**
-     * <p>Returns true if for every edge with source S and target T where S and T are different,
-     * there is always an edge with source T and target S.</p>
-     *
-     * @return {@code true} if the graph is undirected, otherwise {@code false}
-     */
-    @Deprecated
-    default boolean isUndirected() {
-        // TODO: Implement
-        /*ArrayList<VertexPair> edgeList = new ArrayList<>();
-        for (VertexPair e : this.getEdges().keySet()) {
-            Vertex v = e.getSource();
-            Vertex w = e.getTarget();
-            if (!v.equals(w)) {
-                int indexOfOpposite = -1;
-                for (int i = 0; i < edgeList.size(); i++) {
-                    if (edgeList.get(i)[0].equals(w) && edgeList.get(i)[1].equals(v)) {
-                        indexOfOpposite = i;
-                        break;
-                    }
-                }
-                if (indexOfOpposite > -1) {
-                    edgeList.remove(indexOfOpposite);
-                } else {
-                    edgeList.add(new Vertex[]{v, w});
-                }
-            }
-        }
-        return edgeList.size() == 0;*/
-        return false;
-    }
 }

@@ -132,11 +132,6 @@ public final class ImmutableGraph implements Graph {
     }
 
     @Override
-    public boolean isUndirected() {
-        return this.g.isUndirected();
-    }
-
-    @Override
     public List<Vertex> getVertices() {
         return this.g.getVertices();
     }

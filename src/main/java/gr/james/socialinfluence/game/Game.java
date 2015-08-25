@@ -101,8 +101,8 @@ public final class Game {
         GraphState<Double> a = runPrimitiveGame(g, playerAMove, playerBMove, deGrootEpsilon);
         GraphState<Double> b = runPrimitiveGame(g, playerBMove, playerAMove, deGrootEpsilon);
 
-        double am = a.getMean() - 0.5;
-        double bm = b.getMean() - 0.5;
+        double am = a.getAverage() - 0.5;
+        double bm = b.getAverage() - 0.5;
 
         int score;
 

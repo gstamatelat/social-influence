@@ -44,7 +44,7 @@ public class Tests {
 
         /* PageRank values must sum to vertexCount */
         GraphState<Double> pr = PageRank.execute(g, dampingFactor);
-        Assert.assertEquals("pageRankSum", 1.0, pr.getMean(), 1.0e-2);
+        Assert.assertEquals("pageRankSum", 1.0, pr.getAverage(), 1.0e-2);
     }
 
     /**
@@ -104,7 +104,7 @@ public class Tests {
         GraphState<Double> pagerank = PageRank.execute(g, 0.0);
 
         /* Normalize pagerank */
-        double mean = degree.getMean();
+        double mean = degree.getAverage();
         for (Vertex v : g) {
             pagerank.put(v, pagerank.get(v) * mean);
         }
@@ -237,7 +237,7 @@ public class Tests {
         }
 
         GraphState<Double> finalState = DeGroot.execute(g, initialState, 0.0);
-        double avg = finalState.getMean();
+        double avg = finalState.getAverage();
 
         for (double e : finalState.values()) {
             Assert.assertEquals("deGrootTest", avg, e, 1.0e-5);
