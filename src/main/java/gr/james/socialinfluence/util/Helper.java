@@ -1,14 +1,8 @@
 package gr.james.socialinfluence.util;
 
-import gr.james.socialinfluence.api.Graph;
-import gr.james.socialinfluence.api.GraphFactory;
-import gr.james.socialinfluence.api.GraphGenerator;
-import gr.james.socialinfluence.api.GraphImporter;
 import gr.james.socialinfluence.graph.Edge;
 import gr.james.socialinfluence.util.collections.Weighted;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.*;
 
 public final class Helper {
@@ -48,19 +42,6 @@ public final class Helper {
             exceptionAsString += String.format("\t\t%s\n", s);
         }
         return exceptionAsString.substring(0, exceptionAsString.length() - 1);
-    }
-
-    public static GraphGenerator convertImporterToGenerator(GraphImporter i, InputStream s) {
-        return new GraphGenerator() {
-            @Override
-            public <T extends Graph> T create(GraphFactory<T> factory) {
-                try {
-                    return i.from(s, factory);
-                } catch (IOException e) {
-                    throw Helper.convertCheckedException(e);
-                }
-            }
-        };
     }
 
     @SuppressWarnings({"AssertWithSideEffects", "ConstantConditions", "UnusedAssignment"})

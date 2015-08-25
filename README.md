@@ -89,6 +89,8 @@ Remove edge     | O(1)
 Contains vertex | O(1)
 Contains edge   | O(1)
 
+`MemoryGraph` is the default graph implementation; references to the "default graph type", "default graph" or similar in the documentation point to `MemoryGraph`.
+
 ## TODO
 
 - There needs to be a helper function or some `Graph` member method that can return if a graph is aperiodic or not

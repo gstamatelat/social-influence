@@ -14,12 +14,12 @@ import java.util.Map;
 
 public class Dot implements GraphImporter, GraphExporter {
     @Override
-    public <T extends Graph> T from(InputStream in, GraphFactory<T> factory) throws IOException {
+    public <T extends Graph> T from(InputStream source, GraphFactory<T> factory) throws IOException {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public void to(Graph g, OutputStream out) throws IOException {
+    public void to(Graph g, OutputStream target) throws IOException {
         String dot = "digraph G {" + System.lineSeparator();
         dot += "  overlap = false;" + System.lineSeparator();
         dot += "  bgcolor = transparent;" + System.lineSeparator();
@@ -31,9 +31,8 @@ public class Dot implements GraphImporter, GraphExporter {
         }
         dot += "}" + System.lineSeparator();
 
-        BufferedWriter w = new BufferedWriter(new OutputStreamWriter(out, Finals.IO_ENCODING));
+        BufferedWriter w = new BufferedWriter(new OutputStreamWriter(target, Finals.IO_ENCODING));
         w.write(dot);
         w.flush();
-        //w.close(); // Don't close someone else's stream
     }
 }

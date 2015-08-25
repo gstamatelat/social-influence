@@ -80,9 +80,9 @@ public class GraphUtils {
         return combineGraphs(Finals.DEFAULT_GRAPH_FACTORY, graphs);
     }
 
-    public static <T extends Graph> T deepCopy(GraphFactory<T> factory, Graph g, Collection<Vertex> includeOnly) {
+    public static <T extends Graph> T deepCopy(Graph g, GraphFactory<T> factory, Collection<Vertex> filter) {
         T r = factory.create();
-        for (Vertex v : includeOnly) {
+        for (Vertex v : filter) {
             if (!g.containsVertex(v)) {
                 throw new GraphException(Finals.E_GRAPH_VERTEX_NOT_CONTAINED, "deepCopy");
             }
@@ -96,9 +96,17 @@ public class GraphUtils {
         return r;
     }
 
+    public static <T extends Graph> T deepCopy(Graph g, GraphFactory<T> factory) {
+        return deepCopy(g, factory, g.getVertices());
+    }
+
+    public static Graph deepCopy(Graph g, Collection<Vertex> filter) {
+        return deepCopy(g, Finals.DEFAULT_GRAPH_FACTORY, filter);
+    }
+
     public static Graph deepCopy(Graph g) {
         // TODO: We need to have a way to get a GraphFactory out of a Graph in order to produce same-typed graphs
-        return deepCopy(Finals.DEFAULT_GRAPH_FACTORY, g, g.getVertices());
+        return deepCopy(g, Finals.DEFAULT_GRAPH_FACTORY, g.getVertices());
     }
 
     /**

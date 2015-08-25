@@ -13,10 +13,10 @@ import java.util.Arrays;
 
 public class Csv implements GraphImporter, GraphExporter {
     @Override
-    public <T extends Graph> T from(InputStream in, GraphFactory<T> factory) throws IOException {
+    public <T extends Graph> T from(InputStream source, GraphFactory<T> factory) throws IOException {
         T g = factory.create();
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(in, Finals.IO_ENCODING));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(source, Finals.IO_ENCODING));
         String line;
         boolean firstLine = true;
         OrderedVertexIterator it = null;
@@ -39,16 +39,15 @@ public class Csv implements GraphImporter, GraphExporter {
             }
             firstLine = false;
         }
-        reader.close();
 
         g.setGraphType("CSVImport");
-        g.setMeta("source", in.toString());
+        g.setMeta("source", source.toString());
 
         return g;
     }
 
     @Override
-    public void to(Graph g, OutputStream out) {
+    public void to(Graph g, OutputStream target) {
         throw new UnsupportedOperationException();
     }
 }

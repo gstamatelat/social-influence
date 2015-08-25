@@ -17,12 +17,12 @@ import java.util.*;
  */
 public class Json implements GraphImporter, GraphExporter {
     @Override
-    public <T extends Graph> T from(InputStream in, GraphFactory<T> factory) throws IOException {
+    public <T extends Graph> T from(InputStream source, GraphFactory<T> factory) throws IOException {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public void to(Graph g, OutputStream out) {
+    public void to(Graph g, OutputStream target) {
         throw new UnsupportedOperationException();
     }
 
