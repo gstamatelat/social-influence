@@ -84,7 +84,7 @@ public class Tournament {
             }
         }
 
-        scores.put(new TournamentDefinition(generator, d, rounds), score);
+        scores.put(new TournamentDefinition(generator, d, rounds, oneGraphPerRound), score);
 
         return Collections.unmodifiableMap(score);
     }

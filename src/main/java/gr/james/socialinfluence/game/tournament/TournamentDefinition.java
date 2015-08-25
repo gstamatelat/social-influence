@@ -7,11 +7,13 @@ public class TournamentDefinition {
     private GraphGenerator generator;
     private GameDefinition definition;
     private int rounds;
+    private boolean oneGraphPerRound;
 
-    public TournamentDefinition(GraphGenerator generator, GameDefinition definition, int rounds) {
+    public TournamentDefinition(GraphGenerator generator, GameDefinition definition, int rounds, boolean oneGraphPerRound) {
         this.generator = generator;
         this.definition = definition;
         this.rounds = rounds;
+        this.oneGraphPerRound = oneGraphPerRound;
     }
 
     public GraphGenerator getGenerator() {
@@ -24,5 +26,9 @@ public class TournamentDefinition {
 
     public int getRounds() {
         return rounds;
+    }
+
+    public boolean getOneGraphPerRound() {
+        return oneGraphPerRound;
     }
 }
