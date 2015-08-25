@@ -2,27 +2,18 @@ package gr.james.socialinfluence.game;
 
 import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.graph.ImmutableGraph;
-import gr.james.socialinfluence.util.Conditions;
 import gr.james.socialinfluence.util.Finals;
 import gr.james.socialinfluence.util.Helper;
-import gr.james.socialinfluence.util.exceptions.GraphException;
 import org.slf4j.Logger;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Player {
-    protected static final Logger log = Finals.LOG;
+    protected static final Logger log = Finals.LOG; // TODO: This should probably be private
 
     private final Object lock = new Object();
-    private Map<String, String> options = new HashMap<>();
     private boolean interrupted = false;
-
-    /**
-     * <p>Constructs a {@code Player} with default options.</p>
-     */
-    public Player() {
-        options.putAll(defaultOptions());
-    }
 
     /**
      * <p>Tests whether the player has been interrupted. The game mechanism requests player interruption when the
@@ -104,33 +95,6 @@ public abstract class Player {
         }
 
         return m;
-    }
-
-    protected Map<String, String> defaultOptions() {
-        return Collections.<String, String>emptyMap();
-    }
-
-    public final String getOption(String name) {
-        Conditions.requireNonNull(name);
-        if (!this.options.containsKey(name)) {
-            throw new GraphException(Finals.E_PLAYER_NO_PARAMETER, this.getClass().getSimpleName(), name);
-        }
-        return this.options.get(name);
-    }
-
-    public final Player setOption(String name, String value) {
-        name = Conditions.requireNonNull(name);
-        value = Conditions.requireNonNull(value);
-        if (!this.options.containsKey(name)) {
-            throw new GraphException(Finals.E_PLAYER_NO_PARAMETER, this.getClass().getSimpleName(), name);
-        } else {
-            this.options.put(name, value);
-        }
-        return this;
-    }
-
-    public final Map<String, String> getOptions() {
-        return Collections.unmodifiableMap(this.options);
     }
 
     @Override

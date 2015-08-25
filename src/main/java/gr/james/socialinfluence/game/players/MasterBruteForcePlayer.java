@@ -8,9 +8,7 @@ import gr.james.socialinfluence.graph.GraphUtils;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.util.RandomHelper;
 
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 
 /**
  * <p>Implements a simple brute-force player.</p>
@@ -24,6 +22,22 @@ import java.util.Map;
  * </ul>
  */
 public class MasterBruteForcePlayer extends Player {
+    boolean clever;
+    private int weightLevels;
+    private double epsilon;
+
+    public MasterBruteForcePlayer(boolean clever, int weightLevels, double epsilon) {
+        this.clever = clever;
+        this.weightLevels = weightLevels;
+        this.epsilon = epsilon;
+    }
+
+    public MasterBruteForcePlayer() {
+        this.clever = false;
+        this.weightLevels = 10;
+        this.epsilon = 0.0;
+    }
+
     public static Move getRandomMove(Graph g, int numOfMoves, int weightLevels, Move lastMove, boolean clever) {
         if (!clever) {
             return getRandomMoveWithoutMutation(g, numOfMoves, weightLevels);
@@ -59,28 +73,18 @@ public class MasterBruteForcePlayer extends Player {
     }
 
     @Override
-    public Map<String, String> defaultOptions() {
-        Map<String, String> defaultOptions = new HashMap<>();
-        defaultOptions.put("weight_levels", "10");
-        defaultOptions.put("epsilon", "0.0");
-        defaultOptions.put("clever", "false");
-        return defaultOptions;
-    }
-
-    @Override
     public void suggestMove(Graph g, GameDefinition d, MovePointer movePtr) {
         Graph mg = GraphUtils.deepCopy(g);
 
         HashSet<Move> movesHistory = new HashSet<>();
         HashSet<Move> moveDraws = new HashSet<>();
 
-        Move bestMove = getRandomMove(g, d.getActions(), Integer.parseInt(getOption("weight_levels")), null, false);
+        Move bestMove = getRandomMove(g, d.getActions(), weightLevels, null, false);
         movesHistory.add(bestMove);
 
         while (!this.isInterrupted()) {
-            Move newMove = getRandomMove(g, d.getActions(), Integer.parseInt(getOption("weight_levels")), bestMove,
-                    Boolean.parseBoolean(getOption("clever")));
-            int gameScore = Game.runMoves(mg, d, bestMove, newMove, Double.parseDouble(getOption("epsilon"))).score;
+            Move newMove = getRandomMove(g, d.getActions(), weightLevels, bestMove, clever);
+            int gameScore = Game.runMoves(mg, d, bestMove, newMove, epsilon).score;
             if (gameScore == 0) {
                 if (moveDraws.add(newMove)) {
                     log.debug("Draw with move {}", newMove);
