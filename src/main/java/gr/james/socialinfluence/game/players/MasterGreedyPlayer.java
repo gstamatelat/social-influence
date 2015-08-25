@@ -12,7 +12,8 @@ import gr.james.socialinfluence.graph.Vertex;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GreedyPlayer extends Player {
+// TODO: Should derive AbstractGreedyPlayer
+public class MasterGreedyPlayer extends Player {
     public static Move getMinimum(HashMap<Move, Double> treeMoves) {
         Double minSumMove = Double.POSITIVE_INFINITY;
         Move minMove = null;
