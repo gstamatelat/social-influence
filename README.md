@@ -41,7 +41,7 @@ Graph wattsStrogatzGraph = generator.generate();
 System.out.println(wattsStrogatzGraph);
 ```
 
-Inspect available generators in `gr.james.socialinfluence.algorithms.generators` package.
+Inspect available generators in `gr.james.influence.algorithms.generators` package.
 
 ### Vertex iteration
 
@@ -93,7 +93,6 @@ Contains edge   | O(1)
 
 ## TODO
 
-- There needs to be a helper function or some `Graph` member method that can return if a graph is aperiodic or not
 - http://www.cs.cornell.edu/home/kleinber/swn.d/swn.html
 - Transformation "stretch" that extends edges
 - Perhaps define an `interface VertexSimilarity` with one member `double compute(Vertex v1, Vertex v2, Graph g)` as well as an `interface VertexSimilarityMatrix` replacing `Map<VertexPair, Double>`. See '3.2.4. Definitions based on vertex similarity' in 'Community detection in graphs, Santo Fortunato'
