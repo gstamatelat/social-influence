@@ -11,14 +11,14 @@ import java.util.*;
  */
 public class MemoryGraph extends AbstractGraph {
     private Map<Vertex, Pair<Map<Vertex, Edge>>> m;
-    private List<Vertex> vertexCache;
+    private List<Vertex> vList;
 
     /**
      * <p>Constructs an empty {@code MemoryGraph}.</p>
      */
     public MemoryGraph() {
-        this.m = new LinkedHashMap<>();
-        this.vertexCache = null;
+        this.m = new HashMap<>(); // TODO: This was a LinkedHashMap; if it isn't causing any problems, remove this comment
+        this.vList = new ArrayList<>();
     }
 
     @Override
@@ -28,20 +28,18 @@ public class MemoryGraph extends AbstractGraph {
 
     @Override
     public boolean addVertex(Vertex v) {
-        Conditions.requireNonNull(v);
         if (this.containsVertex(v)) {
             return false;
         } else {
             Pair<Map<Vertex, Edge>> pp = new Pair<>(new LinkedHashMap<>(), new LinkedHashMap<>());
             this.m.put(v, pp);
-            verticesChanged();
+            this.vList.add(v);
             return true;
         }
     }
 
     @Override
     public boolean removeVertex(Vertex v) {
-        Conditions.requireNonNull(v);
         if (!this.containsVertex(v)) {
             return false;
         }
@@ -52,14 +50,14 @@ public class MemoryGraph extends AbstractGraph {
             this.m.get(d).getFirst().remove(v);
         }
         this.m.remove(v);
-        verticesChanged();
+        this.vList.remove(v);
         return true;
     }
 
     @Override
     public void clear() {
         this.m.clear();
-        verticesChanged();
+        this.vList.clear();
     }
 
     @Override
@@ -99,13 +97,6 @@ public class MemoryGraph extends AbstractGraph {
 
     @Override
     public List<Vertex> getVertices() {
-        if (this.vertexCache == null) {
-            this.vertexCache = new ArrayList<>(this.m.keySet());
-        }
-        return Collections.unmodifiableList(vertexCache);
-    }
-
-    private void verticesChanged() {
-        this.vertexCache = null;
+        return Collections.unmodifiableList(vList);
     }
 }

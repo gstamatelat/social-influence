@@ -10,8 +10,9 @@ import gr.james.socialinfluence.util.Finals;
 public interface GraphGenerator {
     /**
      * <p>Decorates a {@code Graph} around a {@code GraphGenerator} so that any subsequent
-     * {@link GraphGenerator#generate()} or {@link GraphGenerator#generate(GraphFactory)} methods will return a deep copy of
-     * {@code g}.</p>
+     * {@link GraphGenerator#generate()} or {@link GraphGenerator#generate(GraphFactory)} methods will return a deep
+     * copy of {@code g}. The generator is backed by the input graph so that any changes to {@code g} will reflect to
+     * the generator.</p>
      *
      * @param g the graph to decorate around a {@code GraphGenerator}
      * @return a {@code GraphGenerator} that each of its {@link GraphGenerator#generate()} and
