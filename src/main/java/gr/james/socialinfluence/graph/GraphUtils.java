@@ -9,6 +9,7 @@ import gr.james.socialinfluence.util.exceptions.GraphException;
 import java.util.*;
 import java.util.stream.Collectors;
 
+// TODO: Maybe transfer these as static on Graph
 public class GraphUtils {
     public static void createCircle(Graph g, boolean undirected) {
         Iterator<Vertex> vertexIterator = g.iterator();

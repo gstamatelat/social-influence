@@ -1,19 +1,10 @@
 package gr.james.socialinfluence.util;
 
-import gr.james.socialinfluence.graph.Edge;
 import gr.james.socialinfluence.util.collections.Weighted;
 
 import java.util.*;
 
 public final class Helper {
-    public static double getWeightSum(Collection<Edge> edges) {
-        double sum = 0;
-        for (Edge e : edges) {
-            sum += e.getWeight();
-        }
-        return sum;
-    }
-
     /**
      * <p>Weighted random selection.</p>
      *

@@ -114,7 +114,7 @@ public interface Graph extends Iterable<Vertex>, Metadata {
      * @see #getInStrength(Vertex)
      */
     default double getOutStrength(Vertex v) {
-        return Helper.getWeightSum(this.getOutEdges(v).values());
+        return this.getOutEdges(v).values().stream().mapToDouble(Edge::getWeight).sum();
     }
 
     /**
@@ -127,7 +127,7 @@ public interface Graph extends Iterable<Vertex>, Metadata {
      * @see #getOutStrength(Vertex)
      */
     default double getInStrength(Vertex v) {
-        return Helper.getWeightSum(this.getInEdges(v).values());
+        return this.getInEdges(v).values().stream().mapToDouble(Edge::getWeight).sum();
     }
 
     /**
@@ -272,7 +272,7 @@ public interface Graph extends Iterable<Vertex>, Metadata {
     }
 
     /**
-     * <p>Removes all vertices and all edges from this graph.</p>
+     * <p>Removes all vertices (and consequently all edges) from this graph.</p>
      */
     default void clear() {
         this.removeVertices(this.getVertices());

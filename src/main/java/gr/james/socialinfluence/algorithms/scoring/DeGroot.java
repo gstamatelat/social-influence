@@ -5,7 +5,6 @@ import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.graph.Edge;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.util.Finals;
-import gr.james.socialinfluence.util.Helper;
 import gr.james.socialinfluence.util.collections.GraphState;
 
 import java.util.Map;
@@ -24,7 +23,7 @@ public class DeGroot {
                                     e.getValue().getWeight() * oldState.get(e.getKey())
                             );
                         }
-                        nextState.put(v, vNewValue / Helper.getWeightSum(g.getOutEdges(v).values()));
+                        nextState.put(v, vNewValue / g.getOutStrength(v));
                     }
                     return nextState;
                 },

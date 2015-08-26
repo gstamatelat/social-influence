@@ -5,7 +5,6 @@ import gr.james.socialinfluence.api.Graph;
 import gr.james.socialinfluence.graph.Edge;
 import gr.james.socialinfluence.graph.Vertex;
 import gr.james.socialinfluence.util.Finals;
-import gr.james.socialinfluence.util.Helper;
 import gr.james.socialinfluence.util.collections.GraphState;
 
 import java.util.HashMap;
@@ -13,9 +12,9 @@ import java.util.Map;
 
 public class PageRank {
     public static GraphState<Double> execute(Graph g, double dampingFactor, double epsilon) {
-        HashMap<Vertex, Double> outWeightSums = new HashMap<>();
+        HashMap<Vertex, Double> outStrengths = new HashMap<>();
         for (Vertex v : g) {
-            outWeightSums.put(v, Helper.getWeightSum(g.getOutEdges(v).values()));
+            outStrengths.put(v, g.getOutStrength(v));
         }
 
         return IterativeAlgorithmHelper.execute(
@@ -27,7 +26,7 @@ public class PageRank {
                         Map<Vertex, Edge> inEdges = g.getInEdges(v);
                         for (Map.Entry<Vertex, Edge> e : inEdges.entrySet()) {
                             nextState.put(v, nextState.get(v) +
-                                    e.getValue().getWeight() * oldState.get(e.getKey()) / outWeightSums.get(e.getKey()));
+                                    e.getValue().getWeight() * oldState.get(e.getKey()) / outStrengths.get(e.getKey()));
                         }
                     }
                     for (Map.Entry<Vertex, Double> k : nextState.entrySet()) {
