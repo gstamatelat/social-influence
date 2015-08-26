@@ -84,7 +84,7 @@ while (vi.hasNext()) {
 Storage         | O(n+m)
 Add vertex      | O(1)
 Add edge        | O(1)
-Remove vertex   | O(m)
+Remove vertex   | O(n+m)
 Remove edge     | O(1)
 Contains vertex | O(1)
 Contains edge   | O(1)

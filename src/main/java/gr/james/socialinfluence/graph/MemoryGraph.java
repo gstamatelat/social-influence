@@ -61,9 +61,9 @@ public class MemoryGraph extends AbstractGraph {
     }
 
     @Override
-    public Edge addEdge(Vertex source, Vertex target) {
+    public Edge addEdge(Vertex source, Vertex target, double weight) {
         if (!containsEdge(source, target)) {
-            Edge e = new Edge();
+            Edge e = new Edge(weight);
             this.m.get(source).getFirst().put(target, e);
             this.m.get(target).getSecond().put(source, e);
             return e;

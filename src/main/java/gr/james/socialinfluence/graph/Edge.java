@@ -1,5 +1,6 @@
 package gr.james.socialinfluence.graph;
 
+import gr.james.socialinfluence.util.Conditions;
 import gr.james.socialinfluence.util.Finals;
 import gr.james.socialinfluence.util.exceptions.WeightException;
 
@@ -15,6 +16,17 @@ public class Edge {
      */
     public Edge() {
         this.weight = Finals.DEFAULT_EDGE_WEIGHT;
+    }
+
+    /**
+     * <p>Construct a new {@code Edge} with the specified weight.</p>
+     *
+     * @param weight the weight to be assigned to the edge
+     * @throws IllegalArgumentException if weight is negative or zero
+     */
+    public Edge(double weight) {
+        Conditions.requireArgument(weight > 0, Finals.E_EDGE_WEIGHT_NEGATIVE, weight);
+        this.weight = weight;
     }
 
     /**
@@ -34,15 +46,12 @@ public class Edge {
      * @return the current {@code Edge} instance to fulfill the builder pattern
      * @throws WeightException if weight is negative or zero
      * @see #getWeight()
-     * @deprecated This method will be removed because it violates the immutability of {@code Edge}
+     * @deprecated This method will be removed because it violates the immutability of {@code Edge}.
      */
     @Deprecated
     public Edge setWeight(double weight) {
-        if (weight <= 0) {
-            throw new WeightException(Finals.E_EDGE_WEIGHT_NEGATIVE, weight);
-        } else {
-            this.weight = weight;
-        }
+        Conditions.requireArgument(weight > 0, Finals.E_EDGE_WEIGHT_NEGATIVE, weight);
+        this.weight = weight;
         return this;
     }
 

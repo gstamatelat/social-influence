@@ -279,8 +279,9 @@ public interface Graph extends Iterable<Vertex>, Metadata {
     }
 
     /**
-     * <p>Creates an edge with the specified {@code source} and {@code target}. If an edge with the same {@code source}
-     * and {@code target} exists, nothing happens.</p>
+     * <p>Creates an edge with the specified {@code source} and {@code target} and default weight
+     * {@link Finals#DEFAULT_EDGE_WEIGHT}. If an edge with the same {@code source} and {@code target} exists, nothing
+     * happens.</p>
      *
      * @param source the source of the edge
      * @param target the target of the edge
@@ -288,7 +289,23 @@ public interface Graph extends Iterable<Vertex>, Metadata {
      * @throws NullPointerException   if either {@code source} or {@code target} is {@code null}
      * @throws InvalidVertexException if either {@code source} or {@code target} doesn't belong in the graph
      */
-    Edge addEdge(Vertex source, Vertex target);
+    default Edge addEdge(Vertex source, Vertex target) {
+        return addEdge(source, target, Finals.DEFAULT_EDGE_WEIGHT);
+    }
+
+    /**
+     * <p>Creates an edge with the specified {@code source}, {@code target} and {@code weight}. If an edge with the same
+     * {@code source} and {@code target} exists, nothing happens.</p>
+     *
+     * @param source the source of the edge
+     * @param target the target of the edge
+     * @param weight the weight to be associated with the edge
+     * @return the {@code Edge} object of the newly added edge, or {@code null} if an edge already exists
+     * @throws NullPointerException     if either {@code source} or {@code target} is {@code null}
+     * @throws InvalidVertexException   if either {@code source} or {@code target} doesn't belong in the graph
+     * @throws IllegalArgumentException if {@code weight} is non-positive
+     */
+    Edge addEdge(Vertex source, Vertex target, double weight);
 
     /**
      * <p>Connects every vertex in {@code among} with every other vertex in {@code among}; self-loops are excluded from

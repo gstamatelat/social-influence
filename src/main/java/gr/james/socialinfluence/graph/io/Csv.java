@@ -33,7 +33,7 @@ public class Csv implements GraphImporter, GraphExporter {
                     Vertex u = it2.next();
                     double value = Double.parseDouble(t);
                     if (value > 0) {
-                        g.addEdge(v, u).setWeight(value);
+                        g.addEdge(v, u, value);
                     }
                 }
             }

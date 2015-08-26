@@ -18,11 +18,11 @@ public final class Game {
         g.addEdge(playerB, playerB);
 
         for (Vertex v : playerAMove) {
-            g.addEdge(v, playerA).setWeight(playerAMove.getWeight(v));
+            g.addEdge(v, playerA, playerAMove.getWeight(v));
         }
 
         for (Vertex v : playerBMove) {
-            g.addEdge(v, playerB).setWeight(playerBMove.getWeight(v));
+            g.addEdge(v, playerB, playerBMove.getWeight(v));
         }
 
         GraphState<Double> initialOpinions = new GraphState<>(g, Finals.DEFAULT_GAME_OPINIONS);

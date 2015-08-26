@@ -1,5 +1,6 @@
 package gr.james.socialinfluence.util.exceptions;
 
+@Deprecated
 public class WeightException extends GraphException {
     /**
      * <p>Constructs a new {@code WeightException}.</p>

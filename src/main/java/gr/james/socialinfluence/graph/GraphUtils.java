@@ -43,10 +43,10 @@ public class GraphUtils {
 
         for (Vertex y : f) {
             for (Map.Entry<Vertex, Edge> e : g.getOutEdges(y).entrySet()) {
-                g.addEdge(v, e.getKey()).setWeight(e.getValue().getWeight());
+                g.addEdge(v, e.getKey(), e.getValue().getWeight());
             }
             for (Map.Entry<Vertex, Edge> e : g.getInEdges(y).entrySet()) {
-                g.addEdge(e.getKey(), v).setWeight(e.getValue().getWeight());
+                g.addEdge(e.getKey(), v, e.getValue().getWeight());
             }
             g.removeVertex(y);
         }
@@ -70,7 +70,7 @@ public class GraphUtils {
                 r.addVertex(v);
             }
             for (Map.Entry<VertexPair, Edge> e : g.getEdges().entrySet()) {
-                r.addEdge(e.getKey().getFirst(), e.getKey().getSecond()).setWeight(e.getValue().getWeight());
+                r.addEdge(e.getKey().getFirst(), e.getKey().getSecond(), e.getValue().getWeight());
             }
         }
         return r;
@@ -90,7 +90,7 @@ public class GraphUtils {
         }
         for (Map.Entry<VertexPair, Edge> e : g.getEdges().entrySet()) {
             if ((r.containsVertex(e.getKey().getFirst())) && r.containsVertex(e.getKey().getSecond())) {
-                r.addEdge(e.getKey().getFirst(), e.getKey().getSecond()).setWeight(e.getValue().getWeight());
+                r.addEdge(e.getKey().getFirst(), e.getKey().getSecond(), e.getValue().getWeight());
             }
         }
         return r;
