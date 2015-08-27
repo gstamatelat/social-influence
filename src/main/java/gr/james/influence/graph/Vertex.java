@@ -27,6 +27,15 @@ public class Vertex implements Comparable<Vertex> {
     }
 
     /**
+     * <p>Creates a new {@link Vertex} with the specified {@code label} that doesn't belong to a graph. You must bind it
+     * to a graph using {@link Graph#addVertex(Vertex)}.</p>
+     */
+    public Vertex(String label) {
+        this.id = Vertex.getNextId();
+        this.label = String.valueOf(label);
+    }
+
+    /**
      * <p>Returns an integer id that is guaranteed to be unique for every framework session. This method is used by the
      * constructor {@link #Vertex()} to produce a unique id for the new vertex.</p>
      *
