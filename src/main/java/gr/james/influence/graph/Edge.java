@@ -45,7 +45,8 @@ public class Edge {
      * @return the current {@code Edge} instance to fulfill the builder pattern
      * @throws IllegalArgumentException if weight is negative or zero
      * @see #getWeight()
-     * @deprecated This method will be removed because it violates the immutability of {@code Edge}.
+     * @deprecated This method will be removed because it violates the immutability of {@code Edge}. Use
+     * {@link gr.james.influence.api.Graph#setEdgeWeight(Vertex, Vertex, double)} instead.
      */
     @Deprecated
     public Edge setWeight(double weight) {

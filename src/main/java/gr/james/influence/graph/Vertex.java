@@ -29,6 +29,8 @@ public class Vertex implements Comparable<Vertex> {
     /**
      * <p>Creates a new {@link Vertex} with the specified {@code label} that doesn't belong to a graph. You must bind it
      * to a graph using {@link Graph#addVertex(Vertex)}.</p>
+     *
+     * @param label the label to be associated with the new vertex
      */
     public Vertex(String label) {
         this.id = Vertex.getNextId();

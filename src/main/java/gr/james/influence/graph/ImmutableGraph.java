@@ -197,6 +197,11 @@ public final class ImmutableGraph implements Graph {
     }
 
     @Override
+    public boolean setEdgeWeight(Vertex source, Vertex target, double weight) {
+        throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
+    }
+
+    @Override
     public Edge addEdge(Vertex source, Vertex target, double weight) {
         throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }

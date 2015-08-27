@@ -12,18 +12,14 @@ import gr.james.influence.game.Game;
 import gr.james.influence.game.GameDefinition;
 import gr.james.influence.game.GameResult;
 import gr.james.influence.game.Move;
-import gr.james.influence.graph.Edge;
 import gr.james.influence.graph.GraphUtils;
 import gr.james.influence.graph.MemoryGraph;
 import gr.james.influence.graph.Vertex;
 import gr.james.influence.util.Finals;
 import gr.james.influence.util.RandomHelper;
 import gr.james.influence.util.collections.GraphState;
-import gr.james.influence.util.collections.VertexPair;
 import org.junit.Assert;
 import org.junit.Test;
-
-import java.util.Map;
 
 public class Tests {
     /**
@@ -38,9 +34,7 @@ public class Tests {
         /* Create graph and randomize edge weights */
         Graph g = new RandomGenerator(vertexCount, p).generate();
         GraphUtils.createCircle(g, true);
-        for (Map.Entry<VertexPair, Edge> e : g.getEdges().entrySet()) {
-            e.getValue().setWeight(RandomHelper.getRandom().nextDouble());
-        }
+        GraphUtils.randomizeEdgeWeights(g);
 
         /* PageRank values must sum to vertexCount */
         GraphState<Double> pr = PageRank.execute(g, dampingFactor);
@@ -61,9 +55,7 @@ public class Tests {
         /* Create graph and randomize edge weights */
         Graph g = new RandomGenerator(vertexCount, p).generate();
         GraphUtils.createCircle(g, true);
-        for (Map.Entry<VertexPair, Edge> e : g.getEdges().entrySet()) {
-            e.getValue().setWeight(RandomHelper.getRandom().nextDouble());
-        }
+        GraphUtils.randomizeEdgeWeights(g);
 
         Finals.LOG.debug("damping factor = {}, p = {}", dampingFactor, p);
 

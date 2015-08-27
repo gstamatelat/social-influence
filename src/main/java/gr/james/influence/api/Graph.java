@@ -308,6 +308,29 @@ public interface Graph extends Iterable<Vertex>, Metadata {
     Edge addEdge(Vertex source, Vertex target, double weight);
 
     /**
+     * <p>Replaces the weight of the specified edge with {@code source} and {@code target} with {@code weight}. If an
+     * edge with {@code source} and {@code target} doesn't exist, nothing will happen.</p>
+     *
+     * @param source the source of the edge
+     * @param target the target of the edge
+     * @param weight the new weight to be associated with the edge
+     * @return {@code true} if there was previously an edge with the specified {@code source} and {@code target} and
+     * thus the weight could be changed, {@code false} otherwise
+     * @throws NullPointerException     if either {@code source} or {@code target} is {@code null}
+     * @throws InvalidVertexException   if either {@code source} or {@code target} doesn't belong in the graph
+     * @throws IllegalArgumentException if {@code weight} is non-positive
+     */
+    default boolean setEdgeWeight(Vertex source, Vertex target, double weight) {
+        if (removeEdge(source, target)) {
+            Edge e = addEdge(source, target, weight);
+            assert e != null;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * <p>Connects every vertex in {@code among} with every other vertex in {@code among}; self-loops are excluded from
      * the operation. After the operation, a complete subgraph of {@code among} will be created. If {@code among} only
      * contains 2 (unique) vertices {@code s} and {@code t}, edges {@code (s,t)} and {@code (t,s)} will be created. If
@@ -322,7 +345,7 @@ public interface Graph extends Iterable<Vertex>, Metadata {
         for (Vertex v : among) {
             for (Vertex u : among) {
                 if (!v.equals(u)) {
-                    this.addEdge(v, u);
+                    addEdge(v, u);
                 }
             }
         }

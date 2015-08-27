@@ -3,6 +3,7 @@ package gr.james.influence.graph;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphFactory;
 import gr.james.influence.util.Finals;
+import gr.james.influence.util.RandomHelper;
 import gr.james.influence.util.collections.VertexPair;
 import gr.james.influence.util.exceptions.GraphException;
 
@@ -28,6 +29,14 @@ public class GraphUtils {
             g.addEdges(previous, first);
         } else {
             g.addEdge(previous, first);
+        }
+    }
+
+    public static void randomizeEdgeWeights(Graph g) {
+        for (Map.Entry<VertexPair, Edge> e : g.getEdges().entrySet()) {
+            boolean change = g.setEdgeWeight(e.getKey().getSource(), e.getKey().getTarget(),
+                    RandomHelper.getRandom().nextDouble());
+            assert change;
         }
     }
 
