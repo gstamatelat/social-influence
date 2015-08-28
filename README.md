@@ -99,3 +99,4 @@ Contains edge   | O(1)
 - PageRank and HITS test on a known graph
 - GraphOperations.combineGraphs seems like a generalization of Graph.deepCopy
 - Implement `Metadata` on `Vertex` and `Edge`
+- Edge weight should be part of Graph and Edge should be arbitrary object
