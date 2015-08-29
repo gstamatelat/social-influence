@@ -12,6 +12,7 @@ import gr.james.influence.util.collections.GraphState;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 
 public class BarabasiAlbertGenerator implements GraphGenerator {
@@ -30,7 +31,7 @@ public class BarabasiAlbertGenerator implements GraphGenerator {
     }
 
     @Override
-    public <T extends Graph> T generate(GraphFactory<T> factory) {
+    public <T extends Graph> T generate(GraphFactory<T> factory, Random r) {
         T g = new CompleteGenerator(initialClique).generate(factory);
 
         while (g.getVerticesCount() < totalVertices) {
@@ -41,7 +42,7 @@ public class BarabasiAlbertGenerator implements GraphGenerator {
                 weightMap.put(v, Math.pow((double) degree.get(v), a));
             }
 
-            Set<Vertex> newVertices = Helper.weightedRandom(weightMap, stepEdges);
+            Set<Vertex> newVertices = Helper.weightedRandom(weightMap, stepEdges, r);
 
             Vertex v = g.addVertex();
             for (Vertex w : newVertices) {

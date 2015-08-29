@@ -4,7 +4,8 @@ import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphFactory;
 import gr.james.influence.api.GraphGenerator;
 import gr.james.influence.graph.Vertex;
-import gr.james.influence.util.RandomHelper;
+
+import java.util.Random;
 
 /**
  * <p>Random graph evolving generator implementing the G(n,p) model of Edgar Gilbert.</p>
@@ -22,17 +23,17 @@ public class RandomGenerator implements GraphGenerator {
     }
 
     @Override
-    public <T extends Graph> T generate(GraphFactory<T> factory) {
+    public <T extends Graph> T generate(GraphFactory<T> factory, Random r) {
         T g = factory.create();
 
         while (g.getVerticesCount() < totalVertices) {
             Vertex v = g.addVertex();
             for (Vertex y : g) {
                 if (!v.equals(y)) {
-                    if (RandomHelper.getRandom().nextDouble() < p) {
+                    if (r.nextDouble() < p) {
                         g.addEdge(v, y);
                     }
-                    if (RandomHelper.getRandom().nextDouble() < p) {
+                    if (r.nextDouble() < p) {
                         g.addEdge(y, v);
                     }
                 }

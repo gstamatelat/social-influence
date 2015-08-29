@@ -11,19 +11,33 @@ public final class Helper {
      * @param weightMap  a set of weighted objects as a {@code Map}
      * @param selections how many objects to select from the keys of {@code weightMap}
      * @param <E>        the type of objects
+     * @param r          the {@code Random} to use
      * @return a {@code Set} of objects as the weighted random selection
      * @see "Efraimidis, Spirakis. Weighted random sampling with a reservoir."
      */
-    public static <E> Set<E> weightedRandom(Map<E, Double> weightMap, int selections) {
+    public static <E> Set<E> weightedRandom(Map<E, Double> weightMap, int selections, Random r) {
         PriorityQueue<Weighted<E, Double>> keyQueue = new PriorityQueue<>(11, Collections.reverseOrder());
         for (E e : weightMap.keySet()) {
-            keyQueue.add(new Weighted<>(e, Math.pow(RandomHelper.getRandom().nextDouble(), 1.0 / weightMap.get(e))));
+            keyQueue.add(new Weighted<>(e, Math.pow(r.nextDouble(), 1.0 / weightMap.get(e))));
         }
         Set<E> finalSelections = new HashSet<>();
         while (finalSelections.size() < selections) {
             finalSelections.add(keyQueue.poll().getObject());
         }
         return finalSelections;
+    }
+
+    /**
+     * <p>Weighted random selection using the global random instance.</p>
+     *
+     * @param weightMap  a set of weighted objects as a {@code Map}
+     * @param selections how many objects to select from the keys of {@code weightMap}
+     * @param <E>        the type of objects
+     * @return a {@code Set} of objects as the weighted random selection
+     * @see "Efraimidis, Spirakis. Weighted random sampling with a reservoir."
+     */
+    public static <E> Set<E> weightedRandom(Map<E, Double> weightMap, int selections) {
+        return weightedRandom(weightMap, selections, RandomHelper.getRandom());
     }
 
     public static String getExceptionString(Throwable e) {

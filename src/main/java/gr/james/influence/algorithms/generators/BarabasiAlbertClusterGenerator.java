@@ -6,6 +6,8 @@ import gr.james.influence.api.GraphGenerator;
 import gr.james.influence.graph.GraphUtils;
 import gr.james.influence.graph.Vertex;
 
+import java.util.Random;
+
 public class BarabasiAlbertClusterGenerator implements GraphGenerator {
     private int totalVertices;
     private int initialClique;
@@ -22,17 +24,17 @@ public class BarabasiAlbertClusterGenerator implements GraphGenerator {
     }
 
     @Override
-    public <T extends Graph> T generate(GraphFactory<T> factory) {
+    public <T extends Graph> T generate(GraphFactory<T> factory, Random r) {
         Graph[] c = new Graph[clusters];
 
         GraphGenerator scaleFreeGenerator = new BarabasiAlbertGenerator(totalVertices, stepEdges, initialClique, a);
         for (int i = 0; i < clusters; i++) {
-            c[i] = scaleFreeGenerator.generate(factory);
+            c[i] = scaleFreeGenerator.generate(factory, r);
         }
 
         Vertex[] randomVertices = new Vertex[clusters];
         for (int i = 0; i < clusters; i++) {
-            randomVertices[i] = c[i].getRandomVertex();
+            randomVertices[i] = c[i].getRandomVertex(r);
         }
 
         T g = GraphUtils.combineGraphs(factory, c);

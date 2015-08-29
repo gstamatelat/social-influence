@@ -6,6 +6,8 @@ import gr.james.influence.api.GraphGenerator;
 import gr.james.influence.graph.GraphUtils;
 import gr.james.influence.graph.Vertex;
 
+import java.util.Random;
+
 public class TwoWheelsGenerator implements GraphGenerator {
     private int wheelVertices;
 
@@ -14,7 +16,7 @@ public class TwoWheelsGenerator implements GraphGenerator {
     }
 
     @Override
-    public <T extends Graph> T generate(GraphFactory<T> factory) {
+    public <T extends Graph> T generate(GraphFactory<T> factory, Random r) {
         WheelGenerator wheelGenerator = new WheelGenerator(wheelVertices);
         T g1 = wheelGenerator.generate(factory);
         T g2 = wheelGenerator.generate(factory);

@@ -5,9 +5,9 @@ import gr.james.influence.api.GraphFactory;
 import gr.james.influence.api.GraphGenerator;
 import gr.james.influence.graph.Vertex;
 import gr.james.influence.util.Conditions;
-import gr.james.influence.util.RandomHelper;
 
 import java.util.List;
+import java.util.Random;
 
 public class WattsStrogatzGenerator implements GraphGenerator {
     private int n;
@@ -25,7 +25,7 @@ public class WattsStrogatzGenerator implements GraphGenerator {
     }
 
     @Override
-    public <T extends Graph> T generate(GraphFactory<T> factory) {
+    public <T extends Graph> T generate(GraphFactory<T> factory, Random r) {
         T g = factory.create();
 
         List<Vertex> l = g.addVertices(n);
@@ -38,7 +38,7 @@ public class WattsStrogatzGenerator implements GraphGenerator {
         Vertex sub;
         for (int i = 0; i < n; i++) {
             for (int j = 1; j <= k / 2; j++) {
-                if (RandomHelper.getRandom().nextDouble() <= b) {
+                if (r.nextDouble() <= b) {
                     Vertex a = l.get(i);
                     Vertex b = l.get((i + j) % n);
                     g.removeEdges(a, b);

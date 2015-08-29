@@ -6,6 +6,7 @@ import gr.james.influence.api.GraphGenerator;
 import gr.james.influence.graph.Vertex;
 
 import java.util.List;
+import java.util.Random;
 
 /**
  * <p>Generates a two-dimensional, undirected, n x m grid graph.</p>
@@ -21,7 +22,7 @@ public class GridGenerator implements GraphGenerator {
     }
 
     @Override
-    public <T extends Graph> T generate(GraphFactory<T> factory) {
+    public <T extends Graph> T generate(GraphFactory<T> factory, Random r) {
         T g = factory.create();
 
         int count = 0;

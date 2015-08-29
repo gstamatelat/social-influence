@@ -5,6 +5,8 @@ import gr.james.influence.api.GraphFactory;
 import gr.james.influence.api.GraphGenerator;
 import gr.james.influence.graph.Vertex;
 
+import java.util.Random;
+
 public class CycleGenerator implements GraphGenerator {
     private int totalVertices;
 
@@ -13,7 +15,7 @@ public class CycleGenerator implements GraphGenerator {
     }
 
     @Override
-    public <T extends Graph> T generate(GraphFactory<T> factory) {
+    public <T extends Graph> T generate(GraphFactory<T> factory, Random r) {
         T g = factory.create();
 
         Vertex startVertex = g.addVertex(), previousVertex = startVertex;

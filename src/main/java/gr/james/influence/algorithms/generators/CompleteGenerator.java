@@ -4,6 +4,8 @@ import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphFactory;
 import gr.james.influence.api.GraphGenerator;
 
+import java.util.Random;
+
 public class CompleteGenerator implements GraphGenerator {
     private int totalVertices;
 
@@ -12,7 +14,7 @@ public class CompleteGenerator implements GraphGenerator {
     }
 
     @Override
-    public <T extends Graph> T generate(GraphFactory<T> factory) {
+    public <T extends Graph> T generate(GraphFactory<T> factory, Random r) {
         T g = factory.create();
 
         g.addEdges(g.addVertices(totalVertices));

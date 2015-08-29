@@ -60,11 +60,21 @@ public interface Graph extends Iterable<Vertex>, Metadata {
     /**
      * <p>Return a uniformly distributed random vertex of this graph.</p>
      *
+     * @param r the {@link Random} instance to use for the operation
+     * @return a random vertex contained in this graph
+     */
+    default Vertex getRandomVertex(Random r) {
+        // TODO: Return null or exception if the graph is empty
+        return getVertexFromIndex(r.nextInt(getVerticesCount()));
+    }
+
+    /**
+     * <p>Return a uniformly distributed random vertex of this graph using the global random instance.</p>
+     *
      * @return a random vertex contained in this graph
      */
     default Vertex getRandomVertex() {
-        // TODO: Return null or exception if the graph is empty
-        return getVertexFromIndex(RandomHelper.getRandom().nextInt(getVerticesCount()));
+        return getRandomVertex(RandomHelper.getRandom());
     }
 
     /**
