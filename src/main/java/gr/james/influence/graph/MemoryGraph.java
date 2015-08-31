@@ -32,7 +32,8 @@ public class MemoryGraph extends AbstractGraph {
             return false;
         } else {
             Pair<Map<Vertex, Edge>> pp = new Pair<>(new LinkedHashMap<>(), new LinkedHashMap<>());
-            this.m.put(v, pp);
+            Object o = this.m.put(v, pp);
+            assert o == null;
             this.vList.add(v);
             return true;
         }
@@ -44,13 +45,17 @@ public class MemoryGraph extends AbstractGraph {
             return false;
         }
         for (Vertex d : this.m.get(v).getFirst().keySet()) {
-            this.m.get(d).getSecond().remove(v);
+            Object o = this.m.get(d).getSecond().remove(v);
+            assert o != null;
         }
         for (Vertex d : this.m.get(v).getSecond().keySet()) {
-            this.m.get(d).getFirst().remove(v);
+            Object o = this.m.get(d).getFirst().remove(v);
+            assert o != null;
         }
-        this.m.remove(v);
-        this.vList.remove(v);
+        Object o1 = this.m.remove(v);
+        boolean o2 = this.vList.remove(v);
+        assert o1 != null;
+        assert o2;
         return true;
     }
 

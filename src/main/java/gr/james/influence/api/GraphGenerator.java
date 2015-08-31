@@ -16,7 +16,7 @@ public interface GraphGenerator {
      * return a deep copy of {@code g}. In the case of this decorator it is obvious that
      * {@link #generate(GraphFactory, Random)} is identical to {@link #generate(GraphFactory)} and
      * {@link #generate(Random)} is identical to {@link #generate()}. The generator is backed by the input graph so that
-     * any changes to {@code g} will reflect to the generator.</p>
+     * any changes to {@code g} will reflect on the generator.</p>
      *
      * @param g the graph to decorate around a {@code GraphGenerator}
      * @return a {@code GraphGenerator} that each of its {@link GraphGenerator#generate()} and

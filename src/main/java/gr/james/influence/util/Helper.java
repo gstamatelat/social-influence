@@ -59,4 +59,16 @@ public final class Helper {
     public static RuntimeException convertCheckedException(Exception e) {
         throw new RuntimeException(String.format("%s: %s", e.getClass().getName(), e.getMessage()));
     }
+
+    public static double benchmark(Runnable runnable, double seconds) {
+        long elapsed;
+        int reps = 0;
+        long now = System.nanoTime();
+        while ((elapsed = System.nanoTime() - now) < seconds * 1.0e9) {
+            runnable.run();
+            reps++;
+        }
+        System.out.printf("%d - %d%n", reps, elapsed);
+        return (double) reps * 1.0e9 / (double) elapsed;
+    }
 }
