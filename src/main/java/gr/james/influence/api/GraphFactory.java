@@ -7,9 +7,9 @@ package gr.james.influence.api;
  */
 public interface GraphFactory<T extends Graph> {
     /**
-     * <p>Create an empty graph of type {@code T}.</p>
+     * <p>Allocate and create an empty graph of type {@code T}.</p>
      *
-     * @return a new empty graph of type {@code T}
+     * @return a newly allocated and empty graph of type {@code T}
      */
     T create();
 }

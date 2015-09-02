@@ -116,6 +116,7 @@ public class GraphUtils {
 
     public static Graph deepCopy(Graph g) {
         // TODO: We need to have a way to get a GraphFactory out of a Graph in order to produce same-typed graphs
+        // TODO: On a second thought, maybe not, why would someone need to have the same type?
         return deepCopy(g, Finals.DEFAULT_GRAPH_FACTORY, g.getVertices());
     }
 

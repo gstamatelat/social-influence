@@ -17,7 +17,7 @@ public class MemoryGraph extends AbstractGraph {
      * <p>Constructs an empty {@code MemoryGraph}.</p>
      */
     public MemoryGraph() {
-        this.m = new HashMap<>(); // TODO: This was a LinkedHashMap; if it isn't causing any problems, remove this comment
+        this.m = new HashMap<>();
         this.vList = new ArrayList<>();
     }
 

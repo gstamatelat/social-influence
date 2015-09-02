@@ -17,6 +17,7 @@ public final class ImmutableGraph implements Graph {
         this.g = Conditions.requireNonNull(g);
     }
 
+    // TODO: Say it is backed by g
     public static ImmutableGraph decorate(Graph g) {
         if (g instanceof ImmutableGraph) {
             Finals.LOG.debug("Graph {} is already an instance of ImmutableGraph", g);
