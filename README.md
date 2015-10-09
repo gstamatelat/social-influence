@@ -16,7 +16,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.github.gstamatelat:social-influence:SHOT-COMMIT-HASH'
+    compile 'com.github.gstamatelat:social-influence:SHORT-COMMIT-HASH'
 }
 ```
 
