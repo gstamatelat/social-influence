@@ -84,7 +84,7 @@ GraphGenerator gen = GraphGenerator.decorate(g);
 After this, calls to `gen.generate()` will always return a copy of `g`. This decorator respects the overloaded forms with `GraphFactory<T>` but specifying a seed or a `Random` instance is unnecessary. Common usage cases of the decorator include:
 
 0. Wrapping a graph that is imported or read from a stream to avoid repetitive I/O.
-0. Wrapping a deterministic graph to avoid computational costs.
+0. Wrapping a deterministic graph to avoid computational costs due to its generation.
 
 In both cases, however, the cost of copying is introduced, since calling `generate()` on a decorated `Graph` must allocate a new graph and copy the original.
 
