@@ -45,7 +45,7 @@ public final class Finals {
 
     public static final String E_GRAPH_VERTEX_NOT_CONTAINED = "The vertex specified in %s doesn't belong in the graph.";
 
-    public static final String E_HELPER_INSTANTIATE = "Cannot instantiate object of type %s";
-
     public static final String E_IMMUTABLE_GRAPH = "Cannot modify a graph of type ImmutableGraph";
+
+    public static final String E_EDGES_IMPORT = "A line in an .edges format file must only contain two records";
 }

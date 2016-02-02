@@ -12,7 +12,9 @@ import gr.james.influence.game.players.ExceptionPlayer;
 import gr.james.influence.graph.MemoryGraph;
 import gr.james.influence.graph.Vertex;
 import gr.james.influence.graph.io.Csv;
+import gr.james.influence.graph.io.Edges;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 
@@ -40,5 +42,9 @@ public class Examples {
 
         Graph eee = new MasterGenerator().generate();
         System.out.println(eee.getAveragePathLength());
+
+        Graph g0 = new Edges().from(new FileInputStream("C:\\Users\\James\\Desktop\\academia.edges"));
+        PageRank.execute(g0, 0.15);
+        //System.out.println(g0.getDiameter());
     }
 }
