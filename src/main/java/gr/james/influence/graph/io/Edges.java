@@ -13,6 +13,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Edges implements GraphImporter, GraphExporter {
+    private String delimiter = ",";
+
+    public Edges(String delimiter) {
+        this.delimiter = delimiter;
+
+    }
+
+    public Edges() {
+        this.delimiter = ",";
+    }
+
     @Override
     public <T extends Graph> T from(InputStream source, GraphFactory<T> factory) throws IOException {
         T g = factory.create();
@@ -22,7 +33,7 @@ public class Edges implements GraphImporter, GraphExporter {
         String line;
 
         while ((line = reader.readLine()) != null) {
-            String[] sp = line.split(",");
+            String[] sp = line.split(this.delimiter);
             if (sp.length != 2) {
                 throw new GraphException(Finals.E_EDGES_IMPORT);
             }
@@ -42,7 +53,15 @@ public class Edges implements GraphImporter, GraphExporter {
     }
 
     @Override
-    public void to(Graph g, OutputStream target) {
-        throw new UnsupportedOperationException();
+    public void to(Graph g, OutputStream target) throws IOException {
+        BufferedWriter w = new BufferedWriter(new OutputStreamWriter(target, Finals.IO_ENCODING));
+
+        for (Vertex v : g) {
+            for (Vertex u : g.getOutEdges(v).keySet()) {
+                w.write(String.format("%d%s%d%n", v.getId(), this.delimiter, u.getId()));
+            }
+        }
+
+        w.flush();
     }
 }
