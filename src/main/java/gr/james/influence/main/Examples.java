@@ -1,6 +1,7 @@
 package gr.james.influence.main;
 
 import gr.james.influence.algorithms.generators.BarabasiAlbertGenerator;
+import gr.james.influence.algorithms.generators.MasterGenerator;
 import gr.james.influence.algorithms.scoring.HITS;
 import gr.james.influence.algorithms.scoring.PageRank;
 import gr.james.influence.api.Graph;
@@ -36,5 +37,8 @@ public class Examples {
         GraphImporter importer = new Csv();
         Graph fff = importer.from(new URL("https://raw.githubusercontent.com/gstamatelat/social-influence/gh-pages/graphs/school.csv"));
         int h = 0;
+
+        Graph eee = new MasterGenerator().generate();
+        System.out.println(eee.getAveragePathLength());
     }
 }
