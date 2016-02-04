@@ -2,6 +2,8 @@ package gr.james.influence.main;
 
 import gr.james.influence.algorithms.generators.BarabasiAlbertGenerator;
 import gr.james.influence.algorithms.generators.MasterGenerator;
+import gr.james.influence.algorithms.generators.WeaklyConnectedGenerator;
+import gr.james.influence.algorithms.scoring.DeGroot;
 import gr.james.influence.algorithms.scoring.HITS;
 import gr.james.influence.algorithms.scoring.PageRank;
 import gr.james.influence.api.Graph;
@@ -10,11 +12,8 @@ import gr.james.influence.game.Player;
 import gr.james.influence.game.players.ExceptionPlayer;
 import gr.james.influence.graph.MemoryGraph;
 import gr.james.influence.graph.Vertex;
-import gr.james.influence.graph.io.Dot;
-import gr.james.influence.graph.io.Edges;
+import gr.james.influence.util.collections.GraphState;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class Examples {
@@ -42,12 +41,18 @@ public class Examples {
         Graph eee = new MasterGenerator().generate();
         System.out.println(eee.getAveragePathLength());
 
-        //Graph g0 = new Edges().from(new URL("https://euclid.ee.duth.gr:25312/index.php/s/wXmIirefZKmv95w/download?path=%2F&files=academia.edges"));
-        //Graph g0 = new Csv().from(new FileInputStream("C:\\Users\\James\\Desktop\\internet.csv"));
-        Graph g0 = new Edges(" ").from(new FileInputStream("C:\\Users\\James\\Desktop\\256497288.edges"));
-        new Dot().to(g0, new FileOutputStream("C:\\Users\\James\\Desktop\\256497288.dot"));
-        //new Edges().to(g0, new FileOutputStream("C:\\Users\\James\\Desktop\\internet.edges"));
-        //PageRank.execute(g0, 0.15);
+        //Graph g0 = new Csv().from(new URL("https://euclid.ee.duth.gr:25312/index.php/s/wXmIirefZKmv95w/download?path=%2F&files=school-2.csv"));
+        //Graph g0 = new Edges(" ").from(new URL("https://euclid.ee.duth.gr:25312/index.php/s/wXmIirefZKmv95w/download?path=%2F&files=twitter.edges"));
+        Graph g0 = new WeaklyConnectedGenerator().generate();
+
+        GraphState<Double> initial = new GraphState<>(g0, 0.5);
+        initial.put(g0.getVertexFromIndex(0), 0.2);
+        initial.put(g0.getVertexFromIndex(1), 0.3);
+        initial.put(g0.getVertexFromIndex(2), 0.4);
+        initial.put(g0.getVertexFromIndex(3), 0.5);
+        GraphState<Double> limiting = DeGroot.execute(g0, initial);
+
+        GraphState<Double> aaa = PageRank.execute(g0, 0.0);
         System.out.println(g0.getDiameter());
     }
 }
