@@ -1,5 +1,7 @@
 package gr.james.influence.graph;
 
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphFactory;
 import gr.james.influence.util.Finals;
@@ -49,6 +51,7 @@ public class GraphUtils {
      * @return the vertex that is the result of the fusion
      */
     public static Vertex fuseVertices(Graph g, Vertex[] f) {
+        // TODO: Add link to http://mathworld.wolfram.com/VertexContraction.html
         Vertex v = g.addVertex();
 
         for (Vertex y : f) {
@@ -118,6 +121,18 @@ public class GraphUtils {
         // TODO: We need to have a way to get a GraphFactory out of a Graph in order to produce same-typed graphs
         // TODO: On a second thought, maybe not, why would someone need to have the same type?
         return deepCopy(g, Finals.DEFAULT_GRAPH_FACTORY, g.getVertices());
+    }
+
+    public static BiMap<Vertex, Integer> getGraphIndexMap(Graph g) {
+        // TODO: It's probably better to return an ImmutableBiMap
+        BiMap<Vertex, Integer> vertexMap = HashBiMap.create();
+
+        List<Vertex> vertices = g.getVertices();
+        for (int i = 0; i < vertices.size(); i++) {
+            vertexMap.put(vertices.get(i), i++);
+        }
+
+        return vertexMap;
     }
 
     /**
