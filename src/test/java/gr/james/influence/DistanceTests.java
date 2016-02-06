@@ -29,7 +29,7 @@ public class DistanceTests {
 
         /* Create graph and randomize edge weights */
         Graph g = new RandomGenerator(vertexCount, p).generate();
-        GraphUtils.createCircle(g, true);
+        GraphUtils.connect(g);
         GraphUtils.randomizeEdgeWeights(g);
 
         /* Floyd-Warshall */

@@ -33,7 +33,7 @@ public class Tests {
 
         /* Create graph and randomize edge weights */
         Graph g = new RandomGenerator(vertexCount, p).generate();
-        GraphUtils.createCircle(g, true);
+        GraphUtils.connect(g);
         GraphUtils.randomizeEdgeWeights(g);
 
         /* PageRank values must sum to vertexCount */
@@ -54,7 +54,7 @@ public class Tests {
 
         /* Create graph and randomize edge weights */
         Graph g = new RandomGenerator(vertexCount, p).generate();
-        GraphUtils.createCircle(g, true);
+        GraphUtils.connect(g);
         GraphUtils.randomizeEdgeWeights(g);
 
         Finals.LOG.debug("damping factor = {}, p = {}", dampingFactor, p);
@@ -132,7 +132,7 @@ public class Tests {
         for (int i = 0; i < GRAPHS; i++) {
             int size = RandomHelper.getRandom().nextInt(50) + 50;
             graphs[i] = new RandomGenerator(size, RandomHelper.getRandom().nextDouble()).generate();
-            GraphUtils.createCircle(graphs[i], true);
+            GraphUtils.connect(graphs[i]);
         }
 
         int vertexCount = 0;
@@ -221,7 +221,7 @@ public class Tests {
         int size = RandomHelper.getRandom().nextInt(50) + 50;
         double p = RandomHelper.getRandom().nextDouble();
         Graph g = new RandomGenerator(size, p).generate();
-        GraphUtils.createCircle(g, true);
+        GraphUtils.connect(g);
 
         GraphState<Double> initialState = new GraphState<>(g, 0.0);
         for (Vertex v : g) {
@@ -241,7 +241,7 @@ public class Tests {
         int size = RandomHelper.getRandom().nextInt(50) + 50;
         double p = RandomHelper.getRandom().nextDouble();
         Graph g = new RandomGenerator(size, p).generate();
-        GraphUtils.createCircle(g, true);
+        GraphUtils.connect(g);
         Graph e = GraphUtils.deepCopy(g);
         e.addVertex();
         Assert.assertEquals("deepCopyTest", g.getVerticesCount() + 1, e.getVerticesCount());
@@ -259,5 +259,14 @@ public class Tests {
         GraphState<Double> p2 = PageRank.execute(g, dampingFactor);
 
         Assert.assertEquals("pageRankDeterministicTest", p1, p2);
+    }
+
+    @Test
+    public void connectTest() {
+        int size = RandomHelper.getRandom().nextInt(50) + 50;
+        double p = RandomHelper.getRandom().nextDouble();
+        Graph g = new RandomGenerator(size, p).generate();
+        GraphUtils.connect(g);
+        Assert.assertNotEquals("connectTest", g.getDiameter(), Double.POSITIVE_INFINITY);
     }
 }

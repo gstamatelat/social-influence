@@ -2,6 +2,7 @@ package gr.james.influence.graph;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
+import gr.james.influence.algorithms.layout.Tarjan;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphFactory;
 import gr.james.influence.util.Finals;
@@ -14,23 +15,15 @@ import java.util.stream.Collectors;
 
 // TODO: Maybe transfer these as static on Graph
 public class GraphUtils {
-    public static void createCircle(Graph g, boolean undirected) {
-        Iterator<Vertex> vertexIterator = g.iterator();
-        Vertex previous = vertexIterator.next();
-        Vertex first = previous;
-        while (vertexIterator.hasNext()) {
-            Vertex next = vertexIterator.next();
-            if (undirected) {
-                g.addEdges(previous, next);
-            } else {
-                g.addEdge(previous, next);
-            }
-            previous = next;
-        }
-        if (undirected) {
-            g.addEdges(previous, first);
-        } else {
-            g.addEdge(previous, first);
+    public static void connect(Graph g) {
+        List<List<Vertex>> scc = Tarjan.execute(g);
+        // TODO: This is not the best way to connect the components, eg some edges might already exist
+        for (int i = 0; i < scc.size(); i++) {
+            List<Vertex> thisComponent = scc.get(i);
+            List<Vertex> nextComponent = scc.get((i + 1) % scc.size());
+            Vertex v = thisComponent.get(RandomHelper.getRandom().nextInt(thisComponent.size()));
+            Vertex u = nextComponent.get(RandomHelper.getRandom().nextInt(nextComponent.size()));
+            g.addEdge(v, u);
         }
     }
 
@@ -129,7 +122,7 @@ public class GraphUtils {
 
         List<Vertex> vertices = g.getVertices();
         for (int i = 0; i < vertices.size(); i++) {
-            vertexMap.put(vertices.get(i), i++);
+            vertexMap.put(vertices.get(i), i);
         }
 
         return vertexMap;
