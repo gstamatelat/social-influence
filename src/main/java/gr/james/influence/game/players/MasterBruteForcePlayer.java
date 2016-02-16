@@ -14,15 +14,15 @@ import java.util.HashSet;
  * <p>Implements a simple brute-force player.</p>
  * <p>Options:</p>
  * <ul>
- * <li>weight_levels: Default value is 100. [ADD STUFF]</li>
- * <li>epsilon: Default value is Finals.DEFAULT_EPSILON. [ADD STUFF]</li>
+ * <li>weightLevels: Default value is 10.</li>
+ * <li>epsilon: Default value is 0.0.</li>
  * <li>clever: Instead of picking new moves completely at random, use a mutation, a move that is relatively close to
- * the previous move. Enabling this option should theoretically result in better results most of the time. This is
- * enabled by default.</li>
+ * the previous move. Enabling this option should theoretically result in better results most of the time but may end
+ * up in a local maximum. This is disabled by default.</li>
  * </ul>
  */
 public class MasterBruteForcePlayer extends Player {
-    boolean clever;
+    private boolean clever;
     private int weightLevels;
     private double epsilon;
 
