@@ -1,20 +1,25 @@
 package gr.james.influence.main;
 
-import gr.james.influence.algorithms.generators.TwoWheelsGenerator;
+import gr.james.influence.algorithms.generators.RandomGenerator;
 import gr.james.influence.api.Graph;
 import gr.james.influence.game.Game;
 import gr.james.influence.game.GameDefinition;
 import gr.james.influence.game.GameResult;
 import gr.james.influence.game.Move;
+import gr.james.influence.graph.GraphUtils;
 import gr.james.influence.graph.Vertex;
 
 import java.util.Arrays;
 import java.util.stream.IntStream;
 
 public class BruteForce {
+    private static final int SCALE = 2;
+
     public static void main(String[] args) {
         /* Parameters */
-        Graph g = new TwoWheelsGenerator(6).generate();
+        //Graph g = new TwoWheelsGenerator(5).generate();
+        Graph g = new RandomGenerator(8, 0.2, false).generate();
+        GraphUtils.connect(g);
 
         /* The initial move */
         //Move m = new Move(g.getVertexFromIndex(4), g.getVertexFromIndex(9), g.getVertexFromIndex(10));
@@ -24,7 +29,7 @@ public class BruteForce {
         }
 
         /* Run */
-        optimize(g, m, -3, 3);
+        optimize(g, m, -SCALE, SCALE);
     }
 
     public static void optimize(Graph g, Move q, int min, int max) {
@@ -55,7 +60,7 @@ public class BruteForce {
 
         boolean done = false;
         for (Vertex v : best) {
-            best.putVertex(v, best.getWeight(v) * 2);
+            best.putVertex(v, best.getWeight(v) * SCALE);
             if (best.getWeight(v) > 1000000) {
                 done = true;
             }

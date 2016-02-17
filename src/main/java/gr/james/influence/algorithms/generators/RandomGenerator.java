@@ -16,10 +16,18 @@ import java.util.Random;
 public class RandomGenerator implements GraphGenerator {
     private int totalVertices;
     private double p;
+    private boolean directed;
 
     public RandomGenerator(int totalVertices, double p) {
         this.totalVertices = totalVertices;
         this.p = p;
+        this.directed = true;
+    }
+
+    public RandomGenerator(int totalVertices, double p, boolean directed) {
+        this.totalVertices = totalVertices;
+        this.p = p;
+        this.directed = directed;
     }
 
     @Override
@@ -30,11 +38,17 @@ public class RandomGenerator implements GraphGenerator {
             Vertex v = g.addVertex();
             for (Vertex y : g) {
                 if (!v.equals(y)) {
-                    if (r.nextDouble() < p) {
-                        g.addEdge(v, y);
-                    }
-                    if (r.nextDouble() < p) {
-                        g.addEdge(y, v);
+                    if (directed) {
+                        if (r.nextDouble() < p) {
+                            g.addEdge(v, y);
+                        }
+                        if (r.nextDouble() < p) {
+                            g.addEdge(y, v);
+                        }
+                    } else {
+                        if (r.nextDouble() < p) {
+                            g.addEdges(v, y);
+                        }
                     }
                 }
             }
