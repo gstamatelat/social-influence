@@ -35,7 +35,7 @@ public class BruteForce {
     public static void optimize(Graph g, Move q, int min, int max) {
         Move best = q.deepCopy();
 
-        GameDefinition d = new GameDefinition(q.getVerticesCount(), (double) q.getVerticesCount(), 0);
+        GameDefinition d = new GameDefinition(q.getVerticesCount(), (double) q.getVerticesCount(), 0, 0.0);
 
         int[] c = IntStream.generate(() -> min).limit(q.getVerticesCount()).toArray();
         c[0]--;
@@ -49,7 +49,7 @@ public class BruteForce {
                 m.putVertex(v, Math.max(m.getWeight(v) + c[i++], 1));
             }
 
-            GameResult r = Game.runMoves(g, d, best, m, 0.0);
+            GameResult r = Game.runMoves(g, d, best, m);
             if (r.score > 0) {
                 System.out.printf("Better move: %s on %s%n", m, Arrays.toString(c));
                 best = m;

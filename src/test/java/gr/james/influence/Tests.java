@@ -120,7 +120,7 @@ public class Tests {
         m2.putVertex(g.getVertexFromIndex(1), 0.5);
         m2.putVertex(g.getVertexFromIndex(2), 2.0);
 
-        GameResult r = Game.runMoves(g, new GameDefinition(3, 3.0, 50000L), m1, m2, 0.0);
+        GameResult r = Game.runMoves(g, new GameDefinition(3, 3.0, 50000L, 0.0), m1, m2);
         Assert.assertEquals("lessisTest", 0, r.score);
     }
 

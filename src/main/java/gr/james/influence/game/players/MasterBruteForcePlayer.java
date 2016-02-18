@@ -84,7 +84,7 @@ public class MasterBruteForcePlayer extends Player {
 
         while (!this.isInterrupted()) {
             Move newMove = getRandomMove(g, d.getActions(), weightLevels, bestMove, clever);
-            int gameScore = Game.runMoves(mg, d, bestMove, newMove, epsilon).score;
+            int gameScore = Game.runMoves(mg, d, bestMove, newMove).score;
             if (gameScore == 0) {
                 if (moveDraws.add(newMove)) {
                     log.debug("Draw with move {}", newMove);

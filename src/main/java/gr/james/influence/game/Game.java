@@ -41,15 +41,11 @@ public final class Game {
         return lastState;
     }
 
-    public static GameResult runPlayers(Player a, Player b, Graph g, GameDefinition d, double deDrootEpsilon) {
-        return runMoves(g, d, a.getMove(g, d), b.getMove(g, d), deDrootEpsilon);
-    }
-
     public static GameResult runPlayers(Player a, Player b, Graph g, GameDefinition d) {
         return runMoves(g, d, a.getMove(g, d), b.getMove(g, d));
     }
 
-    public static GameResult runMoves(Graph g, GameDefinition d, Move playerAMove, Move playerBMove, double deGrootEpsilon) {
+    public static GameResult runMoves(Graph g, GameDefinition d, Move playerAMove, Move playerBMove) {
         if (d != null) {
             playerAMove = playerAMove.deepCopy();
             playerBMove = playerBMove.deepCopy();
@@ -98,8 +94,8 @@ public final class Game {
             return new GameResult(0, gs, this.playerAMove, this.playerBMove);
         }*/
 
-        GraphState<Double> a = runPrimitiveGame(g, playerAMove, playerBMove, deGrootEpsilon);
-        GraphState<Double> b = runPrimitiveGame(g, playerBMove, playerAMove, deGrootEpsilon);
+        GraphState<Double> a = runPrimitiveGame(g, playerAMove, playerBMove, (d == null) ? Finals.DEFAULT_DEGROOT_PRECISION : d.getPrecision());
+        GraphState<Double> b = runPrimitiveGame(g, playerBMove, playerAMove, (d == null) ? Finals.DEFAULT_DEGROOT_PRECISION : d.getPrecision());
 
         double am = a.getAverage() - 0.5;
         double bm = b.getAverage() - 0.5;
@@ -121,7 +117,7 @@ public final class Game {
         return new GameResult(score, a, playerAMove, playerBMove);
     }
 
-    public static GameResult runMoves(Graph g, GameDefinition d, Move playerAMove, Move playerBMove) {
+    /*public static GameResult runMoves(Graph g, GameDefinition d, Move playerAMove, Move playerBMove) {
         return runMoves(g, d, playerAMove, playerBMove, Finals.DEFAULT_GAME_PRECISION);
-    }
+    }*/
 }

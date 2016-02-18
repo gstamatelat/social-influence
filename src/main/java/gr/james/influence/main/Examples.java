@@ -31,7 +31,7 @@ public class Examples {
         System.out.println(PageRank.execute(g, 0.0));
 
         Player p = new ExceptionPlayer();
-        p.getMove(g, new GameDefinition(3, 3.0, 0));
+        p.getMove(g, new GameDefinition(3, 3.0, 0, 0.0));
         System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaa");
 
         /*GraphImporter importer = new Csv();
