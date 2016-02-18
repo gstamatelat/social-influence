@@ -102,15 +102,17 @@ public final class Game {
         double am = a.getAverage() - 0.5;
         double bm = b.getAverage() - 0.5;
 
-        if (am + bm != 0.0) {
-            Finals.LOG.warn("am + bm != 0");
-        }
+        /*if (am + bm != 0.0) {
+            Finals.LOG.debug("am + bm != 0");
+        }*/
+
+        double cm = (am - bm) / 2;
 
         int score;
 
-        if ((Math.abs(am) <= 2 * precision) || (Math.abs(bm) <= 2 * precision)) {
+        if (Math.abs(cm) <= 2 * precision) {
             score = 0;
-        } else if (am > 0) {
+        } else if (cm > 0) {
             score = 1;
         } else {
             score = -1;
