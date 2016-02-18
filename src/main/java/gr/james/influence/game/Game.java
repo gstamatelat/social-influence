@@ -94,15 +94,29 @@ public final class Game {
             return new GameResult(0, gs, this.playerAMove, this.playerBMove);
         }*/
 
-        GraphState<Double> a = runPrimitiveGame(g, playerAMove, playerBMove, (d == null) ? Finals.DEFAULT_DEGROOT_PRECISION : d.getPrecision());
-        GraphState<Double> b = runPrimitiveGame(g, playerBMove, playerAMove, (d == null) ? Finals.DEFAULT_DEGROOT_PRECISION : d.getPrecision());
+        double precision = (d == null) ? Finals.DEFAULT_DEGROOT_PRECISION : d.getPrecision();
+
+        GraphState<Double> a = runPrimitiveGame(g, playerAMove, playerBMove, precision);
+        GraphState<Double> b = runPrimitiveGame(g, playerBMove, playerAMove, precision);
 
         double am = a.getAverage() - 0.5;
         double bm = b.getAverage() - 0.5;
 
+        if (am + bm != 0.0) {
+            Finals.LOG.warn("am + bm != 0");
+        }
+
         int score;
 
-        if (am * bm > 0) {
+        if ((Math.abs(am) <= 2 * precision) || (Math.abs(bm) <= 2 * precision)) {
+            score = 0;
+        } else if (am > 0) {
+            score = 1;
+        } else {
+            score = -1;
+        }
+
+        /*if (am * bm > 0) {
             Finals.LOG.warn("am * bm > 0");
             score = 0;
         } else if (am * bm == 0.0) {
@@ -112,7 +126,7 @@ public final class Game {
             score = 0;
         } else {
             score = Double.compare(am, 0);
-        }
+        }*/
 
         return new GameResult(score, a, playerAMove, playerBMove);
     }
