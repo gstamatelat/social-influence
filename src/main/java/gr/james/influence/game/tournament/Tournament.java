@@ -12,9 +12,9 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Tournament {
-    public static final int WIN = 2;
-    public static final int LOSE = 0;
-    public static final int DRAW = 1;
+    public static final int WIN = 4;
+    public static final int LOSE = 1;
+    public static final int DRAW = 2;
 
     public static final int DEFAULT_ROUNDS = 1;
     public static final boolean DEFAULT_ONE_GRAPH_PER_ROUND = true;
