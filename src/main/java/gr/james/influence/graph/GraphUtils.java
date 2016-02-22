@@ -99,6 +99,9 @@ public class GraphUtils {
                 r.addEdge(e.getKey().getFirst(), e.getKey().getSecond(), e.getValue().getWeight());
             }
         }
+        for (String m : g.metaKeySet()) {
+            r.setMeta(m, g.getMeta(m));
+        }
         return r;
     }
 
