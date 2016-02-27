@@ -22,7 +22,7 @@ dependencies {
 
 for example `compile 'com.github.gstamatelat:social-influence:fc8f5d39fe'`
 
-## Graph creation
+## Manual graph creation
 
 ```java
 Graph g = new MemoryGraph();
@@ -31,7 +31,7 @@ Vertex v2 = g.addVertex();
 g.addEdge(v1, v2);
 ```
 
-## Graph generation
+## Automatic graph generation
 
 All generators implement the `GraphGenerator` interface. A primitive example that generates a random graph with *100* vertices and connection probability *0.15* is given below:
 
@@ -162,4 +162,4 @@ Modifications that trigger exceptions include vertex addition/removal, edge addi
 - Implement `Metadata` on `Vertex` and `Edge`
 - Edge weight should be part of Graph and Edge should be arbitrary object
 - Add a field or method or something on GraphGenerator to mark if it is deterministic or not. This may help in the future to cache deterministic graphs.
-- Add GraphTransformation functional interface and convert most GraphUtils functions to that.
+- Add `GraphTransformation` functional interface and convert most `GraphUtils` functions to that. Also add method `transform` in `Graph` interface that will accept a `GraphTransformation`.
