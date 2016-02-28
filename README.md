@@ -163,3 +163,4 @@ Modifications that trigger exceptions include vertex addition/removal, edge addi
 - Edge weight should be part of Graph and Edge should be arbitrary object
 - Add a field or method or something on GraphGenerator to mark if it is deterministic or not. This may help in the future to cache deterministic graphs.
 - Add `GraphTransformation` functional interface and convert most `GraphUtils` functions to that. Also add method `transform` in `Graph` interface that will accept a `GraphTransformation`.
+- GraphGenerator should not bother the client to create a new graph, it should provide the object a priori.
