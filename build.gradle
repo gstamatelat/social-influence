@@ -15,7 +15,7 @@ dependencies {
     compile 'org.slf4j:slf4j-api:1.7.18',
             'com.google.guava:guava:19.0',
             'com.google.code.gson:gson:2.6.2'
-    runtime 'ch.qos.logback:logback-classic:1.1.5'
+    runtime 'ch.qos.logback:logback-classic:1.1.6'
     testCompile 'junit:junit:4.12'
 }
 
