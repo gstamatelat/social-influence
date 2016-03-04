@@ -43,7 +43,7 @@ public class WattsStrogatzGenerator implements GraphGenerator {
                     Vertex b = l.get((i + j) % n);
                     g.removeEdges(a, b);
                     do {
-                        sub = g.getRandomVertex();
+                        sub = g.getRandomVertex(r);
                     } while (sub == a || sub == b || g.containsEdge(a, sub));
                     g.addEdges(a, sub);
                 }
