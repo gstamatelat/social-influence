@@ -449,6 +449,12 @@ public interface Graph extends Iterable<Vertex>, Metadata {
         return diameter;
     }
 
+    default double getDensity() {
+        double n = this.getVerticesCount();
+        double e = this.getEdgesCount();
+        return e / (n * (n - 1));
+    }
+
     default double getAveragePathLength() {
         Map<VertexPair, Double> distanceMap = Dijkstra.executeDistanceMap(this);
 
