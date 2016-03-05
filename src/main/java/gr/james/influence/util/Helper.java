@@ -68,7 +68,7 @@ public final class Helper {
             runnable.run();
             reps++;
         }
-        System.out.printf("%d - %d%n", reps, elapsed);
+        System.out.printf("Reps: %d - Elapsed: %d%n", reps, elapsed);
         return (double) reps * 1.0e9 / (double) elapsed;
     }
 }

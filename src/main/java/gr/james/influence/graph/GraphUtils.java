@@ -94,10 +94,9 @@ public class GraphUtils {
             }
             r.addVertex(v);
         }
-        for (Map.Entry<VertexPair, Edge> e : g.getEdges().entrySet()) {
-            if ((r.containsVertex(e.getKey().getFirst())) && r.containsVertex(e.getKey().getSecond())) {
-                r.addEdge(e.getKey().getFirst(), e.getKey().getSecond(), e.getValue().getWeight());
-            }
+        for (Vertex v : r) {
+            g.getOutEdges(v).entrySet().stream().filter(e -> r.containsVertex(e.getKey()))
+                    .forEach(e -> r.addEdge(v, e.getKey(), e.getValue().getWeight()));
         }
         for (String m : g.metaKeySet()) {
             r.setMeta(m, g.getMeta(m));
