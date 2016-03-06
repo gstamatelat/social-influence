@@ -33,8 +33,6 @@ public final class Finals {
     public static final String L_PLAYER_EXCEPTION = "Player {} triggered exception on graph {} with definition {}\n{}";
 
     /* Exceptions: these finals must be arguments to GraphException(). Format: E_CLASSNAME_IDENTIFIER. */
-    public static final String E_PLAYER_NO_PARAMETER = "%s doesn't have any parameter with name %s.";
-
     public static final String E_EDGE_WEIGHT_NEGATIVE = "Edge weight must be positive. Got %f.";
 
     public static final String E_MOVEPOINTER_SET_NULL = "Cannot submit a null move.";

@@ -62,4 +62,5 @@ public interface GraphImporter {
      * @throws IOException if an I/O exception occurs
      */
     <T extends Graph> T from(InputStream source, GraphFactory<T> factory) throws IOException;
+    // TODO: This method should store the filename in the metadata somehow
 }

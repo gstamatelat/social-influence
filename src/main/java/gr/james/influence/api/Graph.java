@@ -332,6 +332,7 @@ public interface Graph extends Iterable<Vertex>, Metadata {
      */
     default boolean setEdgeWeight(Vertex source, Vertex target, double weight) {
         if (removeEdge(source, target)) {
+            // TODO: If addEdge throws an exception, the original edge will be removed anyway
             Edge e = addEdge(source, target, weight);
             assert e != null;
             return true;
