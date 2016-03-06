@@ -86,6 +86,14 @@ public class GraphUtils {
         return combineGraphs(Finals.DEFAULT_GRAPH_FACTORY, graphs);
     }
 
+    public static <T extends Graph> T subGraph(Graph g, GraphFactory<T> factory, Collection<Vertex> filter) {
+        return deepCopy(g, factory, filter);
+    }
+
+    public static Graph subGraph(Graph g, Collection<Vertex> filter) {
+        return deepCopy(g, filter);
+    }
+
     public static <T extends Graph> T deepCopy(Graph g, GraphFactory<T> factory, Collection<Vertex> filter) {
         T r = factory.create();
         for (Vertex v : filter) {
