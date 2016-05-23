@@ -4,6 +4,7 @@ import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphExporter;
 import gr.james.influence.api.GraphFactory;
 import gr.james.influence.api.GraphImporter;
+import gr.james.influence.graph.Edge;
 import gr.james.influence.graph.Vertex;
 import gr.james.influence.util.Finals;
 import gr.james.influence.util.exceptions.GraphException;
@@ -17,7 +18,6 @@ public class Edges implements GraphImporter, GraphExporter {
 
     public Edges(String delimiter) {
         this.delimiter = delimiter;
-
     }
 
     public Edges() {
@@ -34,7 +34,7 @@ public class Edges implements GraphImporter, GraphExporter {
 
         while ((line = reader.readLine()) != null) {
             String[] sp = line.split(this.delimiter);
-            if (sp.length != 2) {
+            if (sp.length != 3) {
                 throw new GraphException(Finals.E_EDGES_IMPORT);
             }
             if (!nodeMap.containsKey(sp[0])) {
@@ -43,7 +43,10 @@ public class Edges implements GraphImporter, GraphExporter {
             if (!nodeMap.containsKey(sp[1])) {
                 nodeMap.put(sp[1], g.addVertex());
             }
-            g.addEdge(nodeMap.get(sp[0]), nodeMap.get(sp[1]));
+            Edge e = g.addEdge(nodeMap.get(sp[0]), nodeMap.get(sp[1]), Double.parseDouble(sp[2]));
+            if (e == null) {
+                Finals.LOG.warn(Finals.L_EDGES_IMPORT, sp[0], sp[1]);
+            }
         }
 
         g.setGraphType("EdgesImport");
@@ -58,7 +61,7 @@ public class Edges implements GraphImporter, GraphExporter {
 
         for (Vertex v : g) {
             for (Vertex u : g.getOutEdges(v).keySet()) {
-                w.write(String.format("%d%s%d%n", v.getId(), this.delimiter, u.getId()));
+                w.write(String.format("%d%s%d%s%f%n", v.getId(), this.delimiter, u.getId(), this.delimiter, g.getOutEdges(v).get(u).getWeight()));
             }
         }
 
