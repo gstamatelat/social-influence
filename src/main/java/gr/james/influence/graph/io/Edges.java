@@ -38,14 +38,16 @@ public class Edges implements GraphImporter, GraphExporter {
                 throw new GraphException(Finals.E_EDGES_IMPORT);
             }
             if (!nodeMap.containsKey(sp[0])) {
-                nodeMap.put(sp[0], g.addVertex());
+                nodeMap.put(sp[0], g.addVertex(sp[0]));
             }
             if (!nodeMap.containsKey(sp[1])) {
-                nodeMap.put(sp[1], g.addVertex());
+                nodeMap.put(sp[1], g.addVertex(sp[1]));
             }
             Edge e = g.addEdge(nodeMap.get(sp[0]), nodeMap.get(sp[1]), Double.parseDouble(sp[2]));
             if (e == null) {
-                Finals.LOG.warn(Finals.L_EDGES_IMPORT, sp[0], sp[1]);
+                g.setEdgeWeight(nodeMap.get(sp[0]), nodeMap.get(sp[1]),
+                        g.findEdge(nodeMap.get(sp[0]), nodeMap.get(sp[1])).getWeight() + Double.parseDouble(sp[2]));
+                Finals.LOG.info(Finals.L_EDGES_IMPORT_MERGE, sp[0], sp[1]);
             }
         }
 

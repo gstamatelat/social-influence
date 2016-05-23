@@ -249,6 +249,12 @@ public interface Graph extends Iterable<Vertex>, Metadata {
         return v;
     }
 
+    default Vertex addVertex(String label) {
+        Vertex v = new Vertex(label);
+        this.addVertex(v);
+        return v;
+    }
+
     /**
      * <p>Insert {@code count} unconnected vertices in the graph.</p>
      *

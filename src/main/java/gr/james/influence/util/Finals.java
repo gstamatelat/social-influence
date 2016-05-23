@@ -31,7 +31,7 @@ public final class Finals {
     public static final String L_GAME_EMPTY_MOVES = "Identical moves. By definition, draw.";
     public static final String L_PERIODIC = "Periodicity on {} with maxSize = {}";
     public static final String L_PLAYER_EXCEPTION = "Player {} triggered exception on graph {} with definition {}\n{}";
-    public static final String L_EDGES_IMPORT = "The .edges file contains parallel edges [{} -> {}]; duplicates have been ignored.";
+    public static final String L_EDGES_IMPORT_MERGE = "The .edges file contains parallel edges [{} -> {}]; duplicates have been merged.";
 
     /* Exceptions: these finals must be arguments to GraphException(). Format: E_CLASSNAME_IDENTIFIER. */
     public static final String E_EDGE_WEIGHT_NEGATIVE = "Edge weight must be positive. Got %f.";
