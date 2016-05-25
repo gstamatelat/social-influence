@@ -38,27 +38,29 @@ public class Enron {
 
         // In Degree distribution
         GraphState<Integer> inDeg = Degree.execute(g, true);
-        System.out.println("IN DEGREE");
+        System.out.printf("IN DEGREE: ");
         int maxIn = inDeg.values().stream().mapToInt(i -> i).max().getAsInt();
         int[] distIn = new int[maxIn + 1];
         for (int d : inDeg.values()) {
             distIn[d]++;
         }
         for (int i = 0; i < distIn.length; i++) {
-            System.out.printf("%d %d%n", i, distIn[i]);
+            System.out.printf("(%d %d) ", i, distIn[i]);
         }
+        System.out.println();
 
         // Out Degree distribution
         GraphState<Integer> outDeg = Degree.execute(g, false);
-        System.out.println("OUT DEGREE");
+        System.out.printf("OUT DEGREE: ");
         int maxOut = outDeg.values().stream().mapToInt(i -> i).max().getAsInt();
         int[] distOut = new int[maxOut + 1];
         for (int d : outDeg.values()) {
             distOut[d]++;
         }
         for (int i = 0; i < distOut.length; i++) {
-            System.out.printf("%d %d%n", i, distOut[i]);
+            System.out.printf("(%d %d) ", i, distOut[i]);
         }
+        System.out.println();
 
         // Get guilty vertices
         List<Vertex> guiltyVertices = new ArrayList<>();
@@ -93,41 +95,51 @@ public class Enron {
                 .sorted((o1, o2) -> Double.compare(o1.getValue(), o2.getValue()))
                 .map(Map.Entry::getKey).collect(Collectors.toList());
         sortedList.removeAll(guiltyVertices);
-        System.out.println("K-CENTER INDICES (OF 144)");
-        System.out.println(potentialVertices.stream().map(sortedList::indexOf).sorted().collect(Collectors.toList()));
 
-        // k-center recall
-        System.out.println("K-CENTER RECALL");
+        System.out.println("# K-CENTER #");
+        evaluate(sortedList, potentialVertices);
+
+        double h = 0;
+    }
+
+    private static void evaluate(List<Vertex> sortedList, List<Vertex> truth) {
+        // indices
+        System.out.printf("INDICES: ");
+        System.out.println(truth.stream().map(sortedList::indexOf).sorted().collect(Collectors.toList()));
+
+        // recall
+        System.out.printf("RECALL: ");
         int soFar = 0;
         for (int i = 0; i < sortedList.size(); i++) {
-            if (potentialVertices.contains(sortedList.get(i))) {
+            if (truth.contains(sortedList.get(i))) {
                 soFar++;
             }
-            System.out.printf("%d %f%n", i + 1, (double) soFar / potentialVertices.size());
+            System.out.printf("(%d %f) ", i + 1, (double) soFar / truth.size());
         }
+        System.out.println();
 
-        // k-center precision
-        System.out.println("K-CENTER PRECISION");
+        // precision
+        System.out.printf("PRECISION: ");
         soFar = 0;
         for (int i = 0; i < sortedList.size(); i++) {
-            if (potentialVertices.contains(sortedList.get(i))) {
+            if (truth.contains(sortedList.get(i))) {
                 soFar++;
             }
-            System.out.printf("%d %f%n", i + 1, (double) soFar / (i + 1));
+            System.out.printf("(%d %f) ", i + 1, (double) soFar / (i + 1));
         }
+        System.out.println();
 
-        // k-center f1
-        System.out.println("K-CENTER F1");
+        // f1
+        System.out.printf("F1: ");
         soFar = 0;
         for (int i = 0; i < sortedList.size(); i++) {
-            if (potentialVertices.contains(sortedList.get(i))) {
+            if (truth.contains(sortedList.get(i))) {
                 soFar++;
             }
             double prec = (double) soFar / (i + 1);
-            double recall = (double) soFar / potentialVertices.size();
-            System.out.printf("%d %f%n", i + 1, 2 * (prec * recall) / (prec + recall));
+            double recall = (double) soFar / truth.size();
+            System.out.printf("(%d %f) ", i + 1, 2 * (prec * recall) / (prec + recall));
         }
-
-        double h = 0;
+        System.out.println();
     }
 }
