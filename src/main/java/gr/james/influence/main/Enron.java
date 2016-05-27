@@ -94,6 +94,8 @@ public class Enron {
         for (Vertex v : g) {
             double d = guiltyVertices.stream().map(i -> distanceMap.get(new VertexPair(i, v)))
                     .mapToDouble(Math::log).sum();
+            /*double d = 1 / guiltyVertices.stream().map(i -> 1 / distanceMap.get(new VertexPair(i, v)))
+                    .mapToDouble(i -> i).sum();*/
             kCenter.put(v, d);
         }
         List<Vertex> sortedList = kCenter.entrySet().stream()
