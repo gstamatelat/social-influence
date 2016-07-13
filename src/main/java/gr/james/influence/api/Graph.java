@@ -11,6 +11,7 @@ import gr.james.influence.util.collections.VertexPair;
 import gr.james.influence.util.exceptions.InvalidVertexException;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * <p>Represents a collection of vertices and edges. The graph is weighted, directed and there can't be more than one
@@ -55,29 +56,6 @@ public interface Graph extends Iterable<Vertex>, Metadata {
      */
     default Edge findEdge(Vertex source, Vertex target) {
         return this.getOutEdges(source).get(Conditions.requireNonNullAndExists(target, this));
-    }
-
-    /**
-     * <p>Return a uniformly distributed random vertex of this graph.</p>
-     *
-     * @param r the {@link Random} instance to use for the operation
-     * @return a random vertex contained in this graph or {@code null} is the graph is empty
-     */
-    default Vertex getRandomVertex(Random r) {
-        if (getVerticesCount() == 0) {
-            return null;
-        } else {
-            return getVertexFromIndex(r.nextInt(getVerticesCount()));
-        }
-    }
-
-    /**
-     * <p>Return a uniformly distributed random vertex of this graph using the global random instance.</p>
-     *
-     * @return a random vertex contained in this graph or {@code null} is the graph is empty
-     */
-    default Vertex getRandomVertex() {
-        return getRandomVertex(RandomHelper.getRandom());
     }
 
     /**
@@ -214,6 +192,37 @@ public interface Graph extends Iterable<Vertex>, Metadata {
      */
     default Vertex getVertexFromIndex(int index) {
         return this.getVertices().get(index);
+    }
+
+    default List<Vertex> getVerticesFromLabel(String label) {
+        return this.getVertices().stream().filter(v -> v.getLabel().equals(label)).collect(Collectors.toList());
+    }
+
+    default Vertex getVertexFromLabel(String label) {
+        return this.getVertices().stream().filter(v -> v.getLabel().equals(label)).findFirst().orElse(null);
+    }
+
+    /**
+     * <p>Return a uniformly distributed random vertex of this graph.</p>
+     *
+     * @param r the {@link Random} instance to use for the operation
+     * @return a random vertex contained in this graph or {@code null} is the graph is empty
+     */
+    default Vertex getRandomVertex(Random r) {
+        if (getVerticesCount() == 0) {
+            return null;
+        } else {
+            return getVertexFromIndex(r.nextInt(getVerticesCount()));
+        }
+    }
+
+    /**
+     * <p>Return a uniformly distributed random vertex of this graph using the global random instance.</p>
+     *
+     * @return a random vertex contained in this graph or {@code null} is the graph is empty
+     */
+    default Vertex getRandomVertex() {
+        return getRandomVertex(RandomHelper.getRandom());
     }
 
     /**
