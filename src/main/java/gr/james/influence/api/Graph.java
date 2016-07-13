@@ -238,6 +238,24 @@ public interface Graph extends Iterable<Vertex>, Metadata {
     boolean addVertex(Vertex v);
 
     /**
+     * <p>Insert a collection of vertices in the graph. If any of the vertices is already on the graph, it is ignored.
+     * </p>
+     *
+     * @param vertices the vertices to insert to the graph
+     * @return an {@link ArrayList} containing the vertices in {@code vertices} that were already in the graph
+     * @throws NullPointerException if any vertex in {@code vertices} is {@code null}
+     */
+    default List<Vertex> addVertices(Vertex... vertices) {
+        List<Vertex> contained = new ArrayList<>();
+        for (Vertex v : vertices) {
+            if (!this.addVertex(v)) {
+                contained.add(v);
+            }
+        }
+        return contained;
+    }
+
+    /**
      * <p>Inserts a new unconnected vertex to the graph and returns it. Use {@link #addVertices(int)} for bulk inserts.
      * </p>
      *
