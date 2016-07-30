@@ -30,12 +30,16 @@ public class HITS {
                         }
                     }
 
-                    final double authoritySum = next.values().stream().mapToDouble(HITSScore::getAuthority).sum();
-                    final double hubSum = next.values().stream().mapToDouble(HITSScore::getHub).sum();
+                    //final double authoritySum = next.values().stream().mapToDouble(HITSScore::getAuthority).sum();
+                    final double authoritySum = Math.sqrt(next.values().stream()
+                            .mapToDouble(x -> Math.pow(x.getAuthority(), 2.0)).sum());
+                    //final double hubSum = next.values().stream().mapToDouble(HITSScore::getHub).sum();
+                    final double hubSum = Math.sqrt(next.values().stream()
+                            .mapToDouble(x -> Math.pow(x.getHub(), 2.0)).sum());
 
                     next.replaceAll((vertex, hitsScore) -> new HITSScore(
-                                    hitsScore.getAuthority() * g.getVerticesCount() / authoritySum,
-                                    hitsScore.getHub() * g.getVerticesCount() / hubSum)
+                            hitsScore.getAuthority() * g.getVerticesCount() / authoritySum,
+                            hitsScore.getHub() * g.getVerticesCount() / hubSum)
                     );
 
                     return next;
