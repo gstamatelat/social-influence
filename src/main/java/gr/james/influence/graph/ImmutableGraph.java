@@ -6,6 +6,7 @@ import gr.james.influence.util.Finals;
 import gr.james.influence.util.collections.VertexPair;
 
 import java.util.*;
+import java.util.function.Consumer;
 
 /**
  * <p>Unmodifiable decorator of a {@link Graph}.</p>
@@ -68,6 +69,16 @@ public final class ImmutableGraph implements Graph {
     }
 
     @Override
+    public void forEach(Consumer<? super Vertex> action) {
+        this.g.forEach(action);
+    }
+
+    @Override
+    public Spliterator<Vertex> spliterator() {
+        return this.g.spliterator();
+    }
+
+    @Override
     public boolean containsVertex(Vertex v) {
         return this.g.containsVertex(v);
     }
@@ -85,6 +96,21 @@ public final class ImmutableGraph implements Graph {
     @Override
     public Vertex getVertexFromIndex(int index) {
         return this.g.getVertexFromIndex(index);
+    }
+
+    @Override
+    public List<Vertex> getVerticesFromLabel(String label) {
+        return this.g.getVerticesFromLabel(label);
+    }
+
+    @Override
+    public Vertex getVertexFromLabel(String label) {
+        return this.g.getVertexFromLabel(label);
+    }
+
+    @Override
+    public Vertex getRandomVertex(Random r) {
+        return this.g.getRandomVertex(r);
     }
 
     @Override
@@ -153,13 +179,33 @@ public final class ImmutableGraph implements Graph {
     }
 
     @Override
+    public double getDensity() {
+        return this.g.getDensity();
+    }
+
+    @Override
+    public double getAveragePathLength() {
+        return g.getAveragePathLength();
+    }
+
+    @Override
     public Vertex addVertex() {
         throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 
     @Override
+    public Vertex addVertex(String label) {
+        return this.g.addVertex(label);
+    }
+
+    @Override
     public boolean addVertex(Vertex v) {
         throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
+    }
+
+    @Override
+    public List<Vertex> addVertices(Vertex... vertices) {
+        return this.g.addVertices(vertices);
     }
 
     @Override
