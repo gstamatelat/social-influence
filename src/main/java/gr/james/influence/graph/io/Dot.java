@@ -21,9 +21,6 @@ public class Dot implements GraphImporter, GraphExporter {
     @Override
     public void to(Graph g, OutputStream target) throws IOException {
         String dot = "digraph G {" + System.lineSeparator();
-        dot += "  overlap = false;" + System.lineSeparator();
-        dot += "  bgcolor = transparent;" + System.lineSeparator();
-        dot += "  splines = true;" + System.lineSeparator();
         for (Map.Entry<VertexPair, Edge> e : g.getEdges().entrySet()) {
             Vertex v = e.getKey().getFirst();
             Vertex w = e.getKey().getSecond();
