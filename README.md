@@ -161,8 +161,8 @@ Modifications that trigger exceptions include vertex addition/removal, edge addi
 - GraphOperations.combineGraphs seems like a generalization of Graph.deepCopy
 - Implement `Metadata` on `Vertex` and `Edge`
 - Edge weight should be part of Graph and Edge should be arbitrary object
-- Add a field or method or something on GraphGenerator to mark if it is deterministic or not. This may help in the future to cache deterministic graphs.
+- Add a field or method or something on GraphGenerator to mark if it is deterministic or not. Alternatively, implement DeterministicGraphGenerator. This may help in the future to cache deterministic graphs.
 - Add `GraphTransformation` functional interface and convert most `GraphUtils` functions to that. Also add method `transform` in `Graph` interface that will accept a `GraphTransformation`.
-- GraphGenerator should not bother the client to create a new graph, it should provide the object a priori.
 - Maybe rename actions to fragments?
 - getStubborn() is wrong because a stubborn agent can only point to other stubborn agents
+- `Vertex` can still be mutated with `setLabel` even in immutable graphs. Same for labels with `setWeight`.
