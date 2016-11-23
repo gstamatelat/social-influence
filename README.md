@@ -166,3 +166,4 @@ Modifications that trigger exceptions include vertex addition/removal, edge addi
 - Maybe rename actions to fragments?
 - getStubborn() is wrong because a stubborn agent can only point to other stubborn agents
 - `Vertex` can still be mutated with `setLabel` even in immutable graphs. Same for labels with `setWeight`.
+- Fail build if `ImmutableGraph` doesn't implement all methods of `Graph` because it's a risk
