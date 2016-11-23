@@ -206,7 +206,7 @@ public interface Graph extends Iterable<Vertex>, Metadata {
      * <p>Return a uniformly distributed random vertex of this graph.</p>
      *
      * @param r the {@link Random} instance to use for the operation
-     * @return a random vertex contained in this graph or {@code null} is the graph is empty
+     * @return a random vertex contained in this graph or {@code null} if the graph is empty
      */
     default Vertex getRandomVertex(Random r) {
         if (getVerticesCount() == 0) {
@@ -219,7 +219,7 @@ public interface Graph extends Iterable<Vertex>, Metadata {
     /**
      * <p>Return a uniformly distributed random vertex of this graph using the global random instance.</p>
      *
-     * @return a random vertex contained in this graph or {@code null} is the graph is empty
+     * @return a random vertex contained in this graph or {@code null} if the graph is empty
      */
     default Vertex getRandomVertex() {
         return getRandomVertex(RandomHelper.getRandom());
