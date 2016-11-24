@@ -1,7 +1,8 @@
 package gr.james.influence.graph;
 
 import gr.james.influence.api.Graph;
-import gr.james.influence.util.Conditions;
+import gr.james.influence.api.Metadata;
+import gr.james.influence.util.Finals;
 
 /**
  * <p>Represents a single vertex. An object of type Vertex behaves like an immutable object, contains an id and a label.
@@ -11,10 +12,9 @@ import gr.james.influence.util.Conditions;
  * <p>Vertex id is automatically set to an auto-increment value each time you instantiate a new vertex. A vertex can
  * exist in multiple graphs, if that makes sense for the application.</p>
  */
-public class Vertex implements Comparable<Vertex> {
+public class Vertex extends TreeMapMetadata implements Comparable<Vertex>, Metadata {
     private static int nextId = 1;
 
-    private String label;
     private int id;
 
     /**
@@ -23,7 +23,7 @@ public class Vertex implements Comparable<Vertex> {
      */
     public Vertex() {
         this.id = Vertex.getNextId();
-        this.label = String.valueOf(this.id);
+        setLabel(String.valueOf(this.id));
     }
 
     /**
@@ -34,7 +34,7 @@ public class Vertex implements Comparable<Vertex> {
      */
     public Vertex(String label) {
         this.id = Vertex.getNextId();
-        this.label = String.valueOf(label);
+        setLabel(label);
     }
 
     /**
@@ -63,7 +63,7 @@ public class Vertex implements Comparable<Vertex> {
      * @see #setLabel(String)
      */
     public String getLabel() {
-        return label;
+        return getMeta(Finals.LABEL_META);
     }
 
     /**
@@ -75,7 +75,7 @@ public class Vertex implements Comparable<Vertex> {
      * @see #getLabel()
      */
     public Vertex setLabel(String label) {
-        this.label = Conditions.requireNonNull(label);
+        setMeta(Finals.LABEL_META, label);
         return this;
     }
 
@@ -101,7 +101,7 @@ public class Vertex implements Comparable<Vertex> {
      */
     @Override
     public String toString() {
-        return this.label;
+        return getLabel();
     }
 
     /**

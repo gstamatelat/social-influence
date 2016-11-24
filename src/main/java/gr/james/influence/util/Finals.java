@@ -22,13 +22,12 @@ public final class Finals {
 
     /* Constants */
     public static final String TYPE_META = "type";
+    public static final String LABEL_META = "label";
     public static final Charset IO_ENCODING = StandardCharsets.UTF_8;
 
     /* Logging messages */
     public static final String L_PLAYER_WAITING = "Been waiting {} seconds for {} to terminate gracefully.";
     public static final String L_GAME_MOVE_EXCEED = "Move {} contains more than {} vertices. Slicing to {}. This indicates a mistake in your player.";
-    public static final String L_GAME_EMPTY_MOVE = "A player submitted an empty move or didn't terminate before submitting a move.";
-    public static final String L_GAME_EMPTY_MOVES = "Identical moves. By definition, draw.";
     public static final String L_PERIODIC = "Periodicity on {} with maxSize = {}";
     public static final String L_PLAYER_EXCEPTION = "Player {} triggered exception on graph {} with definition {}\n{}";
     public static final String L_EDGES_IMPORT_MERGE = "The .edges file contains parallel edges [{} -> {}]; duplicates have been merged.";
