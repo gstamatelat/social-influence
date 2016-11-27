@@ -2,7 +2,7 @@ package gr.james.influence.graph;
 
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.Metadata;
-import gr.james.influence.util.Finals;
+import gr.james.influence.util.Conditions;
 
 /**
  * <p>Represents a single vertex. An object of type Vertex behaves like an immutable object, contains an id and a label.
@@ -16,6 +16,7 @@ public class Vertex extends TreeMapMetadata implements Comparable<Vertex>, Metad
     private static int nextId = 1;
 
     private int id;
+    private String label;
 
     /**
      * <p>Creates a new {@link Vertex} that doesn't belong to a graph. You must bind it to a graph using
@@ -63,7 +64,7 @@ public class Vertex extends TreeMapMetadata implements Comparable<Vertex>, Metad
      * @see #setLabel(String)
      */
     public String getLabel() {
-        return getMeta(Finals.LABEL_META);
+        return label;
     }
 
     /**
@@ -75,7 +76,7 @@ public class Vertex extends TreeMapMetadata implements Comparable<Vertex>, Metad
      * @see #getLabel()
      */
     public Vertex setLabel(String label) {
-        setMeta(Finals.LABEL_META, label);
+        this.label = Conditions.requireNonNull(label);
         return this;
     }
 
