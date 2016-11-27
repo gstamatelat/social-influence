@@ -17,12 +17,11 @@ public final class Finals {
     public static final double DEFAULT_DEGROOT_PRECISION = 0.0;
     public static final double DEFAULT_GAME_OPINIONS = 0.5;
     public static final double DEFAULT_PAGERANK_PRECISION = 0.0;
-    public static final double DEFAULT_GAME_PRECISION = 0.0;
+    public static final String DEFAULT_INDENT = "  ";
     public static final GraphFactory<MemoryGraph> DEFAULT_GRAPH_FACTORY = MemoryGraph::new;
 
     /* Constants */
     public static final String TYPE_META = "type";
-    public static final String LABEL_META = "label";
     public static final Charset IO_ENCODING = StandardCharsets.UTF_8;
 
     /* Logging messages */

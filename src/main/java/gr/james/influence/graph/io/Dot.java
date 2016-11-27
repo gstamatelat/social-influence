@@ -10,6 +10,16 @@ import gr.james.influence.util.Finals;
 import java.io.*;
 
 public class Dot implements GraphImporter, GraphExporter {
+    private String indent;
+
+    public Dot() {
+        this(Finals.DEFAULT_INDENT);
+    }
+
+    public Dot(String indent) {
+        this.indent = indent;
+    }
+
     @Override
     public <T extends Graph> T from(InputStream source, GraphFactory<T> factory) throws IOException {
         throw new UnsupportedOperationException();
@@ -21,7 +31,7 @@ public class Dot implements GraphImporter, GraphExporter {
         for (Vertex v : g) {
             for (Vertex u : g.getOutEdges(v).keySet()) {
                 double weight = g.getOutEdges(v).get(u).getWeight();
-                dot += String.format("%s -> %s [label=\"%.2f\",weight=%f]%n", v, u, weight, weight);
+                dot += String.format("%s%s -> %s [label=\"%.2f\",weight=%f]%n", indent, v, u, weight, weight);
             }
         }
         dot += String.format("}%n");
