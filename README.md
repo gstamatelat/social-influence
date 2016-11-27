@@ -6,21 +6,7 @@ Java 8 network/graph framework with emphasis on social influence and opinion dyn
 
 ## Using
 
-Add the following to your build.gradle file:
-
-```gradle
-repositories {
-    maven {
-        url "https://jitpack.io"
-    }
-}
-
-dependencies {
-    compile 'com.github.gstamatelat:social-influence:SHORT-COMMIT-HASH'
-}
-```
-
-for example `compile 'com.github.gstamatelat:social-influence:fc8f5d39fe'`
+See [social-influence-starter](https://github.com/gstamatelat/social-influence-starter) project to get started.
 
 ## Manual graph creation
 
