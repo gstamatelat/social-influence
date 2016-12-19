@@ -1,24 +1,19 @@
 package gr.james.influence.graph;
 
 import gr.james.influence.api.Graph;
-import gr.james.influence.util.Conditions;
 import gr.james.influence.util.Finals;
-import gr.james.influence.util.collections.VertexPair;
 
-import java.util.*;
-import java.util.function.Consumer;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * <p>Unmodifiable decorator of a {@link Graph}.</p>
  */
-public final class ImmutableGraph implements Graph {
-    private Graph g;
-
+public final class ImmutableGraph extends GraphDecorator {
     private ImmutableGraph(Graph g) {
-        this.g = Conditions.requireNonNull(g);
+        super(g);
     }
 
-    // TODO: Say it is backed by g
     public static ImmutableGraph decorate(Graph g) {
         if (g instanceof ImmutableGraph) {
             Finals.LOG.debug("Graph {} is already an instance of ImmutableGraph", g);
@@ -26,11 +21,6 @@ public final class ImmutableGraph implements Graph {
         } else {
             return new ImmutableGraph(g);
         }
-    }
-
-    @Override
-    public String getMeta(String key) {
-        return this.g.getMeta(key);
     }
 
     @Override
@@ -44,148 +34,13 @@ public final class ImmutableGraph implements Graph {
     }
 
     @Override
-    public Set<String> metaKeySet() {
-        return this.g.metaKeySet();
-    }
-
-    @Override
     public void clearMeta() {
         throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 
     @Override
-    public String getGraphType() {
-        return this.g.getGraphType();
-    }
-
-    @Override
     public void setGraphType(String type) {
         throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
-    }
-
-    @Override
-    public Iterator<Vertex> iterator() {
-        return this.g.iterator();
-    }
-
-    @Override
-    public void forEach(Consumer<? super Vertex> action) {
-        this.g.forEach(action);
-    }
-
-    @Override
-    public Spliterator<Vertex> spliterator() {
-        return this.g.spliterator();
-    }
-
-    @Override
-    public boolean containsVertex(Vertex v) {
-        return this.g.containsVertex(v);
-    }
-
-    @Override
-    public boolean containsEdge(Vertex source, Vertex target) {
-        return this.g.containsEdge(source, target);
-    }
-
-    @Override
-    public Edge findEdge(Vertex source, Vertex target) {
-        return this.g.findEdge(source, target);
-    }
-
-    @Override
-    public Vertex getVertexFromIndex(int index) {
-        return this.g.getVertexFromIndex(index);
-    }
-
-    @Override
-    public List<Vertex> getVerticesFromLabel(String label) {
-        return this.g.getVerticesFromLabel(label);
-    }
-
-    @Override
-    public Vertex getVertexFromLabel(String label) {
-        return this.g.getVertexFromLabel(label);
-    }
-
-    @Override
-    public Vertex getRandomVertex(Random r) {
-        return this.g.getRandomVertex(r);
-    }
-
-    @Override
-    public Vertex getRandomVertex() {
-        return this.g.getRandomVertex();
-    }
-
-    @Override
-    public Map<VertexPair, Edge> getEdges() {
-        return this.g.getEdges();
-    }
-
-    @Override
-    public int getEdgesCount() {
-        return this.g.getEdgesCount();
-    }
-
-    @Override
-    public Map<Vertex, Edge> getOutEdges(Vertex v) {
-        return this.g.getOutEdges(v);
-    }
-
-    @Override
-    public Map<Vertex, Edge> getInEdges(Vertex v) {
-        return this.g.getInEdges(v);
-    }
-
-    @Override
-    public double getOutStrength(Vertex v) {
-        return this.g.getOutStrength(v);
-    }
-
-    @Override
-    public double getInStrength(Vertex v) {
-        return this.g.getInStrength(v);
-    }
-
-    @Override
-    public int getOutDegree(Vertex v) {
-        return this.g.getOutDegree(v);
-    }
-
-    @Override
-    public int getInDegree(Vertex v) {
-        return this.g.getInDegree(v);
-    }
-
-    @Override
-    public List<Vertex> getVertices() {
-        return this.g.getVertices();
-    }
-
-    @Override
-    public int getVerticesCount() {
-        return this.g.getVerticesCount();
-    }
-
-    @Override
-    public Vertex getRandomOutEdge(Vertex from, boolean weighted) {
-        return this.g.getRandomOutEdge(from, weighted);
-    }
-
-    @Override
-    public double getDiameter() {
-        return this.g.getDiameter();
-    }
-
-    @Override
-    public double getDensity() {
-        return this.g.getDensity();
-    }
-
-    @Override
-    public double getAveragePathLength() {
-        return g.getAveragePathLength();
     }
 
     @Override
@@ -195,7 +50,7 @@ public final class ImmutableGraph implements Graph {
 
     @Override
     public Vertex addVertex(String label) {
-        return this.g.addVertex(label);
+        throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 
     @Override
@@ -205,7 +60,7 @@ public final class ImmutableGraph implements Graph {
 
     @Override
     public List<Vertex> addVertices(Vertex... vertices) {
-        return this.g.addVertices(vertices);
+        throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 
     @Override
@@ -266,10 +121,5 @@ public final class ImmutableGraph implements Graph {
     @Override
     public void removeEdges(Vertex... among) {
         throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
-    }
-
-    @Override
-    public String toString() {
-        return this.g.toString();
     }
 }
