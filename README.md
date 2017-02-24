@@ -137,19 +137,3 @@ ig.addVertex(); // Will throw UnsupportedOperationException
 ```
 
 Modifications that trigger exceptions include vertex addition/removal, edge addition/removal or weight modification as well as altering metadata information. `ImmutableGraph` is backed by the graph it decorates; changes to the underlying graph will immediately reflect on the `ImmutableGraph`.
-
-# TODO
-
-- http://www.cs.cornell.edu/home/kleinber/swn.d/swn.html
-- Transformation "stretch" that extends edges
-- Perhaps define an `interface VertexSimilarity` with one member `double compute(Vertex v1, Vertex v2, Graph g)` as well as an `interface VertexSimilarityMatrix` replacing `Map<VertexPair, Double>`. See '3.2.4. Definitions based on vertex similarity' in 'Community detection in graphs, Santo Fortunato'
-- PageRank and HITS test on a known graph
-- GraphOperations.combineGraphs seems like a generalization of Graph.deepCopy
-- Implement `Metadata` on `Vertex` and `Edge`
-- Edge weight should be part of Graph and Edge should be arbitrary object
-- Add a field or method or something on GraphGenerator to mark if it is deterministic or not. Alternatively, implement DeterministicGraphGenerator. This may help in the future to cache deterministic graphs.
-- Add `GraphTransformation` functional interface and convert most `GraphUtils` functions to that. Also add method `transform` in `Graph` interface that will accept a `GraphTransformation`.
-- Maybe rename actions to fragments?
-- getStubborn() is wrong because a stubborn agent can only point to other stubborn agents
-- `Vertex` can still be mutated with `setLabel` even in immutable graphs. Same for labels with `setWeight`.
-- Fail build if `ImmutableGraph` doesn't implement all methods of `Graph` because it's a risk
