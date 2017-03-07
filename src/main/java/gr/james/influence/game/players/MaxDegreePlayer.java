@@ -7,12 +7,13 @@ import gr.james.influence.game.GameDefinition;
 import gr.james.influence.game.Move;
 import gr.james.influence.game.MovePointer;
 import gr.james.influence.game.Player;
+import gr.james.influence.graph.Direction;
 
 public class MaxDegreePlayer extends Player {
     @Override
     public void suggestMove(Graph g, GameDefinition d, MovePointer movePtr) {
         Move m = new Move();
-        GraphStateIterator<Integer> it = new GraphStateIterator<>(Degree.execute(g, true));
+        GraphStateIterator<Integer> it = new GraphStateIterator<>(Degree.execute(g, Direction.INBOUND));
         while (m.getVerticesCount() < d.getActions()) {
             m.putVertex(it.next().getObject(), 1.0);
         }

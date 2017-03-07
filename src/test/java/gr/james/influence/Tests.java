@@ -12,6 +12,7 @@ import gr.james.influence.game.Game;
 import gr.james.influence.game.GameDefinition;
 import gr.james.influence.game.GameResult;
 import gr.james.influence.game.Move;
+import gr.james.influence.graph.Direction;
 import gr.james.influence.graph.GraphUtils;
 import gr.james.influence.graph.MemoryGraph;
 import gr.james.influence.graph.Vertex;
@@ -92,7 +93,7 @@ public class Tests {
         Graph g = new BarabasiAlbertGenerator(vertexCount, 2, 2, 1.0).generate();
 
         /* Get PageRank and Degree */
-        GraphState<Integer> degree = Degree.execute(g, true);
+        GraphState<Integer> degree = Degree.execute(g, Direction.INBOUND);
         GraphState<Double> pagerank = PageRank.execute(g, 0.0);
 
         /* Normalize pagerank */
@@ -169,7 +170,7 @@ public class Tests {
         Graph g = new TwoWheelsGenerator(k).generate();
 
         /* Get max degree */
-        int max = new GraphStateIterator<>(Degree.execute(g, true)).next().getWeight();
+        int max = new GraphStateIterator<>(Degree.execute(g, Direction.INBOUND)).next().getWeight();
 
         /* The max has to be k or 6 if k is too low */
         Assert.assertEquals("twoWheelsMaxDegreeTest - " + k, Math.max(6, k - 1), max);

@@ -3,6 +3,7 @@ package gr.james.influence.main;
 import gr.james.influence.algorithms.generators.BarabasiAlbertGenerator;
 import gr.james.influence.algorithms.scoring.Degree;
 import gr.james.influence.api.Graph;
+import gr.james.influence.graph.Direction;
 import gr.james.influence.graph.Vertex;
 import gr.james.influence.util.RandomHelper;
 import gr.james.influence.util.collections.GraphState;
@@ -29,7 +30,7 @@ public class DegreeDistributionTest {
 
         // Find largest degree
         int largestDegree = 0;
-        GraphState<Integer> degrees = Degree.execute(g, true);
+        GraphState<Integer> degrees = Degree.execute(g, Direction.INBOUND);
         for (int d : degrees.values()) {
             if (d > largestDegree) {
                 largestDegree = d;
