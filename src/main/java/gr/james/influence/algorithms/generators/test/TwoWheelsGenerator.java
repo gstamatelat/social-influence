@@ -1,5 +1,6 @@
-package gr.james.influence.algorithms.generators;
+package gr.james.influence.algorithms.generators.test;
 
+import gr.james.influence.algorithms.generators.basic.WheelGenerator;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphFactory;
 import gr.james.influence.api.GraphGenerator;

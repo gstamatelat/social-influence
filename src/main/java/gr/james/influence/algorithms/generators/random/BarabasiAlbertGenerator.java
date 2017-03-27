@@ -1,5 +1,6 @@
-package gr.james.influence.algorithms.generators;
+package gr.james.influence.algorithms.generators.random;
 
+import gr.james.influence.algorithms.generators.basic.CompleteGenerator;
 import gr.james.influence.algorithms.scoring.Degree;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphFactory;

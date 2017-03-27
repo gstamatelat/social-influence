@@ -1,4 +1,4 @@
-package gr.james.influence.algorithms.generators;
+package gr.james.influence.algorithms.generators.basic;
 
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphFactory;
@@ -7,10 +7,10 @@ import gr.james.influence.graph.Vertex;
 
 import java.util.Random;
 
-public class CycleGenerator implements GraphGenerator {
+public class PathGenerator implements GraphGenerator {
     private int totalVertices;
 
-    public CycleGenerator(int totalVertices) {
+    public PathGenerator(int totalVertices) {
         this.totalVertices = totalVertices;
     }
 
@@ -24,9 +24,8 @@ public class CycleGenerator implements GraphGenerator {
             g.addEdges(previousVertex, newVertex);
             previousVertex = newVertex;
         }
-        g.addEdges(startVertex, previousVertex);
 
-        g.setGraphType("Cycle");
+        g.setGraphType("Path");
         g.setMeta("totalVertices", String.valueOf(totalVertices));
 
         return g;

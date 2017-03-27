@@ -1,6 +1,10 @@
 package gr.james.influence;
 
-import gr.james.influence.algorithms.generators.*;
+import gr.james.influence.algorithms.generators.basic.CycleGenerator;
+import gr.james.influence.algorithms.generators.random.BarabasiAlbertClusterGenerator;
+import gr.james.influence.algorithms.generators.random.BarabasiAlbertGenerator;
+import gr.james.influence.algorithms.generators.random.RandomGenerator;
+import gr.james.influence.algorithms.generators.test.TwoWheelsGenerator;
 import gr.james.influence.algorithms.iterators.GraphStateIterator;
 import gr.james.influence.algorithms.iterators.OrderedVertexIterator;
 import gr.james.influence.algorithms.iterators.RandomSurferIterator;

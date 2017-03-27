@@ -1,6 +1,6 @@
 package gr.james.influence;
 
-import gr.james.influence.algorithms.generators.RandomGenerator;
+import gr.james.influence.algorithms.generators.random.RandomGenerator;
 import gr.james.influence.api.Graph;
 import gr.james.influence.graph.MemoryGraph;
 import gr.james.influence.graph.Vertex;

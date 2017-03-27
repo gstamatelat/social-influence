@@ -1,6 +1,6 @@
 package gr.james.influence;
 
-import gr.james.influence.algorithms.generators.PathGenerator;
+import gr.james.influence.algorithms.generators.basic.PathGenerator;
 import gr.james.influence.algorithms.scoring.Closeness;
 import gr.james.influence.api.Graph;
 import gr.james.influence.graph.Direction;

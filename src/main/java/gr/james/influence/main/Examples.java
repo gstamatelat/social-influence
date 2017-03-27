@@ -1,8 +1,8 @@
 package gr.james.influence.main;
 
-import gr.james.influence.algorithms.generators.BarabasiAlbertGenerator;
-import gr.james.influence.algorithms.generators.MasterGenerator;
-import gr.james.influence.algorithms.generators.WeaklyConnectedGenerator;
+import gr.james.influence.algorithms.generators.random.BarabasiAlbertGenerator;
+import gr.james.influence.algorithms.generators.test.MasterGenerator;
+import gr.james.influence.algorithms.generators.test.WeaklyConnectedGenerator;
 import gr.james.influence.algorithms.scoring.DeGroot;
 import gr.james.influence.algorithms.scoring.HITS;
 import gr.james.influence.algorithms.scoring.PageRank;
