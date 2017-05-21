@@ -1,9 +1,9 @@
 package gr.james.influence.graph;
 
 import gr.james.influence.api.Graph;
+import gr.james.influence.api.GraphEdge;
 import gr.james.influence.util.Conditions;
 import gr.james.influence.util.collections.VertexPair;
-import gr.james.influence.util.collections.Weighted;
 
 import java.util.*;
 import java.util.function.Consumer;
@@ -76,7 +76,7 @@ public abstract class GraphDecorator implements Graph {
     }
 
     @Override
-    public Weighted<Edge, Double> findEdge(Vertex source, Vertex target) {
+    public GraphEdge findEdge(Vertex source, Vertex target) {
         return this.g.findEdge(source, target);
     }
 
@@ -106,7 +106,7 @@ public abstract class GraphDecorator implements Graph {
     }
 
     @Override
-    public Map<VertexPair, Weighted<Edge, Double>> getEdges() {
+    public Map<VertexPair, GraphEdge> getEdges() {
         return this.g.getEdges();
     }
 
@@ -116,12 +116,12 @@ public abstract class GraphDecorator implements Graph {
     }
 
     @Override
-    public Map<Vertex, Weighted<Edge, Double>> getOutEdges(Vertex v) {
+    public Map<Vertex, GraphEdge> getOutEdges(Vertex v) {
         return this.g.getOutEdges(v);
     }
 
     @Override
-    public Map<Vertex, Weighted<Edge, Double>> getInEdges(Vertex v) {
+    public Map<Vertex, GraphEdge> getInEdges(Vertex v) {
         return this.g.getInEdges(v);
     }
 
@@ -226,7 +226,7 @@ public abstract class GraphDecorator implements Graph {
     }
 
     @Override
-    public Edge addEdge(Vertex source, Vertex target) {
+    public GraphEdge addEdge(Vertex source, Vertex target) {
         return this.g.addEdge(source, target);
     }
 
@@ -236,7 +236,7 @@ public abstract class GraphDecorator implements Graph {
     }
 
     @Override
-    public Edge addEdge(Vertex source, Vertex target, double weight) {
+    public GraphEdge addEdge(Vertex source, Vertex target, double weight) {
         return this.g.addEdge(source, target, weight);
     }
 

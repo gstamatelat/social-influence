@@ -1,6 +1,7 @@
 package gr.james.influence.graph;
 
 import gr.james.influence.api.Graph;
+import gr.james.influence.api.GraphEdge;
 import gr.james.influence.util.Finals;
 
 import java.util.Collection;
@@ -94,7 +95,7 @@ public final class ImmutableGraph extends GraphDecorator {
     }
 
     @Override
-    public Edge addEdge(Vertex source, Vertex target) {
+    public GraphEdge addEdge(Vertex source, Vertex target) {
         throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 
@@ -104,7 +105,7 @@ public final class ImmutableGraph extends GraphDecorator {
     }
 
     @Override
-    public Edge addEdge(Vertex source, Vertex target, double weight) {
+    public GraphEdge addEdge(Vertex source, Vertex target, double weight) {
         throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 

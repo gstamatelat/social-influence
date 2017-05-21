@@ -1,12 +1,7 @@
 package gr.james.influence.graph.io;
 
-import gr.james.influence.api.Graph;
-import gr.james.influence.api.GraphExporter;
-import gr.james.influence.api.GraphFactory;
-import gr.james.influence.api.GraphImporter;
-import gr.james.influence.graph.Edge;
+import gr.james.influence.api.*;
 import gr.james.influence.graph.Vertex;
-import gr.james.influence.util.collections.Weighted;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -64,7 +59,7 @@ public class Json implements GraphImporter, GraphExporter {
         private boolean directed = true;
         private String label;
 
-        public JsonEdge(Vertex source, Vertex target, Weighted<Edge, Double> e) {
+        public JsonEdge(Vertex source, Vertex target, GraphEdge e) {
             this.source = String.valueOf(source.getId());
             this.target = String.valueOf(target.getId());
             this.label = String.valueOf(e.getWeight());

@@ -1,11 +1,10 @@
 package gr.james.influence.algorithms.distance;
 
 import gr.james.influence.api.Graph;
-import gr.james.influence.graph.Edge;
+import gr.james.influence.api.GraphEdge;
 import gr.james.influence.graph.Vertex;
 import gr.james.influence.util.collections.VertexPair;
 import gr.james.influence.util.collections.VertexSequence;
-import gr.james.influence.util.collections.Weighted;
 
 import java.util.*;
 
@@ -48,7 +47,7 @@ public class Dijkstra {
         while (!pq.isEmpty()) {
             DijkstraNode u = pq.poll();
 
-            for (Map.Entry<Vertex, Weighted<Edge, Double>> e : g.getOutEdges(u.vertex).entrySet()) {
+            for (Map.Entry<Vertex, GraphEdge> e : g.getOutEdges(u.vertex).entrySet()) {
                 DijkstraNode v = nodeMap.get(e.getKey());
                 double weight = e.getValue().getWeight();
                 double distanceThroughU = u.distance + weight;

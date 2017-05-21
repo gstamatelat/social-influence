@@ -2,10 +2,9 @@ package gr.james.influence.algorithms.scoring;
 
 import gr.james.influence.algorithms.scoring.util.IterativeAlgorithmHelper;
 import gr.james.influence.api.Graph;
-import gr.james.influence.graph.Edge;
+import gr.james.influence.api.GraphEdge;
 import gr.james.influence.graph.Vertex;
 import gr.james.influence.util.collections.GraphState;
-import gr.james.influence.util.collections.Weighted;
 
 import java.util.Map;
 
@@ -18,15 +17,15 @@ public class HITS {
                     GraphState<HITSScore> next = new GraphState<>(g, new HITSScore(0.0, 0.0));
 
                     for (Vertex v : g) {
-                        Map<Vertex, Weighted<Edge, Double>> inEdges = g.getInEdges(v);
-                        for (Map.Entry<Vertex, Weighted<Edge, Double>> e : inEdges.entrySet()) {
+                        Map<Vertex, GraphEdge> inEdges = g.getInEdges(v);
+                        for (Map.Entry<Vertex, GraphEdge> e : inEdges.entrySet()) {
                             next.put(v, next.get(v).addToAuthority(e.getValue().getWeight() * old.get(e.getKey()).getHub()));
                         }
                     }
 
                     for (Vertex v : g) {
-                        Map<Vertex, Weighted<Edge, Double>> outEdges = g.getOutEdges(v);
-                        for (Map.Entry<Vertex, Weighted<Edge, Double>> e : outEdges.entrySet()) {
+                        Map<Vertex, GraphEdge> outEdges = g.getOutEdges(v);
+                        for (Map.Entry<Vertex, GraphEdge> e : outEdges.entrySet()) {
                             next.put(v, next.get(v).addToHub(e.getValue().getWeight() * next.get(e.getKey()).getAuthority()));
                         }
                     }

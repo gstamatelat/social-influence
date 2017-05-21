@@ -12,6 +12,7 @@ import gr.james.influence.util.Conditions;
  * <p>Vertex id is automatically set to an auto-increment value each time you instantiate a new vertex. A vertex can
  * exist in multiple graphs, if that makes sense for the application.</p>
  */
+@Deprecated
 public class Vertex extends TreeMapMetadata implements Comparable<Vertex>, Metadata {
     private static int nextId = 1;
 

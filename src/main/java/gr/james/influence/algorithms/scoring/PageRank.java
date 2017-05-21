@@ -2,11 +2,10 @@ package gr.james.influence.algorithms.scoring;
 
 import gr.james.influence.algorithms.scoring.util.IterativeAlgorithmHelper;
 import gr.james.influence.api.Graph;
-import gr.james.influence.graph.Edge;
+import gr.james.influence.api.GraphEdge;
 import gr.james.influence.graph.Vertex;
 import gr.james.influence.util.Finals;
 import gr.james.influence.util.collections.GraphState;
-import gr.james.influence.util.collections.Weighted;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,8 +23,8 @@ public class PageRank {
                 oldState -> {
                     GraphState<Double> nextState = new GraphState<>(g, 0.0);
                     for (Vertex v : g) {
-                        Map<Vertex, Weighted<Edge, Double>> inEdges = g.getInEdges(v);
-                        for (Map.Entry<Vertex, Weighted<Edge, Double>> e : inEdges.entrySet()) {
+                        Map<Vertex, GraphEdge> inEdges = g.getInEdges(v);
+                        for (Map.Entry<Vertex, GraphEdge> e : inEdges.entrySet()) {
                             nextState.put(v, nextState.get(v) +
                                     e.getValue().getWeight() * oldState.get(e.getKey()) / outStrengths.get(e.getKey()));
                         }

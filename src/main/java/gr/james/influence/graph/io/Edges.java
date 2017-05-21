@@ -1,10 +1,6 @@
 package gr.james.influence.graph.io;
 
-import gr.james.influence.api.Graph;
-import gr.james.influence.api.GraphExporter;
-import gr.james.influence.api.GraphFactory;
-import gr.james.influence.api.GraphImporter;
-import gr.james.influence.graph.Edge;
+import gr.james.influence.api.*;
 import gr.james.influence.graph.Vertex;
 import gr.james.influence.util.Finals;
 import gr.james.influence.util.exceptions.GraphException;
@@ -43,7 +39,7 @@ public class Edges implements GraphImporter, GraphExporter {
             if (!nodeMap.containsKey(sp[1])) {
                 nodeMap.put(sp[1], g.addVertex(sp[1]));
             }
-            Edge e = g.addEdge(nodeMap.get(sp[0]), nodeMap.get(sp[1]), Double.parseDouble(sp[2]));
+            GraphEdge e = g.addEdge(nodeMap.get(sp[0]), nodeMap.get(sp[1]), Double.parseDouble(sp[2]));
             if (e == null) {
                 g.setEdgeWeight(nodeMap.get(sp[0]), nodeMap.get(sp[1]),
                         g.findEdge(nodeMap.get(sp[0]), nodeMap.get(sp[1])).getWeight() + Double.parseDouble(sp[2]));

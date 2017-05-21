@@ -1,10 +1,10 @@
 package gr.james.influence.graph;
 
 import gr.james.influence.api.Graph;
+import gr.james.influence.api.GraphEdge;
 import gr.james.influence.util.Conditions;
 import gr.james.influence.util.Finals;
 import gr.james.influence.util.collections.Pair;
-import gr.james.influence.util.collections.Weighted;
 
 import java.util.*;
 
@@ -12,7 +12,7 @@ import java.util.*;
  * <p>Represents an in-memory {@link Graph}, implemented using adjacency lists. Suitable for sparse graphs.</p>
  */
 public class MemoryGraph extends AbstractGraph {
-    private Map<Vertex, Pair<Map<Vertex, Weighted<Edge, Double>>>> m;
+    private Map<Vertex, Pair<Map<Vertex, GraphEdge>>> m;
     private List<Vertex> vList;
 
     /**
@@ -33,7 +33,7 @@ public class MemoryGraph extends AbstractGraph {
         if (this.containsVertex(v)) {
             return false;
         } else {
-            Pair<Map<Vertex, Weighted<Edge, Double>>> pp = new Pair<>(new LinkedHashMap<>(), new LinkedHashMap<>());
+            Pair<Map<Vertex, GraphEdge>> pp = new Pair<>(new LinkedHashMap<>(), new LinkedHashMap<>());
             Object o = this.m.put(v, pp);
             assert o == null;
             this.vList.add(v);
@@ -68,12 +68,12 @@ public class MemoryGraph extends AbstractGraph {
     }
 
     @Override
-    public Edge addEdge(Vertex source, Vertex target, double weight) {
+    public GraphEdge addEdge(Vertex source, Vertex target, double weight) {
         Conditions.requireArgument(weight > 0, Finals.E_EDGE_WEIGHT_NEGATIVE, weight);
         if (!containsEdge(source, target)) {
-            Edge e = new Edge(source, target, weight);
-            Weighted<Edge, Double> e1 = this.m.get(source).getFirst().put(target, new Weighted<>(e, weight));
-            Weighted<Edge, Double> e2 = this.m.get(target).getSecond().put(source, new Weighted<>(e, weight));
+            GraphEdge e = new MemoryGraphEdge(new Edge(), source, target, weight);
+            GraphEdge e1 = this.m.get(source).getFirst().put(target, e);
+            GraphEdge e2 = this.m.get(target).getSecond().put(source, e);
             assert e1 == null;
             assert e2 == null;
             return e;
@@ -85,7 +85,7 @@ public class MemoryGraph extends AbstractGraph {
     @Override
     public boolean removeEdge(Vertex source, Vertex target) {
         if (this.m.get(source).getFirst().remove(target) != null) {
-            Weighted<Edge, Double> h = this.m.get(target).getSecond().remove(source);
+            GraphEdge h = this.m.get(target).getSecond().remove(source);
             assert h != null;
             return true;
         } else {
@@ -94,13 +94,13 @@ public class MemoryGraph extends AbstractGraph {
     }
 
     @Override
-    public Map<Vertex, Weighted<Edge, Double>> getOutEdges(Vertex v) {
+    public Map<Vertex, GraphEdge> getOutEdges(Vertex v) {
         Conditions.requireNonNullAndExists(v, this);
         return Collections.unmodifiableMap(this.m.get(v).getFirst());
     }
 
     @Override
-    public Map<Vertex, Weighted<Edge, Double>> getInEdges(Vertex v) {
+    public Map<Vertex, GraphEdge> getInEdges(Vertex v) {
         Conditions.requireNonNullAndExists(v, this);
         return Collections.unmodifiableMap(this.m.get(v).getSecond());
     }
