@@ -4,6 +4,7 @@ import gr.james.influence.api.Graph;
 import gr.james.influence.graph.Edge;
 import gr.james.influence.graph.Vertex;
 import gr.james.influence.util.collections.VertexPair;
+import gr.james.influence.util.collections.Weighted;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -33,7 +34,7 @@ public class FloydWarshall {
         }
 
         for (Vertex v : g) {
-            for (Map.Entry<Vertex, Edge> e : g.getOutEdges(v).entrySet()) {
+            for (Map.Entry<Vertex, Weighted<Edge, Double>> e : g.getOutEdges(v).entrySet()) {
                 dist.put(new VertexPair(v, e.getKey()), e.getValue().getWeight());
             }
         }

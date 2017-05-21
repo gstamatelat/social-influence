@@ -8,6 +8,7 @@ import gr.james.influence.api.GraphFactory;
 import gr.james.influence.util.Finals;
 import gr.james.influence.util.RandomHelper;
 import gr.james.influence.util.collections.VertexPair;
+import gr.james.influence.util.collections.Weighted;
 import gr.james.influence.util.exceptions.GraphException;
 
 import java.util.*;
@@ -28,7 +29,7 @@ public class GraphUtils {
     }
 
     public static void randomizeEdgeWeights(Graph g) {
-        for (Map.Entry<VertexPair, Edge> e : g.getEdges().entrySet()) {
+        for (Map.Entry<VertexPair, Weighted<Edge, Double>> e : g.getEdges().entrySet()) {
             boolean change = g.setEdgeWeight(e.getKey().getSource(), e.getKey().getTarget(),
                     RandomHelper.getRandom().nextDouble());
             assert change;
@@ -48,10 +49,10 @@ public class GraphUtils {
         Vertex v = g.addVertex();
 
         for (Vertex y : f) {
-            for (Map.Entry<Vertex, Edge> e : g.getOutEdges(y).entrySet()) {
+            for (Map.Entry<Vertex, Weighted<Edge, Double>> e : g.getOutEdges(y).entrySet()) {
                 g.addEdge(v, e.getKey(), e.getValue().getWeight());
             }
-            for (Map.Entry<Vertex, Edge> e : g.getInEdges(y).entrySet()) {
+            for (Map.Entry<Vertex, Weighted<Edge, Double>> e : g.getInEdges(y).entrySet()) {
                 g.addEdge(e.getKey(), v, e.getValue().getWeight());
             }
             g.removeVertex(y);
@@ -75,7 +76,7 @@ public class GraphUtils {
             for (Vertex v : g) {
                 r.addVertex(v);
             }
-            for (Map.Entry<VertexPair, Edge> e : g.getEdges().entrySet()) {
+            for (Map.Entry<VertexPair, Weighted<Edge, Double>> e : g.getEdges().entrySet()) {
                 r.addEdge(e.getKey().getFirst(), e.getKey().getSecond(), e.getValue().getWeight());
             }
         }

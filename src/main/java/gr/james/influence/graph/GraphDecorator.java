@@ -3,6 +3,7 @@ package gr.james.influence.graph;
 import gr.james.influence.api.Graph;
 import gr.james.influence.util.Conditions;
 import gr.james.influence.util.collections.VertexPair;
+import gr.james.influence.util.collections.Weighted;
 
 import java.util.*;
 import java.util.function.Consumer;
@@ -75,7 +76,7 @@ public abstract class GraphDecorator implements Graph {
     }
 
     @Override
-    public Edge findEdge(Vertex source, Vertex target) {
+    public Weighted<Edge, Double> findEdge(Vertex source, Vertex target) {
         return this.g.findEdge(source, target);
     }
 
@@ -105,7 +106,7 @@ public abstract class GraphDecorator implements Graph {
     }
 
     @Override
-    public Map<VertexPair, Edge> getEdges() {
+    public Map<VertexPair, Weighted<Edge, Double>> getEdges() {
         return this.g.getEdges();
     }
 
@@ -115,12 +116,12 @@ public abstract class GraphDecorator implements Graph {
     }
 
     @Override
-    public Map<Vertex, Edge> getOutEdges(Vertex v) {
+    public Map<Vertex, Weighted<Edge, Double>> getOutEdges(Vertex v) {
         return this.g.getOutEdges(v);
     }
 
     @Override
-    public Map<Vertex, Edge> getInEdges(Vertex v) {
+    public Map<Vertex, Weighted<Edge, Double>> getInEdges(Vertex v) {
         return this.g.getInEdges(v);
     }
 

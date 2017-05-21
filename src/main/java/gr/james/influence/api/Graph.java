@@ -8,6 +8,7 @@ import gr.james.influence.util.Finals;
 import gr.james.influence.util.Helper;
 import gr.james.influence.util.RandomHelper;
 import gr.james.influence.util.collections.VertexPair;
+import gr.james.influence.util.collections.Weighted;
 import gr.james.influence.util.exceptions.InvalidVertexException;
 
 import java.util.*;
@@ -54,7 +55,7 @@ public interface Graph extends Iterable<Vertex>, Metadata {
      * @throws NullPointerException   if either {@code source} or {@code target} is {@code null}
      * @throws InvalidVertexException if either {@code source} or {@code target} doesn't belong in the graph
      */
-    default Edge findEdge(Vertex source, Vertex target) {
+    default Weighted<Edge, Double> findEdge(Vertex source, Vertex target) {
         return this.getOutEdges(source).get(Conditions.requireNonNullAndExists(target, this));
     }
 
@@ -73,27 +74,27 @@ public interface Graph extends Iterable<Vertex>, Metadata {
 
     /**
      * <p>Get all outbound edges of {@code v}. The result is a {@link Map} where the keys are the destination vertices
-     * and the values are the respective {@link Edge} objects.</p>
+     * and the values are the respective {@link Edge} objects along with their weights.</p>
      *
      * @param v the vertex to get the outbound edges of
-     * @return the outbound edges of {@code v} as a {@code Map<Vertex, Edge>}
+     * @return the outbound edges of {@code v} as a {@code Map<Vertex, Weighted<Edge, Double>>}
      * @throws NullPointerException   if {@code v} is {@code null}
      * @throws InvalidVertexException if {@code v} doesn't belong in the graph
      * @see #getInEdges(Vertex)
      */
-    Map<Vertex, Edge> getOutEdges(Vertex v);
+    Map<Vertex, Weighted<Edge, Double>> getOutEdges(Vertex v);
 
     /**
      * <p>Get all inbound edges of {@code v}. The result is a {@link Map} where the keys are the source vertices and the
-     * values are the respective {@link Edge} objects.</p>
+     * values are the respective {@link Edge} objects along with their weights.</p>
      *
      * @param v the vertex to get the inbound edges of
-     * @return the inbound edges of {@code v} as a {@code Map<Vertex, Edge>}
+     * @return the inbound edges of {@code v} as a {@code Map<Vertex, Weighted<Edge, Double>>}
      * @throws NullPointerException   if {@code v} is {@code null}
      * @throws InvalidVertexException if {@code v} doesn't belong in the graph
      * @see #getOutEdges(Vertex)
      */
-    Map<Vertex, Edge> getInEdges(Vertex v);
+    Map<Vertex, Weighted<Edge, Double>> getInEdges(Vertex v);
 
     /**
      * <p>Returns the sum of the outbound edge weights of a vertex.</p>
@@ -105,7 +106,7 @@ public interface Graph extends Iterable<Vertex>, Metadata {
      * @see #getInStrength(Vertex)
      */
     default double getOutStrength(Vertex v) {
-        return this.getOutEdges(v).values().stream().mapToDouble(Edge::getWeight).sum();
+        return this.getOutEdges(v).values().stream().mapToDouble(Weighted::getWeight).sum();
     }
 
     /**
@@ -118,7 +119,7 @@ public interface Graph extends Iterable<Vertex>, Metadata {
      * @see #getOutStrength(Vertex)
      */
     default double getInStrength(Vertex v) {
-        return this.getInEdges(v).values().stream().mapToDouble(Edge::getWeight).sum();
+        return this.getInEdges(v).values().stream().mapToDouble(Weighted::getWeight).sum();
     }
 
     /**
@@ -143,6 +144,7 @@ public interface Graph extends Iterable<Vertex>, Metadata {
      * @return the inbound degree of vertex {@code v}
      * @throws NullPointerException   if {@code v} is {@code null}
      * @throws InvalidVertexException if {@code v} doesn't belong in the graph
+     * @see #getOutDegree(Vertex)
      * @see #getOutDegree(Vertex)
      */
     default int getInDegree(Vertex v) {
@@ -464,8 +466,8 @@ public interface Graph extends Iterable<Vertex>, Metadata {
         // TODO: Documentation and probably return a pair or vertex and edge
         // TODO: What if no out edge?
         Map<Vertex, Double> weightMap = new HashMap<>();
-        Map<Vertex, Edge> outEdges = this.getOutEdges(from);
-        for (Map.Entry<Vertex, Edge> e : outEdges.entrySet()) {
+        Map<Vertex, Weighted<Edge, Double>> outEdges = this.getOutEdges(from);
+        for (Map.Entry<Vertex, Weighted<Edge, Double>> e : outEdges.entrySet()) {
             weightMap.put(e.getKey(), (weighted ? e.getValue().getWeight() : 1.0));
         }
         Set<Vertex> edges = Helper.weightedRandom(weightMap, 1);
@@ -504,10 +506,10 @@ public interface Graph extends Iterable<Vertex>, Metadata {
     }
 
     @Deprecated
-    default Map<VertexPair, Edge> getEdges() {
-        Map<VertexPair, Edge> edges = new HashMap<>();
+    default Map<VertexPair, Weighted<Edge, Double>> getEdges() {
+        Map<VertexPair, Weighted<Edge, Double>> edges = new HashMap<>();
         for (Vertex v : this.getVertices()) {
-            for (Map.Entry<Vertex, Edge> e : this.getOutEdges(v).entrySet()) {
+            for (Map.Entry<Vertex, Weighted<Edge, Double>> e : this.getOutEdges(v).entrySet()) {
                 edges.put(new VertexPair(v, e.getKey()), e.getValue());
             }
         }
