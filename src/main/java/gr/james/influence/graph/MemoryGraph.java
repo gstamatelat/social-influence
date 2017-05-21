@@ -71,7 +71,7 @@ public class MemoryGraph extends AbstractGraph {
     public Edge addEdge(Vertex source, Vertex target, double weight) {
         Conditions.requireArgument(weight > 0, Finals.E_EDGE_WEIGHT_NEGATIVE, weight);
         if (!containsEdge(source, target)) {
-            Edge e = new Edge();
+            Edge e = new Edge(source, target, weight);
             Weighted<Edge, Double> e1 = this.m.get(source).getFirst().put(target, new Weighted<>(e, weight));
             Weighted<Edge, Double> e2 = this.m.get(target).getSecond().put(source, new Weighted<>(e, weight));
             assert e1 == null;
