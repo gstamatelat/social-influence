@@ -14,6 +14,8 @@ public interface GraphExporter {
      *
      * @param g      the graph that will be exported to {@code target}
      * @param target the output stream to write the graph to
+     * @param <V>    the vertex type
+     * @param <E>    the edge type
      * @throws IOException if an I/O exception occurs
      */
     <V, E> void to(Graph<V, E> g, OutputStream target) throws IOException;

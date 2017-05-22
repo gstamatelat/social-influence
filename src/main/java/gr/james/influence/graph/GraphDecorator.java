@@ -2,7 +2,6 @@ package gr.james.influence.graph;
 
 import gr.james.influence.api.*;
 import gr.james.influence.util.Conditions;
-import gr.james.influence.util.collections.Pair;
 
 import java.util.*;
 import java.util.function.Consumer;
@@ -119,8 +118,13 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
         return this.g.getRandomVertex();
     }
 
-    @Override
+    /*@Override
     public Map<Pair<V>, GraphEdge<V, E>> getEdges() {
+        return this.g.getEdges();
+    }*/
+
+    @Override
+    public Collection<GraphEdge<V, E>> getEdges() {
         return this.g.getEdges();
     }
 

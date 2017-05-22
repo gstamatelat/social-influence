@@ -5,7 +5,6 @@ import gr.james.influence.util.Conditions;
 import gr.james.influence.util.Finals;
 import gr.james.influence.util.Helper;
 import gr.james.influence.util.RandomHelper;
-import gr.james.influence.util.collections.Pair;
 import gr.james.influence.util.collections.VertexPair;
 import gr.james.influence.util.exceptions.InvalidVertexException;
 
@@ -512,7 +511,15 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
         return sum / (this.getVerticesCount() * (this.getVerticesCount() - 1));
     }
 
-    @Deprecated
+    default Collection<GraphEdge<V, E>> getEdges() {
+        Collection<GraphEdge<V, E>> edges = new LinkedHashSet<>();
+        for (V v : this.getVertices()) {
+            edges.addAll(this.getOutEdges(v).values());
+        }
+        return Collections.unmodifiableCollection(edges);
+    }
+
+    /*@Deprecated
     default Map<Pair<V>, GraphEdge<V, E>> getEdges() {
         Map<Pair<V>, GraphEdge<V, E>> edges = new HashMap<>();
         for (V v : this.getVertices()) {
@@ -521,5 +528,5 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
             }
         }
         return Collections.unmodifiableMap(edges);
-    }
+    }*/
 }

@@ -28,7 +28,7 @@ public class GraphUtils {
     }
 
     public static <V, E> void randomizeEdgeWeights(Graph<V, E> g) {
-        for (GraphEdge<V, E> e : g.getEdges().values()) {
+        for (GraphEdge<V, E> e : g.getEdges()) {
             boolean change = g.setEdgeWeight(e.getSource(), e.getTarget(),
                     RandomHelper.getRandom().nextDouble());
             assert change;
@@ -74,7 +74,7 @@ public class GraphUtils {
             for (V v : g) {
                 r.addVertex(v);
             }
-            for (GraphEdge<V, E> e : g.getEdges().values()) {
+            for (GraphEdge<V, E> e : g.getEdges()) {
                 r.addEdge(e.getSource(), e.getTarget(), e.getWeight());
             }
         }
