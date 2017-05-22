@@ -1,9 +1,7 @@
 package gr.james.influence;
 
 import gr.james.influence.algorithms.generators.random.RandomGenerator;
-import gr.james.influence.api.Graph;
-import gr.james.influence.graph.MemoryGraph;
-import gr.james.influence.graph.Vertex;
+import gr.james.influence.graph.SimpleGraph;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -15,10 +13,10 @@ public class GraphImplementationTests {
      */
     @Test
     public void vertexIteratorTest() {
-        Graph g = new RandomGenerator(250, 0.2).generate(MemoryGraph::new);
+        SimpleGraph g = new RandomGenerator(250, 0.2).generate();
 
-        Iterator<Vertex> it1 = g.iterator();
-        Iterator<Vertex> it2 = g.getVertices().iterator();
+        Iterator<String> it1 = g.iterator();
+        Iterator<String> it2 = g.getVertices().iterator();
 
         while (it1.hasNext() || it2.hasNext()) {
             Assert.assertEquals("vertexIteratorTest", true, it1.hasNext());
@@ -32,7 +30,7 @@ public class GraphImplementationTests {
      */
     @Test
     public void vertexIndexText() {
-        Graph g = new RandomGenerator(250, 0.2).generate(MemoryGraph::new);
+        SimpleGraph g = new RandomGenerator(250, 0.2).generate();
         for (int i = 0; i < g.getVerticesCount(); i++) {
             Assert.assertEquals("vertexIndexText", g.getVertexFromIndex(i), g.getVertices().get(i));
         }
@@ -43,7 +41,7 @@ public class GraphImplementationTests {
      */
     @Test
     public void verticesCountTest() {
-        Graph g = new RandomGenerator(250, 0.2).generate(MemoryGraph::new);
+        SimpleGraph g = new RandomGenerator(250, 0.2).generate();
         Assert.assertEquals("verticesCountTest", g.getVerticesCount(), g.getVertices().size());
     }
 }

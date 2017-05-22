@@ -5,7 +5,6 @@ import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphExporter;
 import gr.james.influence.api.GraphFactory;
 import gr.james.influence.api.GraphImporter;
-import gr.james.influence.graph.Vertex;
 import gr.james.influence.util.Finals;
 
 import java.io.*;
@@ -13,24 +12,24 @@ import java.util.Arrays;
 
 public class Csv implements GraphImporter, GraphExporter {
     @Override
-    public <T extends Graph> T from(InputStream source, GraphFactory<T> factory) throws IOException {
-        T g = factory.create();
+    public <V, E> Graph<V, E> from(InputStream source, GraphFactory<V, E> factory) throws IOException {
+        Graph<V, E> g = factory.create();
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(source, Finals.IO_ENCODING));
         String line;
         boolean firstLine = true;
-        OrderedVertexIterator it = null;
+        OrderedVertexIterator<V> it = null;
         while ((line = reader.readLine()) != null) {
             if (firstLine) {
                 g.addVertices(line.split(";").length - 1);
-                it = new OrderedVertexIterator(g);
+                it = new OrderedVertexIterator<>(g);
             } else {
-                Vertex v = it.next();
+                V v = it.next();
                 String[] splitted = line.split(";");
                 splitted = Arrays.copyOfRange(splitted, 1, splitted.length);
-                OrderedVertexIterator it2 = new OrderedVertexIterator(g);
+                OrderedVertexIterator<V> it2 = new OrderedVertexIterator<>(g);
                 for (String t : splitted) {
-                    Vertex u = it2.next();
+                    V u = it2.next();
                     double value = Double.parseDouble(t);
                     if (value > 0) {
                         g.addEdge(v, u, value);

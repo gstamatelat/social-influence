@@ -10,21 +10,21 @@ public final class IterativeAlgorithmHelper {
     public static final int REPS_INCREASE = 500;
     public static final int INITIAL_SIZE = 2;
 
-    public static <T> GraphState<T> execute(Graph g, GraphState<T> initialState, StateAdvancer<T> advancer,
-                                            ConvergePredicate<T> convergePredicate, double epsilon) {
+    public static <V, T> GraphState<V, T> execute(Graph<V, ?> g, GraphState<V, T> initialState, StateAdvancer<V, T> advancer,
+                                                  ConvergePredicate<T> convergePredicate, double epsilon) {
         Conditions.requireAllNonNull(g, initialState, advancer, convergePredicate);
         Conditions.requireArgument(epsilon >= 0, "epsilon must be >= 0");
 
-        EvictingLinkedHashSet<GraphState<T>> stateHistory = new EvictingLinkedHashSet<>(INITIAL_SIZE);
+        EvictingLinkedHashSet<GraphState<V, T>> stateHistory = new EvictingLinkedHashSet<>(INITIAL_SIZE);
 
-        GraphState<T> lastState = initialState;
+        GraphState<V, T> lastState = initialState;
         stateHistory.add(initialState);
 
         int reps = 0;
 
         boolean stabilized = false;
         while (!stabilized) {
-            GraphState<T> nextState = advancer.next(lastState);
+            GraphState<V, T> nextState = advancer.next(lastState);
 
             if (epsilon != 0.0 && nextState.testConvergence(lastState, convergePredicate, epsilon)) {
                 stabilized = true;

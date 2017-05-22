@@ -1,20 +1,18 @@
 package gr.james.influence.util.collections;
 
-import gr.james.influence.graph.Vertex;
-
 /**
- * <p>A {@link Pair} of {@link Vertex vertices}.</p>
+ * <p>A {@link Pair} of {@link V vertices}.</p>
  */
-public class VertexPair extends Pair<Vertex> {
-    public VertexPair(Vertex source, Vertex target) {
+public class VertexPair<V> extends Pair<V> {
+    public VertexPair(V source, V target) {
         super(source, target);
     }
 
-    public Vertex getSource() {
+    public V getSource() {
         return this.getFirst();
     }
 
-    public Vertex getTarget() {
+    public V getTarget() {
         return this.getSecond();
     }
 }

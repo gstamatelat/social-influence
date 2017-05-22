@@ -16,5 +16,5 @@ public interface GraphExporter {
      * @param target the output stream to write the graph to
      * @throws IOException if an I/O exception occurs
      */
-    void to(Graph g, OutputStream target) throws IOException;
+    <V, E> void to(Graph<V, E> g, OutputStream target) throws IOException;
 }

@@ -4,8 +4,9 @@ import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphFactory;
 import gr.james.influence.api.GraphGenerator;
 import gr.james.influence.graph.GraphUtils;
-import gr.james.influence.graph.Vertex;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class BarabasiAlbertClusterGenerator implements GraphGenerator {
@@ -24,24 +25,35 @@ public class BarabasiAlbertClusterGenerator implements GraphGenerator {
     }
 
     @Override
-    public <T extends Graph> T generate(GraphFactory<T> factory, Random r) {
-        Graph[] c = new Graph[clusters];
+    public <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, Random r) {
+        // Graph<V, E>[] c = new Graph<V, E>[clusters];
+        List<Graph<V, E>> c = new ArrayList<>(clusters);
 
         GraphGenerator scaleFreeGenerator = new BarabasiAlbertGenerator(totalVertices, stepEdges, initialClique, a);
         for (int i = 0; i < clusters; i++) {
-            c[i] = scaleFreeGenerator.generate(factory, r);
+            c.add(scaleFreeGenerator.generate(factory, r));
+            // c[i] = scaleFreeGenerator.generate(graphFactory, r);
         }
 
-        Vertex[] randomVertices = new Vertex[clusters];
+        assert c.size() == clusters;
+
+        // V[] randomVertices = new V[clusters];
+        List<V> randomVertices = new ArrayList<>(clusters);
         for (int i = 0; i < clusters; i++) {
-            randomVertices[i] = c[i].getRandomVertex(r);
+            randomVertices.add(c.get(i).getRandomVertex(r));
+            // randomVertices.set(i, c.get(i).getRandomVertex(r));
+            // randomVertices[i] = c[i].getRandomVertex(r);
         }
 
-        T g = GraphUtils.combineGraphs(factory, c);
+        assert randomVertices.size() == clusters;
+
+        Graph<V, E> g = GraphUtils.combineGraphs(factory, c);
 
         for (int i = 0; i < clusters; i++) {
-            Vertex s = randomVertices[i];
-            Vertex t = randomVertices[(i + 1) % clusters];
+            // Vertex s = randomVertices[i];
+            V s = randomVertices.get(i);
+            // V t = randomVertices[(i + 1) % clusters];
+            V t = randomVertices.get((i + 1) % clusters);
             g.addEdges(s, t);
         }
 

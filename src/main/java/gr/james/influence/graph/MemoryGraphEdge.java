@@ -2,28 +2,28 @@ package gr.james.influence.graph;
 
 import gr.james.influence.api.GraphEdge;
 
-public class MemoryGraphEdge implements GraphEdge<Vertex, Edge> {
-    private Edge edge;
-    private Vertex source;
-    private Vertex target;
+public class MemoryGraphEdge<V, E> implements GraphEdge<V, E> {
+    private E edge;
+    private V source;
+    private V target;
     private double weight;
 
-    public MemoryGraphEdge(Edge edge, Vertex source, Vertex target, double weight) {
+    public MemoryGraphEdge(E edge, V source, V target, double weight) {
         this.edge = edge;
         this.source = source;
         this.target = target;
         this.weight = weight;
     }
 
-    public Edge getEdge() {
+    public E getEdge() {
         return edge;
     }
 
-    public Vertex getSource() {
+    public V getSource() {
         return source;
     }
 
-    public Vertex getTarget() {
+    public V getTarget() {
         return target;
     }
 

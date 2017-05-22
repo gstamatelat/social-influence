@@ -2,7 +2,7 @@ package gr.james.influence.util;
 
 import gr.james.influence.api.GraphFactory;
 import gr.james.influence.graph.Direction;
-import gr.james.influence.graph.MemoryGraph;
+import gr.james.influence.graph.SimpleGraph;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,7 +24,7 @@ public final class Finals {
     public static final double DEFAULT_PAGERANK_PRECISION = 0.0;
     public static final String DEFAULT_INDENT = "  ";
     public static final Direction DEFAULT_DIRECTION = Direction.INBOUND;
-    public static final GraphFactory<MemoryGraph> DEFAULT_GRAPH_FACTORY = MemoryGraph::new;
+    public static final GraphFactory<String, Object> DEFAULT_GRAPH_FACTORY = SimpleGraph.graphFactory;
 
     /* Logging messages */
     public static final String L_PLAYER_WAITING = "Been waiting {} seconds for {} to terminate gracefully.";

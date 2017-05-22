@@ -3,7 +3,6 @@ package gr.james.influence.algorithms.generators.test;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphFactory;
 import gr.james.influence.api.GraphGenerator;
-import gr.james.influence.graph.Vertex;
 import gr.james.influence.util.Conditions;
 
 import java.util.Random;
@@ -21,18 +20,18 @@ public class WiseCrowdGenerator implements GraphGenerator {
     }
 
     @Override
-    public <T extends Graph> T generate(GraphFactory<T> factory, Random r) {
-        T g = factory.create();
+    public <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, Random r) {
+        Graph<V, E> g = factory.create();
 
-        Vertex boss = g.addVertex();
+        V boss = g.addVertex();
 
         while (g.getVerticesCount() < totalVertices) {
-            Vertex v = g.addVertex();
+            V v = g.addVertex();
             g.addEdge(boss, v, delta / (totalVertices - 1));
             g.addEdge(v, boss, delta);
         }
 
-        for (Vertex v : g) {
+        for (V v : g) {
             g.addEdge(v, v, 1 - delta);
         }
 

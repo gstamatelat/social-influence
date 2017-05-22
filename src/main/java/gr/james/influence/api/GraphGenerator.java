@@ -1,6 +1,6 @@
 package gr.james.influence.api;
 
-import gr.james.influence.graph.GraphUtils;
+import gr.james.influence.graph.SimpleGraph;
 import gr.james.influence.util.Conditions;
 import gr.james.influence.util.Finals;
 import gr.james.influence.util.RandomHelper;
@@ -23,12 +23,14 @@ public interface GraphGenerator {
      * {@link GraphGenerator#generate(GraphFactory)} calls will return a deep copy of the original graph
      * @throws NullPointerException if {@code g} is {@code null}
      */
-    static GraphGenerator decorate(Graph g) {
+    static <V, E> GraphGenerator decorate(Graph<V, E> g) {
         Conditions.requireNonNull(g);
         return new GraphGenerator() {
             @Override
-            public <T extends Graph> T generate(GraphFactory<T> factory, Random r) {
-                return GraphUtils.deepCopy(g, factory);
+            public <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, Random r) {
+                // return GraphUtils.deepCopy(g, factory);
+                // TODO
+                return null;
             }
         };
     }
@@ -39,8 +41,8 @@ public interface GraphGenerator {
      *
      * @return the generated graph
      */
-    default Graph generate() {
-        return generate(Finals.DEFAULT_GRAPH_FACTORY, RandomHelper.getRandom());
+    default SimpleGraph generate() {
+        return (SimpleGraph) generate(Finals.DEFAULT_GRAPH_FACTORY, RandomHelper.getRandom());
     }
 
     /**
@@ -49,8 +51,8 @@ public interface GraphGenerator {
      * @param seed create a new {@link Random} with this seed
      * @return the generated graph
      */
-    default Graph generate(long seed) {
-        return generate(Finals.DEFAULT_GRAPH_FACTORY, new Random(seed));
+    default SimpleGraph generate(long seed) {
+        return (SimpleGraph) generate(Finals.DEFAULT_GRAPH_FACTORY, new Random(seed));
     }
 
     /**
@@ -59,41 +61,38 @@ public interface GraphGenerator {
      * @param r the {@code Random} instance to use
      * @return the generated graph
      */
-    default Graph generate(Random r) {
-        return generate(Finals.DEFAULT_GRAPH_FACTORY, r);
+    default SimpleGraph generate(Random r) {
+        return (SimpleGraph) generate(Finals.DEFAULT_GRAPH_FACTORY, r);
     }
 
     /**
      * <p>Generate a new graph of type {@code T} based on the rules imposed by this entity. This method is using the
      * global random instance.</p>
      *
-     * @param factory the factory of {@code T}
-     * @param <T>     the type of graph to generate
+     * @param factory the graphFactory of {@code T}
      * @return the generated graph
      */
-    default <T extends Graph> T generate(GraphFactory<T> factory) {
+    default <V, E> Graph<V, E> generate(GraphFactory<V, E> factory) {
         return generate(factory, RandomHelper.getRandom());
     }
 
     /**
      * <p>Generate a new graph of type {@code T} based on the rules imposed by this entity.</p>
      *
-     * @param factory the factory of {@code T}
+     * @param factory the graphFactory of {@code T}
      * @param seed    create a new {@link Random} with this seed
-     * @param <T>     the type of graph to generate
      * @return the generated graph
      */
-    default <T extends Graph> T generate(GraphFactory<T> factory, long seed) {
+    default <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, long seed) {
         return generate(factory, new Random(seed));
     }
 
     /**
      * <p>Generate a new graph of type {@code T} based on the rules imposed by this entity.</p>
      *
-     * @param factory the factory of {@code T}
+     * @param factory the graphFactory of {@code T}
      * @param r       the {@code Random} instance to use
-     * @param <T>     the type of graph to generate
      * @return the generated graph
      */
-    <T extends Graph> T generate(GraphFactory<T> factory, Random r);
+    <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, Random r);
 }

@@ -12,7 +12,7 @@ public class WiseCrowdTest {
     public static void main(String[] args) throws IOException {
         Graph wiseCrowd = new WiseCrowdGenerator(11, 0.5).generate();
         new Dot().to(wiseCrowd, System.out);
-        GraphState<Double> pr = PageRank.execute(wiseCrowd, 0.0);
+        GraphState<String, Double> pr = PageRank.execute(wiseCrowd, 0.0);
         System.out.println(pr);
     }
 }

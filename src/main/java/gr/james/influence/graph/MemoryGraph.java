@@ -1,7 +1,6 @@
 package gr.james.influence.graph;
 
-import gr.james.influence.api.Graph;
-import gr.james.influence.api.GraphEdge;
+import gr.james.influence.api.*;
 import gr.james.influence.util.Conditions;
 import gr.james.influence.util.Finals;
 import gr.james.influence.util.collections.Pair;
@@ -11,29 +10,33 @@ import java.util.*;
 /**
  * <p>Represents an in-memory {@link Graph}, implemented using adjacency lists. Suitable for sparse graphs.</p>
  */
-public class MemoryGraph extends AbstractGraph {
-    private Map<Vertex, Pair<Map<Vertex, GraphEdge>>> m;
-    private List<Vertex> vList;
+public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
+    private Map<V, Pair<Map<V, GraphEdge<V, E>>>> m;
+    private List<V> vList;
+    private VertexFactory<V> vertexFactory;
+    private EdgeFactory<E> edgeFactory;
 
     /**
      * <p>Constructs an empty {@code MemoryGraph}.</p>
      */
-    public MemoryGraph() {
+    public MemoryGraph(VertexFactory<V> vertexFactory, EdgeFactory<E> edgeFactory) {
         this.m = new HashMap<>();
         this.vList = new ArrayList<>();
+        this.vertexFactory = vertexFactory;
+        this.edgeFactory = edgeFactory;
     }
 
     @Override
-    public boolean containsVertex(Vertex v) {
+    public boolean containsVertex(V v) {
         return this.m.containsKey(Conditions.requireNonNull(v));
     }
 
     @Override
-    public boolean addVertex(Vertex v) {
+    public boolean addVertex(V v) {
         if (this.containsVertex(v)) {
             return false;
         } else {
-            Pair<Map<Vertex, GraphEdge>> pp = new Pair<>(new LinkedHashMap<>(), new LinkedHashMap<>());
+            Pair<Map<V, GraphEdge<V, E>>> pp = new Pair<>(new LinkedHashMap<>(), new LinkedHashMap<>());
             Object o = this.m.put(v, pp);
             assert o == null;
             this.vList.add(v);
@@ -42,15 +45,15 @@ public class MemoryGraph extends AbstractGraph {
     }
 
     @Override
-    public boolean removeVertex(Vertex v) {
+    public boolean removeVertex(V v) {
         if (!this.containsVertex(v)) {
             return false;
         }
-        for (Vertex d : this.m.get(v).getFirst().keySet()) {
+        for (V d : this.m.get(v).getFirst().keySet()) {
             Object o = this.m.get(d).getSecond().remove(v);
             assert o != null;
         }
-        for (Vertex d : this.m.get(v).getSecond().keySet()) {
+        for (V d : this.m.get(v).getSecond().keySet()) {
             Object o = this.m.get(d).getFirst().remove(v);
             assert o != null;
         }
@@ -68,12 +71,12 @@ public class MemoryGraph extends AbstractGraph {
     }
 
     @Override
-    public GraphEdge addEdge(Vertex source, Vertex target, double weight) {
+    public GraphEdge<V, E> addEdge(V source, V target, double weight) {
         Conditions.requireArgument(weight > 0, Finals.E_EDGE_WEIGHT_NEGATIVE, weight);
         if (!containsEdge(source, target)) {
-            GraphEdge e = new MemoryGraphEdge(new Edge(), source, target, weight);
-            GraphEdge e1 = this.m.get(source).getFirst().put(target, e);
-            GraphEdge e2 = this.m.get(target).getSecond().put(source, e);
+            GraphEdge<V, E> e = new MemoryGraphEdge<>(edgeFactory.createEdge(), source, target, weight);
+            GraphEdge<V, E> e1 = this.m.get(source).getFirst().put(target, e);
+            GraphEdge<V, E> e2 = this.m.get(target).getSecond().put(source, e);
             assert e1 == null;
             assert e2 == null;
             return e;
@@ -83,9 +86,9 @@ public class MemoryGraph extends AbstractGraph {
     }
 
     @Override
-    public boolean removeEdge(Vertex source, Vertex target) {
+    public boolean removeEdge(V source, V target) {
         if (this.m.get(source).getFirst().remove(target) != null) {
-            GraphEdge h = this.m.get(target).getSecond().remove(source);
+            GraphEdge<V, E> h = this.m.get(target).getSecond().remove(source);
             assert h != null;
             return true;
         } else {
@@ -94,19 +97,54 @@ public class MemoryGraph extends AbstractGraph {
     }
 
     @Override
-    public Map<Vertex, GraphEdge> getOutEdges(Vertex v) {
+    public VertexFactory<V> getVertexFactory() {
+        return vertexFactory;
+    }
+
+    @Override
+    public EdgeFactory<E> getEdgeFactory() {
+        return edgeFactory;
+    }
+
+    @Override
+    public Map<V, GraphEdge<V, E>> getOutEdges(V v) {
         Conditions.requireNonNullAndExists(v, this);
         return Collections.unmodifiableMap(this.m.get(v).getFirst());
     }
 
     @Override
-    public Map<Vertex, GraphEdge> getInEdges(Vertex v) {
+    public GraphFactory<V, E> getGraphFactory() {
+        return new GraphFactory<V, E>() {
+            @Override
+            public Graph<V, E> create() {
+                return new MemoryGraph<>(vertexFactory, edgeFactory);
+            }
+
+            @Override
+            public VertexFactory<V> getVertexFactory() {
+                return vertexFactory;
+            }
+
+            @Override
+            public EdgeFactory<E> getEdgeFactory() {
+                return edgeFactory;
+            }
+        };
+    }
+
+    @Override
+    public Map<V, GraphEdge<V, E>> getInEdges(V v) {
         Conditions.requireNonNullAndExists(v, this);
         return Collections.unmodifiableMap(this.m.get(v).getSecond());
     }
 
     @Override
-    public List<Vertex> getVertices() {
+    public List<V> getVertices() {
         return Collections.unmodifiableList(vList);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("{container=%s, meta=%s}", this.getClass().getSimpleName(), this.meta);
     }
 }

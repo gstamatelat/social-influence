@@ -8,7 +8,6 @@ import gr.james.influence.api.GraphEdge;
 import gr.james.influence.api.GraphFactory;
 import gr.james.influence.util.Finals;
 import gr.james.influence.util.RandomHelper;
-import gr.james.influence.util.collections.VertexPair;
 import gr.james.influence.util.exceptions.GraphException;
 
 import java.util.*;
@@ -16,21 +15,21 @@ import java.util.stream.Collectors;
 
 // TODO: Maybe transfer these as static on Graph
 public class GraphUtils {
-    public static void connect(Graph g) {
-        List<List<Vertex>> scc = Tarjan.execute(g);
+    public static <V, E> void connect(Graph<V, E> g) {
+        List<List<V>> scc = new Tarjan<V>().execute(g);
         // TODO: This is not the best way to connect the components, eg some edges might already exist
         for (int i = 0; i < scc.size(); i++) {
-            List<Vertex> thisComponent = scc.get(i);
-            List<Vertex> nextComponent = scc.get((i + 1) % scc.size());
-            Vertex v = thisComponent.get(RandomHelper.getRandom().nextInt(thisComponent.size()));
-            Vertex u = nextComponent.get(RandomHelper.getRandom().nextInt(nextComponent.size()));
+            List<V> thisComponent = scc.get(i);
+            List<V> nextComponent = scc.get((i + 1) % scc.size());
+            V v = thisComponent.get(RandomHelper.getRandom().nextInt(thisComponent.size()));
+            V u = nextComponent.get(RandomHelper.getRandom().nextInt(nextComponent.size()));
             g.addEdge(v, u);
         }
     }
 
-    public static void randomizeEdgeWeights(Graph g) {
-        for (Map.Entry<VertexPair, GraphEdge> e : g.getEdges().entrySet()) {
-            boolean change = g.setEdgeWeight(e.getKey().getSource(), e.getKey().getTarget(),
+    public static <V, E> void randomizeEdgeWeights(Graph<V, E> g) {
+        for (GraphEdge<V, E> e : g.getEdges().values()) {
+            boolean change = g.setEdgeWeight(e.getSource(), e.getTarget(),
                     RandomHelper.getRandom().nextDouble());
             assert change;
         }
@@ -44,15 +43,15 @@ public class GraphUtils {
      * @param f an array of vertices to be fused
      * @return the vertex that is the result of the fusion
      */
-    public static Vertex fuseVertices(Graph g, Vertex[] f) {
+    public static <V, E> V fuseVertices(Graph<V, E> g, Collection<V> f) {
         // TODO: Add link to http://mathworld.wolfram.com/VertexContraction.html
-        Vertex v = g.addVertex();
+        V v = g.addVertex();
 
-        for (Vertex y : f) {
-            for (Map.Entry<Vertex, GraphEdge> e : g.getOutEdges(y).entrySet()) {
+        for (V y : f) {
+            for (Map.Entry<V, GraphEdge<V, E>> e : g.getOutEdges(y).entrySet()) {
                 g.addEdge(v, e.getKey(), e.getValue().getWeight());
             }
-            for (Map.Entry<Vertex, GraphEdge> e : g.getInEdges(y).entrySet()) {
+            for (Map.Entry<V, GraphEdge<V, E>> e : g.getInEdges(y).entrySet()) {
                 g.addEdge(e.getKey(), v, e.getValue().getWeight());
             }
             g.removeVertex(y);
@@ -65,45 +64,44 @@ public class GraphUtils {
      * <p>Combine several graphs into a single one. When combining, the vertices of the input graphs will be inserted to
      * the output along with their edges. The original graphs will not be modified.</p>
      *
-     * @param type   the factory that will used to create the output graph
+     * @param type   the graphFactory that will used to create the output graph
      * @param graphs the graph objects to combine
-     * @param <T>    the type of the output graph
      * @return the combined graph
      */
-    public static <T extends Graph> T combineGraphs(GraphFactory<T> type, Graph[] graphs) {
-        T r = type.create();
-        for (Graph g : graphs) {
-            for (Vertex v : g) {
+    public static <V, E> Graph<V, E> combineGraphs(GraphFactory<V, E> type, Collection<Graph<V, E>> graphs) {
+        Graph<V, E> r = type.create();
+        for (Graph<V, E> g : graphs) {
+            for (V v : g) {
                 r.addVertex(v);
             }
-            for (Map.Entry<VertexPair, GraphEdge> e : g.getEdges().entrySet()) {
-                r.addEdge(e.getKey().getFirst(), e.getKey().getSecond(), e.getValue().getWeight());
+            for (GraphEdge<V, E> e : g.getEdges().values()) {
+                r.addEdge(e.getSource(), e.getTarget(), e.getWeight());
             }
         }
         return r;
     }
 
-    public static Graph combineGraphs(Graph[] graphs) {
-        return combineGraphs(Finals.DEFAULT_GRAPH_FACTORY, graphs);
+    public static SimpleGraph combineGraphs(Collection<Graph<String, Object>> graphs) {
+        return (SimpleGraph) combineGraphs(Finals.DEFAULT_GRAPH_FACTORY, graphs);
     }
 
-    public static <T extends Graph> T subGraph(Graph g, GraphFactory<T> factory, Collection<Vertex> filter) {
+    public static <V, E> Graph<V, E> subGraph(Graph<V, E> g, GraphFactory<V, E> factory, Collection<V> filter) {
         return deepCopy(g, factory, filter);
     }
 
-    public static Graph subGraph(Graph g, Collection<Vertex> filter) {
+    public static SimpleGraph subGraph(SimpleGraph g, Collection<String> filter) {
         return deepCopy(g, filter);
     }
 
-    public static <T extends Graph> T deepCopy(Graph g, GraphFactory<T> factory, Collection<Vertex> filter) {
-        T r = factory.create();
-        for (Vertex v : filter) {
+    public static <V, E> Graph<V, E> deepCopy(Graph<V, E> g, GraphFactory<V, E> factory, Collection<V> filter) {
+        Graph<V, E> r = factory.create();
+        for (V v : filter) {
             if (!g.containsVertex(v)) {
                 throw new GraphException(Finals.E_GRAPH_VERTEX_NOT_CONTAINED, "deepCopy");
             }
             r.addVertex(v);
         }
-        for (Vertex v : r) {
+        for (V v : r) {
             g.getOutEdges(v).entrySet().stream().filter(e -> r.containsVertex(e.getKey()))
                     .forEach(e -> r.addEdge(v, e.getKey(), e.getValue().getWeight()));
         }
@@ -113,25 +111,23 @@ public class GraphUtils {
         return r;
     }
 
-    public static <T extends Graph> T deepCopy(Graph g, GraphFactory<T> factory) {
+    public static <V, E> Graph<V, E> deepCopy(Graph<V, E> g, GraphFactory<V, E> factory) {
         return deepCopy(g, factory, g.getVertices());
     }
 
-    public static Graph deepCopy(Graph g, Collection<Vertex> filter) {
-        return deepCopy(g, Finals.DEFAULT_GRAPH_FACTORY, filter);
+    public static SimpleGraph deepCopy(SimpleGraph g, Collection<String> filter) {
+        return (SimpleGraph) deepCopy(g, Finals.DEFAULT_GRAPH_FACTORY, filter);
     }
 
-    public static Graph deepCopy(Graph g) {
-        // TODO: We need to have a way to get a GraphFactory out of a Graph in order to produce same-typed graphs
-        // TODO: On a second thought, maybe not, why would someone need to have the same type?
-        return deepCopy(g, Finals.DEFAULT_GRAPH_FACTORY, g.getVertices());
+    public static SimpleGraph deepCopy(SimpleGraph g) {
+        return (SimpleGraph) deepCopy(g, Finals.DEFAULT_GRAPH_FACTORY, g.getVertices());
     }
 
-    public static BiMap<Vertex, Integer> getGraphIndexMap(Graph g) {
+    public static <V, E> BiMap<V, Integer> getGraphIndexMap(Graph<V, E> g) {
         // TODO: It's probably better to return an ImmutableBiMap
-        BiMap<Vertex, Integer> vertexMap = HashBiMap.create();
+        BiMap<V, Integer> vertexMap = HashBiMap.create();
 
-        List<Vertex> vertices = g.getVertices();
+        List<V> vertices = g.getVertices();
         for (int i = 0; i < vertices.size(); i++) {
             vertexMap.put(vertices.get(i), i);
         }
@@ -146,7 +142,7 @@ public class GraphUtils {
      * @param g the graph that the operation is to be performed
      * @return an unmodifiable {@code Set} of all the stubborn vertices of {@code g}
      */
-    public static Set<Vertex> getStubbornVertices(Graph g) {
+    public static <V, E> Set<V> getStubbornVertices(Graph<V, E> g) {
         return Collections.unmodifiableSet(
                 g.getVertices().stream()
                         .filter(v -> g.getOutDegree(v) == 1 && g.getOutEdges(v).containsKey(v))

@@ -14,8 +14,8 @@ public class CompleteGenerator implements GraphGenerator {
     }
 
     @Override
-    public <T extends Graph> T generate(GraphFactory<T> factory, Random r) {
-        T g = factory.create();
+    public <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, Random r) {
+        Graph<V, E> g = factory.create();
 
         g.addEdges(g.addVertices(totalVertices));
 

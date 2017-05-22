@@ -3,7 +3,6 @@ package gr.james.influence.algorithms.generators.test;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphFactory;
 import gr.james.influence.api.GraphGenerator;
-import gr.james.influence.graph.Vertex;
 
 import java.util.Random;
 
@@ -16,12 +15,12 @@ public class MasterGenerator implements GraphGenerator {
     }
 
     @Override
-    public <T extends Graph> T generate(GraphFactory<T> factory, Random r) {
-        T g = factory.create();
+    public <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, Random r) {
+        Graph<V, E> g = factory.create();
 
-        Vertex v1 = g.addVertex();
-        Vertex v2 = g.addVertex();
-        Vertex v3 = g.addVertex();
+        V v1 = g.addVertex();
+        V v2 = g.addVertex();
+        V v3 = g.addVertex();
         g.addEdge(v1, v3);
         g.addEdge(v1, v2);
         g.addEdge(v3, v2);

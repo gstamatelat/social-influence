@@ -1,18 +1,32 @@
 package gr.james.influence.graph;
 
-import gr.james.influence.api.Graph;
-import gr.james.influence.api.GraphEdge;
+import gr.james.influence.api.*;
 import gr.james.influence.util.Conditions;
-import gr.james.influence.util.collections.VertexPair;
+import gr.james.influence.util.collections.Pair;
 
 import java.util.*;
 import java.util.function.Consumer;
 
-public abstract class GraphDecorator implements Graph {
-    private Graph g;
+public abstract class GraphDecorator<V, E> implements Graph<V, E> {
+    private Graph<V, E> g;
 
-    protected GraphDecorator(Graph g) {
+    protected GraphDecorator(Graph<V, E> g) {
         this.g = Conditions.requireNonNull(g);
+    }
+
+    @Override
+    public VertexFactory<V> getVertexFactory() {
+        return this.g.getVertexFactory();
+    }
+
+    @Override
+    public EdgeFactory<E> getEdgeFactory() {
+        return this.g.getEdgeFactory();
+    }
+
+    @Override
+    public GraphFactory<V, E> getGraphFactory() {
+        return this.g.getGraphFactory();
     }
 
     @Override
@@ -51,62 +65,62 @@ public abstract class GraphDecorator implements Graph {
     }
 
     @Override
-    public Iterator<Vertex> iterator() {
+    public Iterator<V> iterator() {
         return this.g.iterator();
     }
 
     @Override
-    public void forEach(Consumer<? super Vertex> action) {
+    public void forEach(Consumer<? super V> action) {
         this.g.forEach(action);
     }
 
     @Override
-    public Spliterator<Vertex> spliterator() {
+    public Spliterator<V> spliterator() {
         return this.g.spliterator();
     }
 
     @Override
-    public boolean containsVertex(Vertex v) {
+    public boolean containsVertex(V v) {
         return this.g.containsVertex(v);
     }
 
     @Override
-    public boolean containsEdge(Vertex source, Vertex target) {
+    public boolean containsEdge(V source, V target) {
         return this.g.containsEdge(source, target);
     }
 
     @Override
-    public GraphEdge findEdge(Vertex source, Vertex target) {
+    public GraphEdge<V, E> findEdge(V source, V target) {
         return this.g.findEdge(source, target);
     }
 
     @Override
-    public Vertex getVertexFromIndex(int index) {
+    public V getVertexFromIndex(int index) {
         return this.g.getVertexFromIndex(index);
     }
 
     @Override
-    public List<Vertex> getVerticesFromLabel(String label) {
+    public List<V> getVerticesFromLabel(String label) {
         return this.g.getVerticesFromLabel(label);
     }
 
     @Override
-    public Vertex getVertexFromLabel(String label) {
+    public V getVertexFromLabel(String label) {
         return this.g.getVertexFromLabel(label);
     }
 
     @Override
-    public Vertex getRandomVertex(Random r) {
+    public V getRandomVertex(Random r) {
         return this.g.getRandomVertex(r);
     }
 
     @Override
-    public Vertex getRandomVertex() {
+    public V getRandomVertex() {
         return this.g.getRandomVertex();
     }
 
     @Override
-    public Map<VertexPair, GraphEdge> getEdges() {
+    public Map<Pair<V>, GraphEdge<V, E>> getEdges() {
         return this.g.getEdges();
     }
 
@@ -116,37 +130,37 @@ public abstract class GraphDecorator implements Graph {
     }
 
     @Override
-    public Map<Vertex, GraphEdge> getOutEdges(Vertex v) {
+    public Map<V, GraphEdge<V, E>> getOutEdges(V v) {
         return this.g.getOutEdges(v);
     }
 
     @Override
-    public Map<Vertex, GraphEdge> getInEdges(Vertex v) {
+    public Map<V, GraphEdge<V, E>> getInEdges(V v) {
         return this.g.getInEdges(v);
     }
 
     @Override
-    public double getOutStrength(Vertex v) {
+    public double getOutStrength(V v) {
         return this.g.getOutStrength(v);
     }
 
     @Override
-    public double getInStrength(Vertex v) {
+    public double getInStrength(V v) {
         return this.g.getInStrength(v);
     }
 
     @Override
-    public int getOutDegree(Vertex v) {
+    public int getOutDegree(V v) {
         return this.g.getOutDegree(v);
     }
 
     @Override
-    public int getInDegree(Vertex v) {
+    public int getInDegree(V v) {
         return this.g.getInDegree(v);
     }
 
     @Override
-    public List<Vertex> getVertices() {
+    public List<V> getVertices() {
         return this.g.getVertices();
     }
 
@@ -156,7 +170,7 @@ public abstract class GraphDecorator implements Graph {
     }
 
     @Override
-    public Vertex getRandomOutEdge(Vertex from, boolean weighted) {
+    public V getRandomOutEdge(V from, boolean weighted) {
         return this.g.getRandomOutEdge(from, weighted);
     }
 
@@ -176,47 +190,47 @@ public abstract class GraphDecorator implements Graph {
     }
 
     @Override
-    public Vertex addVertex() {
+    public V addVertex() {
         return this.g.addVertex();
     }
 
-    @Override
-    public Vertex addVertex(String label) {
+    /*@Override
+    public V addVertex(String label) {
         return this.g.addVertex(label);
-    }
+    }*/
 
     @Override
-    public boolean addVertex(Vertex v) {
+    public boolean addVertex(V v) {
         return this.g.addVertex(v);
     }
 
     @Override
-    public List<Vertex> addVertices(Vertex... vertices) {
+    public List<V> addVertices(V... vertices) {
         return this.g.addVertices(vertices);
     }
 
     @Override
-    public List<Vertex> addVertices(int count) {
+    public List<V> addVertices(int count) {
         return this.g.addVertices(count);
     }
 
     @Override
-    public boolean removeVertex(Vertex v) {
+    public boolean removeVertex(V v) {
         return this.g.removeVertex(v);
     }
 
     @Override
-    public void removeVertices(Collection<Vertex> vertices) {
+    public void removeVertices(Collection<V> vertices) {
         this.g.removeVertices(vertices);
     }
 
     @Override
-    public void addEdges(Collection<Vertex> among) {
+    public void addEdges(Collection<V> among) {
         this.g.addEdges(among);
     }
 
     @Override
-    public void addEdges(Vertex... among) {
+    public void addEdges(V... among) {
         this.g.addEdges(among);
     }
 
@@ -226,32 +240,32 @@ public abstract class GraphDecorator implements Graph {
     }
 
     @Override
-    public GraphEdge addEdge(Vertex source, Vertex target) {
+    public GraphEdge<V, E> addEdge(V source, V target) {
         return this.g.addEdge(source, target);
     }
 
     @Override
-    public boolean setEdgeWeight(Vertex source, Vertex target, double weight) {
+    public boolean setEdgeWeight(V source, V target, double weight) {
         return this.g.setEdgeWeight(source, target, weight);
     }
 
     @Override
-    public GraphEdge addEdge(Vertex source, Vertex target, double weight) {
+    public GraphEdge<V, E> addEdge(V source, V target, double weight) {
         return this.g.addEdge(source, target, weight);
     }
 
     @Override
-    public boolean removeEdge(Vertex source, Vertex target) {
+    public boolean removeEdge(V source, V target) {
         return this.g.removeEdge(source, target);
     }
 
     @Override
-    public void removeEdges(Collection<Vertex> among) {
+    public void removeEdges(Collection<V> among) {
         this.g.removeEdges(among);
     }
 
     @Override
-    public void removeEdges(Vertex... among) {
+    public void removeEdges(V... among) {
         this.g.removeEdges(among);
     }
 

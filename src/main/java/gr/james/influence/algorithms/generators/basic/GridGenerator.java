@@ -3,7 +3,6 @@ package gr.james.influence.algorithms.generators.basic;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphFactory;
 import gr.james.influence.api.GraphGenerator;
-import gr.james.influence.graph.Vertex;
 
 import java.util.List;
 import java.util.Random;
@@ -22,11 +21,11 @@ public class GridGenerator implements GraphGenerator {
     }
 
     @Override
-    public <T extends Graph> T generate(GraphFactory<T> factory, Random r) {
-        T g = factory.create();
+    public <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, Random r) {
+        Graph<V, E> g = factory.create();
 
         int count = 0;
-        List<Vertex> set = g.addVertices(n * m);
+        List<V> set = g.addVertices(n * m);
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {

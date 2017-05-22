@@ -2,7 +2,6 @@ package gr.james.influence.algorithms.distance;
 
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphEdge;
-import gr.james.influence.graph.Vertex;
 import gr.james.influence.util.collections.VertexPair;
 
 import java.util.Collections;
@@ -19,30 +18,30 @@ import java.util.Map;
  */
 public class FloydWarshall {
     // TODO: Why is this method so much slower than Dijkstra?
-    public static Map<VertexPair, Double> execute(Graph g) {
-        Map<VertexPair, Double> dist = new HashMap<>();
+    public static <V, E> Map<VertexPair<V>, Double> execute(Graph<V, E> g) {
+        Map<VertexPair<V>, Double> dist = new HashMap<>();
 
-        for (Vertex u : g) {
-            for (Vertex v : g) {
+        for (V u : g) {
+            for (V v : g) {
                 if (u.equals(v)) {
-                    dist.put(new VertexPair(u, v), 0.0);
+                    dist.put(new VertexPair<>(u, v), 0.0);
                 } else {
-                    dist.put(new VertexPair(u, v), Double.POSITIVE_INFINITY);
+                    dist.put(new VertexPair<>(u, v), Double.POSITIVE_INFINITY);
                 }
             }
         }
 
-        for (Vertex v : g) {
-            for (Map.Entry<Vertex, GraphEdge> e : g.getOutEdges(v).entrySet()) {
-                dist.put(new VertexPair(v, e.getKey()), e.getValue().getWeight());
+        for (V v : g) {
+            for (Map.Entry<V, GraphEdge<V, E>> e : g.getOutEdges(v).entrySet()) {
+                dist.put(new VertexPair<>(v, e.getKey()), e.getValue().getWeight());
             }
         }
 
-        for (Vertex k : g) {
-            for (Vertex i : g) {
-                for (Vertex j : g) {
-                    if (dist.get(new VertexPair(i, j)) > dist.get(new VertexPair(i, k)) + dist.get(new VertexPair(k, j))) {
-                        dist.put(new VertexPair(i, j), dist.get(new VertexPair(i, k)) + dist.get(new VertexPair(k, j)));
+        for (V k : g) {
+            for (V i : g) {
+                for (V j : g) {
+                    if (dist.get(new VertexPair<>(i, j)) > dist.get(new VertexPair<>(i, k)) + dist.get(new VertexPair<>(k, j))) {
+                        dist.put(new VertexPair<>(i, j), dist.get(new VertexPair<>(i, k)) + dist.get(new VertexPair<>(k, j)));
                     }
                 }
             }

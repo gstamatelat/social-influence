@@ -5,8 +5,8 @@ import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphFactory;
 import gr.james.influence.api.GraphGenerator;
 import gr.james.influence.graph.GraphUtils;
-import gr.james.influence.graph.Vertex;
 
+import java.util.Arrays;
 import java.util.Random;
 
 public class TwoWheelsGenerator implements GraphGenerator {
@@ -17,16 +17,16 @@ public class TwoWheelsGenerator implements GraphGenerator {
     }
 
     @Override
-    public <T extends Graph> T generate(GraphFactory<T> factory, Random r) {
+    public <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, Random r) {
         WheelGenerator wheelGenerator = new WheelGenerator(wheelVertices);
-        T g1 = wheelGenerator.generate(factory);
-        T g2 = wheelGenerator.generate(factory);
+        Graph<V, E> g1 = wheelGenerator.generate(factory);
+        Graph<V, E> g2 = wheelGenerator.generate(factory);
 
-        Vertex a = g1.getVertexFromIndex(0);
-        Vertex b = g2.getVertexFromIndex(0);
+        V a = g1.getVertexFromIndex(0);
+        V b = g2.getVertexFromIndex(0);
 
-        T g = GraphUtils.combineGraphs(factory, new Graph[]{g1, g2});
-        GraphUtils.fuseVertices(g, new Vertex[]{a, b});
+        Graph<V, E> g = GraphUtils.combineGraphs(factory, Arrays.asList(g1, g2));
+        GraphUtils.fuseVertices(g, Arrays.asList(a, b));
 
         g.setGraphType("TwoWheels");
         g.setMeta("wheelVertices", String.valueOf(wheelVertices));

@@ -10,17 +10,17 @@ import java.util.List;
 /**
  * <p>Unmodifiable decorator of a {@link Graph}.</p>
  */
-public final class ImmutableGraph extends GraphDecorator {
-    private ImmutableGraph(Graph g) {
+public final class ImmutableGraph<V, E> extends GraphDecorator<V, E> {
+    private ImmutableGraph(Graph<V, E> g) {
         super(g);
     }
 
-    public static ImmutableGraph decorate(Graph g) {
+    public static <V, E> ImmutableGraph decorate(Graph<V, E> g) {
         if (g instanceof ImmutableGraph) {
             Finals.LOG.debug("Graph {} is already an instance of ImmutableGraph", g);
             return (ImmutableGraph) g;
         } else {
-            return new ImmutableGraph(g);
+            return new ImmutableGraph<>(g);
         }
     }
 
@@ -45,47 +45,47 @@ public final class ImmutableGraph extends GraphDecorator {
     }
 
     @Override
-    public Vertex addVertex() {
+    public V addVertex() {
+        throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
+    }
+
+    /*@Override
+    public V addVertex(String label) {
+        throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
+    }*/
+
+    @Override
+    public boolean addVertex(V v) {
         throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 
     @Override
-    public Vertex addVertex(String label) {
+    public List<V> addVertices(V... vertices) {
         throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 
     @Override
-    public boolean addVertex(Vertex v) {
+    public List<V> addVertices(int count) {
         throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 
     @Override
-    public List<Vertex> addVertices(Vertex... vertices) {
+    public boolean removeVertex(V v) {
         throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 
     @Override
-    public List<Vertex> addVertices(int count) {
+    public void removeVertices(Collection<V> vertices) {
         throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 
     @Override
-    public boolean removeVertex(Vertex v) {
+    public void addEdges(Collection<V> among) {
         throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 
     @Override
-    public void removeVertices(Collection<Vertex> vertices) {
-        throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
-    }
-
-    @Override
-    public void addEdges(Collection<Vertex> among) {
-        throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
-    }
-
-    @Override
-    public void addEdges(Vertex... among) {
+    public void addEdges(V... among) {
         throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 
@@ -95,32 +95,32 @@ public final class ImmutableGraph extends GraphDecorator {
     }
 
     @Override
-    public GraphEdge addEdge(Vertex source, Vertex target) {
+    public GraphEdge<V, E> addEdge(V source, V target) {
         throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 
     @Override
-    public boolean setEdgeWeight(Vertex source, Vertex target, double weight) {
+    public boolean setEdgeWeight(V source, V target, double weight) {
         throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 
     @Override
-    public GraphEdge addEdge(Vertex source, Vertex target, double weight) {
+    public GraphEdge<V, E> addEdge(V source, V target, double weight) {
         throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 
     @Override
-    public boolean removeEdge(Vertex source, Vertex target) {
+    public boolean removeEdge(V source, V target) {
         throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 
     @Override
-    public void removeEdges(Collection<Vertex> among) {
+    public void removeEdges(Collection<V> among) {
         throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 
     @Override
-    public void removeEdges(Vertex... among) {
+    public void removeEdges(V... among) {
         throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 }

@@ -6,7 +6,6 @@ import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphFactory;
 import gr.james.influence.api.GraphGenerator;
 import gr.james.influence.graph.Direction;
-import gr.james.influence.graph.Vertex;
 import gr.james.influence.util.Conditions;
 import gr.james.influence.util.Finals;
 import gr.james.influence.util.Helper;
@@ -33,21 +32,21 @@ public class BarabasiAlbertGenerator implements GraphGenerator {
     }
 
     @Override
-    public <T extends Graph> T generate(GraphFactory<T> factory, Random r) {
-        T g = new CompleteGenerator(initialClique).generate(factory);
+    public <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, Random r) {
+        Graph<V, E> g = new CompleteGenerator(initialClique).generate(factory);
 
         while (g.getVerticesCount() < totalVertices) {
-            GraphState<Integer> degree = Degree.execute(g, Direction.INBOUND);
+            GraphState<V, Integer> degree = Degree.execute(g, Direction.INBOUND);
 
-            Map<Vertex, Double> weightMap = new HashMap<>();
-            for (Vertex v : degree.keySet()) {
+            Map<V, Double> weightMap = new HashMap<>();
+            for (V v : degree.keySet()) {
                 weightMap.put(v, Math.pow((double) degree.get(v), a));
             }
 
-            Set<Vertex> newVertices = Helper.weightedRandom(weightMap, stepEdges, r);
+            Set<V> newVertices = Helper.weightedRandom(weightMap, stepEdges, r);
 
-            Vertex v = g.addVertex();
-            for (Vertex w : newVertices) {
+            V v = g.addVertex();
+            for (V w : newVertices) {
                 g.addEdges(v, w);
             }
         }

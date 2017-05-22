@@ -1,18 +1,17 @@
 package gr.james.influence.algorithms.iterators;
 
 import gr.james.influence.api.Graph;
-import gr.james.influence.graph.Vertex;
 
 import java.util.Iterator;
 import java.util.TreeSet;
 
 /**
- * <p>Iterates through vertices in a graph by their natural order, imposed by {@link Vertex#compareTo(Vertex)}.</p>
+ * <p>Iterates through vertices in a graph by their natural order.</p>
  */
-public class OrderedVertexIterator implements Iterator<Vertex> {
-    private TreeSet<Vertex> vertices;
+public class OrderedVertexIterator<V> implements Iterator<V> {
+    private TreeSet<V> vertices;
 
-    public OrderedVertexIterator(Graph g) {
+    public OrderedVertexIterator(Graph<V, ?> g) {
         vertices = new TreeSet<>(g.getVertices());
     }
 
@@ -22,9 +21,9 @@ public class OrderedVertexIterator implements Iterator<Vertex> {
     }
 
     @Override
-    public Vertex next() {
-        Iterator<Vertex> it = this.vertices.iterator();
-        Vertex next = it.next();
+    public V next() {
+        Iterator<V> it = this.vertices.iterator();
+        V next = it.next();
         it.remove();
         return next;
     }

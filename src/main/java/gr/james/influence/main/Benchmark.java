@@ -1,13 +1,13 @@
 package gr.james.influence.main;
 
 import gr.james.influence.algorithms.generators.random.BarabasiAlbertGenerator;
-import gr.james.influence.api.Graph;
 import gr.james.influence.graph.GraphUtils;
+import gr.james.influence.graph.SimpleGraph;
 import gr.james.influence.util.Helper;
 
 public class Benchmark {
     public static void main(String[] args) {
-        Graph g = new BarabasiAlbertGenerator(250, 2, 2, 1.0).generate();
+        SimpleGraph g = new BarabasiAlbertGenerator(250, 2, 2, 1.0).generate();
 
         System.out.printf("%e%n", Helper.benchmark(() -> GraphUtils.deepCopy(g), 1.0));
 

@@ -3,7 +3,6 @@ package gr.james.influence.algorithms.generators.basic;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphFactory;
 import gr.james.influence.api.GraphGenerator;
-import gr.james.influence.graph.Vertex;
 
 import java.util.Random;
 
@@ -15,11 +14,11 @@ public class WheelGenerator implements GraphGenerator {
     }
 
     @Override
-    public <T extends Graph> T generate(GraphFactory<T> factory, Random r) {
-        T g = new CycleGenerator(totalVertices - 1).generate(factory);
+    public <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, Random r) {
+        Graph<V, E> g = new CycleGenerator(totalVertices - 1).generate(factory);
 
-        Vertex n = g.addVertex();
-        for (Vertex v : g) {
+        V n = g.addVertex();
+        for (V v : g) {
             if (!v.equals(n)) {
                 g.addEdges(v, n);
             }

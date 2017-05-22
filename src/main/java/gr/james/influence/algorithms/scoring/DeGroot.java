@@ -3,22 +3,21 @@ package gr.james.influence.algorithms.scoring;
 import gr.james.influence.algorithms.scoring.util.IterativeAlgorithmHelper;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphEdge;
-import gr.james.influence.graph.Vertex;
 import gr.james.influence.util.Finals;
 import gr.james.influence.util.collections.GraphState;
 
 import java.util.Map;
 
 public class DeGroot {
-    public static GraphState<Double> execute(Graph g, GraphState<Double> initialOpinions, double epsilon) {
+    public static <V, E> GraphState<V, Double> execute(Graph<V, E> g, GraphState<V, Double> initialOpinions, double epsilon) {
         return IterativeAlgorithmHelper.execute(
                 g,
                 initialOpinions,
                 oldState -> {
-                    GraphState<Double> nextState = new GraphState<>();
-                    for (Vertex v : g) {
+                    GraphState<V, Double> nextState = new GraphState<>();
+                    for (V v : g) {
                         double vNewValue = 0.0;
-                        for (Map.Entry<Vertex, GraphEdge> e : g.getOutEdges(v).entrySet()) {
+                        for (Map.Entry<V, GraphEdge<V, E>> e : g.getOutEdges(v).entrySet()) {
                             vNewValue = vNewValue + (
                                     e.getValue().getWeight() * oldState.get(e.getKey())
                             );
@@ -32,7 +31,7 @@ public class DeGroot {
         );
     }
 
-    public static GraphState<Double> execute(Graph g, GraphState<Double> initialOpinions) {
+    public static <V> GraphState<V, Double> execute(Graph<V, ?> g, GraphState<V, Double> initialOpinions) {
         return execute(g, initialOpinions, Finals.DEFAULT_DEGROOT_PRECISION);
     }
 }

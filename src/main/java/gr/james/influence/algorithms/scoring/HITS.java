@@ -3,29 +3,28 @@ package gr.james.influence.algorithms.scoring;
 import gr.james.influence.algorithms.scoring.util.IterativeAlgorithmHelper;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphEdge;
-import gr.james.influence.graph.Vertex;
 import gr.james.influence.util.collections.GraphState;
 
 import java.util.Map;
 
 public class HITS {
-    public static GraphState<HITSScore> execute(Graph g, double epsilon) {
+    public static <V, E> GraphState<V, HITSScore> execute(Graph<V, E> g, double epsilon) {
         return IterativeAlgorithmHelper.execute(
                 g,
                 new GraphState<>(g, new HITSScore(0.0, 1.0)),
                 old -> {
-                    GraphState<HITSScore> next = new GraphState<>(g, new HITSScore(0.0, 0.0));
+                    GraphState<V, HITSScore> next = new GraphState<>(g, new HITSScore(0.0, 0.0));
 
-                    for (Vertex v : g) {
-                        Map<Vertex, GraphEdge> inEdges = g.getInEdges(v);
-                        for (Map.Entry<Vertex, GraphEdge> e : inEdges.entrySet()) {
+                    for (V v : g) {
+                        Map<V, GraphEdge<V, E>> inEdges = g.getInEdges(v);
+                        for (Map.Entry<V, GraphEdge<V, E>> e : inEdges.entrySet()) {
                             next.put(v, next.get(v).addToAuthority(e.getValue().getWeight() * old.get(e.getKey()).getHub()));
                         }
                     }
 
-                    for (Vertex v : g) {
-                        Map<Vertex, GraphEdge> outEdges = g.getOutEdges(v);
-                        for (Map.Entry<Vertex, GraphEdge> e : outEdges.entrySet()) {
+                    for (V v : g) {
+                        Map<V, GraphEdge<V, E>> outEdges = g.getOutEdges(v);
+                        for (Map.Entry<V, GraphEdge<V, E>> e : outEdges.entrySet()) {
                             next.put(v, next.get(v).addToHub(e.getValue().getWeight() * next.get(e.getKey()).getAuthority()));
                         }
                     }
