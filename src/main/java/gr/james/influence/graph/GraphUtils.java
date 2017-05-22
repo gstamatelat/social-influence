@@ -39,8 +39,10 @@ public class GraphUtils {
      * <p>Fuses two or more vertices into a single one. This method may cause information loss
      * if there are conflicts on the edges.</p>
      *
-     * @param g the graph to apply the fusion to
-     * @param f an array of vertices to be fused
+     * @param g   the graph to apply the fusion to
+     * @param f   an array of vertices to be fused
+     * @param <V> the vertex type
+     * @param <E> the edge type
      * @return the vertex that is the result of the fusion
      */
     public static <V, E> V fuseVertices(Graph<V, E> g, Collection<V> f) {
@@ -66,6 +68,8 @@ public class GraphUtils {
      *
      * @param type   the graphFactory that will used to create the output graph
      * @param graphs the graph objects to combine
+     * @param <V>    the vertex type
+     * @param <E>    the edge type
      * @return the combined graph
      */
     public static <V, E> Graph<V, E> combineGraphs(GraphFactory<V, E> type, Collection<Graph<V, E>> graphs) {
@@ -139,7 +143,9 @@ public class GraphUtils {
      * <p>Filters out and returns the stubborn vertices contained in {@code g}. A stubborn vertex is one that its only
      * outbound edge points to itself.</p>
      *
-     * @param g the graph that the operation is to be performed
+     * @param g   the graph that the operation is to be performed
+     * @param <V> the vertex type
+     * @param <E> the edge type
      * @return an unmodifiable {@code Set} of all the stubborn vertices of {@code g}
      */
     public static <V, E> Set<V> getStubbornVertices(Graph<V, E> g) {

@@ -28,6 +28,8 @@ public interface GraphImporter {
      *
      * @param source  the input stream to read the graph from
      * @param factory the graphFactory to use when creating the new {@code Graph}
+     * @param <V>     the vertex type
+     * @param <E>     the edge type
      * @return a new {@code Graph} of type {@code T} that was read from {@code source}
      * @throws IOException if an I/O exception occurs
      */
@@ -57,6 +59,8 @@ public interface GraphImporter {
      *
      * @param source  the input stream to read the graph from
      * @param factory the graphFactory to use when creating the new {@code Graph}
+     * @param <V>     the vertex type
+     * @param <E>     the edge type
      * @return a new {@code Graph} of type {@code T} that was read from {@code source}
      * @throws IOException if an I/O exception occurs
      */

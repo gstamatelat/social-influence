@@ -18,6 +18,9 @@ public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
 
     /**
      * <p>Constructs an empty {@code MemoryGraph}.</p>
+     *
+     * @param vertexFactory the vertex factory to use when invoking {@link #addVertex()}
+     * @param edgeFactory   the edge factory to use when invoking {@link #addEdge(Object, Object)} and related methods
      */
     public MemoryGraph(VertexFactory<V> vertexFactory, EdgeFactory<E> edgeFactory) {
         this.m = new HashMap<>();
