@@ -9,10 +9,6 @@ import gr.james.influence.util.collections.VertexPair;
 import gr.james.influence.util.exceptions.InvalidVertexException;
 
 import java.util.*;
-import java.util.stream.Collectors;
-
-// import gr.james.influence.graph.Vertex;
-// import gr.james.influence.graph.Edge;
 
 /**
  * <p>Represents a collection of vertices and edges. The graph is weighted, directed and there can't be more than one
@@ -22,6 +18,9 @@ import java.util.stream.Collectors;
  * remove or reorder elements. These collections may also not be backed by the graph, changes to the graph may not
  * affect these collections after they have been returned; you need to call the method again. This behavior depends on
  * the underlying {@code Graph} implementation.</dd></dl>
+ *
+ * @param <V> the vertex type
+ * @param <E> the edge type
  */
 public interface Graph<V, E> extends Iterable<V>, Metadata {
     default String getGraphType() {
@@ -86,7 +85,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @return the outbound edges of {@code v} as a {@code Map<Vertex, Weighted<Edge, Double>>}
      * @throws NullPointerException   if {@code v} is {@code null}
      * @throws InvalidVertexException if {@code v} doesn't belong in the graph
-     * @see #getOutEdges(Object)
+     * @see #getInEdges
      */
     Map<V, GraphEdge<V, E>> getOutEdges(V v);
 
@@ -98,7 +97,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @return the inbound edges of {@code v} as a {@code Map<Vertex, Weighted<Edge, Double>>}
      * @throws NullPointerException   if {@code v} is {@code null}
      * @throws InvalidVertexException if {@code v} doesn't belong in the graph
-     * @see #getOutEdges(Object)
+     * @see #getOutEdges
      */
     Map<V, GraphEdge<V, E>> getInEdges(V v);
 
@@ -109,7 +108,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @return the sum of weights of all outbound edges of vertex {@code v}
      * @throws NullPointerException   if {@code v} is {@code null}
      * @throws InvalidVertexException if {@code v} doesn't belong in the graph
-     * @see #getInStrength(Object)
+     * @see #getInStrength
      */
     default double getOutStrength(V v) {
         return this.getOutEdges(v).values().stream().mapToDouble(GraphEdge::getWeight).sum();
@@ -122,7 +121,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @return the sum of weights of all inbound edges of vertex {@code v}
      * @throws NullPointerException   if {@code v} is {@code null}
      * @throws InvalidVertexException if {@code v} doesn't belong in the graph
-     * @see #getOutStrength(Object)
+     * @see #getOutStrength
      */
     default double getInStrength(V v) {
         return this.getInEdges(v).values().stream().mapToDouble(GraphEdge::getWeight).sum();
@@ -136,7 +135,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @return the outbound degree of vertex {@code v}
      * @throws NullPointerException   if {@code v} is {@code null}
      * @throws InvalidVertexException if {@code v} doesn't belong in the graph
-     * @see #getInDegree(Object)
+     * @see #getInDegree
      */
     default int getOutDegree(V v) {
         return this.getOutEdges(v).size();
@@ -150,7 +149,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @return the inbound degree of vertex {@code v}
      * @throws NullPointerException   if {@code v} is {@code null}
      * @throws InvalidVertexException if {@code v} doesn't belong in the graph
-     * @see #getOutDegree(Object)
+     * @see #getOutDegree
      */
     default int getInDegree(V v) {
         return this.getInEdges(v).size();
@@ -168,7 +167,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * <p>Checks if the graph contains the specified vertex. {@code containsVertex(v)} will return the same value as
      * {@code getVertices().contains(v)} but could be faster depending on the {@code Graph} implementation.</p>
      *
-     * @param v the {@link V} to check whether it is contained in the graph
+     * @param v the vertex to check whether it is contained in the graph
      * @return {@code true} if {@code v} exists in the graph, otherwise {@code false}
      * @throws NullPointerException if {@code v} is {@code null}
      */
@@ -201,13 +200,13 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
         return this.getVertices().get(index);
     }
 
-    default List<V> getVerticesFromLabel(String label) {
+    /*default List<V> getVerticesFromLabel(String label) {
         return this.getVertices().stream().filter(v -> v.toString().equals(label)).collect(Collectors.toList());
     }
 
     default V getVertexFromLabel(String label) {
         return this.getVertices().stream().filter(v -> v.toString().equals(label)).findFirst().orElse(null);
-    }
+    }*/
 
     /**
      * <p>Return a uniformly distributed random vertex of this graph.</p>
@@ -511,6 +510,12 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
         return sum / (this.getVerticesCount() * (this.getVerticesCount() - 1));
     }
 
+    /**
+     * <p>Get a collection of all edges in this graph. The items are of type {@link GraphEdge GraphEdge} and are in no
+     * particular order inside the collection.</p>
+     *
+     * @return a collection of all edges in the graph
+     */
     default Collection<GraphEdge<V, E>> getEdges() {
         Collection<GraphEdge<V, E>> edges = new LinkedHashSet<>();
         for (V v : this.getVertices()) {

@@ -98,7 +98,7 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
         return this.g.getVertexFromIndex(index);
     }
 
-    @Override
+    /*@Override
     public List<V> getVerticesFromLabel(String label) {
         return this.g.getVerticesFromLabel(label);
     }
@@ -106,7 +106,7 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
     @Override
     public V getVertexFromLabel(String label) {
         return this.g.getVertexFromLabel(label);
-    }
+    }*/
 
     @Override
     public V getRandomVertex(Random r) {
