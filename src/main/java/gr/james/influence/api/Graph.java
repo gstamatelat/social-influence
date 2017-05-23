@@ -1,6 +1,7 @@
 package gr.james.influence.api;
 
 import gr.james.influence.algorithms.distance.Dijkstra;
+import gr.james.influence.graph.GraphUtils;
 import gr.james.influence.util.Conditions;
 import gr.james.influence.util.Finals;
 import gr.james.influence.util.Helper;
@@ -379,12 +380,13 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
 
     /**
      * <p>Connects every vertex in {@code among} with every other vertex in {@code among}; self-loops are excluded from
-     * the operation. After the operation, a complete subgraph of {@code among} will be created. If {@code among} only
-     * contains 2 (unique) vertices {@code s} and {@code t}, edges {@code (s,t)} and {@code (t,s)} will be created. If
-     * {@code among} only contains 1 (unique) vertex or less, it's a no-op.</p>
+     * the operation. After the operation, a complete subgraph of {@code among} will be created. This method will only
+     * create missing edges, existing ones will not be altered. If {@code among} only contains 2 (unique) vertices
+     * {@code s} and {@code t}, edges {@code (s,t)} and {@code (t,s)} will be created. If {@code among} only contains
+     * 1 (unique) vertex or less, it's a no-op.</p>
      *
      * @param among a collection of vertices of which each pair will be connected; you should prefer a collection with a
-     *              fast {@code next()} implementation
+     *              fast iterator implementation
      * @throws NullPointerException   if any vertex in {@code among} is {@code null}
      * @throws InvalidVertexException if any vertex in {@code among} doesn't belong in the graph
      */
@@ -396,16 +398,19 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
                 }
             }
         }
+        assert GraphUtils.subGraph(this, this.getGraphFactory(), among)
+                .getEdgesCount() == among.size() * (among.size() - 1);
     }
 
     /**
      * <p>Connects every vertex in {@code among} with every other vertex in {@code among}; self-loops are excluded from
-     * the operation. After the operation, a complete subgraph of {@code among} will be created. If {@code among} only
-     * contains 2 (unique) vertices {@code s} and {@code t}, edges {@code (s,t)} and {@code (t,s)} will be created. If
-     * {@code among} only contains 1 (unique) vertex or less, it's a no-op.</p>
+     * the operation. After the operation, a complete subgraph of {@code among} will be created. This method will only
+     * create missing edges, existing ones will not be altered. If {@code among} only contains 2 (unique) vertices
+     * {@code s} and {@code t}, edges {@code (s,t)} and {@code (t,s)} will be created. If {@code among} only contains
+     * 1 (unique) vertex or less, it's a no-op.</p>
      *
      * @param among the vertices as variable arguments to connect each of its pairs; you should prefer a collection with
-     *              a fast {@code next()} implementation
+     *              a fast iterator implementation
      * @throws NullPointerException   if any vertex in {@code among} is {@code null}
      * @throws InvalidVertexException if any vertex in {@code among} doesn't belong in the graph
      */
