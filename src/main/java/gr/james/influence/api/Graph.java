@@ -253,6 +253,18 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     boolean addVertex(V v);
 
     /**
+     * <p>Inserts a new unconnected vertex to the graph and returns it. Use {@link #addVertices(int)} for bulk inserts.
+     * </p>
+     *
+     * @return the new vertex object
+     */
+    default V addVertex() {
+        V v = getVertexFactory().createVertex();
+        this.addVertex(v);
+        return v;
+    }
+
+    /**
      * <p>Insert a collection of vertices in the graph. If any of the vertices is already on the graph, it is ignored.
      * </p>
      *
@@ -271,31 +283,12 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     }
 
     /**
-     * <p>Inserts a new unconnected vertex to the graph and returns it. Use {@link #addVertices(int)} for bulk inserts.
-     * </p>
-     *
-     * @return the new vertex object
-     */
-    default V addVertex() {
-        V v = getVertexFactory().createVertex();
-        this.addVertex(v);
-        return v;
-    }
-
-    /*default V addVertex(String label) {
-        V v = getVertexFactory().createVertex(label);
-        this.addVertex(v);
-        return v;
-    }*/
-
-    /**
      * <p>Insert {@code count} unconnected vertices in the graph.</p>
      *
      * @param count how many new vertices to add
      * @return an unmodifiable list view of the vertices in the order that they were added
      */
     default List<V> addVertices(int count) {
-        // TODO: documentation add graphFactory
         List<V> newVertices = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             newVertices.add(this.addVertex());
@@ -374,7 +367,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @throws IllegalArgumentException if {@code weight} is non-positive
      */
     default boolean setEdgeWeight(V source, V target, double weight) {
-        if (removeEdge(source, target)) {
+        if (removeEdge(source, target) != null) {
             // TODO: If addEdge throws an exception, the original edge will be removed anyway
             GraphEdge<V, E> e = addEdge(source, target, weight);
             assert e != null;
@@ -425,11 +418,12 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      *
      * @param source the source of the edge
      * @param target the target of the edge
-     * @return {@code true} if there was previously a directed edge {@code (source,target)}, otherwise {@code false}
+     * @return the {@link GraphEdge GraphEdge} that was removed if there was previously a directed edge
+     * {@code (source,target)}, otherwise {@code null}
      * @throws NullPointerException   if either {@code source} or {@code target} is {@code null}
      * @throws InvalidVertexException if either {@code source} or {@code target} doesn't belong in the graph
      */
-    boolean removeEdge(V source, V target);
+    GraphEdge<V, E> removeEdge(V source, V target);
 
     /**
      * <p>Removes all the (existing) edges of which both the source and the target are contained in {@code among}.

@@ -259,7 +259,7 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
     }
 
     @Override
-    public boolean removeEdge(V source, V target) {
+    public GraphEdge<V, E> removeEdge(V source, V target) {
         return this.g.removeEdge(source, target);
     }
 

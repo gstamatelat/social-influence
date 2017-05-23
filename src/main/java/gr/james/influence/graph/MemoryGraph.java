@@ -89,13 +89,13 @@ public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
     }
 
     @Override
-    public boolean removeEdge(V source, V target) {
+    public GraphEdge<V, E> removeEdge(V source, V target) {
         if (this.m.get(source).getFirst().remove(target) != null) {
             GraphEdge<V, E> h = this.m.get(target).getSecond().remove(source);
             assert h != null;
-            return true;
+            return h;
         } else {
-            return false;
+            return null;
         }
     }
 

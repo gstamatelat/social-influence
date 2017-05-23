@@ -110,7 +110,7 @@ public final class ImmutableGraph<V, E> extends GraphDecorator<V, E> {
     }
 
     @Override
-    public boolean removeEdge(V source, V target) {
+    public GraphEdge<V, E> removeEdge(V source, V target) {
         throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 
