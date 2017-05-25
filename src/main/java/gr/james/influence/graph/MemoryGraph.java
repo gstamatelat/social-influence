@@ -42,6 +42,7 @@ public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
             Pair<Map<V, GraphEdge<V, E>>> pp = new Pair<>(new LinkedHashMap<>(), new LinkedHashMap<>());
             Object o = this.m.put(v, pp);
             assert o == null;
+            assert !this.vList.contains(v);
             this.vList.add(v);
             return true;
         }
