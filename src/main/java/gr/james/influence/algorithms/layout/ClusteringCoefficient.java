@@ -1,7 +1,7 @@
 package gr.james.influence.algorithms.layout;
 
 import gr.james.influence.api.Graph;
-import gr.james.influence.graph.GraphUtils;
+import gr.james.influence.graph.Graphs;
 import gr.james.influence.util.collections.GraphState;
 
 import java.util.HashSet;
@@ -15,7 +15,7 @@ public class ClusteringCoefficient {
             neighborhood.addAll(g.getOutEdges(v).keySet());
             neighborhood.addAll(g.getInEdges(v).keySet());
 
-            Graph<V, E> nGraph = GraphUtils.deepCopy(g, g.getGraphFactory(), neighborhood);
+            Graph<V, E> nGraph = Graphs.deepCopy(g, g.getGraphFactory(), neighborhood);
             cc.put(v, nGraph.getDensity());
         }
         return cc;

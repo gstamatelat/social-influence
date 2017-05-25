@@ -3,7 +3,7 @@ package gr.james.influence.algorithms.generators.random;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphFactory;
 import gr.james.influence.api.GraphGenerator;
-import gr.james.influence.graph.GraphUtils;
+import gr.james.influence.graph.Graphs;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +47,7 @@ public class BarabasiAlbertClusterGenerator implements GraphGenerator {
 
         assert randomVertices.size() == clusters;
 
-        Graph<V, E> g = GraphUtils.combineGraphs(factory, c);
+        Graph<V, E> g = Graphs.combineGraphs(factory, c);
 
         for (int i = 0; i < clusters; i++) {
             // Vertex s = randomVertices[i];

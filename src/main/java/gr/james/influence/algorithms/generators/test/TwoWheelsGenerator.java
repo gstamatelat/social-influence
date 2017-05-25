@@ -4,7 +4,7 @@ import gr.james.influence.algorithms.generators.basic.WheelGenerator;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphFactory;
 import gr.james.influence.api.GraphGenerator;
-import gr.james.influence.graph.GraphUtils;
+import gr.james.influence.graph.Graphs;
 
 import java.util.Arrays;
 import java.util.Random;
@@ -25,8 +25,8 @@ public class TwoWheelsGenerator implements GraphGenerator {
         V a = g1.getVertexFromIndex(0);
         V b = g2.getVertexFromIndex(0);
 
-        Graph<V, E> g = GraphUtils.combineGraphs(factory, Arrays.asList(g1, g2));
-        GraphUtils.fuseVertices(g, Arrays.asList(a, b));
+        Graph<V, E> g = Graphs.combineGraphs(factory, Arrays.asList(g1, g2));
+        Graphs.fuseVertices(g, Arrays.asList(a, b));
 
         g.setGraphType("TwoWheels");
         g.setMeta("wheelVertices", String.valueOf(wheelVertices));

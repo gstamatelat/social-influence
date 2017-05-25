@@ -2,7 +2,7 @@ package gr.james.influence.algorithms.layout;
 
 import com.google.common.collect.BiMap;
 import gr.james.influence.api.Graph;
-import gr.james.influence.graph.GraphUtils;
+import gr.james.influence.graph.Graphs;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +23,7 @@ public class Tarjan<V> {
     private List<List<V>> components;
 
     public List<List<V>> execute(Graph<V, ?> g) {
-        vertexMap = GraphUtils.getGraphIndexMap(g);
+        vertexMap = Graphs.getGraphIndexMap(g);
 
         this.g = g;
         visited = new boolean[g.getVerticesCount()];

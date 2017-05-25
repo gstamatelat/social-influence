@@ -12,7 +12,7 @@ import gr.james.influence.algorithms.scoring.Degree;
 import gr.james.influence.algorithms.scoring.PageRank;
 import gr.james.influence.api.Graph;
 import gr.james.influence.graph.Direction;
-import gr.james.influence.graph.GraphUtils;
+import gr.james.influence.graph.Graphs;
 import gr.james.influence.graph.MemoryGraph;
 import gr.james.influence.graph.SimpleGraph;
 import gr.james.influence.util.Finals;
@@ -35,8 +35,8 @@ public class Tests {
 
         /* Create graph and randomize edge weights */
         SimpleGraph g = new RandomGenerator(vertexCount, p).generate();
-        GraphUtils.connect(g);
-        GraphUtils.randomizeEdgeWeights(g);
+        Graphs.connect(g);
+        Graphs.randomizeEdgeWeights(g);
 
         /* PageRank values must sum to vertexCount */
         GraphState<String, Double> pr = PageRank.execute(g, dampingFactor);
@@ -56,8 +56,8 @@ public class Tests {
 
         /* Create graph and randomize edge weights */
         SimpleGraph g = new RandomGenerator(vertexCount, p).generate();
-        GraphUtils.connect(g);
-        GraphUtils.randomizeEdgeWeights(g);
+        Graphs.connect(g);
+        Graphs.randomizeEdgeWeights(g);
 
         Finals.LOG.debug("damping factor = {}, p = {}", dampingFactor, p);
 
@@ -117,7 +117,7 @@ public class Tests {
         for (int i = 0; i < GRAPHS; i++) {
             int size = RandomHelper.getRandom().nextInt(50) + 50;
             graphs[i] = new RandomGenerator(size, RandomHelper.getRandom().nextDouble()).generate();
-            GraphUtils.connect(graphs[i]);
+            Graphs.connect(graphs[i]);
         }
 
         int vertexCount = 0;
@@ -127,7 +127,7 @@ public class Tests {
             edgeCount += g.getEdgesCount();
         }
 
-        SimpleGraph g = GraphUtils.combineGraphs(Arrays.asList(graphs));
+        SimpleGraph g = Graphs.combineGraphs(Arrays.asList(graphs));
 
         Assert.assertEquals("combineGraphsTest - vertexCount", vertexCount, g.getVerticesCount());
         Assert.assertEquals("combineGraphsTest - edgeCount", edgeCount, g.getEdgesCount());
@@ -206,7 +206,7 @@ public class Tests {
         int size = RandomHelper.getRandom().nextInt(50) + 50;
         double p = RandomHelper.getRandom().nextDouble();
         SimpleGraph g = new RandomGenerator(size, p).generate();
-        GraphUtils.connect(g);
+        Graphs.connect(g);
 
         GraphState<String, Double> initialState = new GraphState<>(g, 0.0);
         for (String v : g) {
@@ -226,8 +226,8 @@ public class Tests {
         int size = RandomHelper.getRandom().nextInt(50) + 50;
         double p = RandomHelper.getRandom().nextDouble();
         SimpleGraph g = new RandomGenerator(size, p).generate();
-        GraphUtils.connect(g);
-        Graph e = GraphUtils.deepCopy(g);
+        Graphs.connect(g);
+        Graph e = Graphs.deepCopy(g);
         e.addVertex();
         Assert.assertEquals("deepCopyTest", g.getVerticesCount() + 1, e.getVerticesCount());
         Assert.assertEquals("deepCopyTest", g.getEdgesCount(), e.getEdgesCount());
@@ -251,7 +251,7 @@ public class Tests {
         int size = RandomHelper.getRandom().nextInt(50) + 50;
         double p = RandomHelper.getRandom().nextDouble();
         SimpleGraph g = new RandomGenerator(size, p).generate();
-        GraphUtils.connect(g);
+        Graphs.connect(g);
         Assert.assertNotEquals("connectTest", g.getDiameter(), Double.POSITIVE_INFINITY);
     }
 }

@@ -30,7 +30,7 @@ public interface GraphGenerator {
         return new GraphGenerator() {
             @Override
             public <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, Random r) {
-                // return GraphUtils.deepCopy(g, factory);
+                // return Graphs.deepCopy(g, factory);
                 // TODO
                 throw new UnsupportedOperationException();
             }

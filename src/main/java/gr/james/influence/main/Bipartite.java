@@ -1,7 +1,7 @@
 package gr.james.influence.main;
 
 import gr.james.influence.algorithms.scoring.HITS;
-import gr.james.influence.graph.GraphUtils;
+import gr.james.influence.graph.Graphs;
 import gr.james.influence.graph.SimpleGraph;
 import gr.james.influence.graph.io.Edges;
 import gr.james.influence.util.collections.GraphState;
@@ -24,8 +24,8 @@ public class Bipartite {
                 .filter(vertex -> Arrays.asList(new String[]{"b1", "b2", "b3", "c1", "c2", "c3"}).contains(vertex))
                 .collect(Collectors.toList());
 
-        SimpleGraph g1 = GraphUtils.subGraph(g, g1v);
-        SimpleGraph g2 = GraphUtils.subGraph(g, g2v);
+        SimpleGraph g1 = Graphs.subGraph(g, g1v);
+        SimpleGraph g2 = Graphs.subGraph(g, g2v);
 
         GraphState<String, HITS.HITSScore> hits = HITS.execute(g, 0.0);
         GraphState<String, HITS.HITSScore> hits1 = HITS.execute(g1, 0.0);

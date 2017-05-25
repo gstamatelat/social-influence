@@ -1,7 +1,7 @@
 package gr.james.influence.api;
 
 import gr.james.influence.algorithms.distance.Dijkstra;
-import gr.james.influence.graph.GraphUtils;
+import gr.james.influence.graph.Graphs;
 import gr.james.influence.util.Conditions;
 import gr.james.influence.util.Finals;
 import gr.james.influence.util.Helper;
@@ -398,7 +398,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
                 }
             }
         }
-        assert GraphUtils.subGraph(this, this.getGraphFactory(), among)
+        assert Graphs.subGraph(this, this.getGraphFactory(), among)
                 .getEdgesCount() == among.size() * (among.size() - 1);
     }
 

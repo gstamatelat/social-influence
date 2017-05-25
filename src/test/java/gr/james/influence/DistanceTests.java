@@ -5,7 +5,7 @@ import gr.james.influence.algorithms.distance.Dijkstra;
 import gr.james.influence.algorithms.distance.FloydWarshall;
 import gr.james.influence.algorithms.generators.basic.GridGenerator;
 import gr.james.influence.algorithms.generators.random.RandomGenerator;
-import gr.james.influence.graph.GraphUtils;
+import gr.james.influence.graph.Graphs;
 import gr.james.influence.graph.SimpleGraph;
 import gr.james.influence.util.RandomHelper;
 import gr.james.influence.util.collections.VertexPair;
@@ -28,8 +28,8 @@ public class DistanceTests {
 
         /* Create graph and randomize edge weights */
         SimpleGraph g = new RandomGenerator(vertexCount, p).generate();
-        GraphUtils.connect(g);
-        GraphUtils.randomizeEdgeWeights(g);
+        Graphs.connect(g);
+        Graphs.randomizeEdgeWeights(g);
 
         /* Floyd-Warshall */
         Map<VertexPair<String>, Double> distFloyd = FloydWarshall.execute(g);
