@@ -1,7 +1,6 @@
 package gr.james.influence.graph;
 
-import com.google.common.collect.BiMap;
-import com.google.common.collect.HashBiMap;
+import com.google.common.collect.ImmutableBiMap;
 import gr.james.influence.algorithms.layout.Tarjan;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphEdge;
@@ -127,16 +126,13 @@ public class GraphUtils {
         return (SimpleGraph) deepCopy(g, Finals.DEFAULT_GRAPH_FACTORY, g.getVertices());
     }
 
-    public static <V, E> BiMap<V, Integer> getGraphIndexMap(Graph<V, E> g) {
-        // TODO: It's probably better to return an ImmutableBiMap
-        BiMap<V, Integer> vertexMap = HashBiMap.create();
-
+    public static <V, E> ImmutableBiMap<V, Integer> getGraphIndexMap(Graph<V, E> g) {
+        ImmutableBiMap.Builder<V, Integer> builder = ImmutableBiMap.builder();
         List<V> vertices = g.getVertices();
         for (int i = 0; i < vertices.size(); i++) {
-            vertexMap.put(vertices.get(i), i);
+            builder.put(vertices.get(i), i);
         }
-
-        return vertexMap;
+        return builder.build();
     }
 
     /**
