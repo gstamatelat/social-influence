@@ -19,6 +19,8 @@ public class SimpleGraph extends MemoryGraph<String, Object> {
             return s;
         }
     };
+    
+    public static final EdgeFactory<Object> edgeFactory = Object::new;
 
     public static final GraphFactory<String, Object> graphFactory = new GraphFactory<String, Object>() {
         @Override
@@ -28,16 +30,14 @@ public class SimpleGraph extends MemoryGraph<String, Object> {
 
         @Override
         public VertexFactory<String> getVertexFactory() {
-            return null;
+            return vertexFactory;
         }
 
         @Override
         public EdgeFactory<Object> getEdgeFactory() {
-            return null;
+            return edgeFactory;
         }
     };
-
-    public static final EdgeFactory<Object> edgeFactory = Object::new;
 
     public SimpleGraph() {
         super(vertexFactory, edgeFactory);
