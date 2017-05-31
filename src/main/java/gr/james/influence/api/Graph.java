@@ -258,6 +258,8 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * </p>
      *
      * @return the new vertex object
+     * @throws InvalidVertexException if the automatically generated vertex was already in the graph; this behavior
+     *                                signals a flawed vertex factory
      */
     @Deprecated
     default V addVertex() {
