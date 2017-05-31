@@ -293,7 +293,10 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      *
      * @param count how many new vertices to add
      * @return an unmodifiable list view of the vertices in the order that they were added
+     * @throws InvalidVertexException if any automatically generated vertex was already in the graph; this behavior
+     *                                signals a flawed vertex factory
      */
+    @Deprecated
     default List<V> addVertices(int count) {
         List<V> newVertices = new ArrayList<>();
         for (int i = 0; i < count; i++) {
