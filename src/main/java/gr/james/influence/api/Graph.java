@@ -14,6 +14,12 @@ import java.util.*;
 /**
  * <p>Represents a collection of vertices and edges. The graph is weighted, directed and there can't be more than one
  * edge from node {@code i} to node {@code j} (it's not a multigraph).</p>
+ * <dl><dt><b>Vertices and edges:</b></dt><dd>Objects of type {@code <V>} are used as vertices in the graph as-is. This
+ * behavior implies that such objects must be unique. Methods that accept vertex objects as arguments will automatically
+ * (but not silently) handle duplicate values.<br><br>On the other hand, edge objects {@code <E>} are objects that
+ * attach to higher level edges in the graph ({@link GraphEdge}) and, thus, need not be unique. In fact, edge objects
+ * can also be {@code null}. It is the caller's responsibility to ensure uniqueness for edge objects if such behavior is
+ * desired.<br><br>Both vertex and edge types need to be immutable or effectively immutable.</dd></dl>
  * <dl><dt><b>Collections returned:</b></dt><dd>Methods that return collections ({@link Map Maps}, {@link Set Sets} and
  * {@link List Lists}) return read-only views of the actual collections they represent, meaning that you can't insert,
  * remove or reorder elements. These collections may also not be backed by the graph, changes to the graph may not
@@ -24,10 +30,12 @@ import java.util.*;
  * @param <E> the edge type
  */
 public interface Graph<V, E> extends Iterable<V>, Metadata {
+    @Deprecated
     default String getGraphType() {
         return getMeta(Finals.TYPE_META);
     }
 
+    @Deprecated
     default void setGraphType(String type) {
         setMeta(Finals.TYPE_META, type);
     }
@@ -43,8 +51,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     GraphFactory<V, E> getGraphFactory();
 
     /**
-     * <p>Checks if this graph supports the methods for automatically generating and inserting vertices
-     * {@link #addVertex()} and {@link #addVertices(int)}.</p>
+     * <p>Checks if this graph supports the methods listed below for automatically generating and inserting vertices.</p>
      *
      * @return {@code true} if this graph supports vertex generating methods, otherwise {@code false}
      * @see #addVertex()
@@ -55,12 +62,13 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     }
 
     /**
-     * <p>Checks if this graph supports the methods for automatically generating and inserting edges
-     * {@link #addEdge(Object, Object)} and {@link #addEdge(Object, Object, double)}.</p>
+     * <p>Checks if this graph supports the methods listed below for automatically generating and inserting edges.</p>
      *
      * @return {@code true} if this graph supports edge generating methods, otherwise {@code false}
      * @see #addEdge(Object, Object)
      * @see #addEdge(Object, Object, double)
+     * @see #addEdges(Object[])
+     * @see #addEdges(Collection)
      */
     default boolean supportsAutoEdges() {
         return getEdgeFactory() != null;
@@ -81,11 +89,12 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     }
 
     /**
-     * <p>Returns the {@code Edge} from {@code source} to {@code target}, or {@code null} if there is no such edge.</p>
+     * <p>Returns the {@link GraphEdge} from {@code source} to {@code target}, or {@code null} if there is no such
+     * edge.</p>
      *
      * @param source the source vertex of the edge
      * @param target the target vertex of the edge
-     * @return the {@code Edge} from {@code source} to {@code target}, or {@code null} if there is no such edge
+     * @return the {@link GraphEdge} from {@code source} to {@code target}, or {@code null} if there is no such edge
      * @throws NullPointerException   if either {@code source} or {@code target} is {@code null}
      * @throws InvalidVertexException if either {@code source} or {@code target} doesn't belong in the graph
      */
@@ -108,24 +117,24 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
 
     /**
      * <p>Get all outbound edges of {@code v}. The result is a {@link Map} where the keys are the destination vertices
-     * and the values are the respective {@link E} objects along with their weights.</p>
+     * and the values are the respective {@link GraphEdge} objects.</p>
      *
      * @param v the vertex to get the outbound edges of
-     * @return the outbound edges of {@code v} as a {@code Map<Vertex, Weighted<Edge, Double>>}
+     * @return the outbound edges of {@code v} as a {@code Map<V, GraphEdge<V,E>>}
      * @throws NullPointerException   if {@code v} is {@code null}
-     * @throws InvalidVertexException if {@code v} doesn't belong in the graph
+     * @throws InvalidVertexException if {@code v} is not in the graph
      * @see #getInEdges
      */
     Map<V, GraphEdge<V, E>> getOutEdges(V v);
 
     /**
      * <p>Get all inbound edges of {@code v}. The result is a {@link Map} where the keys are the source vertices and the
-     * values are the respective {@link E} objects along with their weights.</p>
+     * values are the respective {@link GraphEdge} objects.</p>
      *
      * @param v the vertex to get the inbound edges of
-     * @return the inbound edges of {@code v} as a {@code Map<Vertex, Weighted<Edge, Double>>}
+     * @return the inbound edges of {@code v} as a {@code Map<Vertex, GraphEdge<V, E>>}
      * @throws NullPointerException   if {@code v} is {@code null}
-     * @throws InvalidVertexException if {@code v} doesn't belong in the graph
+     * @throws InvalidVertexException if {@code v} is not in the graph
      * @see #getOutEdges
      */
     Map<V, GraphEdge<V, E>> getInEdges(V v);
@@ -136,7 +145,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @param v the vertex
      * @return the sum of weights of all outbound edges of vertex {@code v}
      * @throws NullPointerException   if {@code v} is {@code null}
-     * @throws InvalidVertexException if {@code v} doesn't belong in the graph
+     * @throws InvalidVertexException if {@code v} is not in the graph
      * @see #getInStrength
      */
     default double getOutStrength(V v) {
@@ -149,7 +158,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @param v the vertex
      * @return the sum of weights of all inbound edges of vertex {@code v}
      * @throws NullPointerException   if {@code v} is {@code null}
-     * @throws InvalidVertexException if {@code v} doesn't belong in the graph
+     * @throws InvalidVertexException if {@code v} is not in the graph
      * @see #getOutStrength
      */
     default double getInStrength(V v) {
@@ -235,6 +244,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @param r the {@link Random} instance to use for the operation
      * @return a random vertex contained in this graph or {@code null} if the graph is empty
      */
+    @Deprecated
     default V getRandomVertex(Random r) {
         if (getVerticesCount() == 0) {
             return null;
@@ -248,6 +258,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      *
      * @return a random vertex contained in this graph or {@code null} if the graph is empty
      */
+    @Deprecated
     default V getRandomVertex() {
         return getRandomVertex(RandomHelper.getRandom());
     }
@@ -296,11 +307,11 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     }
 
     /**
-     * <p>Insert a collection of vertices in the graph. If any of the vertices is already on the graph, it is ignored.
-     * </p>
+     * <p>Insert a collection of vertices in the graph. If any of the vertices are already on the graph, they are
+     * ignored.</p>
      *
      * @param vertices the vertices to insert to the graph
-     * @return an {@link ArrayList} containing the vertices in {@code vertices} that were already in the graph
+     * @return a {@link List} containing the vertices in {@code vertices} that were already in the graph
      * @throws NullPointerException if any vertex in {@code vertices} is {@code null}
      */
     default List<V> addVertices(V... vertices) {
@@ -346,7 +357,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * <p>Removes a collection of vertices from the graph.</p>
      *
      * @param vertices a collection of vertices to remove from the graph; you should prefer a collection with a fast
-     *                 {@code next()} implementation
+     *                 iterator
      * @throws NullPointerException if any of the vertices in {@code vertices} is {@code null}
      */
     default void removeVertices(Collection<V> vertices) {
@@ -354,7 +365,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     }
 
     /**
-     * <p>Removes all vertices (and consequently all edges) from this graph.</p>
+     * <p>Removes all vertices (and consequently all edges) from this graph. Metadata are not removed.</p>
      */
     default void clear() {
         this.removeVertices(this.getVertices());
@@ -368,8 +379,9 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @param source the source of the edge
      * @param target the target of the edge
      * @return the {@link GraphEdge} object of the newly added edge, or {@code null} if an edge already exists
-     * @throws NullPointerException   if either {@code source} or {@code target} is {@code null}
-     * @throws InvalidVertexException if either {@code source} or {@code target} is not in the graph
+     * @throws NullPointerException          if either {@code source} or {@code target} is {@code null}
+     * @throws InvalidVertexException        if either {@code source} or {@code target} is not in the graph
+     * @throws UnsupportedOperationException if this method is not supported by this graph instance
      * @see #supportsAutoEdges()
      */
     default GraphEdge<V, E> addEdge(V source, V target) {
@@ -377,16 +389,17 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     }
 
     /**
-     * <p>Creates an edge with the specified {@code source}, {@code target} and {@code weight}. If an edge with the same
-     * {@code source} and {@code target} exists, nothing happens.</p>
+     * <p>Creates an edge with the specified {@code source}, {@code target} and {@code weight}. If an edge with the
+     * same {@code source} and {@code target} exists, nothing happens.</p>
      *
      * @param source the source of the edge
      * @param target the target of the edge
      * @param weight the weight to be associated with the edge
      * @return the {@link GraphEdge} object of the newly added edge, or {@code null} if an edge already exists
-     * @throws NullPointerException     if either {@code source} or {@code target} is {@code null}
-     * @throws InvalidVertexException   if either {@code source} or {@code target} is not in the graph
-     * @throws IllegalArgumentException if {@code weight} is non-positive
+     * @throws NullPointerException          if either {@code source} or {@code target} is {@code null}
+     * @throws InvalidVertexException        if either {@code source} or {@code target} is not in the graph
+     * @throws IllegalArgumentException      if {@code weight} is non-positive
+     * @throws UnsupportedOperationException if this method is not supported by this graph instance
      * @see #supportsAutoEdges()
      */
     default GraphEdge<V, E> addEdge(V source, V target, double weight) {
@@ -396,10 +409,36 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
         return addEdge(source, target, getEdgeFactory().createEdge(), weight);
     }
 
+    /**
+     * <p>Creates an edge with the specified {@code source} and {@code target} and default weight
+     * {@link Finals#DEFAULT_EDGE_WEIGHT}. Also attaches the object {@code edge} to the edge. If an edge with the same
+     * {@code source} and {@code target} exists, nothing happens.</p>
+     *
+     * @param source the source of the edge
+     * @param target the target of the edge
+     * @param edge   the object to attach to the edge
+     * @return the {@link GraphEdge} object of the newly added edge, or {@code null} if an edge already exists
+     * @throws NullPointerException   if either {@code source} or {@code target} is {@code null}
+     * @throws InvalidVertexException if either {@code source} or {@code target} is not in the graph
+     */
     default GraphEdge<V, E> addEdge(V source, V target, E edge) {
         return addEdge(source, target, edge, Finals.DEFAULT_EDGE_WEIGHT);
     }
 
+    /**
+     * <p>Creates an edge with the specified {@code source}, {@code target} and {@code weight}. Also attaches the
+     * object {@code edge} to the edge. If an edge with the same {@code source} and {@code target} exists, nothing
+     * happens.</p>
+     *
+     * @param source the source of the edge
+     * @param target the target of the edge
+     * @param edge   the object to attach to the edge
+     * @param weight the weight to be associated with the edge
+     * @return the {@link GraphEdge} object of the newly added edge, or {@code null} if an edge already exists
+     * @throws NullPointerException     if either {@code source} or {@code target} is {@code null}
+     * @throws InvalidVertexException   if either {@code source} or {@code target} is not in the graph
+     * @throws IllegalArgumentException if {@code weight} is non-positive
+     */
     GraphEdge<V, E> addEdge(V source, V target, E edge, double weight);
 
     /**
@@ -416,9 +455,10 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @throws IllegalArgumentException if {@code weight} is non-positive
      */
     default boolean setEdgeWeight(V source, V target, double weight) {
-        if (removeEdge(source, target) != null) {
-            // TODO: If addEdge throws an exception, the original edge will be removed anyway
-            GraphEdge<V, E> e = addEdge(source, target, weight);
+        Conditions.requireArgument(weight > 0, Finals.E_EDGE_WEIGHT_NEGATIVE, weight);
+        GraphEdge<V, E> previousEdge = removeEdge(source, target);
+        if (previousEdge != null) {
+            GraphEdge<V, E> e = addEdge(source, target, previousEdge.getEdge(), weight);
             assert e != null;
             return true;
         } else {
@@ -435,8 +475,10 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      *
      * @param among a collection of vertices of which each pair will be connected; you should prefer a collection with a
      *              fast iterator implementation
-     * @throws NullPointerException   if any vertex in {@code among} is {@code null}
-     * @throws InvalidVertexException if any vertex in {@code among} doesn't belong in the graph
+     * @throws NullPointerException          if any vertex in {@code among} is {@code null}
+     * @throws InvalidVertexException        if any vertex in {@code among} doesn't belong in the graph
+     * @throws UnsupportedOperationException if this method is not supported by this graph instance
+     * @see #supportsAutoEdges()
      */
     default void addEdges(Collection<V> among) {
         for (V v : among) {
@@ -459,8 +501,10 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      *
      * @param among the vertices as variable arguments to connect each of its pairs; you should prefer a collection with
      *              a fast iterator implementation
-     * @throws NullPointerException   if any vertex in {@code among} is {@code null}
-     * @throws InvalidVertexException if any vertex in {@code among} doesn't belong in the graph
+     * @throws NullPointerException          if any vertex in {@code among} is {@code null}
+     * @throws InvalidVertexException        if any vertex in {@code among} doesn't belong in the graph
+     * @throws UnsupportedOperationException if this method is not supported by this graph instance
+     * @see #supportsAutoEdges()
      */
     default void addEdges(V... among) {
         this.addEdges(Arrays.asList(among));
@@ -471,10 +515,10 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      *
      * @param source the source of the edge
      * @param target the target of the edge
-     * @return the {@link GraphEdge GraphEdge} that was removed if there was previously a directed edge
+     * @return the {@link GraphEdge} that was removed if there was previously a directed edge
      * {@code (source,target)}, otherwise {@code null}
      * @throws NullPointerException   if either {@code source} or {@code target} is {@code null}
-     * @throws InvalidVertexException if either {@code source} or {@code target} doesn't belong in the graph
+     * @throws InvalidVertexException if either {@code source} or {@code target} is not in the graph
      */
     GraphEdge<V, E> removeEdge(V source, V target);
 
@@ -485,9 +529,9 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * contains 1 (unique) vertex or less, it's a no-op.</p>
      *
      * @param among a collection of vertices to strip the edges from; you should prefer a collection with a fast
-     *              {@code next()} implementation
+     *              iterator
      * @throws NullPointerException   if any vertex in {@code among} is {@code null}
-     * @throws InvalidVertexException if any vertex in {@code among} doesn't belong in the graph
+     * @throws InvalidVertexException if any vertex in {@code among} is not in the graph
      */
     default void removeEdges(Collection<V> among) {
         for (V v : among) {
@@ -514,6 +558,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
         this.removeEdges(Arrays.asList(among));
     }
 
+    @Deprecated
     default V getRandomOutEdge(V from, boolean weighted) {
         // TODO: Return GraphEdge
         // TODO: What if no out edge?
@@ -526,6 +571,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
         return edges.iterator().next();
     }
 
+    @Deprecated
     default double getDiameter() {
         // TODO: Should return a list/path/walk of vertices to show both the weight sum and the steps
         Map<VertexPair<V>, Double> distanceMap = Dijkstra.executeDistanceMap(this);
@@ -540,12 +586,14 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
         return diameter;
     }
 
+    @Deprecated
     default double getDensity() {
         double n = this.getVerticesCount();
         double e = this.getEdgesCount();
         return e / (n * (n - 1));
     }
 
+    @Deprecated
     default double getAveragePathLength() {
         Map<VertexPair<V>, Double> distanceMap = Dijkstra.executeDistanceMap(this);
 
@@ -558,8 +606,8 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     }
 
     /**
-     * <p>Get a collection of all edges in this graph. The items are of type {@link GraphEdge GraphEdge} and are in no
-     * particular order inside the collection.</p>
+     * <p>Get a collection of all edges in this graph. The items are of type {@link GraphEdge} and are in no particular
+     * order inside the collection.</p>
      *
      * @return a collection of all edges in the graph
      */
@@ -570,15 +618,4 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
         }
         return Collections.unmodifiableCollection(edges);
     }
-
-    /*@Deprecated
-    default Map<Pair<V>, GraphEdge<V, E>> getEdges() {
-        Map<Pair<V>, GraphEdge<V, E>> edges = new HashMap<>();
-        for (V v : this.getVertices()) {
-            for (Map.Entry<V, GraphEdge<V, E>> e : this.getOutEdges(v).entrySet()) {
-                edges.put(new Pair<>(v, e.getKey()), e.getValue());
-            }
-        }
-        return Collections.unmodifiableMap(edges);
-    }*/
 }

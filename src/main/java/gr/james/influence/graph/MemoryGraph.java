@@ -145,6 +145,8 @@ public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
         if (this.m.get(source).getFirst().remove(target) != null) {
             GraphEdge<V, E> h = this.m.get(target).getSecond().remove(source);
             assert h != null;
+            assert h.getSource().equals(source);
+            assert h.getTarget().equals(target);
             return h;
         } else {
             return null;
