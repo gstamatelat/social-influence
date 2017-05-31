@@ -19,7 +19,7 @@ public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
     /**
      * <p>Constructs an empty {@code MemoryGraph}.</p>
      *
-     * @param vertexFactory the vertex factory to use when invoking {@link #addVertex()}
+     * @param vertexFactory the vertex factory to use when invoking {@link #addVertex()} and related methods
      * @param edgeFactory   the edge factory to use when invoking {@link #addEdge(Object, Object)} and related methods
      */
     public MemoryGraph(VertexFactory<V> vertexFactory, EdgeFactory<E> edgeFactory) {
@@ -33,7 +33,7 @@ public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
         this.m = new HashMap<>();
         this.vList = new ArrayList<>();
         this.vertexFactory = vertexFactory;
-        this.edgeFactory = null;
+        this.edgeFactory = () -> null;
     }
 
     public MemoryGraph(EdgeFactory<E> edgeFactory) {
@@ -47,7 +47,7 @@ public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
         this.m = new HashMap<>();
         this.vList = new ArrayList<>();
         this.vertexFactory = null;
-        this.edgeFactory = null;
+        this.edgeFactory = () -> null;
     }
 
     @Override
