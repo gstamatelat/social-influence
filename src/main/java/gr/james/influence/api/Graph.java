@@ -32,11 +32,22 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
         setMeta(Finals.TYPE_META, type);
     }
 
-    VertexFactory<V> getVertexFactory();
+    default VertexFactory<V> getVertexFactory() {
+        return null;
+    }
 
     EdgeFactory<E> getEdgeFactory();
 
     GraphFactory<V, E> getGraphFactory();
+
+    /**
+     * <p>Checks if this graph supports the methods for automatically generating and inserting vertices {@link #addVertex()} and {@link #addVertices(int)}.</p>
+     *
+     * @return {@code true} if this graph supports vertex generating methods, otherwise {@code false}
+     */
+    default boolean supportsAutoVertices() {
+        return getVertexFactory() != null;
+    }
 
     /**
      * <p>Checks if this graph contains an edge with the specified {@code source} and {@code target}.</p>
@@ -258,11 +269,16 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * </p>
      *
      * @return the new vertex object
-     * @throws InvalidVertexException if the automatically generated vertex was already in the graph; this behavior
-     *                                signals a flawed vertex factory
+     * @throws UnsupportedOperationException if this method is not supported by this graph instance
+     * @throws InvalidVertexException        if the automatically generated vertex was already in the graph; this
+     *                                       behavior signals a flawed vertex factory
+     * @throws NullPointerException          if the vertex factory generated {@code null}
+     * @see #supportsAutoVertices()
      */
-    @Deprecated
     default V addVertex() {
+        if (!supportsAutoVertices()) {
+            throw new UnsupportedOperationException(Finals.E_GRAPH_NOT_SUPPORTED);
+        }
         V v = getVertexFactory().createVertex();
         if (!this.addVertex(v)) {
             throw new InvalidVertexException(Finals.E_GRAPH_VERTEX_CONTAINED, v);
@@ -293,10 +309,12 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      *
      * @param count how many new vertices to add
      * @return an unmodifiable list view of the vertices in the order that they were added
-     * @throws InvalidVertexException if any automatically generated vertex was already in the graph; this behavior
-     *                                signals a flawed vertex factory
+     * @throws UnsupportedOperationException if this method is not supported by this graph instance
+     * @throws InvalidVertexException        if any automatically generated vertex was already in the graph; this
+     *                                       behavior signals a flawed vertex factory
+     * @throws NullPointerException          if the vertex factory generated one {@code null} value
+     * @see #supportsAutoVertices()
      */
-    @Deprecated
     default List<V> addVertices(int count) {
         List<V> newVertices = new ArrayList<>();
         for (int i = 0; i < count; i++) {

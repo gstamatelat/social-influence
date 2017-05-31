@@ -44,6 +44,7 @@ public final class Finals {
 
     public static final String E_GRAPH_VERTEX_NOT_CONTAINED = "The vertex specified in %s doesn't belong in the graph.";
     public static final String E_GRAPH_VERTEX_CONTAINED = "The vertex %s created is already in the graph.";
+    public static final String E_GRAPH_NOT_SUPPORTED = "The operation is not supported by this graph instance.";
 
     public static final String E_IMMUTABLE_GRAPH = "Cannot modify a graph of type ImmutableGraph";
 

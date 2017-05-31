@@ -29,6 +29,11 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
     }
 
     @Override
+    public boolean supportsAutoVertices() {
+        return this.g.supportsAutoVertices();
+    }
+
+    @Override
     public String getMeta(String key) {
         return this.g.getMeta(key);
     }

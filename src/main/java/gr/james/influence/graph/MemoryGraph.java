@@ -29,6 +29,57 @@ public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
         this.edgeFactory = edgeFactory;
     }
 
+    public MemoryGraph(VertexFactory<V> vertexFactory) {
+        this.m = new HashMap<>();
+        this.vList = new ArrayList<>();
+        this.vertexFactory = vertexFactory;
+        this.edgeFactory = null;
+    }
+
+    public MemoryGraph(EdgeFactory<E> edgeFactory) {
+        this.m = new HashMap<>();
+        this.vList = new ArrayList<>();
+        this.vertexFactory = null;
+        this.edgeFactory = edgeFactory;
+    }
+
+    public MemoryGraph() {
+        this.m = new HashMap<>();
+        this.vList = new ArrayList<>();
+        this.vertexFactory = null;
+        this.edgeFactory = null;
+    }
+
+    @Override
+    public VertexFactory<V> getVertexFactory() {
+        return vertexFactory;
+    }
+
+    @Override
+    public EdgeFactory<E> getEdgeFactory() {
+        return edgeFactory;
+    }
+
+    @Override
+    public GraphFactory<V, E> getGraphFactory() {
+        return new GraphFactory<V, E>() {
+            @Override
+            public Graph<V, E> create() {
+                return new MemoryGraph<>(vertexFactory, edgeFactory);
+            }
+
+            @Override
+            public VertexFactory<V> getVertexFactory() {
+                return vertexFactory;
+            }
+
+            @Override
+            public EdgeFactory<E> getEdgeFactory() {
+                return edgeFactory;
+            }
+        };
+    }
+
     @Override
     public boolean containsVertex(V v) {
         return this.m.containsKey(Conditions.requireNonNull(v));
@@ -101,39 +152,9 @@ public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
     }
 
     @Override
-    public VertexFactory<V> getVertexFactory() {
-        return vertexFactory;
-    }
-
-    @Override
-    public EdgeFactory<E> getEdgeFactory() {
-        return edgeFactory;
-    }
-
-    @Override
     public Map<V, GraphEdge<V, E>> getOutEdges(V v) {
         Conditions.requireNonNullAndExists(v, this);
         return Collections.unmodifiableMap(this.m.get(v).getFirst());
-    }
-
-    @Override
-    public GraphFactory<V, E> getGraphFactory() {
-        return new GraphFactory<V, E>() {
-            @Override
-            public Graph<V, E> create() {
-                return new MemoryGraph<>(vertexFactory, edgeFactory);
-            }
-
-            @Override
-            public VertexFactory<V> getVertexFactory() {
-                return vertexFactory;
-            }
-
-            @Override
-            public EdgeFactory<E> getEdgeFactory() {
-                return edgeFactory;
-            }
-        };
     }
 
     @Override
