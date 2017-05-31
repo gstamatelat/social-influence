@@ -333,7 +333,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      *
      * @param source the source of the edge
      * @param target the target of the edge
-     * @return the {@code Edge} object of the newly added edge, or {@code null} if an edge already exists
+     * @return the {@link GraphEdge} object of the newly added edge, or {@code null} if an edge already exists
      * @throws NullPointerException   if either {@code source} or {@code target} is {@code null}
      * @throws InvalidVertexException if either {@code source} or {@code target} doesn't belong in the graph
      */
@@ -348,7 +348,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @param source the source of the edge
      * @param target the target of the edge
      * @param weight the weight to be associated with the edge
-     * @return the {@code Edge} object of the newly added edge, or {@code null} if an edge already exists
+     * @return the {@link GraphEdge} object of the newly added edge, or {@code null} if an edge already exists
      * @throws NullPointerException     if either {@code source} or {@code target} is {@code null}
      * @throws InvalidVertexException   if either {@code source} or {@code target} doesn't belong in the graph
      * @throws IllegalArgumentException if {@code weight} is non-positive
