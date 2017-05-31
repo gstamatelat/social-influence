@@ -29,25 +29,11 @@ public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
         this.edgeFactory = edgeFactory;
     }
 
-    public MemoryGraph(VertexFactory<V> vertexFactory) {
-        this.m = new HashMap<>();
-        this.vList = new ArrayList<>();
-        this.vertexFactory = vertexFactory;
-        this.edgeFactory = null;
-    }
-
     public MemoryGraph(EdgeFactory<E> edgeFactory) {
         this.m = new HashMap<>();
         this.vList = new ArrayList<>();
         this.vertexFactory = null;
         this.edgeFactory = edgeFactory;
-    }
-
-    public MemoryGraph() {
-        this.m = new HashMap<>();
-        this.vList = new ArrayList<>();
-        this.vertexFactory = null;
-        this.edgeFactory = null;
     }
 
     @Override
