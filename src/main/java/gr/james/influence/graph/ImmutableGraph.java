@@ -49,11 +49,6 @@ public final class ImmutableGraph<V, E> extends GraphDecorator<V, E> {
         throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 
-    /*@Override
-    public V addVertex(String label) {
-        throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
-    }*/
-
     @Override
     public boolean addVertex(V v) {
         throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
@@ -100,12 +95,22 @@ public final class ImmutableGraph<V, E> extends GraphDecorator<V, E> {
     }
 
     @Override
-    public boolean setEdgeWeight(V source, V target, double weight) {
+    public GraphEdge<V, E> addEdge(V source, V target, double weight) {
         throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 
     @Override
-    public GraphEdge<V, E> addEdge(V source, V target, double weight) {
+    public GraphEdge<V, E> addEdge(V source, V target, E edge) {
+        throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
+    }
+
+    @Override
+    public GraphEdge<V, E> addEdge(V source, V target, E edge, double weight) {
+        throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
+    }
+
+    @Override
+    public boolean setEdgeWeight(V source, V target, double weight) {
         throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 

@@ -34,6 +34,11 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
     }
 
     @Override
+    public boolean supportsAutoEdges() {
+        return false;
+    }
+
+    @Override
     public String getMeta(String key) {
         return this.g.getMeta(key);
     }
@@ -103,16 +108,6 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
         return this.g.getVertexFromIndex(index);
     }
 
-    /*@Override
-    public List<V> getVerticesFromLabel(String label) {
-        return this.g.getVerticesFromLabel(label);
-    }
-
-    @Override
-    public V getVertexFromLabel(String label) {
-        return this.g.getVertexFromLabel(label);
-    }*/
-
     @Override
     public V getRandomVertex(Random r) {
         return this.g.getRandomVertex(r);
@@ -122,11 +117,6 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
     public V getRandomVertex() {
         return this.g.getRandomVertex();
     }
-
-    /*@Override
-    public Map<Pair<V>, GraphEdge<V, E>> getEdges() {
-        return this.g.getEdges();
-    }*/
 
     @Override
     public Collection<GraphEdge<V, E>> getEdges() {
@@ -203,11 +193,6 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
         return this.g.addVertex();
     }
 
-    /*@Override
-    public V addVertex(String label) {
-        return this.g.addVertex(label);
-    }*/
-
     @Override
     public boolean addVertex(V v) {
         return this.g.addVertex(v);
@@ -254,13 +239,23 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
     }
 
     @Override
-    public boolean setEdgeWeight(V source, V target, double weight) {
-        return this.g.setEdgeWeight(source, target, weight);
+    public GraphEdge<V, E> addEdge(V source, V target, double weight) {
+        return this.g.addEdge(source, target, weight);
     }
 
     @Override
-    public GraphEdge<V, E> addEdge(V source, V target, double weight) {
-        return this.g.addEdge(source, target, weight);
+    public GraphEdge<V, E> addEdge(V source, V target, E edge) {
+        return this.g.addEdge(source, target, edge);
+    }
+
+    @Override
+    public GraphEdge<V, E> addEdge(V source, V target, E edge, double weight) {
+        return this.g.addEdge(source, target, edge, weight);
+    }
+
+    @Override
+    public boolean setEdgeWeight(V source, V target, double weight) {
+        return this.g.setEdgeWeight(source, target, weight);
     }
 
     @Override

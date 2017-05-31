@@ -29,11 +29,25 @@ public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
         this.edgeFactory = edgeFactory;
     }
 
+    public MemoryGraph(VertexFactory<V> vertexFactory) {
+        this.m = new HashMap<>();
+        this.vList = new ArrayList<>();
+        this.vertexFactory = vertexFactory;
+        this.edgeFactory = null;
+    }
+
     public MemoryGraph(EdgeFactory<E> edgeFactory) {
         this.m = new HashMap<>();
         this.vList = new ArrayList<>();
         this.vertexFactory = null;
         this.edgeFactory = edgeFactory;
+    }
+
+    public MemoryGraph() {
+        this.m = new HashMap<>();
+        this.vList = new ArrayList<>();
+        this.vertexFactory = null;
+        this.edgeFactory = null;
     }
 
     @Override
@@ -112,10 +126,10 @@ public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
     }
 
     @Override
-    public GraphEdge<V, E> addEdge(V source, V target, double weight) {
+    public GraphEdge<V, E> addEdge(V source, V target, E edge, double weight) {
         Conditions.requireArgument(weight > 0, Finals.E_EDGE_WEIGHT_NEGATIVE, weight);
         if (!containsEdge(source, target)) {
-            GraphEdge<V, E> e = new MemoryGraphEdge<>(edgeFactory.createEdge(), source, target, weight);
+            GraphEdge<V, E> e = new MemoryGraphEdge<>(edge, source, target, weight);
             GraphEdge<V, E> e1 = this.m.get(source).getFirst().put(target, e);
             GraphEdge<V, E> e2 = this.m.get(target).getSecond().put(source, e);
             assert e1 == null;

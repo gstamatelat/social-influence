@@ -36,17 +36,34 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
         return null;
     }
 
-    EdgeFactory<E> getEdgeFactory();
+    default EdgeFactory<E> getEdgeFactory() {
+        return null;
+    }
 
     GraphFactory<V, E> getGraphFactory();
 
     /**
-     * <p>Checks if this graph supports the methods for automatically generating and inserting vertices {@link #addVertex()} and {@link #addVertices(int)}.</p>
+     * <p>Checks if this graph supports the methods for automatically generating and inserting vertices
+     * {@link #addVertex()} and {@link #addVertices(int)}.</p>
      *
      * @return {@code true} if this graph supports vertex generating methods, otherwise {@code false}
+     * @see #addVertex()
+     * @see #addVertices(int)
      */
     default boolean supportsAutoVertices() {
         return getVertexFactory() != null;
+    }
+
+    /**
+     * <p>Checks if this graph supports the methods for automatically generating and inserting edges
+     * {@link #addEdge(Object, Object)} and {@link #addEdge(Object, Object, double)}.</p>
+     *
+     * @return {@code true} if this graph supports edge generating methods, otherwise {@code false}
+     * @see #addEdge(Object, Object)
+     * @see #addEdge(Object, Object, double)
+     */
+    default boolean supportsAutoEdges() {
+        return getEdgeFactory() != null;
     }
 
     /**
@@ -212,14 +229,6 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
         return this.getVertices().get(index);
     }
 
-    /*default List<V> getVerticesFromLabel(String label) {
-        return this.getVertices().stream().filter(v -> v.toString().equals(label)).collect(Collectors.toList());
-    }
-
-    default V getVertexFromLabel(String label) {
-        return this.getVertices().stream().filter(v -> v.toString().equals(label)).findFirst().orElse(null);
-    }*/
-
     /**
      * <p>Return a uniformly distributed random vertex of this graph.</p>
      *
@@ -360,7 +369,8 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @param target the target of the edge
      * @return the {@link GraphEdge} object of the newly added edge, or {@code null} if an edge already exists
      * @throws NullPointerException   if either {@code source} or {@code target} is {@code null}
-     * @throws InvalidVertexException if either {@code source} or {@code target} doesn't belong in the graph
+     * @throws InvalidVertexException if either {@code source} or {@code target} is not in the graph
+     * @see #supportsAutoEdges()
      */
     default GraphEdge<V, E> addEdge(V source, V target) {
         return addEdge(source, target, Finals.DEFAULT_EDGE_WEIGHT);
@@ -375,10 +385,22 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @param weight the weight to be associated with the edge
      * @return the {@link GraphEdge} object of the newly added edge, or {@code null} if an edge already exists
      * @throws NullPointerException     if either {@code source} or {@code target} is {@code null}
-     * @throws InvalidVertexException   if either {@code source} or {@code target} doesn't belong in the graph
+     * @throws InvalidVertexException   if either {@code source} or {@code target} is not in the graph
      * @throws IllegalArgumentException if {@code weight} is non-positive
+     * @see #supportsAutoEdges()
      */
-    GraphEdge<V, E> addEdge(V source, V target, double weight);
+    default GraphEdge<V, E> addEdge(V source, V target, double weight) {
+        if (!supportsAutoEdges()) {
+            throw new UnsupportedOperationException(Finals.E_GRAPH_NOT_SUPPORTED);
+        }
+        return addEdge(source, target, getEdgeFactory().createEdge(), weight);
+    }
+
+    default GraphEdge<V, E> addEdge(V source, V target, E edge) {
+        return addEdge(source, target, edge, Finals.DEFAULT_EDGE_WEIGHT);
+    }
+
+    GraphEdge<V, E> addEdge(V source, V target, E edge, double weight);
 
     /**
      * <p>Replaces the weight of the specified edge with {@code source} and {@code target} with {@code weight}. If an
