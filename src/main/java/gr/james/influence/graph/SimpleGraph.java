@@ -19,8 +19,8 @@ public class SimpleGraph extends MemoryGraph<String, Object> {
             return s;
         }
     };
-    
-    public static final EdgeFactory<Object> edgeFactory = Object::new;
+
+    public static final EdgeFactory<Object> edgeFactory = () -> null;
 
     public static final GraphFactory<String, Object> graphFactory = new GraphFactory<String, Object>() {
         @Override
