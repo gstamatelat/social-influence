@@ -259,6 +259,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      *
      * @return the new vertex object
      */
+    @Deprecated
     default V addVertex() {
         V v = getVertexFactory().createVertex();
         this.addVertex(v);
