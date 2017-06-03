@@ -30,4 +30,9 @@ public class MemoryGraphEdge<V, E> implements GraphEdge<V, E> {
     public double getWeight() {
         return weight;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%s -> %s", source, target);
+    }
 }
