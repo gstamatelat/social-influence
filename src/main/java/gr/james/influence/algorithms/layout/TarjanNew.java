@@ -12,7 +12,7 @@ import java.util.Stack;
  * <p>Implementation of the <a href="https://en.wikipedia.org/wiki/Tarjan%27s_strongly_connected_components_algorithm">
  * Tarjan's strongly connected components algorithm</a>.</p>
  */
-public class Tarjan<V> {
+public class TarjanNew<V> {
     private Graph<V, ?> g;
     private BiMap<V, Integer> vertexMap;
 
@@ -45,30 +45,30 @@ public class Tarjan<V> {
         lowlink[u] = time++;
         visited[u] = true;
         stack.add(u);
-        boolean isComponentRoot = true;
+        int min = lowlink[u];
 
         for (V v0 : g.getOutEdges(vertexMap.inverse().get(u)).keySet()) {
             int w = vertexMap.get(v0);
             if (!visited[w]) {
                 dfs(w);
             }
-            if (lowlink[u] > lowlink[w]) {
-                lowlink[u] = lowlink[w];
-                isComponentRoot = false;
+            if (min > lowlink[w]) {
+                min = lowlink[w];
             }
         }
 
-        if (isComponentRoot) {
-            List<V> component = new ArrayList<>();
-            while (true) {
-                int x = stack.pop();
-                component.add(vertexMap.inverse().get(x));
-                lowlink[x] = Integer.MAX_VALUE;
-                if (x == u) {
-                    break;
-                }
-            }
-            components.add(component);
+        if (min < lowlink[u]) {
+            lowlink[u] = min;
+            return;
         }
+
+        List<V> component = new ArrayList<>();
+        int w = 0;
+        do {
+            w = stack.pop();
+            component.add(vertexMap.inverse().get(w));
+            lowlink[w] = g.getVerticesCount();
+        } while (w != u);
+        components.add(component);
     }
 }
