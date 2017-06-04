@@ -43,6 +43,7 @@ public class Tarjan<V> {
         }
 
         assert Helper.listToSet(components).equals(Kosaraju.execute(g));
+        assert components.stream().mapToInt(List::size).sum() == g.getVerticesCount();
 
         return components;
     }

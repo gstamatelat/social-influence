@@ -73,6 +73,8 @@ public class Kosaraju {
             }
         }
 
+        assert components.stream().mapToInt(Set::size).sum() == g.getVerticesCount();
+
         return components;
     }
 }
