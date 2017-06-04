@@ -3,6 +3,7 @@ package gr.james.influence.algorithms.layout;
 import com.google.common.collect.BiMap;
 import gr.james.influence.api.Graph;
 import gr.james.influence.graph.Graphs;
+import gr.james.influence.util.Helper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +38,8 @@ public class Tarjan<V> {
                 dfs(u);
             }
         }
+
+        assert Helper.listToSet(components).equals(Kosaraju.execute(g));
 
         return components;
     }

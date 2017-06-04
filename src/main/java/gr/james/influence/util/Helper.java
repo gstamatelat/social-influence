@@ -56,6 +56,14 @@ public final class Helper {
         return assertsEnabled;
     }
 
+    public static <V> Set<Set<V>> listToSet(List<List<V>> list) {
+        Set<Set<V>> set = new HashSet<>();
+        for (List<V> l : list) {
+            set.add(new HashSet<>(l));
+        }
+        return set;
+    }
+
     public static RuntimeException convertCheckedException(Exception e) {
         throw new RuntimeException(String.format("%s: %s", e.getClass().getName(), e.getMessage()));
     }

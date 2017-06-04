@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.function.ToDoubleFunction;
 
 public class GraphState<V, T> extends ForwardingMap<V, T> {
@@ -21,6 +22,12 @@ public class GraphState<V, T> extends ForwardingMap<V, T> {
     public GraphState(Graph<V, ?> g, T i) {
         for (V v : g) {
             this.put(v, i);
+        }
+    }
+
+    public GraphState(Graph<V, ?> g, Function<V, T> i) {
+        for (V v : g) {
+            this.put(v, i.apply(v));
         }
     }
 
