@@ -11,7 +11,10 @@ import java.util.Stack;
 
 /**
  * <p>Implementation of the <a href="https://en.wikipedia.org/wiki/Tarjan%27s_strongly_connected_components_algorithm">
- * Tarjan's strongly connected components algorithm</a>.</p>
+ * Tarjan's strongly connected components algorithm</a>. This algorithm is implemented recursively and is prone to
+ * StackOverflowException on large graphs.</p>
+ *
+ * @see Kosaraju
  */
 public class Tarjan<V> {
     private Graph<V, ?> g;

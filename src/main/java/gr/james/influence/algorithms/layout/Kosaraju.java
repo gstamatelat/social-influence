@@ -5,6 +5,13 @@ import gr.james.influence.util.collections.GraphState;
 
 import java.util.*;
 
+/**
+ * <p>Implementation of the <a href="https://en.wikipedia.org/wiki/Kosaraju%27s_algorithm">Kosaraju's algorithm</a> to
+ * find strongly connected components. This implementation uses an iterative approach and is not prone to
+ * StackOverflowException.</p>
+ *
+ * @see Tarjan
+ */
 public class Kosaraju {
     public static <V, E> Set<Set<V>> execute(Graph<V, E> g) {
 
