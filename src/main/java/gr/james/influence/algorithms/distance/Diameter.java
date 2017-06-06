@@ -19,6 +19,9 @@ public class Diameter {
             assert ret.isPresent();
             max = Double.max(max, ret.get());
         }
+
+        assert max > 0;
+
         return max;
     }
 }
