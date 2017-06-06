@@ -1,5 +1,6 @@
 package gr.james.influence.api;
 
+import gr.james.influence.algorithms.distance.Diameter;
 import gr.james.influence.algorithms.distance.Dijkstra;
 import gr.james.influence.graph.Graphs;
 import gr.james.influence.util.Conditions;
@@ -582,6 +583,8 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
                 diameter = d;
             }
         }
+
+        assert diameter == Diameter.execute(this);
 
         return diameter;
     }
