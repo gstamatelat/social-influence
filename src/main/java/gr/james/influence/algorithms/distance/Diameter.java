@@ -32,26 +32,29 @@ public class Diameter {
 
         int max = 0;
 
+        GraphState<V, Integer> distances = new GraphState<>(g, -1);
         for (V v : g) {
             Queue<V> bfs = new LinkedList<>();
             Set<V> visited = new HashSet<>();
-            GraphState<V, Integer> distances = new GraphState<>(g, -1);
+            distances.replaceAll((v12, integer) -> -1);
             bfs.add(v);
             distances.put(v, 0);
             visited.add(v);
+            V lastRemoved = null;
             while (!bfs.isEmpty()) {
                 V w = bfs.remove();
+                lastRemoved = w;
                 g.getOutEdges(w).keySet().stream().filter(v1 -> !visited.contains(v1)).forEach(f -> {
                     bfs.add(f);
                     distances.put(f, distances.get(w) + 1);
                     boolean inserted = visited.add(f);
                     assert inserted;
                 });
-                max = Integer.max(max, distances.get(w));
             }
             if (visited.size() != g.getVerticesCount()) {
                 return -1;
             }
+            max = Integer.max(max, distances.get(lastRemoved));
         }
 
         assert max > 0 && max < g.getVerticesCount();
