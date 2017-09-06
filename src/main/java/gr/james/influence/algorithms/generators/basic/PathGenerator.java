@@ -3,6 +3,7 @@ package gr.james.influence.algorithms.generators.basic;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphFactory;
 import gr.james.influence.api.GraphGenerator;
+import gr.james.influence.util.Finals;
 
 import java.util.Random;
 
@@ -24,7 +25,7 @@ public class PathGenerator implements GraphGenerator {
             previousVertex = newVertex;
         }
 
-        g.setGraphType("Path");
+        g.setMeta(Finals.TYPE_META, "Path");
         g.setMeta("totalVertices", String.valueOf(totalVertices));
 
         return g;

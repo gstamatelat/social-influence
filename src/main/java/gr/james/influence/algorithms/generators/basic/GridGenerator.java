@@ -3,6 +3,7 @@ package gr.james.influence.algorithms.generators.basic;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphFactory;
 import gr.james.influence.api.GraphGenerator;
+import gr.james.influence.util.Finals;
 
 import java.util.List;
 import java.util.Random;
@@ -39,7 +40,7 @@ public class GridGenerator implements GraphGenerator {
             }
         }
 
-        g.setGraphType("Grid");
+        g.setMeta(Finals.TYPE_META, "Grid");
         g.setMeta("n", String.valueOf(n));
         g.setMeta("m", String.valueOf(m));
 

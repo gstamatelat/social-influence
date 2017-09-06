@@ -52,7 +52,7 @@ public class BarabasiAlbertGenerator implements GraphGenerator {
         }
 
         g.clearMeta();
-        g.setGraphType("BarabasiAlbert");
+        g.setMeta(Finals.TYPE_META, "BarabasiAlbert");
         g.setMeta("totalVertices", String.valueOf(totalVertices));
         g.setMeta("initialClique", String.valueOf(initialClique));
         g.setMeta("stepEdges", String.valueOf(stepEdges));

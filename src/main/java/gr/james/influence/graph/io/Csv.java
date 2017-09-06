@@ -39,7 +39,7 @@ public class Csv implements GraphImporter, GraphExporter {
             firstLine = false;
         }
 
-        g.setGraphType("CSVImport");
+        g.setMeta(Finals.TYPE_META, "CSVImport");
         g.setMeta("source", source.toString());
 
         return g;

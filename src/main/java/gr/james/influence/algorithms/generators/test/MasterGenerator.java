@@ -3,6 +3,7 @@ package gr.james.influence.algorithms.generators.test;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphFactory;
 import gr.james.influence.api.GraphGenerator;
+import gr.james.influence.util.Finals;
 
 import java.util.Random;
 
@@ -26,7 +27,7 @@ public class MasterGenerator implements GraphGenerator {
         g.addEdge(v3, v2);
         g.addEdge(v2, v1);
 
-        g.setGraphType("Master");
+        g.setMeta(Finals.TYPE_META, "Master");
 
         return g;
     }

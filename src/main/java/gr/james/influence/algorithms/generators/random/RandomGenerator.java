@@ -3,6 +3,7 @@ package gr.james.influence.algorithms.generators.random;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphFactory;
 import gr.james.influence.api.GraphGenerator;
+import gr.james.influence.util.Finals;
 
 import java.util.Random;
 
@@ -53,7 +54,7 @@ public class RandomGenerator implements GraphGenerator {
             }
         }
 
-        g.setGraphType("Random");
+        g.setMeta(Finals.TYPE_META, "Random");
         g.setMeta("totalVertices", String.valueOf(totalVertices));
         g.setMeta("p", String.valueOf(p));
 

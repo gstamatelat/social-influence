@@ -4,6 +4,7 @@ import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphFactory;
 import gr.james.influence.api.GraphGenerator;
 import gr.james.influence.graph.Graphs;
+import gr.james.influence.util.Finals;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +58,7 @@ public class BarabasiAlbertClusterGenerator implements GraphGenerator {
             g.addEdges(s, t);
         }
 
-        g.setGraphType("BarabasiAlbertCluster");
+        g.setMeta(Finals.TYPE_META, "BarabasiAlbertCluster");
         g.setMeta("totalVertices", String.valueOf(totalVertices));
         g.setMeta("initialClique", String.valueOf(initialClique));
         g.setMeta("stepEdges", String.valueOf(stepEdges));

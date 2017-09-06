@@ -46,16 +46,6 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
     }
 
     @Override
-    public String getGraphType() {
-        return this.g.getGraphType();
-    }
-
-    @Override
-    public void setGraphType(String type) {
-        this.g.setGraphType(type);
-    }
-
-    @Override
     public Iterator<V> iterator() {
         return this.g.iterator();
     }

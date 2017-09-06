@@ -31,16 +31,6 @@ import java.util.*;
  * @param <E> the edge type
  */
 public interface Graph<V, E> extends Iterable<V>, Metadata {
-    @Deprecated
-    default String getGraphType() {
-        return getMeta(Finals.TYPE_META);
-    }
-
-    @Deprecated
-    default void setGraphType(String type) {
-        setMeta(Finals.TYPE_META, type);
-    }
-
     GraphFactory<V, E> getGraphFactory();
 
     /**

@@ -3,6 +3,7 @@ package gr.james.influence.algorithms.generators.basic;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphFactory;
 import gr.james.influence.api.GraphGenerator;
+import gr.james.influence.util.Finals;
 
 import java.util.Random;
 
@@ -19,7 +20,7 @@ public class CompleteGenerator implements GraphGenerator {
 
         g.addEdges(g.addVertices(totalVertices));
 
-        g.setGraphType("Complete");
+        g.setMeta(Finals.TYPE_META, "Complete");
         g.setMeta("totalVertices", String.valueOf(totalVertices));
 
         return g;

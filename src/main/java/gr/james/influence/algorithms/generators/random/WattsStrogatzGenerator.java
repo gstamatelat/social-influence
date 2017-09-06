@@ -4,6 +4,7 @@ import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphFactory;
 import gr.james.influence.api.GraphGenerator;
 import gr.james.influence.util.Conditions;
+import gr.james.influence.util.Finals;
 
 import java.util.List;
 import java.util.Random;
@@ -49,7 +50,7 @@ public class WattsStrogatzGenerator implements GraphGenerator {
             }
         }
 
-        g.setGraphType("WattsStrogatz");
+        g.setMeta(Finals.TYPE_META, "WattsStrogatz");
         g.setMeta("n", String.valueOf(n));
         g.setMeta("k", String.valueOf(k));
         g.setMeta("b", String.valueOf(b));

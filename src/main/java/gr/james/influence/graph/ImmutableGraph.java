@@ -40,11 +40,6 @@ public final class ImmutableGraph<V, E> extends GraphDecorator<V, E> {
     }
 
     @Override
-    public void setGraphType(String type) {
-        throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
-    }
-
-    @Override
     public V addVertex() {
         throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }

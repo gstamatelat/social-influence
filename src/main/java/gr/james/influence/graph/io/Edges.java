@@ -51,7 +51,7 @@ public class Edges implements GraphImporter, GraphExporter {
             }
         }
 
-        g.setGraphType("EdgesImport");
+        g.setMeta(Finals.TYPE_META, "EdgesImport");
         g.setMeta("source", source.toString());
 
         return g;
