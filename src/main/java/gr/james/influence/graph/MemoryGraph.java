@@ -1,6 +1,8 @@
 package gr.james.influence.graph;
 
-import gr.james.influence.api.*;
+import gr.james.influence.api.Graph;
+import gr.james.influence.api.GraphEdge;
+import gr.james.influence.api.GraphFactory;
 import gr.james.influence.util.Conditions;
 import gr.james.influence.util.Finals;
 import gr.james.influence.util.collections.Pair;
@@ -13,71 +15,26 @@ import java.util.*;
 public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
     private Map<V, Pair<Map<V, GraphEdge<V, E>>>> m;
     private List<V> vList;
-    private VertexFactory<V> vertexFactory;
-    private EdgeFactory<E> edgeFactory;
+    private GraphFactory<V, E> factory;
 
     /**
      * <p>Constructs an empty {@code MemoryGraph}.</p>
      *
-     * @param vertexFactory the vertex factory to use when invoking {@link #addVertex()} and related methods
-     * @param edgeFactory   the edge factory to use when invoking {@link #addEdge(Object, Object)} and related methods
+     * @param factory the factory to use
      */
-    public MemoryGraph(VertexFactory<V> vertexFactory, EdgeFactory<E> edgeFactory) {
+    public MemoryGraph(GraphFactory<V, E> factory) {
         this.m = new HashMap<>();
         this.vList = new ArrayList<>();
-        this.vertexFactory = vertexFactory;
-        this.edgeFactory = edgeFactory;
-    }
-
-    public MemoryGraph(VertexFactory<V> vertexFactory) {
-        this.m = new HashMap<>();
-        this.vList = new ArrayList<>();
-        this.vertexFactory = vertexFactory;
-        this.edgeFactory = () -> null;
-    }
-
-    public MemoryGraph(EdgeFactory<E> edgeFactory) {
-        this.m = new HashMap<>();
-        this.vList = new ArrayList<>();
-        this.vertexFactory = null;
-        this.edgeFactory = edgeFactory;
+        this.factory = factory;
     }
 
     public MemoryGraph() {
-        this.m = new HashMap<>();
-        this.vList = new ArrayList<>();
-        this.vertexFactory = null;
-        this.edgeFactory = () -> null;
-    }
-
-    @Override
-    public VertexFactory<V> getVertexFactory() {
-        return vertexFactory;
-    }
-
-    @Override
-    public EdgeFactory<E> getEdgeFactory() {
-        return edgeFactory;
+        this(null);
     }
 
     @Override
     public GraphFactory<V, E> getGraphFactory() {
-        return new GraphFactory<V, E>() {
-            @Override
-            public Graph<V, E> create() {
-                return new MemoryGraph<>(vertexFactory, edgeFactory);
-            }
-
-            @Override
-            public VertexFactory<V> getVertexFactory() {
-                return vertexFactory;
-            }
-
-            @Override
-            public EdgeFactory<E> getEdgeFactory() {
-                return edgeFactory;
-            }
-        };
+        return this.factory;
     }
 
     @Override

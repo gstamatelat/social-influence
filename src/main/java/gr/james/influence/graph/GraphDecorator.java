@@ -1,6 +1,8 @@
 package gr.james.influence.graph;
 
-import gr.james.influence.api.*;
+import gr.james.influence.api.Graph;
+import gr.james.influence.api.GraphEdge;
+import gr.james.influence.api.GraphFactory;
 import gr.james.influence.util.Conditions;
 
 import java.util.*;
@@ -14,28 +16,8 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
     }
 
     @Override
-    public VertexFactory<V> getVertexFactory() {
-        return this.g.getVertexFactory();
-    }
-
-    @Override
-    public EdgeFactory<E> getEdgeFactory() {
-        return this.g.getEdgeFactory();
-    }
-
-    @Override
     public GraphFactory<V, E> getGraphFactory() {
         return this.g.getGraphFactory();
-    }
-
-    @Override
-    public boolean supportsAutoVertices() {
-        return this.g.supportsAutoVertices();
-    }
-
-    @Override
-    public boolean supportsAutoEdges() {
-        return false;
     }
 
     @Override

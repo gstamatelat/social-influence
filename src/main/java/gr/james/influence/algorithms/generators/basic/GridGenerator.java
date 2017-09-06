@@ -22,7 +22,7 @@ public class GridGenerator implements GraphGenerator {
 
     @Override
     public <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, Random r) {
-        Graph<V, E> g = factory.create();
+        Graph<V, E> g = factory.createGraph();
 
         int count = 0;
         List<V> set = g.addVertices(n * m);

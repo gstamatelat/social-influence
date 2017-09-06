@@ -41,39 +41,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
         setMeta(Finals.TYPE_META, type);
     }
 
-    default VertexFactory<V> getVertexFactory() {
-        return null;
-    }
-
-    default EdgeFactory<E> getEdgeFactory() {
-        return null;
-    }
-
     GraphFactory<V, E> getGraphFactory();
-
-    /**
-     * <p>Checks if this graph supports the methods listed below for automatically generating and inserting vertices.</p>
-     *
-     * @return {@code true} if this graph supports vertex generating methods, otherwise {@code false}
-     * @see #addVertex()
-     * @see #addVertices(int)
-     */
-    default boolean supportsAutoVertices() {
-        return getVertexFactory() != null;
-    }
-
-    /**
-     * <p>Checks if this graph supports the methods listed below for automatically generating and inserting edges.</p>
-     *
-     * @return {@code true} if this graph supports edge generating methods, otherwise {@code false}
-     * @see #addEdge(Object, Object)
-     * @see #addEdge(Object, Object, double)
-     * @see #addEdges(Object[])
-     * @see #addEdges(Collection)
-     */
-    default boolean supportsAutoEdges() {
-        return getEdgeFactory() != null;
-    }
 
     /**
      * <p>Checks if this graph contains an edge with the specified {@code source} and {@code target}.</p>
@@ -294,13 +262,9 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @throws InvalidVertexException        if the automatically generated vertex was already in the graph; this
      *                                       behavior signals a flawed vertex factory
      * @throws NullPointerException          if the vertex factory generated {@code null}
-     * @see #supportsAutoVertices()
      */
     default V addVertex() {
-        if (!supportsAutoVertices()) {
-            throw new UnsupportedOperationException(Finals.E_GRAPH_NOT_SUPPORTED);
-        }
-        V v = getVertexFactory().createVertex();
+        V v = getGraphFactory().createVertex();
         if (!this.addVertex(v)) {
             throw new InvalidVertexException(Finals.E_GRAPH_VERTEX_CONTAINED, v);
         }
@@ -334,7 +298,6 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @throws InvalidVertexException        if any automatically generated vertex was already in the graph; this
      *                                       behavior signals a flawed vertex factory
      * @throws NullPointerException          if the vertex factory generated one {@code null} value
-     * @see #supportsAutoVertices()
      */
     default List<V> addVertices(int count) {
         List<V> newVertices = new ArrayList<>();
@@ -383,7 +346,6 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @throws NullPointerException          if either {@code source} or {@code target} is {@code null}
      * @throws InvalidVertexException        if either {@code source} or {@code target} is not in the graph
      * @throws UnsupportedOperationException if this method is not supported by this graph instance
-     * @see #supportsAutoEdges()
      */
     default GraphEdge<V, E> addEdge(V source, V target) {
         return addEdge(source, target, Finals.DEFAULT_EDGE_WEIGHT);
@@ -401,13 +363,9 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @throws InvalidVertexException        if either {@code source} or {@code target} is not in the graph
      * @throws IllegalArgumentException      if {@code weight} is non-positive
      * @throws UnsupportedOperationException if this method is not supported by this graph instance
-     * @see #supportsAutoEdges()
      */
     default GraphEdge<V, E> addEdge(V source, V target, double weight) {
-        if (!supportsAutoEdges()) {
-            throw new UnsupportedOperationException(Finals.E_GRAPH_NOT_SUPPORTED);
-        }
-        return addEdge(source, target, getEdgeFactory().createEdge(), weight);
+        return addEdge(source, target, getGraphFactory().createEdge(), weight);
     }
 
     /**
@@ -479,7 +437,6 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @throws NullPointerException          if any vertex in {@code among} is {@code null}
      * @throws InvalidVertexException        if any vertex in {@code among} doesn't belong in the graph
      * @throws UnsupportedOperationException if this method is not supported by this graph instance
-     * @see #supportsAutoEdges()
      */
     default void addEdges(Collection<V> among) {
         for (V v : among) {
@@ -505,7 +462,6 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @throws NullPointerException          if any vertex in {@code among} is {@code null}
      * @throws InvalidVertexException        if any vertex in {@code among} doesn't belong in the graph
      * @throws UnsupportedOperationException if this method is not supported by this graph instance
-     * @see #supportsAutoEdges()
      */
     default void addEdges(V... among) {
         this.addEdges(Arrays.asList(among));

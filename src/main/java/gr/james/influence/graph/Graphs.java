@@ -72,7 +72,7 @@ public class Graphs {
      * @return the combined graph
      */
     public static <V, E> Graph<V, E> combineGraphs(GraphFactory<V, E> type, Collection<Graph<V, E>> graphs) {
-        Graph<V, E> r = type.create();
+        Graph<V, E> r = type.createGraph();
         for (Graph<V, E> g : graphs) {
             for (V v : g) {
                 r.addVertex(v);
@@ -97,7 +97,7 @@ public class Graphs {
     }
 
     public static <V, E> Graph<V, E> deepCopy(Graph<V, E> g, GraphFactory<V, E> factory, Collection<V> filter) {
-        Graph<V, E> r = factory.create();
+        Graph<V, E> r = factory.createGraph();
         for (V v : filter) {
             if (!g.containsVertex(v)) {
                 throw new GraphException(Finals.E_GRAPH_VERTEX_NOT_CONTAINED, "deepCopy");

@@ -24,7 +24,7 @@ public final class Finals {
     public static final double DEFAULT_PAGERANK_PRECISION = 0.0;
     public static final String DEFAULT_INDENT = "  ";
     public static final Direction DEFAULT_DIRECTION = Direction.INBOUND;
-    public static final GraphFactory<String, Object> DEFAULT_GRAPH_FACTORY = SimpleGraph.graphFactory;
+    public static final GraphFactory<String, Object> DEFAULT_GRAPH_FACTORY = SimpleGraph.factory;
 
     /* Logging messages */
     public static final String L_PLAYER_WAITING = "Been waiting {} seconds for {} to terminate gracefully.";

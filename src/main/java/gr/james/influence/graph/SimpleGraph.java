@@ -1,13 +1,16 @@
 package gr.james.influence.graph;
 
-import gr.james.influence.api.EdgeFactory;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphFactory;
-import gr.james.influence.api.VertexFactory;
 
 public class SimpleGraph extends MemoryGraph<String, Object> {
-    public static final VertexFactory<String> vertexFactory = new VertexFactory<String>() {
+    public static GraphFactory<String, Object> factory = new GraphFactory<String, Object>() {
         private int nextId = 0;
+
+        @Override
+        public Graph<String, Object> createGraph() {
+            return new SimpleGraph();
+        }
 
         @Override
         public String createVertex() {
@@ -15,31 +18,17 @@ public class SimpleGraph extends MemoryGraph<String, Object> {
         }
 
         @Override
-        public String createVertex(String s) {
-            return s;
-        }
-    };
-
-    public static final EdgeFactory<Object> edgeFactory = () -> null;
-
-    public static final GraphFactory<String, Object> graphFactory = new GraphFactory<String, Object>() {
-        @Override
-        public Graph<String, Object> create() {
-            return new SimpleGraph();
+        public String createVertex(Object o) {
+            return o.toString();
         }
 
         @Override
-        public VertexFactory<String> getVertexFactory() {
-            return vertexFactory;
-        }
-
-        @Override
-        public EdgeFactory<Object> getEdgeFactory() {
-            return edgeFactory;
+        public Object createEdge() {
+            return null;
         }
     };
 
     public SimpleGraph() {
-        super(vertexFactory, edgeFactory);
+        super(factory);
     }
 }

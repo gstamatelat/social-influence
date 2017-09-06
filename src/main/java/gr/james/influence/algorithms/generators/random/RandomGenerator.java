@@ -31,7 +31,7 @@ public class RandomGenerator implements GraphGenerator {
 
     @Override
     public <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, Random r) {
-        Graph<V, E> g = factory.create();
+        Graph<V, E> g = factory.createGraph();
 
         while (g.getVerticesCount() < totalVertices) {
             V v = g.addVertex();

@@ -22,7 +22,7 @@ public class Edges implements GraphImporter, GraphExporter {
 
     @Override
     public <V, E> Graph<V, E> from(InputStream source, GraphFactory<V, E> factory) throws IOException {
-        Graph<V, E> g = factory.create();
+        Graph<V, E> g = factory.createGraph();
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(source, Finals.IO_ENCODING));
         Map<String, V> nodeMap = new HashMap<>();
@@ -34,12 +34,12 @@ public class Edges implements GraphImporter, GraphExporter {
                 throw new GraphException(Finals.E_EDGES_IMPORT);
             }
             if (!nodeMap.containsKey(sp[0])) {
-                V v = factory.getVertexFactory().createVertex(sp[0]);
+                V v = factory.createVertex(sp[0]);
                 g.addVertex(v);
                 nodeMap.put(sp[0], v);
             }
             if (!nodeMap.containsKey(sp[1])) {
-                V v = factory.getVertexFactory().createVertex(sp[1]);
+                V v = factory.createVertex(sp[1]);
                 g.addVertex(v);
                 nodeMap.put(sp[1], v);
             }

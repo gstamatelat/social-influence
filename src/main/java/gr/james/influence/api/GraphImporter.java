@@ -27,7 +27,7 @@ public interface GraphImporter {
      * <p>Read a {@code Graph} of type {@code T} from {@code source} using the format imposed by this class.</p>
      *
      * @param source  the input stream to read the graph from
-     * @param factory the graphFactory to use when creating the new {@code Graph}
+     * @param factory the graph factory to use when creating the new {@code Graph}
      * @param <V>     the vertex type
      * @param <E>     the edge type
      * @return a new {@code Graph} of type {@code T} that was read from {@code source}
@@ -58,7 +58,7 @@ public interface GraphImporter {
      * </p>
      *
      * @param source  the input stream to read the graph from
-     * @param factory the graphFactory to use when creating the new {@code Graph}
+     * @param factory the graph factory to use when creating the new {@code Graph}
      * @param <V>     the vertex type
      * @param <E>     the edge type
      * @return a new {@code Graph} of type {@code T} that was read from {@code source}

@@ -15,7 +15,7 @@ public class CycleGenerator implements GraphGenerator {
 
     @Override
     public <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, Random r) {
-        Graph<V, E> g = factory.create();
+        Graph<V, E> g = factory.createGraph();
 
         V startVertex = g.addVertex(), previousVertex = startVertex;
         while (g.getVerticesCount() < totalVertices) {
