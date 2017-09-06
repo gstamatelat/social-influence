@@ -254,6 +254,9 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @throws NullPointerException          if the vertex factory generated {@code null}
      */
     default V addVertex() {
+        if (getGraphFactory() == null) {
+            throw new UnsupportedOperationException(Finals.E_GRAPH_NOT_SUPPORTED);
+        }
         V v = getGraphFactory().createVertex();
         if (!this.addVertex(v)) {
             throw new InvalidVertexException(Finals.E_GRAPH_VERTEX_CONTAINED, v);
@@ -355,6 +358,9 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @throws UnsupportedOperationException if this method is not supported by this graph instance
      */
     default GraphEdge<V, E> addEdge(V source, V target, double weight) {
+        if (getGraphFactory() == null) {
+            throw new UnsupportedOperationException(Finals.E_GRAPH_NOT_SUPPORTED);
+        }
         return addEdge(source, target, getGraphFactory().createEdge(), weight);
     }
 
