@@ -28,6 +28,9 @@ public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
         this.factory = factory;
     }
 
+    /**
+     * <p>Constructs an empty {@code MemoryGraph} without a factory.</p>
+     */
     public MemoryGraph() {
         this(null);
     }
