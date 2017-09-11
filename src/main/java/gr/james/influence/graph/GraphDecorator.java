@@ -146,11 +146,6 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
     }
 
     @Override
-    public double getDiameter() {
-        return this.g.getDiameter();
-    }
-
-    @Override
     public double getDensity() {
         return this.g.getDensity();
     }

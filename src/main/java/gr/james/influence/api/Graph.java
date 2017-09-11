@@ -1,6 +1,5 @@
 package gr.james.influence.api;
 
-import gr.james.influence.algorithms.distance.Diameter;
 import gr.james.influence.algorithms.distance.Dijkstra;
 import gr.james.influence.graph.Graphs;
 import gr.james.influence.util.Conditions;
@@ -522,23 +521,6 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
         }
         Set<V> edges = Helper.weightedRandom(weightMap, 1);
         return edges.iterator().next();
-    }
-
-    @Deprecated
-    default double getDiameter() {
-        // TODO: Should return a list/path/walk of vertices to show both the weight sum and the steps
-        Map<VertexPair<V>, Double> distanceMap = Dijkstra.executeDistanceMap(this);
-
-        double diameter = 0;
-        for (double d : distanceMap.values()) {
-            if (d > diameter) {
-                diameter = d;
-            }
-        }
-
-        assert diameter == Diameter.execute(this);
-
-        return diameter;
     }
 
     @Deprecated

@@ -1,5 +1,6 @@
 package gr.james.influence;
 
+import gr.james.influence.algorithms.distance.Diameter;
 import gr.james.influence.algorithms.generators.random.BarabasiAlbertClusterGenerator;
 import gr.james.influence.algorithms.generators.random.BarabasiAlbertGenerator;
 import gr.james.influence.algorithms.generators.random.RandomGenerator;
@@ -252,6 +253,6 @@ public class Tests {
         double p = RandomHelper.getRandom().nextDouble();
         SimpleGraph g = new RandomGenerator(size, p).generate();
         Graphs.connect(g);
-        Assert.assertNotEquals("connectTest", g.getDiameter(), Double.POSITIVE_INFINITY);
+        Assert.assertNotEquals("connectTest", Diameter.execute(g), Double.POSITIVE_INFINITY);
     }
 }
