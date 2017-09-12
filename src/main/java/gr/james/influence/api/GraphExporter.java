@@ -9,8 +9,9 @@ import java.io.OutputStream;
  */
 public interface GraphExporter {
     /**
-     * <p>Export {@code g} to {@code target} using the format imposed by this class. Implementations of this method
-     * should not close {@code target}, instead the caller is responsible for doing so.</p>
+     * <p>Export {@code g} to {@code target} using the format imposed by this class. The {@code V.toString} method is
+     * used as a serializer. Implementations of this method should not close {@code target}, the caller is instead
+     * responsible for doing so.</p>
      *
      * @param g      the graph that will be exported to {@code target}
      * @param target the output stream to write the graph to
@@ -18,5 +19,20 @@ public interface GraphExporter {
      * @param <E>    the edge type
      * @throws IOException if an I/O exception occurs
      */
-    <V, E> void to(Graph<V, E> g, OutputStream target) throws IOException;
+    default <V, E> void to(Graph<V, E> g, OutputStream target) throws IOException {
+        to(g, target, V::toString);
+    }
+
+    /**
+     * <p>Export {@code g} to {@code target} using the format imposed by this class. Implementations of this method
+     * should not close {@code target}, instead the caller is responsible for doing so.</p>
+     *
+     * @param g          the graph that will be exported to {@code target}
+     * @param target     the output stream to write the graph to
+     * @param serializer the serializer to use when writing to the output stream
+     * @param <V>        the vertex type
+     * @param <E>        the edge type
+     * @throws IOException if an I/O exception occurs
+     */
+    <V, E> void to(Graph<V, E> g, OutputStream target, Serializer<V> serializer) throws IOException;
 }

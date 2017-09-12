@@ -7,21 +7,22 @@ import gr.james.influence.util.exceptions.GraphException;
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Function;
 
 public class Edges implements GraphImporter, GraphExporter {
-    private String delimiter = ",";
+    public static final String DEFAULT_SEPARATOR = ",";
 
-    public Edges(String delimiter, Function stringMapping) {
+    private String delimiter;
+
+    public Edges(String delimiter) {
         this.delimiter = delimiter;
     }
 
     public Edges() {
-        this.delimiter = ",";
+        this.delimiter = DEFAULT_SEPARATOR;
     }
 
     @Override
-    public <V, E> Graph<V, E> from(InputStream source, GraphFactory<V, E> factory) throws IOException {
+    public <V, E> Graph<V, E> from(InputStream source, GraphFactory<V, E> factory, Deserializer<V> deserializer) throws IOException {
         Graph<V, E> g = factory.createGraph();
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(source, Finals.IO_ENCODING));
@@ -34,14 +35,14 @@ public class Edges implements GraphImporter, GraphExporter {
                 throw new GraphException(Finals.E_EDGES_IMPORT);
             }
             if (!nodeMap.containsKey(sp[0])) {
-                V v = factory.createVertex(sp[0]);
-                g.addVertex(v);
-                nodeMap.put(sp[0], v);
+                V sp0 = deserializer.deserialize(sp[0]);
+                g.addVertex(sp0);
+                nodeMap.put(sp[0], sp0);
             }
             if (!nodeMap.containsKey(sp[1])) {
-                V v = factory.createVertex(sp[1]);
-                g.addVertex(v);
-                nodeMap.put(sp[1], v);
+                V sp1 = deserializer.deserialize(sp[1]);
+                g.addVertex(sp1);
+                nodeMap.put(sp[1], sp1);
             }
             GraphEdge e = g.addEdge(nodeMap.get(sp[0]), nodeMap.get(sp[1]), Double.parseDouble(sp[2]));
             if (e == null) {
@@ -58,12 +59,17 @@ public class Edges implements GraphImporter, GraphExporter {
     }
 
     @Override
-    public <V, E> void to(Graph<V, E> g, OutputStream target) throws IOException {
+    public <V, E> void to(Graph<V, E> g, OutputStream target, Serializer<V> serializer) throws IOException {
         BufferedWriter w = new BufferedWriter(new OutputStreamWriter(target, Finals.IO_ENCODING));
 
         for (V v : g) {
             for (V u : g.getOutEdges(v).keySet()) {
-                w.write(String.format("%s%s%s%s%f%n", v, this.delimiter, u, this.delimiter, g.getOutEdges(v).get(u).getWeight()));
+                w.write(String.format("%s%s%s%s%f%n",
+                        serializer.serialize(v),
+                        this.delimiter,
+                        serializer.serialize(u),
+                        this.delimiter,
+                        g.getOutEdges(v).get(u).getWeight()));
             }
         }
 

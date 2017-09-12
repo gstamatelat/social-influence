@@ -20,22 +20,23 @@ public interface GraphImporter {
      * @throws IOException if an I/O exception occurs
      */
     default SimpleGraph from(URL source) throws IOException {
-        return (SimpleGraph) from(source, Finals.DEFAULT_GRAPH_FACTORY);
+        return (SimpleGraph) from(source, Finals.DEFAULT_GRAPH_FACTORY, s -> s);
     }
 
     /**
      * <p>Read a {@code Graph} of type {@code T} from {@code source} using the format imposed by this class.</p>
      *
-     * @param source  the input stream to read the graph from
-     * @param factory the graph factory to use when creating the new {@code Graph}
-     * @param <V>     the vertex type
-     * @param <E>     the edge type
+     * @param source       the input stream to read the graph from
+     * @param factory      the graph factory to use when creating the new {@code Graph}
+     * @param deserializer the vertex deserializer to use when parsing the input stream
+     * @param <V>          the vertex type
+     * @param <E>          the edge type
      * @return a new {@code Graph} of type {@code T} that was read from {@code source}
      * @throws IOException if an I/O exception occurs
      */
-    default <V, E> Graph<V, E> from(URL source, GraphFactory<V, E> factory) throws IOException {
+    default <V, E> Graph<V, E> from(URL source, GraphFactory<V, E> factory, Deserializer<V> deserializer) throws IOException {
         try (InputStream tmp = source.openStream()) {
-            return from(tmp, factory);
+            return from(tmp, factory, deserializer);
         }
     }
 
@@ -49,7 +50,7 @@ public interface GraphImporter {
      * @throws IOException if an I/O exception occurs
      */
     default SimpleGraph from(InputStream source) throws IOException {
-        return (SimpleGraph) from(source, Finals.DEFAULT_GRAPH_FACTORY);
+        return (SimpleGraph) from(source, Finals.DEFAULT_GRAPH_FACTORY, s -> s);
     }
 
     /**
@@ -57,13 +58,13 @@ public interface GraphImporter {
      * Implementations of this method should not close {@code source}, instead the caller is responsible for doing so.
      * </p>
      *
-     * @param source  the input stream to read the graph from
-     * @param factory the graph factory to use when creating the new {@code Graph}
-     * @param <V>     the vertex type
-     * @param <E>     the edge type
+     * @param source       the input stream to read the graph from
+     * @param factory      the graph factory to use when creating the new {@code Graph}
+     * @param deserializer the vertex deserializer to use when parsing the input stream
+     * @param <V>          the vertex type
+     * @param <E>          the edge type
      * @return a new {@code Graph} of type {@code T} that was read from {@code source}
      * @throws IOException if an I/O exception occurs
      */
-    <V, E> Graph<V, E> from(InputStream source, GraphFactory<V, E> factory) throws IOException;
-    // TODO: This method should store the filename in the metadata somehow
+    <V, E> Graph<V, E> from(InputStream source, GraphFactory<V, E> factory, Deserializer<V> deserializer) throws IOException;
 }

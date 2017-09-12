@@ -12,12 +12,12 @@ import java.util.*;
  */
 public class Json implements GraphImporter, GraphExporter {
     @Override
-    public <V, E> Graph<V, E> from(InputStream source, GraphFactory<V, E> factory) throws IOException {
+    public <V, E> Graph<V, E> from(InputStream source, GraphFactory<V, E> factory, Deserializer<V> deserializer) throws IOException {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public void to(Graph g, OutputStream target) {
+    public <V, E> void to(Graph<V, E> g, OutputStream target, Serializer<V> serializer) {
         throw new UnsupportedOperationException();
     }
 

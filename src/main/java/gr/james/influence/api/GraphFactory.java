@@ -11,10 +11,6 @@ public interface GraphFactory<V, E> {
         throw new UnsupportedOperationException(Finals.E_GRAPH_NOT_SUPPORTED);
     }
 
-    default V createVertex(Object o) {
-        throw new UnsupportedOperationException(Finals.E_GRAPH_NOT_SUPPORTED);
-    }
-
     default E createEdge() {
         throw new UnsupportedOperationException(Finals.E_GRAPH_NOT_SUPPORTED);
     }

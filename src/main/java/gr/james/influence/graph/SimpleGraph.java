@@ -18,11 +18,6 @@ public class SimpleGraph extends MemoryGraph<String, Object> {
         }
 
         @Override
-        public String createVertex(Object o) {
-            return o.toString();
-        }
-
-        @Override
         public Object createEdge() {
             return null;
         }
