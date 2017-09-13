@@ -1,44 +1,62 @@
 package gr.james.influence.algorithms.scoring;
 
-import gr.james.influence.algorithms.scoring.util.IterativeAlgorithmHelper;
+import gr.james.influence.algorithms.AbstractIterativeAlgorithm;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphEdge;
-import gr.james.influence.util.Finals;
 import gr.james.influence.util.collections.GraphState;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class PageRank {
-    public static <V, E> GraphState<V, Double> execute(Graph<V, E> g, double dampingFactor, double epsilon) {
-        HashMap<V, Double> outStrengths = new HashMap<>();
+public final class PageRank<V> extends AbstractIterativeAlgorithm<V, Double> {
+    public static final double DEFAULT_PRECISION = -1.0;
+
+    private double dampingFactor;
+    private double epsilon;
+    private Map<V, Double> outStrengths;
+
+    public PageRank(Graph<V, ?> g, double dampingFactor, double epsilon) {
+        super(g, new GraphState<>(g, 1.0));
+        this.dampingFactor = dampingFactor;
+        this.epsilon = epsilon;
+
+        outStrengths = new HashMap<>();
         for (V v : g) {
             outStrengths.put(v, g.getOutStrength(v));
         }
-
-        return IterativeAlgorithmHelper.execute(
-                g,
-                new GraphState<>(g, 1.0),
-                oldState -> {
-                    GraphState<V, Double> nextState = new GraphState<>(g, 0.0);
-                    for (V v : g) {
-                        Map<V, GraphEdge<V, E>> inEdges = g.getInEdges(v);
-                        for (Map.Entry<V, GraphEdge<V, E>> e : inEdges.entrySet()) {
-                            nextState.put(v, nextState.get(v) +
-                                    e.getValue().getWeight() * oldState.get(e.getKey()) / outStrengths.get(e.getKey()));
-                        }
-                    }
-                    for (Map.Entry<V, Double> k : nextState.entrySet()) {
-                        k.setValue(dampingFactor + (1 - dampingFactor) * k.getValue());
-                    }
-                    return nextState;
-                },
-                (t1, t2, e) -> Math.abs(t1 - t2) <= e,
-                epsilon
-        );
     }
 
-    public static <V, E> GraphState<V, Double> execute(Graph<V, E> g, double dampingFactor) {
-        return execute(g, dampingFactor, Finals.DEFAULT_PAGERANK_PRECISION);
+    public static <V> GraphState<V, Double> execute(Graph<V, ?> g, double dampingFactor, double epsilon) {
+        return new PageRank<>(g, dampingFactor, epsilon).run();
+    }
+
+    public static <V> GraphState<V, Double> execute(Graph<V, ?> g, double dampingFactor) {
+        return new PageRank<>(g, dampingFactor, DEFAULT_PRECISION).run();
+    }
+
+    @Override
+    protected boolean converges(GraphState<V, Double> previous, GraphState<V, Double> next) {
+        for (V v : next.keySet()) {
+            if (Math.abs(next.get(v) - previous.get(v)) > epsilon) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    protected GraphState<V, Double> step(Graph<V, ?> g, GraphState<V, Double> previous) {
+        GraphState<V, Double> nextState = new GraphState<>(g, 0.0);
+        for (V v : g) {
+            Map<V, ? extends GraphEdge<V, ?>> inEdges = g.getInEdges(v);
+            for (Map.Entry<V, ? extends GraphEdge<V, ?>> e : inEdges.entrySet()) {
+                nextState.put(v, nextState.get(v) +
+                        e.getValue().getWeight() * previous.get(e.getKey()) / outStrengths.get(e.getKey()));
+            }
+        }
+        for (Map.Entry<V, Double> k : nextState.entrySet()) {
+            k.setValue(dampingFactor + (1 - dampingFactor) * k.getValue());
+        }
+        return nextState;
     }
 }

@@ -1,7 +1,6 @@
 package gr.james.influence.util.collections;
 
 import com.google.common.collect.ForwardingMap;
-import gr.james.influence.algorithms.scoring.util.ConvergePredicate;
 import gr.james.influence.api.Graph;
 import gr.james.influence.util.exceptions.GraphException;
 
@@ -38,15 +37,6 @@ public class GraphState<V, T> extends ForwardingMap<V, T> {
     @Override
     protected Map<V, T> delegate() {
         return delegate;
-    }
-
-    public boolean testConvergence(GraphState<V, T> o, ConvergePredicate<T> handler, double epsilon) {
-        for (V v : this.keySet()) {
-            if (!handler.converges(this.get(v), o.get(v), epsilon)) {
-                return false;
-            }
-        }
-        return true;
     }
 
     public double getAsDouble(V v) {

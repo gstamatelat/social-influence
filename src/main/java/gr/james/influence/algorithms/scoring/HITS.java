@@ -1,51 +1,70 @@
 package gr.james.influence.algorithms.scoring;
 
-import gr.james.influence.algorithms.scoring.util.IterativeAlgorithmHelper;
+import gr.james.influence.algorithms.AbstractIterativeAlgorithm;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphEdge;
 import gr.james.influence.util.collections.GraphState;
 
 import java.util.Map;
 
-public class HITS {
-    public static <V, E> GraphState<V, HITSScore> execute(Graph<V, E> g, double epsilon) {
-        return IterativeAlgorithmHelper.execute(
-                g,
-                new GraphState<>(g, new HITSScore(0.0, 1.0)),
-                old -> {
-                    GraphState<V, HITSScore> next = new GraphState<>(g, new HITSScore(0.0, 0.0));
+public class HITS<V> extends AbstractIterativeAlgorithm<V, HITS.HITSScore> {
+    public static final double DEFAULT_PRECISION = -1.0;
 
-                    for (V v : g) {
-                        Map<V, GraphEdge<V, E>> inEdges = g.getInEdges(v);
-                        for (Map.Entry<V, GraphEdge<V, E>> e : inEdges.entrySet()) {
-                            next.put(v, next.get(v).addToAuthority(e.getValue().getWeight() * old.get(e.getKey()).getHub()));
-                        }
-                    }
+    private double epsilon;
 
-                    for (V v : g) {
-                        Map<V, GraphEdge<V, E>> outEdges = g.getOutEdges(v);
-                        for (Map.Entry<V, GraphEdge<V, E>> e : outEdges.entrySet()) {
-                            next.put(v, next.get(v).addToHub(e.getValue().getWeight() * next.get(e.getKey()).getAuthority()));
-                        }
-                    }
+    public HITS(Graph<V, ?> g, double epsilon) {
+        super(g, new GraphState<>(g, new HITSScore(0.0, 1.0)));
+        this.epsilon = epsilon;
+    }
 
-                    //final double authoritySum = next.values().stream().mapToDouble(HITSScore::getAuthority).sum();
-                    final double authoritySum = Math.sqrt(next.values().stream()
-                            .mapToDouble(x -> Math.pow(x.getAuthority(), 2.0)).sum());
-                    //final double hubSum = next.values().stream().mapToDouble(HITSScore::getHub).sum();
-                    final double hubSum = Math.sqrt(next.values().stream()
-                            .mapToDouble(x -> Math.pow(x.getHub(), 2.0)).sum());
+    public static <V> GraphState<V, HITSScore> execute(Graph<V, ?> g, double epsilon) {
+        return new HITS<>(g, epsilon).run();
+    }
 
-                    next.replaceAll((vertex, hitsScore) -> new HITSScore(
-                            hitsScore.getAuthority() * g.getVerticesCount() / authoritySum,
-                            hitsScore.getHub() * g.getVerticesCount() / hubSum)
-                    );
+    public static <V> GraphState<V, HITSScore> execute(Graph<V, ?> g) {
+        return new HITS<>(g, DEFAULT_PRECISION).run();
+    }
 
-                    return next;
-                },
-                (t1, t2, e) -> Math.abs(t1.authority - t2.authority) <= e && Math.abs(t1.hub - t2.hub) <= e,
-                epsilon
+    @Override
+    protected boolean converges(GraphState<V, HITSScore> previous, GraphState<V, HITSScore> next) {
+        for (V v : next.keySet()) {
+            if (Math.abs(next.get(v).authority - previous.get(v).authority) > epsilon ||
+                    Math.abs(next.get(v).hub - previous.get(v).hub) > epsilon) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    protected GraphState<V, HITSScore> step(Graph<V, ?> g, GraphState<V, HITSScore> previous) {
+        GraphState<V, HITSScore> next = new GraphState<>(g, new HITSScore(0.0, 0.0));
+
+        for (V v : g) {
+            Map<V, ? extends GraphEdge<V, ?>> inEdges = g.getInEdges(v);
+            for (Map.Entry<V, ? extends GraphEdge<V, ?>> e : inEdges.entrySet()) {
+                next.put(v, next.get(v).addToAuthority(e.getValue().getWeight() * previous.get(e.getKey()).getHub()));
+            }
+        }
+
+        for (V v : g) {
+            Map<V, ? extends GraphEdge<V, ?>> outEdges = g.getOutEdges(v);
+            for (Map.Entry<V, ? extends GraphEdge<V, ?>> e : outEdges.entrySet()) {
+                next.put(v, next.get(v).addToHub(e.getValue().getWeight() * next.get(e.getKey()).getAuthority()));
+            }
+        }
+
+        final double authoritySum = Math.sqrt(next.values().stream()
+                .mapToDouble(x -> Math.pow(x.getAuthority(), 2.0)).sum());
+        final double hubSum = Math.sqrt(next.values().stream()
+                .mapToDouble(x -> Math.pow(x.getHub(), 2.0)).sum());
+
+        next.replaceAll((vertex, hitsScore) -> new HITSScore(
+                hitsScore.getAuthority() * g.getVerticesCount() / authoritySum,
+                hitsScore.getHub() * g.getVerticesCount() / hubSum)
         );
+
+        return next;
     }
 
     public static class HITSScore {
