@@ -32,7 +32,7 @@ public class Diameter {
 
         int max = 0;
 
-        GraphState<V, Integer> distances = new GraphState<>(g, -1);
+        GraphState<V, Integer> distances = GraphState.create(g.getVertices(), -1);
         for (V v : g) {
             Queue<V> bfs = new LinkedList<>();
             Set<V> visited = new HashSet<>();

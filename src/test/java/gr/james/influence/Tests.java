@@ -63,7 +63,7 @@ public class Tests {
         Finals.LOG.debug("damping factor = {}, p = {}", dampingFactor, p);
 
         /* Emulate the random surfer until mean of the map values average is MEAN, aka for MEAN * N steps */
-        GraphState<String, Double> gs = new GraphState<>(g, 0.0);
+        GraphState<String, Double> gs = GraphState.create(g.getVertices(), 0.0);
         RandomSurferIterator<String, Object> rsi = new RandomSurferIterator<>(g, dampingFactor);
         int steps = mean * g.getVerticesCount();
         while (--steps > 0) {
@@ -209,7 +209,7 @@ public class Tests {
         SimpleGraph g = new RandomGenerator(size, p).generate();
         Graphs.connect(g);
 
-        GraphState<String, Double> initialState = new GraphState<>(g, 0.0);
+        GraphState<String, Double> initialState = GraphState.create(g.getVertices(), 0.0);
         for (String v : g) {
             initialState.put(v, RandomHelper.getRandom().nextDouble());
         }

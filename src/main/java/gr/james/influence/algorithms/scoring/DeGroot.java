@@ -37,7 +37,7 @@ public class DeGroot<V> extends AbstractIterativeAlgorithm<V, Double> {
 
     @Override
     protected GraphState<V, Double> step(Graph<V, ?> g, GraphState<V, Double> previous) {
-        GraphState<V, Double> nextState = new GraphState<>();
+        GraphState<V, Double> nextState = GraphState.create();
         for (V v : g) {
             double vNewValue = 0.0;
             for (Map.Entry<V, ? extends GraphEdge<V, ?>> e : g.getOutEdges(v).entrySet()) {

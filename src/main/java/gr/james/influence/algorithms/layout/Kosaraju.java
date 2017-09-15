@@ -21,7 +21,7 @@ public class Kosaraju {
         for (V v : g) {
             edgeIterator.put(v, g.getOutEdges(v).keySet().iterator());
         }
-        final GraphState<V, Boolean> visited = new GraphState<>(g, false);
+        final GraphState<V, Boolean> visited = GraphState.create(g.getVertices(), false);
         final Stack<V> dfsStack = new Stack<>();
 
         for (V start : g) {

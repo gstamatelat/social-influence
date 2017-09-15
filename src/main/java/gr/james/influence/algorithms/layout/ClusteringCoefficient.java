@@ -9,7 +9,7 @@ import java.util.Set;
 
 public class ClusteringCoefficient {
     public static <V, E> GraphState<V, Double> localClusteringCoefficient(Graph<V, E> g) {
-        GraphState<V, Double> cc = new GraphState<>();
+        GraphState<V, Double> cc = GraphState.create();
         for (V v : g) {
             Set<V> neighborhood = new HashSet<>();
             neighborhood.addAll(g.getOutEdges(v).keySet());

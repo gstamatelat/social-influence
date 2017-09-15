@@ -8,7 +8,7 @@ import java.util.Collection;
 
 public class Degree {
     public static <V> GraphState<V, Integer> execute(Graph<V, ?> g, Collection<V> filter, Direction direction) {
-        GraphState<V, Integer> degreesState = new GraphState<>();
+        GraphState<V, Integer> degreesState = GraphState.create();
 
         g.getVertices().stream().filter(filter::contains)
                 .forEach(i -> degreesState.put(i, (direction.isInbound()) ? g.getInDegree(i) : g.getOutDegree(i)));

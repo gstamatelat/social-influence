@@ -1,37 +1,40 @@
 package gr.james.influence.util.collections;
 
 import com.google.common.collect.ForwardingMap;
-import gr.james.influence.api.Graph;
 import gr.james.influence.util.exceptions.GraphException;
 
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Function;
+import java.util.function.Supplier;
 import java.util.function.ToDoubleFunction;
 
 public class GraphState<V, T> extends ForwardingMap<V, T> {
     private Map<V, T> delegate = new HashMap<>();
     private ToDoubleFunction<T> converter = null;
 
-    public GraphState() {
+    private GraphState() {
     }
 
-    public GraphState(Graph<V, ?> g, T i) {
-        for (V v : g) {
-            this.put(v, i);
+    public static <V, T> GraphState<V, T> create() {
+        return new GraphState<>();
+    }
+
+    public static <V, T> GraphState<V, T> create(Collection<V> c, T value) {
+        GraphState<V, T> s = new GraphState<>();
+        for (V v : c) {
+            s.put(v, value);
         }
+        return s;
     }
 
-    public GraphState(Graph<V, ?> g, Function<V, T> i) {
-        for (V v : g) {
-            this.put(v, i.apply(v));
+    public static <V, T> GraphState<V, T> create(Collection<V> c, Supplier<T> supplier) {
+        GraphState<V, T> s = new GraphState<>();
+        for (V v : c) {
+            s.put(v, supplier.get());
         }
-    }
-
-    public GraphState(ToDoubleFunction<T> converter) {
-        this.converter = converter;
+        return s;
     }
 
     @Override

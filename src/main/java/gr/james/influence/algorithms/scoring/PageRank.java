@@ -16,7 +16,7 @@ public class PageRank<V> extends AbstractIterativeAlgorithm<V, Double> {
     private Map<V, Double> outStrengths;
 
     public PageRank(Graph<V, ?> g, double dampingFactor, double epsilon) {
-        super(g, new GraphState<>(g, 1.0));
+        super(g, GraphState.create(g.getVertices(), 1.0));
         this.dampingFactor = dampingFactor;
         this.epsilon = epsilon;
 
@@ -46,7 +46,7 @@ public class PageRank<V> extends AbstractIterativeAlgorithm<V, Double> {
 
     @Override
     protected GraphState<V, Double> step(Graph<V, ?> g, GraphState<V, Double> previous) {
-        GraphState<V, Double> nextState = new GraphState<>(g, 0.0);
+        GraphState<V, Double> nextState = GraphState.create(g.getVertices(), 0.0);
         for (V v : g) {
             Map<V, ? extends GraphEdge<V, ?>> inEdges = g.getInEdges(v);
             for (Map.Entry<V, ? extends GraphEdge<V, ?>> e : inEdges.entrySet()) {

@@ -16,7 +16,7 @@ public class Closeness {
         // TODO: We only need to calculate distances for the filter
         Map<VertexPair<V>, Double> distanceMap = Dijkstra.executeDistanceMap(g);
 
-        GraphState<V, Double> state = new GraphState<>();
+        GraphState<V, Double> state = GraphState.create();
 
         for (V v : g) {
             Map<V, Double> dist = new HashMap<>();
