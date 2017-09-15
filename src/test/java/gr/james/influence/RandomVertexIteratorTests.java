@@ -8,6 +8,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.List;
+import java.util.Random;
 
 public class RandomVertexIteratorTests {
     private SimpleGraph g = new RandomGenerator(100, 0.0).generate();
@@ -25,5 +26,12 @@ public class RandomVertexIteratorTests {
         List<String> it2 = Lists.newArrayList(new RandomVertexIterator<>(g));
         Assert.assertEquals("RandomVertexIteratorTests.differentOrder", it1.size(), it2.size());
         Assert.assertNotEquals("RandomVertexIteratorTests.differentOrder", it1, it2);
+    }
+
+    @Test
+    public void random() {
+        List<String> it1 = Lists.newArrayList(new RandomVertexIterator<>(g, new Random(12345)));
+        List<String> it2 = Lists.newArrayList(new RandomVertexIterator<>(g, 12345));
+        Assert.assertEquals("RandomVertexIteratorTests.random", it1, it2);
     }
 }
