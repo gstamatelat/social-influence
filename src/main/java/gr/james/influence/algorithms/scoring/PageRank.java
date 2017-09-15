@@ -8,7 +8,7 @@ import gr.james.influence.util.collections.GraphState;
 import java.util.HashMap;
 import java.util.Map;
 
-public final class PageRank<V> extends AbstractIterativeAlgorithm<V, Double> {
+public class PageRank<V> extends AbstractIterativeAlgorithm<V, Double> {
     public static final double DEFAULT_PRECISION = -1.0;
 
     private double dampingFactor;
