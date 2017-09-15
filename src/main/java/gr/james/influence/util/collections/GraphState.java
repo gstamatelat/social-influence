@@ -42,6 +42,7 @@ public class GraphState<V, T> extends ForwardingMap<V, T> {
         return delegate;
     }
 
+    @Deprecated
     public double getAsDouble(V v) {
         if (converter == null) {
             T t = this.get(v);
