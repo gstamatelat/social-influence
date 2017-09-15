@@ -27,9 +27,4 @@ public class OrderedVertexIterator<V> implements Iterator<V> {
         it.remove();
         return next;
     }
-
-    @Override
-    public void remove() {
-        throw new UnsupportedOperationException();
-    }
 }

@@ -44,9 +44,4 @@ public class RandomSurferIterator<V, E> implements Iterator<V> {
         }
         return this.current;
     }
-
-    @Override
-    public void remove() {
-        throw new UnsupportedOperationException();
-    }
 }

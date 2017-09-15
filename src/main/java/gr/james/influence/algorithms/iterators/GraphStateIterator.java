@@ -24,9 +24,4 @@ public class GraphStateIterator<V, T extends Comparable<T>> implements Iterator<
     public Weighted<V, T> next() {
         return p.poll();
     }
-
-    @Override
-    public void remove() {
-        throw new UnsupportedOperationException();
-    }
 }

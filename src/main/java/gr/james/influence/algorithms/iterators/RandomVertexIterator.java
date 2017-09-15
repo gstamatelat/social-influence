@@ -23,9 +23,4 @@ public class RandomVertexIterator<V> implements Iterator<V> {
         int randomIndex = RandomHelper.getRandom().nextInt(this.nodes.size());
         return this.nodes.remove(randomIndex);
     }
-
-    @Override
-    public void remove() {
-        throw new UnsupportedOperationException();
-    }
 }
