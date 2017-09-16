@@ -266,7 +266,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * ignored.</p>
      *
      * @param vertices the vertices to insert to the graph
-     * @return a {@link List} containing the vertices in {@code vertices} that were already in the graph
+     * @return an unmodifiable list view containing the vertices in {@code vertices} that were already in the graph
      * @throws NullPointerException if any vertex in {@code vertices} is {@code null}
      */
     default List<V> addVertices(V... vertices) {
@@ -276,7 +276,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
                 contained.add(v);
             }
         }
-        return contained;
+        return Collections.unmodifiableList(contained);
     }
 
     /**
