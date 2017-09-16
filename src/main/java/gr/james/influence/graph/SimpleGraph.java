@@ -9,7 +9,7 @@ public class SimpleGraph extends MemoryGraph<String, Object> {
         private int nextId = 0;
 
         @Override
-        public String get() {
+        public String getVertex() {
             return String.valueOf(nextId++);
         }
     };
