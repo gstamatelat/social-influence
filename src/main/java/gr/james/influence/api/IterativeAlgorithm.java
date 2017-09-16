@@ -2,13 +2,9 @@ package gr.james.influence.api;
 
 import gr.james.influence.util.collections.GraphState;
 
-import java.util.Iterator;
-
-public interface IterativeAlgorithm<V, T> extends Iterator<GraphState<V, T>> {
-    @Override
+public interface IterativeAlgorithm<V, T> {
     GraphState<V, T> next();
 
-    @Override
     boolean hasNext();
 
     default GraphState<V, T> run() {
