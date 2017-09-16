@@ -105,8 +105,8 @@ public class Graphs {
             r.addVertex(v);
         }
         for (V v : r) {
-            g.getOutEdges(v).entrySet().stream().filter(e -> r.containsVertex(e.getKey()))
-                    .forEach(e -> r.addEdge(v, e.getKey(), e.getValue().getWeight()));
+            g.getOutEdges(v).values().stream().filter(e -> r.containsVertex(e.getTarget()))
+                    .forEach(e -> r.addEdge(e.getSource(), e.getTarget(), e.getEdge(), e.getWeight()));
         }
         for (String m : g.metaKeySet()) {
             r.setMeta(m, g.getMeta(m));

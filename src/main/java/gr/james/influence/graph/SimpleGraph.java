@@ -1,29 +1,24 @@
 package gr.james.influence.graph;
 
-import gr.james.influence.api.Graph;
+import gr.james.influence.api.EdgeProvider;
 import gr.james.influence.api.GraphFactory;
+import gr.james.influence.api.VertexProvider;
 
 public class SimpleGraph extends MemoryGraph<String, Object> {
-    public static GraphFactory<String, Object> factory = new GraphFactory<String, Object>() {
+    public static VertexProvider<String> vertexProvider = new VertexProvider<String>() {
         private int nextId = 0;
 
         @Override
-        public Graph<String, Object> createGraph() {
-            return new SimpleGraph();
-        }
-
-        @Override
-        public String createVertex() {
+        public String get() {
             return String.valueOf(nextId++);
-        }
-
-        @Override
-        public Object createEdge() {
-            return null;
         }
     };
 
+    public static EdgeProvider<Object> edgeProvider = () -> null;
+
+    public static GraphFactory<String, Object> graphFactory = SimpleGraph::new;
+
     public SimpleGraph() {
-        super(factory);
+        super(vertexProvider, edgeProvider);
     }
 }

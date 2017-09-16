@@ -1,8 +1,9 @@
 package gr.james.influence.graph;
 
+import gr.james.influence.api.EdgeProvider;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphEdge;
-import gr.james.influence.api.GraphFactory;
+import gr.james.influence.api.VertexProvider;
 import gr.james.influence.util.Conditions;
 import gr.james.influence.util.Finals;
 import gr.james.influence.util.collections.Pair;
@@ -13,31 +14,23 @@ import java.util.*;
  * <p>Represents an in-memory {@link Graph}, implemented using adjacency lists. Suitable for sparse graphs.</p>
  */
 public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
-    private Map<V, Pair<Map<V, GraphEdge<V, E>>>> m;
-    private List<V> vList;
-    private GraphFactory<V, E> factory;
+    private final Map<V, Pair<Map<V, GraphEdge<V, E>>>> m;
+    private final List<V> vList;
+    private final VertexProvider<V> vertexProvider;
+    private final EdgeProvider<E> eEdgeProvider;
 
     /**
      * <p>Constructs an empty {@code MemoryGraph}.</p>
-     *
-     * @param factory the factory to use
-     */
-    public MemoryGraph(GraphFactory<V, E> factory) {
-        this.m = new HashMap<>();
-        this.vList = new ArrayList<>();
-        this.factory = factory;
-    }
-
-    /**
-     * <p>Constructs an empty {@code MemoryGraph} without a factory.</p>
      */
     public MemoryGraph() {
-        this(null);
+        this(null, null);
     }
 
-    @Override
-    public GraphFactory<V, E> getGraphFactory() {
-        return this.factory;
+    public MemoryGraph(VertexProvider<V> vertexProvider, EdgeProvider<E> eEdgeProvider) {
+        this.m = new HashMap<>();
+        this.vList = new ArrayList<>();
+        this.vertexProvider = vertexProvider;
+        this.eEdgeProvider = eEdgeProvider;
     }
 
     @Override
@@ -133,5 +126,61 @@ public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
     @Override
     public String toString() {
         return String.format("{container=%s, meta=%s}", this.getClass().getSimpleName(), this.meta);
+    }
+
+    ////////////////////////////////////////////////////////////////////////
+
+    @Override
+    public V addVertex() {
+        if (vertexProvider != null) {
+            return this.addVertex(vertexProvider);
+        } else {
+            throw new UnsupportedOperationException();
+        }
+    }
+
+    @Override
+    public List<V> addVertices(int count) {
+        if (vertexProvider != null) {
+            return this.addVertices(count, vertexProvider);
+        } else {
+            throw new UnsupportedOperationException();
+        }
+    }
+
+    @Override
+    public GraphEdge<V, E> addEdge(V source, V target) {
+        if (eEdgeProvider != null) {
+            return this.addEdge(source, target, eEdgeProvider);
+        } else {
+            throw new UnsupportedOperationException();
+        }
+    }
+
+    @Override
+    public GraphEdge<V, E> addEdge(V source, V target, double weight) {
+        if (eEdgeProvider != null) {
+            return this.addEdge(source, target, weight, eEdgeProvider);
+        } else {
+            throw new UnsupportedOperationException();
+        }
+    }
+
+    @Override
+    public void addEdges(Collection<V> among) {
+        if (eEdgeProvider != null) {
+            this.addEdges(among, eEdgeProvider);
+        } else {
+            throw new UnsupportedOperationException();
+        }
+    }
+
+    @Override
+    public void addEdges(V... among) {
+        if (eEdgeProvider != null) {
+            this.addEdges(eEdgeProvider, among);
+        } else {
+            throw new UnsupportedOperationException();
+        }
     }
 }

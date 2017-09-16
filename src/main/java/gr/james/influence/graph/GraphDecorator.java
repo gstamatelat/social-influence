@@ -1,8 +1,9 @@
 package gr.james.influence.graph;
 
+import gr.james.influence.api.EdgeProvider;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphEdge;
-import gr.james.influence.api.GraphFactory;
+import gr.james.influence.api.VertexProvider;
 import gr.james.influence.util.Conditions;
 
 import java.util.*;
@@ -13,11 +14,6 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
 
     protected GraphDecorator(Graph<V, E> g) {
         this.g = Conditions.requireNonNull(g);
-    }
-
-    @Override
-    public GraphFactory<V, E> getGraphFactory() {
-        return this.g.getGraphFactory();
     }
 
     @Override
@@ -156,6 +152,11 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
     }
 
     @Override
+    public V addVertex(VertexProvider<V> vertexProvider) {
+        return this.g.addVertex(vertexProvider);
+    }
+
+    @Override
     public V addVertex() {
         return this.g.addVertex();
     }
@@ -168,6 +169,11 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
     @Override
     public List<V> addVertices(V... vertices) {
         return this.g.addVertices(vertices);
+    }
+
+    @Override
+    public List<V> addVertices(int count, VertexProvider<V> vertexProvider) {
+        return this.g.addVertices(count, vertexProvider);
     }
 
     @Override
@@ -186,8 +192,18 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
     }
 
     @Override
+    public void addEdges(Collection<V> among, EdgeProvider<E> edgeProvider) {
+        this.g.addEdges(among, edgeProvider);
+    }
+
+    @Override
     public void addEdges(Collection<V> among) {
         this.g.addEdges(among);
+    }
+
+    @Override
+    public void addEdges(EdgeProvider<E> edgeProvider, V... among) {
+        this.g.addEdges(edgeProvider, among);
     }
 
     @Override
@@ -201,8 +217,18 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
     }
 
     @Override
+    public GraphEdge<V, E> addEdge(V source, V target, EdgeProvider<E> edgeProvider) {
+        return this.g.addEdge(source, target, edgeProvider);
+    }
+
+    @Override
     public GraphEdge<V, E> addEdge(V source, V target) {
         return this.g.addEdge(source, target);
+    }
+
+    @Override
+    public GraphEdge<V, E> addEdge(V source, V target, double weight, EdgeProvider<E> edgeProvider) {
+        return this.g.addEdge(source, target, weight, edgeProvider);
     }
 
     @Override

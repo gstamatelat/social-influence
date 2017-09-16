@@ -1,7 +1,9 @@
 package gr.james.influence.graph;
 
+import gr.james.influence.api.EdgeProvider;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphEdge;
+import gr.james.influence.api.VertexProvider;
 import gr.james.influence.util.Finals;
 
 import java.util.Collection;
@@ -40,6 +42,11 @@ public final class ImmutableGraph<V, E> extends GraphDecorator<V, E> {
     }
 
     @Override
+    public V addVertex(VertexProvider<V> vertexProvider) {
+        throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
+    }
+
+    @Override
     public V addVertex() {
         throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
@@ -51,6 +58,11 @@ public final class ImmutableGraph<V, E> extends GraphDecorator<V, E> {
 
     @Override
     public List<V> addVertices(V... vertices) {
+        throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
+    }
+
+    @Override
+    public List<V> addVertices(int count, VertexProvider<V> vertexProvider) {
         throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 
@@ -70,7 +82,17 @@ public final class ImmutableGraph<V, E> extends GraphDecorator<V, E> {
     }
 
     @Override
+    public void addEdges(Collection<V> among, EdgeProvider<E> edgeProvider) {
+        throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
+    }
+
+    @Override
     public void addEdges(Collection<V> among) {
+        throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
+    }
+
+    @Override
+    public void addEdges(EdgeProvider<E> edgeProvider, V... among) {
         throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 
@@ -85,7 +107,17 @@ public final class ImmutableGraph<V, E> extends GraphDecorator<V, E> {
     }
 
     @Override
+    public GraphEdge<V, E> addEdge(V source, V target, EdgeProvider<E> edgeProvider) {
+        throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
+    }
+
+    @Override
     public GraphEdge<V, E> addEdge(V source, V target) {
+        throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
+    }
+
+    @Override
+    public GraphEdge<V, E> addEdge(V source, V target, double weight, EdgeProvider<E> edgeProvider) {
         throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 
