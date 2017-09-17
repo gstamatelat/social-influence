@@ -12,7 +12,6 @@ import gr.james.influence.util.exceptions.GraphException;
 import java.util.*;
 import java.util.stream.Collectors;
 
-// TODO: Maybe transfer these as static on Graph
 public class Graphs {
     public static <V, E> void connect(Graph<V, E> g) {
         List<List<V>> scc = new Tarjan<V>().execute(g);
