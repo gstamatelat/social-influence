@@ -137,12 +137,14 @@ public class Graphs {
 
     /**
      * <p>Filters out and returns the stubborn vertices contained in {@code g}. A stubborn vertex is one that its only
-     * outbound edge points to itself.</p>
+     * outbound edge points to itself. By this definition, this method will not return vertices that only point to other
+     * stubborn vertices.</p>
      *
      * @param g   the graph that the operation is to be performed
      * @param <V> the vertex type
      * @param <E> the edge type
      * @return an unmodifiable {@code Set} of all the stubborn vertices of {@code g}
+     * @throws NullPointerException if {@code g} is null
      */
     public static <V, E> Set<V> getStubbornVertices(Graph<V, E> g) {
         return Collections.unmodifiableSet(
