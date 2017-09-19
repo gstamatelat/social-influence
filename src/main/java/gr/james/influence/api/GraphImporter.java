@@ -24,7 +24,7 @@ public interface GraphImporter {
     }
 
     /**
-     * <p>Read a {@code Graph} of type {@code T} from {@code source} using the format imposed by this class.</p>
+     * <p>Read a {@code Graph} from {@code source} using the format imposed by this class.</p>
      *
      * @param source       the input stream to read the graph from
      * @param factory      the graph factory to use when creating the new {@code Graph}
@@ -42,7 +42,7 @@ public interface GraphImporter {
 
     /**
      * <p>Read a {@code Graph} of default type from {@code source} using the format imposed by this class.
-     * Implementations of this method should not close {@code source}, instead the caller is responsible for doing so.
+     * Implementations of this method should not close {@code source}, the caller is instead responsible for doing so.
      * </p>
      *
      * @param source the input stream to read the graph from
@@ -54,9 +54,8 @@ public interface GraphImporter {
     }
 
     /**
-     * <p>Read a {@code Graph} of type {@code T} from {@code source} using the format imposed by this class.
-     * Implementations of this method should not close {@code source}, instead the caller is responsible for doing so.
-     * </p>
+     * <p>Read a {@code Graph} from {@code source} using the format imposed by this class. Implementations of this
+     * method should not close {@code source}, the caller is instead responsible for doing so.</p>
      *
      * @param source       the input stream to read the graph from
      * @param factory      the graph factory to use when creating the new {@code Graph}
