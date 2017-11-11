@@ -62,6 +62,27 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     }
 
     /**
+     * <p>Returns the weight of the edge from {@code source} to {@code target} if it exists, or {@code other} if it
+     * doesn't exist.</p>
+     *
+     * @param source the source vertex of the edge
+     * @param target the target vertex of the edge
+     * @param other  the default weight if no edge exists
+     * @return the weight of the edge from {@code source} to {@code target}, or {@code other} if there is no such edge
+     * @throws NullPointerException   if either {@code source} or {@code target} is {@code null}
+     * @throws InvalidVertexException if either {@code source} or {@code target} doesn't belong in the graph
+     */
+    default double getEdgeWeightElse(V source, V target, double other) {
+        final GraphEdge<V, E> edge = findEdge(source, target);
+        if (edge == null) {
+            return other;
+        } else {
+            assert edge.getWeight() > 0;
+            return edge.getWeight();
+        }
+    }
+
+    /**
      * <p>Calculates the total amount of directed edges that this graph has.</p>
      *
      * @return the number of directed edges in this graph
