@@ -12,17 +12,17 @@ public class PearsonSimilarityTest {
      */
     @Test
     public void simple() {
-        SimpleGraph g = new SimpleGraph();
-        String v1 = g.addVertex();
-        String v2 = g.addVertex();
-        String v3 = g.addVertex();
+        final SimpleGraph g = new SimpleGraph();
+        final String v1 = g.addVertex();
+        final String v2 = g.addVertex();
+        final String v3 = g.addVertex();
         g.addEdge(v1, v2, 1);
         g.addEdge(v1, v3, 1);
         g.addEdge(v3, v2, 2);
-        VertexSimilarity<String, Double> pearson = new PearsonSimilarity<>(g);
-        double v1v2 = pearson.similarity(v1, v2);
-        double v1v3 = pearson.similarity(v1, v3);
-        double v2v3 = pearson.similarity(v2, v3);
+        final VertexSimilarity<String, Double> pearson = new PearsonSimilarity<>(g);
+        final double v1v2 = pearson.similarity(v1, v2);
+        final double v1v3 = pearson.similarity(v1, v3);
+        final double v2v3 = pearson.similarity(v2, v3);
         Assert.assertEquals("PearsonSimilarityTest.simple", 0.5, v1v3, 1e-4);
         Assert.assertTrue("PearsonSimilarityTest.simple", Double.isNaN(v1v2));
         Assert.assertTrue("PearsonSimilarityTest.simple", Double.isNaN(v2v3));
