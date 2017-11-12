@@ -15,11 +15,11 @@ import org.junit.Test;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.Objects;
 
 public class DistanceTests {
     /**
-     * <p>This test demonstrates that {@link FloydWarshall} yields the same result as multiple executions of
-     * {@link Dijkstra}.</p>
+     * The {@link FloydWarshall} algorithm yields the same result as multiple executions of {@link Dijkstra}.
      */
     @Test
     public void floydWarshallTest() {
@@ -38,23 +38,26 @@ public class DistanceTests {
         Map<VertexPair<String>, Double> distDijkstra = Dijkstra.executeDistanceMap(g);
 
         /* Length assertion */
-        Assert.assertEquals("FloydWarshallTest - length - " + g, distFloyd.size(), distDijkstra.size());
+        Assert.assertEquals("DistanceTests.floydWarshallTest", distFloyd.size(), distDijkstra.size());
 
         /* Value assertions */
         for (String u : g) {
             for (String v : g) {
-                // TODO: Both Dijkstra and Floyd-Warshall use additions, it is intuitive that there won't be any double rounding issues
-                // TODO: Also, 10^{-5} is too hardcoded for a quantity that could very well be really close to 10^{-5}
-                // TODO: It's better to just compare 1 (one) with the ratio of distFloyd/distDijkstra
-                Assert.assertEquals("FloydWarshallTest - " + g, distFloyd.get(new VertexPair<>(u, v)),
-                        distDijkstra.get(new VertexPair<>(u, v)), 1.0e-5);
+                if (!Objects.equals(v, u)) {
+                    final double ratio = distFloyd.get(new VertexPair<>(u, v)) / distDijkstra.get(new VertexPair<>(u, v));
+                    Assert.assertEquals("DistanceTests.floydWarshallTest", 1.0, ratio, 1.0e-4);
+                } else {
+                    Assert.assertTrue("DistanceTests.floydWarshallTest",
+                            distFloyd.get(new VertexPair<>(u, v)) == 0);
+                    Assert.assertTrue("DistanceTests.floydWarshallTest",
+                            distDijkstra.get(new VertexPair<>(u, v)) == 0);
+                }
             }
         }
     }
 
     /**
-     * <p>The amount of discrete shortest paths from one corner of a NxM grid graph to the distant one is
-     * N+M-2 choose N-1</p>
+     * The amount of discrete shortest paths from one corner of a NxM grid graph to the distant one is N+M-2 choose N-1.
      */
     @Test
     public void dijkstraPathsTest() {
@@ -76,6 +79,6 @@ public class DistanceTests {
         Map<String, Collection<VertexSequence<String>>> r = Dijkstra.executeWithPath(g, largestPair.getSource());
         int num = r.get(largestPair.getTarget()).size();
 
-        Assert.assertEquals("dijkstraPathsTest", LongMath.binomial(n + m - 2, n - 1), num);
+        Assert.assertEquals("DistanceTests.dijkstraPathsTest", LongMath.binomial(n + m - 2, n - 1), num);
     }
 }
