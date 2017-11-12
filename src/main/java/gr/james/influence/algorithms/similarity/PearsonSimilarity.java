@@ -55,7 +55,8 @@ public class PearsonSimilarity<V> implements VertexSimilarity<V, Double> {
     }
 
     /**
-     * Calculates the Pearson similarity between two vertices. This method runs in time {@code O(V)}.
+     * Calculates the Pearson similarity between two vertices. This method runs in time proportional to the out degrees
+     * of the input vertices.
      *
      * @param v1 one vertex
      * @param v2 the other vertex
