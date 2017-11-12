@@ -1,5 +1,6 @@
 package gr.james.influence.algorithms.similarity;
 
+import gr.james.influence.algorithms.generators.basic.CycleGenerator;
 import gr.james.influence.algorithms.generators.random.RandomGenerator;
 import gr.james.influence.api.VertexSimilarity;
 import gr.james.influence.graph.SimpleGraph;
@@ -26,6 +27,24 @@ public class PearsonSimilarityTest {
         Assert.assertEquals("PearsonSimilarityTest.simple", 0.5, v1v3, 1e-4);
         Assert.assertTrue("PearsonSimilarityTest.simple", Double.isNaN(v1v2));
         Assert.assertTrue("PearsonSimilarityTest.simple", Double.isNaN(v2v3));
+    }
+
+    /**
+     * The Pearson similarity of neighboring vertices in a circle of length 4 or more is 2 / (2 - n)
+     */
+    @Test
+    public void circle() {
+        for (int n = 4; n < 100; n++) {
+            final double similarity = 2.0 / (2.0 - n);
+            final SimpleGraph g = new CycleGenerator(n).generate();
+            final VertexSimilarity<String, Double> pearson = new PearsonSimilarity<>(g);
+            for (String v : g) {
+                for (String e : g.getOutEdges(v).keySet()) {
+                    Assert.assertEquals("PearsonSimilarityTest.circle",
+                            similarity, pearson.similarity(v, e), 1e-4);
+                }
+            }
+        }
     }
 
     /**
