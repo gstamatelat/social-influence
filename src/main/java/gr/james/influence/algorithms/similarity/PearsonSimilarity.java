@@ -1,11 +1,13 @@
 package gr.james.influence.algorithms.similarity;
 
+import com.google.common.collect.Sets;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphEdge;
 import gr.james.influence.api.VertexSimilarity;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Implementation of the Pearson correlation from the book "Networks: An Introduction", Newman (ch 7.12.2).
@@ -62,11 +64,13 @@ public class PearsonSimilarity<V> implements VertexSimilarity<V, Double> {
     @Override
     public Double similarity(V v1, V v2) {
         double sum = 0;
-        for (V k : g) {
+        final Set<V> union = Sets.union(g.getOutEdges(v1).keySet(), g.getOutEdges(v2).keySet());
+        for (V k : union) {
             final double aik = g.getEdgeWeightElse(v1, k, 0);
             final double ajk = g.getEdgeWeightElse(v2, k, 0);
             sum += (aik - averages.get(v1)) * (ajk - averages.get(v2));
         }
+        sum += (g.getVerticesCount() - union.size()) * averages.get(v1) * averages.get(v2);
         final double similarity = sum / (variances.get(v1) * variances.get(v2));
         assert Double.isNaN(similarity) || (similarity > -1 - 1e-4 && similarity < 1 + 1e-4);
         return similarity;
