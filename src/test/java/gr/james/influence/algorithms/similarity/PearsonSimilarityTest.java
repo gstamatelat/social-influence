@@ -57,7 +57,7 @@ public class PearsonSimilarityTest {
         for (String v : g) {
             for (String w : g) {
                 Assert.assertEquals("PearsonSimilarityTest.commutativity",
-                        pearson.similarity(v, w), pearson.similarity(w, v));
+                        pearson.similarity(v, w), pearson.similarity(w, v), 1e-4);
             }
         }
     }
