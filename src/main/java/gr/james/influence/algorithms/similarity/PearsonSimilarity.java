@@ -36,6 +36,8 @@ public class PearsonSimilarity<V> implements VertexSimilarity<V, Double> {
      * @param g the {@code Graph} to construct this instance from
      */
     public PearsonSimilarity(Graph<V, ?> g) {
+        Conditions.requireArgument(g.getVerticesCount() > 0, "Input graph is empty");
+
         this.g = g;
         this.averages = new HashMap<>();
         this.variances = new HashMap<>();
