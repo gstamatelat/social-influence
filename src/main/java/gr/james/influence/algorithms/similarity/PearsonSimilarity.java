@@ -4,6 +4,7 @@ import com.google.common.collect.Sets;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphEdge;
 import gr.james.influence.api.VertexSimilarity;
+import gr.james.influence.util.Conditions;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -79,5 +80,29 @@ public class PearsonSimilarity<V> implements VertexSimilarity<V, Double> {
         final double similarity = sum / (variances.get(v1) * variances.get(v2));
         assert Double.isNaN(similarity) || (similarity > -1 - 1e-4 && similarity < 1 + 1e-4);
         return similarity;
+    }
+
+    /**
+     * Return the variance of the outbound edge weights for a vertex. This method runs in constant time.
+     *
+     * @param v the vertex to return the variance for
+     * @return the variance of {@code v}
+     */
+    public double variance(V v) {
+        Conditions.requireNonNull(v);
+        Conditions.requireArgument(this.variances.containsKey(v), "Vertex %s is not in the graph", v);
+        return this.variances.get(v);
+    }
+
+    /**
+     * Return the average of the outbound edge weights for a vertex. This method runs in constant time.
+     *
+     * @param v the vertex to return the average for
+     * @return the average of {@code v}
+     */
+    public double average(V v) {
+        Conditions.requireNonNull(v);
+        Conditions.requireArgument(this.averages.containsKey(v), "Vertex %s is not in the graph", v);
+        return this.averages.get(v);
     }
 }
