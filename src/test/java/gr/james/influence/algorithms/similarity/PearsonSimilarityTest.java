@@ -68,10 +68,15 @@ public class PearsonSimilarityTest {
     @Test
     public void identity() {
         final SimpleGraph g = new RandomGenerator(100, 0.1).generate();
-        final VertexSimilarity<String, Double> pearson = new PearsonSimilarity<>(g);
+        final PearsonSimilarity<String> pearson = new PearsonSimilarity<>(g);
         for (String v : g) {
-            Assert.assertEquals("PearsonSimilarityTest.identity",
-                    1.0, pearson.similarity(v, v), 1e-4);
+            if (pearson.variance(v) != 0) {
+                Assert.assertEquals("PearsonSimilarityTest.identity",
+                        1.0, pearson.similarity(v, v), 1e-4);
+            } else {
+                Assert.assertTrue("PearsonSimilarityTest.identity",
+                        Double.isNaN(pearson.similarity(v, v)));
+            }
         }
     }
 }
