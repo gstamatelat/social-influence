@@ -1,7 +1,7 @@
 package gr.james.influence.graph;
 
 import com.google.common.collect.ImmutableBiMap;
-import gr.james.influence.algorithms.layout.Tarjan;
+import gr.james.influence.algorithms.layout.TarjanConnectedComponents;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphEdge;
 import gr.james.influence.api.GraphFactory;
@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 public class Graphs {
     public static <V, E> void connect(Graph<V, E> g) {
-        List<List<V>> scc = new Tarjan<V>().execute(g);
+        List<List<V>> scc = new TarjanConnectedComponents<V>().execute(g);
         // TODO: This is not the best way to connect the components, eg some edges might already exist
         for (int i = 0; i < scc.size(); i++) {
             List<V> thisComponent = scc.get(i);

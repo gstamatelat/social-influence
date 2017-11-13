@@ -14,9 +14,9 @@ import java.util.Stack;
  * Tarjan's strongly connected components algorithm</a>. This algorithm is implemented recursively and is prone to
  * StackOverflowException on large graphs.</p>
  *
- * @see Kosaraju
+ * @see KosarajuConnectedComponents
  */
-public class Tarjan<V> {
+public class TarjanConnectedComponents<V> {
     private Graph<V, ?> g;
     private BiMap<V, Integer> vertexMap;
 
@@ -42,7 +42,7 @@ public class Tarjan<V> {
             }
         }
 
-        assert Helper.listToSet(components).equals(Kosaraju.execute(g));
+        assert Helper.listToSet(components).equals(KosarajuConnectedComponents.execute(g));
         assert components.stream().mapToInt(List::size).sum() == g.getVerticesCount();
 
         return components;
