@@ -15,8 +15,7 @@ import java.util.Set;
  * <p>
  * Pearson correlation is a measure of the linear correlation between the outbound edge weights of two vertices. It has
  * a value between -1 and 1, where 1 is total positive correlation, -1 is total negative correlation and 0 is no
- * correlation. The value of the coefficient is {@code NaN} when the result is undefined, for example when the variance
- * of either vertex is zero.
+ * correlation. The value of the coefficient is {@code NaN} if and only if the variance of either vertex is zero.
  * <p>
  * Pearson correlation is commutative, which means that {@code pearson(x, y) = pearson(y, x)}. Also, by definition, it
  * holds that the correlation of a vertex with itself is 1 (or {@code NaN}).
