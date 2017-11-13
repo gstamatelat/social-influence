@@ -1,5 +1,6 @@
 package gr.james.influence.algorithms.similarity;
 
+import gr.james.influence.algorithms.generators.basic.CompleteGenerator;
 import gr.james.influence.algorithms.generators.basic.CycleGenerator;
 import gr.james.influence.algorithms.generators.random.RandomGenerator;
 import gr.james.influence.api.VertexSimilarity;
@@ -76,6 +77,27 @@ public class PearsonSimilarityTest {
             } else {
                 Assert.assertTrue("PearsonSimilarityTest.identity",
                         Double.isNaN(pearson.similarity(v, v)));
+            }
+        }
+    }
+
+    /**
+     * In a complete graph with self loops all similarities must be NaN
+     */
+    @Test
+    public void complete() {
+        final SimpleGraph g = new CompleteGenerator(5).generate();
+        for (String v : g) {
+            g.addEdge(v, v, 1.0);
+        }
+        final PearsonSimilarity<String> pearson = new PearsonSimilarity<>(g);
+        for (String v : g) {
+            Assert.assertTrue("PearsonSimilarityTest.complete", pearson.average(v) == 1.0);
+            Assert.assertTrue("PearsonSimilarityTest.complete", pearson.variance(v) == 0.0);
+        }
+        for (String v : g) {
+            for (String w : g) {
+                Assert.assertTrue("PearsonSimilarityTest.complete", Double.isNaN(pearson.similarity(v, w)));
             }
         }
     }
