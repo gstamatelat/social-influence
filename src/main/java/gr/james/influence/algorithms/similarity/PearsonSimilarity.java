@@ -85,7 +85,7 @@ public class PearsonSimilarity<V> implements VertexSimilarity<V, Double> {
     }
 
     /**
-     * Return the variance of the outbound edge weights of a vertex. This method runs in constant time.
+     * Return the variance (sigma squared) of the outbound edge weights of a vertex. This method runs in constant time.
      *
      * @param v the vertex to return the variance for
      * @return the variance of {@code v}
@@ -93,7 +93,9 @@ public class PearsonSimilarity<V> implements VertexSimilarity<V, Double> {
     public double variance(V v) {
         Conditions.requireNonNull(v);
         Conditions.requireArgument(this.variances.containsKey(v), "Vertex %s is not in the graph", v);
-        return this.variances.get(v) / Math.sqrt(g.getVerticesCount());
+        final double var = Math.pow(this.variances.get(v), 2) / g.getVerticesCount();
+        assert var >= 0;
+        return var;
     }
 
     /**
