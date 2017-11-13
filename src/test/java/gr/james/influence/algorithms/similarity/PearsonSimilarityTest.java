@@ -64,7 +64,7 @@ public class PearsonSimilarityTest {
     }
 
     /**
-     * Similarity is undefined if and only if variance of either vertex is zero
+     * Similarity is undefined if and only if the variance of either vertex is zero
      */
     @Test
     public void undefined() {
