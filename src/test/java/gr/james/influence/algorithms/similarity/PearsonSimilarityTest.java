@@ -64,22 +64,6 @@ public class PearsonSimilarityTest {
     }
 
     /**
-     * Similarity is undefined if and only if the variance of either vertex is zero
-     */
-    @Test
-    public void undefined() {
-        final SimpleGraph g = new RandomGenerator(100, 0.1).generate();
-        final PearsonSimilarity<String> pearson = new PearsonSimilarity<>(g);
-        for (String v : g) {
-            for (String w : g) {
-                Assert.assertEquals("PearsonSimilarityTest.undefined",
-                        pearson.variance(v) == 0 || pearson.variance(w) == 0,
-                        Double.isNaN(pearson.similarity(v, w)));
-            }
-        }
-    }
-
-    /**
      * pearson(v, v) = 1
      */
     @Test

@@ -78,6 +78,7 @@ public class PearsonSimilarity<V> implements VertexSimilarity<V, Double> {
         sum += (g.getVerticesCount() - unionSize) * averages.get(v1) * averages.get(v2);
         final double similarity = sum / (variances.get(v1) * variances.get(v2));
         assert Double.isNaN(similarity) || (similarity > -1 - 1e-4 && similarity < 1 + 1e-4);
+        assert Double.isNaN(similarity) == (variance(v1) == 0 || variance(v2) == 0);
         return similarity;
     }
 
