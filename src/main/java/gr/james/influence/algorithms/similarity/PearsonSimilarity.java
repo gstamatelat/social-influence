@@ -83,7 +83,7 @@ public class PearsonSimilarity<V> implements VertexSimilarity<V, Double> {
     }
 
     /**
-     * Return the variance of the outbound edge weights for a vertex. This method runs in constant time.
+     * Return the variance of the outbound edge weights of a vertex. This method runs in constant time.
      *
      * @param v the vertex to return the variance for
      * @return the variance of {@code v}
@@ -95,7 +95,7 @@ public class PearsonSimilarity<V> implements VertexSimilarity<V, Double> {
     }
 
     /**
-     * Return the average of the outbound edge weights for a vertex. This method runs in constant time.
+     * Return the average of the outbound edge weights of a vertex. This method runs in constant time.
      *
      * @param v the vertex to return the average for
      * @return the average of {@code v}
