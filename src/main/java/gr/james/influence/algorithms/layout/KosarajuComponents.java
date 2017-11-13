@@ -10,9 +10,9 @@ import java.util.*;
  * find strongly connected components. This implementation uses an iterative approach and is not prone to
  * StackOverflowException.</p>
  *
- * @see TarjanConnectedComponents
+ * @see TarjanComponents
  */
-public class KosarajuConnectedComponents {
+public class KosarajuComponents { // TODO: Implement ConnectedComponents
     public static <V, E> Set<Set<V>> execute(Graph<V, E> g) {
 
         final Set<Set<V>> components = new HashSet<>();
