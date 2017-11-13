@@ -93,7 +93,7 @@ public class PearsonSimilarity<V> implements VertexSimilarity<V, Double> {
     public double variance(V v) {
         Conditions.requireNonNull(v);
         Conditions.requireArgument(this.variances.containsKey(v), "Vertex %s is not in the graph", v);
-        return this.variances.get(v);
+        return this.variances.get(v) / Math.sqrt(g.getVerticesCount());
     }
 
     /**
