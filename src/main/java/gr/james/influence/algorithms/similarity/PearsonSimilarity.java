@@ -20,7 +20,7 @@ import java.util.Set;
  * Pearson correlation is commutative, which means that {@code pearson(x, y) = pearson(y, x)}. Also, by definition, it
  * holds that the correlation of a vertex with itself is 1 (or {@code NaN}).
  * <p>
- * This class expects that the graph will not be mutated after the constructor is invoked.
+ * Instances of this class expect that the graph will not be mutated after the constructor is invoked.
  *
  * @param <V> the type of vertex
  */
