@@ -8,7 +8,7 @@ import gr.james.influence.graph.SimpleGraph;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class PearsonSimilarityTest {
+public class PearsonSimilarityTests {
     /**
      * Test for the graph {A->B (1), A->C (1), C->B (2)}
      */
@@ -25,9 +25,9 @@ public class PearsonSimilarityTest {
         final double v1v2 = pearson.similarity(v1, v2);
         final double v1v3 = pearson.similarity(v1, v3);
         final double v2v3 = pearson.similarity(v2, v3);
-        Assert.assertEquals("PearsonSimilarityTest.simple", 0.5, v1v3, 1e-4);
-        Assert.assertTrue("PearsonSimilarityTest.simple", Double.isNaN(v1v2));
-        Assert.assertTrue("PearsonSimilarityTest.simple", Double.isNaN(v2v3));
+        Assert.assertEquals("PearsonSimilarityTests.simple", 0.5, v1v3, 1e-4);
+        Assert.assertTrue("PearsonSimilarityTests.simple", Double.isNaN(v1v2));
+        Assert.assertTrue("PearsonSimilarityTests.simple", Double.isNaN(v2v3));
     }
 
     /**
@@ -41,7 +41,7 @@ public class PearsonSimilarityTest {
             final VertexSimilarity<String, Double> pearson = new PearsonSimilarity<>(g);
             for (String v : g) {
                 for (String e : g.getOutEdges(v).keySet()) {
-                    Assert.assertEquals("PearsonSimilarityTest.circle",
+                    Assert.assertEquals("PearsonSimilarityTests.circle",
                             similarity, pearson.similarity(v, e), 1e-4);
                 }
             }
@@ -57,7 +57,7 @@ public class PearsonSimilarityTest {
         final VertexSimilarity<String, Double> pearson = new PearsonSimilarity<>(g);
         for (String v : g) {
             for (String w : g) {
-                Assert.assertEquals("PearsonSimilarityTest.commutativity",
+                Assert.assertEquals("PearsonSimilarityTests.commutativity",
                         pearson.similarity(v, w), pearson.similarity(w, v), 1e-4);
             }
         }
@@ -72,10 +72,10 @@ public class PearsonSimilarityTest {
         final PearsonSimilarity<String> pearson = new PearsonSimilarity<>(g);
         for (String v : g) {
             if (pearson.variance(v) != 0) {
-                Assert.assertEquals("PearsonSimilarityTest.identity",
+                Assert.assertEquals("PearsonSimilarityTests.identity",
                         1.0, pearson.similarity(v, v), 1e-4);
             } else {
-                Assert.assertTrue("PearsonSimilarityTest.identity",
+                Assert.assertTrue("PearsonSimilarityTests.identity",
                         Double.isNaN(pearson.similarity(v, v)));
             }
         }
@@ -92,12 +92,12 @@ public class PearsonSimilarityTest {
         }
         final PearsonSimilarity<String> pearson = new PearsonSimilarity<>(g);
         for (String v : g) {
-            Assert.assertTrue("PearsonSimilarityTest.complete", pearson.average(v) == 1.0);
-            Assert.assertTrue("PearsonSimilarityTest.complete", pearson.variance(v) == 0.0);
+            Assert.assertTrue("PearsonSimilarityTests.complete", pearson.average(v) == 1.0);
+            Assert.assertTrue("PearsonSimilarityTests.complete", pearson.variance(v) == 0.0);
         }
         for (String v : g) {
             for (String w : g) {
-                Assert.assertTrue("PearsonSimilarityTest.complete", Double.isNaN(pearson.similarity(v, w)));
+                Assert.assertTrue("PearsonSimilarityTests.complete", Double.isNaN(pearson.similarity(v, w)));
             }
         }
     }
