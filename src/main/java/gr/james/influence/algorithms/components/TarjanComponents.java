@@ -1,4 +1,4 @@
-package gr.james.influence.algorithms.layout;
+package gr.james.influence.algorithms.components;
 
 import com.google.common.collect.BiMap;
 import gr.james.influence.api.Graph;
