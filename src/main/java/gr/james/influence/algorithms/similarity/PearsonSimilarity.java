@@ -3,7 +3,7 @@ package gr.james.influence.algorithms.similarity;
 import com.google.common.collect.Sets;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphEdge;
-import gr.james.influence.api.VertexSimilarity;
+import gr.james.influence.api.algorithms.VertexSimilarity;
 import gr.james.influence.util.Conditions;
 
 import java.util.HashMap;

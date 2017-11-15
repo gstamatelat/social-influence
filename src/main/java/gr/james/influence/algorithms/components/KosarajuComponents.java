@@ -1,7 +1,7 @@
 package gr.james.influence.algorithms.components;
 
-import gr.james.influence.api.ConnectedComponents;
 import gr.james.influence.api.Graph;
+import gr.james.influence.api.algorithms.ConnectedComponents;
 import gr.james.influence.util.Conditions;
 import gr.james.influence.util.collections.GraphState;
 

@@ -3,7 +3,7 @@ package gr.james.influence.algorithms.similarity;
 import gr.james.influence.algorithms.generators.basic.CompleteGenerator;
 import gr.james.influence.algorithms.generators.basic.CycleGenerator;
 import gr.james.influence.algorithms.generators.random.RandomGenerator;
-import gr.james.influence.api.VertexSimilarity;
+import gr.james.influence.api.algorithms.VertexSimilarity;
 import gr.james.influence.graph.SimpleGraph;
 import org.junit.Assert;
 import org.junit.Test;

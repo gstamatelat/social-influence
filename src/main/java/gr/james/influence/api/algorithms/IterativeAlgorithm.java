@@ -1,4 +1,4 @@
-package gr.james.influence.api;
+package gr.james.influence.api.algorithms;
 
 import gr.james.influence.util.collections.GraphState;
 
