@@ -33,7 +33,7 @@ public class PearsonSimilarity<V> implements VertexSimilarity<V, Double> {
      * Construct a {@code PearsonSimilarity} instance from a {@code Graph}. The constructor calculates the weight
      * averages and variances of all vertices in time {@code O(V + E)}.
      *
-     * @param g the {@code Graph} to construct this instance from
+     * @param g the {@link Graph} to construct this instance from
      */
     public PearsonSimilarity(Graph<V, ?> g) {
         Conditions.requireArgument(g.getVerticesCount() > 0, "Input graph is empty");

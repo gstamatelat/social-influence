@@ -1,5 +1,6 @@
 package gr.james.influence.api.algorithms;
 
+import gr.james.influence.util.Conditions;
 import gr.james.influence.util.collections.GraphState;
 
 /**
@@ -17,7 +18,14 @@ public interface VertexScoring<V, T> {
      * @throws NullPointerException     if {@code v} is {@code null}
      * @throws IllegalArgumentException if {@code v} is not in the graph
      */
-    T score(V v);
+    default T score(V v) {
+        Conditions.requireNonNull(v);
+        T r = scores().get(v);
+        if (r == null) {
+            throw new IllegalArgumentException();
+        }
+        return r;
+    }
 
     /**
      * Get the scores for all vertices.
