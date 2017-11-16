@@ -339,11 +339,11 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     boolean removeVertex(V v);
 
     /**
-     * <p>Removes a collection of vertices from the graph.</p>
+     * <p>Removes a group of vertices from the graph. Vertices in the group that are not in the graph are silently
+     * ignored.</p>
      *
-     * @param vertices a collection of vertices to remove from the graph; you should prefer a collection with a fast
-     *                 iterator
-     * @throws NullPointerException if any of the vertices in {@code vertices} is {@code null}
+     * @param vertices an {@link Iterable} of vertices to remove from the graph
+     * @throws NullPointerException if {@code vertices} or any of the objects in {@code vertices} is {@code null}
      */
     default void removeVertices(Iterable<V> vertices) {
         vertices.forEach(this::removeVertex);
