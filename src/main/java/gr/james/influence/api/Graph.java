@@ -526,12 +526,11 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * {@code t}, edges {@code (s,t)} and {@code (t,s)} will be removed (assuming they exist). If {@code among} only
      * contains 1 (unique) vertex or less, it's a no-op.</p>
      *
-     * @param among a collection of vertices to strip the edges from; you should prefer a collection with a fast
-     *              iterator
-     * @throws NullPointerException   if any vertex in {@code among} is {@code null}
+     * @param among an {@link Iterable} of vertices to strip the edges from
+     * @throws NullPointerException   if {@code among} or any vertex in {@code among} is {@code null}
      * @throws InvalidVertexException if any vertex in {@code among} is not in the graph
      */
-    default void removeEdges(Collection<V> among) {
+    default void removeEdges(Iterable<V> among) {
         for (V v : among) {
             for (V u : among) {
                 if (!v.equals(u)) {

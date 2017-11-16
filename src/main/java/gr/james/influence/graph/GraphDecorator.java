@@ -262,7 +262,7 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
     }
 
     @Override
-    public void removeEdges(Collection<V> among) {
+    public void removeEdges(Iterable<V> among) {
         this.g.removeEdges(among);
     }
 
