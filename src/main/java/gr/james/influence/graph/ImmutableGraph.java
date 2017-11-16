@@ -6,7 +6,6 @@ import gr.james.influence.api.GraphEdge;
 import gr.james.influence.api.VertexProvider;
 import gr.james.influence.util.Finals;
 
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -82,12 +81,12 @@ public final class ImmutableGraph<V, E> extends GraphDecorator<V, E> {
     }
 
     @Override
-    public void addEdges(Collection<V> among, EdgeProvider<E> edgeProvider) {
+    public void addEdges(Iterable<V> among, EdgeProvider<E> edgeProvider) {
         throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 
     @Override
-    public void addEdges(Collection<V> among) {
+    public void addEdges(Iterable<V> among) {
         throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 

@@ -197,12 +197,12 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
     }
 
     @Override
-    public void addEdges(Collection<V> among, EdgeProvider<E> edgeProvider) {
+    public void addEdges(Iterable<V> among, EdgeProvider<E> edgeProvider) {
         this.g.addEdges(among, edgeProvider);
     }
 
     @Override
-    public void addEdges(Collection<V> among) {
+    public void addEdges(Iterable<V> among) {
         this.g.addEdges(among);
     }
 

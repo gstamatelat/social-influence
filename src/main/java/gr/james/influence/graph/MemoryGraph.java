@@ -167,7 +167,7 @@ public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
     }
 
     @Override
-    public void addEdges(Collection<V> among) {
+    public void addEdges(Iterable<V> among) {
         if (eEdgeProvider != null) {
             this.addEdges(among, eEdgeProvider);
         } else {
