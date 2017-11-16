@@ -23,7 +23,6 @@ public class ClusteringCoefficient {
     }
 
     public static <V, E> double globalClusteringCoefficient(Graph<V, E> g, GraphState<V, Double> localClusteringCoefficient) {
-        // TODO: Implement as weighted average of the local clustering coefficient
         throw new UnsupportedOperationException();
     }
 }

@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 public class Graphs {
     public static <V, E> void connect(Graph<V, E> g) {
         List<List<V>> scc = new TarjanComponents<V>().execute(g);
-        // TODO: This is not the best way to connect the components, eg some edges might already exist
         for (int i = 0; i < scc.size(); i++) {
             List<V> thisComponent = scc.get(i);
             List<V> nextComponent = scc.get((i + 1) % scc.size());

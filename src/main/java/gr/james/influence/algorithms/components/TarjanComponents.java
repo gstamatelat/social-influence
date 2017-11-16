@@ -16,7 +16,7 @@ import java.util.Stack;
  *
  * @see KosarajuComponents
  */
-public class TarjanComponents<V> { // TODO: Implement ConnectedComponents
+public class TarjanComponents<V> {
     private Graph<V, ?> g;
     private BiMap<V, Integer> vertexMap;
 
