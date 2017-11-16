@@ -345,7 +345,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      *                 iterator
      * @throws NullPointerException if any of the vertices in {@code vertices} is {@code null}
      */
-    default void removeVertices(Collection<V> vertices) {
+    default void removeVertices(Iterable<V> vertices) {
         vertices.forEach(this::removeVertex);
     }
 

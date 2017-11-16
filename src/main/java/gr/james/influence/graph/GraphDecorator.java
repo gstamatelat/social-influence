@@ -192,7 +192,7 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
     }
 
     @Override
-    public void removeVertices(Collection<V> vertices) {
+    public void removeVertices(Iterable<V> vertices) {
         this.g.removeVertices(vertices);
     }
 

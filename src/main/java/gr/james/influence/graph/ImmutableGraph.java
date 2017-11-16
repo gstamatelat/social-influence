@@ -77,7 +77,7 @@ public final class ImmutableGraph<V, E> extends GraphDecorator<V, E> {
     }
 
     @Override
-    public void removeVertices(Collection<V> vertices) {
+    public void removeVertices(Iterable<V> vertices) {
         throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 
