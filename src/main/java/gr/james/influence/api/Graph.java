@@ -263,7 +263,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @param vertexProvider the vertex provider to use when generating a new vertex instance
      * @return the new vertex object
      * @throws InvalidVertexException if the automatically generated vertex was already in the graph; this
-     *                                behavior signals a flawed vertex factory
+     *                                behavior signals a flawed vertex provider
      * @throws NullPointerException   if {@code vertexProvider} is null or it generated {@code null}
      */
     default V addVertex(VertexProvider<V> vertexProvider) {
@@ -303,7 +303,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @param vertexProvider the vertex provider to use when generating a new vertex instance
      * @return an unmodifiable list view of the vertices in the order that they were added
      * @throws InvalidVertexException if any automatically generated vertex was already in the graph; this
-     *                                behavior signals a flawed vertex factory
+     *                                behavior signals a flawed vertex provider
      * @throws NullPointerException   if {@code vertexProvider} is null or any generated vertex was {@code null}
      */
     default List<V> addVertices(int count, VertexProvider<V> vertexProvider) {
