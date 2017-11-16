@@ -40,15 +40,6 @@ public final class Helper {
         return weightedRandom(weightMap, selections, RandomHelper.getRandom());
     }
 
-    public static String getExceptionString(Throwable e) {
-        // TODO: If e.getMessage() is null it becomes ugly
-        String exceptionAsString = String.format("\t%s: %s\n", e.getClass().getName(), e.getMessage());
-        for (StackTraceElement s : e.getStackTrace()) {
-            exceptionAsString += String.format("\t\t%s\n", s);
-        }
-        return exceptionAsString.substring(0, exceptionAsString.length() - 1);
-    }
-
     @SuppressWarnings({"AssertWithSideEffects", "ConstantConditions", "UnusedAssignment"})
     public static boolean isAssertionEnabled() {
         boolean assertsEnabled = false;
