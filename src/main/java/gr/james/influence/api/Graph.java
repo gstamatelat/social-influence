@@ -32,7 +32,7 @@ import java.util.*;
  */
 public interface Graph<V, E> extends Iterable<V>, Metadata {
     /**
-     * <p>Checks if this graph contains an edge with the specified {@code source} and {@code target}.</p>
+     * Checks if this graph contains an edge with the specified {@code source} and {@code target}.
      *
      * @param source the source of the edge
      * @param target the target of the edge
@@ -46,8 +46,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     }
 
     /**
-     * <p>Returns the {@link GraphEdge} from {@code source} to {@code target}, or {@code null} if there is no such
-     * edge.</p>
+     * Returns the {@link GraphEdge} from {@code source} to {@code target}, or {@code null} if there is no such edge.
      *
      * @param source the source vertex of the edge
      * @param target the target vertex of the edge
@@ -60,8 +59,8 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     }
 
     /**
-     * <p>Returns the weight of the edge from {@code source} to {@code target} if it exists, or {@code other} if it
-     * doesn't exist.</p>
+     * Returns the weight of the edge from {@code source} to {@code target} if it exists, or {@code other} if it doesn't
+     * exist.
      *
      * @param source the source vertex of the edge
      * @param target the target vertex of the edge
@@ -81,7 +80,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     }
 
     /**
-     * <p>Calculates the total amount of directed edges that this graph has.</p>
+     * Calculates the total amount of directed edges that this graph has.
      *
      * @return the number of directed edges in this graph
      */
@@ -94,8 +93,8 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     }
 
     /**
-     * <p>Get all outbound edges of {@code v}. The result is a {@link Map} where the keys are the destination vertices
-     * and the values are the respective {@link GraphEdge} objects.</p>
+     * Get all outbound edges of {@code v}. The result is a {@link Map} where the keys are the destination vertices
+     * and the values are the respective {@link GraphEdge} objects.
      *
      * @param v the vertex to get the outbound edges of
      * @return the outbound edges of {@code v} as a {@code Map<V, GraphEdge<V,E>>}
@@ -106,8 +105,8 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     Map<V, GraphEdge<V, E>> getOutEdges(V v);
 
     /**
-     * <p>Get all inbound edges of {@code v}. The result is a {@link Map} where the keys are the source vertices and the
-     * values are the respective {@link GraphEdge} objects.</p>
+     * Get all inbound edges of {@code v}. The result is a {@link Map} where the keys are the source vertices and the
+     * values are the respective {@link GraphEdge} objects.
      *
      * @param v the vertex to get the inbound edges of
      * @return the inbound edges of {@code v} as a {@code Map<Vertex, GraphEdge<V, E>>}
@@ -118,7 +117,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     Map<V, GraphEdge<V, E>> getInEdges(V v);
 
     /**
-     * <p>Returns the sum of the outbound edge weights of a vertex.</p>
+     * Returns the sum of the outbound edge weights of a vertex.
      *
      * @param v the vertex
      * @return the sum of weights of all outbound edges of vertex {@code v}
@@ -131,7 +130,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     }
 
     /**
-     * <p>Returns the sum of the inbound edge weights of a vertex.</p>
+     * Returns the sum of the inbound edge weights of a vertex.
      *
      * @param v the vertex
      * @return the sum of weights of all inbound edges of vertex {@code v}
@@ -144,8 +143,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     }
 
     /**
-     * <p>Returns the outbound degree of a vertex, aka the number of outbound edges. Edge to self is included (if
-     * present).</p>
+     * Returns the outbound degree of a vertex, aka the number of outbound edges. Edge to self is included (if present).
      *
      * @param v the vertex
      * @return the outbound degree of vertex {@code v}
@@ -158,8 +156,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     }
 
     /**
-     * <p>Returns the inbound degree of a vertex, aka the number of inbound edges. Edge to self is included (if
-     * present).</p>
+     * Returns the inbound degree of a vertex, aka the number of inbound edges. Edge to self is included (if present).
      *
      * @param v the vertex
      * @return the inbound degree of vertex {@code v}
@@ -172,16 +169,16 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     }
 
     /**
-     * <p>Returns an list view of the vertices contained in this graph. The list is indexed at the order at which the
-     * vertices were inserted in the graph and will always contain distinct objects.</p>
+     * Returns an list view of the vertices contained in this graph. The list is indexed at the order at which the
+     * vertices were inserted in the graph and will always contain distinct objects.
      *
      * @return an unmodifiable list of vertices in this graph
      */
     List<V> getVertices();
 
     /**
-     * <p>Checks if the graph contains the specified vertex. {@code containsVertex(v)} will return the same value as
-     * {@code getVertices().contains(v)} but could be faster depending on the {@code Graph} implementation.</p>
+     * Checks if the graph contains the specified vertex. {@code containsVertex(v)} will return the same value as
+     * {@code getVertices().contains(v)} but could be faster depending on the {@code Graph} implementation.
      *
      * @param v the vertex to check whether it is contained in the graph
      * @return {@code true} if {@code v} exists in the graph, otherwise {@code false}
@@ -192,8 +189,8 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     }
 
     /**
-     * <p>Returns the number of vertices in this graph. {@code getVerticesCount()} will return the same value as
-     * {@code getVertices().size()} but could be faster depending on the {@code Graph} implementation.</p>
+     * Returns the number of vertices in this graph. {@code getVerticesCount()} will return the same value as
+     * {@code getVertices().size()} but could be faster depending on the {@code Graph} implementation.
      *
      * @return the number of vertices in this graph
      */
@@ -202,22 +199,21 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     }
 
     /**
-     * <p>Get a {@link V} of this graph based on its index. Index is a deterministic, per-graph attribute between
-     * {@code 0} (inclusive) and {@link #getVerticesCount()} (exclusive), indicating the order at which the vertices
-     * were inserted in the graph. {@code getVertexFromIndex(i)} will return the same vertex as
-     * {@code getVertices().get(i)} but could be faster depending on the {@code Graph} implementation.</p>
+     * Get a vertex of this graph based on its index. Index is a deterministic, per-graph attribute between {@code 0}
+     * (inclusive) and {@link #getVerticesCount()} (exclusive), indicating the order at which the vertices were
+     * inserted in the graph. {@code getVertexFromIndex(i)} will return the same vertex as {@code getVertices().get(i)}
+     * but could be faster depending on the {@code Graph} implementation.
      *
      * @param index the index of the vertex
      * @return the vertex reference with the provided index
-     * @throws IndexOutOfBoundsException if the index is out of range
-     *                                   (<tt>index &lt; 0 || index &gt;= getVerticesCount()</tt>)
+     * @throws IndexOutOfBoundsException if the index is out of range ({@code index < 0 || index >= getVerticesCount()})
      */
     default V getVertexFromIndex(int index) {
         return this.getVertices().get(index);
     }
 
     /**
-     * <p>Return a uniformly distributed random vertex of this graph.</p>
+     * Return a uniformly distributed random vertex of this graph.
      *
      * @param r the {@link Random} instance to use for the operation
      * @return a random vertex contained in this graph or {@code null} if the graph is empty
@@ -232,7 +228,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     }
 
     /**
-     * <p>Return a uniformly distributed random vertex of this graph using the global random instance.</p>
+     * Return a uniformly distributed random vertex of this graph using the global random instance.
      *
      * @return a random vertex contained in this graph or {@code null} if the graph is empty
      */
@@ -242,9 +238,8 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     }
 
     /**
-     * <p>Get the read-only, index-based, vertex iterator for this graph. {@code iterator()} will return the same
-     * iterator as {@code getVertices().iterator()} but could be faster depending on the {@code Graph} implementation.
-     * </p>
+     * Get the read-only, index-based, vertex iterator for this graph. {@code iterator()} will return the same iterator
+     * as {@code getVertices().iterator()} but could be faster depending on the {@code Graph} implementation.
      *
      * @return the index-based vertex iterator for this graph
      */
@@ -253,8 +248,8 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     }
 
     /**
-     * <p>Insert the specified vertex {@code v} to the graph. If the vertex is already contained in the graph, this
-     * method is a no-op.</p>
+     * Insert the specified vertex {@code v} to the graph. If the vertex is already contained in the graph, this method
+     * is a no-op.
      *
      * @param v the vertex to insert to the graph
      * @return {@code false} if the graph previously already contained the vertex, otherwise {@code true}
@@ -263,8 +258,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     boolean addVertex(V v);
 
     /**
-     * <p>Inserts a new unconnected vertex to the graph and returns it. Use {@link #addVertices(int)} for bulk inserts.
-     * </p>
+     * Inserts a new unconnected vertex to the graph and returns it. Use {@link #addVertices(int)} for bulk inserts.
      *
      * @param vertexProvider the vertex provider to use when generating a new vertex instance
      * @return the new vertex object
@@ -286,8 +280,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     }
 
     /**
-     * <p>Insert a collection of vertices in the graph. If any of the vertices are already on the graph, they are
-     * ignored.</p>
+     * Insert a collection of vertices in the graph. If any of the vertices are already on the graph, they are ignored.
      *
      * @param vertices the vertices to insert to the graph
      * @return an unmodifiable list view containing the vertices in {@code vertices} that were already in the graph
@@ -304,7 +297,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     }
 
     /**
-     * <p>Insert {@code count} unconnected vertices in the graph.</p>
+     * Insert {@code count} unconnected vertices in the graph.
      *
      * @param count          how many new vertices to add
      * @param vertexProvider the vertex provider to use when generating a new vertex instance
@@ -327,8 +320,8 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     }
 
     /**
-     * <p>Removes a vertex from the graph if it is present. This method will also remove the inbound and outbound edges
-     * of that vertex.</p>
+     * Removes a vertex from the graph if it is present. This method will also remove the inbound and outbound edges of
+     * that vertex.
      *
      * @param v the vertex to be removed
      * @return {@code true} if the graph previously contained this vertex, otherwise {@code false}
@@ -337,8 +330,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     boolean removeVertex(V v);
 
     /**
-     * <p>Removes a group of vertices from the graph. Vertices in the group that are not in the graph are silently
-     * ignored.</p>
+     * Removes a group of vertices from the graph. Vertices in the group that are not in the graph are silently ignored.
      *
      * @param vertices an {@link Iterable} of vertices to remove from the graph
      * @throws NullPointerException if {@code vertices} or any of the objects in {@code vertices} is {@code null}
@@ -348,16 +340,16 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     }
 
     /**
-     * <p>Removes all vertices (and consequently all edges) from this graph. Metadata are not removed.</p>
+     * Removes all vertices (and consequently all edges) from this graph. Metadata are not removed.
      */
     default void clear() {
         this.removeVertices(this.getVertices());
     }
 
     /**
-     * <p>Creates an edge with the specified {@code source} and {@code target} and default weight
+     * Creates an edge with the specified {@code source} and {@code target} and default weight
      * {@link Finals#DEFAULT_EDGE_WEIGHT}. If an edge with the same {@code source} and {@code target} exists, nothing
-     * happens.</p>
+     * happens.
      *
      * @param source       the source of the edge
      * @param target       the target of the edge
@@ -376,8 +368,8 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     }
 
     /**
-     * <p>Creates an edge with the specified {@code source}, {@code target} and {@code weight}. If an edge with the
-     * same {@code source} and {@code target} exists, nothing happens.</p>
+     * Creates an edge with the specified {@code source}, {@code target} and {@code weight}. If an edge with the same
+     * {@code source} and {@code target} exists, nothing happens.
      *
      * @param source       the source of the edge
      * @param target       the target of the edge
@@ -398,9 +390,9 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     }
 
     /**
-     * <p>Creates an edge with the specified {@code source} and {@code target} and default weight
+     * Creates an edge with the specified {@code source} and {@code target} and default weight
      * {@link Finals#DEFAULT_EDGE_WEIGHT}. Also attaches the object {@code edge} to the edge. If an edge with the same
-     * {@code source} and {@code target} exists, nothing happens.</p>
+     * {@code source} and {@code target} exists, nothing happens.
      *
      * @param source the source of the edge
      * @param target the target of the edge
@@ -414,9 +406,8 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     }
 
     /**
-     * <p>Creates an edge with the specified {@code source}, {@code target} and {@code weight}. Also attaches the
-     * object {@code edge} to the edge. If an edge with the same {@code source} and {@code target} exists, nothing
-     * happens.</p>
+     * Creates an edge with the specified {@code source}, {@code target} and {@code weight}. Also attaches the object
+     * {@code edge} to the edge. If an edge with the same {@code source} and {@code target} exists, nothing happens.
      *
      * @param source the source of the edge
      * @param target the target of the edge
@@ -430,8 +421,8 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     GraphEdge<V, E> addEdge(V source, V target, E edge, double weight);
 
     /**
-     * <p>Replaces the weight of the specified edge with {@code source} and {@code target} with {@code weight}. If an
-     * edge with {@code source} and {@code target} doesn't exist, nothing will happen.</p>
+     * Replaces the weight of the specified edge with {@code source} and {@code target} with {@code weight}. If an edge
+     * with {@code source} and {@code target} doesn't exist, nothing will happen.
      *
      * @param source the source of the edge
      * @param target the target of the edge
@@ -455,11 +446,11 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     }
 
     /**
-     * <p>Connects every vertex in {@code among} with every other vertex in {@code among}; self-loops are excluded from
-     * the operation. After the operation, a complete subgraph of {@code among} will be created. This method will only
+     * Connects every vertex in {@code among} with every other vertex in {@code among}; self-loops are excluded from the
+     * operation. After the operation, a complete subgraph of {@code among} will be created. This method will only
      * create missing edges, existing ones will not be altered. If {@code among} only contains 2 (unique) vertices
      * {@code s} and {@code t}, edges {@code (s,t)} and {@code (t,s)} will be created. If {@code among} only contains
-     * 1 (unique) vertex or less, it's a no-op.</p>
+     * 1 (unique) vertex or less, it's a no-op.
      *
      * @param among        an {@link Iterable} of vertices of which each pair will be connected
      * @param edgeProvider the edge provider to use when generating a new edge instance
@@ -483,11 +474,11 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     }
 
     /**
-     * <p>Connects every vertex in {@code among} with every other vertex in {@code among}; self-loops are excluded from
-     * the operation. After the operation, a complete subgraph of {@code among} will be created. This method will only
+     * Connects every vertex in {@code among} with every other vertex in {@code among}; self-loops are excluded from the
+     * operation. After the operation, a complete subgraph of {@code among} will be created. This method will only
      * create missing edges, existing ones will not be altered. If {@code among} only contains 2 (unique) vertices
      * {@code s} and {@code t}, edges {@code (s,t)} and {@code (t,s)} will be created. If {@code among} only contains
-     * 1 (unique) vertex or less, it's a no-op.</p>
+     * 1 (unique) vertex or less, it's a no-op.
      *
      * @param among        the vertices as variable arguments to connect each of its pairs; you should prefer a
      *                     collection with a fast iterator implementation
@@ -505,7 +496,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     }
 
     /**
-     * <p>Remove the edge with the specified {@code source} and {@code target}, if it exists.</p>
+     * Remove the edge with the specified {@code source} and {@code target}, if it exists.
      *
      * @param source the source of the edge
      * @param target the target of the edge
@@ -517,10 +508,10 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     GraphEdge<V, E> removeEdge(V source, V target);
 
     /**
-     * <p>Removes all the (existing) edges of which both the source and the target are contained in {@code among}.
+     * Removes all the (existing) edges of which both the source and the target are contained in {@code among}.
      * Self-loops are excluded from the operation. If {@code among} only contains 2 (unique) vertices {@code s} and
      * {@code t}, edges {@code (s,t)} and {@code (t,s)} will be removed (assuming they exist). If {@code among} only
-     * contains 1 (unique) vertex or less, it's a no-op.</p>
+     * contains 1 (unique) vertex or less, it's a no-op.
      *
      * @param among an {@link Iterable} of vertices to strip the edges from
      * @throws NullPointerException   if {@code among} or any vertex in {@code among} is {@code null}
@@ -537,10 +528,10 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     }
 
     /**
-     * <p>Removes all the (existing) edges of which both the source and the target are contained in {@code among}.
+     * Removes all the (existing) edges of which both the source and the target are contained in {@code among}.
      * Self-loops are excluded from the operation. If {@code among} only contains 2 (unique) vertices {@code s} and
      * {@code t}, edges {@code (s,t)} and {@code (t,s)} will be removed (assuming they exist). If {@code among} only
-     * contains 1 (unique) vertex or less, it's a no-op.</p>
+     * contains 1 (unique) vertex or less, it's a no-op.
      *
      * @param among the vertices as variable arguments to strip the edges from; you should prefer a collection with a
      *              fast {@code next()} implementation
@@ -584,8 +575,8 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     }
 
     /**
-     * <p>Get a collection of all edges in this graph. The items are of type {@link GraphEdge} and are in no particular
-     * order inside the collection.</p>
+     * Get a collection of all edges in this graph. The items are of type {@link GraphEdge} and are in no particular
+     * order inside the collection.
      *
      * @return a collection of all edges in the graph
      */
