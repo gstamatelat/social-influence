@@ -1,4 +1,4 @@
-package gr.james.influence.api.algorithms;
+package gr.james.influence.api.algorithms.distance;
 
 import gr.james.influence.api.GraphEdge;
 
