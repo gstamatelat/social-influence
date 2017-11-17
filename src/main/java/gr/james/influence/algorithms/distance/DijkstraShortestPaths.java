@@ -7,8 +7,9 @@ import gr.james.influence.api.algorithms.distance.SingleSourceShortestPaths;
 import java.util.List;
 
 /**
- * Implementation of Dijkstra's shortest paths algorithm using a binary heap. Instances of this class expect that the
- * graph will not be mutated after the constructor is invoked.
+ * Implementation of Dijkstra's shortest paths algorithm using a binary heap. This class implements the
+ * {@link SingleSourceShortestPaths} interface. Instances of this class expect that the graph will not be mutated after
+ * the constructor is invoked.
  *
  * @param <V> the vertex type
  */
