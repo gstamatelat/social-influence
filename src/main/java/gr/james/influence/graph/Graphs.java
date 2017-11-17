@@ -24,6 +24,16 @@ public class Graphs {
         }
     }
 
+    public static <V, E> void reverse(Graph<V, E> g) {
+        final Collection<GraphEdge<V, E>> edges = g.getEdges();
+        g.removeEdges(g.getVertices());
+        for (GraphEdge<V, E> e : edges) {
+            if (!e.getSource().equals(e.getTarget())) {
+                g.addEdge(e.getTarget(), e.getSource(), e.getEdge(), e.getWeight());
+            }
+        }
+    }
+
     public static <V, E> void randomizeEdgeWeights(Graph<V, E> g) {
         for (GraphEdge<V, E> e : g.getEdges()) {
             boolean change = g.setEdgeWeight(e.getSource(), e.getTarget(),
