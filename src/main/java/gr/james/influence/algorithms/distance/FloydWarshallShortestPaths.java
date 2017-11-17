@@ -8,8 +8,6 @@ import gr.james.influence.util.collections.VertexPair;
 import java.util.HashMap;
 import java.util.Map;
 
-// TODO: Add javadoc: use DijkstraAllShortestPaths instead of this class because it's faster
-
 /**
  * Implementation of the <a href="http://en.wikipedia.org/wiki/Floyd%E2%80%93Warshall_algorithm">Floyd-Warshall
  * algorithm</a>. The Floyd-Warshall algorithm is an algorithm for finding shortest paths in a weighted graph with
