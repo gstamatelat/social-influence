@@ -9,7 +9,7 @@ import gr.james.influence.algorithms.iterators.GraphStateIterator;
 import gr.james.influence.algorithms.iterators.OrderedVertexIterator;
 import gr.james.influence.algorithms.iterators.RandomSurferIterator;
 import gr.james.influence.algorithms.scoring.DeGroot;
-import gr.james.influence.algorithms.scoring.Degree;
+import gr.james.influence.algorithms.scoring.DegreeCentrality;
 import gr.james.influence.algorithms.scoring.PageRank;
 import gr.james.influence.api.Graph;
 import gr.james.influence.graph.Direction;
@@ -94,8 +94,8 @@ public class Tests {
         /* Make the graph */
         SimpleGraph g = new BarabasiAlbertGenerator(vertexCount, 2, 2, 1.0).generate();
 
-        /* Get PageRank and Degree */
-        GraphState<String, Integer> degree = Degree.execute(g, Direction.INBOUND);
+        /* Get PageRank and DegreeCentrality */
+        GraphState<String, Integer> degree = DegreeCentrality.execute(g, Direction.INBOUND);
         GraphState<String, Double> pagerank = PageRank.execute(g, 0.0);
 
         /* Normalize pagerank */
@@ -155,7 +155,7 @@ public class Tests {
         SimpleGraph g = new TwoWheelsGenerator(k).generate();
 
         /* Get max degree */
-        int max = new GraphStateIterator<>(Degree.execute(g, Direction.INBOUND)).next().getWeight();
+        int max = new GraphStateIterator<>(DegreeCentrality.execute(g, Direction.INBOUND)).next().getWeight();
 
         /* The max has to be k or 6 if k is too low */
         Assert.assertEquals("twoWheelsMaxDegreeTest - " + k, Math.max(6, k - 1), max);

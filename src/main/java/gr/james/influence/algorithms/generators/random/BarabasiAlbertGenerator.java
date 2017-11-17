@@ -1,7 +1,7 @@
 package gr.james.influence.algorithms.generators.random;
 
 import gr.james.influence.algorithms.generators.basic.CompleteGenerator;
-import gr.james.influence.algorithms.scoring.Degree;
+import gr.james.influence.algorithms.scoring.DegreeCentrality;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphFactory;
 import gr.james.influence.api.algorithms.GraphGenerator;
@@ -36,7 +36,7 @@ public class BarabasiAlbertGenerator implements GraphGenerator {
         Graph<V, E> g = new CompleteGenerator(initialClique).generate(factory);
 
         while (g.getVerticesCount() < totalVertices) {
-            GraphState<V, Integer> degree = Degree.execute(g, Direction.INBOUND);
+            GraphState<V, Integer> degree = DegreeCentrality.execute(g, Direction.INBOUND);
 
             Map<V, Double> weightMap = new HashMap<>();
             for (V v : degree.keySet()) {
