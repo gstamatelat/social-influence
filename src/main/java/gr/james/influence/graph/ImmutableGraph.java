@@ -16,10 +16,10 @@ public final class ImmutableGraph<V, E> extends GraphDecorator<V, E> {
         super(g);
     }
 
-    public static <V, E> ImmutableGraph decorate(Graph<V, E> g) {
+    public static <V, E> ImmutableGraph<V, E> decorate(Graph<V, E> g) {
         if (g instanceof ImmutableGraph) {
             Finals.LOG.debug("Graph {} is already an instance of ImmutableGraph", g);
-            return (ImmutableGraph) g;
+            return (ImmutableGraph<V, E>) g;
         } else {
             return new ImmutableGraph<>(g);
         }
