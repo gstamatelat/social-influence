@@ -99,9 +99,8 @@ public class DijkstraShortestPathsAlgorithm<V> {
      *
      * @param v the vertex to get the shortest route to
      * @return an unmodifiable {@link List} of {@link GraphEdge} representing the shortest route to {@code v}
-     * @throws NullPointerException          if {@code v} is null
-     * @throws IllegalArgumentException      if {@code v} is not in the graph
-     * @throws UnsupportedOperationException if the algorithm does not support this operation
+     * @throws NullPointerException     if {@code v} is null
+     * @throws IllegalArgumentException if {@code v} is not in the graph
      */
     public List<GraphEdge<V, ?>> pathTo(V v) {
         Conditions.requireNonNull(v);
