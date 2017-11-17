@@ -15,6 +15,9 @@ import java.util.Map;
  * lengths (sum of edge weights) of the shortest paths between all pairs of vertices, though it does not return details
  * of the paths themselves. The {@link #path(Object, Object)} method will always throw an
  * {@link UnsupportedOperationException}.
+ * <p>
+ * You should use {@link DijkstraAllShortestPaths} instead of this class. {@link DijkstraAllShortestPaths} is a drop-in
+ * replacement of {@code FloydWarshallShortestPaths} but faster in most cases.
  */
 public class FloydWarshallShortestPaths<V> implements AllPairsShortestPaths<V> {
     private final Map<VertexPair<V>, Double> dist;
