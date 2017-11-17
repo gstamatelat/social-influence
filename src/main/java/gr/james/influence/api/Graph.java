@@ -280,14 +280,31 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     }
 
     /**
-     * Insert a collection of vertices in the graph. If any of the vertices are already on the graph, they are ignored.
+     * Insert a group of vertices in the graph. If any of the vertices are already on the graph, they are ignored.
      *
      * @param vertices the vertices to insert to the graph
      * @return an unmodifiable list view containing the vertices in {@code vertices} that were already in the graph
      * @throws NullPointerException if any vertex in {@code vertices} is {@code null}
      */
     default List<V> addVertices(V... vertices) {
-        List<V> contained = new ArrayList<>();
+        final List<V> contained = new ArrayList<>();
+        for (V v : vertices) {
+            if (!this.addVertex(v)) {
+                contained.add(v);
+            }
+        }
+        return Collections.unmodifiableList(contained);
+    }
+
+    /**
+     * Insert a group of vertices in the graph. If any of the vertices are already on the graph, they are ignored.
+     *
+     * @param vertices an {@link Iterable} of vertices to insert to the graph
+     * @return an unmodifiable list view containing the vertices in {@code vertices} that were already in the graph
+     * @throws NullPointerException if any vertex in {@code vertices} is {@code null}
+     */
+    default List<V> addVertices(Iterable<V> vertices) {
+        final List<V> contained = new ArrayList<>();
         for (V v : vertices) {
             if (!this.addVertex(v)) {
                 contained.add(v);

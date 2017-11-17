@@ -61,6 +61,11 @@ public final class ImmutableGraph<V, E> extends GraphDecorator<V, E> {
     }
 
     @Override
+    public List<V> addVertices(Iterable<V> vertices) {
+        throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
+    }
+
+    @Override
     public List<V> addVertices(int count, VertexProvider<V> vertexProvider) {
         throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }

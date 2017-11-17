@@ -177,6 +177,11 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
     }
 
     @Override
+    public List<V> addVertices(Iterable<V> vertices) {
+        return this.g.addVertices(vertices);
+    }
+
+    @Override
     public List<V> addVertices(int count, VertexProvider<V> vertexProvider) {
         return this.g.addVertices(count, vertexProvider);
     }
