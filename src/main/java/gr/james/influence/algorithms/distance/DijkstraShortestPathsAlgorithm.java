@@ -28,6 +28,7 @@ public class DijkstraShortestPathsAlgorithm<V> {
      * @param source the source vertex
      * @param target the target vertex (can be  {@code null})
      * @throws NullPointerException     if {@code g} or {@code source} is {@code null}
+     * @throws IllegalArgumentException if {@code source} is not in {@code g}
      * @throws IllegalArgumentException if {@code target} is not {@code null} and not in {@code g}
      */
     public DijkstraShortestPathsAlgorithm(Graph<V, ?> g, V source, V target) {
@@ -74,7 +75,7 @@ public class DijkstraShortestPathsAlgorithm<V> {
      * Get the distance of the shortest path to a target vertex. If there is no such path, this method will return
      * {@link Double#POSITIVE_INFINITY}. Additionally, this method may also return {@link Double#POSITIVE_INFINITY}
      * if the algorithm did not previously complete (if the constructor argument {@code target} was not {@code null})
-     * even if there is a path from {@code start} to {@code v}.
+     * even if there is a path from {@code start} to {@code v}. This method runs in constant time.
      *
      * @param v the vertex to get the distance to
      * @return the distance of the shortest path to {@code v}
@@ -95,7 +96,7 @@ public class DijkstraShortestPathsAlgorithm<V> {
      * target specified is the source vertex associated with this instance this method will return an empty sequence.
      * Additionally, this method may also return an empty sequence if the algorithm did not previously complete (if the
      * constructor argument {@code target} was not {@code null}) even if there is a path from {@code start} to
-     * {@code v}.
+     * {@code v}. This method runs in time proportional to the shortest path length.
      *
      * @param v the vertex to get the shortest route to
      * @return an unmodifiable {@link List} of {@link GraphEdge} representing the shortest route to {@code v}
