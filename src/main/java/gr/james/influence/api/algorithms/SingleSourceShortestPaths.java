@@ -25,8 +25,11 @@ public interface SingleSourceShortestPaths<V> {
      *
      * @param v the vertex to get the shortest route to
      * @return a {@link List} of {@link GraphEdge} representing the shortest route to {@code v}
-     * @throws NullPointerException     if {@code v} is null
-     * @throws IllegalArgumentException if {@code v} is not in the graph
+     * @throws NullPointerException          if {@code v} is null
+     * @throws IllegalArgumentException      if {@code v} is not in the graph
+     * @throws UnsupportedOperationException if the algorithm does not support this operation
      */
-    List<GraphEdge<V, ?>> pathTo(V v);
+    default List<GraphEdge<V, ?>> pathTo(V v) {
+        throw new UnsupportedOperationException();
+    }
 }

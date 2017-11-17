@@ -27,8 +27,11 @@ public interface AllPairsShortestPaths<V> {
      * @param from the source vertex
      * @param to   the target vertex
      * @return a {@link List} of {@link GraphEdge} representing the shortest route from {@code from} to {@code to}
-     * @throws NullPointerException     if either {@code from} or {@code to} is null
-     * @throws IllegalArgumentException if either {@code from} or {@code to} is not in the graph
+     * @throws NullPointerException          if either {@code from} or {@code to} is null
+     * @throws IllegalArgumentException      if either {@code from} or {@code to} is not in the graph
+     * @throws UnsupportedOperationException if the algorithm does not support this operation
      */
-    List<GraphEdge<V, ?>> path(V from, V to);
+    default List<GraphEdge<V, ?>> path(V from, V to) {
+        throw new UnsupportedOperationException();
+    }
 }
