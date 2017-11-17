@@ -61,7 +61,7 @@ public class FloydWarshallShortestPaths<V> implements AllPairsShortestPaths<V> {
      */
     @Override
     public double distance(V from, V to) {
-        Double distance = dist.get(new VertexPair<>(from, to));
+        final Double distance = dist.get(new VertexPair<>(from, to));
         if (distance == null) {
             throw new IllegalArgumentException();
         }

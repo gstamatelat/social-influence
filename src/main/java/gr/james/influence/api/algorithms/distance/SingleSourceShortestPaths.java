@@ -11,7 +11,8 @@ import java.util.List;
  */
 public interface SingleSourceShortestPaths<V> {
     /**
-     * Get the distance of the shortest path to a target vertex.
+     * Get the distance of the shortest path to a target vertex. If there is no such path, this method will return
+     * {@link Double#POSITIVE_INFINITY}.
      *
      * @param v the vertex to get the distance to
      * @return the distance of the shortest path to {@code v}
@@ -21,10 +22,11 @@ public interface SingleSourceShortestPaths<V> {
     double distanceTo(V v);
 
     /**
-     * Get the shortest path to a target vertex as a sequence of edges.
+     * Get the shortest path to a target vertex as a sequence of edges. If there is no path to the target or if the
+     * target specified is the source vertex associated with this instance this method will return an empty sequence.
      *
      * @param v the vertex to get the shortest route to
-     * @return a {@link List} of {@link GraphEdge} representing the shortest route to {@code v}
+     * @return an unmodifiable {@link List} of {@link GraphEdge} representing the shortest route to {@code v}
      * @throws NullPointerException          if {@code v} is null
      * @throws IllegalArgumentException      if {@code v} is not in the graph
      * @throws UnsupportedOperationException if the algorithm does not support this operation
