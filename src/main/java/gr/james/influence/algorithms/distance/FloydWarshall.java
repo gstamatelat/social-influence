@@ -17,6 +17,7 @@ import java.util.Map;
  * <p>
  * You should use {@link Dijkstra#executeDistanceMap(Graph)}, which is faster.
  */
+@Deprecated
 public class FloydWarshall {
     public static <V, E> Map<VertexPair<V>, Double> execute(Graph<V, E> g) {
         final Map<VertexPair<V>, Double> dist = new HashMap<>();

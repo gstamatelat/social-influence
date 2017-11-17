@@ -7,6 +7,7 @@ import gr.james.influence.util.collections.VertexSequence;
 
 import java.util.*;
 
+@Deprecated
 public class Dijkstra {
     public static <V, E> Map<V, Double> execute(Graph<V, E> g, V source) {
         Map<V, Collection<VertexSequence<V>>> paths = executeWithPathInternal(g, source, true);
