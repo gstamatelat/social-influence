@@ -361,6 +361,14 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     }
 
     /**
+     * Removes all edges from this graph. Metadata are not removed.
+     */
+    default void clearEdges() {
+        removeEdges(getVertices());
+        assert getEdgesCount() == 0;
+    }
+
+    /**
      * Creates an edge with the specified {@code source} and {@code target} and default weight
      * {@link Finals#DEFAULT_EDGE_WEIGHT}. If an edge with the same {@code source} and {@code target} exists, nothing
      * happens.
@@ -560,11 +568,6 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      */
     default void removeEdges(V... among) {
         this.removeEdges(Arrays.asList(among));
-    }
-
-    default void removeEdges() {
-        removeEdges(getVertices());
-        assert getEdgesCount() == 0;
     }
 
     @Deprecated

@@ -26,7 +26,7 @@ public class Graphs {
 
     public static <V, E> void reverse(Graph<V, E> g) {
         final Collection<GraphEdge<V, E>> edges = g.getEdges();
-        g.removeEdges();
+        g.clearEdges();
         for (GraphEdge<V, E> e : edges) {
             g.addEdge(e.getTarget(), e.getSource(), e.getEdge(), e.getWeight());
         }

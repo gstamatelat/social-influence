@@ -76,6 +76,14 @@ public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
     }
 
     @Override
+    public void clearEdges() {
+        for (V v : this.m.keySet()) {
+            this.m.get(v).getFirst().clear();
+            this.m.get(v).getSecond().clear();
+        }
+    }
+
+    @Override
     public GraphEdge<V, E> addEdge(V source, V target, E edge, double weight) {
         Conditions.requireArgument(weight > 0, Finals.E_EDGE_WEIGHT_NEGATIVE, weight);
         if (!containsEdge(source, target)) {
@@ -100,14 +108,6 @@ public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
             return h;
         } else {
             return null;
-        }
-    }
-
-    @Override
-    public void removeEdges() {
-        for (V v : this.m.keySet()) {
-            this.m.get(v).getFirst().clear();
-            this.m.get(v).getSecond().clear();
         }
     }
 

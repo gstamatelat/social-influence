@@ -267,8 +267,8 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
     }
 
     @Override
-    public void removeEdges() {
-        this.g.removeEdges();
+    public void clearEdges() {
+        this.g.clearEdges();
     }
 
     @Override

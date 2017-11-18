@@ -161,7 +161,7 @@ public final class ImmutableGraph<V, E> extends GraphDecorator<V, E> {
     }
 
     @Override
-    public void removeEdges() {
+    public void clearEdges() {
         throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 }
