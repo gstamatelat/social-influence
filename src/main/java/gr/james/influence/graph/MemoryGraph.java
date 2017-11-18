@@ -17,7 +17,7 @@ public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
     private final Map<V, Pair<Map<V, GraphEdge<V, E>>>> m;
     private final List<V> vList;
     private final VertexProvider<V> vertexProvider;
-    private final EdgeProvider<E> eEdgeProvider;
+    private final EdgeProvider<E> edgeProvider;
 
     /**
      * <p>Constructs an empty {@code MemoryGraph}.</p>
@@ -26,11 +26,11 @@ public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
         this(null, null);
     }
 
-    public MemoryGraph(VertexProvider<V> vertexProvider, EdgeProvider<E> eEdgeProvider) {
+    public MemoryGraph(VertexProvider<V> vertexProvider, EdgeProvider<E> edgeProvider) {
         this.m = new HashMap<>();
         this.vList = new ArrayList<>();
         this.vertexProvider = vertexProvider;
-        this.eEdgeProvider = eEdgeProvider;
+        this.edgeProvider = edgeProvider;
     }
 
     @Override
@@ -150,8 +150,8 @@ public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
 
     @Override
     public GraphEdge<V, E> addEdge(V source, V target) {
-        if (eEdgeProvider != null) {
-            return this.addEdge(source, target, eEdgeProvider);
+        if (edgeProvider != null) {
+            return this.addEdge(source, target, edgeProvider);
         } else {
             throw new UnsupportedOperationException();
         }
@@ -159,8 +159,8 @@ public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
 
     @Override
     public GraphEdge<V, E> addEdge(V source, V target, double weight) {
-        if (eEdgeProvider != null) {
-            return this.addEdge(source, target, weight, eEdgeProvider);
+        if (edgeProvider != null) {
+            return this.addEdge(source, target, weight, edgeProvider);
         } else {
             throw new UnsupportedOperationException();
         }
@@ -168,8 +168,8 @@ public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
 
     @Override
     public void addEdges(Iterable<V> among) {
-        if (eEdgeProvider != null) {
-            this.addEdges(among, eEdgeProvider);
+        if (edgeProvider != null) {
+            this.addEdges(among, edgeProvider);
         } else {
             throw new UnsupportedOperationException();
         }
@@ -177,8 +177,8 @@ public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
 
     @Override
     public void addEdges(V... among) {
-        if (eEdgeProvider != null) {
-            this.addEdges(eEdgeProvider, among);
+        if (edgeProvider != null) {
+            this.addEdges(edgeProvider, among);
         } else {
             throw new UnsupportedOperationException();
         }
