@@ -41,8 +41,8 @@ public class Graphs {
     }
 
     /**
-     * <p>Fuses two or more vertices into a single one. This method may cause information loss
-     * if there are conflicts on the edges.</p>
+     * Fuses two or more vertices into a single one. This operation is also known as contraction. This method may cause
+     * information loss if there are conflicts on the edges.
      *
      * @param g   the graph to apply the fusion to
      * @param f   an array of vertices to be fused
@@ -51,7 +51,7 @@ public class Graphs {
      * @return the vertex that is the result of the fusion
      * @see <a href="http://mathworld.wolfram.com/VertexContraction.html">VertexContraction @ mathworld.wolfram.com</a>
      */
-    public static <V, E> V fuseVertices(Graph<V, E> g, Collection<V> f) {
+    public static <V, E> V fuseVertices(Graph<V, E> g, Iterable<V> f) {
         V v = g.addVertex();
 
         for (V y : f) {
