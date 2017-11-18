@@ -91,6 +91,31 @@ public class DijkstraClosestFirstIterator<V> implements Iterator<V> {
     }
 
     /**
+     * Runs this iterator until there are no more elements.
+     */
+    public void exhaust() {
+        while (hasNext()) {
+            next();
+        }
+    }
+
+    /**
+     * Runs this iterator until there are no more elements or until a vertex has been marked.
+     *
+     * @param until the vertex on which to stop the iteration
+     * @throws NullPointerException   if {@code until} is {@code null}
+     * @throws InvalidVertexException if {@code until} is not in {@code g}
+     */
+    public void exhaust(V until) {
+        Conditions.requireNonNullAndExists(until, g);
+        while (hasNext()) {
+            if (next().equals(until)) {
+                break;
+            }
+        }
+    }
+
+    /**
      * Get the distance of the shortest path to a target vertex. If there is no such path, this method will return
      * {@link Double#POSITIVE_INFINITY}. Additionally, this method may also return {@link Double#POSITIVE_INFINITY}
      * if the algorithm did not previously complete (if the iterator is not exhausted) even if there is a path from

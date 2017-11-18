@@ -3,7 +3,7 @@ package gr.james.influence.algorithms.distance;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphEdge;
 import gr.james.influence.api.algorithms.distance.SourceSinkShortestPaths;
-import gr.james.influence.util.Conditions;
+import gr.james.influence.util.exceptions.InvalidVertexException;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import java.util.List;
  * @param <V> the vertex type
  */
 public class DijkstraOneShortestPath<V> implements SourceSinkShortestPaths<V> {
-    private final DijkstraShortestPathsAlgorithm<V> alg;
+    private final DijkstraClosestFirstIterator<V> alg;
     private final V to;
 
     /**
@@ -26,13 +26,12 @@ public class DijkstraOneShortestPath<V> implements SourceSinkShortestPaths<V> {
      * @param g      the {@link Graph} in which to perform the algorithm
      * @param source the source vertex
      * @param target the target vertex
-     * @throws NullPointerException     if {@code g} or {@code source} or {@code target} is {@code null}
-     * @throws IllegalArgumentException if {@code source} is not in {@code g}
-     * @throws IllegalArgumentException if {@code target} is not in {@code g}
+     * @throws NullPointerException   if {@code g} or {@code source} or {@code target} is {@code null}
+     * @throws InvalidVertexException if {@code source} or {@code target} is not in {@code g}
      */
     public DijkstraOneShortestPath(Graph<V, ?> g, V source, V target) {
-        Conditions.requireNonNull(target);
-        alg = new DijkstraShortestPathsAlgorithm<>(g, source, target);
+        alg = new DijkstraClosestFirstIterator<>(g, source);
+        alg.exhaust(target);
         to = target;
     }
 

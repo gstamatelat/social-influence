@@ -4,6 +4,7 @@ import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphEdge;
 import gr.james.influence.api.algorithms.distance.AllPairsShortestPaths;
 import gr.james.influence.util.Conditions;
+import gr.james.influence.util.exceptions.InvalidVertexException;
 
 import java.util.HashMap;
 import java.util.List;
@@ -37,7 +38,7 @@ public class DijkstraAllShortestPaths<V> implements AllPairsShortestPaths<V> {
     public double distance(V from, V to) {
         Conditions.requireAllNonNull(from, to);
         if (!g.containsVertex(from) || !g.containsVertex(to)) {
-            throw new IllegalArgumentException();
+            throw new InvalidVertexException();
         }
         if (!alg.containsKey(from)) {
             alg.put(from, new DijkstraShortestPaths<>(g, from));
@@ -49,7 +50,7 @@ public class DijkstraAllShortestPaths<V> implements AllPairsShortestPaths<V> {
     public List<GraphEdge<V, ?>> path(V from, V to) {
         Conditions.requireAllNonNull(from, to);
         if (!g.containsVertex(from) || !g.containsVertex(to)) {
-            throw new IllegalArgumentException();
+            throw new InvalidVertexException();
         }
         if (!alg.containsKey(from)) {
             alg.put(from, new DijkstraShortestPaths<>(g, from));

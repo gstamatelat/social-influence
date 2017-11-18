@@ -1,6 +1,7 @@
 package gr.james.influence.api.algorithms.distance;
 
 import gr.james.influence.api.GraphEdge;
+import gr.james.influence.util.exceptions.InvalidVertexException;
 
 import java.util.List;
 
@@ -16,8 +17,8 @@ public interface SingleSourceShortestPaths<V> {
      *
      * @param v the vertex to get the distance to
      * @return the distance of the shortest path to {@code v}
-     * @throws NullPointerException     if {@code v} is null
-     * @throws IllegalArgumentException if {@code v} is not in the graph
+     * @throws NullPointerException   if {@code v} is null
+     * @throws InvalidVertexException if {@code v} is not in the graph
      */
     double distanceTo(V v);
 
@@ -28,7 +29,7 @@ public interface SingleSourceShortestPaths<V> {
      * @param v the vertex to get the shortest route to
      * @return an unmodifiable {@link List} of {@link GraphEdge} representing the shortest route to {@code v}
      * @throws NullPointerException          if {@code v} is null
-     * @throws IllegalArgumentException      if {@code v} is not in the graph
+     * @throws InvalidVertexException        if {@code v} is not in the graph
      * @throws UnsupportedOperationException if the algorithm does not support this operation
      */
     default List<GraphEdge<V, ?>> pathTo(V v) {

@@ -3,6 +3,7 @@ package gr.james.influence.algorithms.distance;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphEdge;
 import gr.james.influence.api.algorithms.distance.SingleSourceShortestPaths;
+import gr.james.influence.util.exceptions.InvalidVertexException;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ import java.util.List;
  * @param <V> the vertex type
  */
 public class DijkstraShortestPaths<V> implements SingleSourceShortestPaths<V> {
-    private final DijkstraShortestPathsAlgorithm<V> alg;
+    private final DijkstraClosestFirstIterator<V> alg;
 
     /**
      * Construct an instance of {@link DijkstraShortestPaths} with a given {@link Graph} and a {@code source}. The
@@ -22,11 +23,12 @@ public class DijkstraShortestPaths<V> implements SingleSourceShortestPaths<V> {
      *
      * @param g      the {@link Graph} in which to perform the algorithm
      * @param source the source vertex
-     * @throws NullPointerException     if {@code g} or {@code source} is {@code null}
-     * @throws IllegalArgumentException if {@code source} is not in {@code g}
+     * @throws NullPointerException   if {@code g} or {@code source} is {@code null}
+     * @throws InvalidVertexException if {@code source} is not in {@code g}
      */
     public DijkstraShortestPaths(Graph<V, ?> g, V source) {
-        alg = new DijkstraShortestPathsAlgorithm<>(g, source, null);
+        alg = new DijkstraClosestFirstIterator<>(g, source);
+        alg.exhaust();
     }
 
     /**
