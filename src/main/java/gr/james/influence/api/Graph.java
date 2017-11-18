@@ -385,6 +385,17 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
         return addEdge(source, target, Finals.DEFAULT_EDGE_WEIGHT, edgeProvider);
     }
 
+    /**
+     * Creates an edge with the specified {@code source} and {@code target} and default weight
+     * {@link Finals#DEFAULT_EDGE_WEIGHT}. The edge object will be assigned to {@code null}. If an edge with the same
+     * {@code source} and {@code target} exists, nothing happens.
+     *
+     * @param source the source of the edge
+     * @param target the target of the edge
+     * @return the {@link GraphEdge} object of the newly added edge, or {@code null} if an edge already exists
+     * @throws NullPointerException   if any of the arguments is {@code null}
+     * @throws InvalidVertexException if either {@code source} or {@code target} is not in the graph
+     */
     default GraphEdge<V, E> addEdge(V source, V target) {
         return addEdge(source, target, null, Finals.DEFAULT_EDGE_WEIGHT);
     }
@@ -407,6 +418,18 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
         return addEdge(source, target, edgeProvider.getEdge(), weight);
     }
 
+    /**
+     * Creates an edge with the specified {@code source}, {@code target} and {@code weight}. The edge object will be
+     * assigned to {@code null}. If an edge with the same {@code source} and {@code target} exists, nothing happens.
+     *
+     * @param source the source of the edge
+     * @param target the target of the edge
+     * @param weight the weight to be associated with the edge
+     * @return the {@link GraphEdge} object of the newly added edge, or {@code null} if an edge already exists
+     * @throws NullPointerException     if any of the arguments is {@code null}
+     * @throws InvalidVertexException   if either {@code source} or {@code target} is not in the graph
+     * @throws IllegalArgumentException if {@code weight} is non-positive
+     */
     default GraphEdge<V, E> addEdge(V source, V target, double weight) {
         return addEdge(source, target, null, weight);
     }
