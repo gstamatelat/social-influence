@@ -1,6 +1,5 @@
 package gr.james.influence.graph;
 
-import gr.james.influence.api.EdgeProvider;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphEdge;
 import gr.james.influence.api.VertexProvider;
@@ -17,20 +16,18 @@ public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
     private final Map<V, Pair<Map<V, GraphEdge<V, E>>>> m;
     private final List<V> vList;
     private final VertexProvider<V> vertexProvider;
-    private final EdgeProvider<E> edgeProvider;
 
     /**
      * <p>Constructs an empty {@code MemoryGraph}.</p>
      */
     public MemoryGraph() {
-        this(null, null);
+        this(null);
     }
 
-    public MemoryGraph(VertexProvider<V> vertexProvider, EdgeProvider<E> edgeProvider) {
+    public MemoryGraph(VertexProvider<V> vertexProvider) {
         this.m = new HashMap<>();
         this.vList = new ArrayList<>();
         this.vertexProvider = vertexProvider;
-        this.edgeProvider = edgeProvider;
     }
 
     @Override
@@ -143,42 +140,6 @@ public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
     public List<V> addVertices(int count) {
         if (vertexProvider != null) {
             return this.addVertices(count, vertexProvider);
-        } else {
-            throw new UnsupportedOperationException();
-        }
-    }
-
-    @Override
-    public GraphEdge<V, E> addEdge(V source, V target) {
-        if (edgeProvider != null) {
-            return this.addEdge(source, target, edgeProvider);
-        } else {
-            throw new UnsupportedOperationException();
-        }
-    }
-
-    @Override
-    public GraphEdge<V, E> addEdge(V source, V target, double weight) {
-        if (edgeProvider != null) {
-            return this.addEdge(source, target, weight, edgeProvider);
-        } else {
-            throw new UnsupportedOperationException();
-        }
-    }
-
-    @Override
-    public void addEdges(Iterable<V> among) {
-        if (edgeProvider != null) {
-            this.addEdges(among, edgeProvider);
-        } else {
-            throw new UnsupportedOperationException();
-        }
-    }
-
-    @Override
-    public void addEdges(V... among) {
-        if (edgeProvider != null) {
-            this.addEdges(edgeProvider, among);
         } else {
             throw new UnsupportedOperationException();
         }

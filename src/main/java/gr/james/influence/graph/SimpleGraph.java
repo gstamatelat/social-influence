@@ -1,6 +1,5 @@
 package gr.james.influence.graph;
 
-import gr.james.influence.api.EdgeProvider;
 import gr.james.influence.api.GraphFactory;
 import gr.james.influence.api.VertexProvider;
 
@@ -14,11 +13,9 @@ public class SimpleGraph extends MemoryGraph<String, Object> {
         }
     };
 
-    public static EdgeProvider<Object> edgeProvider = () -> null;
-
     public static GraphFactory<String, Object> graphFactory = SimpleGraph::new;
 
     public SimpleGraph() {
-        super(vertexProvider, edgeProvider);
+        super(vertexProvider);
     }
 }
