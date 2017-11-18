@@ -4,14 +4,14 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 /**
- * <p>A {@code GraphExporter} provides means to write a Graph to an {@link OutputStream} with the format imposed by this
- * class.</p>
+ * A {@code GraphExporter} provides means to write a {@link Graph} to an {@link OutputStream} with the format imposed by
+ * this class.
  */
 public interface GraphExporter {
     /**
-     * <p>Export {@code g} to {@code target} using the format imposed by this class. The {@code V.toString} method is
-     * used as a serializer. Implementations of this method should not close {@code target}, the caller is instead
-     * responsible for doing so.</p>
+     * Export {@code g} to {@code target} using the format imposed by this class. The {@code V.toString} method is used
+     * as a serializer. Implementations of this method should not close {@code target}, the caller is instead
+     * responsible for doing so.
      *
      * @param g      the graph that will be exported to {@code target}
      * @param target the output stream to write the graph to
@@ -24,8 +24,8 @@ public interface GraphExporter {
     }
 
     /**
-     * <p>Export {@code g} to {@code target} using the format imposed by this class. Implementations of this method
-     * should not close {@code target}, instead the caller is responsible for doing so.</p>
+     * Export {@code g} to {@code target} using the format imposed by this class. Implementations of this method should
+     * not close {@code target}, instead the caller is responsible for doing so.
      *
      * @param g          the graph that will be exported to {@code target}
      * @param target     the output stream to write the graph to
