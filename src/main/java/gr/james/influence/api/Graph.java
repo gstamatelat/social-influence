@@ -562,6 +562,11 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
         this.removeEdges(Arrays.asList(among));
     }
 
+    default void removeEdges() {
+        removeEdges(getVertices());
+        assert getEdgesCount() == 0;
+    }
+
     @Deprecated
     default V getRandomOutEdge(V from, boolean weighted) {
         // TODO: Return GraphEdge

@@ -104,6 +104,14 @@ public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
     }
 
     @Override
+    public void removeEdges() {
+        for (V v : this.m.keySet()) {
+            this.m.get(v).getFirst().clear();
+            this.m.get(v).getSecond().clear();
+        }
+    }
+
+    @Override
     public Map<V, GraphEdge<V, E>> getOutEdges(V v) {
         Conditions.requireNonNullAndExists(v, this);
         return Collections.unmodifiableMap(this.m.get(v).getFirst());
