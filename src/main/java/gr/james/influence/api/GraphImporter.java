@@ -8,15 +8,15 @@ import java.io.InputStream;
 import java.net.URL;
 
 /**
- * <p>A {@code GraphImporter} provides means to read a Graph from an {@link InputStream} with the format imposed by this
- * class.</p>
+ * A {@code GraphImporter} provides means to read a {@link Graph} from an {@link InputStream} with the format imposed by
+ * this class.
  */
 public interface GraphImporter {
     /**
-     * <p>Read a {@code Graph} of default type from {@code source} using the format imposed by this class.</p>
+     * Read a {@link Graph} of default type from the {@code source} URL using the format imposed by this class.
      *
      * @param source the input stream to read the graph from
-     * @return a new {@code Graph} of default type that was read from {@code source}
+     * @return a new {@link Graph} of default type that was read from {@code source}
      * @throws IOException if an I/O exception occurs
      */
     default SimpleGraph from(URL source) throws IOException {
@@ -24,14 +24,14 @@ public interface GraphImporter {
     }
 
     /**
-     * <p>Read a {@code Graph} from {@code source} using the format imposed by this class.</p>
+     * Read a {@link Graph} from the {@code source} URL using the format imposed by this class.
      *
      * @param source       the input stream to read the graph from
-     * @param factory      the graph factory to use when creating the new {@code Graph}
+     * @param factory      the graph factory to use when creating the new {@link Graph}
      * @param deserializer the vertex deserializer to use when parsing the input stream
      * @param <V>          the vertex type
      * @param <E>          the edge type
-     * @return a new {@code Graph} of type {@code T} that was read from {@code source}
+     * @return a new {@link Graph} that was read from {@code source}
      * @throws IOException if an I/O exception occurs
      */
     default <V, E> Graph<V, E> from(URL source, GraphFactory<V, E> factory, Deserializer<V> deserializer) throws IOException {
@@ -41,12 +41,11 @@ public interface GraphImporter {
     }
 
     /**
-     * <p>Read a {@code Graph} of default type from {@code source} using the format imposed by this class.
-     * Implementations of this method should not close {@code source}, the caller is instead responsible for doing so.
-     * </p>
+     * Read a {@link Graph} of default type from {@code source} using the format imposed by this class. Implementations
+     * of this method should not close {@code source}, the caller is instead responsible for doing so.
      *
      * @param source the input stream to read the graph from
-     * @return a new {@code Graph} of default type that was read from {@code source}
+     * @return a new {@link Graph} of default type that was read from {@code source}
      * @throws IOException if an I/O exception occurs
      */
     default SimpleGraph from(InputStream source) throws IOException {
@@ -54,15 +53,15 @@ public interface GraphImporter {
     }
 
     /**
-     * <p>Read a {@code Graph} from {@code source} using the format imposed by this class. Implementations of this
-     * method should not close {@code source}, the caller is instead responsible for doing so.</p>
+     * Read a {@link Graph} from {@code source} using the format imposed by this class. Implementations of this method
+     * should not close {@code source}, the caller is instead responsible for doing so.
      *
      * @param source       the input stream to read the graph from
-     * @param factory      the graph factory to use when creating the new {@code Graph}
+     * @param factory      the graph factory to use when creating the new {@link Graph}
      * @param deserializer the vertex deserializer to use when parsing the input stream
      * @param <V>          the vertex type
      * @param <E>          the edge type
-     * @return a new {@code Graph} of type {@code T} that was read from {@code source}
+     * @return a new {@link Graph} that was read from {@code source}
      * @throws IOException if an I/O exception occurs
      */
     <V, E> Graph<V, E> from(InputStream source, GraphFactory<V, E> factory, Deserializer<V> deserializer) throws IOException;
