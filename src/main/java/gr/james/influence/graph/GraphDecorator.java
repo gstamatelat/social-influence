@@ -152,11 +152,6 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
     }
 
     @Override
-    public double getAveragePathLength() {
-        return g.getAveragePathLength();
-    }
-
-    @Override
     public V addVertex(VertexProvider<V> vertexProvider) {
         return this.g.addVertex(vertexProvider);
     }
