@@ -3,7 +3,7 @@ package gr.james.influence.main;
 import gr.james.influence.algorithms.scoring.HITS;
 import gr.james.influence.graph.Graphs;
 import gr.james.influence.graph.SimpleGraph;
-import gr.james.influence.graph.io.Edges;
+import gr.james.influence.graph.io.EdgesImporterExporter;
 import gr.james.influence.util.collections.GraphState;
 
 import java.io.FileInputStream;
@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 public class Bipartite {
     public static void main(String[] args) throws IOException {
-        SimpleGraph g = new Edges().from(new FileInputStream("/home/james/Documents/bipartite.csv"));
+        SimpleGraph g = new EdgesImporterExporter().from(new FileInputStream("/home/james/Documents/bipartite.csv"));
 
         List<String> g1v = g.getVertices().stream()
                 .filter(vertex -> Arrays.asList(new String[]{"a1", "a2", "a3", "b1", "b2", "b3"}).contains(vertex))

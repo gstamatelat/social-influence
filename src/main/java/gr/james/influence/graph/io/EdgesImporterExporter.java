@@ -8,16 +8,16 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Edges implements GraphImporter, GraphExporter {
+public class EdgesImporterExporter implements GraphImporter, GraphExporter {
     public static final String DEFAULT_SEPARATOR = ",";
 
     private String delimiter;
 
-    public Edges(String delimiter) {
+    public EdgesImporterExporter(String delimiter) {
         this.delimiter = delimiter;
     }
 
-    public Edges() {
+    public EdgesImporterExporter() {
         this.delimiter = DEFAULT_SEPARATOR;
     }
 
