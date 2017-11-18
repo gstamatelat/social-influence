@@ -13,6 +13,7 @@ import java.util.*;
  *
  * @param <V> the vertex type
  */
+@Deprecated
 public class DijkstraShortestPathsAlgorithm<V> {
     private final Map<V, Double> distTo;
     private final Map<V, V> edgeTo;
