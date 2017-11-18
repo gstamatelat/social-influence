@@ -1,13 +1,19 @@
 package gr.james.influence.graph.io;
 
 import gr.james.influence.algorithms.iterators.OrderedVertexIterator;
-import gr.james.influence.api.*;
+import gr.james.influence.api.Deserializer;
+import gr.james.influence.api.Graph;
+import gr.james.influence.api.GraphFactory;
+import gr.james.influence.api.GraphImporter;
 import gr.james.influence.util.Finals;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Arrays;
 
-public class Csv implements GraphImporter, GraphExporter {
+public class CSVImporter implements GraphImporter {
     @Override
     public <V, E> Graph<V, E> from(InputStream source, GraphFactory<V, E> factory, Deserializer<V> deserializer) throws IOException {
         Graph<V, E> g = factory.createGraph();
@@ -40,10 +46,5 @@ public class Csv implements GraphImporter, GraphExporter {
         g.setMeta("source", source.toString());
 
         return g;
-    }
-
-    @Override
-    public <V, E> void to(Graph<V, E> g, OutputStream target, Serializer<V> serializer) {
-        throw new UnsupportedOperationException();
     }
 }
