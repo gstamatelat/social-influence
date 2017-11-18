@@ -49,9 +49,9 @@ public class Graphs {
      * @param <V> the vertex type
      * @param <E> the edge type
      * @return the vertex that is the result of the fusion
+     * @see <a href="http://mathworld.wolfram.com/VertexContraction.html">VertexContraction @ mathworld.wolfram.com</a>
      */
     public static <V, E> V fuseVertices(Graph<V, E> g, Collection<V> f) {
-        // TODO: Add link to http://mathworld.wolfram.com/VertexContraction.html
         V v = g.addVertex();
 
         for (V y : f) {

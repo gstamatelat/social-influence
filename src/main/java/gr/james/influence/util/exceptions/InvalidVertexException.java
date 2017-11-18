@@ -1,15 +1,18 @@
 package gr.james.influence.util.exceptions;
 
-public class InvalidVertexException extends GraphException {
+/**
+ * An {@code InvalidVertexException} usually indicates
+ */
+public class InvalidVertexException extends RuntimeException {
     /**
-     * <p>Constructs a new {@code InvalidVertexException}.</p>
+     * Constructs a new {@link InvalidVertexException}.
      */
     public InvalidVertexException() {
         super();
     }
 
     /**
-     * <p>Constructs a new {@code InvalidVertexException} with the specified detail message.</p>
+     * Constructs a new {@link InvalidVertexException} with the specified detail message.
      *
      * @param messagePattern The error message text pattern
      * @param arguments      Arguments referenced by the format specifiers in the format string

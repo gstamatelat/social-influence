@@ -40,6 +40,7 @@ public final class Helper {
         return weightedRandom(weightMap, selections, RandomHelper.getRandom());
     }
 
+    @Deprecated
     @SuppressWarnings({"AssertWithSideEffects", "ConstantConditions", "UnusedAssignment"})
     public static boolean isAssertionEnabled() {
         boolean assertsEnabled = false;
@@ -55,6 +56,7 @@ public final class Helper {
         return set;
     }
 
+    @Deprecated
     public static RuntimeException convertCheckedException(Exception e) {
         throw new RuntimeException(String.format("%s: %s", e.getClass().getName(), e.getMessage()));
     }

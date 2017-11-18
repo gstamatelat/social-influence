@@ -1,5 +1,6 @@
 package gr.james.influence.util.exceptions;
 
+@Deprecated
 public class GraphException extends RuntimeException {
     /**
      * <p>Constructs a new {@code GraphException}.</p>
