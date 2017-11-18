@@ -31,7 +31,6 @@ public final class Finals {
     public static final String L_GAME_MOVE_EXCEED = "Move {} contains more than {} vertices. Slicing to {}. This indicates a mistake in your player.";
     public static final String L_PERIODIC = "Periodicity on {} with maxSize = {}";
     public static final String L_PLAYER_EXCEPTION = "Player {} triggered exception on graph {} with definition {}\n{}";
-    public static final String L_EDGES_IMPORT_MERGE = "The .edges file contains parallel edges [{} -> {}]; duplicates have been merged.";
 
     /* Exceptions: these finals must be arguments to GraphException(). Format: E_CLASSNAME_IDENTIFIER. */
     public static final String E_EDGE_WEIGHT_NEGATIVE = "Edge weight must be positive. Got %f.";
@@ -47,6 +46,4 @@ public final class Finals {
     public static final String E_GRAPH_NOT_SUPPORTED = "The operation is not supported by this graph instance.";
 
     public static final String E_IMMUTABLE_GRAPH = "Cannot modify a graph of type ImmutableGraph";
-
-    public static final String E_EDGES_IMPORT = "A line in an .edges format file must only contain three records";
 }
