@@ -14,8 +14,8 @@ public class InvalidVertexException extends RuntimeException {
     /**
      * Constructs a new {@link InvalidVertexException} with the specified detail message.
      *
-     * @param messagePattern The error message text pattern
-     * @param arguments      Arguments referenced by the format specifiers in the format string
+     * @param messagePattern the error message text pattern
+     * @param arguments      arguments referenced by the format specifiers in the format string
      * @see String#format(String, Object...)
      */
     public InvalidVertexException(String messagePattern, Object... arguments) {
