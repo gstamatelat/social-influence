@@ -30,7 +30,7 @@ public class PearsonSimilarity<V> implements VertexSimilarity<V, Double> {
     private final Map<V, Double> variances;
 
     /**
-     * Construct a {@code PearsonSimilarity} instance from a {@code Graph}. The constructor calculates the weight
+     * Construct a {@code PearsonSimilarity} instance from a {@link Graph}. The constructor calculates the weight
      * averages and variances of all vertices in time {@code O(V + E)}.
      *
      * @param g the {@link Graph} to construct this instance from
