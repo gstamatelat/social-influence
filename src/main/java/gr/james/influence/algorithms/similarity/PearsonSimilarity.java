@@ -5,6 +5,7 @@ import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphEdge;
 import gr.james.influence.api.algorithms.VertexSimilarity;
 import gr.james.influence.util.Conditions;
+import gr.james.influence.util.exceptions.InvalidVertexException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,7 +23,7 @@ import java.util.Set;
  * <p>
  * Instances of this class expect that the graph will not be mutated after the constructor is invoked.
  *
- * @param <V> the type of vertex
+ * @param <V> the vertex type
  */
 public class PearsonSimilarity<V> implements VertexSimilarity<V, Double> {
     private final Graph<V, ?> g;
@@ -34,6 +35,8 @@ public class PearsonSimilarity<V> implements VertexSimilarity<V, Double> {
      * averages and variances of all vertices in time {@code O(V + E)}.
      *
      * @param g the {@link Graph} to construct this instance from
+     * @throws NullPointerException     if {@code g} is {@code null}
+     * @throws IllegalArgumentException if {@code g} does not contain any vertices
      */
     public PearsonSimilarity(Graph<V, ?> g) {
         Conditions.requireArgument(g.getVerticesCount() > 0, "Input graph is empty");
@@ -89,11 +92,16 @@ public class PearsonSimilarity<V> implements VertexSimilarity<V, Double> {
      *
      * @param v the vertex to return the variance for
      * @return the variance of {@code v}
+     * @throws NullPointerException   if {@code v} is {@code null}
+     * @throws InvalidVertexException if {@code v} is not in the graph
      */
     public double variance(V v) {
         Conditions.requireNonNull(v);
-        Conditions.requireArgument(this.variances.containsKey(v), "Vertex %s is not in the graph", v);
-        final double var = Math.pow(this.variances.get(v), 2) / g.getVerticesCount();
+        final Double mapping = this.variances.get(v);
+        if (mapping == null) {
+            throw new InvalidVertexException("Vertex %s is not in the graph", v);
+        }
+        final double var = Math.pow(mapping, 2) / g.getVerticesCount();
         assert var >= 0;
         return var;
     }
@@ -103,10 +111,16 @@ public class PearsonSimilarity<V> implements VertexSimilarity<V, Double> {
      *
      * @param v the vertex to return the average for
      * @return the average of {@code v}
+     * @throws NullPointerException   if {@code v} is {@code null}
+     * @throws InvalidVertexException if {@code v} is not in the graph
      */
     public double average(V v) {
         Conditions.requireNonNull(v);
-        Conditions.requireArgument(this.averages.containsKey(v), "Vertex %s is not in the graph", v);
-        return this.averages.get(v);
+        final Double mapping = this.averages.get(v);
+        if (mapping == null) {
+            throw new InvalidVertexException("Vertex %s is not in the graph", v);
+        }
+        assert mapping >= 0;
+        return mapping;
     }
 }
