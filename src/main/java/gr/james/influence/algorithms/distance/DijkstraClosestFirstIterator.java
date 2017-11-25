@@ -3,7 +3,7 @@ package gr.james.influence.algorithms.distance;
 import com.google.common.collect.Lists;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphEdge;
-import gr.james.influence.exceptions.InvalidVertexException;
+import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.util.Conditions;
 
 import java.util.*;
@@ -28,12 +28,12 @@ public class DijkstraClosestFirstIterator<V> implements Iterator<V> {
      * @param g      the {@link Graph} in which to perform the algorithm
      * @param source the source vertex
      * @throws NullPointerException   if {@code g} or {@code source} is {@code null}
-     * @throws InvalidVertexException if {@code source} is not in {@code g}
+     * @throws IllegalVertexException if {@code source} is not in {@code g}
      */
     public DijkstraClosestFirstIterator(Graph<V, ?> g, V source) {
         Conditions.requireAllNonNull(g, source);
         if (!g.containsVertex(source)) {
-            throw new InvalidVertexException();
+            throw new IllegalVertexException();
         }
 
         this.g = g;
@@ -104,7 +104,7 @@ public class DijkstraClosestFirstIterator<V> implements Iterator<V> {
      *
      * @param until the vertex on which to stop the iteration
      * @throws NullPointerException   if {@code until} is {@code null}
-     * @throws InvalidVertexException if {@code until} is not in {@code g}
+     * @throws IllegalVertexException if {@code until} is not in {@code g}
      */
     public void exhaust(V until) {
         Conditions.requireNonNullAndExists(until, g);
@@ -124,13 +124,13 @@ public class DijkstraClosestFirstIterator<V> implements Iterator<V> {
      * @param v the vertex to get the distance to
      * @return the distance of the shortest path to {@code v}
      * @throws NullPointerException   if {@code v} is null
-     * @throws InvalidVertexException if {@code v} is not in the graph
+     * @throws IllegalVertexException if {@code v} is not in the graph
      */
     public double distanceTo(V v) {
         Conditions.requireNonNull(v);
         final Double distance = distTo.get(v);
         if (distance == null) {
-            throw new InvalidVertexException();
+            throw new IllegalVertexException();
         }
         return distance;
     }
@@ -145,12 +145,12 @@ public class DijkstraClosestFirstIterator<V> implements Iterator<V> {
      * @param v the vertex to get the shortest route to
      * @return an unmodifiable {@link List} of {@link GraphEdge} representing the shortest route to {@code v}
      * @throws NullPointerException   if {@code v} is null
-     * @throws InvalidVertexException if {@code v} is not in the graph
+     * @throws IllegalVertexException if {@code v} is not in the graph
      */
     public List<GraphEdge<V, ?>> pathTo(V v) {
         Conditions.requireNonNull(v);
         if (!edgeTo.containsKey(v)) {
-            throw new InvalidVertexException();
+            throw new IllegalVertexException();
         }
         final List<GraphEdge<V, ?>> route = new ArrayList<>();
         while (edgeTo.get(v) != null) {

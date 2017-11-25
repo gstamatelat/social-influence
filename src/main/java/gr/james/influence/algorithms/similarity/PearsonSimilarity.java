@@ -4,7 +4,7 @@ import com.google.common.collect.Sets;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphEdge;
 import gr.james.influence.api.algorithms.VertexSimilarity;
-import gr.james.influence.exceptions.InvalidVertexException;
+import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.util.Conditions;
 
 import java.util.HashMap;
@@ -93,13 +93,13 @@ public class PearsonSimilarity<V> implements VertexSimilarity<V, Double> {
      * @param v the vertex to return the variance for
      * @return the variance of {@code v}
      * @throws NullPointerException   if {@code v} is {@code null}
-     * @throws InvalidVertexException if {@code v} is not in the graph
+     * @throws IllegalVertexException if {@code v} is not in the graph
      */
     public double variance(V v) {
         Conditions.requireNonNull(v);
         final Double mapping = this.variances.get(v);
         if (mapping == null) {
-            throw new InvalidVertexException("Vertex %s is not in the graph", v);
+            throw new IllegalVertexException("Vertex %s is not in the graph", v);
         }
         final double var = Math.pow(mapping, 2) / g.getVerticesCount();
         assert var >= 0;
@@ -112,13 +112,13 @@ public class PearsonSimilarity<V> implements VertexSimilarity<V, Double> {
      * @param v the vertex to return the average for
      * @return the average of {@code v}
      * @throws NullPointerException   if {@code v} is {@code null}
-     * @throws InvalidVertexException if {@code v} is not in the graph
+     * @throws IllegalVertexException if {@code v} is not in the graph
      */
     public double average(V v) {
         Conditions.requireNonNull(v);
         final Double mapping = this.averages.get(v);
         if (mapping == null) {
-            throw new InvalidVertexException("Vertex %s is not in the graph", v);
+            throw new IllegalVertexException("Vertex %s is not in the graph", v);
         }
         assert mapping >= 0;
         return mapping;

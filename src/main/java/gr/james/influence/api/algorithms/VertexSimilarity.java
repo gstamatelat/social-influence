@@ -1,6 +1,6 @@
 package gr.james.influence.api.algorithms;
 
-import gr.james.influence.exceptions.InvalidVertexException;
+import gr.james.influence.exceptions.IllegalVertexException;
 
 /**
  * Represents an algorithm that calculates the pairwise similarity between vertices of a graph.
@@ -17,7 +17,7 @@ public interface VertexSimilarity<V, T> {
      * @param v2 the second vertex
      * @return the similarity between {@code v1} and {@code v2}
      * @throws NullPointerException   if either {@code v1} or {@code v2} is {@code null}
-     * @throws InvalidVertexException if either {@code v1} or {@code v2} is not in the graph referenced by the instance
+     * @throws IllegalVertexException if either {@code v1} or {@code v2} is not in the graph referenced by the instance
      */
     T similarity(V v1, V v2);
 }

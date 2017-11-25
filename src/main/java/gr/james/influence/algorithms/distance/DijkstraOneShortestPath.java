@@ -3,7 +3,7 @@ package gr.james.influence.algorithms.distance;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphEdge;
 import gr.james.influence.api.algorithms.distance.SourceSinkShortestPaths;
-import gr.james.influence.exceptions.InvalidVertexException;
+import gr.james.influence.exceptions.IllegalVertexException;
 
 import java.util.List;
 
@@ -27,7 +27,7 @@ public class DijkstraOneShortestPath<V> implements SourceSinkShortestPaths<V> {
      * @param source the source vertex
      * @param target the target vertex
      * @throws NullPointerException   if {@code g} or {@code source} or {@code target} is {@code null}
-     * @throws InvalidVertexException if {@code source} or {@code target} is not in {@code g}
+     * @throws IllegalVertexException if {@code source} or {@code target} is not in {@code g}
      */
     public DijkstraOneShortestPath(Graph<V, ?> g, V source, V target) {
         alg = new DijkstraClosestFirstIterator<>(g, source);

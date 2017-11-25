@@ -1,7 +1,7 @@
 package gr.james.influence.util;
 
 import gr.james.influence.api.Graph;
-import gr.james.influence.exceptions.InvalidVertexException;
+import gr.james.influence.exceptions.IllegalVertexException;
 
 public final class Conditions {
     public static void requireArgument(boolean expression, String errorMessageTemplate, Object... errorMessageArgs) {
@@ -13,7 +13,7 @@ public final class Conditions {
     public static <V, E> V requireNonNullAndExists(V v, Graph<V, E> g) {
         Conditions.requireNonNull(v);
         if (!g.containsVertex(v)) {
-            throw new InvalidVertexException();
+            throw new IllegalVertexException();
         }
         return v;
     }

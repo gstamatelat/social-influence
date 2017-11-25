@@ -3,7 +3,7 @@ package gr.james.influence.algorithms.distance;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphEdge;
 import gr.james.influence.api.algorithms.distance.AllPairsShortestPaths;
-import gr.james.influence.exceptions.InvalidVertexException;
+import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.util.collections.VertexPair;
 
 import java.util.HashMap;
@@ -67,7 +67,7 @@ public class FloydWarshallShortestPaths<V> implements AllPairsShortestPaths<V> {
     public double distance(V from, V to) {
         final Double distance = dist.get(new VertexPair<>(from, to));
         if (distance == null) {
-            throw new InvalidVertexException();
+            throw new IllegalVertexException();
         }
         return distance;
     }
