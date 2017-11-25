@@ -1,4 +1,4 @@
-package gr.james.influence.util.exceptions;
+package gr.james.influence.exceptions;
 
 @Deprecated
 public class TournamentException extends GraphException {

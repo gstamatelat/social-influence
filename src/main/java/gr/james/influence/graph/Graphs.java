@@ -5,9 +5,9 @@ import gr.james.influence.algorithms.components.TarjanComponents;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphEdge;
 import gr.james.influence.api.GraphFactory;
+import gr.james.influence.exceptions.GraphException;
 import gr.james.influence.util.Finals;
 import gr.james.influence.util.RandomHelper;
-import gr.james.influence.util.exceptions.GraphException;
 
 import java.util.*;
 import java.util.stream.Collectors;

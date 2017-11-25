@@ -1,4 +1,4 @@
-package gr.james.influence.util.exceptions;
+package gr.james.influence.exceptions;
 
 /**
  * An {@code InvalidVertexException} indicates that a vertex argument is not in the graph imposed by the context.

@@ -1,6 +1,6 @@
 package gr.james.influence.api.algorithms;
 
-import gr.james.influence.util.exceptions.InvalidVertexException;
+import gr.james.influence.exceptions.InvalidVertexException;
 
 /**
  * Represents an algorithm that calculates the pairwise similarity between vertices of a graph.

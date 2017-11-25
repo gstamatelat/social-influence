@@ -3,7 +3,7 @@ package gr.james.influence.algorithms.distance;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphEdge;
 import gr.james.influence.api.algorithms.distance.SourceSinkShortestPaths;
-import gr.james.influence.util.exceptions.InvalidVertexException;
+import gr.james.influence.exceptions.InvalidVertexException;
 
 import java.util.List;
 

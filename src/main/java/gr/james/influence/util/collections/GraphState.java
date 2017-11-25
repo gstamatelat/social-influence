@@ -1,7 +1,7 @@
 package gr.james.influence.util.collections;
 
 import com.google.common.collect.ForwardingMap;
-import gr.james.influence.util.exceptions.GraphException;
+import gr.james.influence.exceptions.GraphException;
 
 import java.util.Collection;
 import java.util.Comparator;

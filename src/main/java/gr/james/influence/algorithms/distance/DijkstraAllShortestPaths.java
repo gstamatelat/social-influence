@@ -3,8 +3,8 @@ package gr.james.influence.algorithms.distance;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphEdge;
 import gr.james.influence.api.algorithms.distance.AllPairsShortestPaths;
+import gr.james.influence.exceptions.InvalidVertexException;
 import gr.james.influence.util.Conditions;
-import gr.james.influence.util.exceptions.InvalidVertexException;
 
 import java.util.HashMap;
 import java.util.List;
