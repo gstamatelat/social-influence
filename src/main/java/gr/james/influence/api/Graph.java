@@ -36,7 +36,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @return {@code true} if an edge with the specified {@code source} and {@code target} exists, otherwise
      * {@code false}
      * @throws NullPointerException   if either {@code source} or {@code target} is {@code null}
-     * @throws IllegalVertexException if either {@code source} or {@code target} doesn't belong in the graph
+     * @throws IllegalVertexException if either {@code source} or {@code target} is not in the graph
      */
     default boolean containsEdge(V source, V target) {
         return findEdge(source, target) != null;
@@ -49,7 +49,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @param target the target vertex of the edge
      * @return the {@link GraphEdge} from {@code source} to {@code target}, or {@code null} if there is no such edge
      * @throws NullPointerException   if either {@code source} or {@code target} is {@code null}
-     * @throws IllegalVertexException if either {@code source} or {@code target} doesn't belong in the graph
+     * @throws IllegalVertexException if either {@code source} or {@code target} is not in the graph
      */
     default GraphEdge<V, E> findEdge(V source, V target) {
         return this.getOutEdges(source).get(Conditions.requireNonNullAndExists(target, this));
@@ -64,7 +64,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @param other  the default weight if no edge exists
      * @return the weight of the edge from {@code source} to {@code target}, or {@code other} if there is no such edge
      * @throws NullPointerException   if either {@code source} or {@code target} is {@code null}
-     * @throws IllegalVertexException if either {@code source} or {@code target} doesn't belong in the graph
+     * @throws IllegalVertexException if either {@code source} or {@code target} is not in the graph
      */
     default double getEdgeWeightElse(V source, V target, double other) {
         final GraphEdge<V, E> edge = findEdge(source, target);
@@ -145,7 +145,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @param v the vertex
      * @return the outbound degree of vertex {@code v}
      * @throws NullPointerException   if {@code v} is {@code null}
-     * @throws IllegalVertexException if {@code v} doesn't belong in the graph
+     * @throws IllegalVertexException if {@code v} is not in the graph
      * @see #getInDegree
      */
     default int getOutDegree(V v) {
@@ -158,7 +158,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @param v the vertex
      * @return the inbound degree of vertex {@code v}
      * @throws NullPointerException   if {@code v} is {@code null}
-     * @throws IllegalVertexException if {@code v} doesn't belong in the graph
+     * @throws IllegalVertexException if {@code v} is not in the graph
      * @see #getOutDegree
      */
     default int getInDegree(V v) {
@@ -259,8 +259,8 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      *
      * @param vertexProvider the vertex provider to use when generating a new vertex instance
      * @return the new vertex object
-     * @throws IllegalVertexException if the automatically generated vertex was already in the graph; this
-     *                                behavior signals a flawed vertex provider
+     * @throws IllegalVertexException if the automatically generated vertex was already in the graph; this behavior
+     *                                signals a flawed vertex provider
      * @throws NullPointerException   if {@code vertexProvider} is null or it generated {@code null}
      */
     default V addVertex(VertexProvider<V> vertexProvider) {
@@ -475,7 +475,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @return {@code true} if there was previously an edge with the specified {@code source} and {@code target} and
      * thus the weight could be changed, {@code false} otherwise
      * @throws NullPointerException     if either {@code source} or {@code target} is {@code null}
-     * @throws IllegalVertexException   if either {@code source} or {@code target} doesn't belong in the graph
+     * @throws IllegalVertexException   if either {@code source} or {@code target} is not in the graph
      * @throws IllegalArgumentException if {@code weight} is non-positive
      */
     default boolean setEdgeWeight(V source, V target, double weight) {
@@ -501,7 +501,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @param edgeProvider the edge provider to use when generating a new edge instance
      * @throws NullPointerException   if {@code among} or any vertex in {@code among} or {@code edgeProvider} is
      *                                {@code null}
-     * @throws IllegalVertexException if any vertex in {@code among} isn't part of the graph
+     * @throws IllegalVertexException if any vertex in {@code among} is not in the graph
      */
     @Deprecated
     default void addEdges(Iterable<V> among, EdgeProvider<E> edgeProvider) {
@@ -535,7 +535,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      *                     collection with a fast iterator implementation
      * @param edgeProvider the edge provider to use when generating a new edge instance
      * @throws NullPointerException   if any vertex in {@code among} or {@code edgeProvider} is {@code null}
-     * @throws IllegalVertexException if any vertex in {@code among} doesn't belong in the graph
+     * @throws IllegalVertexException if any vertex in {@code among} is not in the graph
      */
     @Deprecated
     default void addEdges(EdgeProvider<E> edgeProvider, V... among) {
@@ -587,7 +587,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @param among the vertices as variable arguments to strip the edges from; you should prefer a collection with a
      *              fast {@code next()} implementation
      * @throws NullPointerException   if any vertex in {@code among} is {@code null}
-     * @throws IllegalVertexException if any vertex in {@code among} doesn't belong in the graph
+     * @throws IllegalVertexException if any vertex in {@code among} is not in the graph
      */
     default void removeEdges(V... among) {
         this.removeEdges(Arrays.asList(among));
