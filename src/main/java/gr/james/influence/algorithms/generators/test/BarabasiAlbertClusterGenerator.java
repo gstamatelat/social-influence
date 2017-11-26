@@ -1,5 +1,6 @@
-package gr.james.influence.algorithms.generators.random;
+package gr.james.influence.algorithms.generators.test;
 
+import gr.james.influence.algorithms.generators.random.BarabasiAlbertGenerator;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphFactory;
 import gr.james.influence.api.algorithms.GraphGenerator;
