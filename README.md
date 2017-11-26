@@ -1,7 +1,5 @@
 # Social Influence
 
-[![Dependency Status](https://www.versioneye.com/user/projects/55d2318a265ff6001c00001d/badge.svg)](https://www.versioneye.com/user/projects/55d2318a265ff6001c00001d)
-
 Java 8 network/graph framework with emphasis on social influence and opinion dynamics.
 
 ## Using
