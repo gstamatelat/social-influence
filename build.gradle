@@ -10,7 +10,7 @@ repositories {
 
 dependencies {
     compile 'org.slf4j:slf4j-api:1.7.25',
-            'com.google.guava:guava:23.4-jre',
+            'com.google.guava:guava:23.5-jre',
             'com.google.code.gson:gson:2.8.2'
     runtime 'ch.qos.logback:logback-classic:1.2.3'
     testCompile 'junit:junit:4.12'
