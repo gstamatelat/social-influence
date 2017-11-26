@@ -13,7 +13,7 @@ import org.junit.Test;
  */
 public class PearsonSimilarityTests {
     /**
-     * Test for the graph {A->B (1), A->C (1), C->B (2)}
+     * Test for the graph {A->B (1), A->C (1), C->B (2)}.
      */
     @Test
     public void simple() {
@@ -34,7 +34,22 @@ public class PearsonSimilarityTests {
     }
 
     /**
-     * The Pearson similarity of neighboring vertices in a circle of length 4 or more is 2 / (2 - n)
+     * In a graph with isolated vertices all similarities must be NaN.
+     */
+    @Test
+    public void empty() {
+        final SimpleGraph g = new SimpleGraph();
+        g.addVertices(5);
+        final VertexSimilarity<String, Double> pearson = new PearsonSimilarity<>(g);
+        for (String v : g) {
+            for (String w : g) {
+                Assert.assertTrue("PearsonSimilarityTests.empty", Double.isNaN(pearson.similarity(v, w)));
+            }
+        }
+    }
+
+    /**
+     * The Pearson similarity of neighboring vertices in a circle of length 4 or more is 2 / (2 - n).
      */
     @Test
     public void circle() {
@@ -52,7 +67,7 @@ public class PearsonSimilarityTests {
     }
 
     /**
-     * pearson(v1, v2) = pearson(v2, v1)
+     * pearson(v1, v2) = pearson(v2, v1).
      */
     @Test
     public void commutativity() {
@@ -67,7 +82,7 @@ public class PearsonSimilarityTests {
     }
 
     /**
-     * pearson(v, v) = 1
+     * pearson(v, v) = 1.
      */
     @Test
     public void identity() {
@@ -85,7 +100,7 @@ public class PearsonSimilarityTests {
     }
 
     /**
-     * In a complete graph with self loops all similarities must be NaN
+     * In a complete graph with self loops all similarities must be NaN.
      */
     @Test
     public void complete() {

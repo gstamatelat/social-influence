@@ -13,7 +13,7 @@ import org.junit.Test;
  */
 public class JaccardSimilarityTests {
     /**
-     * Test for the graph {A->B, A->C, C->B}
+     * Test for the graph {A->B, A->C, C->B}.
      */
     @Test
     public void simple() {
@@ -34,7 +34,22 @@ public class JaccardSimilarityTests {
     }
 
     /**
-     * The Jaccard similarity of neighboring vertices in a circle of length 4 or more is 0
+     * In a graph with isolated vertices all similarities must be NaN.
+     */
+    @Test
+    public void empty() {
+        final SimpleGraph g = new SimpleGraph();
+        g.addVertices(5);
+        final VertexSimilarity<String, Double> jaccard = new JaccardSimilarity<>(g);
+        for (String v : g) {
+            for (String w : g) {
+                Assert.assertTrue("JaccardSimilarityTests.empty", Double.isNaN(jaccard.similarity(v, w)));
+            }
+        }
+    }
+
+    /**
+     * The Jaccard similarity of neighboring vertices in a circle of length 4 or more is 0.
      */
     @Test
     public void circle() {
@@ -51,7 +66,7 @@ public class JaccardSimilarityTests {
     }
 
     /**
-     * jaccard(v1, v2) = jaccard(v2, v1)
+     * jaccard(v1, v2) = jaccard(v2, v1).
      */
     @Test
     public void commutativity() {
@@ -66,7 +81,7 @@ public class JaccardSimilarityTests {
     }
 
     /**
-     * jaccard(v, v) = 1
+     * jaccard(v, v) = 1.
      */
     @Test
     public void identity() {
@@ -84,7 +99,7 @@ public class JaccardSimilarityTests {
     }
 
     /**
-     * In a complete graph with self loops all similarities must be 1
+     * In a complete graph with self loops all similarities must be 1.
      */
     @Test
     public void complete() {
