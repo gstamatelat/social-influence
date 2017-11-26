@@ -21,6 +21,8 @@ import java.util.Set;
  * Pearson correlation is commutative, which means that {@code pearson(x, y) = pearson(y, x)}. Also, by definition, it
  * holds that the correlation of a vertex with itself is 1 (or {@code NaN}).
  * <p>
+ * This class uses internal state of size {@code O(V)}.
+ * <p>
  * Instances of this class expect that the graph will not be mutated after the constructor is invoked.
  *
  * @param <V> the vertex type
@@ -61,11 +63,12 @@ public class PearsonSimilarity<V> implements VertexSimilarity<V, Double> {
 
     /**
      * Calculates the Pearson similarity between two vertices. This method runs in time proportional to the out degrees
-     * of the input vertices.
+     * of the input vertices and uses constant extra space. This method runs slightly faster when {@code v1} has more
+     * outgoing edges than {@code v2}.
      *
      * @param v1 one vertex
      * @param v2 the other vertex
-     * @return the Pearson correlation as a {@link Double} or {@link Double#NaN} if undefined
+     * @return the Pearson correlation between {@code v1} and {@code v2} or {@link Double#NaN} if undefined
      */
     @Override
     public Double similarity(V v1, V v2) {

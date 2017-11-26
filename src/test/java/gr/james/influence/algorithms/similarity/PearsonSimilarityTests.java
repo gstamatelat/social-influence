@@ -8,6 +8,9 @@ import gr.james.influence.graph.SimpleGraph;
 import org.junit.Assert;
 import org.junit.Test;
 
+/**
+ * Tests for {@link PearsonSimilarity}.
+ */
 public class PearsonSimilarityTests {
     /**
      * Test for the graph {A->B (1), A->C (1), C->B (2)}
