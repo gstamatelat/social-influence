@@ -23,8 +23,8 @@ public class DegreeCentrality<V> implements VertexScoring<V, Integer> {
     private final GraphState<V, Integer> scores;
 
     /**
-     * Construct a {@code DegreeCentrality} instance from a {@code Graph}. The constructor calculates the degrees of all vertices
-     * in time {@code O(V)}.
+     * Construct a {@code DegreeCentrality} instance from a {@code Graph}. The constructor calculates the degrees of all
+     * vertices in time {@code O(V)}.
      *
      * @param g         the {@link Graph} to construct this instance from
      * @param direction the direction of the degree to calculate (in or out)

@@ -1,5 +1,6 @@
 package gr.james.influence.api.algorithms;
 
+import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.util.Conditions;
 import gr.james.influence.util.collections.GraphState;
 
@@ -15,20 +16,23 @@ public interface VertexScoring<V, T> {
      *
      * @param v the vertex to get the score of
      * @return the score of vertex {@code v}
-     * @throws NullPointerException     if {@code v} is {@code null}
-     * @throws IllegalArgumentException if {@code v} is not in the graph
+     * @throws NullPointerException   if {@code v} is {@code null}
+     * @throws IllegalVertexException if {@code v} is not in the graph
      */
     default T score(V v) {
         Conditions.requireNonNull(v);
-        T r = scores().get(v);
+        final T r = scores().get(v);
         if (r == null) {
-            throw new IllegalArgumentException();
+            throw new IllegalVertexException();
         }
         return r;
     }
 
     /**
      * Get the scores for all vertices.
+     * <p>
+     * The {@link GraphState} returned by this method will have as many entries as there are vertices in the graph. The
+     * {@link GraphState} returned by this method may be empty if the graph is empty but can't be {@code null}.
      *
      * @return a {@link GraphState} object holding the scores for all vertices in the graph
      */
