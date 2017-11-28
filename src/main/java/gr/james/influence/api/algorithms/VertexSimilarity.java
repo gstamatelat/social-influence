@@ -4,6 +4,14 @@ import gr.james.influence.exceptions.IllegalVertexException;
 
 /**
  * Represents an algorithm that calculates the pairwise similarity between vertices of a graph.
+ * <p>
+ * The documentation of implementations must mention
+ * <ul>
+ * <li>the possible values of this quantity</li>
+ * <li>weather or not the measure is commutative</li>
+ * <li>the size of the state (space complexity)</li>
+ * <li>if graph mutation is allowed</li>
+ * </ul>
  *
  * @param <V> the vertex type
  * @param <T> the result type
