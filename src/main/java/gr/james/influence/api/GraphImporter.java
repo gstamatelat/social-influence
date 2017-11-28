@@ -41,8 +41,8 @@ public interface GraphImporter {
     }
 
     /**
-     * Read a {@link Graph} of default type from {@code source} using the format imposed by this class. Implementations
-     * of this method should not close {@code source}, the caller is instead responsible for doing so.
+     * Read a {@link Graph} of default type from {@code source} using the format imposed by this class. The
+     * implementation of this method will not close {@code source}.
      *
      * @param source the input stream to read the graph from
      * @return a new {@link Graph} of default type that was read from {@code source}
@@ -53,8 +53,8 @@ public interface GraphImporter {
     }
 
     /**
-     * Read a {@link Graph} from {@code source} using the format imposed by this class. Implementations of this method
-     * should not close {@code source}, the caller is instead responsible for doing so.
+     * Read a {@link Graph} from {@code source} using the format imposed by this class. The implementation of this
+     * method will not close {@code source}.
      *
      * @param source       the input stream to read the graph from
      * @param factory      the graph factory to use when creating the new {@link Graph}
