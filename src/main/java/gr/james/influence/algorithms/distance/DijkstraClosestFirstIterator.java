@@ -9,9 +9,15 @@ import gr.james.influence.util.Conditions;
 import java.util.*;
 
 /**
- * Implementation of Dijkstra's shortest paths algorithm using a binary heap. This class is implemented as an
- * {@link Iterator} where the order of iteration is imposed by the (ascending) distance from the specified source
- * vertex. Instances of this class expect that the graph will not be mutated during iteration.
+ * Implementation of Dijkstra's shortest paths algorithm using a binary heap.
+ * <p>
+ * This class is implemented as an {@link Iterator} where the order of iteration is imposed by the (ascending) distance
+ * from the specified source vertex. The iterator will only traverse through the elements that are reachable from the
+ * source.
+ * <p>
+ * Instances of this class expect that the graph will not be mutated during iteration.
+ * <p>
+ * The size of the state of this class is {@code O(V)}.
  *
  * @param <V> the vertex type
  */
@@ -23,7 +29,8 @@ public class DijkstraClosestFirstIterator<V> implements Iterator<V> {
 
     /**
      * Construct an instance of {@link DijkstraClosestFirstIterator} with a given {@link Graph} and a {@code source}.
-     * The constructor will initialize the instance in time proportional to the number of vertices in the graph.
+     * <p>
+     * The constructor will initialize the instance in time {@code O(V)}.
      *
      * @param g      the {@link Graph} in which to perform the algorithm
      * @param source the source vertex
@@ -53,7 +60,9 @@ public class DijkstraClosestFirstIterator<V> implements Iterator<V> {
 
     /**
      * Returns {@code true} if the algorithm has more vertices to discover, that is if there are still vertices that are
-     * unmarked. Otherwise returns {@code false}. This method runs in constant time.
+     * unmarked. Otherwise returns {@code false}.
+     * <p>
+     * This method runs in constant time.
      *
      * @return {@code true} if the algorithm has more vertices to discover, otherwise {@code false}
      */
@@ -116,10 +125,13 @@ public class DijkstraClosestFirstIterator<V> implements Iterator<V> {
     }
 
     /**
-     * Get the distance of the shortest path to a target vertex. If there is no such path, this method will return
-     * {@link Double#POSITIVE_INFINITY}. Additionally, this method may also return {@link Double#POSITIVE_INFINITY}
-     * if the algorithm did not previously complete (if the iterator is not exhausted) even if there is a path from
-     * {@code start} to {@code v}. This method runs in constant time.
+     * Get the distance of the shortest path to a target vertex.
+     * <p>
+     * If there is no such path, this method will return {@link Double#POSITIVE_INFINITY}. Additionally, this method may
+     * also return {@link Double#POSITIVE_INFINITY} if the algorithm did not previously complete (if the iterator is not
+     * exhausted) even if there is a path from {@code start} to {@code v}.
+     * <p>
+     * This method runs in constant time.
      *
      * @param v the vertex to get the distance to
      * @return the distance of the shortest path to {@code v}
@@ -136,11 +148,14 @@ public class DijkstraClosestFirstIterator<V> implements Iterator<V> {
     }
 
     /**
-     * Get the shortest path to a target vertex as a sequence of edges. If there is no path to the target or if the
-     * target specified is the source vertex associated with this instance this method will return an empty sequence.
-     * Additionally, this method may also return an empty sequence if the algorithm did not previously complete (if the
-     * iterator is not exhausted) even if there is a path from {@code start} to {@code v}. This method runs in time
-     * proportional to the shortest path length.
+     * Get the shortest path to a target vertex as a sequence of edges.
+     * <p>
+     * If there is no path to the target or if the target specified is the source vertex associated with this instance
+     * this method will return an empty sequence. Additionally, this method may also return an empty sequence if the
+     * algorithm did not previously complete (if the iterator is not exhausted) even if there is a path from
+     * {@code start} to {@code v}.
+     * <p>
+     * This method runs in time proportional to the shortest path length.
      *
      * @param v the vertex to get the shortest route to
      * @return an unmodifiable {@link List} of {@link GraphEdge} representing the shortest route to {@code v}
