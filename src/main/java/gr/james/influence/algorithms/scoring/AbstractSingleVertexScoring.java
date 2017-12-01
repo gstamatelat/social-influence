@@ -1,0 +1,71 @@
+package gr.james.influence.algorithms.scoring;
+
+import gr.james.influence.api.Graph;
+import gr.james.influence.api.algorithms.VertexScoring;
+import gr.james.influence.util.Conditions;
+import gr.james.influence.util.collections.GraphState;
+
+/**
+ * This class provides a skeletal implementation of the {@link VertexScoring} interface to minimize the effort required
+ * to implement it.
+ * <p>
+ * This abstract class is intended to be used for algorithms in which each vertex score is calculated independently of
+ * other scores, for example degree or closeness. The reason of extending this class instead of
+ * {@link AbstractMultiVertexScoring} is for performance reasons, for example if the client only requires to get the
+ * scores for a fraction of the population.
+ * <p>
+ * Instances of this class expect that the graph will not be mutated after the constructor is invoked.
+ *
+ * @param <V> the vertex type
+ * @param <T> the score type
+ * @see AbstractMultiVertexScoring
+ */
+public abstract class AbstractSingleVertexScoring<V, T> implements VertexScoring<V, T> {
+    private final Graph<V, ?> g;
+    private final GraphState<V, T> state;
+
+    /**
+     * Construct an instance of {@link AbstractSingleVertexScoring} using the specified input {@link Graph} g.
+     * <p>
+     * The constructor does not perform any calculations and runs in constant time.
+     *
+     * @param g the input {@link Graph}
+     * @throws NullPointerException if {@code g} is {@code null}
+     */
+    public AbstractSingleVertexScoring(Graph<V, ?> g) {
+        this.g = Conditions.requireNonNull(g);
+        this.state = GraphState.create();
+    }
+
+    /**
+     * Calculate the score for a single vertex.
+     * <p>
+     * This method is invoked at most once for each vertex in the graph. The input is guaranteed to be a vertex of the
+     * graph.
+     *
+     * @param v the vertex to get the score of
+     * @return the score of vertex {@code v}
+     */
+    protected abstract T scoreProtected(V v);
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public T score(V v) {
+        return state.computeIfAbsent(v, this::scoreProtected);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public GraphState<V, T> scores() {
+        if (state.size() < g.getVerticesCount()) {
+            for (V v : g) {
+                state.putIfAbsent(v, score(v));
+            }
+        }
+        return this.state;
+    }
+}
