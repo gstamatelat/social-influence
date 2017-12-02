@@ -5,6 +5,8 @@ import gr.james.influence.api.algorithms.VertexScoring;
 import gr.james.influence.util.Conditions;
 import gr.james.influence.util.collections.GraphState;
 
+import java.util.HashSet;
+
 /**
  * This class provides a skeletal implementation of the {@link VertexScoring} interface to minimize the effort required
  * to implement it.
@@ -22,7 +24,7 @@ import gr.james.influence.util.collections.GraphState;
  */
 public abstract class AbstractSingleVertexScoring<V, T> implements VertexScoring<V, T> {
     private final Graph<V, ?> g;
-    private final GraphState<V, T> state;
+    private final GraphState<V, T> scores;
 
     /**
      * Construct an instance of {@link AbstractSingleVertexScoring} using the specified input {@link Graph} g.
@@ -34,7 +36,7 @@ public abstract class AbstractSingleVertexScoring<V, T> implements VertexScoring
      */
     public AbstractSingleVertexScoring(Graph<V, ?> g) {
         this.g = Conditions.requireNonNull(g);
-        this.state = GraphState.create();
+        this.scores = GraphState.create();
     }
 
     /**
@@ -54,7 +56,7 @@ public abstract class AbstractSingleVertexScoring<V, T> implements VertexScoring
     @Override
     public T score(V v) {
         Conditions.requireNonNullAndExists(v, g);
-        return state.computeIfAbsent(v, this::scoreProtected);
+        return scores.computeIfAbsent(v, this::scoreProtected);
     }
 
     /**
@@ -62,12 +64,12 @@ public abstract class AbstractSingleVertexScoring<V, T> implements VertexScoring
      */
     @Override
     public GraphState<V, T> scores() {
-        if (state.size() < g.getVerticesCount()) {
+        if (scores.size() < g.getVerticesCount()) {
             for (V v : g) {
-                state.putIfAbsent(v, score(v));
+                scores.putIfAbsent(v, score(v));
             }
         }
-        assert state.size() == g.getVerticesCount();
-        return this.state;
+        assert scores.keySet().equals(new HashSet<>(g.getVertices()));
+        return this.scores;
     }
 }
