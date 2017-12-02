@@ -40,8 +40,8 @@ public abstract class AbstractSingleVertexScoring<V, T> implements VertexScoring
     /**
      * Calculate the score for a single vertex.
      * <p>
-     * This method is invoked at most once for each vertex in the graph. The input is guaranteed to be a vertex of the
-     * graph.
+     * This method is invoked at most once for each vertex in the graph. The input is guaranteed to be a non-null vertex
+     * of the graph.
      *
      * @param v the vertex to get the score of
      * @return the score of vertex {@code v}
@@ -53,6 +53,7 @@ public abstract class AbstractSingleVertexScoring<V, T> implements VertexScoring
      */
     @Override
     public T score(V v) {
+        Conditions.requireNonNullAndExists(v, g);
         return state.computeIfAbsent(v, this::scoreProtected);
     }
 
@@ -66,6 +67,7 @@ public abstract class AbstractSingleVertexScoring<V, T> implements VertexScoring
                 state.putIfAbsent(v, score(v));
             }
         }
+        assert state.size() == g.getVerticesCount();
         return this.state;
     }
 }
