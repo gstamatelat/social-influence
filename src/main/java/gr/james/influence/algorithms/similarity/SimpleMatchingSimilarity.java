@@ -3,6 +3,7 @@ package gr.james.influence.algorithms.similarity;
 import com.google.common.collect.Sets;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.algorithms.VertexSimilarity;
+import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.util.Conditions;
 
 /**
@@ -28,8 +29,9 @@ public class SimpleMatchingSimilarity<V> implements VertexSimilarity<V, Double> 
     private final Graph<V, ?> g;
 
     /**
-     * Construct a {@code SimpleMatchingSimilarity} instance from a {@link Graph}. The constructor doesn't perform any
-     * calculations.
+     * Construct a {@code SimpleMatchingSimilarity} instance from a {@link Graph}.
+     * <p>
+     * The constructor doesn't perform any calculations.
      *
      * @param g the {@link Graph} to construct this instance from
      * @throws NullPointerException if {@code g} is {@code null}
@@ -39,13 +41,16 @@ public class SimpleMatchingSimilarity<V> implements VertexSimilarity<V, Double> 
     }
 
     /**
-     * Calculates the SMC between two vertices. This method runs in time proportional to the out degrees of the input
-     * vertices and uses constant extra space. This method runs slightly faster when {@code v2} has more outgoing edges
-     * than {@code v1}.
+     * Calculates the SMC between two vertices.
+     * <p>
+     * This method runs in time proportional to the out degrees of the input vertices and uses constant extra space.
+     * This method runs slightly faster when {@code v2} has more outgoing edges than {@code v1}.
      *
      * @param v1 one vertex
      * @param v2 the other vertex
      * @return the SMC between {@code v1} and {@code v2} or {@link Double#NaN} if undefined
+     * @throws NullPointerException   if either {@code v1} or {@code v2} is {@code null}
+     * @throws IllegalVertexException if either {@code v1} or {@code v2} is not in the graph referenced by the instance
      */
     @Override
     public Double similarity(V v1, V v2) {

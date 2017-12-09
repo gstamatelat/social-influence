@@ -33,8 +33,9 @@ public class PearsonSimilarity<V> implements VertexSimilarity<V, Double> {
     private final Map<V, Double> variances;
 
     /**
-     * Construct a {@code PearsonSimilarity} instance from a {@link Graph}. The constructor calculates the weight
-     * averages and variances of all vertices in time {@code O(V + E)}.
+     * Construct a {@code PearsonSimilarity} instance from a {@link Graph}.
+     * <p>
+     * The constructor calculates the weight averages and variances of all vertices in time {@code O(V + E)}.
      *
      * @param g the {@link Graph} to construct this instance from
      * @throws NullPointerException     if {@code g} is {@code null}
@@ -62,13 +63,16 @@ public class PearsonSimilarity<V> implements VertexSimilarity<V, Double> {
     }
 
     /**
-     * Calculates the Pearson similarity between two vertices. This method runs in time proportional to the out degrees
-     * of the input vertices and uses constant extra space. This method runs slightly faster when {@code v1} has more
-     * outgoing edges than {@code v2}.
+     * Calculates the Pearson similarity between two vertices.
+     * <p>
+     * This method runs in time proportional to the out degrees of the input vertices and uses constant extra space.
+     * This method runs slightly faster when {@code v1} has more outgoing edges than {@code v2}.
      *
      * @param v1 one vertex
      * @param v2 the other vertex
      * @return the Pearson correlation between {@code v1} and {@code v2} or {@link Double#NaN} if undefined
+     * @throws NullPointerException   if either {@code v1} or {@code v2} is {@code null}
+     * @throws IllegalVertexException if either {@code v1} or {@code v2} is not in the graph referenced by the instance
      */
     @Override
     public Double similarity(V v1, V v2) {
@@ -91,7 +95,9 @@ public class PearsonSimilarity<V> implements VertexSimilarity<V, Double> {
     }
 
     /**
-     * Return the variance (sigma squared) of the outbound edge weights of a vertex. This method runs in constant time.
+     * Return the variance (sigma squared) of the outbound edge weights of a vertex.
+     * <p>
+     * This method runs in constant time.
      *
      * @param v the vertex to return the variance for
      * @return the variance of {@code v}
@@ -110,7 +116,9 @@ public class PearsonSimilarity<V> implements VertexSimilarity<V, Double> {
     }
 
     /**
-     * Return the average of the outbound edge weights of a vertex. This method runs in constant time.
+     * Return the average of the outbound edge weights of a vertex.
+     * <p>
+     * This method runs in constant time.
      *
      * @param v the vertex to return the average for
      * @return the average of {@code v}
