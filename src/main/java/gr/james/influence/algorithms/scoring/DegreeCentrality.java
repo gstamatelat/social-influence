@@ -1,13 +1,10 @@
 package gr.james.influence.algorithms.scoring;
 
 import gr.james.influence.api.Graph;
-import gr.james.influence.api.algorithms.VertexScoring;
 import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.graph.Direction;
 import gr.james.influence.util.Conditions;
 import gr.james.influence.util.collections.GraphState;
-
-import java.util.HashSet;
 
 /**
  * Implementation of the degree centrality.
@@ -16,39 +13,28 @@ import java.util.HashSet;
  * <p>
  * Instances of this class expect that the graph will not be mutated after the constructor is invoked.
  * <p>
- * This class is mostly a demonstration of implementing centrality measures and other vertex scoring algorithms.
+ * This class is mostly a demonstration of implementing centrality measures and other vertex scoring algorithms using
+ * the {@link AbstractSingleVertexScoring} class.
  *
  * @param <V> the vertex type
  */
-public class DegreeCentrality<V> implements VertexScoring<V, Integer> {
-    private final GraphState<V, Integer> scores;
+public class DegreeCentrality<V> extends AbstractSingleVertexScoring<V, Integer> {
+    private final Graph<V, ?> g;
+    private final Direction direction;
 
     /**
      * Construct a {@code DegreeCentrality} instance from a {@code Graph}.
      * <p>
-     * The constructor calculates the degrees of all vertices in time {@code O(V)}.
+     * The constructor initializes this instance in constant time.
      *
      * @param g         the {@link Graph} to construct this instance from
      * @param direction the direction of the degree to calculate (in or out)
      * @throws NullPointerException if either {@code g} or {@code direction} is {@code null}
      */
     public DegreeCentrality(Graph<V, ?> g, Direction direction) {
-        Conditions.requireAllNonNull(g, direction);
-
-        scores = GraphState.create();
-
-        if (direction.isOutbound()) {
-            for (V v : g) {
-                scores.put(v, g.getOutDegree(v));
-            }
-        } else {
-            for (V v : g) {
-                scores.put(v, g.getInDegree(v));
-            }
-        }
-
-        assert scores.keySet().equals(new HashSet<>(g.getVertices()));
-        assert scores.values().stream().mapToInt(v -> v).sum() == g.getEdgesCount();
+        super(g);
+        this.g = g;
+        this.direction = Conditions.requireNonNull(direction);
     }
 
     /**
@@ -69,6 +55,15 @@ public class DegreeCentrality<V> implements VertexScoring<V, Integer> {
         return new DegreeCentrality<>(g, direction).scores();
     }
 
+    @Override
+    protected Integer scoreProtected(V v) {
+        if (direction.isInbound()) {
+            return g.getInDegree(v);
+        } else {
+            return g.getOutDegree(v);
+        }
+    }
+
     /**
      * Get the degree assigned to vertex {@code v}.
      * <p>
@@ -76,26 +71,28 @@ public class DegreeCentrality<V> implements VertexScoring<V, Integer> {
      *
      * @param v the vertex to get the degree of
      * @return the degree of vertex {@code v}
+     * @throws NullPointerException   if {@code v} is {@code null}
+     * @throws IllegalVertexException if {@code v} is not in the graph
      */
     @Override
     public Integer score(V v) {
-        Conditions.requireNonNull(v);
-        final Integer r = scores.get(v);
-        if (r == null) {
-            throw new IllegalVertexException();
-        }
-        return r;
+        return super.score(v);
     }
 
     /**
      * Get the degrees of all vertices.
      * <p>
-     * This method runs in constant time.
+     * The {@link GraphState} returned by this method will have as many entries as there are vertices in the graph. The
+     * {@link GraphState} returned by this method may be empty if the graph is empty but can't be {@code null}.
+     * <p>
+     * This method runs lazily in time {@code O(V)} in the worst case.
      *
-     * @return a {@link GraphState} object holding the degrees for all vertices in the graph
+     * @return a {@link GraphState} object holding the degrees of all vertices in the graph
      */
     @Override
     public GraphState<V, Integer> scores() {
+        final GraphState<V, Integer> scores = super.scores();
+        assert scores.values().stream().mapToInt(v -> v).sum() == g.getEdgesCount();
         return scores;
     }
 }

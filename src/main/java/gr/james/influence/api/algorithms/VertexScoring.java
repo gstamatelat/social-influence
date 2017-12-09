@@ -21,12 +21,12 @@ public interface VertexScoring<V, T> {
     T score(V v);
 
     /**
-     * Get the scores for all vertices.
+     * Get the scores of all vertices.
      * <p>
      * The {@link GraphState} returned by this method will have as many entries as there are vertices in the graph. The
      * {@link GraphState} returned by this method may be empty if the graph is empty but can't be {@code null}.
      *
-     * @return a {@link GraphState} object holding the scores for all vertices in the graph
+     * @return a {@link GraphState} object holding the scores of all vertices in the graph
      */
     GraphState<V, T> scores();
 }
