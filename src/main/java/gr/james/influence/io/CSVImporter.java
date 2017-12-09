@@ -1,4 +1,4 @@
-package gr.james.influence.graph.io;
+package gr.james.influence.io;
 
 import gr.james.influence.algorithms.iterators.OrderedVertexIterator;
 import gr.james.influence.api.Deserializer;

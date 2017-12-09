@@ -3,7 +3,7 @@ package gr.james.influence.main;
 import gr.james.influence.algorithms.generators.test.WiseCrowdGenerator;
 import gr.james.influence.algorithms.scoring.PageRank;
 import gr.james.influence.api.Graph;
-import gr.james.influence.graph.io.Dot;
+import gr.james.influence.io.Dot;
 import gr.james.influence.util.collections.GraphState;
 
 import java.io.IOException;

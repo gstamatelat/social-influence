@@ -3,7 +3,7 @@ package gr.james.influence.main;
 import gr.james.influence.algorithms.generators.test.MasterGenerator;
 import gr.james.influence.graph.Graphs;
 import gr.james.influence.graph.SimpleGraph;
-import gr.james.influence.graph.io.Dot;
+import gr.james.influence.io.Dot;
 
 import java.io.IOException;
 
