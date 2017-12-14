@@ -3,6 +3,7 @@ package gr.james.influence.algorithms.similarity;
 import com.google.common.collect.Sets;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.algorithms.VertexSimilarity;
+import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.util.Conditions;
 
 /**
@@ -48,6 +49,8 @@ public class SimpleMatchingSimilarity<V> implements VertexSimilarity<V, Double> 
      * @param v1 one vertex
      * @param v2 the other vertex
      * @return the SMC between {@code v1} and {@code v2} or {@link Double#NaN} if undefined
+     * @throws NullPointerException   {@inheritDoc}
+     * @throws IllegalVertexException {@inheritDoc}
      */
     @Override
     public Double similarity(V v1, V v2) {
