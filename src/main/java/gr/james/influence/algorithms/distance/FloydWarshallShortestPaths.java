@@ -7,6 +7,7 @@ import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.util.collections.VertexPair;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -62,6 +63,9 @@ public class FloydWarshallShortestPaths<V> implements AllPairsShortestPaths<V> {
 
     /**
      * {@inheritDoc} This method runs in constant time.
+     *
+     * @throws NullPointerException   {@inheritDoc}
+     * @throws IllegalVertexException {@inheritDoc}
      */
     @Override
     public double distance(V from, V to) {
@@ -70,5 +74,18 @@ public class FloydWarshallShortestPaths<V> implements AllPairsShortestPaths<V> {
             throw new IllegalVertexException();
         }
         return distance;
+    }
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * The Floyd-Warshall algorithm does not support paths, thus this method will always throw
+     * {@link UnsupportedOperationException}.
+     *
+     * @throws UnsupportedOperationException always
+     */
+    @Override
+    public List<GraphEdge<V, ?>> path(V from, V to) {
+        throw new UnsupportedOperationException("FloydWarshallShortestPaths doesn't support the path method");
     }
 }

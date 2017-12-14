@@ -34,6 +34,12 @@ public class DijkstraAllShortestPaths<V> implements AllPairsShortestPaths<V> {
         this.alg = new HashMap<>();
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @throws NullPointerException   {@inheritDoc}
+     * @throws IllegalVertexException {@inheritDoc}
+     */
     @Override
     public double distance(V from, V to) {
         Conditions.requireAllNonNull(from, to);
@@ -46,6 +52,12 @@ public class DijkstraAllShortestPaths<V> implements AllPairsShortestPaths<V> {
         return alg.get(from).distanceTo(to);
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @throws NullPointerException   {@inheritDoc}
+     * @throws IllegalVertexException {@inheritDoc}
+     */
     @Override
     public List<GraphEdge<V, ?>> path(V from, V to) {
         Conditions.requireAllNonNull(from, to);

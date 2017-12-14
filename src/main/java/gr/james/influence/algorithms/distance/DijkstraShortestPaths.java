@@ -33,6 +33,9 @@ public class DijkstraShortestPaths<V> implements SingleSourceShortestPaths<V> {
 
     /**
      * {@inheritDoc} This method runs in constant time.
+     *
+     * @throws NullPointerException   {@inheritDoc}
+     * @throws IllegalVertexException {@inheritDoc}
      */
     @Override
     public double distanceTo(V v) {
@@ -41,6 +44,9 @@ public class DijkstraShortestPaths<V> implements SingleSourceShortestPaths<V> {
 
     /**
      * {@inheritDoc} This method runs in time proportional to the shortest path length.
+     *
+     * @throws NullPointerException   {@inheritDoc}
+     * @throws IllegalVertexException {@inheritDoc}
      */
     @Override
     public List<GraphEdge<V, ?>> pathTo(V v) {
