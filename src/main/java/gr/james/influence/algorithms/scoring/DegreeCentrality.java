@@ -11,7 +11,8 @@ import gr.james.influence.util.collections.GraphState;
  * <p>
  * The degree of a vertex is the number of edges that are incident to that vertex. Self loops are included.
  * <p>
- * Instances of this class expect that the graph will not be mutated after the constructor is invoked.
+ * The graph bound to an instance of this class may be mutated freely after the constructor is invoked. Methods will
+ * reflect the changes to the underlying graph.
  * <p>
  * This class is mostly a demonstration of implementing centrality measures and other vertex scoring algorithms using
  * the {@link AbstractSingleVertexScoring} class.
