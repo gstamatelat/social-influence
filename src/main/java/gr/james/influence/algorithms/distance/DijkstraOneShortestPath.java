@@ -1,5 +1,6 @@
 package gr.james.influence.algorithms.distance;
 
+import gr.james.influence.annotation.UnmodifiableGraph;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphEdge;
 import gr.james.influence.api.algorithms.distance.SourceSinkShortestPaths;
@@ -9,8 +10,7 @@ import java.util.List;
 
 /**
  * Implementation of Dijkstra's shortest paths algorithm using a binary heap. This class implements the
- * {@link SourceSinkShortestPaths} interface. Instances of this class expect that the graph will not be mutated after
- * the constructor is invoked.
+ * {@link SourceSinkShortestPaths} interface.
  *
  * @param <V> the vertex type
  */
@@ -29,7 +29,7 @@ public class DijkstraOneShortestPath<V> implements SourceSinkShortestPaths<V> {
      * @throws NullPointerException   if {@code g} or {@code source} or {@code target} is {@code null}
      * @throws IllegalVertexException if {@code source} or {@code target} is not in {@code g}
      */
-    public DijkstraOneShortestPath(Graph<V, ?> g, V source, V target) {
+    public DijkstraOneShortestPath(@UnmodifiableGraph Graph<V, ?> g, V source, V target) {
         alg = new DijkstraClosestFirstIterator<>(g, source);
         alg.exhaust(target);
         to = target;

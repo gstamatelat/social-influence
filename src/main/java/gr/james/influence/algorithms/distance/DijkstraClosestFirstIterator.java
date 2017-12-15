@@ -1,6 +1,7 @@
 package gr.james.influence.algorithms.distance;
 
 import com.google.common.collect.Lists;
+import gr.james.influence.annotation.UnmodifiableGraph;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphEdge;
 import gr.james.influence.exceptions.IllegalVertexException;
@@ -14,8 +15,6 @@ import java.util.*;
  * This class is implemented as an {@link Iterator} where the order of iteration is imposed by the (ascending) distance
  * from the specified source vertex. The iterator will only traverse through the elements that are reachable from the
  * source.
- * <p>
- * Instances of this class expect that the graph will not be mutated during iteration.
  * <p>
  * The size of the state of this class is {@code O(V)}.
  *
@@ -37,7 +36,7 @@ public class DijkstraClosestFirstIterator<V> implements Iterator<V> {
      * @throws NullPointerException   if {@code g} or {@code source} is {@code null}
      * @throws IllegalVertexException if {@code source} is not in {@code g}
      */
-    public DijkstraClosestFirstIterator(Graph<V, ?> g, V source) {
+    public DijkstraClosestFirstIterator(@UnmodifiableGraph Graph<V, ?> g, V source) {
         Conditions.requireAllNonNull(g, source);
         if (!g.containsVertex(source)) {
             throw new IllegalVertexException();

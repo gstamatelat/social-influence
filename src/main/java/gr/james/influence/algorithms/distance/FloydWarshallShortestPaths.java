@@ -1,5 +1,6 @@
 package gr.james.influence.algorithms.distance;
 
+import gr.james.influence.annotation.UnmodifiableGraph;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphEdge;
 import gr.james.influence.api.algorithms.distance.AllPairsShortestPaths;
@@ -12,11 +13,12 @@ import java.util.Map;
 
 /**
  * Implementation of the <a href="http://en.wikipedia.org/wiki/Floyd%E2%80%93Warshall_algorithm">Floyd-Warshall
- * algorithm</a>. The Floyd-Warshall algorithm is an algorithm for finding shortest paths in a weighted graph with
- * positive or negative edge weights (but with no negative cycles). A single execution of the algorithm will find the
- * lengths (sum of edge weights) of the shortest paths between all pairs of vertices, though it does not return details
- * of the paths themselves. The {@link #path(Object, Object)} method will always throw an
- * {@link UnsupportedOperationException}.
+ * algorithm</a>.
+ * <p>
+ * The Floyd-Warshall algorithm is an algorithm for finding shortest paths in a weighted graph with positive or negative
+ * edge weights (but with no negative cycles). A single execution of the algorithm will find the lengths (sum of edge
+ * weights) of the shortest paths between all pairs of vertices, though it does not return details of the paths
+ * themselves. The {@link #path(Object, Object)} method will always throw an {@link UnsupportedOperationException}.
  * <p>
  * You should use {@link DijkstraAllShortestPaths} instead of this class. {@link DijkstraAllShortestPaths} is a drop-in
  * replacement of {@code FloydWarshallShortestPaths} but faster in most cases.
@@ -31,7 +33,7 @@ public class FloydWarshallShortestPaths<V> implements AllPairsShortestPaths<V> {
      * @param g the graph to create this instance from
      * @throws NullPointerException if {@code g} is {@code null}
      */
-    public FloydWarshallShortestPaths(Graph<V, ?> g) {
+    public FloydWarshallShortestPaths(@UnmodifiableGraph Graph<V, ?> g) {
         dist = new HashMap<>();
 
         for (V u : g) {

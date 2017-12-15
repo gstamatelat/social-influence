@@ -1,5 +1,6 @@
 package gr.james.influence.algorithms.distance;
 
+import gr.james.influence.annotation.UnmodifiableGraph;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphEdge;
 import gr.james.influence.api.algorithms.distance.AllPairsShortestPaths;
@@ -12,8 +13,7 @@ import java.util.Map;
 
 /**
  * Implementation of Dijkstra's shortest paths algorithm using a binary heap. This class implements the
- * {@link AllPairsShortestPaths} interface. Instances of this class expect that the graph will not be mutated after
- * the constructor is invoked.
+ * {@link AllPairsShortestPaths} interface.
  *
  * @param <V> the vertex type
  */
@@ -28,7 +28,7 @@ public class DijkstraAllShortestPaths<V> implements AllPairsShortestPaths<V> {
      * @param g the {@link Graph} in which to perform the algorithm
      * @throws NullPointerException if {@code g} is {@code null}
      */
-    public DijkstraAllShortestPaths(Graph<V, ?> g) {
+    public DijkstraAllShortestPaths(@UnmodifiableGraph Graph<V, ?> g) {
         Conditions.requireNonNull(g);
         this.g = g;
         this.alg = new HashMap<>();
