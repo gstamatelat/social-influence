@@ -1,5 +1,6 @@
 package gr.james.influence.algorithms.scoring;
 
+import gr.james.influence.annotation.ModifiableGraph;
 import gr.james.influence.api.Graph;
 import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.graph.Direction;
@@ -10,9 +11,6 @@ import gr.james.influence.util.collections.GraphState;
  * Implementation of the degree centrality.
  * <p>
  * The degree of a vertex is the number of edges that are incident to that vertex. Self loops are included.
- * <p>
- * The graph bound to an instance of this class may be mutated freely after the constructor is invoked. Methods will
- * reflect the changes to the underlying graph.
  * <p>
  * This class is mostly a demonstration of implementing centrality measures and other vertex scoring algorithms using
  * the {@link AbstractSingleVertexScoring} class.
@@ -32,7 +30,7 @@ public class DegreeCentrality<V> extends AbstractSingleVertexScoring<V, Integer>
      * @param direction the direction of the degree to calculate (in or out)
      * @throws NullPointerException if either {@code g} or {@code direction} is {@code null}
      */
-    public DegreeCentrality(Graph<V, ?> g, Direction direction) {
+    public DegreeCentrality(@ModifiableGraph Graph<V, ?> g, Direction direction) {
         super(g);
         this.g = g;
         this.direction = Conditions.requireNonNull(direction);
