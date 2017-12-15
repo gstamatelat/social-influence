@@ -1,5 +1,6 @@
 package gr.james.influence.algorithms.components;
 
+import gr.james.influence.annotation.UnmodifiableGraph;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.algorithms.ConnectedComponents;
 import gr.james.influence.util.Conditions;
@@ -10,8 +11,7 @@ import java.util.*;
 /**
  * Implementation of the <a href="https://en.wikipedia.org/wiki/Kosaraju%27s_algorithm">Kosaraju's algorithm</a> to
  * find the strongly connected components of a directed graph. This implementation uses an iterative approach and is not
- * prone to {@link StackOverflowError}. Instances of this class expect that the graph will not be mutated after the
- * constructor is invoked.
+ * prone to {@link StackOverflowError}.
  *
  * @param <V> the type of vertex
  * @see TarjanComponents
@@ -25,7 +25,7 @@ public class KosarajuComponents<V> implements ConnectedComponents<V> {
      * @param g the graph with which to construct this instance from
      * @throws NullPointerException if {@code g} is {@code null}
      */
-    public KosarajuComponents(Graph<V, ?> g) {
+    public KosarajuComponents(@UnmodifiableGraph Graph<V, ?> g) {
         Conditions.requireNonNull(g);
         this.components = executeAlgorithm(g);
     }
@@ -107,6 +107,11 @@ public class KosarajuComponents<V> implements ConnectedComponents<V> {
         return Collections.unmodifiableSet(components);
     }
 
+    /**
+     * {@inheritDoc}
+     * <p>
+     * This method runs in constant time.
+     */
     @Override
     public Set<Set<V>> components() {
         return this.components;
