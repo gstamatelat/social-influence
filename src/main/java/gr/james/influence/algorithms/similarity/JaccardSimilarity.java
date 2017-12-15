@@ -1,6 +1,7 @@
 package gr.james.influence.algorithms.similarity;
 
 import com.google.common.collect.Sets;
+import gr.james.influence.annotation.ModifiableGraph;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.algorithms.VertexSimilarity;
 import gr.james.influence.exceptions.IllegalVertexException;
@@ -22,9 +23,6 @@ import gr.james.influence.util.Conditions;
  * holds that the similarity of a vertex with itself is 1 (or {@code NaN}).
  * <p>
  * This class has no internal state.
- * <p>
- * The graph bound to an instance of this class may be mutated freely after the constructor is invoked. Methods will
- * reflect the changes to the underlying graph.
  *
  * @param <V> the vertex type
  */
@@ -32,14 +30,14 @@ public class JaccardSimilarity<V> implements VertexSimilarity<V, Double> {
     private final Graph<V, ?> g;
 
     /**
-     * Construct a {@code JaccardSimilarity} instance from a {@link Graph}.
+     * Construct a {@link JaccardSimilarity} instance from a {@link Graph}.
      * <p>
      * The constructor doesn't perform any calculations.
      *
      * @param g the {@link Graph} to construct this instance from
      * @throws NullPointerException if {@code g} is {@code null}
      */
-    public JaccardSimilarity(Graph<V, ?> g) {
+    public JaccardSimilarity(@ModifiableGraph Graph<V, ?> g) {
         this.g = Conditions.requireNonNull(g);
     }
 

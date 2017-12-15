@@ -10,7 +10,6 @@ import gr.james.influence.exceptions.IllegalVertexException;
  * <li>the possible values of this quantity</li>
  * <li>weather or not the measure is commutative</li>
  * <li>the size of the state (space complexity)</li>
- * <li>if graph mutation is allowed</li>
  * </ul>
  *
  * @param <V> the vertex type

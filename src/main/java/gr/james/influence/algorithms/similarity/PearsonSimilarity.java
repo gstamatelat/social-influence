@@ -1,6 +1,7 @@
 package gr.james.influence.algorithms.similarity;
 
 import com.google.common.collect.Sets;
+import gr.james.influence.annotation.UnmodifiableGraph;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphEdge;
 import gr.james.influence.api.algorithms.VertexSimilarity;
@@ -22,8 +23,6 @@ import java.util.Set;
  * holds that the correlation of a vertex with itself is 1 (or {@code NaN}).
  * <p>
  * This class uses internal state of size {@code O(V)}.
- * <p>
- * Instances of this class expect that the graph will not be mutated after the constructor is invoked.
  *
  * @param <V> the vertex type
  */
@@ -33,7 +32,7 @@ public class PearsonSimilarity<V> implements VertexSimilarity<V, Double> {
     private final Map<V, Double> variances;
 
     /**
-     * Construct a {@code PearsonSimilarity} instance from a {@link Graph}.
+     * Construct a {@link PearsonSimilarity} instance from a {@link Graph}.
      * <p>
      * The constructor calculates the weight averages and variances of all vertices in time {@code O(V + E)}.
      *
@@ -41,7 +40,7 @@ public class PearsonSimilarity<V> implements VertexSimilarity<V, Double> {
      * @throws NullPointerException     if {@code g} is {@code null}
      * @throws IllegalArgumentException if {@code g} does not contain any vertices
      */
-    public PearsonSimilarity(Graph<V, ?> g) {
+    public PearsonSimilarity(@UnmodifiableGraph Graph<V, ?> g) {
         Conditions.requireArgument(g.getVerticesCount() > 0, "Input graph is empty");
 
         this.g = g;
