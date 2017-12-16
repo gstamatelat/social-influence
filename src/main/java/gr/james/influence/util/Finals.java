@@ -27,10 +27,8 @@ public final class Finals {
     public static final GraphFactory<String, Object> DEFAULT_GRAPH_FACTORY = SimpleGraph.graphFactory;
 
     /* Logging messages */
-    public static final String L_PLAYER_WAITING = "Been waiting {} seconds for {} to terminate gracefully.";
     public static final String L_GAME_MOVE_EXCEED = "Move {} contains more than {} vertices. Slicing to {}. This indicates a mistake in your player.";
     public static final String L_PERIODIC = "Periodicity on {} with maxSize = {}";
-    public static final String L_PLAYER_EXCEPTION = "Player {} triggered exception on graph {} with definition {}\n{}";
 
     /* Exceptions: these finals must be arguments to GraphException(). Format: E_CLASSNAME_IDENTIFIER. */
     public static final String E_EDGE_WEIGHT_NEGATIVE = "Edge weight must be positive. Got %f.";

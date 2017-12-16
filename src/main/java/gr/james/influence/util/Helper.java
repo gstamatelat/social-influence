@@ -40,25 +40,12 @@ public final class Helper {
         return weightedRandom(weightMap, selections, RandomHelper.getRandom());
     }
 
-    @Deprecated
-    @SuppressWarnings({"AssertWithSideEffects", "ConstantConditions", "UnusedAssignment"})
-    public static boolean isAssertionEnabled() {
-        boolean assertsEnabled = false;
-        assert assertsEnabled = true;
-        return assertsEnabled;
-    }
-
     public static <V> Set<Set<V>> listToSet(List<List<V>> list) {
         Set<Set<V>> set = new HashSet<>();
         for (List<V> l : list) {
             set.add(new HashSet<>(l));
         }
         return set;
-    }
-
-    @Deprecated
-    public static RuntimeException convertCheckedException(Exception e) {
-        throw new RuntimeException(String.format("%s: %s", e.getClass().getName(), e.getMessage()));
     }
 
     public static double benchmark(Runnable runnable, double seconds) {
