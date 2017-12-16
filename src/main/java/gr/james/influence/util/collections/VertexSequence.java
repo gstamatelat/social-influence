@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+@Deprecated
 public class VertexSequence<V> implements Iterable<V> {
     private List<V> sequence;
     private double distance;
