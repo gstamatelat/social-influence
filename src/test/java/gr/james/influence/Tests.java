@@ -155,7 +155,7 @@ public class Tests {
         SimpleGraph g = new TwoWheelsGenerator(k).generate();
 
         /* Get max degree */
-        int max = new GraphStateIterator<>(DegreeCentrality.execute(g, Direction.INBOUND)).next().getWeight();
+        int max = new GraphStateIterator<>(DegreeCentrality.execute(g, Direction.INBOUND)).next().weight;
 
         /* The max has to be k or 6 if k is too low */
         Assert.assertEquals("twoWheelsMaxDegreeTest - " + k, Math.max(6, k - 1), max);

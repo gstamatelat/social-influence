@@ -22,7 +22,7 @@ public final class Helper {
         }
         Set<E> finalSelections = new HashSet<>();
         while (finalSelections.size() < selections) {
-            finalSelections.add(keyQueue.poll().getObject());
+            finalSelections.add(keyQueue.poll().object);
         }
         return finalSelections;
     }
