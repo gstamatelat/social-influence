@@ -37,10 +37,7 @@ public class DijkstraClosestFirstIterator<V> implements Iterator<V> {
      * @throws IllegalVertexException if {@code source} is not in {@code g}
      */
     public DijkstraClosestFirstIterator(@UnmodifiableGraph Graph<V, ?> g, V source) {
-        Conditions.requireAllNonNull(g, source);
-        if (!g.containsVertex(source)) {
-            throw new IllegalVertexException();
-        }
+        Conditions.requireVertexInGraph(g, source);
 
         this.g = g;
         this.distTo = new HashMap<>();
