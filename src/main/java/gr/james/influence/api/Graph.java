@@ -263,6 +263,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      *                                signals a flawed vertex provider
      * @throws NullPointerException   if {@code vertexProvider} is null or it generated {@code null}
      */
+    @Deprecated
     default V addVertex(VertexProvider<V> vertexProvider) {
         V v = vertexProvider.getVertex();
         if (!this.addVertex(v)) {
