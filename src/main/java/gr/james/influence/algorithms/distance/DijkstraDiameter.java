@@ -35,7 +35,7 @@ public class DijkstraDiameter<V> implements GraphProperty<Double> {
 
         for (V v : g) {
             final DijkstraClosestFirstIterator<V> dijkstra = new DijkstraClosestFirstIterator<>(g, v);
-            final List<V> reachable = dijkstra.exhaust();
+            final List<V> reachable = dijkstra.exhaustVertices();
             final double dist = reachable.size() < g.getVerticesCount() ?
                     Double.POSITIVE_INFINITY :
                     dijkstra.distanceTo(reachable.get(reachable.size() - 1));

@@ -51,10 +51,19 @@ public interface VertexIterator<V> extends Iterator<V> {
 
     /**
      * Runs this iterator until there are no more vertices.
+     */
+    default void exhaust() {
+        while (hasNext()) {
+            next();
+        }
+    }
+
+    /**
+     * Runs this iterator until there are no more vertices.
      *
      * @return a {@link List} of vertices in the order at which they have been returned by {@link #next()}
      */
-    default List<V> exhaust() {
+    default List<V> exhaustVertices() {
         final List<V> vertices = new ArrayList<>();
         while (hasNext()) {
             vertices.add(next());
@@ -66,11 +75,27 @@ public interface VertexIterator<V> extends Iterator<V> {
      * Runs this iterator until there are no more vertices or until a vertex has been returned.
      *
      * @param until the vertex on which to stop the iteration
+     * @throws NullPointerException   if {@code until} is {@code null}
+     * @throws IllegalVertexException if {@code until} is not in the graph referenced by this instance
+     */
+    default void exhaust(V until) {
+        Conditions.requireNonNullAndExists(until, getGraph());
+        while (hasNext()) {
+            if (next().equals(until)) {
+                break;
+            }
+        }
+    }
+
+    /**
+     * Runs this iterator until there are no more vertices or until a vertex has been returned.
+     *
+     * @param until the vertex on which to stop the iteration
      * @return a {@link List} of vertices in the order at which they have been returned by {@link #next()}
      * @throws NullPointerException   if {@code until} is {@code null}
      * @throws IllegalVertexException if {@code until} is not in the graph referenced by this instance
      */
-    default List<V> exhaust(V until) {
+    default List<V> exhaustVertices(V until) {
         Conditions.requireNonNullAndExists(until, getGraph());
         final List<V> vertices = new ArrayList<>();
         while (hasNext()) {
