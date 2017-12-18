@@ -60,6 +60,8 @@ public interface VertexIterator<V> extends Iterator<V> {
 
     /**
      * Runs this iterator until there are no more vertices.
+     * <p>
+     * This method is identical to {@link #exhaust()} except that it also returns the vertices and, thus, is slower.
      *
      * @return a {@link List} of vertices in the order at which they have been returned by {@link #next()}
      */
@@ -89,6 +91,9 @@ public interface VertexIterator<V> extends Iterator<V> {
 
     /**
      * Runs this iterator until there are no more vertices or until a vertex has been returned.
+     * <p>
+     * This method is identical to {@link #exhaust(Object)} except that it also returns the vertices and, thus, is
+     * slower.
      *
      * @param until the vertex on which to stop the iteration
      * @return a {@link List} of vertices in the order at which they have been returned by {@link #next()}
