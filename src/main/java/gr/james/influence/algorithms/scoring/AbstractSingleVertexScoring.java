@@ -1,7 +1,9 @@
 package gr.james.influence.algorithms.scoring;
 
+import gr.james.influence.annotation.UnmodifiableGraph;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.algorithms.VertexScoring;
+import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.util.Conditions;
 import gr.james.influence.util.collections.GraphState;
 
@@ -34,13 +36,13 @@ public abstract class AbstractSingleVertexScoring<V, T> implements VertexScoring
      * @param g the input {@link Graph}
      * @throws NullPointerException if {@code g} is {@code null}
      */
-    public AbstractSingleVertexScoring(Graph<V, ?> g) {
+    public AbstractSingleVertexScoring(@UnmodifiableGraph Graph<V, ?> g) {
         this.g = Conditions.requireNonNull(g);
         this.scores = GraphState.create();
     }
 
     /**
-     * Calculate the score for a single vertex.
+     * Calculate the score of a single vertex.
      * <p>
      * This method is invoked at most once for each vertex in the graph. The input is guaranteed to be a non-null vertex
      * of the graph.
@@ -52,6 +54,9 @@ public abstract class AbstractSingleVertexScoring<V, T> implements VertexScoring
 
     /**
      * {@inheritDoc}
+     *
+     * @throws NullPointerException   {@inheritDoc}
+     * @throws IllegalVertexException {@inheritDoc}
      */
     @Override
     public T score(V v) {

@@ -1,6 +1,6 @@
 package gr.james.influence.algorithms.scoring;
 
-import gr.james.influence.annotation.ModifiableGraph;
+import gr.james.influence.annotation.UnmodifiableGraph;
 import gr.james.influence.api.Graph;
 import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.graph.Direction;
@@ -30,7 +30,7 @@ public class DegreeCentrality<V> extends AbstractSingleVertexScoring<V, Integer>
      * @param direction the direction of the degree to calculate (in or out)
      * @throws NullPointerException if either {@code g} or {@code direction} is {@code null}
      */
-    public DegreeCentrality(@ModifiableGraph Graph<V, ?> g, Direction direction) {
+    public DegreeCentrality(@UnmodifiableGraph Graph<V, ?> g, Direction direction) {
         super(g);
         this.g = g;
         this.direction = Conditions.requireNonNull(direction);
@@ -70,8 +70,8 @@ public class DegreeCentrality<V> extends AbstractSingleVertexScoring<V, Integer>
      *
      * @param v the vertex to get the degree of
      * @return the degree of vertex {@code v}
-     * @throws NullPointerException   if {@code v} is {@code null}
-     * @throws IllegalVertexException if {@code v} is not in the graph
+     * @throws NullPointerException   {@inheritDoc}
+     * @throws IllegalVertexException {@inheritDoc}
      */
     @Override
     public Integer score(V v) {

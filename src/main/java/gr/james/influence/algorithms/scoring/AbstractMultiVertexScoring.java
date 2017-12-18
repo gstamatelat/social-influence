@@ -1,5 +1,6 @@
 package gr.james.influence.algorithms.scoring;
 
+import gr.james.influence.annotation.UnmodifiableGraph;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.algorithms.VertexScoring;
 import gr.james.influence.exceptions.IllegalVertexException;
@@ -33,7 +34,7 @@ public abstract class AbstractMultiVertexScoring<V, T> implements VertexScoring<
      * @param g the input {@link Graph}
      * @throws NullPointerException if {@code g} is {@code null}
      */
-    public AbstractMultiVertexScoring(Graph<V, ?> g) {
+    public AbstractMultiVertexScoring(@UnmodifiableGraph Graph<V, ?> g) {
         this.g = Conditions.requireNonNull(g);
         this.scores = scoresProtected();
         assert scores.keySet().equals(new HashSet<>(g.getVertices()));
@@ -52,6 +53,9 @@ public abstract class AbstractMultiVertexScoring<V, T> implements VertexScoring<
      * {@inheritDoc}
      * <p>
      * This method runs in constant time.
+     *
+     * @throws NullPointerException   {@inheritDoc}
+     * @throws IllegalVertexException {@inheritDoc}
      */
     @Override
     public T score(V v) {
