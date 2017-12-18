@@ -2,6 +2,7 @@ package gr.james.influence.algorithms.connectivity;
 
 import gr.james.influence.annotation.UnmodifiableGraph;
 import gr.james.influence.api.Graph;
+import gr.james.influence.api.algorithms.VertexIterator;
 import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.util.Conditions;
 
@@ -14,7 +15,7 @@ import java.util.*;
  *
  * @param <V> the vertex type
  */
-public class DepthFirstIterator<V> implements Iterator<V> {
+public class DepthFirstIterator<V> implements VertexIterator<V> {
     private final Graph<V, ?> g;
     private final Deque<V> stack;
     private final Set<V> visited;
@@ -73,5 +74,13 @@ public class DepthFirstIterator<V> implements Iterator<V> {
         }
 
         return next;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Graph<V, ?> getGraph() {
+        return g;
     }
 }

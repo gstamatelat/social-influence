@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import gr.james.influence.annotation.UnmodifiableGraph;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphEdge;
+import gr.james.influence.api.algorithms.VertexIterator;
 import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.util.Conditions;
 
@@ -20,7 +21,7 @@ import java.util.*;
  *
  * @param <V> the vertex type
  */
-public class DijkstraClosestFirstIterator<V> implements Iterator<V> {
+public class DijkstraClosestFirstIterator<V> implements VertexIterator<V> {
     private final Map<V, Double> distTo;
     private final Map<V, V> edgeTo;
     private final Graph<V, ?> g;
@@ -96,37 +97,11 @@ public class DijkstraClosestFirstIterator<V> implements Iterator<V> {
     }
 
     /**
-     * Runs this iterator until there are no more elements.
-     *
-     * @return a {@link List} of vertices in the order at which they have been returned by {@link #next()}
+     * {@inheritDoc}
      */
-    public List<V> exhaust() {
-        final List<V> vertices = new ArrayList<>();
-        while (hasNext()) {
-            vertices.add(next());
-        }
-        return vertices;
-    }
-
-    /**
-     * Runs this iterator until there are no more elements or until a vertex has been marked.
-     *
-     * @param until the vertex on which to stop the iteration
-     * @return a {@link List} of vertices in the order at which they have been returned by {@link #next()}
-     * @throws NullPointerException   if {@code until} is {@code null}
-     * @throws IllegalVertexException if {@code until} is not in {@code g}
-     */
-    public List<V> exhaust(V until) {
-        Conditions.requireNonNullAndExists(until, g);
-        final List<V> vertices = new ArrayList<>();
-        while (hasNext()) {
-            final V next = next();
-            vertices.add(next);
-            if (next.equals(until)) {
-                break;
-            }
-        }
-        return vertices;
+    @Override
+    public Graph<V, ?> getGraph() {
+        return g;
     }
 
     /**
