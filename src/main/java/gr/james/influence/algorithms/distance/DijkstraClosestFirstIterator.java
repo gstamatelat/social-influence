@@ -97,27 +97,36 @@ public class DijkstraClosestFirstIterator<V> implements Iterator<V> {
 
     /**
      * Runs this iterator until there are no more elements.
+     *
+     * @return a {@link List} of vertices in the order at which they have been returned by {@link #next()}
      */
-    public void exhaust() {
+    public List<V> exhaust() {
+        final List<V> vertices = new ArrayList<>();
         while (hasNext()) {
-            next();
+            vertices.add(next());
         }
+        return vertices;
     }
 
     /**
      * Runs this iterator until there are no more elements or until a vertex has been marked.
      *
      * @param until the vertex on which to stop the iteration
+     * @return a {@link List} of vertices in the order at which they have been returned by {@link #next()}
      * @throws NullPointerException   if {@code until} is {@code null}
      * @throws IllegalVertexException if {@code until} is not in {@code g}
      */
-    public void exhaust(V until) {
+    public List<V> exhaust(V until) {
         Conditions.requireNonNullAndExists(until, g);
+        final List<V> vertices = new ArrayList<>();
         while (hasNext()) {
-            if (next().equals(until)) {
+            final V next = next();
+            vertices.add(next);
+            if (next.equals(until)) {
                 break;
             }
         }
+        return vertices;
     }
 
     /**

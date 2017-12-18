@@ -10,6 +10,12 @@ public final class Conditions {
         }
     }
 
+    public static void requireArgument(boolean expression) {
+        if (!expression) {
+            throw new IllegalArgumentException();
+        }
+    }
+
     public static <V, E> V requireNonNullAndExists(V v, Graph<V, E> g) {
         Conditions.requireNonNull(v);
         if (!g.containsVertex(v)) {

@@ -1,6 +1,6 @@
 package gr.james.influence;
 
-import gr.james.influence.algorithms.distance.Diameter;
+import gr.james.influence.algorithms.distance.DijkstraDiameter;
 import gr.james.influence.algorithms.generators.random.BarabasiAlbertGenerator;
 import gr.james.influence.algorithms.generators.random.RandomGenerator;
 import gr.james.influence.algorithms.generators.test.BarabasiAlbertClusterGenerator;
@@ -253,6 +253,6 @@ public class Tests {
         double p = RandomHelper.getRandom().nextDouble();
         SimpleGraph g = new RandomGenerator(size, p).generate();
         Graphs.connect(g);
-        Assert.assertNotEquals("connectTest", Diameter.execute(g), Double.POSITIVE_INFINITY);
+        Assert.assertNotEquals("connectTest", new DijkstraDiameter<>(g).get(), Double.POSITIVE_INFINITY);
     }
 }
