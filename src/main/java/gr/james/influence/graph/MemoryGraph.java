@@ -3,6 +3,7 @@ package gr.james.influence.graph;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphEdge;
 import gr.james.influence.api.VertexProvider;
+import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.util.Conditions;
 import gr.james.influence.util.Finals;
 import gr.james.influence.util.collections.Pair;
@@ -129,27 +130,19 @@ public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
     }
 
     @Override
+    public V addVertex() {
+        if (vertexProvider == null) {
+            throw new UnsupportedOperationException();
+        }
+        final V v = vertexProvider.getVertex();
+        if (!addVertex(v)) {
+            throw new IllegalVertexException();
+        }
+        return v;
+    }
+
+    @Override
     public String toString() {
         return String.format("{container=%s, meta=%s}", this.getClass().getSimpleName(), this.meta);
-    }
-
-    ////////////////////////////////////////////////////////////////////////
-
-    @Override
-    public V addVertex() {
-        if (vertexProvider != null) {
-            return this.addVertex(vertexProvider);
-        } else {
-            throw new UnsupportedOperationException();
-        }
-    }
-
-    @Override
-    public List<V> addVertices(int count) {
-        if (vertexProvider != null) {
-            return this.addVertices(count, vertexProvider);
-        } else {
-            throw new UnsupportedOperationException();
-        }
     }
 }
