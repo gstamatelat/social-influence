@@ -255,24 +255,6 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     boolean addVertex(V v);
 
     /**
-     * Inserts a new unconnected vertex to the graph and returns it. Use {@link #addVertices(int)} for bulk inserts.
-     *
-     * @param vertexProvider the vertex provider to use when generating a new vertex instance
-     * @return the new vertex object
-     * @throws IllegalVertexException if the automatically generated vertex was already in the graph; this behavior
-     *                                signals a flawed vertex provider
-     * @throws NullPointerException   if {@code vertexProvider} is null or it generated {@code null}
-     */
-    @Deprecated
-    default V addVertex(VertexProvider<V> vertexProvider) {
-        V v = vertexProvider.getVertex();
-        if (!this.addVertex(v)) {
-            throw new IllegalVertexException(Finals.E_GRAPH_VERTEX_CONTAINED, v);
-        }
-        return v;
-    }
-
-    /**
      * Inserts a new unconnected vertex to the graph and returns it.
      * <p>
      * This method internally uses a {@link VertexProvider} to generate a new vertex instance.
@@ -321,24 +303,6 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
             }
         }
         return Collections.unmodifiableList(contained);
-    }
-
-    /**
-     * Insert {@code count} unconnected vertices in the graph.
-     *
-     * @param count          how many new vertices to add
-     * @param vertexProvider the vertex provider to use when generating a new vertex instance
-     * @return an unmodifiable list view of the vertices in the order that they were added
-     * @throws IllegalVertexException if any automatically generated vertex was already in the graph; this
-     *                                behavior signals a flawed vertex provider
-     * @throws NullPointerException   if {@code vertexProvider} is null or any generated vertex was {@code null}
-     */
-    default List<V> addVertices(int count, VertexProvider<V> vertexProvider) {
-        List<V> newVertices = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            newVertices.add(this.addVertex(vertexProvider));
-        }
-        return Collections.unmodifiableList(newVertices);
     }
 
     /**
