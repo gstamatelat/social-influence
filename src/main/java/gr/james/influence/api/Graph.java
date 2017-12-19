@@ -10,8 +10,8 @@ import gr.james.influence.util.RandomHelper;
 import java.util.*;
 
 /**
- * <p>Represents a collection of vertices and edges. The graph is weighted, directed and there can't be more than one
- * edge from node {@code i} to node {@code j} (it's not a multigraph).</p>
+ * Represents a weighted and directed graph that doesn't allow more than one edge from node {@code i} to node {@code j}
+ * (not a multigraph).
  * <dl><dt><b>Vertices and edges:</b></dt><dd>Objects of type {@code <V>} are used as vertices in the graph as-is. This
  * behavior implies that such objects must be unique. Methods that accept vertex objects as arguments will automatically
  * (but not silently) handle duplicate values.<br><br>On the other hand, edge objects {@code <E>} are objects that
