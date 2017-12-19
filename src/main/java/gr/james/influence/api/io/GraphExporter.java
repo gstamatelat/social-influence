@@ -1,4 +1,6 @@
-package gr.james.influence.api;
+package gr.james.influence.api.io;
+
+import gr.james.influence.api.Graph;
 
 import java.io.IOException;
 import java.io.OutputStream;

@@ -1,4 +1,4 @@
-package gr.james.influence.api;
+package gr.james.influence.api.io;
 
 @FunctionalInterface
 public interface Deserializer<T> {

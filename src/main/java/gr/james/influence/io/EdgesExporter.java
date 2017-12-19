@@ -1,8 +1,8 @@
 package gr.james.influence.io;
 
 import gr.james.influence.api.Graph;
-import gr.james.influence.api.GraphExporter;
-import gr.james.influence.api.Serializer;
+import gr.james.influence.api.io.GraphExporter;
+import gr.james.influence.api.io.Serializer;
 import gr.james.influence.util.Finals;
 
 import java.io.BufferedWriter;
