@@ -1,6 +1,5 @@
 package gr.james.influence.graph;
 
-import gr.james.influence.api.EdgeProvider;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphEdge;
 import gr.james.influence.util.Finals;
@@ -75,17 +74,7 @@ public final class ImmutableGraph<V, E> extends GraphDecorator<V, E> {
     }
 
     @Override
-    public void addEdges(Iterable<V> among, EdgeProvider<E> edgeProvider) {
-        throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
-    }
-
-    @Override
     public void addEdges(Iterable<V> among) {
-        throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
-    }
-
-    @Override
-    public void addEdges(EdgeProvider<E> edgeProvider, V... among) {
         throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 
@@ -100,17 +89,7 @@ public final class ImmutableGraph<V, E> extends GraphDecorator<V, E> {
     }
 
     @Override
-    public GraphEdge<V, E> addEdge(V source, V target, EdgeProvider<E> edgeProvider) {
-        throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
-    }
-
-    @Override
     public GraphEdge<V, E> addEdge(V source, V target) {
-        throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
-    }
-
-    @Override
-    public GraphEdge<V, E> addEdge(V source, V target, double weight, EdgeProvider<E> edgeProvider) {
         throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 

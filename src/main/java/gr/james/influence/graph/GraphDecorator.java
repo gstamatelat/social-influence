@@ -1,6 +1,5 @@
 package gr.james.influence.graph;
 
-import gr.james.influence.api.EdgeProvider;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphEdge;
 import gr.james.influence.util.Conditions;
@@ -186,18 +185,8 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
     }
 
     @Override
-    public void addEdges(Iterable<V> among, EdgeProvider<E> edgeProvider) {
-        this.g.addEdges(among, edgeProvider);
-    }
-
-    @Override
     public void addEdges(Iterable<V> among) {
         this.g.addEdges(among);
-    }
-
-    @Override
-    public void addEdges(EdgeProvider<E> edgeProvider, V... among) {
-        this.g.addEdges(edgeProvider, among);
     }
 
     @Override
@@ -211,18 +200,8 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
     }
 
     @Override
-    public GraphEdge<V, E> addEdge(V source, V target, EdgeProvider<E> edgeProvider) {
-        return this.g.addEdge(source, target, edgeProvider);
-    }
-
-    @Override
     public GraphEdge<V, E> addEdge(V source, V target) {
         return this.g.addEdge(source, target);
-    }
-
-    @Override
-    public GraphEdge<V, E> addEdge(V source, V target, double weight, EdgeProvider<E> edgeProvider) {
-        return this.g.addEdge(source, target, weight, edgeProvider);
     }
 
     @Override

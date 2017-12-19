@@ -365,23 +365,6 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
 
     /**
      * Creates an edge with the specified {@code source} and {@code target} and default weight
-     * {@value Finals#DEFAULT_EDGE_WEIGHT}. If an edge with the same {@code source} and {@code target} exists, nothing
-     * happens.
-     *
-     * @param source       the source of the edge
-     * @param target       the target of the edge
-     * @param edgeProvider the edge provider to use when generating a new edge instance
-     * @return the {@link GraphEdge} object of the newly added edge, or {@code null} if an edge already exists
-     * @throws NullPointerException   if any of the arguments is {@code null}
-     * @throws IllegalVertexException if either {@code source} or {@code target} is not in the graph
-     */
-    @Deprecated
-    default GraphEdge<V, E> addEdge(V source, V target, EdgeProvider<E> edgeProvider) {
-        return addEdge(source, target, Finals.DEFAULT_EDGE_WEIGHT, edgeProvider);
-    }
-
-    /**
-     * Creates an edge with the specified {@code source} and {@code target} and default weight
      * {@value Finals#DEFAULT_EDGE_WEIGHT}. The edge object will be assigned to {@code null}. If an edge with the same
      * {@code source} and {@code target} exists, nothing happens.
      *
@@ -393,24 +376,6 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      */
     default GraphEdge<V, E> addEdge(V source, V target) {
         return addEdge(source, target, null, Finals.DEFAULT_EDGE_WEIGHT);
-    }
-
-    /**
-     * Creates an edge with the specified {@code source}, {@code target} and {@code weight}. If an edge with the same
-     * {@code source} and {@code target} exists, nothing happens.
-     *
-     * @param source       the source of the edge
-     * @param target       the target of the edge
-     * @param weight       the weight to be associated with the edge
-     * @param edgeProvider the edge provider to use when generating a new edge instance
-     * @return the {@link GraphEdge} object of the newly added edge, or {@code null} if an edge already exists
-     * @throws NullPointerException     if either {@code source}, {@code target} or {@code edgeProvider} is {@code null}
-     * @throws IllegalVertexException   if either {@code source} or {@code target} is not in the graph
-     * @throws IllegalArgumentException if {@code weight} is non-positive
-     */
-    @Deprecated
-    default GraphEdge<V, E> addEdge(V source, V target, double weight, EdgeProvider<E> edgeProvider) {
-        return addEdge(source, target, edgeProvider.getEdge(), weight);
     }
 
     /**
@@ -487,30 +452,6 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
 
     /**
      * Connects every vertex in {@code among} with every other vertex in {@code among}; self-loops are excluded from the
-     * operation. After the operation, a complete subgraph of {@code among} will be created. This method will only
-     * create missing edges, existing ones will not be altered. If {@code among} only contains 2 (unique) vertices
-     * {@code s} and {@code t}, edges {@code (s,t)} and {@code (t,s)} will be created. If {@code among} only contains
-     * 1 (unique) vertex or less, it's a no-op.
-     *
-     * @param among        an {@link Iterable} of vertices of which each pair will be connected
-     * @param edgeProvider the edge provider to use when generating a new edge instance
-     * @throws NullPointerException   if {@code among} or any vertex in {@code among} or {@code edgeProvider} is
-     *                                {@code null}
-     * @throws IllegalVertexException if any vertex in {@code among} is not in the graph
-     */
-    @Deprecated
-    default void addEdges(Iterable<V> among, EdgeProvider<E> edgeProvider) {
-        for (V v : among) {
-            for (V u : among) {
-                if (!v.equals(u)) {
-                    addEdge(v, u, edgeProvider);
-                }
-            }
-        }
-    }
-
-    /**
-     * Connects every vertex in {@code among} with every other vertex in {@code among}; self-loops are excluded from the
      * operation.
      * <p>
      * After the operation, a complete subgraph of {@code among} will be created. This method will only create missing
@@ -536,24 +477,6 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
                 }
             }
         }
-    }
-
-    /**
-     * Connects every vertex in {@code among} with every other vertex in {@code among}; self-loops are excluded from the
-     * operation. After the operation, a complete subgraph of {@code among} will be created. This method will only
-     * create missing edges, existing ones will not be altered. If {@code among} only contains 2 (unique) vertices
-     * {@code s} and {@code t}, edges {@code (s,t)} and {@code (t,s)} will be created. If {@code among} only contains
-     * 1 (unique) vertex or less, it's a no-op.
-     *
-     * @param among        the vertices as variable arguments to connect each of its pairs; you should prefer a
-     *                     collection with a fast iterator implementation
-     * @param edgeProvider the edge provider to use when generating a new edge instance
-     * @throws NullPointerException   if any vertex in {@code among} or {@code edgeProvider} is {@code null}
-     * @throws IllegalVertexException if any vertex in {@code among} is not in the graph
-     */
-    @Deprecated
-    default void addEdges(EdgeProvider<E> edgeProvider, V... among) {
-        this.addEdges(Arrays.asList(among), edgeProvider);
     }
 
     /**
