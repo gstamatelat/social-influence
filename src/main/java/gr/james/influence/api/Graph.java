@@ -365,7 +365,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
 
     /**
      * Creates an edge with the specified {@code source} and {@code target} and default weight
-     * {@link Finals#DEFAULT_EDGE_WEIGHT}. If an edge with the same {@code source} and {@code target} exists, nothing
+     * {@value Finals#DEFAULT_EDGE_WEIGHT}. If an edge with the same {@code source} and {@code target} exists, nothing
      * happens.
      *
      * @param source       the source of the edge
@@ -382,7 +382,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
 
     /**
      * Creates an edge with the specified {@code source} and {@code target} and default weight
-     * {@link Finals#DEFAULT_EDGE_WEIGHT}. The edge object will be assigned to {@code null}. If an edge with the same
+     * {@value Finals#DEFAULT_EDGE_WEIGHT}. The edge object will be assigned to {@code null}. If an edge with the same
      * {@code source} and {@code target} exists, nothing happens.
      *
      * @param source the source of the edge
@@ -431,7 +431,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
 
     /**
      * Creates an edge with the specified {@code source} and {@code target} and default weight
-     * {@link Finals#DEFAULT_EDGE_WEIGHT}. Also attaches the object {@code edge} to the edge. If an edge with the same
+     * {@value Finals#DEFAULT_EDGE_WEIGHT}. Also attaches the object {@code edge} to the edge. If an edge with the same
      * {@code source} and {@code target} exists, nothing happens.
      *
      * @param source the source of the edge
