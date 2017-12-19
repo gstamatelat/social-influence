@@ -509,11 +509,30 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
         }
     }
 
+    /**
+     * Connects every vertex in {@code among} with every other vertex in {@code among}; self-loops are excluded from the
+     * operation.
+     * <p>
+     * After the operation, a complete subgraph of {@code among} will be created. This method will only create missing
+     * edges, existing ones will not be altered. If {@code among} only contains 2 (unique) vertices {@code s} and
+     * {@code t}, edges {@code (s,t)} and {@code (t,s)} will be created. If {@code among} only contains 1 (unique)
+     * vertex or less, it's a no-op.
+     * <p>
+     * The edge objects will be assigned to {@code null} and the edge weights to {@value Finals#DEFAULT_EDGE_WEIGHT}.
+     *
+     * @param among an {@link Iterable} of vertices of which each pair will be connected
+     * @throws NullPointerException   if {@code among} or any vertex in {@code among} is {@code null}
+     * @throws IllegalVertexException if any vertex in {@code among} is not in the graph
+     */
     default void addEdges(Iterable<V> among) {
         for (V v : among) {
             for (V u : among) {
                 if (!v.equals(u)) {
-                    addEdge(v, u);
+                    final GraphEdge<V, E> edge = addEdge(v, u);
+                    assert edge.getSource() == v;
+                    assert edge.getTarget() == u;
+                    assert edge.getEdge() == null;
+                    assert edge.getWeight() == Finals.DEFAULT_EDGE_WEIGHT;
                 }
             }
         }
@@ -537,6 +556,21 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
         this.addEdges(Arrays.asList(among), edgeProvider);
     }
 
+    /**
+     * Connects every vertex in {@code among} with every other vertex in {@code among}; self-loops are excluded from the
+     * operation.
+     * <p>
+     * After the operation, a complete subgraph of {@code among} will be created. This method will only create missing
+     * edges, existing ones will not be altered. If {@code among} only contains 2 (unique) vertices {@code s} and
+     * {@code t}, edges {@code (s,t)} and {@code (t,s)} will be created. If {@code among} only contains 1 (unique)
+     * vertex or less, it's a no-op.
+     * <p>
+     * The edge objects will be assigned to {@code null} and the edge weights to {@value Finals#DEFAULT_EDGE_WEIGHT}.
+     *
+     * @param among the vertices of which each pair will be connected
+     * @throws NullPointerException   if {@code among} or any vertex in {@code among} is {@code null}
+     * @throws IllegalVertexException if any vertex in {@code among} is not in the graph
+     */
     default void addEdges(V... among) {
         this.addEdges(Arrays.asList(among));
     }
