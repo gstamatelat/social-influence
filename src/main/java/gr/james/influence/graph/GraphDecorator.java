@@ -235,6 +235,11 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
     }
 
     @Override
+    public Iterable<GraphEdge<V, E>> edges() {
+        return this.g.edges();
+    }
+
+    @Override
     public String toString() {
         return this.g.toString();
     }
