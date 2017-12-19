@@ -3,6 +3,7 @@ package gr.james.influence.algorithms.generators.random;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphFactory;
 import gr.james.influence.api.algorithms.GraphGenerator;
+import gr.james.influence.graph.Graphs;
 import gr.james.influence.util.Conditions;
 import gr.james.influence.util.Finals;
 
@@ -43,7 +44,7 @@ public class WattsStrogatzGenerator implements GraphGenerator {
                     V b = l.get((i + j) % n);
                     g.removeEdges(a, b);
                     do {
-                        sub = g.getRandomVertex(r);
+                        sub = Graphs.getRandomVertex(g, r);
                     } while (sub == a || sub == b || g.containsEdge(a, sub));
                     g.addEdges(a, sub);
                 }

@@ -80,16 +80,6 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
     }
 
     @Override
-    public V getRandomVertex(Random r) {
-        return this.g.getRandomVertex(r);
-    }
-
-    @Override
-    public V getRandomVertex() {
-        return this.g.getRandomVertex();
-    }
-
-    @Override
     public Collection<GraphEdge<V, E>> getEdges() {
         return this.g.getEdges();
     }

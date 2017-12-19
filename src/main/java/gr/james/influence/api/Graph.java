@@ -5,7 +5,6 @@ import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.util.Conditions;
 import gr.james.influence.util.Finals;
 import gr.james.influence.util.Helper;
-import gr.james.influence.util.RandomHelper;
 
 import java.util.*;
 
@@ -207,31 +206,6 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      */
     default V getVertexFromIndex(int index) {
         return this.getVertices().get(index);
-    }
-
-    /**
-     * Return a uniformly distributed random vertex of this graph.
-     *
-     * @param r the {@link Random} instance to use for the operation
-     * @return a random vertex contained in this graph or {@code null} if the graph is empty
-     */
-    @Deprecated
-    default V getRandomVertex(Random r) {
-        if (getVerticesCount() == 0) {
-            return null;
-        } else {
-            return getVertexFromIndex(r.nextInt(getVerticesCount()));
-        }
-    }
-
-    /**
-     * Return a uniformly distributed random vertex of this graph using the global random instance.
-     *
-     * @return a random vertex contained in this graph or {@code null} if the graph is empty
-     */
-    @Deprecated
-    default V getRandomVertex() {
-        return getRandomVertex(RandomHelper.getRandom());
     }
 
     /**

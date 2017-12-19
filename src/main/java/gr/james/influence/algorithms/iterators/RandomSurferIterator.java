@@ -1,6 +1,7 @@
 package gr.james.influence.algorithms.iterators;
 
 import gr.james.influence.api.Graph;
+import gr.james.influence.graph.Graphs;
 import gr.james.influence.util.Conditions;
 import gr.james.influence.util.RandomHelper;
 
@@ -16,7 +17,7 @@ public class RandomSurferIterator<V, E> implements Iterator<V> {
     private V current;
 
     public RandomSurferIterator(Graph<V, E> g, double dampingFactor) {
-        this(g, dampingFactor, g.getRandomVertex());
+        this(g, dampingFactor, Graphs.getRandomVertex(g));
     }
 
     public RandomSurferIterator(Graph<V, E> g, double dampingFactor, V initialVertex) {
@@ -37,10 +38,10 @@ public class RandomSurferIterator<V, E> implements Iterator<V> {
         if (RandomHelper.getRandom().nextDouble() > dampingFactor) {
             this.current = g.getRandomOutEdge(this.current, true);
             if (this.current == null) {
-                this.current = g.getRandomVertex();
+                this.current = Graphs.getRandomVertex(g);
             }
         } else {
-            this.current = g.getRandomVertex();
+            this.current = Graphs.getRandomVertex(g);
         }
         return this.current;
     }

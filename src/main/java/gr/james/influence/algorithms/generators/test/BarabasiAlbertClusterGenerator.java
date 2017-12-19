@@ -42,7 +42,7 @@ public class BarabasiAlbertClusterGenerator implements GraphGenerator {
         // V[] randomVertices = new V[clusters];
         List<V> randomVertices = new ArrayList<>(clusters);
         for (int i = 0; i < clusters; i++) {
-            randomVertices.add(c.get(i).getRandomVertex(r));
+            randomVertices.add(Graphs.getRandomVertex(c.get(i), r));
             // randomVertices.set(i, c.get(i).getRandomVertex(r));
             // randomVertices[i] = c[i].getRandomVertex(r);
         }
