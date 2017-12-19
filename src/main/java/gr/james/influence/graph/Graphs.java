@@ -6,6 +6,7 @@ import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphEdge;
 import gr.james.influence.api.GraphFactory;
 import gr.james.influence.exceptions.GraphException;
+import gr.james.influence.util.Conditions;
 import gr.james.influence.util.Finals;
 import gr.james.influence.util.RandomHelper;
 
@@ -158,5 +159,38 @@ public class Graphs {
                         .filter(v -> g.getOutDegree(v) == 1 && g.getOutEdges(v).containsKey(v))
                         .collect(Collectors.toSet())
         );
+    }
+
+    /**
+     * Returns a uniformly distributed random vertex of a graph using the provided {@code Random} instance.
+     * <p>
+     * This method runs in constant time.
+     *
+     * @param g      the {@code Graph}
+     * @param random the {@code Random} instance to use
+     * @param <V>    the vertex type
+     * @return a uniformly distributed random vertex of {@code g}
+     * @throws NullPointerException     if {@code g} or {@code random} is {@code random} is {@code null}
+     * @throws IllegalArgumentException if {@code g} is empty
+     */
+    public static <V> V getRandomVertex(Graph<V, ?> g, Random random) {
+        Conditions.requireAllNonNull(g, random);
+        Conditions.requireArgument(g.getVerticesCount() > 0);
+        return g.getVertexFromIndex(random.nextInt(g.getVerticesCount()));
+    }
+
+    /**
+     * Returns a uniformly distributed random vertex of a graph using the global random instance.
+     * <p>
+     * This method runs in constant time.
+     *
+     * @param g   the {@code Graph}
+     * @param <V> the vertex type
+     * @return a uniformly distributed random vertex of {@code g}
+     * @throws NullPointerException     if {@code g} or {@code random} is {@code random} is {@code null}
+     * @throws IllegalArgumentException if {@code g} is empty
+     */
+    public static <V> V getRandomVertex(Graph<V, ?> g) {
+        return getRandomVertex(g, RandomHelper.getRandom());
     }
 }
