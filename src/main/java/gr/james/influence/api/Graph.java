@@ -5,7 +5,7 @@ import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.util.Conditions;
 import gr.james.influence.util.Finals;
 import gr.james.influence.util.Helper;
-import gr.james.influence.util.collections.BufferedIterator;
+import gr.james.influence.util.collections.EdgesIterator;
 
 import java.util.*;
 
@@ -563,29 +563,11 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * <p>
      * The edges inside the returned {@link Iterable} are in no particular order.
      * <p>
-     * The {@link Iterable} that is returned is exhausted in time {@code O(V+E)} and uses constant space.
+     * The {@link Iterable} that is returned is exhausted in time {@code O(V+E)} and uses constant extra space.
      *
      * @return an {@link Iterable} of all the edges in this graph
      */
     default Iterable<GraphEdge<V, E>> edges() {
-        return () -> new BufferedIterator<GraphEdge<V, E>>() {
-            private Iterator<V> vertexIterator;
-
-            @Override
-            protected void init() {
-                vertexIterator = Graph.this.iterator();
-            }
-
-            @Override
-            protected Iterator<GraphEdge<V, E>> proceed() {
-                while (vertexIterator.hasNext()) {
-                    final V v = vertexIterator.next();
-                    if (!Graph.this.getOutEdges(v).isEmpty()) {
-                        return Graph.this.getOutEdges(v).values().iterator();
-                    }
-                }
-                return Collections.emptyIterator();
-            }
-        };
+        return () -> new EdgesIterator<>(Graph.this);
     }
 }
