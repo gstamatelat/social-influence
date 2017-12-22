@@ -1,6 +1,7 @@
 package gr.james.influence.io;
 
 import gr.james.influence.api.Graph;
+import gr.james.influence.api.GraphEdge;
 import gr.james.influence.api.GraphFactory;
 import gr.james.influence.api.io.Deserializer;
 import gr.james.influence.api.io.GraphExporter;
@@ -28,22 +29,19 @@ public class Dot implements GraphImporter, GraphExporter {
 
     @Override
     public <V, E> void to(Graph<V, E> g, OutputStream target, Serializer<V> vertexSerializer, Serializer<E> edgeSerializer) throws IOException {
-        String dot = String.format("digraph G {%n");
-        for (V v : g) {
-            for (V u : g.getOutEdges(v).keySet()) {
-                double weight = g.getOutEdges(v).get(u).getWeight();
-                dot += String.format("%s%s -> %s [label=\"%s\",weight=%f]%n",
-                        indent,
-                        vertexSerializer.serialize(v),
-                        vertexSerializer.serialize(u),
-                        edgeSerializer.serialize(g.getOutEdges(v).get(u).getEdge()),
-                        weight);
-            }
-        }
-        dot += String.format("}%n");
-
         BufferedWriter w = new BufferedWriter(new OutputStreamWriter(target, Finals.IO_ENCODING));
-        w.write(dot);
+
+        w.write(String.format("digraph G {%n"));
+        for (GraphEdge<V, E> e : g.edges()) {
+            w.write(String.format("%s%s -> %s [label=\"%s\",weight=%f]%n",
+                    indent,
+                    vertexSerializer.serialize(e.getSource()),
+                    vertexSerializer.serialize(e.getTarget()),
+                    edgeSerializer.serialize(e.getEdge()),
+                    e.getWeight()));
+        }
+        w.write(String.format("}%n"));
+
         w.flush();
     }
 }
