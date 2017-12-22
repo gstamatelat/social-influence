@@ -2,29 +2,24 @@ package gr.james.influence.io;
 
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphEdge;
-import gr.james.influence.api.GraphFactory;
-import gr.james.influence.api.io.Deserializer;
 import gr.james.influence.api.io.GraphExporter;
-import gr.james.influence.api.io.GraphImporter;
 import gr.james.influence.api.io.Serializer;
 import gr.james.influence.util.Finals;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 
-public class Dot implements GraphImporter, GraphExporter {
+public class DotExporter implements GraphExporter {
     private String indent;
 
-    public Dot() {
+    public DotExporter() {
         this(Finals.DEFAULT_INDENT);
     }
 
-    public Dot(String indent) {
+    public DotExporter(String indent) {
         this.indent = indent;
-    }
-
-    @Override
-    public <V, E> Graph<V, E> from(InputStream source, GraphFactory<V, E> factory, Deserializer<V> deserializer) throws IOException {
-        throw new UnsupportedOperationException();
     }
 
     @Override
