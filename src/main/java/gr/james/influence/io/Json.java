@@ -16,6 +16,7 @@ import java.util.*;
 /**
  * https://github.com/jsongraph/json-graph-specification
  */
+@Deprecated
 public class Json implements GraphImporter, GraphExporter {
     @Override
     public <V, E> Graph<V, E> from(InputStream source, GraphFactory<V, E> factory, Deserializer<V> deserializer) throws IOException {
