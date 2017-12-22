@@ -1,7 +1,6 @@
 package gr.james.influence.util.collections;
 
 import com.google.common.collect.ForwardingMap;
-import gr.james.influence.exceptions.GraphException;
 
 import java.util.Collection;
 import java.util.Comparator;
@@ -49,7 +48,7 @@ public class GraphState<V, T> extends ForwardingMap<V, T> {
             if (t instanceof Number) {
                 return ((Number) t).doubleValue();
             } else {
-                throw new GraphException("You must provide a converter to GraphState if the type is not a number");
+                throw new UnsupportedOperationException("You must provide a converter to GraphState if the type is not a number");
             }
         } else {
             return converter.applyAsDouble(this.get(v));
