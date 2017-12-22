@@ -5,7 +5,7 @@ import gr.james.influence.algorithms.components.TarjanComponents;
 import gr.james.influence.api.Graph;
 import gr.james.influence.api.GraphEdge;
 import gr.james.influence.api.GraphFactory;
-import gr.james.influence.exceptions.GraphException;
+import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.util.Conditions;
 import gr.james.influence.util.Finals;
 import gr.james.influence.util.RandomHelper;
@@ -107,7 +107,7 @@ public class Graphs {
         Graph<V, E> r = factory.createGraph();
         for (V v : filter) {
             if (!g.containsVertex(v)) {
-                throw new GraphException(Finals.E_GRAPH_VERTEX_NOT_CONTAINED, "deepCopy");
+                throw new IllegalVertexException();
             }
             r.addVertex(v);
         }
