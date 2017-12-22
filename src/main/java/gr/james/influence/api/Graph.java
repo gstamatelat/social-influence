@@ -215,6 +215,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      *
      * @return the index-based vertex iterator for this graph
      */
+    @Override
     default Iterator<V> iterator() {
         return this.getVertices().iterator();
     }
