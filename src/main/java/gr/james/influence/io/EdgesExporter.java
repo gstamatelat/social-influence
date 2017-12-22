@@ -24,15 +24,15 @@ public class EdgesExporter implements GraphExporter {
     }
 
     @Override
-    public <V, E> void to(Graph<V, E> g, OutputStream target, Serializer<V> serializer) throws IOException {
+    public <V, E> void to(Graph<V, E> g, OutputStream target, Serializer<V> vertexSerializer, Serializer<E> edgeSerializer) throws IOException {
         BufferedWriter w = new BufferedWriter(new OutputStreamWriter(target, Finals.IO_ENCODING));
 
         for (V v : g) {
             for (V u : g.getOutEdges(v).keySet()) {
                 w.write(String.format("%s%s%s%s%f%n",
-                        serializer.serialize(v),
+                        vertexSerializer.serialize(v),
                         this.delimiter,
-                        serializer.serialize(u),
+                        vertexSerializer.serialize(u),
                         this.delimiter,
                         g.getOutEdges(v).get(u).getWeight()));
             }

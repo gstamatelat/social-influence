@@ -23,7 +23,7 @@ public class Json implements GraphImporter, GraphExporter {
     }
 
     @Override
-    public <V, E> void to(Graph<V, E> g, OutputStream target, Serializer<V> serializer) {
+    public <V, E> void to(Graph<V, E> g, OutputStream target, Serializer<V> vertexSerializer, Serializer<E> edgeSerializer) {
         throw new UnsupportedOperationException();
     }
 

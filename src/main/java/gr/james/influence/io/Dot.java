@@ -27,16 +27,16 @@ public class Dot implements GraphImporter, GraphExporter {
     }
 
     @Override
-    public <V, E> void to(Graph<V, E> g, OutputStream target, Serializer<V> serializer) throws IOException {
+    public <V, E> void to(Graph<V, E> g, OutputStream target, Serializer<V> vertexSerializer, Serializer<E> edgeSerializer) throws IOException {
         String dot = String.format("digraph G {%n");
         for (V v : g) {
             for (V u : g.getOutEdges(v).keySet()) {
                 double weight = g.getOutEdges(v).get(u).getWeight();
-                dot += String.format("%s%s -> %s [label=\"%.2f\",weight=%f]%n",
+                dot += String.format("%s%s -> %s [label=\"%s\",weight=%f]%n",
                         indent,
-                        serializer.serialize(v),
-                        serializer.serialize(u),
-                        weight,
+                        vertexSerializer.serialize(v),
+                        vertexSerializer.serialize(u),
+                        edgeSerializer.serialize(g.getOutEdges(v).get(u).getEdge()),
                         weight);
             }
         }
