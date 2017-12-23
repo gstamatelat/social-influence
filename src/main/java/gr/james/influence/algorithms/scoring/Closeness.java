@@ -11,6 +11,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+@Deprecated
 public class Closeness {
     private static <V, E> GraphState<V, Double> execute(Graph<V, E> g, ClosenessHandler<V> handler, Collection<V> filter, Direction direction) {
         // TODO: We only need to calculate distances for the filter

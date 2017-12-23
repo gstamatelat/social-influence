@@ -54,6 +54,8 @@ public abstract class AbstractSingleVertexScoring<V, T> implements VertexScoring
 
     /**
      * {@inheritDoc}
+     * <p>
+     * This method is buffered.
      *
      * @throws NullPointerException   {@inheritDoc}
      * @throws IllegalVertexException {@inheritDoc}
@@ -66,6 +68,8 @@ public abstract class AbstractSingleVertexScoring<V, T> implements VertexScoring
 
     /**
      * {@inheritDoc}
+     * <p>
+     * This method is buffered.
      */
     @Override
     public GraphState<V, T> scores() {
