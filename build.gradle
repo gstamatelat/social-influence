@@ -20,6 +20,10 @@ jar {
     exclude('logback.xml')
 }
 
+wrapper {
+    gradleVersion = '4.4'
+}
+
 task sourcesJar(type: Jar, dependsOn: classes) {
     classifier = 'sources'
     from sourceSets.main.allSource
