@@ -43,7 +43,9 @@ public class HarmonicCentrality<V> extends AbstractSingleVertexScoring<V, Double
         final DijkstraShortestPaths<V> dijkstra = new DijkstraShortestPaths<>(g, v);
         double sum = 0;
         for (V w : g) {
-            sum += 1 / dijkstra.distanceTo(w);
+            if (!v.equals(w)) {
+                sum += 1 / dijkstra.distanceTo(w);
+            }
         }
         return sum;
     }

@@ -41,7 +41,9 @@ public class DecayCentrality<V> extends AbstractSingleVertexScoring<V, Double> {
         final DijkstraShortestPaths<V> dijkstra = new DijkstraShortestPaths<>(g, v);
         double sum = 0;
         for (V w : g) {
-            sum += 1 / Math.pow(2.0, dijkstra.distanceTo(w));
+            if (!v.equals(w)) {
+                sum += 1 / Math.pow(2.0, dijkstra.distanceTo(w));
+            }
         }
         return sum;
     }

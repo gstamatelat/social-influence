@@ -42,7 +42,9 @@ public class ClosenessCentrality<V> extends AbstractSingleVertexScoring<V, Doubl
         final DijkstraShortestPaths<V> dijkstra = new DijkstraShortestPaths<>(g, v);
         double farness = 0;
         for (V w : g) {
-            farness += dijkstra.distanceTo(w);
+            if (!v.equals(w)) {
+                farness += dijkstra.distanceTo(w);
+            }
         }
         return g.getVerticesCount() / farness;
     }
