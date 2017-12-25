@@ -9,12 +9,12 @@ import gr.james.influence.util.RandomHelper;
 import java.util.Random;
 
 /**
- * <p>Represents an entity that can generate a {@code Graph} based on a set of rules.</p>
+ * Represents an entity that can generate a {@code Graph} based on a set of rules.
  */
 public interface GraphGenerator {
     /**
-     * <p>Generate a new graph of default type based on the rules imposed by this entity. This method is using the
-     * global random instance.</p>
+     * Generate a new {@link SimpleGraph} based on the rules imposed by this entity. This method is using the global
+     * random instance.
      *
      * @return the generated graph
      */
@@ -23,9 +23,9 @@ public interface GraphGenerator {
     }
 
     /**
-     * <p>Generate a new graph of default type based on the rules imposed by this entity.</p>
+     * Generate a new {@link SimpleGraph} based on the rules imposed by this entity.
      *
-     * @param seed create a new {@link Random} with this seed
+     * @param seed the seed for the {@link Random}
      * @return the generated graph
      */
     default SimpleGraph generate(long seed) {
@@ -33,9 +33,9 @@ public interface GraphGenerator {
     }
 
     /**
-     * <p>Generate a new graph of default type based on the rules imposed by this entity.</p>
+     * Generate a new {@link SimpleGraph} based on the rules imposed by this entity.
      *
-     * @param r the {@code Random} instance to use
+     * @param r the {@link Random} instance to use
      * @return the generated graph
      */
     default SimpleGraph generate(Random r) {
@@ -43,10 +43,10 @@ public interface GraphGenerator {
     }
 
     /**
-     * <p>Generate a new graph of type {@code T} based on the rules imposed by this entity. This method is using the
-     * global random instance.</p>
+     * Generate a new {@link Graph} based on the rules imposed by this entity. This method is using the global random
+     * instance.
      *
-     * @param factory the graphFactory of {@code T}
+     * @param factory the {@link GraphFactory} to produce the new graph
      * @param <V>     the vertex type
      * @param <E>     the edge type
      * @return the generated graph
@@ -56,10 +56,10 @@ public interface GraphGenerator {
     }
 
     /**
-     * <p>Generate a new graph of type {@code T} based on the rules imposed by this entity.</p>
+     * Generate a new {@link Graph} based on the rules imposed by this entity.
      *
-     * @param factory the graphFactory of {@code T}
-     * @param seed    create a new {@link Random} with this seed
+     * @param factory the {@link GraphFactory} to produce the new graph
+     * @param seed    the seed for the {@link Random}
      * @param <V>     the vertex type
      * @param <E>     the edge type
      * @return the generated graph
@@ -69,10 +69,10 @@ public interface GraphGenerator {
     }
 
     /**
-     * <p>Generate a new graph of type {@code T} based on the rules imposed by this entity.</p>
+     * Generate a new {@link Graph} based on the rules imposed by this entity.
      *
-     * @param factory the graphFactory of {@code T}
-     * @param r       the {@code Random} instance to use
+     * @param factory the {@link GraphFactory} to produce the new graph
+     * @param r       the {@link Random} instance to use
      * @param <V>     the vertex type
      * @param <E>     the edge type
      * @return the generated graph
