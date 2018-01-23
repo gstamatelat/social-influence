@@ -56,6 +56,27 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     }
 
     /**
+     * Returns the weight of the edge from {@code source} to {@code target} if it exists, or throws exception if it
+     * doesn't exist.
+     *
+     * @param source the source vertex of the edge
+     * @param target the target vertex of the edge
+     * @return the weight of the edge from {@code source} to {@code target}
+     * @throws NullPointerException     if either {@code source} or {@code target} is {@code null}
+     * @throws IllegalVertexException   if either {@code source} or {@code target} is not in the graph
+     * @throws IllegalArgumentException if there is no edge from {@code source} to {@code target}
+     */
+    default double getEdgeWeight(V source, V target) {
+        final GraphEdge<V, E> edge = findEdge(source, target);
+        if (edge == null) {
+            throw new IllegalArgumentException();
+        } else {
+            assert edge.getWeight() > 0;
+            return edge.getWeight();
+        }
+    }
+
+    /**
      * Returns the weight of the edge from {@code source} to {@code target} if it exists, or {@code other} if it doesn't
      * exist.
      *
