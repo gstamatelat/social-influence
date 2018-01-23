@@ -66,7 +66,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @throws IllegalVertexException   if either {@code source} or {@code target} is not in the graph
      * @throws IllegalArgumentException if there is no edge from {@code source} to {@code target}
      */
-    default double getEdgeWeight(V source, V target) {
+    default double getWeight(V source, V target) {
         final GraphEdge<V, E> edge = findEdge(source, target);
         if (edge == null) {
             throw new IllegalArgumentException();
@@ -87,7 +87,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @throws NullPointerException   if either {@code source} or {@code target} is {@code null}
      * @throws IllegalVertexException if either {@code source} or {@code target} is not in the graph
      */
-    default double getEdgeWeightElse(V source, V target, double other) {
+    default double getWeightElse(V source, V target, double other) {
         final GraphEdge<V, E> edge = findEdge(source, target);
         if (edge == null) {
             return other;

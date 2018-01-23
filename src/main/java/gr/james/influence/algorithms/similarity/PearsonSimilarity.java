@@ -79,8 +79,8 @@ public class PearsonSimilarity<V> implements VertexSimilarity<V, Double> {
         final Set<V> union = Sets.union(g.getOutEdges(v1).keySet(), g.getOutEdges(v2).keySet());
         int unionSize = 0;
         for (V k : union) {
-            final double aik = g.getEdgeWeightElse(v1, k, 0);
-            final double ajk = g.getEdgeWeightElse(v2, k, 0);
+            final double aik = g.getWeightElse(v1, k, 0);
+            final double ajk = g.getWeightElse(v2, k, 0);
             assert !(aik == 0 && ajk == 0);
             sum += (aik - averages.get(v1)) * (ajk - averages.get(v2));
             unionSize++;

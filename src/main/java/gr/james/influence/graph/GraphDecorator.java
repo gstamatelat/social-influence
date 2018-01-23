@@ -70,13 +70,13 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
     }
 
     @Override
-    public double getEdgeWeight(V source, V target) {
-        return this.g.getEdgeWeight(source, target);
+    public double getWeight(V source, V target) {
+        return this.g.getWeight(source, target);
     }
 
     @Override
-    public double getEdgeWeightElse(V source, V target, double other) {
-        return this.g.getEdgeWeightElse(source, target, other);
+    public double getWeightElse(V source, V target, double other) {
+        return this.g.getWeightElse(source, target, other);
     }
 
     @Override
