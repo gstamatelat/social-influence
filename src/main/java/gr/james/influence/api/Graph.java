@@ -102,6 +102,17 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     Map<V, GraphEdge<V, E>> getOutEdges(V v);
 
     /**
+     * Get all outbound incident vertices of {@code v}.
+     *
+     * @param v the vertex to get the outbound incident vertices of
+     * @return the outbound incident vertices of {@code v}
+     * @throws NullPointerException   if {@code v} is {@code null}
+     * @throws IllegalVertexException if {@code v} is not in the graph
+     * @see #adjacentIn(Object)
+     */
+    Set<V> adjacentOut(V v);
+
+    /**
      * Get all inbound edges of {@code v}. The result is a {@link Map} where the keys are the source vertices and the
      * values are the respective {@link GraphEdge} objects.
      *
@@ -112,6 +123,17 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @see #getOutEdges
      */
     Map<V, GraphEdge<V, E>> getInEdges(V v);
+
+    /**
+     * Get all inbound incident vertices of {@code v}.
+     *
+     * @param v the vertex to get the inbound incident vertices of
+     * @return the inbound incident vertices of {@code v}
+     * @throws NullPointerException   if {@code v} is {@code null}
+     * @throws IllegalVertexException if {@code v} is not in the graph
+     * @see #adjacentOut(Object)
+     */
+    Set<V> adjacentIn(V v);
 
     /**
      * Returns the sum of the outbound edge weights of a vertex.

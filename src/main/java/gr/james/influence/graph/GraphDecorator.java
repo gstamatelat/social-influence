@@ -95,8 +95,18 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
     }
 
     @Override
+    public Set<V> adjacentOut(V v) {
+        return this.g.adjacentOut(v);
+    }
+
+    @Override
     public Map<V, GraphEdge<V, E>> getInEdges(V v) {
         return this.g.getInEdges(v);
+    }
+
+    @Override
+    public Set<V> adjacentIn(V v) {
+        return this.g.adjacentIn(v);
     }
 
     @Override
