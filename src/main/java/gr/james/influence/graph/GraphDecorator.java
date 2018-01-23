@@ -80,6 +80,16 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
     }
 
     @Override
+    public E getEdge(V source, V target) {
+        return this.g.getEdge(source, target);
+    }
+
+    @Override
+    public E getEdgeElse(V source, V target, E other) {
+        return this.g.getEdgeElse(source, target, other);
+    }
+
+    @Override
     public V getVertexFromIndex(int index) {
         return this.g.getVertexFromIndex(index);
     }

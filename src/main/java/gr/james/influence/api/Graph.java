@@ -98,6 +98,46 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     }
 
     /**
+     * Returns the object of the edge from {@code source} to {@code target} if it exists, or throws exception if it
+     * doesn't exist.
+     *
+     * @param source the source vertex of the edge
+     * @param target the target vertex of the edge
+     * @return the object of the edge from {@code source} to {@code target}
+     * @throws NullPointerException     if either {@code source} or {@code target} is {@code null}
+     * @throws IllegalVertexException   if either {@code source} or {@code target} is not in the graph
+     * @throws IllegalArgumentException if there is no edge from {@code source} to {@code target}
+     */
+    default E getEdge(V source, V target) {
+        final GraphEdge<V, E> edge = findEdge(source, target);
+        if (edge == null) {
+            throw new IllegalArgumentException();
+        } else {
+            return edge.getEdge();
+        }
+    }
+
+    /**
+     * Returns the object of the edge from {@code source} to {@code target} if it exists, or {@code other} if it doesn't
+     * exist.
+     *
+     * @param source the source vertex of the edge
+     * @param target the target vertex of the edge
+     * @param other  the default object if no edge exists
+     * @return the object of the edge from {@code source} to {@code target}, or {@code other} if there is no such edge
+     * @throws NullPointerException   if either {@code source} or {@code target} is {@code null}
+     * @throws IllegalVertexException if either {@code source} or {@code target} is not in the graph
+     */
+    default E getEdgeElse(V source, V target, E other) {
+        final GraphEdge<V, E> edge = findEdge(source, target);
+        if (edge == null) {
+            return other;
+        } else {
+            return edge.getEdge();
+        }
+    }
+
+    /**
      * Calculates the total amount of directed edges that this graph has.
      *
      * @return the number of directed edges in this graph
