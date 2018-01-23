@@ -6,7 +6,6 @@ import gr.james.influence.api.VertexProvider;
 import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.util.Conditions;
 import gr.james.influence.util.Finals;
-import gr.james.influence.util.collections.Pair;
 
 import java.util.*;
 
@@ -14,7 +13,8 @@ import java.util.*;
  * <p>Represents an in-memory {@link Graph}, implemented using adjacency lists. Suitable for sparse graphs.</p>
  */
 public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
-    private final Map<V, Pair<Map<V, GraphEdge<V, E>>>> m;
+    private final Map<V, Map<V, GraphEdge<V, E>>> mOut;
+    private final Map<V, Map<V, GraphEdge<V, E>>> mIn;
     private final List<V> vList;
     private final VertexProvider<V> vertexProvider;
 
@@ -26,14 +26,17 @@ public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
     }
 
     public MemoryGraph(VertexProvider<V> vertexProvider) {
-        this.m = new HashMap<>();
+        this.mOut = new HashMap<>();
+        this.mIn = new HashMap<>();
         this.vList = new ArrayList<>();
         this.vertexProvider = vertexProvider;
     }
 
     @Override
     public boolean containsVertex(V v) {
-        return this.m.containsKey(Conditions.requireNonNull(v));
+        Conditions.requireNonNull(v);
+        assert this.mOut.containsKey(v) == this.mIn.containsKey(v);
+        return this.mOut.containsKey(v);
     }
 
     @Override
@@ -41,9 +44,9 @@ public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
         if (this.containsVertex(v)) {
             return false;
         } else {
-            Pair<Map<V, GraphEdge<V, E>>> pp = new Pair<>(new LinkedHashMap<>(), new LinkedHashMap<>());
-            Object o = this.m.put(v, pp);
-            assert o == null;
+            final Object o1 = this.mOut.put(v, new LinkedHashMap<>());
+            final Object o2 = this.mIn.put(v, new LinkedHashMap<>());
+            assert o1 == null && o2 == null;
             assert !this.vList.contains(v);
             this.vList.add(v);
             return true;
@@ -55,32 +58,34 @@ public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
         if (!this.containsVertex(v)) {
             return false;
         }
-        for (V d : this.m.get(v).getFirst().keySet()) {
-            Object o = this.m.get(d).getSecond().remove(v);
+        for (V d : mOut.get(v).keySet()) {
+            final Object o = mIn.get(d).remove(v);
             assert o != null;
         }
-        for (V d : this.m.get(v).getSecond().keySet()) {
-            Object o = this.m.get(d).getFirst().remove(v);
+        for (V d : mIn.get(v).keySet()) {
+            final Object o = mOut.get(d).remove(v);
             assert o != null;
         }
-        Object o1 = this.m.remove(v);
-        boolean o2 = this.vList.remove(v);
-        assert o1 != null;
-        assert o2;
+        final Object o1 = this.mOut.remove(v);
+        final Object o2 = this.mIn.remove(v);
+        final boolean o3 = this.vList.remove(v);
+        assert o1 != null && o2 != null;
+        assert o3;
         return true;
     }
 
     @Override
     public void clear() {
-        this.m.clear();
+        this.mOut.clear();
+        this.mIn.clear();
         this.vList.clear();
     }
 
     @Override
     public void clearEdges() {
-        for (V v : this.m.keySet()) {
-            this.m.get(v).getFirst().clear();
-            this.m.get(v).getSecond().clear();
+        for (V v : this) {
+            this.mOut.get(v).clear();
+            this.mIn.get(v).clear();
         }
     }
 
@@ -88,9 +93,9 @@ public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
     public GraphEdge<V, E> addEdge(V source, V target, E edge, double weight) {
         Conditions.requireArgument(weight > 0, Finals.E_EDGE_WEIGHT_NEGATIVE, weight);
         if (!containsEdge(source, target)) {
-            GraphEdge<V, E> e = new MemoryGraphEdge<>(edge, source, target, weight);
-            GraphEdge<V, E> e1 = this.m.get(source).getFirst().put(target, e);
-            GraphEdge<V, E> e2 = this.m.get(target).getSecond().put(source, e);
+            final GraphEdge<V, E> e = new MemoryGraphEdge<>(edge, source, target, weight);
+            final GraphEdge<V, E> e1 = this.mOut.get(source).put(target, e);
+            final GraphEdge<V, E> e2 = this.mIn.get(target).put(source, e);
             assert e1 == null;
             assert e2 == null;
             return e;
@@ -101,8 +106,8 @@ public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
 
     @Override
     public GraphEdge<V, E> removeEdge(V source, V target) {
-        if (this.m.get(source).getFirst().remove(target) != null) {
-            GraphEdge<V, E> h = this.m.get(target).getSecond().remove(source);
+        if (this.mOut.get(source).remove(target) != null) {
+            final GraphEdge<V, E> h = this.mIn.get(target).remove(source);
             assert h != null;
             assert h.getSource().equals(source);
             assert h.getTarget().equals(target);
@@ -115,13 +120,13 @@ public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
     @Override
     public Map<V, GraphEdge<V, E>> getOutEdges(V v) {
         Conditions.requireNonNullAndExists(v, this);
-        return Collections.unmodifiableMap(this.m.get(v).getFirst());
+        return Collections.unmodifiableMap(this.mOut.get(v));
     }
 
     @Override
     public Map<V, GraphEdge<V, E>> getInEdges(V v) {
         Conditions.requireNonNullAndExists(v, this);
-        return Collections.unmodifiableMap(this.m.get(v).getSecond());
+        return Collections.unmodifiableMap(this.mIn.get(v));
     }
 
     @Override
