@@ -1,7 +1,7 @@
 package gr.james.influence;
 
 import gr.james.influence.algorithms.generators.basic.GridGenerator;
-import gr.james.influence.api.Graph;
+import gr.james.influence.api.graph.Graph;
 import gr.james.influence.util.RandomHelper;
 import org.junit.Assert;
 import org.junit.Test;

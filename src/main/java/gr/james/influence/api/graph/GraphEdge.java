@@ -1,4 +1,4 @@
-package gr.james.influence.api;
+package gr.james.influence.api.graph;
 
 public interface GraphEdge<V, E> {
     E getEdge();

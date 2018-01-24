@@ -1,8 +1,8 @@
 package gr.james.influence.algorithms.scoring;
 
 import gr.james.influence.annotation.UnmodifiableGraph;
-import gr.james.influence.api.Graph;
 import gr.james.influence.api.algorithms.VertexScoring;
+import gr.james.influence.api.graph.Graph;
 import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.util.Conditions;
 import gr.james.influence.util.collections.GraphState;

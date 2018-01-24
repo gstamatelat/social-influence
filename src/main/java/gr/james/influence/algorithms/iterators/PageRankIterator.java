@@ -1,7 +1,7 @@
 package gr.james.influence.algorithms.iterators;
 
 import gr.james.influence.algorithms.scoring.PageRank;
-import gr.james.influence.api.Graph;
+import gr.james.influence.api.graph.Graph;
 
 public class PageRankIterator<V> extends GraphStateIterator<V, Double> {
     public PageRankIterator(Graph<V, ?> g, double dampingFactor) {

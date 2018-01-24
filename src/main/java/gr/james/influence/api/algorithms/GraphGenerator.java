@@ -1,7 +1,7 @@
 package gr.james.influence.api.algorithms;
 
-import gr.james.influence.api.Graph;
-import gr.james.influence.api.GraphFactory;
+import gr.james.influence.api.graph.Graph;
+import gr.james.influence.api.graph.GraphFactory;
 import gr.james.influence.graph.SimpleGraph;
 import gr.james.influence.util.Finals;
 import gr.james.influence.util.RandomHelper;

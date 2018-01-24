@@ -1,6 +1,6 @@
 package gr.james.influence.algorithms.layout;
 
-import gr.james.influence.api.Graph;
+import gr.james.influence.api.graph.Graph;
 import gr.james.influence.graph.Graphs;
 import gr.james.influence.graph.MemoryGraph;
 import gr.james.influence.util.collections.GraphState;

@@ -1,6 +1,6 @@
 package gr.james.influence.graph;
 
-import gr.james.influence.api.Metadata;
+import gr.james.influence.api.graph.Metadata;
 import gr.james.influence.util.Conditions;
 
 import java.util.Collections;

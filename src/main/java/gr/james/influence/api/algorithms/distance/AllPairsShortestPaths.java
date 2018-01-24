@@ -1,6 +1,6 @@
 package gr.james.influence.api.algorithms.distance;
 
-import gr.james.influence.api.GraphEdge;
+import gr.james.influence.api.graph.GraphEdge;
 import gr.james.influence.exceptions.IllegalVertexException;
 
 import java.util.List;

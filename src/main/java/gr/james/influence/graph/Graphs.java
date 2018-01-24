@@ -2,9 +2,9 @@ package gr.james.influence.graph;
 
 import com.google.common.collect.ImmutableBiMap;
 import gr.james.influence.algorithms.components.TarjanComponents;
-import gr.james.influence.api.Graph;
-import gr.james.influence.api.GraphEdge;
-import gr.james.influence.api.GraphFactory;
+import gr.james.influence.api.graph.Graph;
+import gr.james.influence.api.graph.GraphEdge;
+import gr.james.influence.api.graph.GraphFactory;
 import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.util.Conditions;
 import gr.james.influence.util.Finals;

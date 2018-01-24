@@ -1,6 +1,6 @@
 package gr.james.influence.graph;
 
-import gr.james.influence.api.GraphEdge;
+import gr.james.influence.api.graph.GraphEdge;
 
 public class MemoryGraphEdge<V, E> implements GraphEdge<V, E> {
     private E edge;

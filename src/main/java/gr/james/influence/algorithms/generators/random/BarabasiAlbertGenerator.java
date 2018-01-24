@@ -2,9 +2,9 @@ package gr.james.influence.algorithms.generators.random;
 
 import gr.james.influence.algorithms.generators.basic.CompleteGenerator;
 import gr.james.influence.algorithms.scoring.DegreeCentrality;
-import gr.james.influence.api.Graph;
-import gr.james.influence.api.GraphFactory;
 import gr.james.influence.api.algorithms.GraphGenerator;
+import gr.james.influence.api.graph.Graph;
+import gr.james.influence.api.graph.GraphFactory;
 import gr.james.influence.graph.Direction;
 import gr.james.influence.util.Conditions;
 import gr.james.influence.util.Finals;

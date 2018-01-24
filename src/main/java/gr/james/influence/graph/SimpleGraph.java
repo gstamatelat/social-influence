@@ -1,7 +1,7 @@
 package gr.james.influence.graph;
 
-import gr.james.influence.api.GraphFactory;
-import gr.james.influence.api.VertexProvider;
+import gr.james.influence.api.graph.GraphFactory;
+import gr.james.influence.api.graph.VertexProvider;
 
 public class SimpleGraph extends MemoryGraph<String, Object> {
     public static VertexProvider<String> vertexProvider = new VertexProvider<String>() {

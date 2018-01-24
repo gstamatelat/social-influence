@@ -1,6 +1,6 @@
 package gr.james.influence.util;
 
-import gr.james.influence.api.Graph;
+import gr.james.influence.api.graph.Graph;
 import gr.james.influence.exceptions.IllegalVertexException;
 
 public final class Conditions {

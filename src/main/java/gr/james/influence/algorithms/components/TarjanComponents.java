@@ -1,7 +1,7 @@
 package gr.james.influence.algorithms.components;
 
 import com.google.common.collect.BiMap;
-import gr.james.influence.api.Graph;
+import gr.james.influence.api.graph.Graph;
 import gr.james.influence.graph.Graphs;
 import gr.james.influence.util.Helper;
 

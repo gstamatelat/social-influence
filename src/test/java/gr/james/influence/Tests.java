@@ -11,7 +11,7 @@ import gr.james.influence.algorithms.iterators.RandomSurferIterator;
 import gr.james.influence.algorithms.scoring.DeGroot;
 import gr.james.influence.algorithms.scoring.DegreeCentrality;
 import gr.james.influence.algorithms.scoring.PageRank;
-import gr.james.influence.api.Graph;
+import gr.james.influence.api.graph.Graph;
 import gr.james.influence.graph.Direction;
 import gr.james.influence.graph.Graphs;
 import gr.james.influence.graph.MemoryGraph;

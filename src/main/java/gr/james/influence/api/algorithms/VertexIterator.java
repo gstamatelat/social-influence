@@ -1,7 +1,7 @@
 package gr.james.influence.api.algorithms;
 
 import gr.james.influence.algorithms.distance.DijkstraClosestFirstIterator;
-import gr.james.influence.api.Graph;
+import gr.james.influence.api.graph.Graph;
 import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.util.Conditions;
 

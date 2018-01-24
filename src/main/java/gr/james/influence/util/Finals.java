@@ -1,6 +1,6 @@
 package gr.james.influence.util;
 
-import gr.james.influence.api.GraphFactory;
+import gr.james.influence.api.graph.GraphFactory;
 import gr.james.influence.graph.Direction;
 import gr.james.influence.graph.SimpleGraph;
 import org.slf4j.Logger;

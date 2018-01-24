@@ -1,4 +1,4 @@
-package gr.james.influence.api;
+package gr.james.influence.api.graph;
 
 import java.util.HashSet;
 import java.util.Set;

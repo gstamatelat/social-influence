@@ -1,8 +1,8 @@
 package gr.james.influence.algorithms.scoring;
 
 import gr.james.influence.algorithms.AbstractIterativeAlgorithm;
-import gr.james.influence.api.Graph;
-import gr.james.influence.api.GraphEdge;
+import gr.james.influence.api.graph.Graph;
+import gr.james.influence.api.graph.GraphEdge;
 import gr.james.influence.util.collections.GraphState;
 
 public class DeGroot<V> extends AbstractIterativeAlgorithm<V, Double> {

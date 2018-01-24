@@ -1,6 +1,6 @@
 package gr.james.influence.annotation;
 
-import gr.james.influence.api.Graph;
+import gr.james.influence.api.graph.Graph;
 
 import java.lang.annotation.*;
 

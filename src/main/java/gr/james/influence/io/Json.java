@@ -1,8 +1,8 @@
 package gr.james.influence.io;
 
-import gr.james.influence.api.Graph;
-import gr.james.influence.api.GraphEdge;
-import gr.james.influence.api.GraphFactory;
+import gr.james.influence.api.graph.Graph;
+import gr.james.influence.api.graph.GraphEdge;
+import gr.james.influence.api.graph.GraphFactory;
 import gr.james.influence.api.io.Deserializer;
 import gr.james.influence.api.io.GraphExporter;
 import gr.james.influence.api.io.GraphImporter;

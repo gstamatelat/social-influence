@@ -1,6 +1,6 @@
 package gr.james.influence.algorithms.iterators;
 
-import gr.james.influence.api.Graph;
+import gr.james.influence.api.graph.Graph;
 import gr.james.influence.graph.Graphs;
 import gr.james.influence.util.Conditions;
 import gr.james.influence.util.RandomHelper;

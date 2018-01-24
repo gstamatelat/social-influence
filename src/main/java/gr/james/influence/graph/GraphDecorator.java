@@ -1,7 +1,7 @@
 package gr.james.influence.graph;
 
-import gr.james.influence.api.Graph;
-import gr.james.influence.api.GraphEdge;
+import gr.james.influence.api.graph.Graph;
+import gr.james.influence.api.graph.GraphEdge;
 import gr.james.influence.util.Conditions;
 
 import java.util.*;
