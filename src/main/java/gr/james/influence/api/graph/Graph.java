@@ -259,6 +259,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      *
      * @return an unmodifiable list of vertices in this graph
      */
+    @Deprecated
     List<V> getVertices();
 
     /**
@@ -302,19 +303,26 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @return the vertex reference with the provided index
      * @throws IndexOutOfBoundsException if the index is out of range ({@code index < 0 || index >= getVerticesCount()})
      */
+    @Deprecated
     default V getVertexFromIndex(int index) {
         return this.getVertices().get(index);
     }
 
     /**
-     * Get the read-only, index-based, vertex iterator for this graph. {@code iterator()} will return the same iterator
-     * as {@code getVertices().iterator()} but could be faster depending on the {@code Graph} implementation.
+     * Get the read-only {@link Iterator} over the vertices of this graph.
+     * <p>
+     * The vertex iteration is performed in no particular order. The {@link Iterator} returned is equivalent to
+     * <pre><code>
+     * vertexSet().iterator()
+     * </code></pre>
+     * <p>
+     * Complexity: O(1)
      *
-     * @return the index-based vertex iterator for this graph
+     * @return the read-only {@link Iterator} over the vertices of this graph
      */
     @Override
     default Iterator<V> iterator() {
-        return this.getVertices().iterator();
+        return this.vertexSet().iterator();
     }
 
     /**

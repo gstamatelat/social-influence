@@ -164,19 +164,19 @@ public class Tests {
     /**
      * <p>Test for {@link MemoryGraph#getVertexFromIndex(int)} on the {@link TwoWheelsGenerator} graph.</p>
      */
-    @Test
+    /*@Test
     public void getVertexFromIndexTest() {
         int k = RandomHelper.getRandom().nextInt(100) + 4;
 
-        /* Generate TwoWheels(k) */
+        *//* Generate TwoWheels(k) *//*
         SimpleGraph g = new TwoWheelsGenerator(k).generate();
 
-        /* getVertexFromIndex(N) must always return the center vertex */
+        *//* getVertexFromIndex(N) must always return the center vertex *//*
         Assert.assertEquals("getVertexFromIndexTest - N - " + k, 6, g.getOutDegree(g.getVertexFromIndex(g.getVerticesCount() - 1)));
 
-        /* getVertexFromIndex(N-1) must always return the wheel center vertex */
+        *//* getVertexFromIndex(N-1) must always return the wheel center vertex *//*
         Assert.assertEquals("getVertexFromIndexTest - N-1 - " + k, k - 1, g.getOutDegree(g.getVertexFromIndex(g.getVerticesCount() - 2)));
-    }
+    }*/
 
     /**
      * <p>{@link OrderedVertexIterator} must return vertices ordered by ID.</p>

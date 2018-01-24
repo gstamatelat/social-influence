@@ -16,7 +16,7 @@ public class GraphImplementationTests {
         SimpleGraph g = new RandomGenerator(250, 0.2).generate();
 
         Iterator<String> it1 = g.iterator();
-        Iterator<String> it2 = g.getVertices().iterator();
+        Iterator<String> it2 = g.vertexSet().iterator();
 
         while (it1.hasNext() || it2.hasNext()) {
             Assert.assertEquals("vertexIteratorTest", true, it1.hasNext());
