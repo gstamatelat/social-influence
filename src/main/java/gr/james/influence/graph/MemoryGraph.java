@@ -33,13 +33,6 @@ public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
     }
 
     @Override
-    public boolean containsVertex(V v) {
-        Conditions.requireNonNull(v);
-        assert this.mOut.containsKey(v) == this.mIn.containsKey(v);
-        return this.mOut.containsKey(v);
-    }
-
-    @Override
     public boolean addVertex(V v) {
         if (this.containsVertex(v)) {
             return false;
