@@ -279,15 +279,24 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     Set<V> vertexSet();
 
     /**
-     * Checks if the graph contains the specified vertex. {@code containsVertex(v)} will return the same value as
-     * {@code getVertices().contains(v)} but could be faster depending on the {@code Graph} implementation.
+     * Checks if the graph contains the specified vertex.
+     * <p>
+     * This method is equivalent to
+     * <pre><code>
+     * if (v == null) {
+     *     throw new NullPointerException();
+     * }
+     * return vertexSet().contains(v);
+     * </code></pre>
+     * <p>
+     * Complexity: O(1)
      *
      * @param v the vertex to check whether it is contained in the graph
      * @return {@code true} if {@code v} exists in the graph, otherwise {@code false}
      * @throws NullPointerException if {@code v} is {@code null}
      */
     default boolean containsVertex(V v) {
-        return this.getVertices().contains(Conditions.requireNonNull(v));
+        return this.vertexSet().contains(Conditions.requireNonNull(v));
     }
 
     /**
