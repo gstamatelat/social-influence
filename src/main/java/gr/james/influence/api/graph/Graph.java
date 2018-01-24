@@ -273,6 +273,8 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * Returns an unmodifiable {@link Set} of the vertices contained in this graph.
      * <p>
      * The vertices are in no particular order inside the {@link Set}.
+     * <p>
+     * Complexity: O(1)
      *
      * @return an unmodifiable {@link Set} of the vertices contained in this graph
      */
@@ -282,12 +284,12 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * Checks if the graph contains the specified vertex.
      * <p>
      * This method is equivalent to
-     * <pre><code>
+     * <blockquote><pre>
      * if (v == null) {
      *     throw new NullPointerException();
      * }
      * return vertexSet().contains(v);
-     * </code></pre>
+     * </pre></blockquote>
      * <p>
      * Complexity: O(1)
      *
@@ -327,10 +329,10 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     /**
      * Get the read-only {@link Iterator} over the vertices of this graph.
      * <p>
-     * The vertex iteration is performed in no particular order. The {@link Iterator} returned is equivalent to
-     * <pre><code>
-     * vertexSet().iterator()
-     * </code></pre>
+     * The vertex iteration is performed in no particular order. This method is equivalent to
+     * <blockquote><pre>
+     * return vertexSet().iterator();
+     * </pre></blockquote>
      * <p>
      * Complexity: O(1)
      *
