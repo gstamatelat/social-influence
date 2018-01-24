@@ -13,17 +13,21 @@ import java.util.*;
 /**
  * Represents a weighted and directed graph that doesn't allow more than one edge from node {@code i} to node {@code j}
  * (not a multigraph).
- * <dl><dt><b>Vertices and edges:</b></dt><dd>Objects of type {@code <V>} are used as vertices in the graph as-is. This
- * behavior implies that such objects must be unique. Methods that accept vertex objects as arguments will automatically
- * (but not silently) handle duplicate values.<br><br>On the other hand, edge objects {@code <E>} are objects that
- * attach to higher level edges in the graph ({@link GraphEdge}) and, thus, need not be unique. In fact, edge objects
- * can also be {@code null}. It is the caller's responsibility to ensure uniqueness for edge objects if such behavior is
- * desired.<br><br>Both vertex and edge types need to be immutable or effectively immutable.</dd></dl>
- * <dl><dt><b>Collections returned:</b></dt><dd>Methods that return collections ({@link Map Maps}, {@link Set Sets} and
- * {@link List Lists}) return read-only views of the actual collections they represent, meaning that you can't insert,
- * remove or reorder elements. These collections may also not be backed by the graph, changes to the graph may not
- * affect these collections after they have been returned; you need to call the method again. This behavior depends on
- * the underlying {@code Graph} implementation.</dd></dl>
+ * <h2>Vertices and edges</h2>
+ * Objects of type {@code <V>} are used as vertices in the graph as-is. This behavior implies that such objects must be
+ * unique. Methods that accept vertex objects as arguments will automatically (but not silently) handle duplicate
+ * values.
+ * <p>
+ * On the other hand, edge objects {@code <E>} are objects that attach to higher level edges in the graph
+ * ({@link GraphEdge}) and, thus, need not be unique. In fact, edge objects can also be {@code null}. It is the caller's
+ * responsibility to ensure uniqueness for edge objects if such behavior is desired.
+ * <p>
+ * Both vertex and edge types need to be immutable or effectively immutable.
+ * <h2>Collections returned</h2>
+ * Methods that return collections ({@link Map Maps}, {@link Set Sets} and {@link List Lists}) return read-only views of
+ * the actual collections they represent, meaning that you can't insert, remove or reorder elements. These collections
+ * may also not be backed by the graph, changes to the graph may not affect these collections after they have been
+ * returned; you need to call the method again. This behavior depends on the underlying {@code Graph} implementation.
  *
  * @param <V> the vertex type
  * @param <E> the edge type
