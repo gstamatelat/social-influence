@@ -44,8 +44,8 @@ public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
         if (this.containsVertex(v)) {
             return false;
         } else {
-            final Object o1 = this.mOut.put(v, new LinkedHashMap<>());
-            final Object o2 = this.mIn.put(v, new LinkedHashMap<>());
+            final Object o1 = this.mOut.put(v, new HashMap<>());
+            final Object o2 = this.mIn.put(v, new HashMap<>());
             assert o1 == null && o2 == null;
             assert !this.vList.contains(v);
             this.vList.add(v);
