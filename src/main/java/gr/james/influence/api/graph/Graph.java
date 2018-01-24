@@ -13,7 +13,7 @@ import java.util.*;
 /**
  * Represents a weighted and directed graph which can contain self loops but not parallel edges.
  * <p>
- * More formally, this graph cannot contain more than one edge from any ordered pair of endpoints.
+ * More formally, this graph cannot contain more than one edge corresponding to any ordered pair of endpoints.
  * <p>
  * An ordered pair {@code (a, b)} is a pair of objects where the order in which the objects appear in the pair is
  * significant: the ordered pair {@code (a, b)} is different from the ordered pair {@code (b, a)} unless {@code a = b}.
