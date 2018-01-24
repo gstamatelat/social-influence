@@ -150,6 +150,11 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
     }
 
     @Override
+    public Set<V> vertexSet() {
+        return this.g.vertexSet();
+    }
+
+    @Override
     public int getVerticesCount() {
         return this.g.getVerticesCount();
     }

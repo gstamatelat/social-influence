@@ -262,6 +262,15 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     List<V> getVertices();
 
     /**
+     * Returns an unmodifiable {@link Set} of the vertices contained in this graph.
+     * <p>
+     * The vertices are in no particular order inside the {@link Set}.
+     *
+     * @return an unmodifiable {@link Set} of the vertices contained in this graph
+     */
+    Set<V> vertexSet();
+
+    /**
      * Checks if the graph contains the specified vertex. {@code containsVertex(v)} will return the same value as
      * {@code getVertices().contains(v)} but could be faster depending on the {@code Graph} implementation.
      *
