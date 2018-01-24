@@ -151,6 +151,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      *
      * @return the number of directed edges in this graph
      */
+    @Deprecated
     default int getEdgesCount() {
         int count = 0;
         for (V v : this.getVertices()) {
@@ -169,6 +170,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @throws IllegalVertexException if {@code v} is not in the graph
      * @see #getInEdges
      */
+    @Deprecated
     Map<V, GraphEdge<V, E>> getOutEdges(V v);
 
     /**
@@ -192,6 +194,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @throws IllegalVertexException if {@code v} is not in the graph
      * @see #getOutEdges
      */
+    @Deprecated
     Map<V, GraphEdge<V, E>> getInEdges(V v);
 
     /**
