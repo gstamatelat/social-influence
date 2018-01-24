@@ -160,6 +160,11 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
     }
 
     @Override
+    public int vertexCount() {
+        return this.g.vertexCount();
+    }
+
+    @Override
     public V getRandomOutEdge(V from, boolean weighted) {
         return this.g.getRandomOutEdge(from, weighted);
     }

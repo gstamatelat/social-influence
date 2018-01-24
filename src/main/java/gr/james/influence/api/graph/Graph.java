@@ -307,8 +307,25 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      *
      * @return the number of vertices in this graph
      */
+    @Deprecated
     default int getVerticesCount() {
         return this.getVertices().size();
+    }
+
+    /**
+     * Returns the number of vertices in this graph.
+     * <p>
+     * This method is equivalent to
+     * <blockquote><pre>
+     * return vertexSet().size();
+     * </pre></blockquote>
+     * <p>
+     * Complexity: O(1)
+     *
+     * @return the number of vertices in this graph
+     */
+    default int vertexCount() {
+        return this.vertexSet().size();
     }
 
     /**
