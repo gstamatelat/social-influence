@@ -1,8 +1,8 @@
 package gr.james.influence.algorithms.scoring;
 
 import gr.james.influence.algorithms.AbstractIterativeAlgorithm;
+import gr.james.influence.api.graph.DirectedEdge;
 import gr.james.influence.api.graph.Graph;
-import gr.james.influence.api.graph.GraphEdge;
 import gr.james.influence.util.collections.GraphState;
 
 public class DeGroot<V> extends AbstractIterativeAlgorithm<V, Double> {
@@ -38,7 +38,7 @@ public class DeGroot<V> extends AbstractIterativeAlgorithm<V, Double> {
         final GraphState<V, Double> nextState = GraphState.create();
         for (V v : g) {
             double w = 0.0;
-            for (GraphEdge<V, ?> e : g.getOutEdges(v).values()) {
+            for (DirectedEdge<V, ?> e : g.getOutEdges(v).values()) {
                 w += e.getWeight() * previous.get(e.getTarget());
             }
             nextState.put(v, w / g.getOutStrength(v));

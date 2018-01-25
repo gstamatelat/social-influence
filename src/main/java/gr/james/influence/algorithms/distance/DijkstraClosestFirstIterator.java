@@ -3,8 +3,8 @@ package gr.james.influence.algorithms.distance;
 import com.google.common.collect.Lists;
 import gr.james.influence.annotation.UnmodifiableGraph;
 import gr.james.influence.api.algorithms.VertexIterator;
+import gr.james.influence.api.graph.DirectedEdge;
 import gr.james.influence.api.graph.Graph;
-import gr.james.influence.api.graph.GraphEdge;
 import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.util.Conditions;
 
@@ -82,7 +82,7 @@ public class DijkstraClosestFirstIterator<V> implements VertexIterator<V> {
             throw new NoSuchElementException();
         }
 
-        for (GraphEdge<V, ?> e : g.getOutEdges(u).values()) {
+        for (DirectedEdge<V, ?> e : g.getOutEdges(u).values()) {
             final V to = e.getTarget();
             final double distanceThroughU = distTo.get(u) + e.getWeight();
             if (distanceThroughU < distTo.get(to)) {
@@ -138,16 +138,16 @@ public class DijkstraClosestFirstIterator<V> implements VertexIterator<V> {
      * This method runs in time proportional to the shortest path length.
      *
      * @param v the vertex to get the shortest route to
-     * @return an unmodifiable {@link List} of {@link GraphEdge} representing the shortest route to {@code v}
+     * @return an unmodifiable {@link List} of {@link DirectedEdge} representing the shortest route to {@code v}
      * @throws NullPointerException   if {@code v} is null
      * @throws IllegalVertexException if {@code v} is not in the graph
      */
-    public List<GraphEdge<V, ?>> pathTo(V v) {
+    public List<DirectedEdge<V, ?>> pathTo(V v) {
         Conditions.requireNonNull(v);
         if (!edgeTo.containsKey(v)) {
             throw new IllegalVertexException();
         }
-        final List<GraphEdge<V, ?>> route = new ArrayList<>();
+        final List<DirectedEdge<V, ?>> route = new ArrayList<>();
         while (edgeTo.get(v) != null) {
             route.add(g.findEdge(edgeTo.get(v), v));
             v = edgeTo.get(v);

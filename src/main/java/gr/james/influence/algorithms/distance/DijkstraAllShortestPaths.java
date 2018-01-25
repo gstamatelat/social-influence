@@ -2,8 +2,8 @@ package gr.james.influence.algorithms.distance;
 
 import gr.james.influence.annotation.UnmodifiableGraph;
 import gr.james.influence.api.algorithms.distance.AllPairsShortestPaths;
+import gr.james.influence.api.graph.DirectedEdge;
 import gr.james.influence.api.graph.Graph;
-import gr.james.influence.api.graph.GraphEdge;
 import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.util.Conditions;
 
@@ -59,7 +59,7 @@ public class DijkstraAllShortestPaths<V> implements AllPairsShortestPaths<V> {
      * @throws IllegalVertexException {@inheritDoc}
      */
     @Override
-    public List<GraphEdge<V, ?>> path(V from, V to) {
+    public List<DirectedEdge<V, ?>> path(V from, V to) {
         Conditions.requireAllNonNull(from, to);
         if (!g.containsVertex(from) || !g.containsVertex(to)) {
             throw new IllegalVertexException();

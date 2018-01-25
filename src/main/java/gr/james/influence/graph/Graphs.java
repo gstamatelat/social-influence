@@ -2,8 +2,8 @@ package gr.james.influence.graph;
 
 import com.google.common.collect.ImmutableBiMap;
 import gr.james.influence.algorithms.components.TarjanComponents;
+import gr.james.influence.api.graph.DirectedEdge;
 import gr.james.influence.api.graph.Graph;
-import gr.james.influence.api.graph.GraphEdge;
 import gr.james.influence.api.graph.GraphFactory;
 import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.util.Conditions;
@@ -26,15 +26,15 @@ public class Graphs {
     }
 
     public static <V, E> void reverse(Graph<V, E> g) {
-        final Collection<GraphEdge<V, E>> edges = g.getEdges();
+        final Collection<DirectedEdge<V, E>> edges = g.getEdges();
         g.clearEdges();
-        for (GraphEdge<V, E> e : edges) {
+        for (DirectedEdge<V, E> e : edges) {
             g.addEdge(e.getTarget(), e.getSource(), e.getEdge(), e.getWeight());
         }
     }
 
     public static <V, E> void randomizeEdgeWeights(Graph<V, E> g) {
-        for (GraphEdge<V, E> e : g.getEdges()) {
+        for (DirectedEdge<V, E> e : g.getEdges()) {
             boolean change = g.setEdgeWeight(e.getSource(), e.getTarget(),
                     RandomHelper.getRandom().nextDouble());
             assert change;
@@ -56,10 +56,10 @@ public class Graphs {
         V v = g.addVertex();
 
         for (V y : f) {
-            for (Map.Entry<V, GraphEdge<V, E>> e : g.getOutEdges(y).entrySet()) {
+            for (Map.Entry<V, DirectedEdge<V, E>> e : g.getOutEdges(y).entrySet()) {
                 g.addEdge(v, e.getKey(), e.getValue().getWeight());
             }
-            for (Map.Entry<V, GraphEdge<V, E>> e : g.getInEdges(y).entrySet()) {
+            for (Map.Entry<V, DirectedEdge<V, E>> e : g.getInEdges(y).entrySet()) {
                 g.addEdge(e.getKey(), v, e.getValue().getWeight());
             }
             g.removeVertex(y);
@@ -84,7 +84,7 @@ public class Graphs {
             for (V v : g) {
                 r.addVertex(v);
             }
-            for (GraphEdge<V, E> e : g.getEdges()) {
+            for (DirectedEdge<V, E> e : g.getEdges()) {
                 r.addEdge(e.getSource(), e.getTarget(), e.getWeight());
             }
         }

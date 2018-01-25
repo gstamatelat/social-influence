@@ -1,6 +1,6 @@
 package gr.james.influence.api.algorithms.distance;
 
-import gr.james.influence.api.graph.GraphEdge;
+import gr.james.influence.api.graph.DirectedEdge;
 import gr.james.influence.exceptions.IllegalVertexException;
 
 import java.util.List;
@@ -27,12 +27,12 @@ public interface SingleSourceShortestPaths<V> {
      * target specified is the source vertex associated with this instance this method will return an empty sequence.
      *
      * @param v the vertex to get the shortest route to
-     * @return an unmodifiable {@link List} of {@link GraphEdge} representing the shortest route to {@code v}
+     * @return an unmodifiable {@link List} of {@link DirectedEdge} representing the shortest route to {@code v}
      * @throws NullPointerException          if {@code v} is null
      * @throws IllegalVertexException        if {@code v} is not in the graph
      * @throws UnsupportedOperationException if the algorithm does not support this operation
      */
-    default List<GraphEdge<V, ?>> pathTo(V v) {
+    default List<DirectedEdge<V, ?>> pathTo(V v) {
         throw new UnsupportedOperationException();
     }
 }

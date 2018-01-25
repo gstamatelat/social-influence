@@ -1,7 +1,7 @@
 package gr.james.influence.io;
 
+import gr.james.influence.api.graph.DirectedEdge;
 import gr.james.influence.api.graph.Graph;
-import gr.james.influence.api.graph.GraphEdge;
 import gr.james.influence.api.io.GraphExporter;
 import gr.james.influence.api.io.Serializer;
 import gr.james.influence.util.Finals;
@@ -27,7 +27,7 @@ public class DotExporter implements GraphExporter {
         BufferedWriter w = new BufferedWriter(new OutputStreamWriter(target, Finals.IO_ENCODING));
 
         w.write(String.format("digraph G {%n"));
-        for (GraphEdge<V, E> e : g.edges()) {
+        for (DirectedEdge<V, E> e : g.edges()) {
             w.write(String.format("%s%s -> %s [label=\"%s\",weight=%f]%n",
                     indent,
                     vertexSerializer.serialize(e.getSource()),

@@ -1,7 +1,7 @@
 package gr.james.influence.graph;
 
+import gr.james.influence.api.graph.DirectedEdge;
 import gr.james.influence.api.graph.Graph;
-import gr.james.influence.api.graph.GraphEdge;
 import gr.james.influence.util.Conditions;
 
 import java.util.*;
@@ -65,7 +65,7 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
     }
 
     @Override
-    public GraphEdge<V, E> findEdge(V source, V target) {
+    public DirectedEdge<V, E> findEdge(V source, V target) {
         return this.g.findEdge(source, target);
     }
 
@@ -95,7 +95,7 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
     }
 
     @Override
-    public Collection<GraphEdge<V, E>> getEdges() {
+    public Collection<DirectedEdge<V, E>> getEdges() {
         return this.g.getEdges();
     }
 
@@ -105,7 +105,7 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
     }
 
     @Override
-    public Map<V, GraphEdge<V, E>> getOutEdges(V v) {
+    public Map<V, DirectedEdge<V, E>> getOutEdges(V v) {
         return this.g.getOutEdges(v);
     }
 
@@ -115,7 +115,7 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
     }
 
     @Override
-    public Map<V, GraphEdge<V, E>> getInEdges(V v) {
+    public Map<V, DirectedEdge<V, E>> getInEdges(V v) {
         return this.g.getInEdges(v);
     }
 
@@ -225,22 +225,22 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
     }
 
     @Override
-    public GraphEdge<V, E> addEdge(V source, V target) {
+    public DirectedEdge<V, E> addEdge(V source, V target) {
         return this.g.addEdge(source, target);
     }
 
     @Override
-    public GraphEdge<V, E> addEdge(V source, V target, double weight) {
+    public DirectedEdge<V, E> addEdge(V source, V target, double weight) {
         return this.g.addEdge(source, target, weight);
     }
 
     @Override
-    public GraphEdge<V, E> addEdge(V source, V target, E edge) {
+    public DirectedEdge<V, E> addEdge(V source, V target, E edge) {
         return this.g.addEdge(source, target, edge);
     }
 
     @Override
-    public GraphEdge<V, E> addEdge(V source, V target, E edge, double weight) {
+    public DirectedEdge<V, E> addEdge(V source, V target, E edge, double weight) {
         return this.g.addEdge(source, target, edge, weight);
     }
 
@@ -250,7 +250,7 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
     }
 
     @Override
-    public GraphEdge<V, E> removeEdge(V source, V target) {
+    public DirectedEdge<V, E> removeEdge(V source, V target) {
         return this.g.removeEdge(source, target);
     }
 
@@ -270,7 +270,7 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
     }
 
     @Override
-    public Iterable<GraphEdge<V, E>> edges() {
+    public Iterable<DirectedEdge<V, E>> edges() {
         return this.g.edges();
     }
 

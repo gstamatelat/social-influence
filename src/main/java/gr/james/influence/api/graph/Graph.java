@@ -52,15 +52,15 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     }
 
     /**
-     * Returns the {@link GraphEdge} from {@code source} to {@code target}, or {@code null} if there is no such edge.
+     * Returns the {@link DirectedEdge} from {@code source} to {@code target}, or {@code null} if there is no such edge.
      *
      * @param source the source vertex of the edge
      * @param target the target vertex of the edge
-     * @return the {@link GraphEdge} from {@code source} to {@code target}, or {@code null} if there is no such edge
+     * @return the {@link DirectedEdge} from {@code source} to {@code target}, or {@code null} if there is no such edge
      * @throws NullPointerException   if either {@code source} or {@code target} is {@code null}
      * @throws IllegalVertexException if either {@code source} or {@code target} is not in the graph
      */
-    default GraphEdge<V, E> findEdge(V source, V target) {
+    default DirectedEdge<V, E> findEdge(V source, V target) {
         return this.getOutEdges(source).get(Conditions.requireNonNullAndExists(target, this));
     }
 
@@ -76,7 +76,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @throws IllegalEdgeException   if there is no edge from {@code source} to {@code target}
      */
     default double getWeight(V source, V target) {
-        final GraphEdge<V, E> edge = findEdge(source, target);
+        final DirectedEdge<V, E> edge = findEdge(source, target);
         if (edge == null) {
             throw new IllegalEdgeException();
         } else {
@@ -97,7 +97,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @throws IllegalVertexException if either {@code source} or {@code target} is not in the graph
      */
     default double getWeightElse(V source, V target, double other) {
-        final GraphEdge<V, E> edge = findEdge(source, target);
+        final DirectedEdge<V, E> edge = findEdge(source, target);
         if (edge == null) {
             return other;
         } else {
@@ -118,7 +118,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @throws IllegalEdgeException   if there is no edge from {@code source} to {@code target}
      */
     default E getEdge(V source, V target) {
-        final GraphEdge<V, E> edge = findEdge(source, target);
+        final DirectedEdge<V, E> edge = findEdge(source, target);
         if (edge == null) {
             throw new IllegalEdgeException();
         } else {
@@ -138,7 +138,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @throws IllegalVertexException if either {@code source} or {@code target} is not in the graph
      */
     default E getEdgeElse(V source, V target, E other) {
-        final GraphEdge<V, E> edge = findEdge(source, target);
+        final DirectedEdge<V, E> edge = findEdge(source, target);
         if (edge == null) {
             return other;
         } else {
@@ -162,16 +162,16 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
 
     /**
      * Get all outbound edges of {@code v}. The result is a {@link Map} where the keys are the destination vertices
-     * and the values are the respective {@link GraphEdge} objects.
+     * and the values are the respective {@link DirectedEdge} objects.
      *
      * @param v the vertex to get the outbound edges of
-     * @return the outbound edges of {@code v} as a {@code Map<V, GraphEdge<V,E>>}
+     * @return the outbound edges of {@code v} as a {@code Map<V, DirectedEdge<V,E>>}
      * @throws NullPointerException   if {@code v} is {@code null}
      * @throws IllegalVertexException if {@code v} is not in the graph
      * @see #getInEdges
      */
     @Deprecated
-    Map<V, GraphEdge<V, E>> getOutEdges(V v);
+    Map<V, DirectedEdge<V, E>> getOutEdges(V v);
 
     /**
      * Get all outbound incident vertices of {@code v}.
@@ -186,16 +186,16 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
 
     /**
      * Get all inbound edges of {@code v}. The result is a {@link Map} where the keys are the source vertices and the
-     * values are the respective {@link GraphEdge} objects.
+     * values are the respective {@link DirectedEdge} objects.
      *
      * @param v the vertex to get the inbound edges of
-     * @return the inbound edges of {@code v} as a {@code Map<Vertex, GraphEdge<V, E>>}
+     * @return the inbound edges of {@code v} as a {@code Map<Vertex, DirectedEdge<V, E>>}
      * @throws NullPointerException   if {@code v} is {@code null}
      * @throws IllegalVertexException if {@code v} is not in the graph
      * @see #getOutEdges
      */
     @Deprecated
-    Map<V, GraphEdge<V, E>> getInEdges(V v);
+    Map<V, DirectedEdge<V, E>> getInEdges(V v);
 
     /**
      * Get all inbound incident vertices of {@code v}.
@@ -218,7 +218,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @see #getInStrength
      */
     default double getOutStrength(V v) {
-        return this.getOutEdges(v).values().stream().mapToDouble(GraphEdge::getWeight).sum();
+        return this.getOutEdges(v).values().stream().mapToDouble(DirectedEdge::getWeight).sum();
     }
 
     /**
@@ -231,7 +231,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @see #getOutStrength
      */
     default double getInStrength(V v) {
-        return this.getInEdges(v).values().stream().mapToDouble(GraphEdge::getWeight).sum();
+        return this.getInEdges(v).values().stream().mapToDouble(DirectedEdge::getWeight).sum();
     }
 
     /**
@@ -486,11 +486,11 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      *
      * @param source the source of the edge
      * @param target the target of the edge
-     * @return the {@link GraphEdge} object of the newly added edge, or {@code null} if an edge already exists
+     * @return the {@link DirectedEdge} object of the newly added edge, or {@code null} if an edge already exists
      * @throws NullPointerException   if any of the arguments is {@code null}
      * @throws IllegalVertexException if either {@code source} or {@code target} is not in the graph
      */
-    default GraphEdge<V, E> addEdge(V source, V target) {
+    default DirectedEdge<V, E> addEdge(V source, V target) {
         return addEdge(source, target, null, Finals.DEFAULT_EDGE_WEIGHT);
     }
 
@@ -501,12 +501,12 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @param source the source of the edge
      * @param target the target of the edge
      * @param weight the weight to be associated with the edge
-     * @return the {@link GraphEdge} object of the newly added edge, or {@code null} if an edge already exists
+     * @return the {@link DirectedEdge} object of the newly added edge, or {@code null} if an edge already exists
      * @throws NullPointerException     if any of the arguments is {@code null}
      * @throws IllegalVertexException   if either {@code source} or {@code target} is not in the graph
      * @throws IllegalArgumentException if {@code weight} is non-positive
      */
-    default GraphEdge<V, E> addEdge(V source, V target, double weight) {
+    default DirectedEdge<V, E> addEdge(V source, V target, double weight) {
         return addEdge(source, target, null, weight);
     }
 
@@ -518,11 +518,11 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @param source the source of the edge
      * @param target the target of the edge
      * @param edge   the object to attach to the edge
-     * @return the {@link GraphEdge} object of the newly added edge, or {@code null} if an edge already exists
+     * @return the {@link DirectedEdge} object of the newly added edge, or {@code null} if an edge already exists
      * @throws NullPointerException   if either {@code source} or {@code target} is {@code null}
      * @throws IllegalVertexException if either {@code source} or {@code target} is not in the graph
      */
-    default GraphEdge<V, E> addEdge(V source, V target, E edge) {
+    default DirectedEdge<V, E> addEdge(V source, V target, E edge) {
         return addEdge(source, target, edge, Finals.DEFAULT_EDGE_WEIGHT);
     }
 
@@ -534,12 +534,12 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @param target the target of the edge
      * @param edge   the object to attach to the edge
      * @param weight the weight to be associated with the edge
-     * @return the {@link GraphEdge} object of the newly added edge, or {@code null} if an edge already exists
+     * @return the {@link DirectedEdge} object of the newly added edge, or {@code null} if an edge already exists
      * @throws NullPointerException     if either {@code source} or {@code target} is {@code null}
      * @throws IllegalVertexException   if either {@code source} or {@code target} is not in the graph
      * @throws IllegalArgumentException if {@code weight} is non-positive
      */
-    GraphEdge<V, E> addEdge(V source, V target, E edge, double weight);
+    DirectedEdge<V, E> addEdge(V source, V target, E edge, double weight);
 
     /**
      * Replaces the weight of the specified edge with {@code source} and {@code target} with {@code weight}. If an edge
@@ -556,9 +556,9 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      */
     default boolean setEdgeWeight(V source, V target, double weight) {
         Conditions.requireArgument(weight > 0, Finals.E_EDGE_WEIGHT_NEGATIVE, weight);
-        GraphEdge<V, E> previousEdge = removeEdge(source, target);
+        DirectedEdge<V, E> previousEdge = removeEdge(source, target);
         if (previousEdge != null) {
-            GraphEdge<V, E> e = addEdge(source, target, previousEdge.getEdge(), weight);
+            DirectedEdge<V, E> e = addEdge(source, target, previousEdge.getEdge(), weight);
             assert e != null;
             return true;
         } else {
@@ -585,7 +585,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
         for (V v : among) {
             for (V u : among) {
                 if (!v.equals(u)) {
-                    final GraphEdge<V, E> edge = addEdge(v, u);
+                    final DirectedEdge<V, E> edge = addEdge(v, u);
                     assert edge.getSource() == v;
                     assert edge.getTarget() == u;
                     assert edge.getEdge() == null;
@@ -619,12 +619,12 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      *
      * @param source the source of the edge
      * @param target the target of the edge
-     * @return the {@link GraphEdge} that was removed if there was previously a directed edge
+     * @return the {@link DirectedEdge} that was removed if there was previously a directed edge
      * {@code (source,target)}, otherwise {@code null}
      * @throws NullPointerException   if either {@code source} or {@code target} is {@code null}
      * @throws IllegalVertexException if either {@code source} or {@code target} is not in the graph
      */
-    GraphEdge<V, E> removeEdge(V source, V target);
+    DirectedEdge<V, E> removeEdge(V source, V target);
 
     /**
      * Removes all the (existing) edges of which both the source and the target are contained in {@code among}.
@@ -663,11 +663,11 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
 
     @Deprecated
     default V getRandomOutEdge(V from, boolean weighted) {
-        // TODO: Return GraphEdge
+        // TODO: Return DirectedEdge
         // TODO: What if no out edge?
         Map<V, Double> weightMap = new HashMap<>();
-        Map<V, GraphEdge<V, E>> outEdges = this.getOutEdges(from);
-        for (Map.Entry<V, GraphEdge<V, E>> e : outEdges.entrySet()) {
+        Map<V, DirectedEdge<V, E>> outEdges = this.getOutEdges(from);
+        for (Map.Entry<V, DirectedEdge<V, E>> e : outEdges.entrySet()) {
             weightMap.put(e.getKey(), (weighted ? e.getValue().getWeight() : 1.0));
         }
         Set<V> edges = Helper.weightedRandom(weightMap, 1);
@@ -682,14 +682,14 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     }
 
     /**
-     * Get a collection of all edges in this graph. The items are of type {@link GraphEdge} and are in no particular
+     * Get a collection of all edges in this graph. The items are of type {@link DirectedEdge} and are in no particular
      * order inside the collection.
      *
      * @return a collection of all edges in the graph
      */
     @Deprecated
-    default Collection<GraphEdge<V, E>> getEdges() {
-        Collection<GraphEdge<V, E>> edges = new LinkedHashSet<>();
+    default Collection<DirectedEdge<V, E>> getEdges() {
+        Collection<DirectedEdge<V, E>> edges = new LinkedHashSet<>();
         for (V v : this.getVertices()) {
             edges.addAll(this.getOutEdges(v).values());
         }
@@ -708,7 +708,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      *
      * @return an {@link Iterable} of all the edges in this graph
      */
-    default Iterable<GraphEdge<V, E>> edges() {
+    default Iterable<DirectedEdge<V, E>> edges() {
         return () -> new EdgesIterator<>(Graph.this);
     }
 }

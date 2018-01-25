@@ -3,8 +3,8 @@ package gr.james.influence.algorithms.similarity;
 import com.google.common.collect.Sets;
 import gr.james.influence.annotation.UnmodifiableGraph;
 import gr.james.influence.api.algorithms.VertexSimilarity;
+import gr.james.influence.api.graph.DirectedEdge;
 import gr.james.influence.api.graph.Graph;
-import gr.james.influence.api.graph.GraphEdge;
 import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.util.Conditions;
 
@@ -53,7 +53,7 @@ public class PearsonSimilarity<V> implements VertexSimilarity<V, Double> {
 
         for (V v : g) {
             double sum = 0;
-            for (GraphEdge<V, ?> e : g.getOutEdges(v).values()) {
+            for (DirectedEdge<V, ?> e : g.getOutEdges(v).values()) {
                 sum += Math.pow(e.getWeight() - averages.get(v), 2);
             }
             sum += (g.getVerticesCount() - g.getOutEdges(v).size()) * Math.pow(averages.get(v), 2);

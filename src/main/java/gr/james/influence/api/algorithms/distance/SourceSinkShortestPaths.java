@@ -1,6 +1,6 @@
 package gr.james.influence.api.algorithms.distance;
 
-import gr.james.influence.api.graph.GraphEdge;
+import gr.james.influence.api.graph.DirectedEdge;
 
 import java.util.List;
 
@@ -22,10 +22,10 @@ public interface SourceSinkShortestPaths<V> {
      * Get the shortest path as a sequence of edges. If there is no path or if the source and target associated with
      * this instance are the same this method will return an empty sequence.
      *
-     * @return an unmodifiable {@link List} of {@link GraphEdge} representing the shortest route
+     * @return an unmodifiable {@link List} of {@link DirectedEdge} representing the shortest route
      * @throws UnsupportedOperationException if the algorithm does not support this operation
      */
-    default List<GraphEdge<V, ?>> path() {
+    default List<DirectedEdge<V, ?>> path() {
         throw new UnsupportedOperationException();
     }
 }

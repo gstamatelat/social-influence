@@ -1,7 +1,7 @@
 package gr.james.influence.graph;
 
+import gr.james.influence.api.graph.DirectedEdge;
 import gr.james.influence.api.graph.Graph;
-import gr.james.influence.api.graph.GraphEdge;
 import gr.james.influence.util.Finals;
 
 import java.util.List;
@@ -89,22 +89,22 @@ public final class ImmutableGraph<V, E> extends GraphDecorator<V, E> {
     }
 
     @Override
-    public GraphEdge<V, E> addEdge(V source, V target) {
+    public DirectedEdge<V, E> addEdge(V source, V target) {
         throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 
     @Override
-    public GraphEdge<V, E> addEdge(V source, V target, double weight) {
+    public DirectedEdge<V, E> addEdge(V source, V target, double weight) {
         throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 
     @Override
-    public GraphEdge<V, E> addEdge(V source, V target, E edge) {
+    public DirectedEdge<V, E> addEdge(V source, V target, E edge) {
         throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 
     @Override
-    public GraphEdge<V, E> addEdge(V source, V target, E edge, double weight) {
+    public DirectedEdge<V, E> addEdge(V source, V target, E edge, double weight) {
         throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 
@@ -114,7 +114,7 @@ public final class ImmutableGraph<V, E> extends GraphDecorator<V, E> {
     }
 
     @Override
-    public GraphEdge<V, E> removeEdge(V source, V target) {
+    public DirectedEdge<V, E> removeEdge(V source, V target) {
         throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 

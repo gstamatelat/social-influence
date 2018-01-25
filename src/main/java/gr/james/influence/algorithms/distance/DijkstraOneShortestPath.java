@@ -2,8 +2,8 @@ package gr.james.influence.algorithms.distance;
 
 import gr.james.influence.annotation.UnmodifiableGraph;
 import gr.james.influence.api.algorithms.distance.SourceSinkShortestPaths;
+import gr.james.influence.api.graph.DirectedEdge;
 import gr.james.influence.api.graph.Graph;
-import gr.james.influence.api.graph.GraphEdge;
 import gr.james.influence.exceptions.IllegalVertexException;
 
 import java.util.List;
@@ -47,7 +47,7 @@ public class DijkstraOneShortestPath<V> implements SourceSinkShortestPaths<V> {
      * {@inheritDoc} This method runs in time proportional to the shortest path length.
      */
     @Override
-    public List<GraphEdge<V, ?>> path() {
+    public List<DirectedEdge<V, ?>> path() {
         return alg.pathTo(to);
     }
 }

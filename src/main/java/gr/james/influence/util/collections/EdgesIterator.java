@@ -1,8 +1,8 @@
 package gr.james.influence.util.collections;
 
 import gr.james.influence.annotation.UnmodifiableGraph;
+import gr.james.influence.api.graph.DirectedEdge;
 import gr.james.influence.api.graph.Graph;
-import gr.james.influence.api.graph.GraphEdge;
 import gr.james.influence.util.Conditions;
 
 import java.util.Collections;
@@ -22,11 +22,11 @@ import java.util.function.Consumer;
  * @param <V> the vertex type
  * @param <E> the edge type
  */
-public class EdgesIterator<V, E> implements Iterator<GraphEdge<V, E>> {
+public class EdgesIterator<V, E> implements Iterator<DirectedEdge<V, E>> {
     private final Graph<V, E> g;
     private final Iterator<V> vertexIterator;
     private boolean hasNext;
-    private Iterator<GraphEdge<V, E>> buffer;
+    private Iterator<DirectedEdge<V, E>> buffer;
 
     /**
      * Construct a new {@link EdgesIterator} using the specified graph {@code g}.
@@ -73,12 +73,12 @@ public class EdgesIterator<V, E> implements Iterator<GraphEdge<V, E>> {
      * @throws NoSuchElementException if the iteration has no more edges
      */
     @Override
-    public GraphEdge<V, E> next() {
+    public DirectedEdge<V, E> next() {
         if (!hasNext) {
             throw new NoSuchElementException();
         }
         assert buffer.hasNext();
-        final GraphEdge<V, E> n = buffer.next();
+        final DirectedEdge<V, E> n = buffer.next();
         advance();
         return n;
     }
@@ -103,7 +103,7 @@ public class EdgesIterator<V, E> implements Iterator<GraphEdge<V, E>> {
      * @throws NullPointerException if the specified {@code action} is {@code null}
      */
     @Override
-    public void forEachRemaining(Consumer<? super GraphEdge<V, E>> action) {
+    public void forEachRemaining(Consumer<? super DirectedEdge<V, E>> action) {
         Iterator.super.forEachRemaining(action);
     }
 }

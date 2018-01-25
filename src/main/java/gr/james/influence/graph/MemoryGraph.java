@@ -1,7 +1,7 @@
 package gr.james.influence.graph;
 
+import gr.james.influence.api.graph.DirectedEdge;
 import gr.james.influence.api.graph.Graph;
-import gr.james.influence.api.graph.GraphEdge;
 import gr.james.influence.api.graph.VertexProvider;
 import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.util.Conditions;
@@ -13,8 +13,8 @@ import java.util.*;
  * <p>Represents an in-memory {@link Graph}, implemented using adjacency lists. Suitable for sparse graphs.</p>
  */
 public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
-    private final Map<V, Map<V, GraphEdge<V, E>>> mOut;
-    private final Map<V, Map<V, GraphEdge<V, E>>> mIn;
+    private final Map<V, Map<V, DirectedEdge<V, E>>> mOut;
+    private final Map<V, Map<V, DirectedEdge<V, E>>> mIn;
     private final List<V> vList;
     private final VertexProvider<V> vertexProvider;
 
@@ -83,12 +83,12 @@ public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
     }
 
     @Override
-    public GraphEdge<V, E> addEdge(V source, V target, E edge, double weight) {
+    public DirectedEdge<V, E> addEdge(V source, V target, E edge, double weight) {
         Conditions.requireArgument(weight > 0, Finals.E_EDGE_WEIGHT_NEGATIVE, weight);
         if (!containsEdge(source, target)) {
-            final GraphEdge<V, E> e = new MemoryGraphEdge<>(edge, source, target, weight);
-            final GraphEdge<V, E> e1 = this.mOut.get(source).put(target, e);
-            final GraphEdge<V, E> e2 = this.mIn.get(target).put(source, e);
+            final DirectedEdge<V, E> e = new MemoryDirectedEdge<>(edge, source, target, weight);
+            final DirectedEdge<V, E> e1 = this.mOut.get(source).put(target, e);
+            final DirectedEdge<V, E> e2 = this.mIn.get(target).put(source, e);
             assert e1 == null;
             assert e2 == null;
             return e;
@@ -98,9 +98,9 @@ public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
     }
 
     @Override
-    public GraphEdge<V, E> removeEdge(V source, V target) {
+    public DirectedEdge<V, E> removeEdge(V source, V target) {
         if (this.mOut.get(source).remove(target) != null) {
-            final GraphEdge<V, E> h = this.mIn.get(target).remove(source);
+            final DirectedEdge<V, E> h = this.mIn.get(target).remove(source);
             assert h != null;
             assert h.getSource().equals(source);
             assert h.getTarget().equals(target);
@@ -111,7 +111,7 @@ public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
     }
 
     @Override
-    public Map<V, GraphEdge<V, E>> getOutEdges(V v) {
+    public Map<V, DirectedEdge<V, E>> getOutEdges(V v) {
         Conditions.requireNonNullAndExists(v, this);
         return Collections.unmodifiableMap(this.mOut.get(v));
     }
@@ -123,7 +123,7 @@ public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
     }
 
     @Override
-    public Map<V, GraphEdge<V, E>> getInEdges(V v) {
+    public Map<V, DirectedEdge<V, E>> getInEdges(V v) {
         Conditions.requireNonNullAndExists(v, this);
         return Collections.unmodifiableMap(this.mIn.get(v));
     }

@@ -1,6 +1,6 @@
 package gr.james.influence.api.graph;
 
-public interface GraphEdge<V, E> {
+public interface DirectedEdge<V, E> {
     E getEdge();
 
     V getSource();

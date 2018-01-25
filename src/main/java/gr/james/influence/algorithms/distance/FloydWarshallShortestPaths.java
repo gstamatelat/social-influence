@@ -2,8 +2,8 @@ package gr.james.influence.algorithms.distance;
 
 import gr.james.influence.annotation.UnmodifiableGraph;
 import gr.james.influence.api.algorithms.distance.AllPairsShortestPaths;
+import gr.james.influence.api.graph.DirectedEdge;
 import gr.james.influence.api.graph.Graph;
-import gr.james.influence.api.graph.GraphEdge;
 import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.util.collections.VertexPair;
 
@@ -43,7 +43,7 @@ public class FloydWarshallShortestPaths<V> implements AllPairsShortestPaths<V> {
         }
 
         for (V v : g) {
-            for (GraphEdge<V, ?> e : g.getOutEdges(v).values()) {
+            for (DirectedEdge<V, ?> e : g.getOutEdges(v).values()) {
                 dist.put(new VertexPair<>(v, e.getTarget()), e.getWeight());
             }
         }
@@ -87,7 +87,7 @@ public class FloydWarshallShortestPaths<V> implements AllPairsShortestPaths<V> {
      * @throws UnsupportedOperationException always
      */
     @Override
-    public List<GraphEdge<V, ?>> path(V from, V to) {
+    public List<DirectedEdge<V, ?>> path(V from, V to) {
         throw new UnsupportedOperationException("FloydWarshallShortestPaths doesn't support the path method");
     }
 }

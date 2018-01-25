@@ -1,7 +1,7 @@
 package gr.james.influence.io;
 
+import gr.james.influence.api.graph.DirectedEdge;
 import gr.james.influence.api.graph.Graph;
-import gr.james.influence.api.graph.GraphEdge;
 import gr.james.influence.api.graph.GraphFactory;
 import gr.james.influence.api.io.Deserializer;
 import gr.james.influence.api.io.GraphExporter;
@@ -65,7 +65,7 @@ public class Json implements GraphImporter, GraphExporter {
         private boolean directed = true;
         private String label;
 
-        public JsonEdge(V source, V target, GraphEdge<V, E> e) {
+        public JsonEdge(V source, V target, DirectedEdge<V, E> e) {
             this.source = source.toString();
             this.target = target.toString();
             this.label = String.valueOf(e.getWeight());

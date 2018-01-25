@@ -2,8 +2,8 @@ package gr.james.influence.algorithms.distance;
 
 import gr.james.influence.annotation.UnmodifiableGraph;
 import gr.james.influence.api.algorithms.distance.SingleSourceShortestPaths;
+import gr.james.influence.api.graph.DirectedEdge;
 import gr.james.influence.api.graph.Graph;
-import gr.james.influence.api.graph.GraphEdge;
 import gr.james.influence.exceptions.IllegalVertexException;
 
 import java.util.List;
@@ -49,7 +49,7 @@ public class DijkstraShortestPaths<V> implements SingleSourceShortestPaths<V> {
      * @throws IllegalVertexException {@inheritDoc}
      */
     @Override
-    public List<GraphEdge<V, ?>> pathTo(V v) {
+    public List<DirectedEdge<V, ?>> pathTo(V v) {
         return alg.pathTo(v);
     }
 }

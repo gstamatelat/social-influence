@@ -1,14 +1,14 @@
 package gr.james.influence.graph;
 
-import gr.james.influence.api.graph.GraphEdge;
+import gr.james.influence.api.graph.DirectedEdge;
 
-public class MemoryGraphEdge<V, E> implements GraphEdge<V, E> {
+public class MemoryDirectedEdge<V, E> implements DirectedEdge<V, E> {
     private E edge;
     private V source;
     private V target;
     private double weight;
 
-    public MemoryGraphEdge(E edge, V source, V target, double weight) {
+    public MemoryDirectedEdge(E edge, V source, V target, double weight) {
         this.edge = edge;
         this.source = source;
         this.target = target;

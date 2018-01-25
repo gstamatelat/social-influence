@@ -1,8 +1,8 @@
 package gr.james.influence.algorithms.scoring;
 
 import gr.james.influence.algorithms.AbstractIterativeAlgorithm;
+import gr.james.influence.api.graph.DirectedEdge;
 import gr.james.influence.api.graph.Graph;
-import gr.james.influence.api.graph.GraphEdge;
 import gr.james.influence.util.collections.GraphState;
 
 import java.util.HashMap;
@@ -49,7 +49,7 @@ public class PageRank<V> extends AbstractIterativeAlgorithm<V, Double> {
         final GraphState<V, Double> nextState = GraphState.create();
         for (V v : g) {
             double w = 0;
-            for (GraphEdge<V, ?> e : g.getInEdges(v).values()) {
+            for (DirectedEdge<V, ?> e : g.getInEdges(v).values()) {
                 w += e.getWeight() * previous.get(e.getSource()) / outStrengths.get(e.getSource());
             }
             nextState.put(v, dampingFactor + (1 - dampingFactor) * w);
