@@ -86,7 +86,7 @@ public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
     public DirectedEdge<V, E> addEdge(V source, V target, E edge, double weight) {
         Conditions.requireArgument(weight > 0, Finals.E_EDGE_WEIGHT_NEGATIVE, weight);
         if (!containsEdge(source, target)) {
-            final DirectedEdge<V, E> e = new MemoryDirectedEdge<>(edge, source, target, weight);
+            final DirectedEdge<V, E> e = DirectedEdge.from(edge, source, target, weight);
             final DirectedEdge<V, E> e1 = this.mOut.get(source).put(target, e);
             final DirectedEdge<V, E> e2 = this.mIn.get(target).put(source, e);
             assert e1 == null;
