@@ -4,12 +4,12 @@
 
 ```
 This method is equivalent to
-<blockquote><pre>
+<pre><code>
 if (v == null) {
     throw new NullPointerException();
 }
 return vertexSet().contains(v);
-</pre></blockquote>
+</code></pre>
 <p> <!-- new paragraph if the following content is unrelated -->
 More text below the block.
 ```

@@ -284,12 +284,12 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * Checks if the graph contains the specified vertex.
      * <p>
      * This method is equivalent to
-     * <blockquote><pre>
+     * <pre><code>
      * if (v == null) {
      *     throw new NullPointerException();
      * }
      * return vertexSet().contains(v);
-     * </pre></blockquote>
+     * </code></pre>
      * <p>
      * Complexity: O(1)
      *
@@ -316,9 +316,9 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * Returns the number of vertices in this graph.
      * <p>
      * This method is equivalent to
-     * <blockquote><pre>
+     * <pre><code>
      * return vertexSet().size();
-     * </pre></blockquote>
+     * </code></pre>
      * <p>
      * Complexity: O(1)
      *
@@ -347,9 +347,9 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * Get the read-only {@link Iterator} over the vertices of this graph.
      * <p>
      * The vertex iteration is performed in no particular order. This method is equivalent to
-     * <blockquote><pre>
+     * <pre><code>
      * return vertexSet().iterator();
-     * </pre></blockquote>
+     * </code></pre>
      * <p>
      * Complexity: O(1)
      *
