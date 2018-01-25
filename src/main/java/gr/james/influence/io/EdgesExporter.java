@@ -34,7 +34,7 @@ public class EdgesExporter implements GraphExporter {
                         this.delimiter,
                         vertexSerializer.serialize(u),
                         this.delimiter,
-                        g.getOutEdges(v).get(u).getWeight()));
+                        g.getOutEdges(v).get(u).weight()));
             }
         }
 

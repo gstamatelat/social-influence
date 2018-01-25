@@ -83,8 +83,8 @@ public class DijkstraClosestFirstIterator<V> implements VertexIterator<V> {
         }
 
         for (DirectedEdge<V, ?> e : g.getOutEdges(u).values()) {
-            final V to = e.getTarget();
-            final double distanceThroughU = distTo.get(u) + e.getWeight();
+            final V to = e.target();
+            final double distanceThroughU = distTo.get(u) + e.weight();
             if (distanceThroughU < distTo.get(to)) {
                 pq.remove(to);
                 this.distTo.put(to, distanceThroughU);

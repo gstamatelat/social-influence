@@ -1,11 +1,11 @@
 package gr.james.influence.api.graph;
 
 public interface DirectedEdge<V, E> {
-    E getEdge();
+    E edge();
 
-    V getSource();
+    V source();
 
-    V getTarget();
+    V target();
 
-    double getWeight();
+    double weight();
 }

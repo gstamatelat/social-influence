@@ -80,8 +80,8 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
         if (edge == null) {
             throw new IllegalEdgeException();
         } else {
-            assert edge.getWeight() > 0;
-            return edge.getWeight();
+            assert edge.weight() > 0;
+            return edge.weight();
         }
     }
 
@@ -101,8 +101,8 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
         if (edge == null) {
             return other;
         } else {
-            assert edge.getWeight() > 0;
-            return edge.getWeight();
+            assert edge.weight() > 0;
+            return edge.weight();
         }
     }
 
@@ -122,7 +122,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
         if (edge == null) {
             throw new IllegalEdgeException();
         } else {
-            return edge.getEdge();
+            return edge.edge();
         }
     }
 
@@ -142,7 +142,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
         if (edge == null) {
             return other;
         } else {
-            return edge.getEdge();
+            return edge.edge();
         }
     }
 
@@ -218,7 +218,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @see #getInStrength
      */
     default double getOutStrength(V v) {
-        return this.getOutEdges(v).values().stream().mapToDouble(DirectedEdge::getWeight).sum();
+        return this.getOutEdges(v).values().stream().mapToDouble(DirectedEdge::weight).sum();
     }
 
     /**
@@ -231,7 +231,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @see #getOutStrength
      */
     default double getInStrength(V v) {
-        return this.getInEdges(v).values().stream().mapToDouble(DirectedEdge::getWeight).sum();
+        return this.getInEdges(v).values().stream().mapToDouble(DirectedEdge::weight).sum();
     }
 
     /**
@@ -558,7 +558,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
         Conditions.requireArgument(weight > 0, Finals.E_EDGE_WEIGHT_NEGATIVE, weight);
         DirectedEdge<V, E> previousEdge = removeEdge(source, target);
         if (previousEdge != null) {
-            DirectedEdge<V, E> e = addEdge(source, target, previousEdge.getEdge(), weight);
+            DirectedEdge<V, E> e = addEdge(source, target, previousEdge.edge(), weight);
             assert e != null;
             return true;
         } else {
@@ -586,10 +586,10 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
             for (V u : among) {
                 if (!v.equals(u)) {
                     final DirectedEdge<V, E> edge = addEdge(v, u);
-                    assert edge.getSource() == v;
-                    assert edge.getTarget() == u;
-                    assert edge.getEdge() == null;
-                    assert edge.getWeight() == Finals.DEFAULT_EDGE_WEIGHT;
+                    assert edge.source() == v;
+                    assert edge.target() == u;
+                    assert edge.edge() == null;
+                    assert edge.weight() == Finals.DEFAULT_EDGE_WEIGHT;
                 }
             }
         }
@@ -668,7 +668,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
         Map<V, Double> weightMap = new HashMap<>();
         Map<V, DirectedEdge<V, E>> outEdges = this.getOutEdges(from);
         for (Map.Entry<V, DirectedEdge<V, E>> e : outEdges.entrySet()) {
-            weightMap.put(e.getKey(), (weighted ? e.getValue().getWeight() : 1.0));
+            weightMap.put(e.getKey(), (weighted ? e.getValue().weight() : 1.0));
         }
         Set<V> edges = Helper.weightedRandom(weightMap, 1);
         return edges.iterator().next();

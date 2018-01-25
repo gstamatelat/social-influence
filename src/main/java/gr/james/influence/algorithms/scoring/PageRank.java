@@ -50,7 +50,7 @@ public class PageRank<V> extends AbstractIterativeAlgorithm<V, Double> {
         for (V v : g) {
             double w = 0;
             for (DirectedEdge<V, ?> e : g.getInEdges(v).values()) {
-                w += e.getWeight() * previous.get(e.getSource()) / outStrengths.get(e.getSource());
+                w += e.weight() * previous.get(e.source()) / outStrengths.get(e.source());
             }
             nextState.put(v, dampingFactor + (1 - dampingFactor) * w);
         }

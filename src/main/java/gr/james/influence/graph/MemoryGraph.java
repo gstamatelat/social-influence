@@ -102,8 +102,8 @@ public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
         if (this.mOut.get(source).remove(target) != null) {
             final DirectedEdge<V, E> h = this.mIn.get(target).remove(source);
             assert h != null;
-            assert h.getSource().equals(source);
-            assert h.getTarget().equals(target);
+            assert h.source().equals(source);
+            assert h.target().equals(target);
             return h;
         } else {
             return null;

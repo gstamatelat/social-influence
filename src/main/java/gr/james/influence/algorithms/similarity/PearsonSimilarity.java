@@ -54,7 +54,7 @@ public class PearsonSimilarity<V> implements VertexSimilarity<V, Double> {
         for (V v : g) {
             double sum = 0;
             for (DirectedEdge<V, ?> e : g.getOutEdges(v).values()) {
-                sum += Math.pow(e.getWeight() - averages.get(v), 2);
+                sum += Math.pow(e.weight() - averages.get(v), 2);
             }
             sum += (g.getVerticesCount() - g.getOutEdges(v).size()) * Math.pow(averages.get(v), 2);
             this.variances.put(v, Math.sqrt(sum));

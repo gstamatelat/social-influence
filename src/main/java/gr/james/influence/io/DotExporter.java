@@ -30,10 +30,10 @@ public class DotExporter implements GraphExporter {
         for (DirectedEdge<V, E> e : g.edges()) {
             w.write(String.format("%s%s -> %s [label=\"%s\",weight=%f]%n",
                     indent,
-                    vertexSerializer.serialize(e.getSource()),
-                    vertexSerializer.serialize(e.getTarget()),
-                    edgeSerializer.serialize(e.getEdge()),
-                    e.getWeight()));
+                    vertexSerializer.serialize(e.source()),
+                    vertexSerializer.serialize(e.target()),
+                    edgeSerializer.serialize(e.edge()),
+                    e.weight()));
         }
         w.write(String.format("}%n"));
 

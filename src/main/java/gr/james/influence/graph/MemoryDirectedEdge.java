@@ -15,19 +15,19 @@ public class MemoryDirectedEdge<V, E> implements DirectedEdge<V, E> {
         this.weight = weight;
     }
 
-    public E getEdge() {
+    public E edge() {
         return edge;
     }
 
-    public V getSource() {
+    public V source() {
         return source;
     }
 
-    public V getTarget() {
+    public V target() {
         return target;
     }
 
-    public double getWeight() {
+    public double weight() {
         return weight;
     }
 

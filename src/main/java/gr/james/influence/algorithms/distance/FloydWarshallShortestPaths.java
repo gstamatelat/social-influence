@@ -44,7 +44,7 @@ public class FloydWarshallShortestPaths<V> implements AllPairsShortestPaths<V> {
 
         for (V v : g) {
             for (DirectedEdge<V, ?> e : g.getOutEdges(v).values()) {
-                dist.put(new VertexPair<>(v, e.getTarget()), e.getWeight());
+                dist.put(new VertexPair<>(v, e.target()), e.weight());
             }
         }
 

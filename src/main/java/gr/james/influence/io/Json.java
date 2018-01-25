@@ -68,7 +68,7 @@ public class Json implements GraphImporter, GraphExporter {
         public JsonEdge(V source, V target, DirectedEdge<V, E> e) {
             this.source = source.toString();
             this.target = target.toString();
-            this.label = String.valueOf(e.getWeight());
+            this.label = String.valueOf(e.weight());
         }
     }
 }

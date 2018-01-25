@@ -29,13 +29,13 @@ public class Graphs {
         final Collection<DirectedEdge<V, E>> edges = g.getEdges();
         g.clearEdges();
         for (DirectedEdge<V, E> e : edges) {
-            g.addEdge(e.getTarget(), e.getSource(), e.getEdge(), e.getWeight());
+            g.addEdge(e.target(), e.source(), e.edge(), e.weight());
         }
     }
 
     public static <V, E> void randomizeEdgeWeights(Graph<V, E> g) {
         for (DirectedEdge<V, E> e : g.getEdges()) {
-            boolean change = g.setEdgeWeight(e.getSource(), e.getTarget(),
+            boolean change = g.setEdgeWeight(e.source(), e.target(),
                     RandomHelper.getRandom().nextDouble());
             assert change;
         }
@@ -57,10 +57,10 @@ public class Graphs {
 
         for (V y : f) {
             for (Map.Entry<V, DirectedEdge<V, E>> e : g.getOutEdges(y).entrySet()) {
-                g.addEdge(v, e.getKey(), e.getValue().getWeight());
+                g.addEdge(v, e.getKey(), e.getValue().weight());
             }
             for (Map.Entry<V, DirectedEdge<V, E>> e : g.getInEdges(y).entrySet()) {
-                g.addEdge(e.getKey(), v, e.getValue().getWeight());
+                g.addEdge(e.getKey(), v, e.getValue().weight());
             }
             g.removeVertex(y);
         }
@@ -85,7 +85,7 @@ public class Graphs {
                 r.addVertex(v);
             }
             for (DirectedEdge<V, E> e : g.getEdges()) {
-                r.addEdge(e.getSource(), e.getTarget(), e.getWeight());
+                r.addEdge(e.source(), e.target(), e.weight());
             }
         }
         return r;
@@ -112,8 +112,8 @@ public class Graphs {
             r.addVertex(v);
         }
         for (V v : r) {
-            g.getOutEdges(v).values().stream().filter(e -> r.containsVertex(e.getTarget()))
-                    .forEach(e -> r.addEdge(e.getSource(), e.getTarget(), e.getEdge(), e.getWeight()));
+            g.getOutEdges(v).values().stream().filter(e -> r.containsVertex(e.target()))
+                    .forEach(e -> r.addEdge(e.source(), e.target(), e.edge(), e.weight()));
         }
         for (String m : g.metaKeySet()) {
             r.setMeta(m, g.getMeta(m));

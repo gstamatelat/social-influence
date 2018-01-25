@@ -43,14 +43,14 @@ public class HITS<V> extends AbstractIterativeAlgorithm<V, HITS.HITSScore> {
         for (V v : g) {
             Map<V, ? extends DirectedEdge<V, ?>> inEdges = g.getInEdges(v);
             for (Map.Entry<V, ? extends DirectedEdge<V, ?>> e : inEdges.entrySet()) {
-                next.put(v, next.get(v).addToAuthority(e.getValue().getWeight() * previous.get(e.getKey()).getHub()));
+                next.put(v, next.get(v).addToAuthority(e.getValue().weight() * previous.get(e.getKey()).getHub()));
             }
         }
 
         for (V v : g) {
             Map<V, ? extends DirectedEdge<V, ?>> outEdges = g.getOutEdges(v);
             for (Map.Entry<V, ? extends DirectedEdge<V, ?>> e : outEdges.entrySet()) {
-                next.put(v, next.get(v).addToHub(e.getValue().getWeight() * next.get(e.getKey()).getAuthority()));
+                next.put(v, next.get(v).addToHub(e.getValue().weight() * next.get(e.getKey()).getAuthority()));
             }
         }
 
