@@ -1,10 +1,28 @@
 # Social Influence
 
-Java 8 network/graph framework with emphasis on social influence and opinion dynamics.
+Java 8 network/graph framework with emphasis on social influence and opinion
+dynamics.
 
 ## Using
 
-See [social-influence-starter](https://github.com/gstamatelat/social-influence-starter) project to get started.
+```xml
+<repositories>
+  <repository>
+    <id>jitpack.io</id>
+    <url>https://jitpack.io</url>
+  </repository>
+</repositories>
+```
+
+```xml
+<dependencies>
+  <dependency>
+    <groupId>gr.james</groupId>
+    <artifactId>social-influence</artifactId>
+    <version>SHORT_COMMIT_HASH</version>
+  </dependency>
+</dependencies>
+```
 
 ## Manual graph creation
 
@@ -17,7 +35,9 @@ g.addEdge(v1, v2);
 
 ## Automatic graph generation
 
-All generators implement the `GraphGenerator` interface. A primitive example that generates a random graph with *100* vertices and connection probability *0.15* is given below:
+All generators implement the `GraphGenerator` interface. A primitive example
+that generates a random graph with *100* vertices and connection probability
+*0.15* is given below:
 
 ```java
 GraphGenerator generator = new RandomGenerator(100, 0.15);
@@ -25,20 +45,31 @@ Graph randomGraph = generator.generate();
 System.out.println(randomGraph);
 ```
 
-Each call of `generate()` or any other form of this method will always allocate and return a new graph.
+Each call of `generate()` or any other form of this method will always allocate
+and return a new graph.
 
 ### Non-deterministic generators
 
-Some graph models (including `RandomGenerator`) are non-deterministic; successive calls to `generate()` may produce different graphs. Eliminate randomness by using the following forms:
+Some graph models (including `RandomGenerator`) are non-deterministic;
+successive calls to `generate()` may produce different graphs. Eliminate
+randomness by using the following forms:
 
-- `generate(long)` will attach a seed to the generation, thus always producing identical copies of the same graph with a set seed.
-- `generate(Random)` will force the generation to use a specific `Random` object. The default is to use a framework-wide `Random` instance.
+- `generate(long)` will attach a seed to the generation, thus always producing
+identical copies of the same graph with a set seed.
+- `generate(Random)` will force the generation to use a specific `Random`
+object. The default is to use a framework-wide `Random` instance.
 
-These forms do not differentiate the behavior of generation on deterministic graphs, for example on `WheelGenerator`.
+These forms do not differentiate the behavior of generation on deterministic
+graphs, for example on `WheelGenerator`.
 
 ### Force a specific graph type
 
-The type (also referred to as container) of `Graph` that the generator will produce can be specified using the overloaded forms of `generate` with a `GraphFactory<T>`, which will produce a graph of type `T`. If this is not specified, the default type of `MemoryGraph` will be used. In the table below, the correspondences between the methods with and without `GraphFactory<T>` are presented.
+The type (also referred to as container) of `Graph` that the generator will
+produce can be specified using the overloaded forms of `generate` with a
+`GraphFactory<T>`, which will produce a graph of type `T`. If this is not
+specified, the default type of `MemoryGraph` will be used. In the table below,
+the correspondences between the methods with and without `GraphFactory<T>` are
+presented.
 
 Default type       | Specified type
 ------------------ | --------------
@@ -46,7 +77,8 @@ Default type       | Specified type
 `generate(long)`   | `generate(GraphFactory<T>, long)`
 `generate(Random)` | `generate(GraphFactory<T>, Random)`
 
-`GraphFactory<T>` is a functional interface containing only the method `create()`, which has to return a newly allocated empty graph of type `T`.
+`GraphFactory<T>` is a functional interface containing only the method
+`create()`, which has to return a newly allocated empty graph of type `T`.
 
 ```java
 GraphGenerator generator = new RandomGenerator(100, 0.15);
@@ -54,7 +86,10 @@ Graph randomGraph = generator.generate(MemoryGraph::new);
 System.out.println(randomGraph);
 ```
 
-The above snippet will generate a random graph with *100* vertices and connection probability *0.15* and return it as a `MemoryGraph` using a lambda implementation of `GraphFactory<T>` (although this is the default behavior, it is more explicit).
+The above snippet will generate a random graph with *100* vertices and
+connection probability *0.15* and return it as a `MemoryGraph` using a lambda
+implementation of `GraphFactory<T>` (although this is the default behavior, it
+is more explicit).
 
 ### Graph decorator
 
@@ -65,16 +100,24 @@ Graph g = new RandomGenerator(100, 0.15).generate();
 GraphGenerator gen = GraphGenerator.decorate(g);
 ```
 
-After this, calls to `gen.generate()` will always return a copy of `g`. This decorator respects the overloaded forms with `GraphFactory<T>` but specifying a seed or a `Random` instance is unnecessary. Common usage cases of the decorator include:
+After this, calls to `gen.generate()` will always return a copy of `g`. This
+decorator respects the overloaded forms with `GraphFactory<T>` but specifying a
+seed or a `Random` instance is unnecessary. Common usage cases of the decorator
+include:
 
-0. Wrapping a graph that is imported or read from a stream to avoid repetitive I/O.
-0. Wrapping a deterministic graph to avoid generation-related computational costs.
+0. Wrapping a graph that is imported or read from a stream to avoid repetitive
+I/O.
+0. Wrapping a deterministic graph to avoid generation-related computational
+costs.
 
-In both cases, however, the cost of copying is introduced, since calling `generate()` on a decorated `Graph` must allocate a new graph and copy the original.
+In both cases, however, the cost of copying is introduced, since calling
+`generate()` on a decorated `Graph` must allocate a new graph and copy the
+original.
 
 ### Available generators
 
-Inspect available generators in `gr.james.influence.algorithms.generators` package.
+Inspect available generators in `gr.james.influence.algorithms.generators`
+package.
 
 ## Vertex iteration
 
@@ -85,7 +128,9 @@ for (Vertex v : g) {
 }
 ```
 
-The above construct will traverse the graph vertices in the order they were inserted in the graph. If you need to perform an index-based iteration, you should use
+The above construct will traverse the graph vertices in the order they were
+inserted in the graph. If you need to perform an index-based iteration, you
+should use
 
 ```java
 Graph g = new RandomGenerator(100, 0.05).generate();
@@ -95,9 +140,13 @@ for (int i = 0; i < g.getVerticesCount(); i++) {
 }
 ```
 
-**Index** is a deterministic, per-graph attribute between *0* (inclusive) and *N* (exclusive), where *N* the number of vertices in the graph, indicating the order at which the vertices were inserted in the graph.
+**Index** is a deterministic, per-graph attribute between *0* (inclusive) and
+*N* (exclusive), where *N* the number of vertices in the graph, indicating the
+order at which the vertices were inserted in the graph.
 
-Iterators (unless stated) are generally not backed by the graph; changes on the graph structure while an iteration is in progress won't reflect on the iterators.
+Iterators (unless stated) are generally not backed by the graph; changes on the
+graph structure while an iteration is in progress won't reflect on the
+iterators.
 
 `RandomVertexIterator` iterates over vertices in a random order.
 
@@ -112,7 +161,7 @@ while (vi.hasNext()) {
 
 ## Graph implementations
 
-                | MemoryGraph
+Operation       | MemoryGraph
 --------------- | -----------
 Storage         | O(n+m)
 Add vertex      | O(1)
@@ -122,11 +171,17 @@ Remove edge     | O(1)
 Contains vertex | O(1)
 Contains edge   | O(1)
 
-`MemoryGraph` is implemented using in-memory adjacency lists and is suitable for sparse graphs. It is the default graph implementation; references to the "default graph type", "default graph" or similar point to `MemoryGraph`.
+`MemoryGraph` is implemented using in-memory adjacency lists and is suitable for
+sparse graphs. It is the default graph implementation; references to the
+"default graph type", "default graph" or similar point to `MemoryGraph`.
 
 ### Unmodifiable graphs
 
-`ImmutableGraph` is a graph decorator that implements the `Graph` interface and represents an unmodifiable (read-only) graph. Attempting to modify an `ImmutableGraph` will result in an `UnsupportedOperationException`. You can only create an `ImmutableGraph` using the static `decorate(Graph)` method. This method doesn't have any computational cost associated with it.
+`ImmutableGraph` is a graph decorator that implements the `Graph` interface and
+represents an unmodifiable (read-only) graph. Attempting to modify an
+`ImmutableGraph` will result in an `UnsupportedOperationException`. You can only
+create an `ImmutableGraph` using the static `decorate(Graph)` method. This
+method doesn't have any computational cost associated with it.
 
 ```java
 Graph g = new RandomGenerator(100, 0.05).generate();
@@ -134,4 +189,7 @@ Graph ig = ImmutableGraph.decorate(g);
 ig.addVertex(); // Will throw UnsupportedOperationException
 ```
 
-Modifications that trigger exceptions include vertex addition/removal, edge addition/removal or weight modification as well as altering metadata information. `ImmutableGraph` is backed by the graph it decorates; changes to the underlying graph will immediately reflect on the `ImmutableGraph`.
+Modifications that trigger exceptions include vertex addition/removal, edge
+addition/removal or weight modification as well as altering metadata
+information. `ImmutableGraph` is backed by the graph it decorates; changes to
+the underlying graph will immediately reflect on the `ImmutableGraph`.
