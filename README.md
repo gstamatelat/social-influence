@@ -17,7 +17,7 @@ dynamics.
 ```xml
 <dependencies>
   <dependency>
-    <groupId>gr.james</groupId>
+    <groupId>com.github.gstamatelat</groupId>
     <artifactId>social-influence</artifactId>
     <version>SHORT_COMMIT_HASH</version>
   </dependency>
