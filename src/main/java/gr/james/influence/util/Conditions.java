@@ -41,7 +41,6 @@ public final class Conditions {
      * @throws IllegalVertexException if {@code v} is not in {@code g}
      */
     public static <V> void requireVertexInGraph(Graph<V, ?> g, V v) {
-        Conditions.requireAllNonNull(g, v);
         if (!g.containsVertex(v)) {
             throw new IllegalVertexException();
         }
