@@ -19,7 +19,7 @@ public class CycleGenerator implements GraphGenerator {
         Graph<V, E> g = factory.createGraph();
 
         V startVertex = g.addVertex(), previousVertex = startVertex;
-        while (g.getVerticesCount() < totalVertices) {
+        while (g.vertexCount() < totalVertices) {
             V newVertex = g.addVertex();
             g.addEdges(previousVertex, newVertex);
             previousVertex = newVertex;

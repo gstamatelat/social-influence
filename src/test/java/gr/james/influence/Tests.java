@@ -65,7 +65,7 @@ public class Tests {
         /* Emulate the random surfer until mean of the map values average is MEAN, aka for MEAN * N steps */
         GraphState<String, Double> gs = GraphState.create(g.getVertices(), 0.0);
         RandomSurferIterator<String, Object> rsi = new RandomSurferIterator<>(g, dampingFactor);
-        int steps = mean * g.getVerticesCount();
+        int steps = mean * g.vertexCount();
         while (--steps > 0) {
             String v = rsi.next();
             gs.put(v, gs.get(v) + 1.0);
@@ -74,7 +74,7 @@ public class Tests {
         /* Get the PageRank and normalize gs to it */
         GraphState<String, Double> pr = PageRank.execute(g, dampingFactor);
         for (String v : gs.keySet()) {
-            gs.put(v, pr.getSum() * gs.get(v) / (g.getVerticesCount() * mean));
+            gs.put(v, pr.getSum() * gs.get(v) / (g.vertexCount() * mean));
         }
 
         /* Assert if maps not approx. equal with 1% error */
@@ -124,13 +124,13 @@ public class Tests {
         int vertexCount = 0;
         int edgeCount = 0;
         for (SimpleGraph g : graphs) {
-            vertexCount += g.getVerticesCount();
+            vertexCount += g.vertexCount();
             edgeCount += g.getEdgesCount();
         }
 
         SimpleGraph g = Graphs.combineGraphs(Arrays.asList(graphs));
 
-        Assert.assertEquals("combineGraphsTest - vertexCount", vertexCount, g.getVerticesCount());
+        Assert.assertEquals("combineGraphsTest - vertexCount", vertexCount, g.vertexCount());
         Assert.assertEquals("combineGraphsTest - edgeCount", edgeCount, g.getEdgesCount());
     }
 
@@ -140,7 +140,7 @@ public class Tests {
         int clusterSize = RandomHelper.getRandom().nextInt(10) + 10;
 
         SimpleGraph g = new BarabasiAlbertClusterGenerator(clusterSize, 2, 2, 1.0, clusters).generate();
-        Assert.assertEquals("clustersTest", clusters * clusterSize, g.getVerticesCount());
+        Assert.assertEquals("clustersTest", clusters * clusterSize, g.vertexCount());
     }
 
     /**
@@ -230,7 +230,7 @@ public class Tests {
         Graphs.connect(g);
         Graph e = Graphs.deepCopy(g);
         e.addVertex();
-        Assert.assertEquals("deepCopyTest", g.getVerticesCount() + 1, e.getVerticesCount());
+        Assert.assertEquals("deepCopyTest", g.vertexCount() + 1, e.vertexCount());
         Assert.assertEquals("deepCopyTest", g.getEdgesCount(), e.getEdgesCount());
     }
 

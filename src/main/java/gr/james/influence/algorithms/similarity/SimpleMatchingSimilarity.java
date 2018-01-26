@@ -54,11 +54,11 @@ public class SimpleMatchingSimilarity<V> implements VertexSimilarity<V, Double> 
     public Double similarity(V v1, V v2) {
         final int intersection = Sets.intersection(g.getOutEdges(v1).keySet(), g.getOutEdges(v2).keySet()).size();
         final int union = g.getOutDegree(v1) + g.getOutDegree(v2) - intersection;
-        final int unionComplement = g.getVerticesCount() - union;
-        assert union >= intersection && union <= g.getVerticesCount();
+        final int unionComplement = g.vertexCount() - union;
+        assert union >= intersection && union <= g.vertexCount();
         assert intersection <= g.getOutDegree(v1) && intersection <= g.getOutDegree(v2);
-        assert union + unionComplement == g.getVerticesCount();
-        assert unionComplement + intersection <= g.getVerticesCount();
-        return (double) (unionComplement + intersection) / (double) g.getVerticesCount();
+        assert union + unionComplement == g.vertexCount();
+        assert unionComplement + intersection <= g.vertexCount();
+        return (double) (unionComplement + intersection) / (double) g.vertexCount();
     }
 }

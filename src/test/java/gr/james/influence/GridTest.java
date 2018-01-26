@@ -17,7 +17,7 @@ public class GridTest {
         int j = RandomHelper.getRandom().nextInt(100) + 1;
 
         Graph g = new GridGenerator(i, j).generate();
-        Assert.assertEquals("gridGenerator.invalidVertexCount", g.getVerticesCount(), i * j);
+        Assert.assertEquals("gridGenerator.invalidVertexCount", g.vertexCount(), i * j);
         Assert.assertEquals("gridGenerator.invalidEdgeCount", g.getEdgesCount(), 2 * (2 * i * j - i - j));
     }
 }

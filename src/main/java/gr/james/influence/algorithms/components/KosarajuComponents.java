@@ -102,7 +102,7 @@ public class KosarajuComponents<V> implements ConnectedComponents<V> {
             }
         }
 
-        assert components.stream().mapToInt(Set::size).sum() == g.getVerticesCount();
+        assert components.stream().mapToInt(Set::size).sum() == g.vertexCount();
 
         return Collections.unmodifiableSet(components);
     }

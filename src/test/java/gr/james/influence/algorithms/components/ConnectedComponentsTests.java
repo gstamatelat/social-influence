@@ -51,7 +51,7 @@ public class ConnectedComponentsTests {
 
         final SimpleGraph g = new SimpleGraph();
         g.addVertices(n);
-        for (int i = 0; i < g.getVerticesCount() - 1; i++) {
+        for (int i = 0; i < g.vertexCount() - 1; i++) {
             g.addEdge(g.getVertexFromIndex(i), g.getVertexFromIndex(i + 1));
         }
 

@@ -30,20 +30,20 @@ public class TarjanComponents<V> {
         vertexMap = Graphs.getGraphIndexMap(g);
 
         this.g = g;
-        visited = new boolean[g.getVerticesCount()];
+        visited = new boolean[g.vertexCount()];
         stack = new Stack<>();
         time = 0;
-        lowlink = new int[g.getVerticesCount()];
+        lowlink = new int[g.vertexCount()];
         components = new ArrayList<>();
 
-        for (int u = 0; u < g.getVerticesCount(); u++) {
+        for (int u = 0; u < g.vertexCount(); u++) {
             if (!visited[u]) {
                 dfs(u);
             }
         }
 
         assert Helper.listToSet(components).equals(KosarajuComponents.execute(g));
-        assert components.stream().mapToInt(List::size).sum() == g.getVerticesCount();
+        assert components.stream().mapToInt(List::size).sum() == g.vertexCount();
 
         return components;
     }

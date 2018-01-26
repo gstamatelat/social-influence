@@ -165,11 +165,6 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
     }
 
     @Override
-    public int getVerticesCount() {
-        return this.g.getVerticesCount();
-    }
-
-    @Override
     public int vertexCount() {
         return this.g.vertexCount();
     }

@@ -354,17 +354,6 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     }
 
     /**
-     * Returns the number of vertices in this graph. {@code getVerticesCount()} will return the same value as
-     * {@code getVertices().size()} but could be faster depending on the {@code Graph} implementation.
-     *
-     * @return the number of vertices in this graph
-     */
-    @Deprecated
-    default int getVerticesCount() {
-        return this.getVertices().size();
-    }
-
-    /**
      * Returns the number of vertices in this graph.
      * <p>
      * This method is equivalent to
@@ -382,9 +371,9 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
 
     /**
      * Get a vertex of this graph based on its index. Index is a deterministic, per-graph attribute between {@code 0}
-     * (inclusive) and {@link #getVerticesCount()} (exclusive), indicating the order at which the vertices were
-     * inserted in the graph. {@code getVertexFromIndex(i)} will return the same vertex as {@code getVertices().get(i)}
-     * but could be faster depending on the {@code Graph} implementation.
+     * (inclusive) and {@link #vertexCount()} ()} (exclusive), indicating the order at which the vertices were inserted
+     * in the graph. {@code getVertexFromIndex(i)} will return the same vertex as {@code getVertices().get(i)} but could
+     * be faster depending on the {@code Graph} implementation.
      *
      * @param index the index of the vertex
      * @return the vertex reference with the provided index
@@ -728,7 +717,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
 
     @Deprecated
     default double getDensity() {
-        double n = this.getVerticesCount();
+        double n = this.vertexCount();
         double e = this.getEdgesCount();
         return e / (n * (n - 1));
     }

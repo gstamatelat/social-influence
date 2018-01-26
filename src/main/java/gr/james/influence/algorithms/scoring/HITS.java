@@ -60,8 +60,8 @@ public class HITS<V> extends AbstractIterativeAlgorithm<V, HITS.HITSScore> {
                 .mapToDouble(x -> Math.pow(x.getHub(), 2.0)).sum());
 
         next.replaceAll((vertex, hitsScore) -> new HITSScore(
-                hitsScore.getAuthority() * g.getVerticesCount() / authoritySum,
-                hitsScore.getHub() * g.getVerticesCount() / hubSum)
+                hitsScore.getAuthority() * g.vertexCount() / authoritySum,
+                hitsScore.getHub() * g.vertexCount() / hubSum)
         );
 
         return next;

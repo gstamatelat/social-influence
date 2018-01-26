@@ -41,14 +41,14 @@ public class PearsonSimilarity<V> implements VertexSimilarity<V, Double> {
      * @throws IllegalArgumentException if {@code g} does not contain any vertices
      */
     public PearsonSimilarity(@UnmodifiableGraph Graph<V, ?> g) {
-        Conditions.requireArgument(g.getVerticesCount() > 0, "Input graph is empty");
+        Conditions.requireArgument(g.vertexCount() > 0, "Input graph is empty");
 
         this.g = g;
         this.averages = new HashMap<>();
         this.variances = new HashMap<>();
 
         for (V v : g) {
-            this.averages.put(v, g.getOutStrength(v) / g.getVerticesCount());
+            this.averages.put(v, g.getOutStrength(v) / g.vertexCount());
         }
 
         for (V v : g) {
@@ -56,7 +56,7 @@ public class PearsonSimilarity<V> implements VertexSimilarity<V, Double> {
             for (DirectedEdge<V, ?> e : g.getOutEdges(v).values()) {
                 sum += Math.pow(e.weight() - averages.get(v), 2);
             }
-            sum += (g.getVerticesCount() - g.getOutEdges(v).size()) * Math.pow(averages.get(v), 2);
+            sum += (g.vertexCount() - g.getOutEdges(v).size()) * Math.pow(averages.get(v), 2);
             this.variances.put(v, Math.sqrt(sum));
         }
     }
@@ -85,8 +85,8 @@ public class PearsonSimilarity<V> implements VertexSimilarity<V, Double> {
             sum += (aik - averages.get(v1)) * (ajk - averages.get(v2));
             unionSize++;
         }
-        assert unionSize <= g.getVerticesCount();
-        sum += (g.getVerticesCount() - unionSize) * averages.get(v1) * averages.get(v2);
+        assert unionSize <= g.vertexCount();
+        sum += (g.vertexCount() - unionSize) * averages.get(v1) * averages.get(v2);
         final double similarity = sum / (variances.get(v1) * variances.get(v2));
         assert Double.isNaN(similarity) || (similarity > -1 - 1e-4 && similarity < 1 + 1e-4);
         assert Double.isNaN(similarity) == (variance(v1) == 0 || variance(v2) == 0);
@@ -109,7 +109,7 @@ public class PearsonSimilarity<V> implements VertexSimilarity<V, Double> {
         if (mapping == null) {
             throw new IllegalVertexException("Vertex %s is not in the graph", v);
         }
-        final double var = Math.pow(mapping, 2) / g.getVerticesCount();
+        final double var = Math.pow(mapping, 2) / g.vertexCount();
         assert var >= 0;
         return var;
     }

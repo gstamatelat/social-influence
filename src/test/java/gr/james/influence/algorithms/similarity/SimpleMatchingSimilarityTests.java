@@ -59,7 +59,7 @@ public class SimpleMatchingSimilarityTests {
             for (String v : g) {
                 for (String e : g.getOutEdges(v).keySet()) {
                     Assert.assertEquals("SimpleMatchingSimilarityTests.circle",
-                            (g.getVerticesCount() - 4) / (double) g.getVerticesCount(),
+                            (g.vertexCount() - 4) / (double) g.vertexCount(),
                             smc.similarity(v, e), 1e-4);
                 }
             }

@@ -30,7 +30,7 @@ public class RandomSurferIterator<V, E> implements Iterator<V> {
 
     @Override
     public boolean hasNext() {
-        return (g.getVerticesCount() > 0);
+        return (g.vertexCount() > 0);
     }
 
     @Override

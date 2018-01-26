@@ -26,7 +26,7 @@ public class WiseCrowdGenerator implements GraphGenerator {
 
         V boss = g.addVertex();
 
-        while (g.getVerticesCount() < totalVertices) {
+        while (g.vertexCount() < totalVertices) {
             V v = g.addVertex();
             g.addEdge(boss, v, delta / (totalVertices - 1));
             g.addEdge(v, boss, delta);

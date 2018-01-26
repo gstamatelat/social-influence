@@ -73,7 +73,7 @@ public abstract class AbstractSingleVertexScoring<V, T> implements VertexScoring
      */
     @Override
     public GraphState<V, T> scores() {
-        if (scores.size() < g.getVerticesCount()) {
+        if (scores.size() < g.vertexCount()) {
             for (V v : g) {
                 scores.putIfAbsent(v, score(v));
             }

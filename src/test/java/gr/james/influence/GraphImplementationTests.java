@@ -31,7 +31,7 @@ public class GraphImplementationTests {
     @Test
     public void vertexIndexText() {
         SimpleGraph g = new RandomGenerator(250, 0.2).generate();
-        for (int i = 0; i < g.getVerticesCount(); i++) {
+        for (int i = 0; i < g.vertexCount(); i++) {
             Assert.assertEquals("vertexIndexText", g.getVertexFromIndex(i), g.getVertices().get(i));
         }
     }
@@ -42,6 +42,6 @@ public class GraphImplementationTests {
     @Test
     public void verticesCountTest() {
         SimpleGraph g = new RandomGenerator(250, 0.2).generate();
-        Assert.assertEquals("verticesCountTest", g.getVerticesCount(), g.getVertices().size());
+        Assert.assertEquals("verticesCountTest", g.vertexCount(), g.getVertices().size());
     }
 }

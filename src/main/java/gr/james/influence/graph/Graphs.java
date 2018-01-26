@@ -175,8 +175,8 @@ public class Graphs {
      */
     public static <V> V getRandomVertex(Graph<V, ?> g, Random random) {
         Conditions.requireAllNonNull(g, random);
-        Conditions.requireArgument(g.getVerticesCount() > 0);
-        return g.getVertexFromIndex(random.nextInt(g.getVerticesCount()));
+        Conditions.requireArgument(g.vertexCount() > 0);
+        return g.getVertexFromIndex(random.nextInt(g.vertexCount()));
     }
 
     /**

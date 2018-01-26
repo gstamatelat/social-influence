@@ -29,14 +29,14 @@ public class DijkstraDiameter<V> implements GraphProperty<Double> {
      */
     public DijkstraDiameter(@UnmodifiableGraph Graph<V, ?> g) {
         Conditions.requireNonNull(g);
-        Conditions.requireArgument(g.getVerticesCount() > 1);
+        Conditions.requireArgument(g.vertexCount() > 1);
 
         diameter = Double.NEGATIVE_INFINITY;
 
         for (V v : g) {
             final DijkstraClosestFirstIterator<V> dijkstra = new DijkstraClosestFirstIterator<>(g, v);
             final List<V> reachable = dijkstra.exhaustVertices();
-            final double dist = reachable.size() < g.getVerticesCount() ?
+            final double dist = reachable.size() < g.vertexCount() ?
                     Double.POSITIVE_INFINITY :
                     dijkstra.distanceTo(reachable.get(reachable.size() - 1));
             if (dist > diameter) {

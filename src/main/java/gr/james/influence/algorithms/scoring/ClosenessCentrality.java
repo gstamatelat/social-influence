@@ -46,7 +46,7 @@ public class ClosenessCentrality<V> extends AbstractSingleVertexScoring<V, Doubl
                 farness += dijkstra.distanceTo(w);
             }
         }
-        return g.getVerticesCount() / farness;
+        return g.vertexCount() / farness;
     }
 
     /**
