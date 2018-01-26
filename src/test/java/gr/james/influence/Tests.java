@@ -125,13 +125,13 @@ public class Tests {
         int edgeCount = 0;
         for (SimpleGraph g : graphs) {
             vertexCount += g.vertexCount();
-            edgeCount += g.getEdgesCount();
+            edgeCount += Graphs.getEdgesCount(g);
         }
 
         SimpleGraph g = Graphs.combineGraphs(Arrays.asList(graphs));
 
         Assert.assertEquals("combineGraphsTest - vertexCount", vertexCount, g.vertexCount());
-        Assert.assertEquals("combineGraphsTest - edgeCount", edgeCount, g.getEdgesCount());
+        Assert.assertEquals("combineGraphsTest - edgeCount", edgeCount, Graphs.getEdgesCount(g));
     }
 
     @Test
@@ -231,7 +231,7 @@ public class Tests {
         Graph e = Graphs.deepCopy(g);
         e.addVertex();
         Assert.assertEquals("deepCopyTest", g.vertexCount() + 1, e.vertexCount());
-        Assert.assertEquals("deepCopyTest", g.getEdgesCount(), e.getEdgesCount());
+        Assert.assertEquals("deepCopyTest", Graphs.getEdgesCount(g), Graphs.getEdgesCount(e));
     }
 
     @Test

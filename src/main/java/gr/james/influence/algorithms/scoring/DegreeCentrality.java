@@ -4,6 +4,7 @@ import gr.james.influence.annotation.UnmodifiableGraph;
 import gr.james.influence.api.graph.Graph;
 import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.graph.Direction;
+import gr.james.influence.graph.Graphs;
 import gr.james.influence.util.Conditions;
 import gr.james.influence.util.collections.GraphState;
 
@@ -91,7 +92,7 @@ public class DegreeCentrality<V> extends AbstractSingleVertexScoring<V, Integer>
     @Override
     public GraphState<V, Integer> scores() {
         final GraphState<V, Integer> scores = super.scores();
-        assert scores.values().stream().mapToInt(v -> v).sum() == g.getEdgesCount();
+        assert scores.values().stream().mapToInt(v -> v).sum() == Graphs.getEdgesCount(g);
         return scores;
     }
 }

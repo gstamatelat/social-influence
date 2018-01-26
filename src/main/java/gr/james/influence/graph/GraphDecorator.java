@@ -100,11 +100,6 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
     }
 
     @Override
-    public int getEdgesCount() {
-        return this.g.getEdgesCount();
-    }
-
-    @Override
     public Map<V, DirectedEdge<V, E>> getOutEdges(V v) {
         return this.g.getOutEdges(v);
     }

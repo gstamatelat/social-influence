@@ -193,4 +193,22 @@ public class Graphs {
     public static <V> V getRandomVertex(Graph<V, ?> g) {
         return getRandomVertex(g, RandomHelper.getRandom());
     }
+
+    /**
+     * Returns the number of directed edges in {@code g}.
+     * <p>
+     * Complexity: O(V)
+     *
+     * @param g   the graph
+     * @param <V> the vertex type
+     * @return the number of directed edges in {@code g}
+     * @throws NullPointerException if {@code g} is {@code null}
+     */
+    public static <V> int getEdgesCount(Graph<V, ?> g) {
+        int count = 0;
+        for (V v : g.vertexSet()) {
+            count += g.adjacentOut(v).size();
+        }
+        return count;
+    }
 }
