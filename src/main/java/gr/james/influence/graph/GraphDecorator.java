@@ -110,6 +110,11 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
     }
 
     @Override
+    public Iterable<DirectedEdge<V, E>> outEdges(V v) {
+        return this.g.outEdges(v);
+    }
+
+    @Override
     public Set<V> adjacentOut(V v) {
         return this.g.adjacentOut(v);
     }
@@ -117,6 +122,11 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
     @Override
     public Map<V, DirectedEdge<V, E>> getInEdges(V v) {
         return this.g.getInEdges(v);
+    }
+
+    @Override
+    public Iterable<DirectedEdge<V, E>> inEdges(V v) {
+        return this.g.inEdges(v);
     }
 
     @Override
