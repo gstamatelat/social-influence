@@ -23,6 +23,18 @@ public interface DirectedEdge<V, E> {
     }
 
     /**
+     * Returns the reverse of this {@link DirectedEdge}.
+     * <p>
+     * The reverse edge has the same {@link #edge()} and {@link #weight()} as the original one but the {@link #source()}
+     * and {@link #target()} are interchanged.
+     *
+     * @return the reverse of this {@link DirectedEdge}
+     */
+    default DirectedEdge<V, E> reverse() {
+        return new DirectedEdgeImpl<>(edge(), target(), source(), weight());
+    }
+
+    /**
      * Returns the edge object assigned.
      *
      * @return the edge object assigned
