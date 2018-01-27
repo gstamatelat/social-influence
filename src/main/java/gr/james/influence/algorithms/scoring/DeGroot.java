@@ -41,7 +41,7 @@ public class DeGroot<V> extends AbstractIterativeAlgorithm<V, Double> {
             for (DirectedEdge<V, ?> e : g.getOutEdges(v).values()) {
                 w += e.weight() * previous.get(e.target());
             }
-            nextState.put(v, w / g.getOutStrength(v));
+            nextState.put(v, w / g.outStrength(v));
         }
         return nextState;
     }

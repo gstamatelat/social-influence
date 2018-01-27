@@ -48,7 +48,7 @@ public class PearsonSimilarity<V> implements VertexSimilarity<V, Double> {
         this.variances = new HashMap<>();
 
         for (V v : g) {
-            this.averages.put(v, g.getOutStrength(v) / g.vertexCount());
+            this.averages.put(v, g.outStrength(v) / g.vertexCount());
         }
 
         for (V v : g) {

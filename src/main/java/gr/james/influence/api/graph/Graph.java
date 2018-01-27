@@ -333,9 +333,9 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @return the sum of weights of all outbound edges of vertex {@code v}
      * @throws NullPointerException   if {@code v} is {@code null}
      * @throws IllegalVertexException if {@code v} is not in the graph
-     * @see #getInStrength
+     * @see #inStrength
      */
-    default double getOutStrength(V v) {
+    default double outStrength(V v) {
         double sum = 0;
         for (DirectedEdge<V, E> e : outEdges(v)) {
             sum += e.weight();
@@ -359,9 +359,9 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @return the sum of weights of all inbound edges of vertex {@code v}
      * @throws NullPointerException   if {@code v} is {@code null}
      * @throws IllegalVertexException if {@code v} is not in the graph
-     * @see #getInStrength
+     * @see #outStrength(Object)
      */
-    default double getInStrength(V v) {
+    default double inStrength(V v) {
         double sum = 0;
         for (DirectedEdge<V, E> e : inEdges(v)) {
             sum += e.weight();

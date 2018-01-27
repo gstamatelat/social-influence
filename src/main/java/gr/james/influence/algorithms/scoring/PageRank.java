@@ -22,7 +22,7 @@ public class PageRank<V> extends AbstractIterativeAlgorithm<V, Double> {
 
         outStrengths = new HashMap<>();
         for (V v : g) {
-            outStrengths.put(v, g.getOutStrength(v));
+            outStrengths.put(v, g.outStrength(v));
         }
     }
 

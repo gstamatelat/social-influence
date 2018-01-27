@@ -130,13 +130,13 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
     }
 
     @Override
-    public double getOutStrength(V v) {
-        return this.g.getOutStrength(v);
+    public double outStrength(V v) {
+        return this.g.outStrength(v);
     }
 
     @Override
-    public double getInStrength(V v) {
-        return this.g.getInStrength(v);
+    public double inStrength(V v) {
+        return this.g.inStrength(v);
     }
 
     @Override
