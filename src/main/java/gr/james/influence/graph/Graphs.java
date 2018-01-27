@@ -13,7 +13,10 @@ import gr.james.influence.util.RandomHelper;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Graphs {
+public final class Graphs {
+    private Graphs() {
+    }
+
     public static <V, E> void connect(Graph<V, E> g) {
         List<List<V>> scc = new TarjanComponents<V>().execute(g);
         for (int i = 0; i < scc.size(); i++) {
