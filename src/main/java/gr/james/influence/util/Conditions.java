@@ -16,6 +16,7 @@ public final class Conditions {
         }
     }
 
+    @Deprecated
     public static <V, E> V requireNonNullAndExists(V v, Graph<V, E> g) {
         Conditions.requireNonNull(v);
         if (!g.containsVertex(v)) {

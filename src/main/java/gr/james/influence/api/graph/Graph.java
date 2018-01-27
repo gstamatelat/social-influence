@@ -161,28 +161,42 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     Map<V, DirectedEdge<V, E>> getOutEdges(V v);
 
     /**
-     * Gets an {@link Iterable} of all outbound edges of {@code v}.
+     * Gets an {@link Set} of all outbound edges of {@code v}.
      *
      * @param v the vertex to get the outbound edges of
      * @return the outbound edges of {@code v}
      * @throws NullPointerException   if {@code v} is {@code null}
      * @throws IllegalVertexException if {@code v} is not in the graph
      */
-    default Iterable<DirectedEdge<V, E>> outEdges(V v) {
-        Conditions.requireVertexInGraph(this, v);
-        return () -> new Iterator<DirectedEdge<V, E>>() {
-            private final Iterator<V> adjIterator = Graph.this.adjacentOut(v).iterator();
-
+    default Set<DirectedEdge<V, E>> outEdges(V v) {
+        final Set<V> adj = this.adjacentOut(v);
+        return new AbstractSet<DirectedEdge<V, E>>() {
             @Override
-            public boolean hasNext() {
-                return adjIterator.hasNext();
+            public Iterator<DirectedEdge<V, E>> iterator() {
+                return new Iterator<DirectedEdge<V, E>>() {
+                    private final Iterator<V> adjIterator = adj.iterator();
+
+                    @Override
+                    public boolean hasNext() {
+                        return adjIterator.hasNext();
+                    }
+
+                    @Override
+                    public DirectedEdge<V, E> next() {
+                        final V next = adjIterator.next();
+                        final DirectedEdge<V, E> e = Graph.this.findEdge(v, next);
+                        assert e != null;
+                        return e;
+                    }
+                };
             }
 
             @Override
-            public DirectedEdge<V, E> next() {
-                final V next = adjIterator.next();
-                return DirectedEdge.from(Graph.this.getEdge(v, next), v, next, Graph.this.getWeight(v, next));
+            public int size() {
+                return adj.size();
             }
+
+            // TODO: Implement contains
         };
     }
 
@@ -213,28 +227,42 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     Map<V, DirectedEdge<V, E>> getInEdges(V v);
 
     /**
-     * Gets an {@link Iterable} of all inbound edges of {@code v}.
+     * Gets an {@link Set} of all inbound edges of {@code v}.
      *
      * @param v the vertex to get the inbound edges of
      * @return the inbound edges of {@code v}
      * @throws NullPointerException   if {@code v} is {@code null}
      * @throws IllegalVertexException if {@code v} is not in the graph
      */
-    default Iterable<DirectedEdge<V, E>> inEdges(V v) {
-        Conditions.requireVertexInGraph(this, v);
-        return () -> new Iterator<DirectedEdge<V, E>>() {
-            private final Iterator<V> adjIterator = Graph.this.adjacentIn(v).iterator();
-
+    default Set<DirectedEdge<V, E>> inEdges(V v) {
+        final Set<V> adj = this.adjacentIn(v);
+        return new AbstractSet<DirectedEdge<V, E>>() {
             @Override
-            public boolean hasNext() {
-                return adjIterator.hasNext();
+            public Iterator<DirectedEdge<V, E>> iterator() {
+                return new Iterator<DirectedEdge<V, E>>() {
+                    private final Iterator<V> adjIterator = adj.iterator();
+
+                    @Override
+                    public boolean hasNext() {
+                        return adjIterator.hasNext();
+                    }
+
+                    @Override
+                    public DirectedEdge<V, E> next() {
+                        final V next = adjIterator.next();
+                        final DirectedEdge<V, E> e = Graph.this.findEdge(next, v);
+                        assert e != null;
+                        return e;
+                    }
+                };
             }
 
             @Override
-            public DirectedEdge<V, E> next() {
-                final V next = adjIterator.next();
-                return DirectedEdge.from(Graph.this.getEdge(next, v), next, v, Graph.this.getWeight(next, v));
+            public int size() {
+                return adj.size();
             }
+
+            // TODO: Implement contains
         };
     }
 
