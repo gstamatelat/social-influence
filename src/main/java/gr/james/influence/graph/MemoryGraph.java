@@ -111,6 +111,19 @@ public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
     }
 
     @Override
+    public DirectedEdge<V, E> findEdge(V source, V target) {
+        Conditions.requireAllNonNull(source, target);
+        final Map<V, DirectedEdge<V, E>> edges = mOut.get(source);
+        if (edges == null) {
+            throw new IllegalVertexException();
+        }
+        if (!mOut.containsKey(target)) {
+            throw new IllegalVertexException();
+        }
+        return edges.get(target);
+    }
+
+    @Override
     public Map<V, DirectedEdge<V, E>> getOutEdges(V v) {
         Conditions.requireNonNullAndExists(v, this);
         return Collections.unmodifiableMap(this.mOut.get(v));

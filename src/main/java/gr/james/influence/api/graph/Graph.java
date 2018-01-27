@@ -40,6 +40,11 @@ import java.util.*;
 public interface Graph<V, E> extends Iterable<V>, Metadata {
     /**
      * Checks if this graph contains an edge with the specified {@code source} and {@code target}.
+     * <p>
+     * This method is equivalent to
+     * <pre><code>
+     * findEdge(source, target) != null
+     * </code></pre>
      *
      * @param source the source of the edge
      * @param target the target of the edge
@@ -61,13 +66,20 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @throws NullPointerException   if either {@code source} or {@code target} is {@code null}
      * @throws IllegalVertexException if either {@code source} or {@code target} is not in the graph
      */
-    default DirectedEdge<V, E> findEdge(V source, V target) {
-        return this.getOutEdges(source).get(Conditions.requireNonNullAndExists(target, this));
-    }
+    DirectedEdge<V, E> findEdge(V source, V target);
 
     /**
      * Returns the weight of the edge from {@code source} to {@code target} if it exists, or throws exception if it
      * doesn't exist.
+     * <p>
+     * This method is equivalent to
+     * <pre><code>
+     * final DirectedEdge&lt;V, E&gt; edge = findEdge(source, target);
+     * if (edge == null) {
+     *     throw new IllegalEdgeException();
+     * }
+     * return edge.weight();
+     * </code></pre>
      *
      * @param source the source vertex of the edge
      * @param target the target vertex of the edge
@@ -89,6 +101,15 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     /**
      * Returns the weight of the edge from {@code source} to {@code target} if it exists, or {@code other} if it doesn't
      * exist.
+     * <p>
+     * This method is equivalent to
+     * <pre><code>
+     * final DirectedEdge&lt;V, E&gt; edge = findEdge(source, target);
+     * if (edge == null) {
+     *     return other;
+     * }
+     * return edge.weight();
+     * </code></pre>
      *
      * @param source the source vertex of the edge
      * @param target the target vertex of the edge
@@ -110,6 +131,15 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     /**
      * Returns the object of the edge from {@code source} to {@code target} if it exists, or throws exception if it
      * doesn't exist.
+     * <p>
+     * This method is equivalent to
+     * <pre><code>
+     * final DirectedEdge&lt;V, E&gt; edge = findEdge(source, target);
+     * if (edge == null) {
+     *     throw new IllegalEdgeException();
+     * }
+     * return edge.edge();
+     * </code></pre>
      *
      * @param source the source vertex of the edge
      * @param target the target vertex of the edge
@@ -130,6 +160,15 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     /**
      * Returns the object of the edge from {@code source} to {@code target} if it exists, or {@code other} if it doesn't
      * exist.
+     * <p>
+     * This method is equivalent to
+     * <pre><code>
+     * final DirectedEdge&lt;V, E&gt; edge = findEdge(source, target);
+     * if (edge == null) {
+     *     return other;
+     * }
+     * return edge.edge();
+     * </code></pre>
      *
      * @param source the source vertex of the edge
      * @param target the target vertex of the edge
