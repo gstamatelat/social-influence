@@ -156,7 +156,7 @@ public class Graphs {
     public static <V, E> Set<V> getStubbornVertices(Graph<V, E> g) {
         return Collections.unmodifiableSet(
                 g.getVertices().stream()
-                        .filter(v -> g.getOutDegree(v) == 1 && g.getOutEdges(v).containsKey(v))
+                        .filter(v -> g.outDegree(v) == 1 && g.getOutEdges(v).containsKey(v))
                         .collect(Collectors.toSet())
         );
     }

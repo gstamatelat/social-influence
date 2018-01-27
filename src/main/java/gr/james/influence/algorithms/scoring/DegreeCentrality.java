@@ -58,9 +58,9 @@ public class DegreeCentrality<V> extends AbstractSingleVertexScoring<V, Integer>
     @Override
     protected Integer scoreProtected(V v) {
         if (direction.isInbound()) {
-            return g.getInDegree(v);
+            return g.inDegree(v);
         } else {
-            return g.getOutDegree(v);
+            return g.outDegree(v);
         }
     }
 

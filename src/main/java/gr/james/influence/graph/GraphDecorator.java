@@ -140,13 +140,13 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
     }
 
     @Override
-    public int getOutDegree(V v) {
-        return this.g.getOutDegree(v);
+    public int outDegree(V v) {
+        return this.g.outDegree(v);
     }
 
     @Override
-    public int getInDegree(V v) {
-        return this.g.getInDegree(v);
+    public int inDegree(V v) {
+        return this.g.inDegree(v);
     }
 
     @Override

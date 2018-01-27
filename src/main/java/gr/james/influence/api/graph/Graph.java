@@ -320,6 +320,15 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
 
     /**
      * Returns the sum of the outbound edge weights of a vertex.
+     * <p>
+     * This method is equivalent to
+     * <pre><code>
+     * double sum = 0;
+     * for (DirectedEdge&lt;V, E&gt; e : outEdges(v)) {
+     *     sum += e.weight();
+     * }
+     * return sum;
+     * </code></pre>
      *
      * @param v the vertex
      * @return the sum of weights of all outbound edges of vertex {@code v}
@@ -328,46 +337,73 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @see #getInStrength
      */
     default double getOutStrength(V v) {
-        return this.getOutEdges(v).values().stream().mapToDouble(DirectedEdge::weight).sum();
+        double sum = 0;
+        for (DirectedEdge<V, E> e : outEdges(v)) {
+            sum += e.weight();
+        }
+        return sum;
     }
 
     /**
      * Returns the sum of the inbound edge weights of a vertex.
+     * <p>
+     * This method is equivalent to
+     * <pre><code>
+     * double sum = 0;
+     * for (DirectedEdge&lt;V, E&gt; e : inEdges(v)) {
+     *     sum += e.weight();
+     * }
+     * return sum;
+     * </code></pre>
      *
      * @param v the vertex
      * @return the sum of weights of all inbound edges of vertex {@code v}
      * @throws NullPointerException   if {@code v} is {@code null}
      * @throws IllegalVertexException if {@code v} is not in the graph
-     * @see #getOutStrength
+     * @see #getInStrength
      */
     default double getInStrength(V v) {
-        return this.getInEdges(v).values().stream().mapToDouble(DirectedEdge::weight).sum();
+        double sum = 0;
+        for (DirectedEdge<V, E> e : inEdges(v)) {
+            sum += e.weight();
+        }
+        return sum;
     }
 
     /**
      * Returns the outbound degree of a vertex, aka the number of outbound edges. Edge to self is included (if present).
+     * <p>
+     * This method is equivalent to
+     * <pre><code>
+     * return adjacentOut(v).size();
+     * </code></pre>
      *
      * @param v the vertex
      * @return the outbound degree of vertex {@code v}
      * @throws NullPointerException   if {@code v} is {@code null}
      * @throws IllegalVertexException if {@code v} is not in the graph
-     * @see #getInDegree
+     * @see #inDegree
      */
-    default int getOutDegree(V v) {
-        return this.getOutEdges(v).size();
+    default int outDegree(V v) {
+        return adjacentOut(v).size();
     }
 
     /**
      * Returns the inbound degree of a vertex, aka the number of inbound edges. Edge to self is included (if present).
+     * <p>
+     * This method is equivalent to
+     * <pre><code>
+     * return adjacentIn(v).size();
+     * </code></pre>
      *
      * @param v the vertex
      * @return the inbound degree of vertex {@code v}
      * @throws NullPointerException   if {@code v} is {@code null}
      * @throws IllegalVertexException if {@code v} is not in the graph
-     * @see #getOutDegree
+     * @see #outDegree
      */
-    default int getInDegree(V v) {
-        return this.getInEdges(v).size();
+    default int inDegree(V v) {
+        return adjacentIn(v).size();
     }
 
     /**
@@ -567,14 +603,14 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * Removes all vertices (and consequently all edges) from this graph. Metadata are not removed.
      */
     default void clear() {
-        this.removeVertices(this.getVertices());
+        this.removeVertices(vertexSet());
     }
 
     /**
      * Removes all edges from this graph. Metadata are not removed.
      */
     default void clearEdges() {
-        removeEdges(getVertices());
+        removeEdges(vertexSet());
         assert Graphs.getEdgesCount(this) == 0;
     }
 

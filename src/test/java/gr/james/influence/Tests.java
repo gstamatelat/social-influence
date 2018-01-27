@@ -172,10 +172,10 @@ public class Tests {
         SimpleGraph g = new TwoWheelsGenerator(k).generate();
 
         *//* getVertexFromIndex(N) must always return the center vertex *//*
-        Assert.assertEquals("getVertexFromIndexTest - N - " + k, 6, g.getOutDegree(g.getVertexFromIndex(g.getVerticesCount() - 1)));
+        Assert.assertEquals("getVertexFromIndexTest - N - " + k, 6, g.outDegree(g.getVertexFromIndex(g.getVerticesCount() - 1)));
 
         *//* getVertexFromIndex(N-1) must always return the wheel center vertex *//*
-        Assert.assertEquals("getVertexFromIndexTest - N-1 - " + k, k - 1, g.getOutDegree(g.getVertexFromIndex(g.getVerticesCount() - 2)));
+        Assert.assertEquals("getVertexFromIndexTest - N-1 - " + k, k - 1, g.outDegree(g.getVertexFromIndex(g.getVerticesCount() - 2)));
     }*/
 
     /**

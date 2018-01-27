@@ -88,7 +88,7 @@ public class JaccardSimilarityTests {
         final SimpleGraph g = new RandomGenerator(100, 0.1).generate();
         final VertexSimilarity<String, Double> jaccard = new JaccardSimilarity<>(g);
         for (String v : g) {
-            if (g.getOutDegree(v) != 0) {
+            if (g.outDegree(v) != 0) {
                 Assert.assertEquals("JaccardSimilarityTests.identity",
                         1.0, jaccard.similarity(v, v), 1e-4);
             } else {
