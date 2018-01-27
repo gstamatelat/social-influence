@@ -165,11 +165,6 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
     }
 
     @Override
-    public V getRandomOutEdge(V from, boolean weighted) {
-        return this.g.getRandomOutEdge(from, weighted);
-    }
-
-    @Override
     public double getDensity() {
         return this.g.getDensity();
     }

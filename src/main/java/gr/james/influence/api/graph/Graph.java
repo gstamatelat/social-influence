@@ -6,7 +6,6 @@ import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.graph.Graphs;
 import gr.james.influence.util.Conditions;
 import gr.james.influence.util.Finals;
-import gr.james.influence.util.Helper;
 import gr.james.influence.util.collections.EdgesIterator;
 
 import java.util.*;
@@ -794,19 +793,6 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      */
     default void removeEdges(V... among) {
         this.removeEdges(Arrays.asList(among));
-    }
-
-    @Deprecated
-    default V getRandomOutEdge(V from, boolean weighted) {
-        // TODO: Return DirectedEdge
-        // TODO: What if no out edge?
-        Map<V, Double> weightMap = new HashMap<>();
-        Map<V, DirectedEdge<V, E>> outEdges = this.getOutEdges(from);
-        for (Map.Entry<V, DirectedEdge<V, E>> e : outEdges.entrySet()) {
-            weightMap.put(e.getKey(), (weighted ? e.getValue().weight() : 1.0));
-        }
-        Set<V> edges = Helper.weightedRandom(weightMap, 1);
-        return edges.iterator().next();
     }
 
     @Deprecated

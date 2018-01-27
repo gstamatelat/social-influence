@@ -36,7 +36,7 @@ public class RandomSurferIterator<V, E> implements Iterator<V> {
     @Override
     public V next() {
         if (RandomHelper.getRandom().nextDouble() > dampingFactor) {
-            this.current = g.getRandomOutEdge(this.current, true);
+            this.current = Graphs.getWeightedRandomOutVertex(g, this.current);
             if (this.current == null) {
                 this.current = Graphs.getRandomVertex(g);
             }
