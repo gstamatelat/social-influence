@@ -9,6 +9,9 @@ import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.util.Conditions;
 import gr.james.influence.util.Finals;
 import gr.james.influence.util.RandomHelper;
+import gr.james.sampling.EfraimidisSampling;
+import gr.james.sampling.RandomSampling;
+import gr.james.sampling.WeightedRandomSampling;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -213,5 +216,57 @@ public final class Graphs {
             count += g.adjacentOut(v).size();
         }
         return count;
+    }
+
+    /**
+     * Returns a random vertex that is adjacent to {@code v}.
+     * <p>
+     * This method returns {@code null} if {@code v} doesn't have any outbound edges.
+     *
+     * @param g   the graph
+     * @param v   the vertex
+     * @param <V> the vertex type
+     * @return a random vertex that is adjacent to {@code v}
+     * @throws NullPointerException   if {@code g} or {@code v} is {@code null}
+     * @throws IllegalVertexException if {@code v} is not in {@code g}
+     * @see <a href="https://doi.org/10.1016/j.ipl.2005.11.003">doi:10.1016/j.ipl.2005.11.003</a>
+     */
+    public static <V> V getRandomOutVertex(Graph<V, ?> g, V v) {
+        final RandomSampling<V> rs = new EfraimidisSampling<>(1, RandomHelper.getRandom());
+        rs.feed(g.adjacentOut(v));
+        final Collection<V> sample = rs.sample();
+        if (sample.isEmpty()) {
+            return null;
+        }
+        assert sample.size() == 1;
+        return sample.iterator().next();
+    }
+
+    /**
+     * Returns a random vertex that is adjacent to {@code v} with distribution corresponding to the edge weights.
+     * <p>
+     * This method returns {@code null} if {@code v} doesn't have any outbound edges.
+     *
+     * @param g   the graph
+     * @param v   the vertex
+     * @param <V> the vertex type
+     * @return a random vertex that is adjacent to {@code v}
+     * @throws NullPointerException   if {@code g} or {@code v} is {@code null}
+     * @throws IllegalVertexException if {@code v} is not in {@code g}
+     * @throws RuntimeException       if the weight of any outgoind edge of {@code v} is not in {@code (0, +Inf)}
+     *                                because such values are incompatible with the algorithm
+     * @see <a href="https://doi.org/10.1016/j.ipl.2005.11.003">doi:10.1016/j.ipl.2005.11.003</a>
+     */
+    public static <V> V getWeightedRandomOutVertex(Graph<V, ?> g, V v) {
+        final WeightedRandomSampling<V> wrs = new EfraimidisSampling<>(1, RandomHelper.getRandom());
+        for (DirectedEdge<V, ?> e : g.outEdges(v)) {
+            wrs.feed(e.target(), e.weight());
+        }
+        final Collection<V> sample = wrs.sample();
+        if (sample.isEmpty()) {
+            return null;
+        }
+        assert sample.size() == 1;
+        return sample.iterator().next();
     }
 }

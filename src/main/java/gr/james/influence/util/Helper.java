@@ -15,6 +15,7 @@ public final class Helper {
      * @return a {@code Set} of objects as the weighted random selection
      * @see "Efraimidis, Spirakis. Weighted random sampling with a reservoir."
      */
+    @Deprecated
     public static <E> Set<E> weightedRandom(Map<E, Double> weightMap, int selections, Random r) {
         PriorityQueue<Weighted<E, Double>> keyQueue = new PriorityQueue<>(11, Collections.reverseOrder());
         for (E e : weightMap.keySet()) {
@@ -36,6 +37,7 @@ public final class Helper {
      * @return a {@code Set} of objects as the weighted random selection
      * @see "Efraimidis, Spirakis. Weighted random sampling with a reservoir."
      */
+    @Deprecated
     public static <E> Set<E> weightedRandom(Map<E, Double> weightMap, int selections) {
         return weightedRandom(weightMap, selections, RandomHelper.getRandom());
     }
