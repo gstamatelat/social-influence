@@ -165,11 +165,6 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
     }
 
     @Override
-    public double getDensity() {
-        return this.g.getDensity();
-    }
-
-    @Override
     public V addVertex() {
         return this.g.addVertex();
     }

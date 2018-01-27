@@ -269,4 +269,10 @@ public final class Graphs {
         assert sample.size() == 1;
         return sample.iterator().next();
     }
+
+    public static double getDensity(Graph<?, ?> g) {
+        double n = g.vertexCount();
+        double e = Graphs.getEdgesCount(g);
+        return e / (n * (n - 1));
+    }
 }

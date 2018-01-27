@@ -795,13 +795,6 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
         this.removeEdges(Arrays.asList(among));
     }
 
-    @Deprecated
-    default double getDensity() {
-        double n = this.vertexCount();
-        double e = Graphs.getEdgesCount(this);
-        return e / (n * (n - 1));
-    }
-
     /**
      * Get a collection of all edges in this graph. The items are of type {@link DirectedEdge} and are in no particular
      * order inside the collection.
