@@ -48,7 +48,7 @@ public class EdgesIterator<V, E> implements Iterator<DirectedEdge<V, E>> {
     private void advance() {
         while (!buffer.hasNext()) {
             if (vertexIterator.hasNext()) {
-                buffer = g.getOutEdges(vertexIterator.next()).values().iterator();
+                buffer = g.outEdges(vertexIterator.next()).iterator();
             } else {
                 hasNext = false;
                 return;

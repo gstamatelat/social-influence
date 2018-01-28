@@ -1,5 +1,7 @@
 package gr.james.influence.graph;
 
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 import gr.james.influence.api.graph.DirectedEdge;
 import gr.james.influence.api.graph.Graph;
 import gr.james.influence.api.graph.VertexProvider;
@@ -13,8 +15,8 @@ import java.util.*;
  * <p>Represents an in-memory {@link Graph}, implemented using adjacency lists. Suitable for sparse graphs.</p>
  */
 public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
-    private final Map<V, Map<V, DirectedEdge<V, E>>> mOut;
-    private final Map<V, Map<V, DirectedEdge<V, E>>> mIn;
+    private final Map<V, BiMap<V, DirectedEdge<V, E>>> mOut; // TODO: convert to BiMap because edges are unique
+    private final Map<V, BiMap<V, DirectedEdge<V, E>>> mIn; // TODO: convert to BiMap because edges are unique
     private final List<V> vList;
     private final VertexProvider<V> vertexProvider;
 
@@ -33,12 +35,32 @@ public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
     }
 
     @Override
+    public Set<DirectedEdge<V, E>> outEdges(V v) {
+        Conditions.requireNonNull(v);
+        final BiMap<V, DirectedEdge<V, E>> map = mOut.get(v);
+        if (map == null) {
+            throw new IllegalVertexException();
+        }
+        return Collections.unmodifiableSet(map.values());
+    }
+
+    @Override
+    public Set<DirectedEdge<V, E>> inEdges(V v) {
+        Conditions.requireNonNull(v);
+        final BiMap<V, DirectedEdge<V, E>> map = mIn.get(v);
+        if (map == null) {
+            throw new IllegalVertexException();
+        }
+        return Collections.unmodifiableSet(map.values());
+    }
+
+    @Override
     public boolean addVertex(V v) {
         if (this.containsVertex(v)) {
             return false;
         } else {
-            final Object o1 = this.mOut.put(v, new HashMap<>());
-            final Object o2 = this.mIn.put(v, new HashMap<>());
+            final Object o1 = this.mOut.put(v, HashBiMap.create());
+            final Object o2 = this.mIn.put(v, HashBiMap.create());
             assert o1 == null && o2 == null;
             assert !this.vList.contains(v);
             this.vList.add(v);

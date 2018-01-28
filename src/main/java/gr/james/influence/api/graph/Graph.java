@@ -206,37 +206,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @throws NullPointerException   if {@code v} is {@code null}
      * @throws IllegalVertexException if {@code v} is not in the graph
      */
-    default Set<DirectedEdge<V, E>> outEdges(V v) {
-        final Set<V> adj = this.adjacentOut(v);
-        return new AbstractSet<DirectedEdge<V, E>>() {
-            @Override
-            public Iterator<DirectedEdge<V, E>> iterator() {
-                return new Iterator<DirectedEdge<V, E>>() {
-                    private final Iterator<V> adjIterator = adj.iterator();
-
-                    @Override
-                    public boolean hasNext() {
-                        return adjIterator.hasNext();
-                    }
-
-                    @Override
-                    public DirectedEdge<V, E> next() {
-                        final V next = adjIterator.next();
-                        final DirectedEdge<V, E> e = Graph.this.findEdge(v, next);
-                        assert e != null;
-                        return e;
-                    }
-                };
-            }
-
-            @Override
-            public int size() {
-                return adj.size();
-            }
-
-            // TODO: Implement contains
-        };
-    }
+    Set<DirectedEdge<V, E>> outEdges(V v);
 
     /**
      * Get all outbound incident vertices of {@code v}.
@@ -272,37 +242,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @throws NullPointerException   if {@code v} is {@code null}
      * @throws IllegalVertexException if {@code v} is not in the graph
      */
-    default Set<DirectedEdge<V, E>> inEdges(V v) {
-        final Set<V> adj = this.adjacentIn(v);
-        return new AbstractSet<DirectedEdge<V, E>>() {
-            @Override
-            public Iterator<DirectedEdge<V, E>> iterator() {
-                return new Iterator<DirectedEdge<V, E>>() {
-                    private final Iterator<V> adjIterator = adj.iterator();
-
-                    @Override
-                    public boolean hasNext() {
-                        return adjIterator.hasNext();
-                    }
-
-                    @Override
-                    public DirectedEdge<V, E> next() {
-                        final V next = adjIterator.next();
-                        final DirectedEdge<V, E> e = Graph.this.findEdge(next, v);
-                        assert e != null;
-                        return e;
-                    }
-                };
-            }
-
-            @Override
-            public int size() {
-                return adj.size();
-            }
-
-            // TODO: Implement contains
-        };
-    }
+    Set<DirectedEdge<V, E>> inEdges(V v);
 
     /**
      * Get all inbound incident vertices of {@code v}.
@@ -316,6 +256,22 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @see #adjacentOut(Object)
      */
     Set<V> adjacentIn(V v);
+
+    /**
+     * Get an {@link Iterable} of all edges in this graph.
+     * <p>
+     * This method uses a lazy approach on populating the returned {@link Iterable} and is suitable to use in a
+     * <a href="https://docs.oracle.com/javase/8/docs/technotes/guides/language/foreach.html">For-Each Loop</a>.
+     * <p>
+     * The edges inside the returned {@link Iterable} are in no particular order.
+     * <p>
+     * The {@link Iterable} that is returned is exhausted in time {@code O(V+E)} and uses constant extra space.
+     *
+     * @return an {@link Iterable} of all the edges in this graph
+     */
+    default Iterable<DirectedEdge<V, E>> edges() {
+        return () -> new EdgesIterator<>(Graph.this);
+    }
 
     /**
      * Returns the sum of the outbound edge weights of a vertex.
@@ -808,21 +764,5 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
             edges.addAll(this.getOutEdges(v).values());
         }
         return Collections.unmodifiableCollection(edges);
-    }
-
-    /**
-     * Get an {@link Iterable} of all edges in this graph.
-     * <p>
-     * This method uses a lazy approach on populating the returned {@link Iterable} and is suitable to use in a
-     * <a href="https://docs.oracle.com/javase/8/docs/technotes/guides/language/foreach.html">For-Each Loop</a>.
-     * <p>
-     * The edges inside the returned {@link Iterable} are in no particular order.
-     * <p>
-     * The {@link Iterable} that is returned is exhausted in time {@code O(V+E)} and uses constant extra space.
-     *
-     * @return an {@link Iterable} of all the edges in this graph
-     */
-    default Iterable<DirectedEdge<V, E>> edges() {
-        return () -> new EdgesIterator<>(Graph.this);
     }
 }
