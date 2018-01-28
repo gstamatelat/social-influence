@@ -37,10 +37,10 @@ public class Tests {
         /* Create graph and randomize edge weights */
         SimpleGraph g0 = new RandomGenerator(vertexCount, p).generate();
         Graphs.connect(g0);
-        Graph<String, Object> g = Graphs.randomizeEdgeWeights(g0, true);
+        Graph<Integer, Object> g = Graphs.randomizeEdgeWeights(g0, true);
 
         /* PageRank values must sum to vertexCount */
-        GraphState<String, Double> pr = PageRank.execute(g, dampingFactor);
+        GraphState<Integer, Double> pr = PageRank.execute(g, dampingFactor);
         Assert.assertEquals("pageRankSum", 1.0, pr.getAverage(), 1.0e-2);
     }
 
@@ -58,27 +58,27 @@ public class Tests {
         /* Create graph and randomize edge weights */
         SimpleGraph g0 = new RandomGenerator(vertexCount, p).generate();
         Graphs.connect(g0);
-        Graph<String, Object> g = Graphs.randomizeEdgeWeights(g0, true);
+        Graph<Integer, Object> g = Graphs.randomizeEdgeWeights(g0, true);
 
         Finals.LOG.debug("damping factor = {}, p = {}", dampingFactor, p);
 
         /* Emulate the random surfer until mean of the map values average is MEAN, aka for MEAN * N steps */
-        GraphState<String, Double> gs = GraphState.create(g.vertexSet(), 0.0);
-        RandomSurferIterator<String, Object> rsi = new RandomSurferIterator<>(g, dampingFactor);
+        GraphState<Integer, Double> gs = GraphState.create(g.vertexSet(), 0.0);
+        RandomSurferIterator<Integer, Object> rsi = new RandomSurferIterator<>(g, dampingFactor);
         int steps = mean * g.vertexCount();
         while (--steps > 0) {
-            String v = rsi.next();
+            Integer v = rsi.next();
             gs.put(v, gs.get(v) + 1.0);
         }
 
         /* Get the PageRank and normalize gs to it */
-        GraphState<String, Double> pr = PageRank.execute(g, dampingFactor);
-        for (String v : gs.keySet()) {
+        GraphState<Integer, Double> pr = PageRank.execute(g, dampingFactor);
+        for (Integer v : gs.keySet()) {
             gs.put(v, pr.getSum() * gs.get(v) / (g.vertexCount() * mean));
         }
 
         /* Assert if maps not approx. equal with 1% error */
-        for (String v : g) {
+        for (Integer v : g) {
             Assert.assertEquals("randomSurferTest - " + g, 1.0, gs.get(v) / pr.get(v), 1.0e-2);
         }
     }
@@ -95,17 +95,17 @@ public class Tests {
         SimpleGraph g = new BarabasiAlbertGenerator(vertexCount, 2, 2, 1.0).generate();
 
         /* Get PageRank and DegreeCentrality */
-        GraphState<String, Integer> degree = DegreeCentrality.execute(g, Direction.INBOUND);
-        GraphState<String, Double> pagerank = PageRank.execute(g, 0.0);
+        GraphState<Integer, Integer> degree = DegreeCentrality.execute(g, Direction.INBOUND);
+        GraphState<Integer, Double> pagerank = PageRank.execute(g, 0.0);
 
         /* Normalize pagerank */
         double mean = degree.getAverage();
-        for (String v : g) {
+        for (Integer v : g) {
             pagerank.put(v, pagerank.get(v) * mean);
         }
 
         /* Assert if maps not approx. equal */
-        for (String v : g) {
+        for (Integer v : g) {
             Assert.assertEquals("degreeEigenvectorTest - " + g, degree.get(v), pagerank.get(v), 1.0e-2);
         }
     }
@@ -209,12 +209,12 @@ public class Tests {
         SimpleGraph g = new RandomGenerator(size, p).generate();
         Graphs.connect(g);
 
-        GraphState<String, Double> initialState = GraphState.create(g.getVertices(), 0.0);
-        for (String v : g) {
+        GraphState<Integer, Double> initialState = GraphState.create(g.getVertices(), 0.0);
+        for (Integer v : g) {
             initialState.put(v, RandomHelper.getRandom().nextDouble());
         }
 
-        GraphState<String, Double> finalState = DeGroot.execute(g, initialState, 0.0);
+        GraphState<Integer, Double> finalState = DeGroot.execute(g, initialState, 0.0);
         double avg = finalState.getAverage();
 
         for (double e : finalState.values()) {
@@ -241,8 +241,8 @@ public class Tests {
         double dampingFactor = RandomHelper.getRandom().nextDouble();
         SimpleGraph g = new RandomGenerator(size, p).generate();
 
-        GraphState<String, Double> p1 = PageRank.execute(g, dampingFactor);
-        GraphState<String, Double> p2 = PageRank.execute(g, dampingFactor);
+        GraphState<Integer, Double> p1 = PageRank.execute(g, dampingFactor);
+        GraphState<Integer, Double> p2 = PageRank.execute(g, dampingFactor);
 
         Assert.assertEquals("pageRankDeterministicTest", p1, p2);
     }

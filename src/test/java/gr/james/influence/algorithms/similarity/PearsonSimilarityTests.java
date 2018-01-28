@@ -18,13 +18,13 @@ public class PearsonSimilarityTests {
     @Test
     public void simple() {
         final SimpleGraph g = new SimpleGraph();
-        final String v1 = g.addVertex();
-        final String v2 = g.addVertex();
-        final String v3 = g.addVertex();
+        final Integer v1 = g.addVertex();
+        final Integer v2 = g.addVertex();
+        final Integer v3 = g.addVertex();
         g.addEdge(v1, v2, 1);
         g.addEdge(v1, v3, 1);
         g.addEdge(v3, v2, 2);
-        final VertexSimilarity<String, Double> pearson = new PearsonSimilarity<>(g);
+        final VertexSimilarity<Integer, Double> pearson = new PearsonSimilarity<>(g);
         final double v1v2 = pearson.similarity(v1, v2);
         final double v1v3 = pearson.similarity(v1, v3);
         final double v2v3 = pearson.similarity(v2, v3);
@@ -40,9 +40,9 @@ public class PearsonSimilarityTests {
     public void empty() {
         final SimpleGraph g = new SimpleGraph();
         g.addVertices(5);
-        final VertexSimilarity<String, Double> pearson = new PearsonSimilarity<>(g);
-        for (String v : g) {
-            for (String w : g) {
+        final VertexSimilarity<Integer, Double> pearson = new PearsonSimilarity<>(g);
+        for (Integer v : g) {
+            for (Integer w : g) {
                 Assert.assertTrue("PearsonSimilarityTests.empty", Double.isNaN(pearson.similarity(v, w)));
             }
         }
@@ -56,9 +56,9 @@ public class PearsonSimilarityTests {
         for (int n = 4; n < 100; n++) {
             final double similarity = 2.0 / (2.0 - n);
             final SimpleGraph g = new CycleGenerator(n).generate();
-            final VertexSimilarity<String, Double> pearson = new PearsonSimilarity<>(g);
-            for (String v : g) {
-                for (String e : g.getOutEdges(v).keySet()) {
+            final VertexSimilarity<Integer, Double> pearson = new PearsonSimilarity<>(g);
+            for (Integer v : g) {
+                for (Integer e : g.getOutEdges(v).keySet()) {
                     Assert.assertEquals("PearsonSimilarityTests.circle",
                             similarity, pearson.similarity(v, e), 1e-4);
                 }
@@ -72,9 +72,9 @@ public class PearsonSimilarityTests {
     @Test
     public void commutativity() {
         final SimpleGraph g = new RandomGenerator(100, 0.1).generate();
-        final VertexSimilarity<String, Double> pearson = new PearsonSimilarity<>(g);
-        for (String v : g) {
-            for (String w : g) {
+        final VertexSimilarity<Integer, Double> pearson = new PearsonSimilarity<>(g);
+        for (Integer v : g) {
+            for (Integer w : g) {
                 Assert.assertEquals("PearsonSimilarityTests.commutativity",
                         pearson.similarity(v, w), pearson.similarity(w, v), 1e-4);
             }
@@ -87,8 +87,8 @@ public class PearsonSimilarityTests {
     @Test
     public void identity() {
         final SimpleGraph g = new RandomGenerator(100, 0.1).generate();
-        final PearsonSimilarity<String> pearson = new PearsonSimilarity<>(g);
-        for (String v : g) {
+        final PearsonSimilarity<Integer> pearson = new PearsonSimilarity<>(g);
+        for (Integer v : g) {
             if (pearson.variance(v) != 0) {
                 Assert.assertEquals("PearsonSimilarityTests.identity",
                         1.0, pearson.similarity(v, v), 1e-4);
@@ -105,16 +105,16 @@ public class PearsonSimilarityTests {
     @Test
     public void complete() {
         final SimpleGraph g = new CompleteGenerator(5).generate();
-        for (String v : g) {
+        for (Integer v : g) {
             g.addEdge(v, v, 1.0);
         }
-        final PearsonSimilarity<String> pearson = new PearsonSimilarity<>(g);
-        for (String v : g) {
+        final PearsonSimilarity<Integer> pearson = new PearsonSimilarity<>(g);
+        for (Integer v : g) {
             Assert.assertTrue("PearsonSimilarityTests.complete", pearson.average(v) == 1.0);
             Assert.assertTrue("PearsonSimilarityTests.complete", pearson.variance(v) == 0.0);
         }
-        for (String v : g) {
-            for (String w : g) {
+        for (Integer v : g) {
+            for (Integer w : g) {
                 Assert.assertTrue("PearsonSimilarityTests.complete", Double.isNaN(pearson.similarity(v, w)));
             }
         }

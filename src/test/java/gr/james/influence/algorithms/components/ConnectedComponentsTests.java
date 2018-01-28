@@ -16,15 +16,15 @@ import java.util.stream.Collectors;
 
 @RunWith(Parameterized.class)
 public class ConnectedComponentsTests {
-    private final Function<SimpleGraph, ConnectedComponents<String>> factory;
+    private final Function<SimpleGraph, ConnectedComponents<Integer>> factory;
 
-    public ConnectedComponentsTests(Function<SimpleGraph, ConnectedComponents<String>> factory) {
+    public ConnectedComponentsTests(Function<SimpleGraph, ConnectedComponents<Integer>> factory) {
         this.factory = factory;
     }
 
     @Parameterized.Parameters
-    public static Collection<Function<SimpleGraph, ConnectedComponents<String>>> implementations() {
-        final Collection<Function<SimpleGraph, ConnectedComponents<String>>> implementations = new ArrayList<>();
+    public static Collection<Function<SimpleGraph, ConnectedComponents<Integer>>> implementations() {
+        final Collection<Function<SimpleGraph, ConnectedComponents<Integer>>> implementations = new ArrayList<>();
         implementations.add(KosarajuComponents::new);
         return implementations;
     }
@@ -35,7 +35,7 @@ public class ConnectedComponentsTests {
     @Test
     public void empty() {
         final SimpleGraph g = new SimpleGraph();
-        final ConnectedComponents<String> cc = factory.apply(g);
+        final ConnectedComponents<Integer> cc = factory.apply(g);
 
         Assert.assertTrue("ConnectedComponentsTests.empty", cc.size() == 0);
 
@@ -55,13 +55,13 @@ public class ConnectedComponentsTests {
             g.addEdge(g.getVertexFromIndex(i), g.getVertexFromIndex(i + 1));
         }
 
-        final ConnectedComponents<String> cc = factory.apply(g);
+        final ConnectedComponents<Integer> cc = factory.apply(g);
 
         // there are n components
         Assert.assertTrue("ConnectedComponentsTests.isolated", cc.size() == n);
 
         // each component has 1 element
-        for (Set<String> c : cc.components()) {
+        for (Set<Integer> c : cc.components()) {
             Assert.assertTrue("ConnectedComponentsTests.isolated", c.size() == 1);
         }
 
@@ -75,7 +75,7 @@ public class ConnectedComponentsTests {
     public void complete() {
         final int n = 25;
         final SimpleGraph g = new CompleteGenerator(n).generate();
-        final ConnectedComponents<String> cc = factory.apply(g);
+        final ConnectedComponents<Integer> cc = factory.apply(g);
 
         Assert.assertTrue("ConnectedComponentsTests.complete", cc.size() == 1);
 
@@ -91,8 +91,8 @@ public class ConnectedComponentsTests {
         final SimpleGraph g2 = new CompleteGenerator(15).generate();
         final SimpleGraph g3 = new CompleteGenerator(20).generate();
         final SimpleGraph g = Graphs.combineGraphs(Arrays.asList(new SimpleGraph[]{g1, g2, g3}));
-        final ConnectedComponents<String> cc = factory.apply(g);
-        final Set<Set<String>> s = new HashSet<>();
+        final ConnectedComponents<Integer> cc = factory.apply(g);
+        final Set<Set<Integer>> s = new HashSet<>();
         s.add(new HashSet<>(g1.getVertices()));
         s.add(new HashSet<>(g2.getVertices()));
         s.add(new HashSet<>(g3.getVertices()));
@@ -106,12 +106,12 @@ public class ConnectedComponentsTests {
     public void random() {
         final int n = 100;
         final SimpleGraph g = new RandomGenerator(n, 0.1, true).generate();
-        final ConnectedComponents<String> cc = factory.apply(g);
+        final ConnectedComponents<Integer> cc = factory.apply(g);
 
         api(cc, g);
     }
 
-    private void api(ConnectedComponents<String> cc, SimpleGraph g) {
+    private void api(ConnectedComponents<Integer> cc, SimpleGraph g) {
         // size should be components().size()
         Assert.assertEquals("ConnectedComponentsTests.api", cc.size(), cc.components().size());
 
@@ -122,33 +122,33 @@ public class ConnectedComponentsTests {
         );
 
         // components cannot be empty
-        for (Set<String> s : cc.components()) {
+        for (Set<Integer> s : cc.components()) {
             Assert.assertTrue("ConnectedComponentsTests.api", s.size() > 0);
         }
 
         // connected() and component() invariant
-        for (String v : g.getVertices()) {
-            for (String w : g.getVertices()) {
+        for (Integer v : g.getVertices()) {
+            for (Integer w : g.getVertices()) {
                 Assert.assertEquals("ConnectedComponentsTests.api",
                         cc.connected(v, w), cc.component(v).equals(cc.component(w)));
             }
         }
 
         // component() and components() invariant
-        final Set<Set<String>> m = new HashSet<>();
-        final Set<String> pending = new HashSet<>(g.getVertices());
+        final Set<Set<Integer>> m = new HashSet<>();
+        final Set<Integer> pending = new HashSet<>(g.getVertices());
         while (pending.size() > 0) {
-            final String next = pending.iterator().next();
-            final Set<String> component = cc.component(next);
+            final Integer next = pending.iterator().next();
+            final Set<Integer> component = cc.component(next);
             pending.removeAll(component);
             m.add(component);
         }
         Assert.assertEquals("ConnectedComponentsTests.api", m, cc.components());
 
         // connected() is commutative
-        for (Set<String> s : cc.components()) {
-            for (String v : s) {
-                for (String w : s) {
+        for (Set<Integer> s : cc.components()) {
+            for (Integer v : s) {
+                for (Integer w : s) {
                     Assert.assertEquals("ConnectedComponentsTests.api", cc.connected(v, w), cc.connected(w, v));
                 }
             }

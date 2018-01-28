@@ -92,7 +92,7 @@ public final class Graphs {
         return r;
     }
 
-    public static SimpleGraph combineGraphs(Collection<Graph<String, Object>> graphs) {
+    public static SimpleGraph combineGraphs(Collection<Graph<Integer, Object>> graphs) {
         return (SimpleGraph) combineGraphs(Finals.DEFAULT_GRAPH_FACTORY, graphs);
     }
 
@@ -100,7 +100,7 @@ public final class Graphs {
         return deepCopy(g, factory, filter);
     }
 
-    public static SimpleGraph subGraph(SimpleGraph g, Collection<String> filter) {
+    public static SimpleGraph subGraph(SimpleGraph g, Collection<Integer> filter) {
         return deepCopy(g, filter);
     }
 
@@ -126,7 +126,7 @@ public final class Graphs {
         return deepCopy(g, factory, g.getVertices());
     }
 
-    public static SimpleGraph deepCopy(SimpleGraph g, Collection<String> filter) {
+    public static SimpleGraph deepCopy(SimpleGraph g, Collection<Integer> filter) {
         return (SimpleGraph) deepCopy(g, Finals.DEFAULT_GRAPH_FACTORY, filter);
     }
 
