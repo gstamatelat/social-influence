@@ -35,9 +35,9 @@ public class Tests {
         int vertexCount = 40;
 
         /* Create graph and randomize edge weights */
-        SimpleGraph g = new RandomGenerator(vertexCount, p).generate();
-        Graphs.connect(g);
-        Graphs.randomizeEdgeWeights(g);
+        SimpleGraph g0 = new RandomGenerator(vertexCount, p).generate();
+        Graphs.connect(g0);
+        Graph<String, Object> g = Graphs.randomizeEdgeWeights(g0, true);
 
         /* PageRank values must sum to vertexCount */
         GraphState<String, Double> pr = PageRank.execute(g, dampingFactor);
@@ -56,14 +56,14 @@ public class Tests {
         int vertexCount = 40;
 
         /* Create graph and randomize edge weights */
-        SimpleGraph g = new RandomGenerator(vertexCount, p).generate();
-        Graphs.connect(g);
-        Graphs.randomizeEdgeWeights(g);
+        SimpleGraph g0 = new RandomGenerator(vertexCount, p).generate();
+        Graphs.connect(g0);
+        Graph<String, Object> g = Graphs.randomizeEdgeWeights(g0, true);
 
         Finals.LOG.debug("damping factor = {}, p = {}", dampingFactor, p);
 
         /* Emulate the random surfer until mean of the map values average is MEAN, aka for MEAN * N steps */
-        GraphState<String, Double> gs = GraphState.create(g.getVertices(), 0.0);
+        GraphState<String, Double> gs = GraphState.create(g.vertexSet(), 0.0);
         RandomSurferIterator<String, Object> rsi = new RandomSurferIterator<>(g, dampingFactor);
         int steps = mean * g.vertexCount();
         while (--steps > 0) {

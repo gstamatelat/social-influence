@@ -31,12 +31,15 @@ public final class Graphs {
         }
     }
 
-    public static <V, E> void randomizeEdgeWeights(Graph<V, E> g) {
-        for (DirectedEdge<V, E> e : g.getEdges()) {
-            boolean change = g.setEdgeWeight(e.source(), e.target(),
-                    RandomHelper.getRandom().nextDouble());
-            assert change;
+    public static <V, E> Graph<V, E> randomizeEdgeWeights(Graph<V, E> g, boolean unused) {
+        final Graph<V, E> newGraph = new MemoryGraph<>();
+        for (V v : g) {
+            newGraph.addVertex(v);
         }
+        for (DirectedEdge<V, E> e : g.edges()) {
+            newGraph.addEdge(e.source(), e.target(), e.edge(), RandomHelper.getRandom().nextDouble());
+        }
+        return newGraph;
     }
 
     /**
@@ -82,7 +85,7 @@ public final class Graphs {
             for (V v : g) {
                 r.addVertex(v);
             }
-            for (DirectedEdge<V, E> e : g.getEdges()) {
+            for (DirectedEdge<V, E> e : g.edges()) {
                 r.addEdge(e.source(), e.target(), e.weight());
             }
         }

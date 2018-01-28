@@ -750,19 +750,4 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     default void removeEdges(V... among) {
         this.removeEdges(Arrays.asList(among));
     }
-
-    /**
-     * Get a collection of all edges in this graph. The items are of type {@link DirectedEdge} and are in no particular
-     * order inside the collection.
-     *
-     * @return a collection of all edges in the graph
-     */
-    @Deprecated
-    default Collection<DirectedEdge<V, E>> getEdges() {
-        Collection<DirectedEdge<V, E>> edges = new LinkedHashSet<>();
-        for (V v : this.getVertices()) {
-            edges.addAll(this.getOutEdges(v).values());
-        }
-        return Collections.unmodifiableCollection(edges);
-    }
 }
