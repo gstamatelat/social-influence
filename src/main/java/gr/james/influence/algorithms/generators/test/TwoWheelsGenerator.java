@@ -4,6 +4,7 @@ import gr.james.influence.algorithms.generators.basic.WheelGenerator;
 import gr.james.influence.api.algorithms.GraphGenerator;
 import gr.james.influence.api.graph.Graph;
 import gr.james.influence.api.graph.GraphFactory;
+import gr.james.influence.api.graph.VertexProvider;
 import gr.james.influence.graph.Graphs;
 import gr.james.influence.util.Finals;
 
@@ -18,10 +19,10 @@ public class TwoWheelsGenerator implements GraphGenerator {
     }
 
     @Override
-    public <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, Random r) {
+    public <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, Random r, VertexProvider<V> vertexProvider) {
         WheelGenerator wheelGenerator = new WheelGenerator(wheelVertices);
-        Graph<V, E> g1 = wheelGenerator.generate(factory);
-        Graph<V, E> g2 = wheelGenerator.generate(factory);
+        Graph<V, E> g1 = wheelGenerator.generate(factory, vertexProvider);
+        Graph<V, E> g2 = wheelGenerator.generate(factory, vertexProvider);
 
         V a = g1.getVertexFromIndex(0);
         V b = g2.getVertexFromIndex(0);

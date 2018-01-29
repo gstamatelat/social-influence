@@ -4,6 +4,7 @@ import gr.james.influence.algorithms.generators.random.BarabasiAlbertGenerator;
 import gr.james.influence.api.algorithms.GraphGenerator;
 import gr.james.influence.api.graph.Graph;
 import gr.james.influence.api.graph.GraphFactory;
+import gr.james.influence.api.graph.VertexProvider;
 import gr.james.influence.graph.Graphs;
 import gr.james.influence.util.Finals;
 
@@ -27,13 +28,13 @@ public class BarabasiAlbertClusterGenerator implements GraphGenerator {
     }
 
     @Override
-    public <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, Random r) {
+    public <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, Random r, VertexProvider<V> vertexProvider) {
         // Graph<V, E>[] c = new Graph<V, E>[clusters];
         List<Graph<V, E>> c = new ArrayList<>(clusters);
 
         GraphGenerator scaleFreeGenerator = new BarabasiAlbertGenerator(totalVertices, stepEdges, initialClique, a);
         for (int i = 0; i < clusters; i++) {
-            c.add(scaleFreeGenerator.generate(factory, r));
+            c.add(scaleFreeGenerator.generate(factory, r, vertexProvider));
             // c[i] = scaleFreeGenerator.generate(graphFactory, r);
         }
 

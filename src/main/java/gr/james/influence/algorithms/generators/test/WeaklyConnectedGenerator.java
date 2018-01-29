@@ -3,6 +3,7 @@ package gr.james.influence.algorithms.generators.test;
 import gr.james.influence.api.algorithms.GraphGenerator;
 import gr.james.influence.api.graph.Graph;
 import gr.james.influence.api.graph.GraphFactory;
+import gr.james.influence.api.graph.VertexProvider;
 import gr.james.influence.util.Finals;
 
 import java.util.Random;
@@ -12,7 +13,7 @@ public class WeaklyConnectedGenerator implements GraphGenerator {
     }
 
     @Override
-    public <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, Random r) {
+    public <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, Random r, VertexProvider<V> vertexProvider) {
         Graph<V, E> g = factory.createGraph();
 
         V v1 = g.addVertex();

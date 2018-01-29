@@ -3,6 +3,7 @@ package gr.james.influence.algorithms.generators.random;
 import gr.james.influence.api.algorithms.GraphGenerator;
 import gr.james.influence.api.graph.Graph;
 import gr.james.influence.api.graph.GraphFactory;
+import gr.james.influence.api.graph.VertexProvider;
 import gr.james.influence.graph.Graphs;
 import gr.james.influence.util.Conditions;
 import gr.james.influence.util.Finals;
@@ -26,7 +27,7 @@ public class WattsStrogatzGenerator implements GraphGenerator {
     }
 
     @Override
-    public <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, Random r) {
+    public <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, Random r, VertexProvider<V> vertexProvider) {
         Graph<V, E> g = factory.createGraph();
 
         List<V> l = g.addVertices(n);

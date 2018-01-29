@@ -5,6 +5,7 @@ import gr.james.influence.algorithms.scoring.DegreeCentrality;
 import gr.james.influence.api.algorithms.GraphGenerator;
 import gr.james.influence.api.graph.Graph;
 import gr.james.influence.api.graph.GraphFactory;
+import gr.james.influence.api.graph.VertexProvider;
 import gr.james.influence.graph.Direction;
 import gr.james.influence.util.Conditions;
 import gr.james.influence.util.Finals;
@@ -32,8 +33,8 @@ public class BarabasiAlbertGenerator implements GraphGenerator {
     }
 
     @Override
-    public <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, Random r) {
-        Graph<V, E> g = new CompleteGenerator(initialClique).generate(factory);
+    public <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, Random r, VertexProvider<V> vertexProvider) {
+        Graph<V, E> g = new CompleteGenerator(initialClique).generate(factory, vertexProvider);
 
         while (g.vertexCount() < totalVertices) {
             GraphState<V, Integer> degree = DegreeCentrality.execute(g, Direction.INBOUND);
