@@ -1,4 +1,4 @@
-package gr.james.influence.api.io;
+package gr.james.influence.io;
 
 @FunctionalInterface
 public interface Serializer<T> {

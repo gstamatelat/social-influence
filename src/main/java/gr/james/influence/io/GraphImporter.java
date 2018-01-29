@@ -1,4 +1,4 @@
-package gr.james.influence.api.io;
+package gr.james.influence.io;
 
 import gr.james.influence.graph.Graph;
 import gr.james.influence.graph.GraphFactory;
