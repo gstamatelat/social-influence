@@ -175,6 +175,16 @@ public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
 
     @Override
     public String toString() {
-        return String.format("{container=%s, meta=%s}", this.getClass().getSimpleName(), this.meta);
+        final StringBuilder sb = new StringBuilder();
+        sb.append(String.format("Graph(%d) {%n", this.vertexCount()));
+        for (DirectedEdge<V, E> e : this.edges()) {
+            if (e.edge() == null) {
+                sb.append(String.format("  %s -> %s [%.2f]%n", e.source(), e.target(), e.weight()));
+            } else {
+                sb.append(String.format("  %s -> %s (%s) [%.2f]%n", e.source(), e.target(), e.edge(), e.weight()));
+            }
+        }
+        sb.append("}");
+        return sb.toString();
     }
 }
