@@ -67,7 +67,8 @@ public class DepthFirstIterator<V> implements VertexIterator<V> {
             throw new NoSuchElementException();
         }
 
-        for (V v : g.getOutEdges(next).keySet()) {
+        // works with this interfaces but needs to change
+        for (V v : g.adjacentOut(next)) {
             if (visited.add(v)) {
                 stack.push(v);
             }

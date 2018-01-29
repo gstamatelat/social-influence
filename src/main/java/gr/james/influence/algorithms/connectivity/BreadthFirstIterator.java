@@ -67,7 +67,7 @@ public class BreadthFirstIterator<V> implements VertexIterator<V> {
             throw new NoSuchElementException();
         }
 
-        for (V v : g.getOutEdges(next).keySet()) {
+        for (V v : g.adjacentOut(next)) {
             if (visited.add(v)) {
                 queue.offer(v);
             }
