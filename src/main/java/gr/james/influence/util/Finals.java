@@ -1,8 +1,6 @@
 package gr.james.influence.util;
 
-import gr.james.influence.api.graph.GraphFactory;
 import gr.james.influence.graph.Direction;
-import gr.james.influence.graph.SimpleGraph;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,7 +22,7 @@ public final class Finals {
     public static final double DEFAULT_PAGERANK_PRECISION = 0.0;
     public static final String DEFAULT_INDENT = "  ";
     public static final Direction DEFAULT_DIRECTION = Direction.INBOUND;
-    public static final GraphFactory<Integer, Object> DEFAULT_GRAPH_FACTORY = SimpleGraph.graphFactory;
+    //public static final GraphFactory<Integer, Object> DEFAULT_GRAPH_FACTORY = SimpleGraph.graphFactory;
 
     /* Logging messages */
     public static final String L_GAME_MOVE_EXCEED = "Move {} contains more than {} vertices. Slicing to {}. This indicates a mistake in your player.";

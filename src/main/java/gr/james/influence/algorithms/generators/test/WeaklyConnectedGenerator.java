@@ -16,10 +16,10 @@ public class WeaklyConnectedGenerator implements GraphGenerator {
     public <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, Random r, VertexProvider<V> vertexProvider) {
         Graph<V, E> g = factory.createGraph();
 
-        V v1 = g.addVertex();
-        V v2 = g.addVertex();
-        V v3 = g.addVertex();
-        V v4 = g.addVertex();
+        V v1 = g.addVertex(vertexProvider);
+        V v2 = g.addVertex(vertexProvider);
+        V v3 = g.addVertex(vertexProvider);
+        V v4 = g.addVertex(vertexProvider);
 
         g.addEdges(v1, v2);
         g.addEdges(v3, v4);

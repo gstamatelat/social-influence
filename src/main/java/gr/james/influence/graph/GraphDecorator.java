@@ -2,6 +2,7 @@ package gr.james.influence.graph;
 
 import gr.james.influence.api.graph.DirectedEdge;
 import gr.james.influence.api.graph.Graph;
+import gr.james.influence.api.graph.VertexProvider;
 import gr.james.influence.util.Conditions;
 
 import java.util.*;
@@ -160,11 +161,6 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
     }
 
     @Override
-    public V addVertex() {
-        return this.g.addVertex();
-    }
-
-    @Override
     public boolean addVertex(V v) {
         return this.g.addVertex(v);
     }
@@ -180,8 +176,13 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
     }
 
     @Override
-    public List<V> addVertices(int count) {
-        return this.g.addVertices(count);
+    public V addVertex(VertexProvider<V> vertexProvider) {
+        return this.addVertex(vertexProvider);
+    }
+
+    @Override
+    public List<V> addVertices(int n, VertexProvider<V> vertexProvider) {
+        return this.addVertices(n, vertexProvider);
     }
 
     @Override

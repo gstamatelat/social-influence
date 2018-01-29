@@ -228,7 +228,7 @@ public class Tests {
         double p = RandomHelper.getRandom().nextDouble();
         SimpleGraph g = new RandomGenerator(size, p).generate();
         Graphs.connect(g);
-        Graph e = Graphs.deepCopy(g);
+        SimpleGraph e = Graphs.deepCopy(g);
         e.addVertex();
         Assert.assertEquals("deepCopyTest", g.vertexCount() + 1, e.vertexCount());
         Assert.assertEquals("deepCopyTest", Graphs.getEdgesCount(g), Graphs.getEdgesCount(e));

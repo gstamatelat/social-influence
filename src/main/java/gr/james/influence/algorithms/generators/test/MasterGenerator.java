@@ -20,9 +20,9 @@ public class MasterGenerator implements GraphGenerator {
     public <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, Random r, VertexProvider<V> vertexProvider) {
         Graph<V, E> g = factory.createGraph();
 
-        V v1 = g.addVertex();
-        V v2 = g.addVertex();
-        V v3 = g.addVertex();
+        V v1 = g.addVertex(vertexProvider);
+        V v2 = g.addVertex(vertexProvider);
+        V v3 = g.addVertex(vertexProvider);
         g.addEdge(v1, v3);
         g.addEdge(v1, v2);
         g.addEdge(v3, v2);

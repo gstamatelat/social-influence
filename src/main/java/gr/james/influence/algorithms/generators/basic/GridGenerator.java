@@ -27,7 +27,7 @@ public class GridGenerator implements GraphGenerator {
         Graph<V, E> g = factory.createGraph();
 
         int count = 0;
-        List<V> set = g.addVertices(n * m);
+        List<V> set = g.addVertices(n * m, vertexProvider);
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {

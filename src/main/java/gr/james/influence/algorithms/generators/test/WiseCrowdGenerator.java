@@ -25,10 +25,10 @@ public class WiseCrowdGenerator implements GraphGenerator {
     public <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, Random r, VertexProvider<V> vertexProvider) {
         Graph<V, E> g = factory.createGraph();
 
-        V boss = g.addVertex();
+        V boss = g.addVertex(vertexProvider);
 
         while (g.vertexCount() < totalVertices) {
-            V v = g.addVertex();
+            V v = g.addVertex(vertexProvider);
             g.addEdge(boss, v, delta / (totalVertices - 1));
             g.addEdge(v, boss, delta);
         }

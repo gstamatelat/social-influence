@@ -1,7 +1,8 @@
 package gr.james.influence.graph;
 
-import gr.james.influence.api.graph.GraphFactory;
 import gr.james.influence.api.graph.VertexProvider;
+
+import java.util.List;
 
 public class SimpleGraph extends MemoryGraph<Integer, Object> {
     public static VertexProvider<Integer> vertexProvider = new VertexProvider<Integer>() {
@@ -13,9 +14,19 @@ public class SimpleGraph extends MemoryGraph<Integer, Object> {
         }
     };
 
-    public static GraphFactory<Integer, Object> graphFactory = SimpleGraph::new;
+    //public static GraphFactory<Integer, Object> graphFactory = SimpleGraph::new;
+
+    //private final VertexProvider<Integer> provider = new IntegerVertexProvider();
 
     public SimpleGraph() {
-        super(vertexProvider);
+        super();
+    }
+
+    public Integer addVertex() {
+        return super.addVertex(vertexProvider);
+    }
+
+    public List<Integer> addVertices(int n) {
+        return super.addVertices(n, vertexProvider);
     }
 }

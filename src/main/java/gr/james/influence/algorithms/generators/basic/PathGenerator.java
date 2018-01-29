@@ -19,9 +19,9 @@ public class PathGenerator implements GraphGenerator {
     public <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, Random r, VertexProvider<V> vertexProvider) {
         Graph<V, E> g = factory.createGraph();
 
-        V startVertex = g.addVertex(), previousVertex = startVertex;
+        V startVertex = g.addVertex(vertexProvider), previousVertex = startVertex;
         while (g.vertexCount() < totalVertices) {
-            V newVertex = g.addVertex();
+            V newVertex = g.addVertex(vertexProvider);
             g.addEdges(previousVertex, newVertex);
             previousVertex = newVertex;
         }

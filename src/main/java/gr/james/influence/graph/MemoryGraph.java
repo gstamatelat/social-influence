@@ -4,7 +4,6 @@ import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import gr.james.influence.api.graph.DirectedEdge;
 import gr.james.influence.api.graph.Graph;
-import gr.james.influence.api.graph.VertexProvider;
 import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.util.Conditions;
 import gr.james.influence.util.Finals;
@@ -18,20 +17,14 @@ public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
     private final Map<V, BiMap<V, DirectedEdge<V, E>>> mOut; // TODO: convert to BiMap because edges are unique
     private final Map<V, BiMap<V, DirectedEdge<V, E>>> mIn; // TODO: convert to BiMap because edges are unique
     private final List<V> vList;
-    private final VertexProvider<V> vertexProvider;
 
     /**
      * <p>Constructs an empty {@code MemoryGraph}.</p>
      */
     public MemoryGraph() {
-        this(null);
-    }
-
-    public MemoryGraph(VertexProvider<V> vertexProvider) {
         this.mOut = new HashMap<>();
         this.mIn = new HashMap<>();
         this.vList = new ArrayList<>();
-        this.vertexProvider = vertexProvider;
     }
 
     @Override
@@ -178,18 +171,6 @@ public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
     public Set<V> vertexSet() {
         assert Objects.equals(this.mOut.keySet(), this.mIn.keySet());
         return Collections.unmodifiableSet(this.mOut.keySet());
-    }
-
-    @Override
-    public V addVertex() {
-        if (vertexProvider == null) {
-            throw new UnsupportedOperationException();
-        }
-        final V v = vertexProvider.getVertex();
-        if (!addVertex(v)) {
-            throw new IllegalVertexException();
-        }
-        return v;
     }
 
     @Override

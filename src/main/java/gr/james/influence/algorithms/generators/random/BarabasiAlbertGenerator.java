@@ -46,7 +46,7 @@ public class BarabasiAlbertGenerator implements GraphGenerator {
 
             Set<V> newVertices = Helper.weightedRandom(weightMap, stepEdges, r);
 
-            V v = g.addVertex();
+            V v = g.addVertex(vertexProvider);
             for (V w : newVertices) {
                 g.addEdges(v, w);
             }

@@ -28,7 +28,7 @@ public class TwoWheelsGenerator implements GraphGenerator {
         V b = g2.getVertexFromIndex(0);
 
         Graph<V, E> g = Graphs.combineGraphs(factory, Arrays.asList(g1, g2));
-        Graphs.fuseVertices(g, Arrays.asList(a, b));
+        Graphs.fuseVertices(g, Arrays.asList(a, b), vertexProvider);
 
         g.setMeta(Finals.TYPE_META, "TwoWheels");
         g.setMeta("wheelVertices", String.valueOf(wheelVertices));

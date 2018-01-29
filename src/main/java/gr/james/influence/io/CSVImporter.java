@@ -24,7 +24,8 @@ public class CSVImporter implements GraphImporter {
         OrderedVertexIterator<V> it = null;
         while ((line = reader.readLine()) != null) {
             if (firstLine) {
-                g.addVertices(line.split(";").length - 1);
+                // TODO
+                //g.addVertices(line.split(";").length - 1);
                 it = new OrderedVertexIterator<>(g);
             } else {
                 V v = it.next();

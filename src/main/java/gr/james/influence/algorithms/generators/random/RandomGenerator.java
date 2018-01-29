@@ -36,7 +36,7 @@ public class RandomGenerator implements GraphGenerator {
         Graph<V, E> g = factory.createGraph();
 
         while (g.vertexCount() < totalVertices) {
-            V v = g.addVertex();
+            V v = g.addVertex(vertexProvider);
             for (V y : g) {
                 if (!v.equals(y)) {
                     if (directed) {

@@ -30,7 +30,7 @@ public class WattsStrogatzGenerator implements GraphGenerator {
     public <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, Random r, VertexProvider<V> vertexProvider) {
         Graph<V, E> g = factory.createGraph();
 
-        List<V> l = g.addVertices(n);
+        List<V> l = g.addVertices(n, vertexProvider);
         for (int i = 0; i < n; i++) {
             for (int j = 1; j <= k / 2; j++) {
                 g.addEdges(l.get(i), l.get((i + j) % n));

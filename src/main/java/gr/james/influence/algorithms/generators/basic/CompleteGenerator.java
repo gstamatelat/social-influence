@@ -19,7 +19,7 @@ public class CompleteGenerator implements GraphGenerator {
     public <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, Random r, VertexProvider<V> vertexProvider) {
         Graph<V, E> g = factory.createGraph();
 
-        g.addEdges(g.addVertices(totalVertices));
+        g.addEdges(g.addVertices(totalVertices, vertexProvider));
 
         g.setMeta(Finals.TYPE_META, "Complete");
         g.setMeta("totalVertices", String.valueOf(totalVertices));

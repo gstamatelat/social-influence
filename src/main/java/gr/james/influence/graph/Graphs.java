@@ -5,9 +5,9 @@ import gr.james.influence.algorithms.components.TarjanComponents;
 import gr.james.influence.api.graph.DirectedEdge;
 import gr.james.influence.api.graph.Graph;
 import gr.james.influence.api.graph.GraphFactory;
+import gr.james.influence.api.graph.VertexProvider;
 import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.util.Conditions;
-import gr.james.influence.util.Finals;
 import gr.james.influence.util.RandomHelper;
 import gr.james.sampling.EfraimidisSampling;
 import gr.james.sampling.RandomSampling;
@@ -46,15 +46,16 @@ public final class Graphs {
      * Fuses two or more vertices into a single one. This operation is also known as contraction. This method may cause
      * information loss if there are conflicts on the edges.
      *
-     * @param g   the graph to apply the fusion to
-     * @param f   an array of vertices to be fused
-     * @param <V> the vertex type
-     * @param <E> the edge type
+     * @param g              the graph to apply the fusion to
+     * @param f              an array of vertices to be fused
+     * @param vertexProvider the vertex provider
+     * @param <V>            the vertex type
+     * @param <E>            the edge type
      * @return the vertex that is the result of the fusion
      * @see <a href="http://mathworld.wolfram.com/VertexContraction.html">VertexContraction @ mathworld.wolfram.com</a>
      */
-    public static <V, E> V fuseVertices(Graph<V, E> g, Iterable<V> f) {
-        V v = g.addVertex();
+    public static <V, E> V fuseVertices(Graph<V, E> g, Iterable<V> f, VertexProvider<V> vertexProvider) {
+        V v = g.addVertex(vertexProvider);
 
         for (V y : f) {
             for (Map.Entry<V, DirectedEdge<V, E>> e : g.getOutEdges(y).entrySet()) {
@@ -93,7 +94,7 @@ public final class Graphs {
     }
 
     public static SimpleGraph combineGraphs(Collection<Graph<Integer, Object>> graphs) {
-        return (SimpleGraph) combineGraphs(Finals.DEFAULT_GRAPH_FACTORY, graphs);
+        return (SimpleGraph) combineGraphs(SimpleGraph::new, graphs);
     }
 
     public static <V, E> Graph<V, E> subGraph(Graph<V, E> g, GraphFactory<V, E> factory, Collection<V> filter) {
@@ -127,11 +128,11 @@ public final class Graphs {
     }
 
     public static SimpleGraph deepCopy(SimpleGraph g, Collection<Integer> filter) {
-        return (SimpleGraph) deepCopy(g, Finals.DEFAULT_GRAPH_FACTORY, filter);
+        return (SimpleGraph) deepCopy(g, SimpleGraph::new, filter);
     }
 
     public static SimpleGraph deepCopy(SimpleGraph g) {
-        return (SimpleGraph) deepCopy(g, Finals.DEFAULT_GRAPH_FACTORY, g.getVertices());
+        return (SimpleGraph) deepCopy(g, SimpleGraph::new, g.getVertices());
     }
 
     public static <V, E> ImmutableBiMap<V, Integer> getGraphIndexMap(Graph<V, E> g) {

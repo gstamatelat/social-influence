@@ -3,7 +3,6 @@ package gr.james.influence.api.io;
 import gr.james.influence.api.graph.Graph;
 import gr.james.influence.api.graph.GraphFactory;
 import gr.james.influence.graph.SimpleGraph;
-import gr.james.influence.util.Finals;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,7 +21,7 @@ public interface GraphImporter {
      * @throws IOException if an I/O exception occurs
      */
     default SimpleGraph from(URL source) throws IOException {
-        return (SimpleGraph) from(source, Finals.DEFAULT_GRAPH_FACTORY, Integer::parseInt);
+        return (SimpleGraph) from(source, SimpleGraph::new, Integer::parseInt);
     }
 
     /**
@@ -51,7 +50,7 @@ public interface GraphImporter {
      * @throws IOException if an I/O exception occurs
      */
     default SimpleGraph from(InputStream source) throws IOException {
-        return (SimpleGraph) from(source, Finals.DEFAULT_GRAPH_FACTORY, Integer::parseInt);
+        return (SimpleGraph) from(source, SimpleGraph::new, Integer::parseInt);
     }
 
     /**

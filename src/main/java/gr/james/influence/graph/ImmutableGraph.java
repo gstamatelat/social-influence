@@ -2,6 +2,7 @@ package gr.james.influence.graph;
 
 import gr.james.influence.api.graph.DirectedEdge;
 import gr.james.influence.api.graph.Graph;
+import gr.james.influence.api.graph.VertexProvider;
 import gr.james.influence.util.Finals;
 
 import java.util.List;
@@ -38,7 +39,7 @@ public final class ImmutableGraph<V, E> extends GraphDecorator<V, E> {
     }
 
     @Override
-    public V addVertex() {
+    public V addVertex(VertexProvider<V> vertexProvider) {
         throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 
@@ -58,7 +59,7 @@ public final class ImmutableGraph<V, E> extends GraphDecorator<V, E> {
     }
 
     @Override
-    public List<V> addVertices(int count) {
+    public List<V> addVertices(int count, VertexProvider<V> vertexProvider) {
         throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 
