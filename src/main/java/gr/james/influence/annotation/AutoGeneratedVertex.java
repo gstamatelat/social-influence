@@ -1,7 +1,7 @@
 package gr.james.influence.annotation;
 
-import gr.james.influence.api.graph.Graph;
-import gr.james.influence.api.graph.VertexProvider;
+import gr.james.influence.graph.Graph;
+import gr.james.influence.graph.VertexProvider;
 
 import java.lang.annotation.*;
 

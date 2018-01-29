@@ -2,7 +2,7 @@ package gr.james.influence.algorithms.distance;
 
 import gr.james.influence.annotation.UnmodifiableGraph;
 import gr.james.influence.api.algorithms.GraphProperty;
-import gr.james.influence.api.graph.Graph;
+import gr.james.influence.graph.Graph;
 import gr.james.influence.util.Conditions;
 
 import java.util.List;

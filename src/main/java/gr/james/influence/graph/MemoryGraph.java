@@ -2,25 +2,17 @@ package gr.james.influence.graph;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
-import gr.james.influence.api.graph.DirectedEdge;
-import gr.james.influence.api.graph.Graph;
 import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.util.Conditions;
 import gr.james.influence.util.Finals;
 
 import java.util.*;
 
-/**
- * <p>Represents an in-memory {@link Graph}, implemented using adjacency lists. Suitable for sparse graphs.</p>
- */
-public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
-    private final Map<V, BiMap<V, DirectedEdge<V, E>>> mOut; // TODO: convert to BiMap because edges are unique
-    private final Map<V, BiMap<V, DirectedEdge<V, E>>> mIn; // TODO: convert to BiMap because edges are unique
+class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
+    private final Map<V, BiMap<V, DirectedEdge<V, E>>> mOut;
+    private final Map<V, BiMap<V, DirectedEdge<V, E>>> mIn;
     private final List<V> vList;
 
-    /**
-     * <p>Constructs an empty {@code MemoryGraph}.</p>
-     */
     public MemoryGraph() {
         this.mOut = new HashMap<>();
         this.mIn = new HashMap<>();

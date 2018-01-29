@@ -1,8 +1,5 @@
 package gr.james.influence.graph;
 
-import gr.james.influence.api.graph.DirectedEdge;
-import gr.james.influence.api.graph.Graph;
-
 import java.util.AbstractSet;
 import java.util.Iterator;
 import java.util.Set;

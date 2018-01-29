@@ -1,12 +1,12 @@
 package gr.james.influence.io;
 
-import gr.james.influence.api.graph.DirectedEdge;
-import gr.james.influence.api.graph.Graph;
-import gr.james.influence.api.graph.GraphFactory;
 import gr.james.influence.api.io.Deserializer;
 import gr.james.influence.api.io.GraphExporter;
 import gr.james.influence.api.io.GraphImporter;
 import gr.james.influence.api.io.Serializer;
+import gr.james.influence.graph.DirectedEdge;
+import gr.james.influence.graph.Graph;
+import gr.james.influence.graph.GraphFactory;
 
 import java.io.IOException;
 import java.io.InputStream;

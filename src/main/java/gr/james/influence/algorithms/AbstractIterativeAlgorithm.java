@@ -1,7 +1,7 @@
 package gr.james.influence.algorithms;
 
 import gr.james.influence.api.algorithms.IterativeAlgorithm;
-import gr.james.influence.api.graph.Graph;
+import gr.james.influence.graph.Graph;
 import gr.james.influence.util.Finals;
 import gr.james.influence.util.collections.EvictingLinkedHashSet;
 import gr.james.influence.util.collections.GraphState;

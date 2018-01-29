@@ -1,4 +1,4 @@
-package gr.james.influence.api.graph;
+package gr.james.influence.graph;
 
 /**
  * Represents a directed edge.

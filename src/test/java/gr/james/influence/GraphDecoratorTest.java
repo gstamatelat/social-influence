@@ -1,8 +1,8 @@
 package gr.james.influence;
 
-import gr.james.influence.api.graph.Graph;
-import gr.james.influence.api.graph.Metadata;
+import gr.james.influence.graph.Graph;
 import gr.james.influence.graph.GraphDecorator;
+import gr.james.influence.graph.Metadata;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -17,7 +17,7 @@ public class GraphDecoratorTest {
         List<Method> graphMethods = Arrays.asList(Graph.class.getDeclaredMethods());
         List<Method> graphDecoratorMethods = Arrays.asList(GraphDecorator.class.getDeclaredMethods());
         for (Method m : graphMethods) {
-            if (Modifier.isPublic(m.getModifiers())) {
+            if (Modifier.isPublic(m.getModifiers()) && !Modifier.isStatic(m.getModifiers())) {
                 long count = graphDecoratorMethods.stream().filter(x ->
                         x.getName().equals(m.getName()) && Arrays.equals(x.getParameterTypes(), m.getParameterTypes())
                 ).count();

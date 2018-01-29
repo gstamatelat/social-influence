@@ -1,7 +1,5 @@
 package gr.james.influence.graph;
 
-import gr.james.influence.api.graph.VertexProvider;
-
 import java.util.List;
 
 public class SimpleGraph extends MemoryGraph<Integer, Object> {

@@ -1,8 +1,5 @@
 package gr.james.influence.graph;
 
-import gr.james.influence.api.graph.DirectedEdge;
-import gr.james.influence.api.graph.Graph;
-import gr.james.influence.api.graph.VertexProvider;
 import gr.james.influence.util.Conditions;
 
 import java.util.*;

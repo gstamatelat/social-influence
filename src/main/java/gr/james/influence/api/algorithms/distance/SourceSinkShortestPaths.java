@@ -1,6 +1,6 @@
 package gr.james.influence.api.algorithms.distance;
 
-import gr.james.influence.api.graph.DirectedEdge;
+import gr.james.influence.graph.DirectedEdge;
 
 import java.util.List;
 

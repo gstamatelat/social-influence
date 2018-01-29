@@ -3,8 +3,8 @@ package gr.james.influence.algorithms.similarity;
 import com.google.common.collect.Sets;
 import gr.james.influence.annotation.ModifiableGraph;
 import gr.james.influence.api.algorithms.VertexSimilarity;
-import gr.james.influence.api.graph.Graph;
 import gr.james.influence.exceptions.IllegalVertexException;
+import gr.james.influence.graph.Graph;
 import gr.james.influence.util.Conditions;
 
 /**

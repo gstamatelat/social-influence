@@ -1,9 +1,9 @@
 package gr.james.influence.api.algorithms;
 
-import gr.james.influence.api.graph.Graph;
-import gr.james.influence.api.graph.GraphFactory;
-import gr.james.influence.api.graph.VertexProvider;
+import gr.james.influence.graph.Graph;
+import gr.james.influence.graph.GraphFactory;
 import gr.james.influence.graph.SimpleGraph;
+import gr.james.influence.graph.VertexProvider;
 import gr.james.influence.util.RandomHelper;
 
 import java.util.Random;
@@ -40,6 +40,45 @@ public interface GraphGenerator {
      */
     default SimpleGraph generate(Random r) {
         return (SimpleGraph) generate(SimpleGraph::new, r, SimpleGraph.vertexProvider);
+    }
+
+    /**
+     * Generate a new {@link Graph} based on the rules imposed by this entity. This method is using the global random
+     * instance.
+     *
+     * @param vertexProvider the vertex provider
+     * @param <V>            the vertex type
+     * @param <E>            the edge type
+     * @return the generated graph
+     */
+    default <V, E> Graph<V, E> generate(VertexProvider<V> vertexProvider) {
+        return generate(Graph::create, RandomHelper.getRandom(), vertexProvider);
+    }
+
+    /**
+     * Generate a new {@link Graph} based on the rules imposed by this entity.
+     *
+     * @param seed           the seed for the {@link Random}
+     * @param vertexProvider the vertex provider
+     * @param <V>            the vertex type
+     * @param <E>            the edge type
+     * @return the generated graph
+     */
+    default <V, E> Graph<V, E> generate(long seed, VertexProvider<V> vertexProvider) {
+        return generate(Graph::create, new Random(seed), vertexProvider);
+    }
+
+    /**
+     * Generate a new {@link Graph} based on the rules imposed by this entity.
+     *
+     * @param r              the {@link Random} instance to use
+     * @param vertexProvider the vertex provider
+     * @param <V>            the vertex type
+     * @param <E>            the edge type
+     * @return the generated graph
+     */
+    default <V, E> Graph<V, E> generate(Random r, VertexProvider<V> vertexProvider) {
+        return generate(Graph::create, r, vertexProvider);
     }
 
     /**

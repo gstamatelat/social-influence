@@ -2,8 +2,8 @@ package gr.james.influence.main;
 
 import gr.james.influence.algorithms.generators.random.BarabasiAlbertGenerator;
 import gr.james.influence.algorithms.scoring.DegreeCentrality;
-import gr.james.influence.api.graph.Graph;
 import gr.james.influence.graph.Direction;
+import gr.james.influence.graph.Graph;
 import gr.james.influence.util.RandomHelper;
 import gr.james.influence.util.collections.GraphState;
 

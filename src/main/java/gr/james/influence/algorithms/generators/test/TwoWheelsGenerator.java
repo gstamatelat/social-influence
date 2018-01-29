@@ -2,10 +2,10 @@ package gr.james.influence.algorithms.generators.test;
 
 import gr.james.influence.algorithms.generators.basic.WheelGenerator;
 import gr.james.influence.api.algorithms.GraphGenerator;
-import gr.james.influence.api.graph.Graph;
-import gr.james.influence.api.graph.GraphFactory;
-import gr.james.influence.api.graph.VertexProvider;
+import gr.james.influence.graph.Graph;
+import gr.james.influence.graph.GraphFactory;
 import gr.james.influence.graph.Graphs;
+import gr.james.influence.graph.VertexProvider;
 import gr.james.influence.util.Finals;
 
 import java.util.Arrays;

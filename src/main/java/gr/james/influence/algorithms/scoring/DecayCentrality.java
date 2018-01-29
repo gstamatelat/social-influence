@@ -2,8 +2,8 @@ package gr.james.influence.algorithms.scoring;
 
 import gr.james.influence.algorithms.distance.DijkstraShortestPaths;
 import gr.james.influence.annotation.UnmodifiableGraph;
-import gr.james.influence.api.graph.Graph;
 import gr.james.influence.exceptions.IllegalVertexException;
+import gr.james.influence.graph.Graph;
 import gr.james.influence.util.Conditions;
 import gr.james.influence.util.collections.GraphState;
 

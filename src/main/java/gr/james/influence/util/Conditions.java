@@ -1,7 +1,7 @@
 package gr.james.influence.util;
 
-import gr.james.influence.api.graph.Graph;
 import gr.james.influence.exceptions.IllegalVertexException;
+import gr.james.influence.graph.Graph;
 
 public final class Conditions {
     public static void requireArgument(boolean expression, String errorMessageTemplate, Object... errorMessageArgs) {

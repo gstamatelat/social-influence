@@ -2,7 +2,7 @@ package gr.james.influence.main;
 
 import gr.james.influence.algorithms.generators.random.RandomGenerator;
 import gr.james.influence.algorithms.scoring.PageRank;
-import gr.james.influence.api.graph.Graph;
+import gr.james.influence.graph.Graph;
 import gr.james.influence.util.Finals;
 import javafx.application.Application;
 import javafx.scene.Scene;

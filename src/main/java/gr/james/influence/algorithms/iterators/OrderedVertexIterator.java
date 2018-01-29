@@ -1,6 +1,6 @@
 package gr.james.influence.algorithms.iterators;
 
-import gr.james.influence.api.graph.Graph;
+import gr.james.influence.graph.Graph;
 
 import java.util.Iterator;
 import java.util.TreeSet;

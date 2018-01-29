@@ -1,6 +1,6 @@
 package gr.james.influence.algorithms.iterators;
 
-import gr.james.influence.api.graph.Graph;
+import gr.james.influence.graph.Graph;
 import gr.james.influence.util.RandomHelper;
 
 import java.util.ArrayList;

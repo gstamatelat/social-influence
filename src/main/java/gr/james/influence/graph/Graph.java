@@ -1,8 +1,7 @@
-package gr.james.influence.api.graph;
+package gr.james.influence.graph;
 
 import gr.james.influence.exceptions.IllegalEdgeException;
 import gr.james.influence.exceptions.IllegalVertexException;
-import gr.james.influence.graph.Graphs;
 import gr.james.influence.util.Conditions;
 import gr.james.influence.util.Finals;
 import gr.james.influence.util.collections.EdgesIterator;
@@ -36,6 +35,17 @@ import java.util.*;
  * @param <E> the edge type
  */
 public interface Graph<V, E> extends Iterable<V>, Metadata {
+    /**
+     * Create and return a new {@link Graph}.
+     *
+     * @param <V> the vertex type
+     * @param <E> the edge type
+     * @return a new {@link Graph}
+     */
+    static <V, E> Graph<V, E> create() {
+        return new MemoryGraph<>();
+    }
+
     /**
      * Checks if this graph contains an edge with the specified {@code source} and {@code target}.
      * <p>
