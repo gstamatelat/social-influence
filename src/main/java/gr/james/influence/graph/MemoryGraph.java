@@ -170,10 +170,10 @@ class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
         final StringBuilder sb = new StringBuilder();
         sb.append(String.format("Graph(%d) {%n", this.vertexCount()));
         for (DirectedEdge<V, E> e : this.edges()) {
-            if (e.edge() == null) {
+            if (e.value() == null) {
                 sb.append(String.format("  %s -> %s [%.2f]%n", e.source(), e.target(), e.weight()));
             } else {
-                sb.append(String.format("  %s -> %s (%s) [%.2f]%n", e.source(), e.target(), e.edge(), e.weight()));
+                sb.append(String.format("  %s -> %s (%s) [%.2f]%n", e.source(), e.target(), e.value(), e.weight()));
             }
         }
         sb.append("}");

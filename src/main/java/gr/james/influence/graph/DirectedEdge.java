@@ -10,7 +10,7 @@ public interface DirectedEdge<V, E> {
     /**
      * Construct a new {@link DirectedEdge} from the given arguments.
      *
-     * @param edge   the object assigned to the edge
+     * @param value  the value of the edge
      * @param source the source vertex of the edge
      * @param target the target vertex of the edge
      * @param weight the weight of the edge
@@ -18,28 +18,28 @@ public interface DirectedEdge<V, E> {
      * @param <E>    the edge type
      * @return a new {@link DirectedEdge} from the given arguments
      */
-    static <V, E> DirectedEdge<V, E> from(E edge, V source, V target, double weight) {
-        return new DirectedEdgeImpl<>(edge, source, target, weight);
+    static <V, E> DirectedEdge<V, E> from(E value, V source, V target, double weight) {
+        return new DirectedEdgeImpl<>(value, source, target, weight);
     }
 
     /**
      * Returns the reverse of this {@link DirectedEdge}.
      * <p>
-     * The reverse edge has the same {@link #edge()} and {@link #weight()} as the original one but the {@link #source()}
-     * and {@link #target()} are interchanged.
+     * The reverse edge has the same {@link #value()} and {@link #weight()} as the original one but the
+     * {@link #source()} and {@link #target()} are interchanged.
      *
      * @return the reverse of this {@link DirectedEdge}
      */
     default DirectedEdge<V, E> reverse() {
-        return new DirectedEdgeImpl<>(edge(), target(), source(), weight());
+        return new DirectedEdgeImpl<>(value(), target(), source(), weight());
     }
 
     /**
-     * Returns the edge object assigned.
+     * Returns the value of the edge.
      *
-     * @return the edge object assigned
+     * @return the value of the edge
      */
-    E edge();
+    E value();
 
     /**
      * Returns the source vertex of the edge.
@@ -74,8 +74,8 @@ public interface DirectedEdge<V, E> {
      * Indicates whether some object is equal to this {@link DirectedEdge}.
      * <p>
      * This method will return {@code true} if {@code obj} is of type {@link DirectedEdge} and is equal to this edge.
-     * Two {@link DirectedEdge} are equal if the respective fields {@link #edge()}, {@link #source()}, {@link #target()}
-     * and {@link #weight()} are equal.
+     * Two {@link DirectedEdge} are equal if the respective fields {@link #value()}, {@link #source()},
+     * {@link #target()} and {@link #weight()} are equal.
      *
      * @param obj the reference object with which to compare
      * @return {@code true} if {@code obj} is equal to this {@link DirectedEdge}, otherwise {@code false}

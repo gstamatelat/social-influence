@@ -3,21 +3,21 @@ package gr.james.influence.graph;
 import java.util.Objects;
 
 final class DirectedEdgeImpl<V, E> implements DirectedEdge<V, E> {
-    private final E edge;
+    private final E value;
     private final V source;
     private final V target;
     private final double weight;
 
-    DirectedEdgeImpl(E edge, V source, V target, double weight) {
-        this.edge = edge;
+    DirectedEdgeImpl(E value, V source, V target, double weight) {
+        this.value = value;
         this.source = source;
         this.target = target;
         this.weight = weight;
     }
 
     @Override
-    public E edge() {
-        return edge;
+    public E value() {
+        return value;
     }
 
     @Override
@@ -50,13 +50,13 @@ final class DirectedEdgeImpl<V, E> implements DirectedEdge<V, E> {
         }
         final DirectedEdgeImpl<?, ?> that = (DirectedEdgeImpl<?, ?>) o;
         return Double.compare(weight, that.weight) == 0 && // maybe weight is easier to compare so it goes first
-                Objects.equals(edge, that.edge) &&
+                Objects.equals(value, that.value) &&
                 Objects.equals(source, that.source) &&
                 Objects.equals(target, that.target);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(edge, source, target, weight);
+        return Objects.hash(value, source, target, weight);
     }
 }

@@ -161,7 +161,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
         if (edge == null) {
             throw new IllegalEdgeException();
         } else {
-            return edge.edge();
+            return edge.value();
         }
     }
 
@@ -190,7 +190,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
         if (edge == null) {
             return other;
         } else {
-            return edge.edge();
+            return edge.value();
         }
     }
 
@@ -642,7 +642,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
         Conditions.requireArgument(weight > 0, Finals.E_EDGE_WEIGHT_NEGATIVE, weight);
         DirectedEdge<V, E> previousEdge = removeEdge(source, target);
         if (previousEdge != null) {
-            DirectedEdge<V, E> e = addEdge(source, target, previousEdge.edge(), weight);
+            DirectedEdge<V, E> e = addEdge(source, target, previousEdge.value(), weight);
             assert e != null;
             return true;
         } else {
@@ -672,7 +672,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
                     final DirectedEdge<V, E> edge = addEdge(v, u);
                     assert edge.source() == v;
                     assert edge.target() == u;
-                    assert edge.edge() == null;
+                    assert edge.value() == null;
                     assert edge.weight() == Finals.DEFAULT_EDGE_WEIGHT;
                 }
             }

@@ -33,7 +33,7 @@ public final class Graphs {
             newGraph.addVertex(v);
         }
         for (DirectedEdge<V, E> e : g.edges()) {
-            newGraph.addEdge(e.source(), e.target(), e.edge(), RandomHelper.getRandom().nextDouble());
+            newGraph.addEdge(e.source(), e.target(), e.value(), RandomHelper.getRandom().nextDouble());
         }
         return newGraph;
     }
@@ -103,7 +103,7 @@ public final class Graphs {
         }
         for (DirectedEdge<V, E> e : g.edges()) {
             if (r.containsVertex(e.source()) && r.containsVertex(e.target())) {
-                r.addEdge(e.source(), e.target(), e.edge(), e.weight());
+                r.addEdge(e.source(), e.target(), e.value(), e.weight());
             }
         }
         for (String m : g.metaKeySet()) {

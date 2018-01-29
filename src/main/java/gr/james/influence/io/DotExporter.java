@@ -28,7 +28,7 @@ public class DotExporter implements GraphExporter {
 
         w.write(String.format("digraph G {%n"));
         for (DirectedEdge<V, E> e : g.edges()) {
-            if (e.edge() == null) {
+            if (e.value() == null) {
                 w.write(String.format("%s%s -> %s [weight=%f]%n",
                         indent,
                         vertexSerializer.serialize(e.source()),
@@ -39,7 +39,7 @@ public class DotExporter implements GraphExporter {
                         indent,
                         vertexSerializer.serialize(e.source()),
                         vertexSerializer.serialize(e.target()),
-                        edgeSerializer.serialize(e.edge()),
+                        edgeSerializer.serialize(e.value()),
                         e.weight()));
             }
         }
