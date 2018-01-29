@@ -15,7 +15,7 @@ public class ClusteringCoefficient {
             neighborhood.addAll(g.getOutEdges(v).keySet());
             neighborhood.addAll(g.getInEdges(v).keySet());
 
-            Graph<V, E> nGraph = Graphs.deepCopy(g, Graph::create, neighborhood);
+            Graph<V, E> nGraph = Graphs.deepCopy(g, neighborhood);
             cc.put(v, Graphs.getDensity(nGraph));
         }
         return cc;

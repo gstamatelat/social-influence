@@ -93,25 +93,18 @@ public final class Graphs {
         return (SimpleGraph) combineGraphs(SimpleGraph::new, graphs);
     }
 
-    public static <V, E> Graph<V, E> subGraph(Graph<V, E> g, GraphFactory<V, E> factory, Collection<V> filter) {
-        return deepCopy(g, factory, filter);
-    }
-
-    public static SimpleGraph subGraph(SimpleGraph g, Collection<Integer> filter) {
-        return deepCopy(g, filter);
-    }
-
     public static <V, E> Graph<V, E> deepCopy(Graph<V, E> g, GraphFactory<V, E> factory, Collection<V> filter) {
-        Graph<V, E> r = factory.createGraph();
+        final Graph<V, E> r = factory.createGraph();
         for (V v : filter) {
             if (!g.containsVertex(v)) {
                 throw new IllegalVertexException();
             }
             r.addVertex(v);
         }
-        for (V v : r) {
-            g.getOutEdges(v).values().stream().filter(e -> r.containsVertex(e.target()))
-                    .forEach(e -> r.addEdge(e.source(), e.target(), e.edge(), e.weight()));
+        for (DirectedEdge<V, E> e : g.edges()) {
+            if (r.containsVertex(e.source()) && r.containsVertex(e.target())) {
+                r.addEdge(e.source(), e.target(), e.edge(), e.weight());
+            }
         }
         for (String m : g.metaKeySet()) {
             r.setMeta(m, g.getMeta(m));
@@ -120,7 +113,15 @@ public final class Graphs {
     }
 
     public static <V, E> Graph<V, E> deepCopy(Graph<V, E> g, GraphFactory<V, E> factory) {
-        return deepCopy(g, factory, g.getVertices());
+        return deepCopy(g, factory, g.vertexSet());
+    }
+
+    public static <V, E> Graph<V, E> deepCopy(Graph<V, E> g) {
+        return deepCopy(g, Graph::create, g.vertexSet());
+    }
+
+    public static <V, E> Graph<V, E> deepCopy(Graph<V, E> g, Collection<V> filter) {
+        return deepCopy(g, Graph::create, filter);
     }
 
     public static SimpleGraph deepCopy(SimpleGraph g, Collection<Integer> filter) {
