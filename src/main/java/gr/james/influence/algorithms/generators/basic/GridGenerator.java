@@ -7,6 +7,7 @@ import gr.james.influence.graph.VertexProvider;
 import gr.james.influence.util.Finals;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -23,7 +24,7 @@ public class GridGenerator implements GraphGenerator {
     }
 
     @Override
-    public <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, Random r, VertexProvider<V> vertexProvider) {
+    public <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, Random r, VertexProvider<V> vertexProvider, Map<String, V> identification) {
         Graph<V, E> g = factory.createGraph();
 
         int count = 0;

@@ -9,6 +9,7 @@ import gr.james.influence.util.Conditions;
 import gr.james.influence.util.Finals;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 public class WattsStrogatzGenerator implements GraphGenerator {
@@ -27,7 +28,7 @@ public class WattsStrogatzGenerator implements GraphGenerator {
     }
 
     @Override
-    public <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, Random r, VertexProvider<V> vertexProvider) {
+    public <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, Random r, VertexProvider<V> vertexProvider, Map<String, V> identification) {
         Graph<V, E> g = factory.createGraph();
 
         List<V> l = g.addVertices(n, vertexProvider);

@@ -9,6 +9,7 @@ import gr.james.influence.graph.VertexProvider;
 import gr.james.influence.util.Finals;
 
 import java.util.Arrays;
+import java.util.Map;
 import java.util.Random;
 
 public class TwoWheelsGenerator implements GraphGenerator {
@@ -19,7 +20,7 @@ public class TwoWheelsGenerator implements GraphGenerator {
     }
 
     @Override
-    public <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, Random r, VertexProvider<V> vertexProvider) {
+    public <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, Random r, VertexProvider<V> vertexProvider, Map<String, V> identification) {
         WheelGenerator wheelGenerator = new WheelGenerator(wheelVertices);
         Graph<V, E> g1 = wheelGenerator.generate(factory, vertexProvider);
         Graph<V, E> g2 = wheelGenerator.generate(factory, vertexProvider);

@@ -6,6 +6,7 @@ import gr.james.influence.graph.SimpleGraph;
 import gr.james.influence.graph.VertexProvider;
 import gr.james.influence.util.RandomHelper;
 
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -52,6 +53,10 @@ public interface GraphGenerator {
      * @return the generated graph
      */
     default <V, E> Graph<V, E> generate(VertexProvider<V> vertexProvider) {
+        return generate(Graph.factory(), RandomHelper.getRandom(), vertexProvider, null);
+    }
+
+    default <V, E> Graph<V, E> generate(VertexProvider<V> vertexProvider, Map<String, V> identification) {
         return generate(Graph.factory(), RandomHelper.getRandom(), vertexProvider);
     }
 
@@ -65,6 +70,10 @@ public interface GraphGenerator {
      * @return the generated graph
      */
     default <V, E> Graph<V, E> generate(long seed, VertexProvider<V> vertexProvider) {
+        return generate(Graph.factory(), new Random(seed), vertexProvider, null);
+    }
+
+    default <V, E> Graph<V, E> generate(long seed, VertexProvider<V> vertexProvider, Map<String, V> identification) {
         return generate(Graph.factory(), new Random(seed), vertexProvider);
     }
 
@@ -78,6 +87,10 @@ public interface GraphGenerator {
      * @return the generated graph
      */
     default <V, E> Graph<V, E> generate(Random r, VertexProvider<V> vertexProvider) {
+        return generate(Graph.factory(), r, vertexProvider, null);
+    }
+
+    default <V, E> Graph<V, E> generate(Random r, VertexProvider<V> vertexProvider, Map<String, V> identification) {
         return generate(Graph.factory(), r, vertexProvider);
     }
 
@@ -92,6 +105,10 @@ public interface GraphGenerator {
      * @return the generated graph
      */
     default <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, VertexProvider<V> vertexProvider) {
+        return generate(factory, RandomHelper.getRandom(), vertexProvider, null);
+    }
+
+    default <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, VertexProvider<V> vertexProvider, Map<String, V> identification) {
         return generate(factory, RandomHelper.getRandom(), vertexProvider);
     }
 
@@ -106,6 +123,10 @@ public interface GraphGenerator {
      * @return the generated graph
      */
     default <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, long seed, VertexProvider<V> vertexProvider) {
+        return generate(factory, new Random(seed), vertexProvider, null);
+    }
+
+    default <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, long seed, VertexProvider<V> vertexProvider, Map<String, V> identification) {
         return generate(factory, new Random(seed), vertexProvider);
     }
 
@@ -119,5 +140,9 @@ public interface GraphGenerator {
      * @param <E>            the edge type
      * @return the generated graph
      */
-    <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, Random r, VertexProvider<V> vertexProvider);
+    default <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, Random r, VertexProvider<V> vertexProvider) {
+        return generate(factory, r, vertexProvider, null);
+    }
+
+    <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, Random r, VertexProvider<V> vertexProvider, Map<String, V> identification);
 }

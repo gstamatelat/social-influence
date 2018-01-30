@@ -33,7 +33,7 @@ public class BarabasiAlbertGenerator implements GraphGenerator {
     }
 
     @Override
-    public <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, Random r, VertexProvider<V> vertexProvider) {
+    public <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, Random r, VertexProvider<V> vertexProvider, Map<String, V> identification) {
         Graph<V, E> g = new CompleteGenerator(initialClique).generate(factory, vertexProvider);
 
         while (g.vertexCount() < totalVertices) {
