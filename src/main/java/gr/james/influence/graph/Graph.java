@@ -519,7 +519,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
         }
         final V v = vertexProvider.getVertex();
         if (!addVertex(v)) {
-            throw new IllegalArgumentException();
+            throw new IllegalVertexException();
         }
         return v;
     }
