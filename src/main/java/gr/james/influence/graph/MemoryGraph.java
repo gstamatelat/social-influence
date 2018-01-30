@@ -19,6 +19,12 @@ class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
         this.vList = new ArrayList<>();
     }
 
+    public MemoryGraph(int expectedVertexCount) {
+        this.mOut = new HashMap<>(expectedVertexCount);
+        this.mIn = new HashMap<>(expectedVertexCount);
+        this.vList = new ArrayList<>(expectedVertexCount);
+    }
+
     @Override
     public Set<DirectedEdge<V, E>> outEdges(V v) {
         Conditions.requireNonNull(v);

@@ -117,11 +117,11 @@ public final class Graphs {
     }
 
     public static <V, E> Graph<V, E> deepCopy(Graph<V, E> g) {
-        return deepCopy(g, Graph::create, g.vertexSet());
+        return deepCopy(g, Graph.factory(), g.vertexSet());
     }
 
     public static <V, E> Graph<V, E> deepCopy(Graph<V, E> g, Collection<V> filter) {
-        return deepCopy(g, Graph::create, filter);
+        return deepCopy(g, Graph.factory(), filter);
     }
 
     public static SimpleGraph deepCopy(SimpleGraph g, Collection<Integer> filter) {

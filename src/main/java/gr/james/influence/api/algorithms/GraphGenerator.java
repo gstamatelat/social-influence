@@ -52,7 +52,7 @@ public interface GraphGenerator {
      * @return the generated graph
      */
     default <V, E> Graph<V, E> generate(VertexProvider<V> vertexProvider) {
-        return generate(Graph::create, RandomHelper.getRandom(), vertexProvider);
+        return generate(Graph.factory(), RandomHelper.getRandom(), vertexProvider);
     }
 
     /**
@@ -65,7 +65,7 @@ public interface GraphGenerator {
      * @return the generated graph
      */
     default <V, E> Graph<V, E> generate(long seed, VertexProvider<V> vertexProvider) {
-        return generate(Graph::create, new Random(seed), vertexProvider);
+        return generate(Graph.factory(), new Random(seed), vertexProvider);
     }
 
     /**
@@ -78,7 +78,7 @@ public interface GraphGenerator {
      * @return the generated graph
      */
     default <V, E> Graph<V, E> generate(Random r, VertexProvider<V> vertexProvider) {
-        return generate(Graph::create, r, vertexProvider);
+        return generate(Graph.factory(), r, vertexProvider);
     }
 
     /**

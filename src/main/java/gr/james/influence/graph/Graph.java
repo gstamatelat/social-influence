@@ -36,14 +36,24 @@ import java.util.*;
  */
 public interface Graph<V, E> extends Iterable<V>, Metadata {
     /**
-     * Create and return a new {@link Graph}.
+     * Returns a {@link GraphFactory} for this type.
      *
      * @param <V> the vertex type
      * @param <E> the edge type
-     * @return a new {@link Graph}
+     * @return a {@link GraphFactory} for this type
      */
-    static <V, E> Graph<V, E> create() {
-        return new MemoryGraph<>();
+    static <V, E> GraphFactory<V, E> factory() {
+        return new GraphFactory<V, E>() {
+            @Override
+            public Graph<V, E> createGraph() {
+                return null;
+            }
+
+            @Override
+            public Graph<V, E> createGraph(int expectedVertexCount) {
+                return new MemoryGraph<>(expectedVertexCount);
+            }
+        };
     }
 
     /**
