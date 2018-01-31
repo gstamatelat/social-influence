@@ -20,8 +20,12 @@ public interface GraphFactory<V, E> {
      *
      * @param expectedVertexCount expected number of vertices
      * @return a new empty {@link Graph}
+     * @throws IllegalArgumentException if {@code expectedVertexCount} is negative
      */
     default Graph<V, E> createGraph(int expectedVertexCount) {
+        if (expectedVertexCount < 0) {
+            throw new IllegalArgumentException();
+        }
         return createGraph();
     }
 }

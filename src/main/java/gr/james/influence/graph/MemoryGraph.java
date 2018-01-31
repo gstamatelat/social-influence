@@ -20,6 +20,9 @@ class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
     }
 
     public MemoryGraph(int expectedVertexCount) {
+        if (expectedVertexCount < 0) {
+            throw new IllegalArgumentException();
+        }
         this.mOut = new HashMap<>(expectedVertexCount);
         this.mIn = new HashMap<>(expectedVertexCount);
         this.vList = new ArrayList<>(expectedVertexCount);
