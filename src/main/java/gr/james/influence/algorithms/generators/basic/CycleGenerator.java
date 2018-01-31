@@ -4,32 +4,46 @@ import gr.james.influence.api.algorithms.GraphGenerator;
 import gr.james.influence.graph.Graph;
 import gr.james.influence.graph.GraphFactory;
 import gr.james.influence.graph.VertexProvider;
-import gr.james.influence.util.Finals;
 
 import java.util.Map;
 import java.util.Random;
 
+/**
+ * A generator that produces undirected cycle graphs.
+ */
 public class CycleGenerator implements GraphGenerator {
-    private int totalVertices;
+    private int vertexCount;
 
-    public CycleGenerator(int totalVertices) {
-        this.totalVertices = totalVertices;
+    /**
+     * Construct a new {@link CycleGenerator}.
+     *
+     * @param vertexCount the vertex count
+     * @throws IllegalArgumentException if {@code vertexCount < 1}
+     */
+    public CycleGenerator(int vertexCount) {
+        if (vertexCount < 1) {
+            throw new IllegalArgumentException();
+        }
+        this.vertexCount = vertexCount;
     }
 
     @Override
-    public <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, Random r, VertexProvider<V> vertexProvider, Map<String, V> identification) {
-        Graph<V, E> g = factory.createGraph();
+    public <V, E> Graph<V, E> generate(GraphFactory<V, E> factory,
+                                       Random r,
+                                       VertexProvider<V> vertexProvider,
+                                       Map<String, V> identification) {
+        final Graph<V, E> g = factory.createGraph(vertexCount);
 
-        V startVertex = g.addVertex(vertexProvider), previousVertex = startVertex;
-        while (g.vertexCount() < totalVertices) {
-            V newVertex = g.addVertex(vertexProvider);
-            g.addEdges(previousVertex, newVertex);
-            previousVertex = newVertex;
+        V current = g.addVertex(vertexProvider);
+        final V start = current;
+        while (g.vertexCount() < vertexCount) {
+            final V newVertex = g.addVertex(vertexProvider);
+            g.addEdge(current, newVertex);
+            g.addEdge(newVertex, current);
+            current = newVertex;
         }
-        g.addEdges(startVertex, previousVertex);
-
-        g.setMeta(Finals.TYPE_META, "Cycle");
-        g.setMeta("totalVertices", String.valueOf(totalVertices));
+        g.addEdge(current, start);
+        g.addEdge(start, current);
 
         return g;
     }
