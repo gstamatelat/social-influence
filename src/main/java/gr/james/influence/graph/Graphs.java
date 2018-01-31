@@ -3,7 +3,6 @@ package gr.james.influence.graph;
 import com.google.common.collect.ImmutableBiMap;
 import gr.james.influence.algorithms.components.TarjanComponents;
 import gr.james.influence.exceptions.IllegalVertexException;
-import gr.james.influence.util.Conditions;
 import gr.james.influence.util.RandomHelper;
 import gr.james.sampling.EfraimidisSampling;
 import gr.james.sampling.RandomSampling;
@@ -188,25 +187,33 @@ public final class Graphs {
     /**
      * Returns a uniformly distributed random vertex of a graph using the provided {@code Random} instance.
      * <p>
-     * This method runs in constant time.
+     * Complexity: O(V)
      *
      * @param g      the {@code Graph}
      * @param random the {@code Random} instance to use
      * @param <V>    the vertex type
      * @return a uniformly distributed random vertex of {@code g}
-     * @throws NullPointerException     if {@code g} or {@code random} is {@code random} is {@code null}
+     * @throws NullPointerException     if {@code g} or {@code random} is {@code null}
      * @throws IllegalArgumentException if {@code g} is empty
      */
     public static <V> V getRandomVertex(Graph<V, ?> g, Random random) {
-        Conditions.requireAllNonNull(g, random);
-        Conditions.requireArgument(g.vertexCount() > 0);
-        return g.getVertexFromIndex(random.nextInt(g.vertexCount()));
+        if (g.vertexCount() < 1) {
+            throw new IllegalArgumentException();
+        }
+        int r = random.nextInt(g.vertexCount());
+        for (V v : g) {
+            if (r-- == 0) {
+                return v;
+            }
+        }
+        assert false;
+        return null;
     }
 
     /**
      * Returns a uniformly distributed random vertex of a graph using the global random instance.
      * <p>
-     * This method runs in constant time.
+     * Complexity: O(V)
      *
      * @param g   the {@code Graph}
      * @param <V> the vertex type
