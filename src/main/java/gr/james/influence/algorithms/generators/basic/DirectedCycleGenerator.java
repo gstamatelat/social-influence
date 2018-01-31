@@ -3,24 +3,25 @@ package gr.james.influence.algorithms.generators.basic;
 import gr.james.influence.api.algorithms.GraphGenerator;
 import gr.james.influence.graph.Graph;
 import gr.james.influence.graph.GraphFactory;
+import gr.james.influence.graph.Graphs;
 import gr.james.influence.graph.VertexProvider;
 
 import java.util.Map;
 import java.util.Random;
 
 /**
- * A generator that produces undirected cycle graphs.
+ * A generator that produces directed cycle graphs.
  */
-public class CycleGenerator implements GraphGenerator {
+public class DirectedCycleGenerator implements GraphGenerator {
     private final int vertexCount;
 
     /**
-     * Construct a new {@link CycleGenerator}.
+     * Construct a new {@link DirectedCycleGenerator}.
      *
      * @param vertexCount the vertex count
      * @throws IllegalArgumentException if {@code vertexCount < 3}
      */
-    public CycleGenerator(int vertexCount) {
+    public DirectedCycleGenerator(int vertexCount) {
         if (vertexCount < 3) {
             throw new IllegalArgumentException();
         }
@@ -39,13 +40,12 @@ public class CycleGenerator implements GraphGenerator {
         while (g.vertexCount() < vertexCount) {
             final V newVertex = g.addVertex(vertexProvider);
             g.addEdge(current, newVertex);
-            g.addEdge(newVertex, current);
             current = newVertex;
         }
         g.addEdge(current, start);
-        g.addEdge(start, current);
 
         assert g.vertexCount() == vertexCount;
+        assert Graphs.getEdgesCount(g) == vertexCount;
 
         return g;
     }
