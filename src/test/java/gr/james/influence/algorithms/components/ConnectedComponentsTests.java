@@ -1,6 +1,7 @@
 package gr.james.influence.algorithms.components;
 
 import gr.james.influence.algorithms.generators.basic.CompleteGenerator;
+import gr.james.influence.algorithms.generators.basic.DirectedPathGenerator;
 import gr.james.influence.algorithms.generators.random.RandomGenerator;
 import gr.james.influence.api.algorithms.ConnectedComponents;
 import gr.james.influence.graph.Graphs;
@@ -49,11 +50,7 @@ public class ConnectedComponentsTests {
     public void isolated() {
         final int n = 25;
 
-        final SimpleGraph g = new SimpleGraph();
-        g.addVertices(n);
-        for (int i = 0; i < g.vertexCount() - 1; i++) {
-            g.addEdge(g.getVertexFromIndex(i), g.getVertexFromIndex(i + 1));
-        }
+        final SimpleGraph g = new DirectedPathGenerator(n).generate();
 
         final ConnectedComponents<Integer> cc = factory.apply(g);
 
