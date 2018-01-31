@@ -18,10 +18,10 @@ public class CycleGenerator implements GraphGenerator {
      * Construct a new {@link CycleGenerator}.
      *
      * @param vertexCount the vertex count
-     * @throws IllegalArgumentException if {@code vertexCount < 1}
+     * @throws IllegalArgumentException if {@code vertexCount < 3}
      */
     public CycleGenerator(int vertexCount) {
-        if (vertexCount < 1) {
+        if (vertexCount < 3) {
             throw new IllegalArgumentException();
         }
         this.vertexCount = vertexCount;
