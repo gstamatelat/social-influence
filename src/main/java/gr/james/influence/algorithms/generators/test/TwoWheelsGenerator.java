@@ -6,33 +6,64 @@ import gr.james.influence.graph.Graph;
 import gr.james.influence.graph.GraphFactory;
 import gr.james.influence.graph.Graphs;
 import gr.james.influence.graph.VertexProvider;
-import gr.james.influence.util.Finals;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+/**
+ * A generator that produces undirected two-wheel graphs.
+ * <p>
+ * The identification of this generator is:
+ * <ul>
+ * <li>center: the center of the graph</li>
+ * <li>hub1: the hub of one of the wheels</li>
+ * <li>hub2: the hub of the other wheel</li>
+ * </ul>
+ */
 public class TwoWheelsGenerator implements GraphGenerator {
     private int wheelVertices;
 
+    /**
+     * Construct a new {@link TwoWheelsGenerator}.
+     *
+     * @param wheelVertices the vertex count on each wheel
+     * @throws IllegalArgumentException if {@code vertexCount < 4}
+     */
     public TwoWheelsGenerator(int wheelVertices) {
+        if (wheelVertices < 4) {
+            throw new IllegalArgumentException();
+        }
         this.wheelVertices = wheelVertices;
     }
 
     @Override
-    public <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, Random r, VertexProvider<V> vertexProvider, Map<String, V> identification) {
-        WheelGenerator wheelGenerator = new WheelGenerator(wheelVertices);
-        Graph<V, E> g1 = wheelGenerator.generate(factory, vertexProvider);
-        Graph<V, E> g2 = wheelGenerator.generate(factory, vertexProvider);
+    public <V, E> Graph<V, E> generate(GraphFactory<V, E> factory,
+                                       Random r,
+                                       VertexProvider<V> vertexProvider,
+                                       Map<String, V> identification) {
+        final WheelGenerator wheelGenerator = new WheelGenerator(wheelVertices);
+        final Map<String, V> identification1 = new HashMap<>();
+        final Map<String, V> identification2 = new HashMap<>();
+        final Graph<V, E> g1 = wheelGenerator.generate(factory, r, vertexProvider, identification1);
+        final Graph<V, E> g2 = wheelGenerator.generate(factory, r, vertexProvider, identification2);
+        final V hub1 = identification1.get("hub");
+        final V hub2 = identification2.get("hub");
 
-        V a = g1.getVertexFromIndex(0);
-        V b = g2.getVertexFromIndex(0);
+        final V a = Graphs.findVertex(g1, v -> !v.equals(hub1));
+        final V b = Graphs.findVertex(g2, v -> !v.equals(hub2));
+        assert a != null;
+        assert b != null;
 
-        Graph<V, E> g = Graphs.combineGraphs(factory, Arrays.asList(g1, g2));
-        Graphs.fuseVertices(g, Arrays.asList(a, b), vertexProvider);
+        final Graph<V, E> g = Graphs.combineGraphs(factory, Arrays.asList(g1, g2));
+        final V center = Graphs.fuseVertices(g, Arrays.asList(a, b), vertexProvider);
 
-        g.setMeta(Finals.TYPE_META, "TwoWheels");
-        g.setMeta("wheelVertices", String.valueOf(wheelVertices));
+        identification.put("center", center);
+        identification.put("hub1", hub1);
+        identification.put("hub2", hub2);
+
+        assert g.vertexCount() == 2 * wheelVertices - 1;
 
         return g;
     }

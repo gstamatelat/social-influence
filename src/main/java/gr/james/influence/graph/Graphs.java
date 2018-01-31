@@ -10,6 +10,7 @@ import gr.james.sampling.RandomSampling;
 import gr.james.sampling.WeightedRandomSampling;
 
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public final class Graphs {
@@ -36,6 +37,30 @@ public final class Graphs {
             newGraph.addEdge(e.source(), e.target(), e.value(), RandomHelper.getRandom().nextDouble());
         }
         return newGraph;
+    }
+
+    /**
+     * Finds and returns any vertex in a graph that satisfies a condition.
+     * <p>
+     * If many vertices satisfy the condition, an arbitrary vertex is selected and returned. Returns {@code null} if no
+     * vertex in the graph satisfies the condition.
+     * <p>
+     * Complexity: O(V)
+     *
+     * @param g         the graph
+     * @param condition the condition to be satisfied
+     * @param <V>       the vertex type
+     * @return any vertex in a graph that satisfies {@code condition}, or {@code null} if no vertex in {@code g}
+     * satisfies {@code condition}
+     * @throws NullPointerException if {@code g} or {@code condition} is {@code null}
+     */
+    public static <V> V findVertex(Graph<V, ?> g, Predicate<V> condition) {
+        for (V v : g) {
+            if (condition.test(v)) {
+                return v;
+            }
+        }
+        return null;
     }
 
     /**
