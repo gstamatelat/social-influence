@@ -438,21 +438,6 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     }
 
     /**
-     * Get a vertex of this graph based on its index. Index is a deterministic, per-graph attribute between {@code 0}
-     * (inclusive) and {@link #vertexCount()} ()} (exclusive), indicating the order at which the vertices were inserted
-     * in the graph. {@code getVertexFromIndex(i)} will return the same vertex as {@code getVertices().get(i)} but could
-     * be faster depending on the {@code Graph} implementation.
-     *
-     * @param index the index of the vertex
-     * @return the vertex reference with the provided index
-     * @throws IndexOutOfBoundsException if the index is out of range ({@code index < 0 || index >= getVerticesCount()})
-     */
-    @Deprecated
-    default V getVertexFromIndex(int index) {
-        return this.getVertices().get(index);
-    }
-
-    /**
      * Get the read-only {@link Iterator} over the vertices of this graph.
      * <p>
      * The vertex iteration is performed in no particular order. This method is equivalent to

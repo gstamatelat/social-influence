@@ -88,11 +88,6 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
     }
 
     @Override
-    public V getVertexFromIndex(int index) {
-        return this.g.getVertexFromIndex(index);
-    }
-
-    @Override
     public Map<V, DirectedEdge<V, E>> getOutEdges(V v) {
         return this.g.getOutEdges(v);
     }
