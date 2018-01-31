@@ -12,7 +12,7 @@ import java.util.Random;
  * A generator that produces undirected cycle graphs.
  */
 public class CycleGenerator implements GraphGenerator {
-    private int vertexCount;
+    private final int vertexCount;
 
     /**
      * Construct a new {@link CycleGenerator}.

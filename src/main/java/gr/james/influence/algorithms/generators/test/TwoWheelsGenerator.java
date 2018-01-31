@@ -23,7 +23,7 @@ import java.util.Random;
  * </ul>
  */
 public class TwoWheelsGenerator implements GraphGenerator {
-    private int wheelVertices;
+    private final int wheelVertices;
 
     /**
      * Construct a new {@link TwoWheelsGenerator}.

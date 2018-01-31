@@ -20,7 +20,7 @@ import java.util.Random;
  * @see <a href="http://mathworld.wolfram.com/WheelGraph.html">http://mathworld.wolfram.com/WheelGraph.html</a>
  */
 public class WheelGenerator implements GraphGenerator {
-    private int vertexCount;
+    private final int vertexCount;
 
     /**
      * Construct a new {@link WheelGenerator}.
