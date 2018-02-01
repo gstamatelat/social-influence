@@ -13,13 +13,13 @@ class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
     private final Map<V, BiMap<V, DirectedEdge<V, E>>> mIn;
     private final List<V> vList;
 
-    protected MemoryGraph() {
+    MemoryGraph() {
         this.mOut = new HashMap<>();
         this.mIn = new HashMap<>();
         this.vList = new ArrayList<>();
     }
 
-    protected MemoryGraph(int expectedVertexCount) {
+    MemoryGraph(int expectedVertexCount) {
         if (expectedVertexCount < 0) {
             throw new IllegalArgumentException();
         }
