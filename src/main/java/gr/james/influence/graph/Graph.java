@@ -739,4 +739,12 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     default void removeEdges(V... among) {
         this.removeEdges(Arrays.asList(among));
     }
+
+    /**
+     * Returns a string representation of this graph.
+     *
+     * @return a string representation of this graph
+     */
+    @Override
+    String toString();
 }
