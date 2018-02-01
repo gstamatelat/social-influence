@@ -12,12 +12,24 @@ public class SimpleGraph extends MemoryGraph<Integer, Object> {
         }
     };
 
-    //public static GraphFactory<Integer, Object> graphFactory = SimpleGraph::new;
+    public static GraphFactory<Integer, Object> factory = new GraphFactory<Integer, Object>() {
+        @Override
+        public SimpleGraph createGraph(GraphType type) {
+            return new SimpleGraph();
+        }
 
-    //private final VertexProvider<Integer> provider = new IntegerVertexProvider();
+        @Override
+        public SimpleGraph createGraph(GraphType type, int expectedVertexCount) {
+            return new SimpleGraph(expectedVertexCount);
+        }
+    };
 
     public SimpleGraph() {
         super();
+    }
+
+    public SimpleGraph(int expectedVertexCount) {
+        super(expectedVertexCount);
     }
 
     public Integer addVertex() {

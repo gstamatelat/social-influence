@@ -28,7 +28,7 @@ public final class Graphs {
     }
 
     public static <V, E> Graph<V, E> randomizeEdgeWeights(Graph<V, E> g, boolean unused) {
-        final Graph<V, E> newGraph = Graph.<V, E>factory().createGraph();
+        final Graph<V, E> newGraph = Graph.<V, E>factory().createGraph(g.type());
         for (V v : g) {
             newGraph.addVertex(v);
         }
@@ -101,7 +101,7 @@ public final class Graphs {
      * @return the combined graph
      */
     public static <V, E> Graph<V, E> combineGraphs(GraphFactory<V, E> type, Collection<Graph<V, E>> graphs) {
-        Graph<V, E> r = type.createGraph();
+        Graph<V, E> r = type.createWeightedDirected();
         for (Graph<V, E> g : graphs) {
             for (V v : g) {
                 r.addVertex(v);
@@ -114,11 +114,11 @@ public final class Graphs {
     }
 
     public static SimpleGraph combineGraphs(Collection<Graph<Integer, Object>> graphs) {
-        return (SimpleGraph) combineGraphs(SimpleGraph::new, graphs);
+        return (SimpleGraph) combineGraphs(SimpleGraph.factory, graphs);
     }
 
     public static <V, E> Graph<V, E> deepCopy(Graph<V, E> g, GraphFactory<V, E> factory, Collection<V> filter) {
-        final Graph<V, E> r = factory.createGraph();
+        final Graph<V, E> r = factory.createWeightedDirected();
         for (V v : filter) {
             if (!g.containsVertex(v)) {
                 throw new IllegalVertexException();
@@ -149,11 +149,11 @@ public final class Graphs {
     }
 
     public static SimpleGraph deepCopy(SimpleGraph g, Collection<Integer> filter) {
-        return (SimpleGraph) deepCopy(g, SimpleGraph::new, filter);
+        return (SimpleGraph) deepCopy(g, SimpleGraph.factory, filter);
     }
 
     public static SimpleGraph deepCopy(SimpleGraph g) {
-        return (SimpleGraph) deepCopy(g, SimpleGraph::new, g.getVertices());
+        return (SimpleGraph) deepCopy(g, SimpleGraph.factory, g.getVertices());
     }
 
     public static <V, E> ImmutableBiMap<V, Integer> getGraphIndexMap(Graph<V, E> g) {

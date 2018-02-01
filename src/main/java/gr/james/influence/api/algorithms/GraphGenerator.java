@@ -21,7 +21,7 @@ public interface GraphGenerator {
      * @return the generated graph
      */
     default SimpleGraph generate() {
-        return (SimpleGraph) generate(SimpleGraph::new, RandomHelper.getRandom(), SimpleGraph.vertexProvider);
+        return (SimpleGraph) generate(SimpleGraph.factory, RandomHelper.getRandom(), SimpleGraph.vertexProvider);
     }
 
     /**
@@ -31,7 +31,7 @@ public interface GraphGenerator {
      * @return the generated graph
      */
     default SimpleGraph generate(long seed) {
-        return (SimpleGraph) generate(SimpleGraph::new, new Random(seed), SimpleGraph.vertexProvider);
+        return (SimpleGraph) generate(SimpleGraph.factory, new Random(seed), SimpleGraph.vertexProvider);
     }
 
     /**
@@ -41,7 +41,7 @@ public interface GraphGenerator {
      * @return the generated graph
      */
     default SimpleGraph generate(Random r) {
-        return (SimpleGraph) generate(SimpleGraph::new, r, SimpleGraph.vertexProvider);
+        return (SimpleGraph) generate(SimpleGraph.factory, r, SimpleGraph.vertexProvider);
     }
 
     /**

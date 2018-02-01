@@ -29,7 +29,7 @@ public class EdgesImporter implements GraphImporter {
 
     @Override
     public <V, E> Graph<V, E> from(InputStream source, GraphFactory<V, E> factory, Deserializer<V> deserializer) throws IOException {
-        final Graph<V, E> g = factory.createGraph();
+        final Graph<V, E> g = factory.createWeightedDirected();
 
         final BufferedReader reader = new BufferedReader(new InputStreamReader(source, Finals.IO_ENCODING));
         final Map<String, V> nodeMap = new HashMap<>();

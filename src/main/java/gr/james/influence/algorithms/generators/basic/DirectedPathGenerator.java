@@ -38,7 +38,7 @@ public class DirectedPathGenerator implements GraphGenerator {
                                        Random r,
                                        VertexProvider<V> vertexProvider,
                                        Map<String, V> identification) {
-        final Graph<V, E> g = factory.createGraph(vertexCount);
+        final Graph<V, E> g = factory.createWeightedDirected(vertexCount);
 
         V current = g.addVertex(vertexProvider);
         identification.put("source", current);

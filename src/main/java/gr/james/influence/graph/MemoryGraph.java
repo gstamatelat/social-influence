@@ -13,19 +13,41 @@ class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
     private final Map<V, BiMap<V, DirectedEdge<V, E>>> mIn;
     private final List<V> vList;
 
-    public MemoryGraph() {
+    protected MemoryGraph() {
         this.mOut = new HashMap<>();
         this.mIn = new HashMap<>();
         this.vList = new ArrayList<>();
     }
 
-    public MemoryGraph(int expectedVertexCount) {
+    protected MemoryGraph(int expectedVertexCount) {
         if (expectedVertexCount < 0) {
             throw new IllegalArgumentException();
         }
         this.mOut = new HashMap<>(expectedVertexCount);
         this.mIn = new HashMap<>(expectedVertexCount);
         this.vList = new ArrayList<>(expectedVertexCount);
+    }
+
+    static <V, E> GraphFactory<V, E> factory() {
+        return new GraphFactory<V, E>() {
+            @Override
+            public Graph<V, E> createGraph(GraphType type) {
+                Conditions.requireNonNull(type);
+                if (!type.equals(GraphType.WEIGHTED_DIRECTED)) {
+                    throw new UnsupportedOperationException();
+                }
+                return new MemoryGraph<>();
+            }
+
+            @Override
+            public Graph<V, E> createGraph(GraphType type, int expectedVertexCount) {
+                Conditions.requireNonNull(type);
+                if (!type.equals(GraphType.WEIGHTED_DIRECTED)) {
+                    throw new UnsupportedOperationException();
+                }
+                return new MemoryGraph<>(expectedVertexCount);
+            }
+        };
     }
 
     @Override

@@ -29,7 +29,7 @@ public class WattsStrogatzGenerator implements GraphGenerator {
 
     @Override
     public <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, Random r, VertexProvider<V> vertexProvider, Map<String, V> identification) {
-        Graph<V, E> g = factory.createGraph();
+        Graph<V, E> g = factory.createWeightedDirected();
 
         List<V> l = g.addVertices(n, vertexProvider);
         for (int i = 0; i < n; i++) {

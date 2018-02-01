@@ -14,7 +14,7 @@ import java.util.Arrays;
 public class CSVImporter implements GraphImporter {
     @Override
     public <V, E> Graph<V, E> from(InputStream source, GraphFactory<V, E> factory, Deserializer<V> deserializer) throws IOException {
-        Graph<V, E> g = factory.createGraph();
+        Graph<V, E> g = factory.createWeightedDirected();
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(source, Finals.IO_ENCODING));
         String line;

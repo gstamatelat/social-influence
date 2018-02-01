@@ -21,7 +21,7 @@ public interface GraphImporter {
      * @throws IOException if an I/O exception occurs
      */
     default SimpleGraph from(URL source) throws IOException {
-        return (SimpleGraph) from(source, SimpleGraph::new, Integer::parseInt);
+        return (SimpleGraph) from(source, SimpleGraph.factory, Integer::parseInt);
     }
 
     /**
@@ -50,7 +50,7 @@ public interface GraphImporter {
      * @throws IOException if an I/O exception occurs
      */
     default SimpleGraph from(InputStream source) throws IOException {
-        return (SimpleGraph) from(source, SimpleGraph::new, Integer::parseInt);
+        return (SimpleGraph) from(source, SimpleGraph.factory, Integer::parseInt);
     }
 
     /**

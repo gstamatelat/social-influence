@@ -43,17 +43,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @return a {@link GraphFactory} for this type
      */
     static <V, E> GraphFactory<V, E> factory() {
-        return new GraphFactory<V, E>() {
-            @Override
-            public Graph<V, E> createGraph() {
-                return new MemoryGraph<>();
-            }
-
-            @Override
-            public Graph<V, E> createGraph(int expectedVertexCount) {
-                return new MemoryGraph<>(expectedVertexCount);
-            }
-        };
+        return MemoryGraph.factory();
     }
 
     /**

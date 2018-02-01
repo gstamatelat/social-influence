@@ -18,7 +18,7 @@ public class CompleteGenerator implements GraphGenerator {
 
     @Override
     public <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, Random r, VertexProvider<V> vertexProvider, Map<String, V> identification) {
-        Graph<V, E> g = factory.createGraph();
+        Graph<V, E> g = factory.createWeightedDirected();
 
         g.addEdges(g.addVertices(totalVertices, vertexProvider));
 

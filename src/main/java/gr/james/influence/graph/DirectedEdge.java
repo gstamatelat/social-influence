@@ -74,7 +74,7 @@ public interface DirectedEdge<V, E> {
      * Indicates whether some object is equal to this {@link DirectedEdge}.
      * <p>
      * This method will return {@code true} if {@code obj} is of type {@link DirectedEdge} and is equal to this edge.
-     * Two {@link DirectedEdge} are equal if the respective fields {@link #value()}, {@link #source()},
+     * Two {@link DirectedEdge} objects are equal if the respective fields {@link #value()}, {@link #source()},
      * {@link #target()} and {@link #weight()} are equal.
      *
      * @param obj the reference object with which to compare

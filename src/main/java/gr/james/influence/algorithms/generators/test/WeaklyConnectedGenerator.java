@@ -15,7 +15,7 @@ public class WeaklyConnectedGenerator implements GraphGenerator {
 
     @Override
     public <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, Random r, VertexProvider<V> vertexProvider, Map<String, V> identification) {
-        Graph<V, E> g = factory.createGraph();
+        Graph<V, E> g = factory.createWeightedDirected();
 
         V v1 = g.addVertex(vertexProvider);
         V v2 = g.addVertex(vertexProvider);
