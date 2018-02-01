@@ -46,7 +46,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
         return new GraphFactory<V, E>() {
             @Override
             public Graph<V, E> createGraph() {
-                return null;
+                return new MemoryGraph<>();
             }
 
             @Override

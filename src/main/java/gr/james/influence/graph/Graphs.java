@@ -28,7 +28,7 @@ public final class Graphs {
     }
 
     public static <V, E> Graph<V, E> randomizeEdgeWeights(Graph<V, E> g, boolean unused) {
-        final Graph<V, E> newGraph = new MemoryGraph<>();
+        final Graph<V, E> newGraph = Graph.<V, E>factory().createGraph();
         for (V v : g) {
             newGraph.addVertex(v);
         }
