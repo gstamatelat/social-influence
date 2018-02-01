@@ -29,6 +29,11 @@ class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
     }
 
     @Override
+    public GraphType type() {
+        return GraphType.from(true, true);
+    }
+
+    @Override
     public Set<DirectedEdge<V, E>> outEdges(V v) {
         Conditions.requireNonNull(v);
         final BiMap<V, DirectedEdge<V, E>> map = mOut.get(v);

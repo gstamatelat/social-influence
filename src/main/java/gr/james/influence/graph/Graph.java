@@ -57,6 +57,13 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     }
 
     /**
+     * Returns the type of this graph.
+     *
+     * @return the type of this graph
+     */
+    GraphType type();
+
+    /**
      * Checks if this graph contains an edge with the specified {@code source} and {@code target}.
      * <p>
      * This method is equivalent to
