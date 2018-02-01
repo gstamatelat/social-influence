@@ -147,8 +147,12 @@ class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
 
     @Override
     public Set<V> adjacentOut(V v) {
-        Conditions.requireNonNullAndExists(v, this);
-        return Collections.unmodifiableSet(this.mOut.get(v).keySet());
+        Conditions.requireNonNull(v);
+        final BiMap<V, DirectedEdge<V, E>> edges = mOut.get(v);
+        if (edges == null) {
+            throw new IllegalVertexException();
+        }
+        return Collections.unmodifiableSet(edges.keySet());
     }
 
     @Override
@@ -159,8 +163,12 @@ class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
 
     @Override
     public Set<V> adjacentIn(V v) {
-        Conditions.requireNonNullAndExists(v, this);
-        return Collections.unmodifiableSet(this.mIn.get(v).keySet());
+        Conditions.requireNonNull(v);
+        final BiMap<V, DirectedEdge<V, E>> edges = mIn.get(v);
+        if (edges == null) {
+            throw new IllegalVertexException();
+        }
+        return Collections.unmodifiableSet(edges.keySet());
     }
 
     @Override
