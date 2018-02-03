@@ -1,7 +1,7 @@
 package gr.james.influence.graph;
 
 /**
- * Represents a directed edge.
+ * Represents an edge of a {@link DirectedGraph}.
  *
  * @param <V> the vertex type
  * @param <E> the edge type

@@ -45,14 +45,14 @@ final class DirectedEdgeImpl<V, E> implements DirectedEdge<V, E> {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (o == null || !(o instanceof DirectedEdge)) {
             return false;
         }
-        final DirectedEdgeImpl<?, ?> that = (DirectedEdgeImpl<?, ?>) o;
-        return Double.compare(weight, that.weight) == 0 && // maybe weight is easier to compare so it goes first
-                Objects.equals(value, that.value) &&
-                Objects.equals(source, that.source) &&
-                Objects.equals(target, that.target);
+        final DirectedEdge<?, ?> that = (DirectedEdge<?, ?>) o;
+        return Double.compare(weight(), that.weight()) == 0 && // maybe weight is easier to compare so it goes first
+                Objects.equals(value(), that.value()) &&
+                Objects.equals(source(), that.source()) &&
+                Objects.equals(target(), that.target());
     }
 
     @Override

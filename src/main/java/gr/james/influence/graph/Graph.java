@@ -162,4 +162,12 @@ public interface Graph<V> extends Iterable<V> {
             removeVertex(v);
         }
     }
+
+    /**
+     * Returns a string representation of this graph.
+     *
+     * @return a string representation of this graph
+     */
+    @Override
+    String toString();
 }
