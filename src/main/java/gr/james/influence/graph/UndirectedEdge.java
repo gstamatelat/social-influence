@@ -43,10 +43,20 @@ public interface UndirectedEdge<V, E> {
      */
     V w();
 
+    /**
+     * Returns the vertex that is on the other end of another vertex.
+     * <p>
+     * In other words, this method returns the vertex that sits opposite of {@code ref} in this edge.
+     *
+     * @param ref the other vertex
+     * @return the vertex that is on the other end of another vertex
+     * @throws NullPointerException     if {@code ref} is {@code null}
+     * @throws IllegalArgumentException if {@code ref} is not incident to this edge
+     */
     default V other(V ref) {
-        if (v().equals(ref)) {
+        if (ref.equals(v())) {
             return w();
-        } else if (w().equals(ref)) {
+        } else if (ref.equals(w())) {
             return v();
         } else {
             throw new IllegalArgumentException();
