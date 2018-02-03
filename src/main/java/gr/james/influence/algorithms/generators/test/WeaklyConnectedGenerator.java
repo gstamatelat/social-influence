@@ -2,7 +2,6 @@ package gr.james.influence.algorithms.generators.test;
 
 import gr.james.influence.algorithms.generators.GraphGenerator;
 import gr.james.influence.graph.DirectedGraph;
-import gr.james.influence.graph.MutableGraph;
 import gr.james.influence.graph.VertexProvider;
 import gr.james.influence.util.Finals;
 
@@ -15,7 +14,7 @@ public class WeaklyConnectedGenerator<V, E> implements GraphGenerator<DirectedGr
 
     @Override
     public DirectedGraph<V, E> generate(Random r, VertexProvider<V> vertexProvider, Map<String, V> identification) {
-        DirectedGraph<V, E> g = new MutableGraph<>();
+        DirectedGraph<V, E> g = DirectedGraph.create();
 
         V v1 = g.addVertex(vertexProvider);
         V v2 = g.addVertex(vertexProvider);

@@ -3,7 +3,6 @@ package gr.james.influence.algorithms.generators.random;
 import gr.james.influence.algorithms.generators.GraphGenerator;
 import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.graph.Graphs;
-import gr.james.influence.graph.MutableGraph;
 import gr.james.influence.graph.VertexProvider;
 import gr.james.influence.util.Conditions;
 import gr.james.influence.util.Finals;
@@ -29,7 +28,7 @@ public class WattsStrogatzGenerator<V, E> implements GraphGenerator<DirectedGrap
 
     @Override
     public DirectedGraph<V, E> generate(Random r, VertexProvider<V> vertexProvider, Map<String, V> identification) {
-        DirectedGraph<V, E> g = new MutableGraph<>();
+        DirectedGraph<V, E> g = DirectedGraph.create();
 
         List<V> l = g.addVertices(n, vertexProvider);
         for (int i = 0; i < n; i++) {

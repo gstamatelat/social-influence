@@ -5,7 +5,6 @@ import gr.james.influence.algorithms.generators.basic.DirectedPathGenerator;
 import gr.james.influence.algorithms.generators.random.RandomGenerator;
 import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.graph.Graphs;
-import gr.james.influence.graph.SimpleGraph;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -35,7 +34,7 @@ public class ConnectedComponentsTests {
      */
     @Test
     public void empty() {
-        final SimpleGraph g = new SimpleGraph();
+        final DirectedGraph<Integer, Object> g = DirectedGraph.create();
         final ConnectedComponents<Integer> cc = factory.apply(g);
 
         Assert.assertTrue("ConnectedComponentsTests.empty", cc.size() == 0);

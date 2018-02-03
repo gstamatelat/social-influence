@@ -2,7 +2,6 @@ package gr.james.influence.algorithms.generators.random;
 
 import gr.james.influence.algorithms.generators.GraphGenerator;
 import gr.james.influence.graph.DirectedGraph;
-import gr.james.influence.graph.MutableGraph;
 import gr.james.influence.graph.VertexProvider;
 import gr.james.influence.util.Finals;
 
@@ -34,7 +33,7 @@ public class RandomGenerator<V, E> implements GraphGenerator<DirectedGraph<V, E>
 
     @Override
     public DirectedGraph<V, E> generate(Random r, VertexProvider<V> vertexProvider, Map<String, V> identification) {
-        DirectedGraph<V, E> g = new MutableGraph<>();
+        DirectedGraph<V, E> g = DirectedGraph.create();
 
         while (g.vertexCount() < totalVertices) {
             V v = g.addVertex(vertexProvider);

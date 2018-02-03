@@ -1,9 +1,7 @@
 package gr.james.influence.graph;
 
-import java.util.List;
-
 @Deprecated
-public class SimpleGraph extends MutableGraph<Integer, Object> {
+public class SimpleGraph {
     public static VertexProvider<Integer> vertexProvider = new VertexProvider<Integer>() {
         private int nextId = 0;
 
@@ -13,7 +11,7 @@ public class SimpleGraph extends MutableGraph<Integer, Object> {
         }
     };
 
-    public SimpleGraph() {
+    /*public SimpleGraph() {
         super();
     }
 
@@ -27,5 +25,5 @@ public class SimpleGraph extends MutableGraph<Integer, Object> {
 
     public List<Integer> addVertices(int n) {
         return super.addVertices(n, vertexProvider);
-    }
+    }*/
 }

@@ -8,30 +8,16 @@ import gr.james.influence.util.Finals;
 
 import java.util.*;
 
-/**
- * Implementation of {@link DirectedGraph} using adjacency lists.
- *
- * @param <V> the vertex type
- * @param <E> the edge type
- */
-public class MutableGraph<V, E> extends TreeMapMetadata implements DirectedGraph<V, E> {
+final class DirectedGraphImpl<V, E> extends TreeMapMetadata implements DirectedGraph<V, E> {
     private final Map<V, BiMap<V, DirectedEdge<V, E>>> mOut;
     private final Map<V, BiMap<V, DirectedEdge<V, E>>> mIn;
 
-    /**
-     * Construct a new empty {@link MutableGraph}.
-     */
-    public MutableGraph() {
+    DirectedGraphImpl() {
         this.mOut = new HashMap<>();
         this.mIn = new HashMap<>();
     }
 
-    /**
-     * Construct a new empty {@link MutableGraph} with some expectation of its size.
-     *
-     * @param expectedVertexCount the expected vertex count
-     */
-    public MutableGraph(int expectedVertexCount) {
+    DirectedGraphImpl(int expectedVertexCount) {
         if (expectedVertexCount < 0) {
             throw new IllegalArgumentException();
         }
@@ -39,12 +25,7 @@ public class MutableGraph<V, E> extends TreeMapMetadata implements DirectedGraph
         this.mIn = new HashMap<>(expectedVertexCount);
     }
 
-    /**
-     * Construct a new {@link MutableGraph} from a copy of a given graph.
-     *
-     * @param g the graph to copy
-     */
-    public MutableGraph(DirectedGraph<V, E> g) {
+    DirectedGraphImpl(DirectedGraph<V, E> g) {
         this(g.vertexCount());
         for (V v : g) {
             final boolean inserted = addVertex(v);

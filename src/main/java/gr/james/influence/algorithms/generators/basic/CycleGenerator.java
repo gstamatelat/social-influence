@@ -2,7 +2,6 @@ package gr.james.influence.algorithms.generators.basic;
 
 import gr.james.influence.algorithms.generators.GraphGenerator;
 import gr.james.influence.graph.DirectedGraph;
-import gr.james.influence.graph.MutableGraph;
 import gr.james.influence.graph.VertexProvider;
 
 import java.util.Map;
@@ -31,7 +30,7 @@ public class CycleGenerator<V, E> implements GraphGenerator<DirectedGraph<V, E>,
     public DirectedGraph<V, E> generate(Random r,
                                         VertexProvider<V> vertexProvider,
                                         Map<String, V> identification) {
-        final DirectedGraph<V, E> g = new MutableGraph<>(vertexCount);
+        final DirectedGraph<V, E> g = DirectedGraph.create(vertexCount);
 
         V current = g.addVertex(vertexProvider);
         final V start = current;

@@ -1,7 +1,6 @@
 package gr.james.influence.io;
 
 import gr.james.influence.graph.DirectedGraph;
-import gr.james.influence.graph.MutableGraph;
 import gr.james.influence.util.Finals;
 
 import java.io.BufferedReader;
@@ -29,7 +28,7 @@ public class EdgesImporter<V, E> implements GraphImporter<DirectedGraph<V, E>, V
 
     @Override
     public DirectedGraph<V, E> from(InputStream source, Deserializer<V> deserializer) throws IOException {
-        final DirectedGraph<V, E> g = new MutableGraph<>();
+        final DirectedGraph<V, E> g = DirectedGraph.create();
 
         final BufferedReader reader = new BufferedReader(new InputStreamReader(source, Finals.IO_ENCODING));
         final Map<String, V> nodeMap = new HashMap<>();

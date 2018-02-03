@@ -18,10 +18,10 @@ public class PearsonSimilarityTests {
      */
     @Test
     public void simple() {
-        final SimpleGraph g = new SimpleGraph();
-        final Integer v1 = g.addVertex();
-        final Integer v2 = g.addVertex();
-        final Integer v3 = g.addVertex();
+        final DirectedGraph<Integer, Object> g = DirectedGraph.create();
+        final Integer v1 = g.addVertex(SimpleGraph.vertexProvider);
+        final Integer v2 = g.addVertex(SimpleGraph.vertexProvider);
+        final Integer v3 = g.addVertex(SimpleGraph.vertexProvider);
         g.addEdge(v1, v2, 1);
         g.addEdge(v1, v3, 1);
         g.addEdge(v3, v2, 2);
@@ -39,8 +39,8 @@ public class PearsonSimilarityTests {
      */
     @Test
     public void empty() {
-        final SimpleGraph g = new SimpleGraph();
-        g.addVertices(5);
+        final DirectedGraph<Integer, Object> g = DirectedGraph.create();
+        g.addVertices(5, SimpleGraph.vertexProvider);
         final VertexSimilarity<Integer, Double> pearson = new PearsonSimilarity<>(g);
         for (Integer v : g) {
             for (Integer w : g) {
