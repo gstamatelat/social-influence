@@ -1,6 +1,6 @@
 package gr.james.influence.algorithms.generators;
 
-import gr.james.influence.graph.DirectedGraph;
+import gr.james.influence.graph.Graph;
 import gr.james.influence.graph.VertexProvider;
 import gr.james.influence.util.RandomHelper;
 
@@ -9,12 +9,13 @@ import java.util.Map;
 import java.util.Random;
 
 /**
- * Represents an entity that can generate a {@code DirectedGraph} based on a set of rules.
+ * Represents an algorithm that can generate a {@link Graph}.
  */
-public interface GraphGenerator<G extends DirectedGraph<V, E>, V, E> {
+public interface GraphGenerator<G extends Graph<V, E>, V, E> {
     /**
-     * Generate a new {@link DirectedGraph} based on the rules imposed by this entity. This method is using the global random
-     * instance.
+     * Generates a graph.
+     * <p>
+     * This method is using the global random instance.
      *
      * @param vertexProvider the vertex provider
      * @return the generated graph
@@ -28,7 +29,7 @@ public interface GraphGenerator<G extends DirectedGraph<V, E>, V, E> {
     }
 
     /**
-     * Generate a new {@link DirectedGraph} based on the rules imposed by this entity.
+     * Generates a graph.
      *
      * @param seed           the seed for the {@link Random}
      * @param vertexProvider the vertex provider
@@ -43,7 +44,7 @@ public interface GraphGenerator<G extends DirectedGraph<V, E>, V, E> {
     }
 
     /**
-     * Generate a new {@link DirectedGraph} based on the rules imposed by this entity.
+     * Generates a graph.
      *
      * @param r              the {@link Random} instance to use
      * @param vertexProvider the vertex provider
