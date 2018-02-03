@@ -2,7 +2,7 @@ package gr.james.influence.algorithms.scoring;
 
 import gr.james.influence.algorithms.AbstractIterativeAlgorithm;
 import gr.james.influence.graph.DirectedEdge;
-import gr.james.influence.graph.Graph;
+import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.util.collections.GraphState;
 
 public class DeGroot<V> extends AbstractIterativeAlgorithm<V, Double> {
@@ -10,16 +10,16 @@ public class DeGroot<V> extends AbstractIterativeAlgorithm<V, Double> {
 
     private double epsilon;
 
-    public DeGroot(Graph<V, ?> g, GraphState<V, Double> initial, double epsilon) {
+    public DeGroot(DirectedGraph<V, ?> g, GraphState<V, Double> initial, double epsilon) {
         super(g, initial);
         this.epsilon = epsilon;
     }
 
-    public static <V> GraphState<V, Double> execute(Graph<V, ?> g, GraphState<V, Double> initial, double epsilon) {
+    public static <V> GraphState<V, Double> execute(DirectedGraph<V, ?> g, GraphState<V, Double> initial, double epsilon) {
         return new DeGroot<>(g, initial, epsilon).run();
     }
 
-    public static <V> GraphState<V, Double> execute(Graph<V, ?> g, GraphState<V, Double> initial) {
+    public static <V> GraphState<V, Double> execute(DirectedGraph<V, ?> g, GraphState<V, Double> initial) {
         return new DeGroot<>(g, initial, DEFAULT_PRECISION).run();
     }
 
@@ -34,7 +34,7 @@ public class DeGroot<V> extends AbstractIterativeAlgorithm<V, Double> {
     }
 
     @Override
-    protected GraphState<V, Double> step(Graph<V, ?> g, GraphState<V, Double> previous) {
+    protected GraphState<V, Double> step(DirectedGraph<V, ?> g, GraphState<V, Double> previous) {
         final GraphState<V, Double> nextState = GraphState.create();
         for (V v : g) {
             double w = 0.0;

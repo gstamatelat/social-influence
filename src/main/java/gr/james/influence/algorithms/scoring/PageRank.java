@@ -2,7 +2,7 @@ package gr.james.influence.algorithms.scoring;
 
 import gr.james.influence.algorithms.AbstractIterativeAlgorithm;
 import gr.james.influence.graph.DirectedEdge;
-import gr.james.influence.graph.Graph;
+import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.util.collections.GraphState;
 
 import java.util.HashMap;
@@ -15,7 +15,7 @@ public class PageRank<V> extends AbstractIterativeAlgorithm<V, Double> {
     private double epsilon;
     private Map<V, Double> outStrengths;
 
-    public PageRank(Graph<V, ?> g, double dampingFactor, double epsilon) {
+    public PageRank(DirectedGraph<V, ?> g, double dampingFactor, double epsilon) {
         super(g, GraphState.create(g.vertexSet(), 1.0));
         this.dampingFactor = dampingFactor;
         this.epsilon = epsilon;
@@ -26,11 +26,11 @@ public class PageRank<V> extends AbstractIterativeAlgorithm<V, Double> {
         }
     }
 
-    public static <V> GraphState<V, Double> execute(Graph<V, ?> g, double dampingFactor, double epsilon) {
+    public static <V> GraphState<V, Double> execute(DirectedGraph<V, ?> g, double dampingFactor, double epsilon) {
         return new PageRank<>(g, dampingFactor, epsilon).run();
     }
 
-    public static <V> GraphState<V, Double> execute(Graph<V, ?> g, double dampingFactor) {
+    public static <V> GraphState<V, Double> execute(DirectedGraph<V, ?> g, double dampingFactor) {
         return new PageRank<>(g, dampingFactor, DEFAULT_PRECISION).run();
     }
 
@@ -45,7 +45,7 @@ public class PageRank<V> extends AbstractIterativeAlgorithm<V, Double> {
     }
 
     @Override
-    protected GraphState<V, Double> step(Graph<V, ?> g, GraphState<V, Double> previous) {
+    protected GraphState<V, Double> step(DirectedGraph<V, ?> g, GraphState<V, Double> previous) {
         final GraphState<V, Double> nextState = GraphState.create();
         for (V v : g) {
             double w = 0;

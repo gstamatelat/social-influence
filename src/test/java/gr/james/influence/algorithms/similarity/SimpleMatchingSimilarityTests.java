@@ -4,7 +4,7 @@ import gr.james.influence.algorithms.generators.basic.CompleteGenerator;
 import gr.james.influence.algorithms.generators.basic.CycleGenerator;
 import gr.james.influence.algorithms.generators.random.RandomGenerator;
 import gr.james.influence.api.algorithms.VertexSimilarity;
-import gr.james.influence.graph.Graph;
+import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.graph.SimpleGraph;
 import org.junit.Assert;
 import org.junit.Test;
@@ -55,7 +55,7 @@ public class SimpleMatchingSimilarityTests {
     @Test
     public void circle() {
         for (int n = 4; n < 100; n++) {
-            final Graph<Integer, Object> g = new CycleGenerator<>(n).generate();
+            final DirectedGraph<Integer, Object> g = new CycleGenerator<>(n).generate();
             final VertexSimilarity<Integer, Double> smc = new SimpleMatchingSimilarity<>(g);
             for (Integer v : g) {
                 for (Integer e : g.adjacentOut(v)) {
@@ -72,7 +72,7 @@ public class SimpleMatchingSimilarityTests {
      */
     @Test
     public void commutativity() {
-        final Graph<Integer, Object> g = new RandomGenerator<>(100, 0.1).generate();
+        final DirectedGraph<Integer, Object> g = new RandomGenerator<>(100, 0.1).generate();
         final VertexSimilarity<Integer, Double> smc = new SimpleMatchingSimilarity<>(g);
         for (Integer v : g) {
             for (Integer w : g) {
@@ -87,7 +87,7 @@ public class SimpleMatchingSimilarityTests {
      */
     @Test
     public void identity() {
-        final Graph<Integer, Object> g = new RandomGenerator<>(100, 0.1).generate();
+        final DirectedGraph<Integer, Object> g = new RandomGenerator<>(100, 0.1).generate();
         final VertexSimilarity<Integer, Double> smc = new SimpleMatchingSimilarity<>(g);
         for (Integer v : g) {
             Assert.assertEquals("SimpleMatchingSimilarityTests.identity",
@@ -100,7 +100,7 @@ public class SimpleMatchingSimilarityTests {
      */
     @Test
     public void complete() {
-        final Graph<Integer, Object> g = new CompleteGenerator<>(5).generate();
+        final DirectedGraph<Integer, Object> g = new CompleteGenerator<>(5).generate();
         for (Integer v : g) {
             g.addEdge(v, v, 1.0);
         }

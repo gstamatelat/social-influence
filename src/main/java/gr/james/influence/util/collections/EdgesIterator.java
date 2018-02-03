@@ -2,7 +2,7 @@ package gr.james.influence.util.collections;
 
 import gr.james.influence.annotation.UnmodifiableGraph;
 import gr.james.influence.graph.DirectedEdge;
-import gr.james.influence.graph.Graph;
+import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.util.Conditions;
 
 import java.util.Collections;
@@ -23,7 +23,7 @@ import java.util.function.Consumer;
  * @param <E> the edge type
  */
 public class EdgesIterator<V, E> implements Iterator<DirectedEdge<V, E>> {
-    private final Graph<V, E> g;
+    private final DirectedGraph<V, E> g;
     private final Iterator<V> vertexIterator;
     private boolean hasNext;
     private Iterator<DirectedEdge<V, E>> buffer;
@@ -34,7 +34,7 @@ public class EdgesIterator<V, E> implements Iterator<DirectedEdge<V, E>> {
      * @param g the graph over which to iterate the edges
      * @throws NullPointerException if {@code g} is {@code null}
      */
-    public EdgesIterator(@UnmodifiableGraph Graph<V, E> g) {
+    public EdgesIterator(@UnmodifiableGraph DirectedGraph<V, E> g) {
         Conditions.requireNonNull(g);
 
         this.g = g;

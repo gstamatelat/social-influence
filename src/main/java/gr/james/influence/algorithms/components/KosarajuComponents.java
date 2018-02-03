@@ -1,7 +1,7 @@
 package gr.james.influence.algorithms.components;
 
 import gr.james.influence.annotation.UnmodifiableGraph;
-import gr.james.influence.graph.Graph;
+import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.util.Conditions;
 import gr.james.influence.util.collections.GraphState;
 
@@ -23,7 +23,7 @@ public class KosarajuComponents<V> implements ConnectedComponents<V> {
      * @param g the graph with which to construct this instance from
      * @throws NullPointerException if {@code g} is {@code null}
      */
-    public KosarajuComponents(@UnmodifiableGraph Graph<V, ?> g) {
+    public KosarajuComponents(@UnmodifiableGraph DirectedGraph<V, ?> g) {
         Conditions.requireNonNull(g);
         this.components = executeAlgorithm(g);
     }
@@ -37,11 +37,11 @@ public class KosarajuComponents<V> implements ConnectedComponents<V> {
      * @return the strongly connected components of {@code g}
      * @throws NullPointerException if {@code g} is {@code null}
      */
-    public static <V> Set<Set<V>> execute(Graph<V, ?> g) {
+    public static <V> Set<Set<V>> execute(DirectedGraph<V, ?> g) {
         return new KosarajuComponents<>(g).components();
     }
 
-    private static <V, E> Set<Set<V>> executeAlgorithm(Graph<V, E> g) {
+    private static <V, E> Set<Set<V>> executeAlgorithm(DirectedGraph<V, E> g) {
         final Set<Set<V>> components = new HashSet<>();
 
         final Map<V, Iterator<V>> edgeIterator = new HashMap<>();

@@ -2,7 +2,7 @@ package gr.james.influence.api.algorithms;
 
 import gr.james.influence.algorithms.distance.DijkstraClosestFirstIterator;
 import gr.james.influence.exceptions.IllegalVertexException;
-import gr.james.influence.graph.Graph;
+import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.util.Conditions;
 
 import java.util.ArrayList;
@@ -39,15 +39,15 @@ public interface VertexIterator<V> extends Iterator<V> {
     V next();
 
     /**
-     * Returns the {@link Graph} linked to this instance.
+     * Returns the {@link DirectedGraph} linked to this instance.
      * <p>
      * This method cannot return {@code null}.
      * <p>
      * This method runs in constant time.
      *
-     * @return the {@link Graph} linked to this instance
+     * @return the {@link DirectedGraph} linked to this instance
      */
-    Graph<V, ?> getGraph();
+    DirectedGraph<V, ?> getGraph();
 
     /**
      * Runs this iterator until there are no more vertices.

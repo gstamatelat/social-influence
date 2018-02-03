@@ -2,7 +2,7 @@ package gr.james.influence.algorithms.distance;
 
 import gr.james.influence.annotation.UnmodifiableGraph;
 import gr.james.influence.api.algorithms.GraphProperty;
-import gr.james.influence.graph.Graph;
+import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.util.Conditions;
 
 import java.util.List;
@@ -27,7 +27,7 @@ public class DijkstraDiameter<V> implements GraphProperty<Double> {
      * @throws NullPointerException     if {@code g} is {@code null}
      * @throws IllegalArgumentException if {@code g} contains less than 2 vertices
      */
-    public DijkstraDiameter(@UnmodifiableGraph Graph<V, ?> g) {
+    public DijkstraDiameter(@UnmodifiableGraph DirectedGraph<V, ?> g) {
         Conditions.requireNonNull(g);
         Conditions.requireArgument(g.vertexCount() > 1);
 

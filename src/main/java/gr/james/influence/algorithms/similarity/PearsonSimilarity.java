@@ -5,7 +5,7 @@ import gr.james.influence.annotation.UnmodifiableGraph;
 import gr.james.influence.api.algorithms.VertexSimilarity;
 import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.graph.DirectedEdge;
-import gr.james.influence.graph.Graph;
+import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.util.Conditions;
 
 import java.util.HashMap;
@@ -27,20 +27,20 @@ import java.util.Set;
  * @param <V> the vertex type
  */
 public class PearsonSimilarity<V> implements VertexSimilarity<V, Double> {
-    private final Graph<V, ?> g;
+    private final DirectedGraph<V, ?> g;
     private final Map<V, Double> averages;
     private final Map<V, Double> variances;
 
     /**
-     * Construct a {@link PearsonSimilarity} instance from a {@link Graph}.
+     * Construct a {@link PearsonSimilarity} instance from a {@link DirectedGraph}.
      * <p>
      * The constructor calculates the weight averages and variances of all vertices in time {@code O(V + E)}.
      *
-     * @param g the {@link Graph} to construct this instance from
+     * @param g the {@link DirectedGraph} to construct this instance from
      * @throws NullPointerException     if {@code g} is {@code null}
      * @throws IllegalArgumentException if {@code g} does not contain any vertices
      */
-    public PearsonSimilarity(@UnmodifiableGraph Graph<V, ?> g) {
+    public PearsonSimilarity(@UnmodifiableGraph DirectedGraph<V, ?> g) {
         Conditions.requireArgument(g.vertexCount() > 0, "Input graph is empty");
 
         this.g = g;

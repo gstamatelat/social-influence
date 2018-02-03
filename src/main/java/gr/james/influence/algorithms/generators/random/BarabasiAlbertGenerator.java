@@ -1,10 +1,10 @@
 package gr.james.influence.algorithms.generators.random;
 
+import gr.james.influence.algorithms.generators.GraphGenerator;
 import gr.james.influence.algorithms.generators.basic.CompleteGenerator;
 import gr.james.influence.algorithms.scoring.DegreeCentrality;
-import gr.james.influence.algorithms.generators.GraphGenerator;
+import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.graph.Direction;
-import gr.james.influence.graph.Graph;
 import gr.james.influence.graph.VertexProvider;
 import gr.james.influence.util.Conditions;
 import gr.james.influence.util.Finals;
@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
-public class BarabasiAlbertGenerator<V, E> implements GraphGenerator<Graph<V, E>, V, E> {
+public class BarabasiAlbertGenerator<V, E> implements GraphGenerator<DirectedGraph<V, E>, V, E> {
     private int totalVertices;
     private int initialClique;
     private int stepEdges;
@@ -32,8 +32,8 @@ public class BarabasiAlbertGenerator<V, E> implements GraphGenerator<Graph<V, E>
     }
 
     @Override
-    public Graph<V, E> generate(Random r, VertexProvider<V> vertexProvider, Map<String, V> identification) {
-        Graph<V, E> g = new CompleteGenerator<V, E>(initialClique).generate(r, vertexProvider);
+    public DirectedGraph<V, E> generate(Random r, VertexProvider<V> vertexProvider, Map<String, V> identification) {
+        DirectedGraph<V, E> g = new CompleteGenerator<V, E>(initialClique).generate(r, vertexProvider);
 
         while (g.vertexCount() < totalVertices) {
             GraphState<V, Integer> degree = DegreeCentrality.execute(g, Direction.INBOUND);

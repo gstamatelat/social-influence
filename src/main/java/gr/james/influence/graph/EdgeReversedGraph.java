@@ -5,13 +5,13 @@ import java.util.Iterator;
 import java.util.Set;
 
 /**
- * Provides a way to create a {@link Graph} decorator with reversed edges.
+ * Provides a way to create a {@link DirectedGraph} decorator with reversed edges.
  *
  * @param <V> the vertex type
  * @param <E> the edge type
  */
 public final class EdgeReversedGraph<V, E> extends GraphDecorator<V, E> {
-    private EdgeReversedGraph(Graph<V, E> g) {
+    private EdgeReversedGraph(DirectedGraph<V, E> g) {
         super(g);
     }
 
@@ -23,7 +23,7 @@ public final class EdgeReversedGraph<V, E> extends GraphDecorator<V, E> {
      * @param <E> the edge type
      * @return a decorator of {@code g} with reversed edges
      */
-    public static <V, E> Graph<V, E> decorate(Graph<V, E> g) {
+    public static <V, E> DirectedGraph<V, E> decorate(DirectedGraph<V, E> g) {
         return new EdgeReversedGraph<>(g);
     }
 

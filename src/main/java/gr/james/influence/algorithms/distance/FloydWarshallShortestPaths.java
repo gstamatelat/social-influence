@@ -3,7 +3,7 @@ package gr.james.influence.algorithms.distance;
 import gr.james.influence.annotation.UnmodifiableGraph;
 import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.graph.DirectedEdge;
-import gr.james.influence.graph.Graph;
+import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.util.collections.VertexPair;
 
 import java.util.HashMap;
@@ -32,7 +32,7 @@ public class FloydWarshallShortestPaths<V> implements AllPairsShortestPaths<V> {
      * @param g the graph to create this instance from
      * @throws NullPointerException if {@code g} is {@code null}
      */
-    public FloydWarshallShortestPaths(@UnmodifiableGraph Graph<V, ?> g) {
+    public FloydWarshallShortestPaths(@UnmodifiableGraph DirectedGraph<V, ?> g) {
         dist = new HashMap<>();
 
         for (V u : g) {

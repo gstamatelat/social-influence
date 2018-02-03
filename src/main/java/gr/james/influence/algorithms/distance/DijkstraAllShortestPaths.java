@@ -3,7 +3,7 @@ package gr.james.influence.algorithms.distance;
 import gr.james.influence.annotation.UnmodifiableGraph;
 import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.graph.DirectedEdge;
-import gr.james.influence.graph.Graph;
+import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.util.Conditions;
 
 import java.util.HashMap;
@@ -17,17 +17,17 @@ import java.util.Map;
  * @param <V> the vertex type
  */
 public class DijkstraAllShortestPaths<V> implements AllPairsShortestPaths<V> {
-    private final Graph<V, ?> g;
+    private final DirectedGraph<V, ?> g;
     private final Map<V, DijkstraShortestPaths<V>> alg;
 
     /**
-     * Construct an instance of {@link DijkstraAllShortestPaths} with a given {@link Graph}. The constructor runs in
+     * Construct an instance of {@link DijkstraAllShortestPaths} with a given {@link DirectedGraph}. The constructor runs in
      * constant time.
      *
-     * @param g the {@link Graph} in which to perform the algorithm
+     * @param g the {@link DirectedGraph} in which to perform the algorithm
      * @throws NullPointerException if {@code g} is {@code null}
      */
-    public DijkstraAllShortestPaths(@UnmodifiableGraph Graph<V, ?> g) {
+    public DijkstraAllShortestPaths(@UnmodifiableGraph DirectedGraph<V, ?> g) {
         Conditions.requireNonNull(g);
         this.g = g;
         this.alg = new HashMap<>();

@@ -3,7 +3,7 @@ package gr.james.influence.algorithms.scoring;
 import gr.james.influence.algorithms.distance.DijkstraShortestPaths;
 import gr.james.influence.annotation.UnmodifiableGraph;
 import gr.james.influence.exceptions.IllegalVertexException;
-import gr.james.influence.graph.Graph;
+import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.util.collections.GraphState;
 
 /**
@@ -23,17 +23,17 @@ import gr.james.influence.util.collections.GraphState;
  * Wikipedia</a>
  */
 public class HarmonicCentrality<V> extends AbstractSingleVertexScoring<V, Double> {
-    private final Graph<V, ?> g;
+    private final DirectedGraph<V, ?> g;
 
     /**
-     * Construct an instance of {@link HarmonicCentrality} using the specified input {@link Graph} g.
+     * Construct an instance of {@link HarmonicCentrality} using the specified input {@link DirectedGraph} g.
      * <p>
      * The constructor does not perform any calculations and runs in constant time.
      *
-     * @param g the input {@link Graph}
+     * @param g the input {@link DirectedGraph}
      * @throws NullPointerException if {@code g} is {@code null}
      */
-    public HarmonicCentrality(@UnmodifiableGraph Graph<V, ?> g) {
+    public HarmonicCentrality(@UnmodifiableGraph DirectedGraph<V, ?> g) {
         super(g);
         this.g = g;
     }

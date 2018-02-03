@@ -1,7 +1,7 @@
 package gr.james.influence.algorithms.generators.test;
 
 import gr.james.influence.algorithms.generators.GraphGenerator;
-import gr.james.influence.graph.Graph;
+import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.graph.MutableGraph;
 import gr.james.influence.graph.VertexProvider;
 import gr.james.influence.util.Conditions;
@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Random;
 
 // From Jackson, figure 8.3.7
-public class WiseCrowdGenerator<V, E> implements GraphGenerator<Graph<V, E>, V, E> {
+public class WiseCrowdGenerator<V, E> implements GraphGenerator<DirectedGraph<V, E>, V, E> {
     private int totalVertices;
     private double delta;
 
@@ -23,8 +23,8 @@ public class WiseCrowdGenerator<V, E> implements GraphGenerator<Graph<V, E>, V, 
     }
 
     @Override
-    public Graph<V, E> generate(Random r, VertexProvider<V> vertexProvider, Map<String, V> identification) {
-        Graph<V, E> g = new MutableGraph<>();
+    public DirectedGraph<V, E> generate(Random r, VertexProvider<V> vertexProvider, Map<String, V> identification) {
+        DirectedGraph<V, E> g = new MutableGraph<>();
 
         V boss = g.addVertex(vertexProvider);
 

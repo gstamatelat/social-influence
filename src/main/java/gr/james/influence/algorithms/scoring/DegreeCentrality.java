@@ -2,8 +2,8 @@ package gr.james.influence.algorithms.scoring;
 
 import gr.james.influence.annotation.UnmodifiableGraph;
 import gr.james.influence.exceptions.IllegalVertexException;
+import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.graph.Direction;
-import gr.james.influence.graph.Graph;
 import gr.james.influence.graph.Graphs;
 import gr.james.influence.util.Conditions;
 import gr.james.influence.util.collections.GraphState;
@@ -19,19 +19,19 @@ import gr.james.influence.util.collections.GraphState;
  * @param <V> the vertex type
  */
 public class DegreeCentrality<V> extends AbstractSingleVertexScoring<V, Integer> {
-    private final Graph<V, ?> g;
+    private final DirectedGraph<V, ?> g;
     private final Direction direction;
 
     /**
-     * Construct a {@code DegreeCentrality} instance from a {@code Graph}.
+     * Construct a {@code DegreeCentrality} instance from a {@code DirectedGraph}.
      * <p>
      * The constructor initializes this instance in constant time.
      *
-     * @param g         the {@link Graph} to construct this instance from
+     * @param g         the {@link DirectedGraph} to construct this instance from
      * @param direction the direction of the degree to calculate (in or out)
      * @throws NullPointerException if either {@code g} or {@code direction} is {@code null}
      */
-    public DegreeCentrality(@UnmodifiableGraph Graph<V, ?> g, Direction direction) {
+    public DegreeCentrality(@UnmodifiableGraph DirectedGraph<V, ?> g, Direction direction) {
         super(g);
         this.g = g;
         this.direction = Conditions.requireNonNull(direction);
@@ -51,7 +51,7 @@ public class DegreeCentrality<V> extends AbstractSingleVertexScoring<V, Integer>
      * @return the degrees of the vertices in {@code g}
      * @throws NullPointerException if either {@code g} or {@code direction} is {@code null}
      */
-    public static <V> GraphState<V, Integer> execute(Graph<V, ?> g, Direction direction) {
+    public static <V> GraphState<V, Integer> execute(DirectedGraph<V, ?> g, Direction direction) {
         return new DegreeCentrality<>(g, direction).scores();
     }
 

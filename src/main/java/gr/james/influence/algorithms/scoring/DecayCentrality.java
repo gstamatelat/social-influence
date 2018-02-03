@@ -3,7 +3,7 @@ package gr.james.influence.algorithms.scoring;
 import gr.james.influence.algorithms.distance.DijkstraShortestPaths;
 import gr.james.influence.annotation.UnmodifiableGraph;
 import gr.james.influence.exceptions.IllegalVertexException;
-import gr.james.influence.graph.Graph;
+import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.util.Conditions;
 import gr.james.influence.util.collections.GraphState;
 
@@ -22,19 +22,19 @@ import gr.james.influence.util.collections.GraphState;
  * @see "Matthew Jackson. Social and economic networks. Princeton university press, 2010. Chapter 2.2.4."
  */
 public class DecayCentrality<V> extends AbstractSingleVertexScoring<V, Double> {
-    private final Graph<V, ?> g;
+    private final DirectedGraph<V, ?> g;
     private final double decay;
 
     /**
-     * Construct an instance of {@link DecayCentrality} using the specified input {@link Graph} g.
+     * Construct an instance of {@link DecayCentrality} using the specified input {@link DirectedGraph} g.
      * <p>
      * The constructor does not perform any calculations and runs in constant time.
      *
-     * @param g     the input {@link Graph}
+     * @param g     the input {@link DirectedGraph}
      * @param decay the decay value in (0,1)
      * @throws NullPointerException if {@code g} is {@code null}
      */
-    public DecayCentrality(@UnmodifiableGraph Graph<V, ?> g, double decay) {
+    public DecayCentrality(@UnmodifiableGraph DirectedGraph<V, ?> g, double decay) {
         super(g);
         Conditions.requireArgument(decay > 0 && decay < 1, "decay argument must be in (0,1)");
         this.g = g;

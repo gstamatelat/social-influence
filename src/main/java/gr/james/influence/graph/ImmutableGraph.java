@@ -5,14 +5,14 @@ import gr.james.influence.util.Finals;
 import java.util.List;
 
 /**
- * <p>Unmodifiable decorator of a {@link Graph}.</p>
+ * <p>Unmodifiable decorator of a {@link DirectedGraph}.</p>
  */
 public final class ImmutableGraph<V, E> extends GraphDecorator<V, E> {
-    private ImmutableGraph(Graph<V, E> g) {
+    private ImmutableGraph(DirectedGraph<V, E> g) {
         super(g);
     }
 
-    public static <V, E> ImmutableGraph<V, E> decorate(Graph<V, E> g) {
+    public static <V, E> ImmutableGraph<V, E> decorate(DirectedGraph<V, E> g) {
         if (g instanceof ImmutableGraph) {
             return (ImmutableGraph<V, E>) g;
         } else {

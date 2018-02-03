@@ -3,7 +3,7 @@ package gr.james.influence.algorithms.components;
 import gr.james.influence.algorithms.generators.basic.CompleteGenerator;
 import gr.james.influence.algorithms.generators.basic.DirectedPathGenerator;
 import gr.james.influence.algorithms.generators.random.RandomGenerator;
-import gr.james.influence.graph.Graph;
+import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.graph.Graphs;
 import gr.james.influence.graph.SimpleGraph;
 import org.junit.Assert;
@@ -17,15 +17,15 @@ import java.util.stream.Collectors;
 
 @RunWith(Parameterized.class)
 public class ConnectedComponentsTests {
-    private final Function<Graph<Integer, Object>, ConnectedComponents<Integer>> factory;
+    private final Function<DirectedGraph<Integer, Object>, ConnectedComponents<Integer>> factory;
 
-    public ConnectedComponentsTests(Function<Graph<Integer, Object>, ConnectedComponents<Integer>> factory) {
+    public ConnectedComponentsTests(Function<DirectedGraph<Integer, Object>, ConnectedComponents<Integer>> factory) {
         this.factory = factory;
     }
 
     @Parameterized.Parameters
-    public static Collection<Function<Graph<Integer, Object>, ConnectedComponents<Integer>>> implementations() {
-        final Collection<Function<Graph<Integer, Object>, ConnectedComponents<Integer>>> implementations = new ArrayList<>();
+    public static Collection<Function<DirectedGraph<Integer, Object>, ConnectedComponents<Integer>>> implementations() {
+        final Collection<Function<DirectedGraph<Integer, Object>, ConnectedComponents<Integer>>> implementations = new ArrayList<>();
         implementations.add(KosarajuComponents::new);
         return implementations;
     }
@@ -50,7 +50,7 @@ public class ConnectedComponentsTests {
     public void isolated() {
         final int n = 25;
 
-        final Graph<Integer, Object> g = new DirectedPathGenerator<>(n).generate();
+        final DirectedGraph<Integer, Object> g = new DirectedPathGenerator<>(n).generate();
 
         final ConnectedComponents<Integer> cc = factory.apply(g);
 
@@ -71,7 +71,7 @@ public class ConnectedComponentsTests {
     @Test
     public void complete() {
         final int n = 25;
-        final Graph<Integer, Object> g = new CompleteGenerator<>(n).generate();
+        final DirectedGraph<Integer, Object> g = new CompleteGenerator<>(n).generate();
         final ConnectedComponents<Integer> cc = factory.apply(g);
 
         Assert.assertTrue("ConnectedComponentsTests.complete", cc.size() == 1);
@@ -84,10 +84,10 @@ public class ConnectedComponentsTests {
      */
     @Test
     public void clusters() {
-        final Graph<Integer, Object> g1 = new CompleteGenerator<>(10).generate();
-        final Graph<Integer, Object> g2 = new CompleteGenerator<>(15).generate();
-        final Graph<Integer, Object> g3 = new CompleteGenerator<>(20).generate();
-        final Graph<Integer, Object> g = Graphs.combineGraphs(Arrays.asList(g1, g2, g3));
+        final DirectedGraph<Integer, Object> g1 = new CompleteGenerator<>(10).generate();
+        final DirectedGraph<Integer, Object> g2 = new CompleteGenerator<>(15).generate();
+        final DirectedGraph<Integer, Object> g3 = new CompleteGenerator<>(20).generate();
+        final DirectedGraph<Integer, Object> g = Graphs.combineGraphs(Arrays.asList(g1, g2, g3));
         final ConnectedComponents<Integer> cc = factory.apply(g);
         final Set<Set<Integer>> s = new HashSet<>();
         s.add(g1.vertexSet());
@@ -102,13 +102,13 @@ public class ConnectedComponentsTests {
     @Test
     public void random() {
         final int n = 100;
-        final Graph<Integer, Object> g = new RandomGenerator<>(n, 0.1, true).generate();
+        final DirectedGraph<Integer, Object> g = new RandomGenerator<>(n, 0.1, true).generate();
         final ConnectedComponents<Integer> cc = factory.apply(g);
 
         api(cc, g);
     }
 
-    private void api(ConnectedComponents<Integer> cc, Graph<Integer, Object> g) {
+    private void api(ConnectedComponents<Integer> cc, DirectedGraph<Integer, Object> g) {
         // size should be components().size()
         Assert.assertEquals("ConnectedComponentsTests.api", cc.size(), cc.components().size());
 

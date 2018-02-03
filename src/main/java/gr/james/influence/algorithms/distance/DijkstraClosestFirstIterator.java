@@ -5,7 +5,7 @@ import gr.james.influence.annotation.UnmodifiableGraph;
 import gr.james.influence.api.algorithms.VertexIterator;
 import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.graph.DirectedEdge;
-import gr.james.influence.graph.Graph;
+import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.util.Conditions;
 
 import java.util.*;
@@ -24,20 +24,20 @@ import java.util.*;
 public class DijkstraClosestFirstIterator<V> implements VertexIterator<V> {
     private final Map<V, Double> distTo;
     private final Map<V, V> edgeTo;
-    private final Graph<V, ?> g;
+    private final DirectedGraph<V, ?> g;
     private final PriorityQueue<V> pq;
 
     /**
-     * Construct an instance of {@link DijkstraClosestFirstIterator} with a given {@link Graph} and a {@code source}.
+     * Construct an instance of {@link DijkstraClosestFirstIterator} with a given {@link DirectedGraph} and a {@code source}.
      * <p>
      * The constructor will initialize the instance in time {@code O(V)}.
      *
-     * @param g      the {@link Graph} in which to perform the algorithm
+     * @param g      the {@link DirectedGraph} in which to perform the algorithm
      * @param source the source vertex
      * @throws NullPointerException   if {@code g} or {@code source} is {@code null}
      * @throws IllegalVertexException if {@code source} is not in {@code g}
      */
-    public DijkstraClosestFirstIterator(@UnmodifiableGraph Graph<V, ?> g, V source) {
+    public DijkstraClosestFirstIterator(@UnmodifiableGraph DirectedGraph<V, ?> g, V source) {
         Conditions.requireVertexInGraph(g, source);
 
         this.g = g;
@@ -100,7 +100,7 @@ public class DijkstraClosestFirstIterator<V> implements VertexIterator<V> {
      * {@inheritDoc}
      */
     @Override
-    public Graph<V, ?> getGraph() {
+    public DirectedGraph<V, ?> getGraph() {
         return g;
     }
 

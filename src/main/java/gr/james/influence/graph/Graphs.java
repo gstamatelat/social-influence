@@ -15,7 +15,7 @@ public final class Graphs {
     private Graphs() {
     }
 
-    public static <V, E> void connect(Graph<V, E> g) {
+    public static <V, E> void connect(DirectedGraph<V, E> g) {
         final Set<Set<V>> scc = new KosarajuComponents<>(g).components();
         final Iterator<Set<V>> it = scc.iterator();
         if (!it.hasNext()) {
@@ -34,8 +34,8 @@ public final class Graphs {
         g.addEdge(pre.iterator().next(), start.iterator().next());
     }
 
-    public static <V, E> Graph<V, E> randomizeEdgeWeights(Graph<V, E> g, boolean unused) {
-        final Graph<V, E> newGraph = new MutableGraph<>();
+    public static <V, E> DirectedGraph<V, E> randomizeEdgeWeights(DirectedGraph<V, E> g, boolean unused) {
+        final DirectedGraph<V, E> newGraph = new MutableGraph<>();
         for (V v : g) {
             newGraph.addVertex(v);
         }
@@ -60,7 +60,7 @@ public final class Graphs {
      * satisfies {@code condition}
      * @throws NullPointerException if {@code g} or {@code condition} is {@code null}
      */
-    public static <V> V findVertex(Graph<V, ?> g, Predicate<V> condition) {
+    public static <V> V findVertex(DirectedGraph<V, ?> g, Predicate<V> condition) {
         for (V v : g) {
             if (condition.test(v)) {
                 return v;
@@ -81,7 +81,7 @@ public final class Graphs {
      * @return the vertex that is the result of the fusion
      * @see <a href="http://mathworld.wolfram.com/VertexContraction.html">VertexContraction @ mathworld.wolfram.com</a>
      */
-    public static <V, E> V fuseVertices(Graph<V, E> g, Iterable<V> f, VertexProvider<V> vertexProvider) {
+    public static <V, E> V fuseVertices(DirectedGraph<V, E> g, Iterable<V> f, VertexProvider<V> vertexProvider) {
         V v = g.addVertex(vertexProvider);
 
         for (V y : f) {
@@ -106,9 +106,9 @@ public final class Graphs {
      * @param <E>    the edge type
      * @return the combined graph
      */
-    public static <V, E> Graph<V, E> combineGraphs(Collection<? extends Graph<V, E>> graphs) {
-        final Graph<V, E> r = new MutableGraph<>();
-        for (Graph<V, E> g : graphs) {
+    public static <V, E> DirectedGraph<V, E> combineGraphs(Collection<? extends DirectedGraph<V, E>> graphs) {
+        final DirectedGraph<V, E> r = new MutableGraph<>();
+        for (DirectedGraph<V, E> g : graphs) {
             for (V v : g) {
                 r.addVertex(v);
             }
@@ -119,9 +119,9 @@ public final class Graphs {
         return r;
     }
 
-    public static <G extends Graph<V, E>, V, E> Graph<V, E> deepCopy(G g, Collection<V> filter) {
-        final Graph<V, E> r = new MutableGraph<>();
-        //final Graph<V, E> r = factory.createWeightedDirected();
+    public static <G extends DirectedGraph<V, E>, V, E> DirectedGraph<V, E> deepCopy(G g, Collection<V> filter) {
+        final DirectedGraph<V, E> r = new MutableGraph<>();
+        //final DirectedGraph<V, E> r = factory.createWeightedDirected();
         for (V v : filter) {
             if (!g.containsVertex(v)) {
                 throw new IllegalVertexException();
@@ -139,20 +139,20 @@ public final class Graphs {
         return r;
     }
 
-    public static <G extends Graph<V, E>, V, E> Graph<V, E> deepCopy(G g) {
+    public static <G extends DirectedGraph<V, E>, V, E> DirectedGraph<V, E> deepCopy(G g) {
         return deepCopy(g, g.vertexSet());
     }
 
-    /*public static <V, E> Graph<V, E> deepCopy(Graph<V, E> g, GraphFactory<V, E> factory) {
+    /*public static <V, E> DirectedGraph<V, E> deepCopy(DirectedGraph<V, E> g, GraphFactory<V, E> factory) {
         return deepCopy(g, factory, g.vertexSet());
     }
 
-    public static <V, E> Graph<V, E> deepCopy(Graph<V, E> g) {
-        return deepCopy(g, Graph.factory(), g.vertexSet());
+    public static <V, E> DirectedGraph<V, E> deepCopy(DirectedGraph<V, E> g) {
+        return deepCopy(g, DirectedGraph.factory(), g.vertexSet());
     }
 
-    public static <V, E> Graph<V, E> deepCopy(Graph<V, E> g, Collection<V> filter) {
-        return deepCopy(g, Graph.factory(), filter);
+    public static <V, E> DirectedGraph<V, E> deepCopy(DirectedGraph<V, E> g, Collection<V> filter) {
+        return deepCopy(g, DirectedGraph.factory(), filter);
     }
 
     public static SimpleGraph deepCopy(SimpleGraph g, Collection<Integer> filter) {
@@ -174,7 +174,7 @@ public final class Graphs {
      * @return an unmodifiable {@code Set} of all the stubborn vertices of {@code g}
      * @throws NullPointerException if {@code g} is null
      */
-    public static <V, E> Set<V> getStubbornVertices(Graph<V, E> g) {
+    public static <V, E> Set<V> getStubbornVertices(DirectedGraph<V, E> g) {
         return Collections.unmodifiableSet(
                 g.vertexSet().stream()
                         .filter(v -> g.outDegree(v) == 1 && g.adjacentOut(v).contains(v))
@@ -187,14 +187,14 @@ public final class Graphs {
      * <p>
      * Complexity: O(V)
      *
-     * @param g      the {@code Graph}
+     * @param g      the {@code DirectedGraph}
      * @param random the {@code Random} instance to use
      * @param <V>    the vertex type
      * @return a uniformly distributed random vertex of {@code g}
      * @throws NullPointerException     if {@code g} or {@code random} is {@code null}
      * @throws IllegalArgumentException if {@code g} is empty
      */
-    public static <V> V getRandomVertex(Graph<V, ?> g, Random random) {
+    public static <V> V getRandomVertex(DirectedGraph<V, ?> g, Random random) {
         if (g.vertexCount() < 1) {
             throw new IllegalArgumentException();
         }
@@ -213,13 +213,13 @@ public final class Graphs {
      * <p>
      * Complexity: O(V)
      *
-     * @param g   the {@code Graph}
+     * @param g   the {@code DirectedGraph}
      * @param <V> the vertex type
      * @return a uniformly distributed random vertex of {@code g}
      * @throws NullPointerException     if {@code g} or {@code random} is {@code random} is {@code null}
      * @throws IllegalArgumentException if {@code g} is empty
      */
-    public static <V> V getRandomVertex(Graph<V, ?> g) {
+    public static <V> V getRandomVertex(DirectedGraph<V, ?> g) {
         return getRandomVertex(g, RandomHelper.getRandom());
     }
 
@@ -233,7 +233,7 @@ public final class Graphs {
      * @return the number of directed edges in {@code g}
      * @throws NullPointerException if {@code g} is {@code null}
      */
-    public static <V> int getEdgesCount(Graph<V, ?> g) {
+    public static <V> int getEdgesCount(DirectedGraph<V, ?> g) {
         int count = 0;
         for (V v : g.vertexSet()) {
             count += g.adjacentOut(v).size();
@@ -254,7 +254,7 @@ public final class Graphs {
      * @throws IllegalVertexException if {@code v} is not in {@code g}
      * @see <a href="https://doi.org/10.1016/j.ipl.2005.11.003">doi:10.1016/j.ipl.2005.11.003</a>
      */
-    public static <V> V getRandomOutVertex(Graph<V, ?> g, V v) {
+    public static <V> V getRandomOutVertex(DirectedGraph<V, ?> g, V v) {
         final RandomSampling<V> rs = new EfraimidisSampling<>(1, RandomHelper.getRandom());
         rs.feed(g.adjacentOut(v));
         final Collection<V> sample = rs.sample();
@@ -280,7 +280,7 @@ public final class Graphs {
      *                                because such values are incompatible with the algorithm
      * @see <a href="https://doi.org/10.1016/j.ipl.2005.11.003">doi:10.1016/j.ipl.2005.11.003</a>
      */
-    public static <V> V getWeightedRandomOutVertex(Graph<V, ?> g, V v) {
+    public static <V> V getWeightedRandomOutVertex(DirectedGraph<V, ?> g, V v) {
         final WeightedRandomSampling<V> wrs = new EfraimidisSampling<>(1, RandomHelper.getRandom());
         for (DirectedEdge<V, ?> e : g.outEdges(v)) {
             wrs.feed(e.target(), e.weight());
@@ -293,7 +293,7 @@ public final class Graphs {
         return sample.iterator().next();
     }
 
-    public static double getDensity(Graph<?, ?> g) {
+    public static double getDensity(DirectedGraph<?, ?> g) {
         double n = g.vertexCount();
         double e = Graphs.getEdgesCount(g);
         return e / (n * (n - 1));

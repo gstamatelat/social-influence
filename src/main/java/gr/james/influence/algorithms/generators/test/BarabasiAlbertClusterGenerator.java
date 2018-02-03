@@ -1,8 +1,8 @@
 package gr.james.influence.algorithms.generators.test;
 
-import gr.james.influence.algorithms.generators.random.BarabasiAlbertGenerator;
 import gr.james.influence.algorithms.generators.GraphGenerator;
-import gr.james.influence.graph.Graph;
+import gr.james.influence.algorithms.generators.random.BarabasiAlbertGenerator;
+import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.graph.Graphs;
 import gr.james.influence.graph.VertexProvider;
 import gr.james.influence.util.Finals;
@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-public class BarabasiAlbertClusterGenerator<V, E> implements GraphGenerator<Graph<V, E>, V, E> {
+public class BarabasiAlbertClusterGenerator<V, E> implements GraphGenerator<DirectedGraph<V, E>, V, E> {
     private int totalVertices;
     private int initialClique;
     private int stepEdges;
@@ -28,9 +28,9 @@ public class BarabasiAlbertClusterGenerator<V, E> implements GraphGenerator<Grap
     }
 
     @Override
-    public Graph<V, E> generate(Random r, VertexProvider<V> vertexProvider, Map<String, V> identification) {
-        // Graph<V, E>[] c = new Graph<V, E>[clusters];
-        List<Graph<V, E>> c = new ArrayList<>(clusters);
+    public DirectedGraph<V, E> generate(Random r, VertexProvider<V> vertexProvider, Map<String, V> identification) {
+        // DirectedGraph<V, E>[] c = new DirectedGraph<V, E>[clusters];
+        List<DirectedGraph<V, E>> c = new ArrayList<>(clusters);
 
         BarabasiAlbertGenerator<V, E> scaleFreeGenerator = new BarabasiAlbertGenerator<>(totalVertices, stepEdges, initialClique, a);
         for (int i = 0; i < clusters; i++) {
@@ -50,7 +50,7 @@ public class BarabasiAlbertClusterGenerator<V, E> implements GraphGenerator<Grap
 
         assert randomVertices.size() == clusters;
 
-        Graph<V, E> g = Graphs.combineGraphs(c);
+        DirectedGraph<V, E> g = Graphs.combineGraphs(c);
 
         for (int i = 0; i < clusters; i++) {
             // Vertex s = randomVertices[i];

@@ -3,7 +3,7 @@ package gr.james.influence.algorithms.connectivity;
 import gr.james.influence.annotation.UnmodifiableGraph;
 import gr.james.influence.api.algorithms.VertexIterator;
 import gr.james.influence.exceptions.IllegalVertexException;
-import gr.james.influence.graph.Graph;
+import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.util.Conditions;
 
 import java.util.*;
@@ -16,7 +16,7 @@ import java.util.*;
  * @param <V> the vertex type
  */
 public class DepthFirstIterator<V> implements VertexIterator<V> {
-    private final Graph<V, ?> g;
+    private final DirectedGraph<V, ?> g;
     private final Deque<V> stack;
     private final Set<V> visited;
 
@@ -28,7 +28,7 @@ public class DepthFirstIterator<V> implements VertexIterator<V> {
      * @throws NullPointerException   if {@code g} or {@code source} is {@code null}
      * @throws IllegalVertexException if {@code source} is not in {@code g}
      */
-    public DepthFirstIterator(@UnmodifiableGraph Graph<V, ?> g, V source) {
+    public DepthFirstIterator(@UnmodifiableGraph DirectedGraph<V, ?> g, V source) {
         Conditions.requireVertexInGraph(g, source);
 
         this.g = g;
@@ -81,7 +81,7 @@ public class DepthFirstIterator<V> implements VertexIterator<V> {
      * {@inheritDoc}
      */
     @Override
-    public Graph<V, ?> getGraph() {
+    public DirectedGraph<V, ?> getGraph() {
         return g;
     }
 }

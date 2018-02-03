@@ -1,7 +1,7 @@
 package gr.james.influence.algorithms;
 
 import gr.james.influence.api.algorithms.IterativeAlgorithm;
-import gr.james.influence.graph.Graph;
+import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.util.Finals;
 import gr.james.influence.util.collections.EvictingLinkedHashSet;
 import gr.james.influence.util.collections.GraphState;
@@ -13,12 +13,12 @@ public abstract class AbstractIterativeAlgorithm<V, T> implements IterativeAlgor
     public static final int REPS_INCREASE = 500;
 
     private GraphState<V, T> lastState;
-    private Graph<V, ?> g;
+    private DirectedGraph<V, ?> g;
     private boolean hasNext;
     private EvictingLinkedHashSet<GraphState<V, T>> stateHistory;
     private int reps;
 
-    protected AbstractIterativeAlgorithm(Graph<V, ?> g, GraphState<V, T> initial) {
+    protected AbstractIterativeAlgorithm(DirectedGraph<V, ?> g, GraphState<V, T> initial) {
         this.g = g;
         this.lastState = initial;
         this.hasNext = true;
@@ -28,7 +28,7 @@ public abstract class AbstractIterativeAlgorithm<V, T> implements IterativeAlgor
 
     protected abstract boolean converges(GraphState<V, T> previous, GraphState<V, T> next);
 
-    protected abstract GraphState<V, T> step(Graph<V, ?> g, GraphState<V, T> previous);
+    protected abstract GraphState<V, T> step(DirectedGraph<V, ?> g, GraphState<V, T> previous);
 
     @Override
     public GraphState<V, T> next() {

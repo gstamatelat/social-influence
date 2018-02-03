@@ -3,7 +3,7 @@ package gr.james.influence.algorithms.distance;
 import gr.james.influence.annotation.UnmodifiableGraph;
 import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.graph.DirectedEdge;
-import gr.james.influence.graph.Graph;
+import gr.james.influence.graph.DirectedGraph;
 
 import java.util.List;
 
@@ -18,17 +18,17 @@ public class DijkstraOneShortestPath<V> implements SourceSinkShortestPaths<V> {
     private final V to;
 
     /**
-     * Construct an instance of {@link DijkstraOneShortestPath} with a given {@link Graph}, a {@code source} and a
+     * Construct an instance of {@link DijkstraOneShortestPath} with a given {@link DirectedGraph}, a {@code source} and a
      * {@code target}. The constructor will execute the algorithm until the {@code target} vertex has been marked and
      * will then stop.
      *
-     * @param g      the {@link Graph} in which to perform the algorithm
+     * @param g      the {@link DirectedGraph} in which to perform the algorithm
      * @param source the source vertex
      * @param target the target vertex
      * @throws NullPointerException   if {@code g} or {@code source} or {@code target} is {@code null}
      * @throws IllegalVertexException if {@code source} or {@code target} is not in {@code g}
      */
-    public DijkstraOneShortestPath(@UnmodifiableGraph Graph<V, ?> g, V source, V target) {
+    public DijkstraOneShortestPath(@UnmodifiableGraph DirectedGraph<V, ?> g, V source, V target) {
         alg = new DijkstraClosestFirstIterator<>(g, source);
         alg.exhaust(target);
         to = target;

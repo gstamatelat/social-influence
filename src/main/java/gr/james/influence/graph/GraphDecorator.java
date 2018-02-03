@@ -8,10 +8,10 @@ import java.util.Set;
 import java.util.Spliterator;
 import java.util.function.Consumer;
 
-public abstract class GraphDecorator<V, E> implements Graph<V, E> {
-    private Graph<V, E> g;
+public abstract class GraphDecorator<V, E> implements DirectedGraph<V, E> {
+    private DirectedGraph<V, E> g;
 
-    protected GraphDecorator(Graph<V, E> g) {
+    protected GraphDecorator(DirectedGraph<V, E> g) {
         this.g = Conditions.requireNonNull(g);
     }
 

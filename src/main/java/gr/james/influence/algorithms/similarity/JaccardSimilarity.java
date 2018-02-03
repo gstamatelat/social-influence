@@ -4,7 +4,7 @@ import com.google.common.collect.Sets;
 import gr.james.influence.annotation.ModifiableGraph;
 import gr.james.influence.api.algorithms.VertexSimilarity;
 import gr.james.influence.exceptions.IllegalVertexException;
-import gr.james.influence.graph.Graph;
+import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.util.Conditions;
 
 /**
@@ -27,17 +27,17 @@ import gr.james.influence.util.Conditions;
  * @param <V> the vertex type
  */
 public class JaccardSimilarity<V> implements VertexSimilarity<V, Double> {
-    private final Graph<V, ?> g;
+    private final DirectedGraph<V, ?> g;
 
     /**
-     * Construct a {@link JaccardSimilarity} instance from a {@link Graph}.
+     * Construct a {@link JaccardSimilarity} instance from a {@link DirectedGraph}.
      * <p>
      * The constructor doesn't perform any calculations.
      *
-     * @param g the {@link Graph} to construct this instance from
+     * @param g the {@link DirectedGraph} to construct this instance from
      * @throws NullPointerException if {@code g} is {@code null}
      */
-    public JaccardSimilarity(@ModifiableGraph Graph<V, ?> g) {
+    public JaccardSimilarity(@ModifiableGraph DirectedGraph<V, ?> g) {
         this.g = Conditions.requireNonNull(g);
     }
 

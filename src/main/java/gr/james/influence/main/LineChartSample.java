@@ -2,7 +2,7 @@ package gr.james.influence.main;
 
 import gr.james.influence.algorithms.generators.random.RandomGenerator;
 import gr.james.influence.algorithms.scoring.PageRank;
-import gr.james.influence.graph.Graph;
+import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.util.Finals;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -49,7 +49,7 @@ public class LineChartSample extends Application implements Runnable {
         //populating the series with data
 
         // -------------------------------------------------------------
-        Graph g = new RandomGenerator(10000, 0.1).generate();
+        DirectedGraph g = new RandomGenerator(10000, 0.1).generate();
 
         List<Double> h = new ArrayList<>();
 

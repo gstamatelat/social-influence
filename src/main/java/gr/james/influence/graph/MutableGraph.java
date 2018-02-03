@@ -9,12 +9,12 @@ import gr.james.influence.util.Finals;
 import java.util.*;
 
 /**
- * Implementation of {@link Graph} using adjacency lists.
+ * Implementation of {@link DirectedGraph} using adjacency lists.
  *
  * @param <V> the vertex type
  * @param <E> the edge type
  */
-public class MutableGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
+public class MutableGraph<V, E> extends TreeMapMetadata implements DirectedGraph<V, E> {
     private final Map<V, BiMap<V, DirectedEdge<V, E>>> mOut;
     private final Map<V, BiMap<V, DirectedEdge<V, E>>> mIn;
 
@@ -44,7 +44,7 @@ public class MutableGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
      *
      * @param g the graph to copy
      */
-    public MutableGraph(Graph<V, E> g) {
+    public MutableGraph(DirectedGraph<V, E> g) {
         this(g.vertexCount());
         for (V v : g) {
             final boolean inserted = addVertex(v);
@@ -177,7 +177,7 @@ public class MutableGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append(String.format("Graph(%d) {%n", this.vertexCount()));
+        sb.append(String.format("DirectedGraph(%d) {%n", this.vertexCount()));
         for (DirectedEdge<V, E> e : this.edges()) {
             if (e.value() == null) {
                 sb.append(String.format("  %s -> %s [%.2f]%n", e.source(), e.target(), e.weight()));

@@ -2,8 +2,8 @@ package gr.james.influence.main;
 
 import gr.james.influence.algorithms.generators.random.BarabasiAlbertGenerator;
 import gr.james.influence.algorithms.scoring.DegreeCentrality;
+import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.graph.Direction;
-import gr.james.influence.graph.Graph;
 import gr.james.influence.util.RandomHelper;
 import gr.james.influence.util.collections.GraphState;
 
@@ -23,7 +23,7 @@ public class DegreeDistributionTest {
          * [c_1, e_1] = [c_2, e_2] = ... = [c_p, e_p] in order for the graph to have scale-free degree
          * distribution. On this example p = coefficient_count / 2. Press Ctrl+C to terminate.
          */
-        Graph<Integer, Object> g = new BarabasiAlbertGenerator<>(10000, 2, 1, 1.2).generate();
+        DirectedGraph<Integer, Object> g = new BarabasiAlbertGenerator<>(10000, 2, 1, 1.2).generate();
         int coefficient_count = 2;
         double speed = 1.0;
 

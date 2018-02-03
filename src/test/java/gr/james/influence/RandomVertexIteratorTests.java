@@ -3,7 +3,7 @@ package gr.james.influence;
 import com.google.common.collect.Lists;
 import gr.james.influence.algorithms.generators.random.RandomGenerator;
 import gr.james.influence.algorithms.iterators.RandomVertexIterator;
-import gr.james.influence.graph.Graph;
+import gr.james.influence.graph.DirectedGraph;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Random;
 
 public class RandomVertexIteratorTests {
-    private Graph<Integer, Object> g = new RandomGenerator<>(100, 0.0).generate();
+    private DirectedGraph<Integer, Object> g = new RandomGenerator<>(100, 0.0).generate();
 
     @Test
     public void allItems() {

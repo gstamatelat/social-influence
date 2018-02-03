@@ -1,6 +1,6 @@
 package gr.james.influence;
 
-import gr.james.influence.graph.Graph;
+import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.graph.GraphDecorator;
 import gr.james.influence.graph.Metadata;
 import org.junit.Assert;
@@ -14,7 +14,7 @@ import java.util.List;
 public class GraphDecoratorTest {
     @Test
     public void implementsGraph() {
-        List<Method> graphMethods = Arrays.asList(Graph.class.getDeclaredMethods());
+        List<Method> graphMethods = Arrays.asList(DirectedGraph.class.getDeclaredMethods());
         List<Method> graphDecoratorMethods = Arrays.asList(GraphDecorator.class.getDeclaredMethods());
         for (Method m : graphMethods) {
             if (Modifier.isPublic(m.getModifiers()) && !Modifier.isStatic(m.getModifiers())) {

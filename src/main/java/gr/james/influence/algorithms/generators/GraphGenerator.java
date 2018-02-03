@@ -1,6 +1,6 @@
 package gr.james.influence.algorithms.generators;
 
-import gr.james.influence.graph.Graph;
+import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.graph.SimpleGraph;
 import gr.james.influence.graph.VertexProvider;
 import gr.james.influence.util.RandomHelper;
@@ -10,16 +10,16 @@ import java.util.Map;
 import java.util.Random;
 
 /**
- * Represents an entity that can generate a {@code Graph} based on a set of rules.
+ * Represents an entity that can generate a {@code DirectedGraph} based on a set of rules.
  */
-public interface GraphGenerator<G extends Graph<V, E>, V, E> {
+public interface GraphGenerator<G extends DirectedGraph<V, E>, V, E> {
     @Deprecated
-    default Graph<Integer, Object> generate() {
-        return (Graph<Integer, Object>) generate((VertexProvider<V>) SimpleGraph.vertexProvider);
+    default DirectedGraph<Integer, Object> generate() {
+        return (DirectedGraph<Integer, Object>) generate((VertexProvider<V>) SimpleGraph.vertexProvider);
     }
 
     /**
-     * Generate a new {@link Graph} based on the rules imposed by this entity. This method is using the global random
+     * Generate a new {@link DirectedGraph} based on the rules imposed by this entity. This method is using the global random
      * instance.
      *
      * @param vertexProvider the vertex provider
@@ -34,7 +34,7 @@ public interface GraphGenerator<G extends Graph<V, E>, V, E> {
     }
 
     /**
-     * Generate a new {@link Graph} based on the rules imposed by this entity.
+     * Generate a new {@link DirectedGraph} based on the rules imposed by this entity.
      *
      * @param seed           the seed for the {@link Random}
      * @param vertexProvider the vertex provider
@@ -49,7 +49,7 @@ public interface GraphGenerator<G extends Graph<V, E>, V, E> {
     }
 
     /**
-     * Generate a new {@link Graph} based on the rules imposed by this entity.
+     * Generate a new {@link DirectedGraph} based on the rules imposed by this entity.
      *
      * @param r              the {@link Random} instance to use
      * @param vertexProvider the vertex provider

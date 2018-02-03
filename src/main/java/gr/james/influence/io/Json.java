@@ -1,7 +1,7 @@
 package gr.james.influence.io;
 
 import gr.james.influence.graph.DirectedEdge;
-import gr.james.influence.graph.Graph;
+import gr.james.influence.graph.DirectedGraph;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,14 +12,14 @@ import java.util.*;
  * https://github.com/jsongraph/json-graph-specification
  */
 @Deprecated
-public class Json<V, E> implements GraphImporter<Graph<V, E>, V, E>, GraphExporter {
+public class Json<V, E> implements GraphImporter<DirectedGraph<V, E>, V, E>, GraphExporter {
     @Override
-    public Graph<V, E> from(InputStream source, Deserializer<V> deserializer) throws IOException {
+    public DirectedGraph<V, E> from(InputStream source, Deserializer<V> deserializer) throws IOException {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public <V, E> void to(Graph<V, E> g, OutputStream target, Serializer<V> vertexSerializer, Serializer<E> edgeSerializer) {
+    public <V, E> void to(DirectedGraph<V, E> g, OutputStream target, Serializer<V> vertexSerializer, Serializer<E> edgeSerializer) {
         throw new UnsupportedOperationException();
     }
 
@@ -29,7 +29,7 @@ public class Json<V, E> implements GraphImporter<Graph<V, E>, V, E>, GraphExport
         private Set<JsonVertex<V>> nodes = new TreeSet<>();
         private Set<JsonEdge<V, E>> edges = new HashSet<>();
 
-        public JsonGraph(Graph<V, E> g) {
+        public JsonGraph(DirectedGraph<V, E> g) {
             for (V v : g) {
                 this.nodes.add(new JsonVertex<>(v));
                 for (V y : g.adjacentOut(v)) {

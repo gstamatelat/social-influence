@@ -1,12 +1,12 @@
 package gr.james.influence.io;
 
-import gr.james.influence.graph.Graph;
+import gr.james.influence.graph.DirectedGraph;
 
 import java.io.IOException;
 import java.io.OutputStream;
 
 /**
- * A {@code GraphExporter} provides means to write a {@link Graph} to an {@link OutputStream} with the format imposed by
+ * A {@code GraphExporter} provides means to write a {@link DirectedGraph} to an {@link OutputStream} with the format imposed by
  * this class.
  */
 public interface GraphExporter {
@@ -21,7 +21,7 @@ public interface GraphExporter {
      * @param <E>    the edge type
      * @throws IOException if an I/O exception occurs
      */
-    default <V, E> void to(Graph<V, E> g, OutputStream target) throws IOException {
+    default <V, E> void to(DirectedGraph<V, E> g, OutputStream target) throws IOException {
         to(g, target, V::toString, E::toString);
     }
 
@@ -37,6 +37,6 @@ public interface GraphExporter {
      * @param <E>              the edge type
      * @throws IOException if an I/O exception occurs
      */
-    <V, E> void to(Graph<V, E> g, OutputStream target, Serializer<V> vertexSerializer, Serializer<E> edgeSerializer)
+    <V, E> void to(DirectedGraph<V, E> g, OutputStream target, Serializer<V> vertexSerializer, Serializer<E> edgeSerializer)
             throws IOException;
 }

@@ -1,7 +1,7 @@
 package gr.james.influence.io;
 
 import gr.james.influence.algorithms.iterators.OrderedVertexIterator;
-import gr.james.influence.graph.Graph;
+import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.graph.MutableGraph;
 import gr.james.influence.util.Finals;
 
@@ -11,10 +11,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 
-public class CSVImporter<V, E> implements GraphImporter<Graph<V, E>, V, E> {
+public class CSVImporter<V, E> implements GraphImporter<DirectedGraph<V, E>, V, E> {
     @Override
-    public Graph<V, E> from(InputStream source, Deserializer<V> deserializer) throws IOException {
-        Graph<V, E> g = new MutableGraph<>();
+    public DirectedGraph<V, E> from(InputStream source, Deserializer<V> deserializer) throws IOException {
+        DirectedGraph<V, E> g = new MutableGraph<>();
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(source, Finals.IO_ENCODING));
         String line;

@@ -1,6 +1,6 @@
 package gr.james.influence.algorithms.iterators;
 
-import gr.james.influence.graph.Graph;
+import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.util.RandomHelper;
 
 import java.util.ArrayList;
@@ -12,17 +12,17 @@ public class RandomVertexIterator<V> implements Iterator<V> {
     private final List<V> nodes;
     private Random random;
 
-    public RandomVertexIterator(Graph<V, ?> g) {
+    public RandomVertexIterator(DirectedGraph<V, ?> g) {
         this.nodes = new ArrayList<>(g.vertexSet());
         this.random = RandomHelper.getRandom();
     }
 
-    public RandomVertexIterator(Graph<V, ?> g, Random r) {
+    public RandomVertexIterator(DirectedGraph<V, ?> g, Random r) {
         this.nodes = new ArrayList<>(g.vertexSet());
         this.random = r;
     }
 
-    public RandomVertexIterator(Graph<V, ?> g, long seed) {
+    public RandomVertexIterator(DirectedGraph<V, ?> g, long seed) {
         this.nodes = new ArrayList<>(g.vertexSet());
         this.random = RandomHelper.getNewRandom(seed);
     }

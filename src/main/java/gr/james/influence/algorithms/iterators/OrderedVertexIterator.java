@@ -1,6 +1,6 @@
 package gr.james.influence.algorithms.iterators;
 
-import gr.james.influence.graph.Graph;
+import gr.james.influence.graph.DirectedGraph;
 
 import java.util.Iterator;
 import java.util.TreeSet;
@@ -11,7 +11,7 @@ import java.util.TreeSet;
 public class OrderedVertexIterator<V> implements Iterator<V> {
     private TreeSet<V> vertices;
 
-    public OrderedVertexIterator(Graph<V, ?> g) {
+    public OrderedVertexIterator(DirectedGraph<V, ?> g) {
         vertices = new TreeSet<>(g.vertexSet());
     }
 

@@ -11,8 +11,8 @@ import gr.james.influence.algorithms.iterators.RandomSurferIterator;
 import gr.james.influence.algorithms.scoring.DeGroot;
 import gr.james.influence.algorithms.scoring.DegreeCentrality;
 import gr.james.influence.algorithms.scoring.PageRank;
+import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.graph.Direction;
-import gr.james.influence.graph.Graph;
 import gr.james.influence.graph.Graphs;
 import gr.james.influence.graph.SimpleGraph;
 import gr.james.influence.util.Finals;
@@ -35,9 +35,9 @@ public class Tests {
         int vertexCount = 40;
 
         /* Create graph and randomize edge weights */
-        Graph<Integer, Object> g0 = new RandomGenerator<>(vertexCount, p).generate();
+        DirectedGraph<Integer, Object> g0 = new RandomGenerator<>(vertexCount, p).generate();
         Graphs.connect(g0);
-        Graph<Integer, Object> g = Graphs.randomizeEdgeWeights(g0, true);
+        DirectedGraph<Integer, Object> g = Graphs.randomizeEdgeWeights(g0, true);
 
         /* PageRank values must sum to vertexCount */
         GraphState<Integer, Double> pr = PageRank.execute(g, dampingFactor);
@@ -56,9 +56,9 @@ public class Tests {
         int vertexCount = 40;
 
         /* Create graph and randomize edge weights */
-        Graph<Integer, Object> g0 = new RandomGenerator<>(vertexCount, p).generate();
+        DirectedGraph<Integer, Object> g0 = new RandomGenerator<>(vertexCount, p).generate();
         Graphs.connect(g0);
-        Graph<Integer, Object> g = Graphs.randomizeEdgeWeights(g0, true);
+        DirectedGraph<Integer, Object> g = Graphs.randomizeEdgeWeights(g0, true);
 
         Finals.LOG.debug("damping factor = {}, p = {}", dampingFactor, p);
 
@@ -92,7 +92,7 @@ public class Tests {
         int vertexCount = RandomHelper.getRandom().nextInt(240) + 10;
 
         /* Make the graph */
-        Graph<Integer, Object> g = new BarabasiAlbertGenerator<>(vertexCount, 2, 2, 1.0).generate();
+        DirectedGraph<Integer, Object> g = new BarabasiAlbertGenerator<>(vertexCount, 2, 2, 1.0).generate();
 
         /* Get PageRank and DegreeCentrality */
         GraphState<Integer, Integer> degree = DegreeCentrality.execute(g, Direction.INBOUND);
@@ -114,8 +114,8 @@ public class Tests {
     public void combineGraphsTest() {
         int GRAPHS = 10;
 
-        List<Graph<Integer, Object>> graphs = new ArrayList<>();
-        //Graph<Integer, Object>[] graphs = (Graph<Integer, Object>) new Graph[GRAPHS];
+        List<DirectedGraph<Integer, Object>> graphs = new ArrayList<>();
+        //DirectedGraph<Integer, Object>[] graphs = (DirectedGraph<Integer, Object>) new DirectedGraph[GRAPHS];
         for (int i = 0; i < GRAPHS; i++) {
             int size = RandomHelper.getRandom().nextInt(50) + 50;
             graphs.add(new RandomGenerator<>(size, RandomHelper.getRandom().nextDouble()).generate());
@@ -124,12 +124,12 @@ public class Tests {
 
         int vertexCount = 0;
         int edgeCount = 0;
-        for (Graph<Integer, Object> g : graphs) {
+        for (DirectedGraph<Integer, Object> g : graphs) {
             vertexCount += g.vertexCount();
             edgeCount += Graphs.getEdgesCount(g);
         }
 
-        Graph<Integer, Object> g = Graphs.combineGraphs(graphs);
+        DirectedGraph<Integer, Object> g = Graphs.combineGraphs(graphs);
 
         Assert.assertEquals("combineGraphsTest - vertexCount", vertexCount, g.vertexCount());
         Assert.assertEquals("combineGraphsTest - edgeCount", edgeCount, Graphs.getEdgesCount(g));
@@ -140,7 +140,7 @@ public class Tests {
         int clusters = RandomHelper.getRandom().nextInt(5) + 5;
         int clusterSize = RandomHelper.getRandom().nextInt(10) + 10;
 
-        Graph<Integer, Object> g = new BarabasiAlbertClusterGenerator<>(clusterSize, 2, 2, 1.0, clusters).generate();
+        DirectedGraph<Integer, Object> g = new BarabasiAlbertClusterGenerator<>(clusterSize, 2, 2, 1.0, clusters).generate();
         Assert.assertEquals("clustersTest", clusters * clusterSize, g.vertexCount());
     }
 
@@ -153,7 +153,7 @@ public class Tests {
         int k = RandomHelper.getRandom().nextInt(100) + 4;
 
         /* Generate TwoWheels(k) */
-        Graph<Integer, Object> g = new TwoWheelsGenerator<>(k).generate();
+        DirectedGraph<Integer, Object> g = new TwoWheelsGenerator<>(k).generate();
 
         /* Get max degree */
         int max = new GraphStateIterator<>(DegreeCentrality.execute(g, Direction.INBOUND)).next().weight;
@@ -207,7 +207,7 @@ public class Tests {
     public void deGrootTest() {
         int size = RandomHelper.getRandom().nextInt(50) + 50;
         double p = RandomHelper.getRandom().nextDouble();
-        Graph<Integer, Object> g = new RandomGenerator<>(size, p).generate();
+        DirectedGraph<Integer, Object> g = new RandomGenerator<>(size, p).generate();
         Graphs.connect(g);
 
         GraphState<Integer, Double> initialState = GraphState.create(g.vertexSet(), 0.0);
@@ -227,9 +227,9 @@ public class Tests {
     public void deepCopyTest() {
         int size = RandomHelper.getRandom().nextInt(50) + 50;
         double p = RandomHelper.getRandom().nextDouble();
-        Graph<Integer, Object> g = new RandomGenerator<>(size, p).generate();
+        DirectedGraph<Integer, Object> g = new RandomGenerator<>(size, p).generate();
         Graphs.connect(g);
-        Graph<Integer, Object> e = Graphs.deepCopy(g);
+        DirectedGraph<Integer, Object> e = Graphs.deepCopy(g);
         e.addVertex(SimpleGraph.vertexProvider);
         Assert.assertEquals("deepCopyTest", g.vertexCount() + 1, e.vertexCount());
         Assert.assertEquals("deepCopyTest", Graphs.getEdgesCount(g), Graphs.getEdgesCount(e));
@@ -240,7 +240,7 @@ public class Tests {
         int size = RandomHelper.getRandom().nextInt(50) + 50;
         double p = RandomHelper.getRandom().nextDouble();
         double dampingFactor = RandomHelper.getRandom().nextDouble();
-        Graph<Integer, Object> g = new RandomGenerator<>(size, p).generate();
+        DirectedGraph<Integer, Object> g = new RandomGenerator<>(size, p).generate();
 
         GraphState<Integer, Double> p1 = PageRank.execute(g, dampingFactor);
         GraphState<Integer, Double> p2 = PageRank.execute(g, dampingFactor);
@@ -252,7 +252,7 @@ public class Tests {
     public void connectTest() {
         int size = RandomHelper.getRandom().nextInt(50) + 50;
         double p = RandomHelper.getRandom().nextDouble();
-        Graph<Integer, Object> g = new RandomGenerator<>(size, p).generate();
+        DirectedGraph<Integer, Object> g = new RandomGenerator<>(size, p).generate();
         Graphs.connect(g);
         Assert.assertNotEquals("connectTest", Double.POSITIVE_INFINITY, new DijkstraDiameter<>(g).get());
     }

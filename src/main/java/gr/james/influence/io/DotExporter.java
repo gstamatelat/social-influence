@@ -1,7 +1,7 @@
 package gr.james.influence.io;
 
 import gr.james.influence.graph.DirectedEdge;
-import gr.james.influence.graph.Graph;
+import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.util.Finals;
 
 import java.io.BufferedWriter;
@@ -21,7 +21,7 @@ public class DotExporter implements GraphExporter {
     }
 
     @Override
-    public <V, E> void to(Graph<V, E> g, OutputStream target, Serializer<V> vertexSerializer, Serializer<E> edgeSerializer) throws IOException {
+    public <V, E> void to(DirectedGraph<V, E> g, OutputStream target, Serializer<V> vertexSerializer, Serializer<E> edgeSerializer) throws IOException {
         BufferedWriter w = new BufferedWriter(new OutputStreamWriter(target, Finals.IO_ENCODING));
 
         w.write(String.format("digraph G {%n"));

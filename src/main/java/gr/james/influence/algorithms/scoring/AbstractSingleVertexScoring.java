@@ -3,7 +3,7 @@ package gr.james.influence.algorithms.scoring;
 import gr.james.influence.annotation.UnmodifiableGraph;
 import gr.james.influence.api.algorithms.VertexScoring;
 import gr.james.influence.exceptions.IllegalVertexException;
-import gr.james.influence.graph.Graph;
+import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.util.Conditions;
 import gr.james.influence.util.collections.GraphState;
 
@@ -23,18 +23,18 @@ import gr.james.influence.util.collections.GraphState;
  * @see AbstractMultiVertexScoring
  */
 public abstract class AbstractSingleVertexScoring<V, T> implements VertexScoring<V, T> {
-    private final Graph<V, ?> g;
+    private final DirectedGraph<V, ?> g;
     private final GraphState<V, T> scores;
 
     /**
-     * Construct an instance of {@link AbstractSingleVertexScoring} using the specified input {@link Graph} g.
+     * Construct an instance of {@link AbstractSingleVertexScoring} using the specified input {@link DirectedGraph} g.
      * <p>
      * The constructor does not perform any calculations and runs in constant time.
      *
-     * @param g the input {@link Graph}
+     * @param g the input {@link DirectedGraph}
      * @throws NullPointerException if {@code g} is {@code null}
      */
-    public AbstractSingleVertexScoring(@UnmodifiableGraph Graph<V, ?> g) {
+    public AbstractSingleVertexScoring(@UnmodifiableGraph DirectedGraph<V, ?> g) {
         this.g = Conditions.requireNonNull(g);
         this.scores = GraphState.create();
     }

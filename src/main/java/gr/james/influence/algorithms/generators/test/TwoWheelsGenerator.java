@@ -1,8 +1,8 @@
 package gr.james.influence.algorithms.generators.test;
 
-import gr.james.influence.algorithms.generators.basic.WheelGenerator;
 import gr.james.influence.algorithms.generators.GraphGenerator;
-import gr.james.influence.graph.Graph;
+import gr.james.influence.algorithms.generators.basic.WheelGenerator;
+import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.graph.Graphs;
 import gr.james.influence.graph.VertexProvider;
 
@@ -21,7 +21,7 @@ import java.util.Random;
  * <li>hub2: the hub of the other wheel</li>
  * </ul>
  */
-public class TwoWheelsGenerator<V, E> implements GraphGenerator<Graph<V, E>, V, E> {
+public class TwoWheelsGenerator<V, E> implements GraphGenerator<DirectedGraph<V, E>, V, E> {
     private final int wheelVertices;
 
     /**
@@ -38,14 +38,14 @@ public class TwoWheelsGenerator<V, E> implements GraphGenerator<Graph<V, E>, V, 
     }
 
     @Override
-    public Graph<V, E> generate(Random r,
-                                VertexProvider<V> vertexProvider,
-                                Map<String, V> identification) {
+    public DirectedGraph<V, E> generate(Random r,
+                                        VertexProvider<V> vertexProvider,
+                                        Map<String, V> identification) {
         final WheelGenerator<V, E> wheelGenerator = new WheelGenerator<>(wheelVertices);
         final Map<String, V> identification1 = new HashMap<>();
         final Map<String, V> identification2 = new HashMap<>();
-        final Graph<V, E> g1 = wheelGenerator.generate(r, vertexProvider, identification1);
-        final Graph<V, E> g2 = wheelGenerator.generate(r, vertexProvider, identification2);
+        final DirectedGraph<V, E> g1 = wheelGenerator.generate(r, vertexProvider, identification1);
+        final DirectedGraph<V, E> g2 = wheelGenerator.generate(r, vertexProvider, identification2);
         final V hub1 = identification1.get("hub");
         final V hub2 = identification2.get("hub");
 
@@ -54,7 +54,7 @@ public class TwoWheelsGenerator<V, E> implements GraphGenerator<Graph<V, E>, V, 
         assert a != null;
         assert b != null;
 
-        final Graph<V, E> g = Graphs.combineGraphs(Arrays.asList(g1, g2));
+        final DirectedGraph<V, E> g = Graphs.combineGraphs(Arrays.asList(g1, g2));
         final V center = Graphs.fuseVertices(g, Arrays.asList(a, b), vertexProvider);
 
         identification.put("center", center);
