@@ -8,6 +8,12 @@ import gr.james.influence.util.Finals;
 
 import java.util.*;
 
+/**
+ * Implementation of {@link Graph} using adjacency lists.
+ *
+ * @param <V> the vertex type
+ * @param <E> the edge type
+ */
 public class MutableGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
     private final Map<V, BiMap<V, DirectedEdge<V, E>>> mOut;
     private final Map<V, BiMap<V, DirectedEdge<V, E>>> mIn;
@@ -28,27 +34,56 @@ public class MutableGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
         this.vList = new ArrayList<>(expectedVertexCount);
     }
 
-    /*static <V, E> GraphFactory<MutableGraph<V, E>, V, E> factory() {
-        return new GraphFactory<MutableGraph<V, E>, V, E>() {
-            @Override
-            public MutableGraph<V, E> createGraph(GraphType type) {
-                Conditions.requireNonNull(type);
-                if (!type.equals(GraphType.WEIGHTED_DIRECTED)) {
-                    throw new UnsupportedOperationException();
-                }
-                return new MutableGraph<>();
-            }
+    public MutableGraph(Graph<V, E> g) {
+        this(g.vertexCount());
+        for (V v : g) {
+            final boolean inserted = addVertex(v);
+            assert inserted;
+        }
+        for (DirectedEdge<V, E> e : g.edges()) {
+            final DirectedEdge<V, E> newEdge = addEdge(e.source(), e.target(), e.value(), e.weight());
+            assert newEdge != null;
+        }
+    }
 
-            @Override
-            public MutableGraph<V, E> createGraph(GraphType type, int expectedVertexCount) {
-                Conditions.requireNonNull(type);
-                if (!type.equals(GraphType.WEIGHTED_DIRECTED)) {
-                    throw new UnsupportedOperationException();
-                }
-                return new MutableGraph<>(expectedVertexCount);
-            }
-        };
-    }*/
+    @Override
+    public DirectedEdge<V, E> findEdge(V source, V target) {
+        Conditions.requireAllNonNull(source, target);
+        final Map<V, DirectedEdge<V, E>> edges = mOut.get(source);
+        if (edges == null) {
+            throw new IllegalVertexException();
+        }
+        if (!mOut.containsKey(target)) {
+            throw new IllegalVertexException();
+        }
+        return edges.get(target);
+    }
+
+    @Override
+    public Set<V> adjacentOut(V v) {
+        Conditions.requireNonNull(v);
+        final BiMap<V, DirectedEdge<V, E>> edges = mOut.get(v);
+        if (edges == null) {
+            throw new IllegalVertexException();
+        }
+        return Collections.unmodifiableSet(edges.keySet());
+    }
+
+    @Override
+    public Set<V> adjacentIn(V v) {
+        Conditions.requireNonNull(v);
+        final BiMap<V, DirectedEdge<V, E>> edges = mIn.get(v);
+        if (edges == null) {
+            throw new IllegalVertexException();
+        }
+        return Collections.unmodifiableSet(edges.keySet());
+    }
+
+    @Override
+    public Set<V> vertexSet() {
+        assert Objects.equals(this.mOut.keySet(), this.mIn.keySet());
+        return Collections.unmodifiableSet(this.mOut.keySet());
+    }
 
     @Override
     public Set<DirectedEdge<V, E>> outEdges(V v) {
@@ -146,45 +181,6 @@ public class MutableGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
         } else {
             return null;
         }
-    }
-
-    @Override
-    public DirectedEdge<V, E> findEdge(V source, V target) {
-        Conditions.requireAllNonNull(source, target);
-        final Map<V, DirectedEdge<V, E>> edges = mOut.get(source);
-        if (edges == null) {
-            throw new IllegalVertexException();
-        }
-        if (!mOut.containsKey(target)) {
-            throw new IllegalVertexException();
-        }
-        return edges.get(target);
-    }
-
-    @Override
-    public Set<V> adjacentOut(V v) {
-        Conditions.requireNonNull(v);
-        final BiMap<V, DirectedEdge<V, E>> edges = mOut.get(v);
-        if (edges == null) {
-            throw new IllegalVertexException();
-        }
-        return Collections.unmodifiableSet(edges.keySet());
-    }
-
-    @Override
-    public Set<V> adjacentIn(V v) {
-        Conditions.requireNonNull(v);
-        final BiMap<V, DirectedEdge<V, E>> edges = mIn.get(v);
-        if (edges == null) {
-            throw new IllegalVertexException();
-        }
-        return Collections.unmodifiableSet(edges.keySet());
-    }
-
-    @Override
-    public Set<V> vertexSet() {
-        assert Objects.equals(this.mOut.keySet(), this.mIn.keySet());
-        return Collections.unmodifiableSet(this.mOut.keySet());
     }
 
     @Override
