@@ -3,7 +3,6 @@ package gr.james.influence.algorithms.generators.test;
 import gr.james.influence.algorithms.generators.random.BarabasiAlbertGenerator;
 import gr.james.influence.api.algorithms.GraphGenerator;
 import gr.james.influence.graph.Graph;
-import gr.james.influence.graph.GraphFactory;
 import gr.james.influence.graph.Graphs;
 import gr.james.influence.graph.VertexProvider;
 import gr.james.influence.util.Finals;
@@ -13,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-public class BarabasiAlbertClusterGenerator implements GraphGenerator {
+public class BarabasiAlbertClusterGenerator<V, E> implements GraphGenerator<Graph<V, E>, V, E> {
     private int totalVertices;
     private int initialClique;
     private int stepEdges;
@@ -29,13 +28,13 @@ public class BarabasiAlbertClusterGenerator implements GraphGenerator {
     }
 
     @Override
-    public <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, Random r, VertexProvider<V> vertexProvider, Map<String, V> identification) {
+    public Graph<V, E> generate(Random r, VertexProvider<V> vertexProvider, Map<String, V> identification) {
         // Graph<V, E>[] c = new Graph<V, E>[clusters];
         List<Graph<V, E>> c = new ArrayList<>(clusters);
 
-        GraphGenerator scaleFreeGenerator = new BarabasiAlbertGenerator(totalVertices, stepEdges, initialClique, a);
+        BarabasiAlbertGenerator<V, E> scaleFreeGenerator = new BarabasiAlbertGenerator<>(totalVertices, stepEdges, initialClique, a);
         for (int i = 0; i < clusters; i++) {
-            c.add(scaleFreeGenerator.generate(factory, r, vertexProvider));
+            c.add(scaleFreeGenerator.generate(r, vertexProvider));
             // c[i] = scaleFreeGenerator.generate(graphFactory, r);
         }
 
@@ -51,7 +50,7 @@ public class BarabasiAlbertClusterGenerator implements GraphGenerator {
 
         assert randomVertices.size() == clusters;
 
-        Graph<V, E> g = Graphs.combineGraphs(factory, c);
+        Graph<V, E> g = Graphs.combineGraphs(c);
 
         for (int i = 0; i < clusters; i++) {
             // Vertex s = randomVertices[i];

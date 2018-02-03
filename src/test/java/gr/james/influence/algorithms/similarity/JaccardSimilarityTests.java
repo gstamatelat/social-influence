@@ -4,6 +4,7 @@ import gr.james.influence.algorithms.generators.basic.CompleteGenerator;
 import gr.james.influence.algorithms.generators.basic.CycleGenerator;
 import gr.james.influence.algorithms.generators.random.RandomGenerator;
 import gr.james.influence.api.algorithms.VertexSimilarity;
+import gr.james.influence.graph.Graph;
 import gr.james.influence.graph.SimpleGraph;
 import org.junit.Assert;
 import org.junit.Test;
@@ -54,7 +55,7 @@ public class JaccardSimilarityTests {
     @Test
     public void circle() {
         for (int n = 4; n < 100; n++) {
-            final SimpleGraph g = new CycleGenerator(n).generate();
+            final Graph<Integer, Object> g = new CycleGenerator<>(n).generate();
             final VertexSimilarity<Integer, Double> jaccard = new JaccardSimilarity<>(g);
             for (Integer v : g) {
                 for (Integer e : g.getOutEdges(v).keySet()) {
@@ -70,7 +71,7 @@ public class JaccardSimilarityTests {
      */
     @Test
     public void commutativity() {
-        final SimpleGraph g = new RandomGenerator(100, 0.1).generate();
+        final Graph<Integer, Object> g = new RandomGenerator<>(100, 0.1).generate();
         final VertexSimilarity<Integer, Double> jaccard = new JaccardSimilarity<>(g);
         for (Integer v : g) {
             for (Integer w : g) {
@@ -85,7 +86,7 @@ public class JaccardSimilarityTests {
      */
     @Test
     public void identity() {
-        final SimpleGraph g = new RandomGenerator(100, 0.1).generate();
+        final Graph<Integer, Object> g = new RandomGenerator<>(100, 0.1).generate();
         final VertexSimilarity<Integer, Double> jaccard = new JaccardSimilarity<>(g);
         for (Integer v : g) {
             if (g.outDegree(v) != 0) {
@@ -103,7 +104,7 @@ public class JaccardSimilarityTests {
      */
     @Test
     public void complete() {
-        final SimpleGraph g = new CompleteGenerator(5).generate();
+        final Graph<Integer, Object> g = new CompleteGenerator<>(5).generate();
         for (Integer v : g) {
             g.addEdge(v, v, 1.0);
         }

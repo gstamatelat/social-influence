@@ -2,7 +2,7 @@ package gr.james.influence.algorithms.generators.basic;
 
 import gr.james.influence.api.algorithms.GraphGenerator;
 import gr.james.influence.graph.Graph;
-import gr.james.influence.graph.GraphFactory;
+import gr.james.influence.graph.MemoryGraph;
 import gr.james.influence.graph.VertexProvider;
 
 import java.util.Map;
@@ -17,7 +17,7 @@ import java.util.Random;
  * <li>target: the vertex on the target tail of the path, which has no outgoing edges</li>
  * </ul>
  */
-public class DirectedPathGenerator implements GraphGenerator {
+public class DirectedPathGenerator<V, E> implements GraphGenerator<Graph<V, E>, V, E> {
     private final int vertexCount;
 
     /**
@@ -34,11 +34,10 @@ public class DirectedPathGenerator implements GraphGenerator {
     }
 
     @Override
-    public <V, E> Graph<V, E> generate(GraphFactory<V, E> factory,
-                                       Random r,
-                                       VertexProvider<V> vertexProvider,
-                                       Map<String, V> identification) {
-        final Graph<V, E> g = factory.createWeightedDirected(vertexCount);
+    public Graph<V, E> generate(Random r,
+                                VertexProvider<V> vertexProvider,
+                                Map<String, V> identification) {
+        final Graph<V, E> g = new MemoryGraph<>(vertexCount);
 
         V current = g.addVertex(vertexProvider);
         identification.put("source", current);

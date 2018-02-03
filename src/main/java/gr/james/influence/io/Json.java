@@ -2,7 +2,6 @@ package gr.james.influence.io;
 
 import gr.james.influence.graph.DirectedEdge;
 import gr.james.influence.graph.Graph;
-import gr.james.influence.graph.GraphFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,9 +12,9 @@ import java.util.*;
  * https://github.com/jsongraph/json-graph-specification
  */
 @Deprecated
-public class Json implements GraphImporter, GraphExporter {
+public class Json<V, E> implements GraphImporter<Graph<V, E>, V, E>, GraphExporter {
     @Override
-    public <V, E> Graph<V, E> from(InputStream source, GraphFactory<V, E> factory, Deserializer<V> deserializer) throws IOException {
+    public Graph<V, E> from(InputStream source, Deserializer<V> deserializer) throws IOException {
         throw new UnsupportedOperationException();
     }
 

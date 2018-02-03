@@ -12,18 +12,6 @@ public class SimpleGraph extends MemoryGraph<Integer, Object> {
         }
     };
 
-    public static GraphFactory<Integer, Object> factory = new GraphFactory<Integer, Object>() {
-        @Override
-        public SimpleGraph createGraph(GraphType type) {
-            return new SimpleGraph();
-        }
-
-        @Override
-        public SimpleGraph createGraph(GraphType type, int expectedVertexCount) {
-            return new SimpleGraph(expectedVertexCount);
-        }
-    };
-
     public SimpleGraph() {
         super();
     }

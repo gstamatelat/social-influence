@@ -8,18 +8,18 @@ import gr.james.influence.util.Finals;
 
 import java.util.*;
 
-class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
+public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
     private final Map<V, BiMap<V, DirectedEdge<V, E>>> mOut;
     private final Map<V, BiMap<V, DirectedEdge<V, E>>> mIn;
     private final List<V> vList;
 
-    MemoryGraph() {
+    public MemoryGraph() {
         this.mOut = new HashMap<>();
         this.mIn = new HashMap<>();
         this.vList = new ArrayList<>();
     }
 
-    MemoryGraph(int expectedVertexCount) {
+    public MemoryGraph(int expectedVertexCount) {
         if (expectedVertexCount < 0) {
             throw new IllegalArgumentException();
         }
@@ -28,10 +28,10 @@ class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
         this.vList = new ArrayList<>(expectedVertexCount);
     }
 
-    static <V, E> GraphFactory<V, E> factory() {
-        return new GraphFactory<V, E>() {
+    /*static <V, E> GraphFactory<MemoryGraph<V, E>, V, E> factory() {
+        return new GraphFactory<MemoryGraph<V, E>, V, E>() {
             @Override
-            public Graph<V, E> createGraph(GraphType type) {
+            public MemoryGraph<V, E> createGraph(GraphType type) {
                 Conditions.requireNonNull(type);
                 if (!type.equals(GraphType.WEIGHTED_DIRECTED)) {
                     throw new UnsupportedOperationException();
@@ -40,7 +40,7 @@ class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
             }
 
             @Override
-            public Graph<V, E> createGraph(GraphType type, int expectedVertexCount) {
+            public MemoryGraph<V, E> createGraph(GraphType type, int expectedVertexCount) {
                 Conditions.requireNonNull(type);
                 if (!type.equals(GraphType.WEIGHTED_DIRECTED)) {
                     throw new UnsupportedOperationException();
@@ -48,7 +48,7 @@ class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
                 return new MemoryGraph<>(expectedVertexCount);
             }
         };
-    }
+    }*/
 
     @Override
     public GraphType type() {

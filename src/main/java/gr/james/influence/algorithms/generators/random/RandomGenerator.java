@@ -2,7 +2,7 @@ package gr.james.influence.algorithms.generators.random;
 
 import gr.james.influence.api.algorithms.GraphGenerator;
 import gr.james.influence.graph.Graph;
-import gr.james.influence.graph.GraphFactory;
+import gr.james.influence.graph.MemoryGraph;
 import gr.james.influence.graph.VertexProvider;
 import gr.james.influence.util.Finals;
 
@@ -15,7 +15,7 @@ import java.util.Random;
  * @see <a href="https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93R%C3%A9nyi_model">
  * https://en.wikipedia.org/wiki/Erdős–Rényi_model</a>
  */
-public class RandomGenerator implements GraphGenerator {
+public class RandomGenerator<V, E> implements GraphGenerator<Graph<V, E>, V, E> {
     private int totalVertices;
     private double p;
     private boolean directed;
@@ -33,8 +33,8 @@ public class RandomGenerator implements GraphGenerator {
     }
 
     @Override
-    public <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, Random r, VertexProvider<V> vertexProvider, Map<String, V> identification) {
-        Graph<V, E> g = factory.createWeightedDirected();
+    public Graph<V, E> generate(Random r, VertexProvider<V> vertexProvider, Map<String, V> identification) {
+        Graph<V, E> g = new MemoryGraph<>();
 
         while (g.vertexCount() < totalVertices) {
             V v = g.addVertex(vertexProvider);

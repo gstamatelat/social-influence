@@ -4,6 +4,7 @@ import gr.james.influence.algorithms.generators.basic.CompleteGenerator;
 import gr.james.influence.algorithms.generators.basic.DirectedPathGenerator;
 import gr.james.influence.algorithms.generators.random.RandomGenerator;
 import gr.james.influence.api.algorithms.ConnectedComponents;
+import gr.james.influence.graph.Graph;
 import gr.james.influence.graph.Graphs;
 import gr.james.influence.graph.SimpleGraph;
 import org.junit.Assert;
@@ -17,15 +18,15 @@ import java.util.stream.Collectors;
 
 @RunWith(Parameterized.class)
 public class ConnectedComponentsTests {
-    private final Function<SimpleGraph, ConnectedComponents<Integer>> factory;
+    private final Function<Graph<Integer, Object>, ConnectedComponents<Integer>> factory;
 
-    public ConnectedComponentsTests(Function<SimpleGraph, ConnectedComponents<Integer>> factory) {
+    public ConnectedComponentsTests(Function<Graph<Integer, Object>, ConnectedComponents<Integer>> factory) {
         this.factory = factory;
     }
 
     @Parameterized.Parameters
-    public static Collection<Function<SimpleGraph, ConnectedComponents<Integer>>> implementations() {
-        final Collection<Function<SimpleGraph, ConnectedComponents<Integer>>> implementations = new ArrayList<>();
+    public static Collection<Function<Graph<Integer, Object>, ConnectedComponents<Integer>>> implementations() {
+        final Collection<Function<Graph<Integer, Object>, ConnectedComponents<Integer>>> implementations = new ArrayList<>();
         implementations.add(KosarajuComponents::new);
         return implementations;
     }
@@ -50,7 +51,7 @@ public class ConnectedComponentsTests {
     public void isolated() {
         final int n = 25;
 
-        final SimpleGraph g = new DirectedPathGenerator(n).generate();
+        final Graph<Integer, Object> g = new DirectedPathGenerator<>(n).generate();
 
         final ConnectedComponents<Integer> cc = factory.apply(g);
 
@@ -71,7 +72,7 @@ public class ConnectedComponentsTests {
     @Test
     public void complete() {
         final int n = 25;
-        final SimpleGraph g = new CompleteGenerator(n).generate();
+        final Graph<Integer, Object> g = new CompleteGenerator<>(n).generate();
         final ConnectedComponents<Integer> cc = factory.apply(g);
 
         Assert.assertTrue("ConnectedComponentsTests.complete", cc.size() == 1);
@@ -84,10 +85,10 @@ public class ConnectedComponentsTests {
      */
     @Test
     public void clusters() {
-        final SimpleGraph g1 = new CompleteGenerator(10).generate();
-        final SimpleGraph g2 = new CompleteGenerator(15).generate();
-        final SimpleGraph g3 = new CompleteGenerator(20).generate();
-        final SimpleGraph g = Graphs.combineGraphs(Arrays.asList(new SimpleGraph[]{g1, g2, g3}));
+        final Graph<Integer, Object> g1 = new CompleteGenerator<>(10).generate();
+        final Graph<Integer, Object> g2 = new CompleteGenerator<>(15).generate();
+        final Graph<Integer, Object> g3 = new CompleteGenerator<>(20).generate();
+        final Graph<Integer, Object> g = Graphs.combineGraphs(Arrays.asList(g1, g2, g3));
         final ConnectedComponents<Integer> cc = factory.apply(g);
         final Set<Set<Integer>> s = new HashSet<>();
         s.add(new HashSet<>(g1.getVertices()));
@@ -102,13 +103,13 @@ public class ConnectedComponentsTests {
     @Test
     public void random() {
         final int n = 100;
-        final SimpleGraph g = new RandomGenerator(n, 0.1, true).generate();
+        final Graph<Integer, Object> g = new RandomGenerator<>(n, 0.1, true).generate();
         final ConnectedComponents<Integer> cc = factory.apply(g);
 
         api(cc, g);
     }
 
-    private void api(ConnectedComponents<Integer> cc, SimpleGraph g) {
+    private void api(ConnectedComponents<Integer> cc, Graph<Integer, Object> g) {
         // size should be components().size()
         Assert.assertEquals("ConnectedComponentsTests.api", cc.size(), cc.components().size());
 

@@ -1,7 +1,6 @@
 package gr.james.influence.api.algorithms;
 
 import gr.james.influence.graph.Graph;
-import gr.james.influence.graph.GraphFactory;
 import gr.james.influence.graph.SimpleGraph;
 import gr.james.influence.graph.VertexProvider;
 import gr.james.influence.util.RandomHelper;
@@ -13,35 +12,10 @@ import java.util.Random;
 /**
  * Represents an entity that can generate a {@code Graph} based on a set of rules.
  */
-public interface GraphGenerator {
-    /**
-     * Generate a new {@link SimpleGraph} based on the rules imposed by this entity. This method is using the global
-     * random instance.
-     *
-     * @return the generated graph
-     */
-    default SimpleGraph generate() {
-        return (SimpleGraph) generate(SimpleGraph.factory, RandomHelper.getRandom(), SimpleGraph.vertexProvider);
-    }
-
-    /**
-     * Generate a new {@link SimpleGraph} based on the rules imposed by this entity.
-     *
-     * @param seed the seed for the {@link Random}
-     * @return the generated graph
-     */
-    default SimpleGraph generate(long seed) {
-        return (SimpleGraph) generate(SimpleGraph.factory, new Random(seed), SimpleGraph.vertexProvider);
-    }
-
-    /**
-     * Generate a new {@link SimpleGraph} based on the rules imposed by this entity.
-     *
-     * @param r the {@link Random} instance to use
-     * @return the generated graph
-     */
-    default SimpleGraph generate(Random r) {
-        return (SimpleGraph) generate(SimpleGraph.factory, r, SimpleGraph.vertexProvider);
+public interface GraphGenerator<G extends Graph<V, E>, V, E> {
+    @Deprecated
+    default Graph<Integer, Object> generate() {
+        return (Graph<Integer, Object>) generate((VertexProvider<V>) SimpleGraph.vertexProvider);
     }
 
     /**
@@ -49,16 +23,14 @@ public interface GraphGenerator {
      * instance.
      *
      * @param vertexProvider the vertex provider
-     * @param <V>            the vertex type
-     * @param <E>            the edge type
      * @return the generated graph
      */
-    default <V, E> Graph<V, E> generate(VertexProvider<V> vertexProvider) {
-        return generate(Graph.factory(), RandomHelper.getRandom(), vertexProvider, new HashMap<>());
+    default G generate(VertexProvider<V> vertexProvider) {
+        return generate(RandomHelper.getRandom(), vertexProvider, new HashMap<>());
     }
 
-    default <V, E> Graph<V, E> generate(VertexProvider<V> vertexProvider, Map<String, V> identification) {
-        return generate(Graph.factory(), RandomHelper.getRandom(), vertexProvider);
+    default G generate(VertexProvider<V> vertexProvider, Map<String, V> identification) {
+        return generate(RandomHelper.getRandom(), vertexProvider, identification);
     }
 
     /**
@@ -66,16 +38,14 @@ public interface GraphGenerator {
      *
      * @param seed           the seed for the {@link Random}
      * @param vertexProvider the vertex provider
-     * @param <V>            the vertex type
-     * @param <E>            the edge type
      * @return the generated graph
      */
-    default <V, E> Graph<V, E> generate(long seed, VertexProvider<V> vertexProvider) {
-        return generate(Graph.factory(), new Random(seed), vertexProvider, new HashMap<>());
+    default G generate(long seed, VertexProvider<V> vertexProvider) {
+        return generate(new Random(seed), vertexProvider, new HashMap<>());
     }
 
-    default <V, E> Graph<V, E> generate(long seed, VertexProvider<V> vertexProvider, Map<String, V> identification) {
-        return generate(Graph.factory(), new Random(seed), vertexProvider);
+    default G generate(long seed, VertexProvider<V> vertexProvider, Map<String, V> identification) {
+        return generate(new Random(seed), vertexProvider);
     }
 
     /**
@@ -83,67 +53,11 @@ public interface GraphGenerator {
      *
      * @param r              the {@link Random} instance to use
      * @param vertexProvider the vertex provider
-     * @param <V>            the vertex type
-     * @param <E>            the edge type
      * @return the generated graph
      */
-    default <V, E> Graph<V, E> generate(Random r, VertexProvider<V> vertexProvider) {
-        return generate(Graph.factory(), r, vertexProvider, new HashMap<>());
+    default G generate(Random r, VertexProvider<V> vertexProvider) {
+        return generate(r, vertexProvider, new HashMap<>());
     }
 
-    default <V, E> Graph<V, E> generate(Random r, VertexProvider<V> vertexProvider, Map<String, V> identification) {
-        return generate(Graph.factory(), r, vertexProvider);
-    }
-
-    /**
-     * Generate a new {@link Graph} based on the rules imposed by this entity. This method is using the global random
-     * instance.
-     *
-     * @param factory        the {@link GraphFactory} to produce the new graph
-     * @param vertexProvider the vertex provider
-     * @param <V>            the vertex type
-     * @param <E>            the edge type
-     * @return the generated graph
-     */
-    default <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, VertexProvider<V> vertexProvider) {
-        return generate(factory, RandomHelper.getRandom(), vertexProvider, new HashMap<>());
-    }
-
-    default <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, VertexProvider<V> vertexProvider, Map<String, V> identification) {
-        return generate(factory, RandomHelper.getRandom(), vertexProvider);
-    }
-
-    /**
-     * Generate a new {@link Graph} based on the rules imposed by this entity.
-     *
-     * @param factory        the {@link GraphFactory} to produce the new graph
-     * @param seed           the seed for the {@link Random}
-     * @param vertexProvider the vertex provider
-     * @param <V>            the vertex type
-     * @param <E>            the edge type
-     * @return the generated graph
-     */
-    default <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, long seed, VertexProvider<V> vertexProvider) {
-        return generate(factory, new Random(seed), vertexProvider, new HashMap<>());
-    }
-
-    default <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, long seed, VertexProvider<V> vertexProvider, Map<String, V> identification) {
-        return generate(factory, new Random(seed), vertexProvider);
-    }
-
-    /**
-     * Generate a new {@link Graph} based on the rules imposed by this entity.
-     *
-     * @param factory        the {@link GraphFactory} to produce the new graph
-     * @param r              the {@link Random} instance to use
-     * @param vertexProvider the vertex provider
-     * @param <V>            the vertex type
-     * @param <E>            the edge type
-     * @return the generated graph
-     */
-    default <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, Random r, VertexProvider<V> vertexProvider) {
-        return generate(factory, r, vertexProvider, new HashMap<>());
-    }
-
-    <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, Random r, VertexProvider<V> vertexProvider, Map<String, V> identification);
+    G generate(Random r, VertexProvider<V> vertexProvider, Map<String, V> identification);
 }

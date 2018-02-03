@@ -3,7 +3,6 @@ package gr.james.influence.algorithms.generators.test;
 import gr.james.influence.algorithms.generators.basic.WheelGenerator;
 import gr.james.influence.api.algorithms.GraphGenerator;
 import gr.james.influence.graph.Graph;
-import gr.james.influence.graph.GraphFactory;
 import gr.james.influence.graph.Graphs;
 import gr.james.influence.graph.VertexProvider;
 
@@ -22,7 +21,7 @@ import java.util.Random;
  * <li>hub2: the hub of the other wheel</li>
  * </ul>
  */
-public class TwoWheelsGenerator implements GraphGenerator {
+public class TwoWheelsGenerator<V, E> implements GraphGenerator<Graph<V, E>, V, E> {
     private final int wheelVertices;
 
     /**
@@ -39,15 +38,14 @@ public class TwoWheelsGenerator implements GraphGenerator {
     }
 
     @Override
-    public <V, E> Graph<V, E> generate(GraphFactory<V, E> factory,
-                                       Random r,
-                                       VertexProvider<V> vertexProvider,
-                                       Map<String, V> identification) {
-        final WheelGenerator wheelGenerator = new WheelGenerator(wheelVertices);
+    public Graph<V, E> generate(Random r,
+                                VertexProvider<V> vertexProvider,
+                                Map<String, V> identification) {
+        final WheelGenerator<V, E> wheelGenerator = new WheelGenerator<>(wheelVertices);
         final Map<String, V> identification1 = new HashMap<>();
         final Map<String, V> identification2 = new HashMap<>();
-        final Graph<V, E> g1 = wheelGenerator.generate(factory, r, vertexProvider, identification1);
-        final Graph<V, E> g2 = wheelGenerator.generate(factory, r, vertexProvider, identification2);
+        final Graph<V, E> g1 = wheelGenerator.generate(r, vertexProvider, identification1);
+        final Graph<V, E> g2 = wheelGenerator.generate(r, vertexProvider, identification2);
         final V hub1 = identification1.get("hub");
         final V hub2 = identification2.get("hub");
 
@@ -56,7 +54,7 @@ public class TwoWheelsGenerator implements GraphGenerator {
         assert a != null;
         assert b != null;
 
-        final Graph<V, E> g = Graphs.combineGraphs(factory, Arrays.asList(g1, g2));
+        final Graph<V, E> g = Graphs.combineGraphs(Arrays.asList(g1, g2));
         final V center = Graphs.fuseVertices(g, Arrays.asList(a, b), vertexProvider);
 
         identification.put("center", center);

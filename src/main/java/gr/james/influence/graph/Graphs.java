@@ -28,7 +28,7 @@ public final class Graphs {
     }
 
     public static <V, E> Graph<V, E> randomizeEdgeWeights(Graph<V, E> g, boolean unused) {
-        final Graph<V, E> newGraph = Graph.<V, E>factory().createGraph(g.type());
+        final Graph<V, E> newGraph = new MemoryGraph<>();
         for (V v : g) {
             newGraph.addVertex(v);
         }
@@ -94,14 +94,13 @@ public final class Graphs {
      * <p>Combine several graphs into a single one. When combining, the vertices of the input graphs will be inserted to
      * the output along with their edges. The original graphs will not be modified.</p>
      *
-     * @param type   the graphFactory that will used to create the output graph
      * @param graphs the graph objects to combine
      * @param <V>    the vertex type
      * @param <E>    the edge type
      * @return the combined graph
      */
-    public static <V, E> Graph<V, E> combineGraphs(GraphFactory<V, E> type, Collection<Graph<V, E>> graphs) {
-        Graph<V, E> r = type.createWeightedDirected();
+    public static <V, E> Graph<V, E> combineGraphs(Collection<? extends Graph<V, E>> graphs) {
+        final Graph<V, E> r = new MemoryGraph<>();
         for (Graph<V, E> g : graphs) {
             for (V v : g) {
                 r.addVertex(v);
@@ -113,12 +112,9 @@ public final class Graphs {
         return r;
     }
 
-    public static SimpleGraph combineGraphs(Collection<Graph<Integer, Object>> graphs) {
-        return (SimpleGraph) combineGraphs(SimpleGraph.factory, graphs);
-    }
-
-    public static <V, E> Graph<V, E> deepCopy(Graph<V, E> g, GraphFactory<V, E> factory, Collection<V> filter) {
-        final Graph<V, E> r = factory.createWeightedDirected();
+    public static <G extends Graph<V, E>, V, E> Graph<V, E> deepCopy(G g, Collection<V> filter) {
+        final Graph<V, E> r = new MemoryGraph<>();
+        //final Graph<V, E> r = factory.createWeightedDirected();
         for (V v : filter) {
             if (!g.containsVertex(v)) {
                 throw new IllegalVertexException();
@@ -136,7 +132,11 @@ public final class Graphs {
         return r;
     }
 
-    public static <V, E> Graph<V, E> deepCopy(Graph<V, E> g, GraphFactory<V, E> factory) {
+    public static <G extends Graph<V, E>, V, E> Graph<V, E> deepCopy(G g) {
+        return deepCopy(g, g.vertexSet());
+    }
+
+    /*public static <V, E> Graph<V, E> deepCopy(Graph<V, E> g, GraphFactory<V, E> factory) {
         return deepCopy(g, factory, g.vertexSet());
     }
 
@@ -154,7 +154,7 @@ public final class Graphs {
 
     public static SimpleGraph deepCopy(SimpleGraph g) {
         return (SimpleGraph) deepCopy(g, SimpleGraph.factory, g.getVertices());
-    }
+    }*/
 
     public static <V, E> ImmutableBiMap<V, Integer> getGraphIndexMap(Graph<V, E> g) {
         ImmutableBiMap.Builder<V, Integer> builder = ImmutableBiMap.builder();

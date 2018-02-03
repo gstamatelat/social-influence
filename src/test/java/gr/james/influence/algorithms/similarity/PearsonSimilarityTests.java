@@ -4,6 +4,7 @@ import gr.james.influence.algorithms.generators.basic.CompleteGenerator;
 import gr.james.influence.algorithms.generators.basic.CycleGenerator;
 import gr.james.influence.algorithms.generators.random.RandomGenerator;
 import gr.james.influence.api.algorithms.VertexSimilarity;
+import gr.james.influence.graph.Graph;
 import gr.james.influence.graph.SimpleGraph;
 import org.junit.Assert;
 import org.junit.Test;
@@ -55,7 +56,7 @@ public class PearsonSimilarityTests {
     public void circle() {
         for (int n = 4; n < 100; n++) {
             final double similarity = 2.0 / (2.0 - n);
-            final SimpleGraph g = new CycleGenerator(n).generate();
+            final Graph<Integer, Object> g = new CycleGenerator<>(n).generate();
             final VertexSimilarity<Integer, Double> pearson = new PearsonSimilarity<>(g);
             for (Integer v : g) {
                 for (Integer e : g.getOutEdges(v).keySet()) {
@@ -71,7 +72,7 @@ public class PearsonSimilarityTests {
      */
     @Test
     public void commutativity() {
-        final SimpleGraph g = new RandomGenerator(100, 0.1).generate();
+        final Graph<Integer, Object> g = new RandomGenerator<>(100, 0.1).generate();
         final VertexSimilarity<Integer, Double> pearson = new PearsonSimilarity<>(g);
         for (Integer v : g) {
             for (Integer w : g) {
@@ -86,7 +87,7 @@ public class PearsonSimilarityTests {
      */
     @Test
     public void identity() {
-        final SimpleGraph g = new RandomGenerator(100, 0.1).generate();
+        final Graph<Integer, Object> g = new RandomGenerator<>(100, 0.1).generate();
         final PearsonSimilarity<Integer> pearson = new PearsonSimilarity<>(g);
         for (Integer v : g) {
             if (pearson.variance(v) != 0) {
@@ -104,7 +105,7 @@ public class PearsonSimilarityTests {
      */
     @Test
     public void complete() {
-        final SimpleGraph g = new CompleteGenerator(5).generate();
+        final Graph<Integer, Object> g = new CompleteGenerator<>(5).generate();
         for (Integer v : g) {
             g.addEdge(v, v, 1.0);
         }

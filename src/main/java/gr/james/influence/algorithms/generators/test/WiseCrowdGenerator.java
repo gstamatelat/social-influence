@@ -2,7 +2,7 @@ package gr.james.influence.algorithms.generators.test;
 
 import gr.james.influence.api.algorithms.GraphGenerator;
 import gr.james.influence.graph.Graph;
-import gr.james.influence.graph.GraphFactory;
+import gr.james.influence.graph.MemoryGraph;
 import gr.james.influence.graph.VertexProvider;
 import gr.james.influence.util.Conditions;
 import gr.james.influence.util.Finals;
@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Random;
 
 // From Jackson, figure 8.3.7
-public class WiseCrowdGenerator implements GraphGenerator {
+public class WiseCrowdGenerator<V, E> implements GraphGenerator<Graph<V, E>, V, E> {
     private int totalVertices;
     private double delta;
 
@@ -23,8 +23,8 @@ public class WiseCrowdGenerator implements GraphGenerator {
     }
 
     @Override
-    public <V, E> Graph<V, E> generate(GraphFactory<V, E> factory, Random r, VertexProvider<V> vertexProvider, Map<String, V> identification) {
-        Graph<V, E> g = factory.createWeightedDirected();
+    public Graph<V, E> generate(Random r, VertexProvider<V> vertexProvider, Map<String, V> identification) {
+        Graph<V, E> g = new MemoryGraph<>();
 
         V boss = g.addVertex(vertexProvider);
 

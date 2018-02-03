@@ -2,7 +2,6 @@ package gr.james.influence.algorithms.generators.basic;
 
 import gr.james.influence.api.algorithms.GraphGenerator;
 import gr.james.influence.graph.Graph;
-import gr.james.influence.graph.GraphFactory;
 import gr.james.influence.graph.Graphs;
 import gr.james.influence.graph.VertexProvider;
 
@@ -19,7 +18,7 @@ import java.util.Random;
  *
  * @see <a href="http://mathworld.wolfram.com/WheelGraph.html">http://mathworld.wolfram.com/WheelGraph.html</a>
  */
-public class WheelGenerator implements GraphGenerator {
+public class WheelGenerator<V, E> implements GraphGenerator<Graph<V, E>, V, E> {
     private final int vertexCount;
 
     /**
@@ -36,11 +35,10 @@ public class WheelGenerator implements GraphGenerator {
     }
 
     @Override
-    public <V, E> Graph<V, E> generate(GraphFactory<V, E> factory,
-                                       Random r,
-                                       VertexProvider<V> vertexProvider,
-                                       Map<String, V> identification) {
-        final Graph<V, E> g = new CycleGenerator(vertexCount - 1).generate(factory, r, vertexProvider);
+    public Graph<V, E> generate(Random r,
+                                VertexProvider<V> vertexProvider,
+                                Map<String, V> identification) {
+        final Graph<V, E> g = new CycleGenerator<V, E>(vertexCount - 1).generate(r, vertexProvider);
 
         final V hub = g.addVertex(vertexProvider);
         for (V v : g) {

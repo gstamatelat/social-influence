@@ -1,7 +1,7 @@
 package gr.james.influence.io;
 
 import gr.james.influence.graph.Graph;
-import gr.james.influence.graph.GraphFactory;
+import gr.james.influence.graph.MemoryGraph;
 import gr.james.influence.util.Finals;
 
 import java.io.BufferedReader;
@@ -11,7 +11,7 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EdgesImporter implements GraphImporter {
+public class EdgesImporter<V, E> implements GraphImporter<Graph<V, E>, V, E> {
     public static final String DEFAULT_SEPARATOR = ",";
     public static final double DEFAULT_WEIGHT = 1;
     public static final String PARALLEL_EDGES = "The .edges file contains parallel edge [%s -> %s]";
@@ -28,8 +28,8 @@ public class EdgesImporter implements GraphImporter {
     }
 
     @Override
-    public <V, E> Graph<V, E> from(InputStream source, GraphFactory<V, E> factory, Deserializer<V> deserializer) throws IOException {
-        final Graph<V, E> g = factory.createWeightedDirected();
+    public Graph<V, E> from(InputStream source, Deserializer<V> deserializer) throws IOException {
+        final Graph<V, E> g = new MemoryGraph<>();
 
         final BufferedReader reader = new BufferedReader(new InputStreamReader(source, Finals.IO_ENCODING));
         final Map<String, V> nodeMap = new HashMap<>();

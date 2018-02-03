@@ -1,7 +1,7 @@
 package gr.james.influence;
 
 import gr.james.influence.algorithms.generators.random.RandomGenerator;
-import gr.james.influence.graph.SimpleGraph;
+import gr.james.influence.graph.Graph;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -13,7 +13,7 @@ public class GraphImplementationTests {
      */
     @Test
     public void vertexIteratorTest() {
-        SimpleGraph g = new RandomGenerator(250, 0.2).generate();
+        Graph<Integer, Object> g = new RandomGenerator<>(250, 0.2).generate();
 
         Iterator<Integer> it1 = g.iterator();
         Iterator<Integer> it2 = g.vertexSet().iterator();
@@ -41,7 +41,7 @@ public class GraphImplementationTests {
      */
     @Test
     public void verticesCountTest() {
-        SimpleGraph g = new RandomGenerator(250, 0.2).generate();
+        Graph<Integer, Object> g = new RandomGenerator<>(250, 0.2).generate();
         Assert.assertEquals("verticesCountTest", g.vertexCount(), g.getVertices().size());
     }
 }
