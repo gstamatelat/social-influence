@@ -8,7 +8,7 @@ import gr.james.influence.util.Finals;
 
 import java.util.*;
 
-final class DirectedGraphImpl<V, E> implements DirectedGraph<V, E> {
+final class DirectedGraphImpl<V, E> extends AbstractDirectedGraph<V, E> {
     private final Map<V, BiMap<V, DirectedEdge<V, E>>> mOut;
     private final Map<V, BiMap<V, DirectedEdge<V, E>>> mIn;
 
@@ -167,20 +167,5 @@ final class DirectedGraphImpl<V, E> implements DirectedGraph<V, E> {
         } else {
             return null;
         }
-    }
-
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder();
-        sb.append(String.format("DirectedGraph(%d) {%n", this.vertexCount()));
-        for (DirectedEdge<V, E> e : this.edges()) {
-            if (e.value() == null) {
-                sb.append(String.format("  %s -> %s [%.2f]%n", e.source(), e.target(), e.weight()));
-            } else {
-                sb.append(String.format("  %s -> %s (%s) [%.2f]%n", e.source(), e.target(), e.value(), e.weight()));
-            }
-        }
-        sb.append("}");
-        return sb.toString();
     }
 }

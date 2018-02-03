@@ -2,7 +2,7 @@ package gr.james.influence.graph;
 
 import java.util.Set;
 
-final class UndirectedGraphImpl<V, E> implements UndirectedGraph<V, E> {
+final class UndirectedGraphImpl<V, E> extends AbstractUndirectedGraph<V, E> {
     UndirectedGraphImpl() {
         // TODO
         throw new UnsupportedOperationException();
@@ -66,10 +66,5 @@ final class UndirectedGraphImpl<V, E> implements UndirectedGraph<V, E> {
     @Override
     public boolean removeVertex(V v) {
         return false;
-    }
-
-    @Override
-    public String toString() {
-        return null;
     }
 }
