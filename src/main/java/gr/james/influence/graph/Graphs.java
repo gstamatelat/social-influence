@@ -22,6 +22,7 @@ public final class Graphs {
             return;
         }
         Set<V> pre = it.next();
+        Set<V> start = pre;
         if (!it.hasNext()) {
             return;
         }
@@ -30,6 +31,7 @@ public final class Graphs {
             g.addEdge(pre.iterator().next(), next.iterator().next());
             pre = next;
         }
+        g.addEdge(pre.iterator().next(), start.iterator().next());
     }
 
     public static <V, E> Graph<V, E> randomizeEdgeWeights(Graph<V, E> g, boolean unused) {

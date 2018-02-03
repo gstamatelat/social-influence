@@ -254,6 +254,6 @@ public class Tests {
         double p = RandomHelper.getRandom().nextDouble();
         Graph<Integer, Object> g = new RandomGenerator<>(size, p).generate();
         Graphs.connect(g);
-        Assert.assertNotEquals("connectTest", new DijkstraDiameter<>(g).get(), Double.POSITIVE_INFINITY);
+        Assert.assertNotEquals("connectTest", Double.POSITIVE_INFINITY, new DijkstraDiameter<>(g).get());
     }
 }
