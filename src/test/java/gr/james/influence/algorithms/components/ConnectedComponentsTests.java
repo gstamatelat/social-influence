@@ -3,7 +3,6 @@ package gr.james.influence.algorithms.components;
 import gr.james.influence.algorithms.generators.basic.CompleteGenerator;
 import gr.james.influence.algorithms.generators.basic.DirectedPathGenerator;
 import gr.james.influence.algorithms.generators.random.RandomGenerator;
-import gr.james.influence.api.algorithms.ConnectedComponents;
 import gr.james.influence.graph.Graph;
 import gr.james.influence.graph.Graphs;
 import gr.james.influence.graph.SimpleGraph;
