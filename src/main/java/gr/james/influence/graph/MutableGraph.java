@@ -8,18 +8,18 @@ import gr.james.influence.util.Finals;
 
 import java.util.*;
 
-public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
+public class MutableGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
     private final Map<V, BiMap<V, DirectedEdge<V, E>>> mOut;
     private final Map<V, BiMap<V, DirectedEdge<V, E>>> mIn;
     private final List<V> vList;
 
-    public MemoryGraph() {
+    public MutableGraph() {
         this.mOut = new HashMap<>();
         this.mIn = new HashMap<>();
         this.vList = new ArrayList<>();
     }
 
-    public MemoryGraph(int expectedVertexCount) {
+    public MutableGraph(int expectedVertexCount) {
         if (expectedVertexCount < 0) {
             throw new IllegalArgumentException();
         }
@@ -28,24 +28,24 @@ public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
         this.vList = new ArrayList<>(expectedVertexCount);
     }
 
-    /*static <V, E> GraphFactory<MemoryGraph<V, E>, V, E> factory() {
-        return new GraphFactory<MemoryGraph<V, E>, V, E>() {
+    /*static <V, E> GraphFactory<MutableGraph<V, E>, V, E> factory() {
+        return new GraphFactory<MutableGraph<V, E>, V, E>() {
             @Override
-            public MemoryGraph<V, E> createGraph(GraphType type) {
+            public MutableGraph<V, E> createGraph(GraphType type) {
                 Conditions.requireNonNull(type);
                 if (!type.equals(GraphType.WEIGHTED_DIRECTED)) {
                     throw new UnsupportedOperationException();
                 }
-                return new MemoryGraph<>();
+                return new MutableGraph<>();
             }
 
             @Override
-            public MemoryGraph<V, E> createGraph(GraphType type, int expectedVertexCount) {
+            public MutableGraph<V, E> createGraph(GraphType type, int expectedVertexCount) {
                 Conditions.requireNonNull(type);
                 if (!type.equals(GraphType.WEIGHTED_DIRECTED)) {
                     throw new UnsupportedOperationException();
                 }
-                return new MemoryGraph<>(expectedVertexCount);
+                return new MutableGraph<>(expectedVertexCount);
             }
         };
     }*/

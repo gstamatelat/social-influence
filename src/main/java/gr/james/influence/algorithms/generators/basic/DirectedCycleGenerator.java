@@ -3,7 +3,7 @@ package gr.james.influence.algorithms.generators.basic;
 import gr.james.influence.api.algorithms.GraphGenerator;
 import gr.james.influence.graph.Graph;
 import gr.james.influence.graph.Graphs;
-import gr.james.influence.graph.MemoryGraph;
+import gr.james.influence.graph.MutableGraph;
 import gr.james.influence.graph.VertexProvider;
 
 import java.util.Map;
@@ -32,7 +32,7 @@ public class DirectedCycleGenerator<V, E> implements GraphGenerator<Graph<V, E>,
     public Graph<V, E> generate(Random r,
                                 VertexProvider<V> vertexProvider,
                                 Map<String, V> identification) {
-        final Graph<V, E> g = new MemoryGraph<>(vertexCount);
+        final Graph<V, E> g = new MutableGraph<>(vertexCount);
 
         V current = g.addVertex(vertexProvider);
         final V start = current;

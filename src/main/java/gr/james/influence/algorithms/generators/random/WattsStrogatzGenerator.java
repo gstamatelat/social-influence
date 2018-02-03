@@ -3,7 +3,7 @@ package gr.james.influence.algorithms.generators.random;
 import gr.james.influence.api.algorithms.GraphGenerator;
 import gr.james.influence.graph.Graph;
 import gr.james.influence.graph.Graphs;
-import gr.james.influence.graph.MemoryGraph;
+import gr.james.influence.graph.MutableGraph;
 import gr.james.influence.graph.VertexProvider;
 import gr.james.influence.util.Conditions;
 import gr.james.influence.util.Finals;
@@ -29,7 +29,7 @@ public class WattsStrogatzGenerator<V, E> implements GraphGenerator<Graph<V, E>,
 
     @Override
     public Graph<V, E> generate(Random r, VertexProvider<V> vertexProvider, Map<String, V> identification) {
-        Graph<V, E> g = new MemoryGraph<>();
+        Graph<V, E> g = new MutableGraph<>();
 
         List<V> l = g.addVertices(n, vertexProvider);
         for (int i = 0; i < n; i++) {

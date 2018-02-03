@@ -33,7 +33,7 @@ public final class Graphs {
     }
 
     public static <V, E> Graph<V, E> randomizeEdgeWeights(Graph<V, E> g, boolean unused) {
-        final Graph<V, E> newGraph = new MemoryGraph<>();
+        final Graph<V, E> newGraph = new MutableGraph<>();
         for (V v : g) {
             newGraph.addVertex(v);
         }
@@ -105,7 +105,7 @@ public final class Graphs {
      * @return the combined graph
      */
     public static <V, E> Graph<V, E> combineGraphs(Collection<? extends Graph<V, E>> graphs) {
-        final Graph<V, E> r = new MemoryGraph<>();
+        final Graph<V, E> r = new MutableGraph<>();
         for (Graph<V, E> g : graphs) {
             for (V v : g) {
                 r.addVertex(v);
@@ -118,7 +118,7 @@ public final class Graphs {
     }
 
     public static <G extends Graph<V, E>, V, E> Graph<V, E> deepCopy(G g, Collection<V> filter) {
-        final Graph<V, E> r = new MemoryGraph<>();
+        final Graph<V, E> r = new MutableGraph<>();
         //final Graph<V, E> r = factory.createWeightedDirected();
         for (V v : filter) {
             if (!g.containsVertex(v)) {

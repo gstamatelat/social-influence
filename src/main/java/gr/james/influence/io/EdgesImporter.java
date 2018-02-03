@@ -1,7 +1,7 @@
 package gr.james.influence.io;
 
 import gr.james.influence.graph.Graph;
-import gr.james.influence.graph.MemoryGraph;
+import gr.james.influence.graph.MutableGraph;
 import gr.james.influence.util.Finals;
 
 import java.io.BufferedReader;
@@ -29,7 +29,7 @@ public class EdgesImporter<V, E> implements GraphImporter<Graph<V, E>, V, E> {
 
     @Override
     public Graph<V, E> from(InputStream source, Deserializer<V> deserializer) throws IOException {
-        final Graph<V, E> g = new MemoryGraph<>();
+        final Graph<V, E> g = new MutableGraph<>();
 
         final BufferedReader reader = new BufferedReader(new InputStreamReader(source, Finals.IO_ENCODING));
         final Map<String, V> nodeMap = new HashMap<>();
