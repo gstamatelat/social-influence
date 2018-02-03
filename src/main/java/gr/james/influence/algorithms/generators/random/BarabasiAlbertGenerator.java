@@ -2,7 +2,7 @@ package gr.james.influence.algorithms.generators.random;
 
 import gr.james.influence.algorithms.generators.basic.CompleteGenerator;
 import gr.james.influence.algorithms.scoring.DegreeCentrality;
-import gr.james.influence.api.algorithms.GraphGenerator;
+import gr.james.influence.algorithms.generators.GraphGenerator;
 import gr.james.influence.graph.Direction;
 import gr.james.influence.graph.Graph;
 import gr.james.influence.graph.VertexProvider;

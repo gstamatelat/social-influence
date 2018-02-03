@@ -1,4 +1,4 @@
-package gr.james.influence.api.algorithms;
+package gr.james.influence.algorithms.generators;
 
 import gr.james.influence.graph.Graph;
 import gr.james.influence.graph.SimpleGraph;
