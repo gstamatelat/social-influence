@@ -89,6 +89,26 @@ public interface DirectedGraph<V, E> extends Graph<V, E> {
     }
 
     /**
+     * Returns an unmodifiable decorator around this graph.
+     * <p>
+     * Invoking mutation methods on the resulting graph will result in {@link UnsupportedOperationException}.
+     *
+     * @return an unmodifiable decorator around this graph
+     */
+    default DirectedGraph<V, E> asUnmodifiable() {
+        return new UnmodifiableDirectedGraph<>(this);
+    }
+
+    /**
+     * Returns an edge reversed decorator around this graph.
+     *
+     * @return an edge reversed decorator around this graph
+     */
+    default DirectedGraph<V, E> asReverse() {
+        return new EdgeReversedDirectedGraph<>(this);
+    }
+
+    /**
      * Checks if this graph contains an edge with the specified {@code source} and {@code target}.
      * <p>
      * This method is equivalent to

@@ -1,17 +1,7 @@
 package gr.james.influence;
 
-import gr.james.influence.graph.DirectedGraph;
-import gr.james.influence.graph.GraphDecorator;
-import org.junit.Assert;
-import org.junit.Test;
-
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
-import java.util.Arrays;
-import java.util.List;
-
 public class GraphDecoratorTest {
-    @Test
+    /*@Test
     public void implementsGraph() {
         List<Method> graphMethods = Arrays.asList(DirectedGraph.class.getDeclaredMethods());
         List<Method> graphDecoratorMethods = Arrays.asList(GraphDecorator.class.getDeclaredMethods());
@@ -23,5 +13,5 @@ public class GraphDecoratorTest {
                 Assert.assertEquals("GraphDecoratorTest.implementsGraph", 1, count);
             }
         }
-    }
+    }*/
 }

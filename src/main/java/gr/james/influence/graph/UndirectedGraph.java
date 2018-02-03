@@ -47,6 +47,17 @@ public interface UndirectedGraph<V, E> extends Graph<V, E> {
     }
 
     /**
+     * Returns an unmodifiable decorator around this graph.
+     * <p>
+     * Invoking mutation methods on the resulting graph will result in {@link UnsupportedOperationException}.
+     *
+     * @return an unmodifiable decorator around this graph
+     */
+    default UndirectedGraph<V, E> asUnmodifiable() {
+        return new UnmodifiableUndirectedGraph<>(this);
+    }
+
+    /**
      * Checks if this graph contains an edge connecting {@code v} and {@code w}.
      * <p>
      * This method is equivalent to
