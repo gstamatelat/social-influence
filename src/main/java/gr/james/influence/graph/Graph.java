@@ -415,6 +415,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @return an unmodifiable list view containing the vertices in {@code vertices} that were already in the graph
      * @throws NullPointerException if any vertex in {@code vertices} is {@code null}
      */
+    @SuppressWarnings({"unchecked"})
     default List<V> addVertices(V... vertices) {
         final List<V> contained = new ArrayList<>();
         for (V v : vertices) {
@@ -484,22 +485,9 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @throws NullPointerException if {@code vertices} or any of the objects in {@code vertices} is {@code null}
      */
     default void removeVertices(Iterable<V> vertices) {
-        vertices.forEach(this::removeVertex);
-    }
-
-    /**
-     * Removes all vertices (and consequently all edges) from this graph. Metadata are not removed.
-     */
-    default void clear() {
-        this.removeVertices(vertexSet());
-    }
-
-    /**
-     * Removes all edges from this graph. Metadata are not removed.
-     */
-    default void clearEdges() {
-        removeEdges(vertexSet());
-        assert Graphs.getEdgesCount(this) == 0;
+        for (V v : vertices) {
+            removeVertex(v);
+        }
     }
 
     /**
@@ -633,6 +621,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @throws NullPointerException   if {@code among} or any vertex in {@code among} is {@code null}
      * @throws IllegalVertexException if any vertex in {@code among} is not in the graph
      */
+    @SuppressWarnings({"unchecked"})
     default void addEdges(V... among) {
         this.addEdges(Arrays.asList(among));
     }
@@ -680,6 +669,7 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @throws NullPointerException   if any vertex in {@code among} is {@code null}
      * @throws IllegalVertexException if any vertex in {@code among} is not in the graph
      */
+    @SuppressWarnings({"unchecked"})
     default void removeEdges(V... among) {
         this.removeEdges(Arrays.asList(among));
     }

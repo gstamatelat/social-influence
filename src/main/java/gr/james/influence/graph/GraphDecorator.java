@@ -186,11 +186,6 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
     }
 
     @Override
-    public void clear() {
-        this.g.clear();
-    }
-
-    @Override
     public DirectedEdge<V, E> addEdge(V source, V target) {
         return this.g.addEdge(source, target);
     }
@@ -223,11 +218,6 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
     @Override
     public void removeEdges(Iterable<V> among) {
         this.g.removeEdges(among);
-    }
-
-    @Override
-    public void clearEdges() {
-        this.g.clearEdges();
     }
 
     @Override
