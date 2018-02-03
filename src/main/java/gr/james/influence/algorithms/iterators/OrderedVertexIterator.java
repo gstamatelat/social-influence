@@ -12,7 +12,7 @@ public class OrderedVertexIterator<V> implements Iterator<V> {
     private TreeSet<V> vertices;
 
     public OrderedVertexIterator(Graph<V, ?> g) {
-        vertices = new TreeSet<>(g.getVertices());
+        vertices = new TreeSet<>(g.vertexSet());
     }
 
     @Override

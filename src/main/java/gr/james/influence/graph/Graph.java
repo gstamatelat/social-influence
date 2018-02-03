@@ -360,15 +360,6 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     }
 
     /**
-     * Returns an list view of the vertices contained in this graph. The list is indexed at the order at which the
-     * vertices were inserted in the graph and will always contain distinct objects.
-     *
-     * @return an unmodifiable list of vertices in this graph
-     */
-    @Deprecated
-    List<V> getVertices();
-
-    /**
      * Returns an unmodifiable {@link Set} of the vertices contained in this graph.
      * <p>
      * The vertices are in no particular order inside the {@link Set}.

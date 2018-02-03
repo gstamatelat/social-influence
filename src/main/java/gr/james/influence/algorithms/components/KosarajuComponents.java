@@ -14,7 +14,6 @@ import java.util.*;
  * prone to {@link StackOverflowError}.
  *
  * @param <V> the type of vertex
- * @see TarjanComponents
  */
 public class KosarajuComponents<V> implements ConnectedComponents<V> {
     private final Set<Set<V>> components;
@@ -50,7 +49,7 @@ public class KosarajuComponents<V> implements ConnectedComponents<V> {
         for (V v : g) {
             edgeIterator.put(v, g.getOutEdges(v).keySet().iterator());
         }
-        final GraphState<V, Boolean> visited = GraphState.create(g.getVertices(), false);
+        final GraphState<V, Boolean> visited = GraphState.create(g.vertexSet(), false);
         final Stack<V> dfsStack = new Stack<>();
 
         for (V start : g) {

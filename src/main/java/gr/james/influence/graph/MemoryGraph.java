@@ -194,11 +194,6 @@ public class MemoryGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
     }
 
     @Override
-    public List<V> getVertices() {
-        return Collections.unmodifiableList(vList);
-    }
-
-    @Override
     public Set<V> vertexSet() {
         assert Objects.equals(this.mOut.keySet(), this.mIn.keySet());
         return Collections.unmodifiableSet(this.mOut.keySet());

@@ -13,17 +13,17 @@ public class RandomVertexIterator<V> implements Iterator<V> {
     private Random random;
 
     public RandomVertexIterator(Graph<V, ?> g) {
-        this.nodes = new ArrayList<>(g.getVertices());
+        this.nodes = new ArrayList<>(g.vertexSet());
         this.random = RandomHelper.getRandom();
     }
 
     public RandomVertexIterator(Graph<V, ?> g, Random r) {
-        this.nodes = new ArrayList<>(g.getVertices());
+        this.nodes = new ArrayList<>(g.vertexSet());
         this.random = r;
     }
 
     public RandomVertexIterator(Graph<V, ?> g, long seed) {
-        this.nodes = new ArrayList<>(g.getVertices());
+        this.nodes = new ArrayList<>(g.vertexSet());
         this.random = RandomHelper.getNewRandom(seed);
     }
 

@@ -13,7 +13,7 @@ public class HITS<V> extends AbstractIterativeAlgorithm<V, HITS.HITSScore> {
     private double epsilon;
 
     public HITS(Graph<V, ?> g, double epsilon) {
-        super(g, GraphState.create(g.getVertices(), new HITSScore(0.0, 1.0)));
+        super(g, GraphState.create(g.vertexSet(), new HITSScore(0.0, 1.0)));
         this.epsilon = epsilon;
     }
 
@@ -38,7 +38,7 @@ public class HITS<V> extends AbstractIterativeAlgorithm<V, HITS.HITSScore> {
 
     @Override
     protected GraphState<V, HITSScore> step(Graph<V, ?> g, GraphState<V, HITSScore> previous) {
-        GraphState<V, HITSScore> next = GraphState.create(g.getVertices(), new HITSScore(0.0, 0.0));
+        GraphState<V, HITSScore> next = GraphState.create(g.vertexSet(), new HITSScore(0.0, 0.0));
 
         for (V v : g) {
             Map<V, ? extends DirectedEdge<V, ?>> inEdges = g.getInEdges(v);

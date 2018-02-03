@@ -1,7 +1,6 @@
 package gr.james.influence.graph;
 
-import com.google.common.collect.ImmutableBiMap;
-import gr.james.influence.algorithms.components.TarjanComponents;
+import gr.james.influence.algorithms.components.KosarajuComponents;
 import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.util.RandomHelper;
 import gr.james.sampling.EfraimidisSampling;
@@ -17,13 +16,19 @@ public final class Graphs {
     }
 
     public static <V, E> void connect(Graph<V, E> g) {
-        List<List<V>> scc = new TarjanComponents<V>().execute(g);
-        for (int i = 0; i < scc.size(); i++) {
-            List<V> thisComponent = scc.get(i);
-            List<V> nextComponent = scc.get((i + 1) % scc.size());
-            V v = thisComponent.get(RandomHelper.getRandom().nextInt(thisComponent.size()));
-            V u = nextComponent.get(RandomHelper.getRandom().nextInt(nextComponent.size()));
-            g.addEdge(v, u);
+        final Set<Set<V>> scc = new KosarajuComponents<>(g).components();
+        final Iterator<Set<V>> it = scc.iterator();
+        if (!it.hasNext()) {
+            return;
+        }
+        Set<V> pre = it.next();
+        if (!it.hasNext()) {
+            return;
+        }
+        while (it.hasNext()) {
+            Set<V> next = it.next();
+            g.addEdge(pre.iterator().next(), next.iterator().next());
+            pre = next;
         }
     }
 
@@ -156,15 +161,6 @@ public final class Graphs {
         return (SimpleGraph) deepCopy(g, SimpleGraph.factory, g.getVertices());
     }*/
 
-    public static <V, E> ImmutableBiMap<V, Integer> getGraphIndexMap(Graph<V, E> g) {
-        ImmutableBiMap.Builder<V, Integer> builder = ImmutableBiMap.builder();
-        List<V> vertices = g.getVertices();
-        for (int i = 0; i < vertices.size(); i++) {
-            builder.put(vertices.get(i), i);
-        }
-        return builder.build();
-    }
-
     /**
      * <p>Filters out and returns the stubborn vertices contained in {@code g}. A stubborn vertex is one that its only
      * outbound edge points to itself. By this definition, this method will not return vertices that only point to other
@@ -178,7 +174,7 @@ public final class Graphs {
      */
     public static <V, E> Set<V> getStubbornVertices(Graph<V, E> g) {
         return Collections.unmodifiableSet(
-                g.getVertices().stream()
+                g.vertexSet().stream()
                         .filter(v -> g.outDegree(v) == 1 && g.getOutEdges(v).containsKey(v))
                         .collect(Collectors.toSet())
         );

@@ -16,8 +16,8 @@ public class RandomVertexIteratorTests {
     @Test
     public void allItems() {
         List<Integer> it = Lists.newArrayList(new RandomVertexIterator<>(g));
-        Assert.assertTrue("RandomVertexIteratorTests.allItems", it.containsAll(g.getVertices()));
-        Assert.assertTrue("RandomVertexIteratorTests.allItems", g.getVertices().containsAll(it));
+        Assert.assertTrue("RandomVertexIteratorTests.allItems", it.containsAll(g.vertexSet()));
+        Assert.assertTrue("RandomVertexIteratorTests.allItems", g.vertexSet().containsAll(it));
     }
 
     @Test

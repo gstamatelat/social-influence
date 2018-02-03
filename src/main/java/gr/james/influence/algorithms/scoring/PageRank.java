@@ -16,7 +16,7 @@ public class PageRank<V> extends AbstractIterativeAlgorithm<V, Double> {
     private Map<V, Double> outStrengths;
 
     public PageRank(Graph<V, ?> g, double dampingFactor, double epsilon) {
-        super(g, GraphState.create(g.getVertices(), 1.0));
+        super(g, GraphState.create(g.vertexSet(), 1.0));
         this.dampingFactor = dampingFactor;
         this.epsilon = epsilon;
 

@@ -7,8 +7,6 @@ import gr.james.influence.graph.Graph;
 import gr.james.influence.util.Conditions;
 import gr.james.influence.util.collections.GraphState;
 
-import java.util.HashSet;
-
 /**
  * This class provides a skeletal implementation of the {@link VertexScoring} interface to minimize the effort required
  * to implement it.
@@ -37,7 +35,7 @@ public abstract class AbstractMultiVertexScoring<V, T> implements VertexScoring<
     public AbstractMultiVertexScoring(@UnmodifiableGraph Graph<V, ?> g) {
         this.g = Conditions.requireNonNull(g);
         this.scores = scoresProtected();
-        assert scores.keySet().equals(new HashSet<>(g.getVertices()));
+        assert scores.keySet().equals(g.vertexSet());
     }
 
     /**

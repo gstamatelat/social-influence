@@ -91,9 +91,9 @@ public class ConnectedComponentsTests {
         final Graph<Integer, Object> g = Graphs.combineGraphs(Arrays.asList(g1, g2, g3));
         final ConnectedComponents<Integer> cc = factory.apply(g);
         final Set<Set<Integer>> s = new HashSet<>();
-        s.add(new HashSet<>(g1.getVertices()));
-        s.add(new HashSet<>(g2.getVertices()));
-        s.add(new HashSet<>(g3.getVertices()));
+        s.add(g1.vertexSet());
+        s.add(g2.vertexSet());
+        s.add(g3.vertexSet());
         Assert.assertEquals("ConnectedComponentsTests.clusters", s, cc.components());
     }
 
@@ -116,7 +116,7 @@ public class ConnectedComponentsTests {
         // union of the components equals the graph vertices
         Assert.assertEquals("ConnectedComponentsTests.api",
                 cc.components().stream().flatMap(Collection::stream).collect(Collectors.toSet()),
-                new HashSet<>(g.getVertices())
+                g.vertexSet()
         );
 
         // components cannot be empty
@@ -125,8 +125,8 @@ public class ConnectedComponentsTests {
         }
 
         // connected() and component() invariant
-        for (Integer v : g.getVertices()) {
-            for (Integer w : g.getVertices()) {
+        for (Integer v : g.vertexSet()) {
+            for (Integer w : g.vertexSet()) {
                 Assert.assertEquals("ConnectedComponentsTests.api",
                         cc.connected(v, w), cc.component(v).equals(cc.component(w)));
             }
@@ -134,7 +134,7 @@ public class ConnectedComponentsTests {
 
         // component() and components() invariant
         final Set<Set<Integer>> m = new HashSet<>();
-        final Set<Integer> pending = new HashSet<>(g.getVertices());
+        final Set<Integer> pending = new HashSet<>(g.vertexSet());
         while (pending.size() > 0) {
             final Integer next = pending.iterator().next();
             final Set<Integer> component = cc.component(next);

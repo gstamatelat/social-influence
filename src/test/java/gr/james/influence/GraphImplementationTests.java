@@ -42,6 +42,6 @@ public class GraphImplementationTests {
     @Test
     public void verticesCountTest() {
         Graph<Integer, Object> g = new RandomGenerator<>(250, 0.2).generate();
-        Assert.assertEquals("verticesCountTest", g.vertexCount(), g.getVertices().size());
+        Assert.assertEquals("verticesCountTest", g.vertexCount(), g.vertexSet().size());
     }
 }

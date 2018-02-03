@@ -210,7 +210,7 @@ public class Tests {
         Graph<Integer, Object> g = new RandomGenerator<>(size, p).generate();
         Graphs.connect(g);
 
-        GraphState<Integer, Double> initialState = GraphState.create(g.getVertices(), 0.0);
+        GraphState<Integer, Double> initialState = GraphState.create(g.vertexSet(), 0.0);
         for (Integer v : g) {
             initialState.put(v, RandomHelper.getRandom().nextDouble());
         }

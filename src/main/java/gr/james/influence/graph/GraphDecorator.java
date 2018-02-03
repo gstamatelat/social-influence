@@ -138,11 +138,6 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
     }
 
     @Override
-    public List<V> getVertices() {
-        return this.g.getVertices();
-    }
-
-    @Override
     public Set<V> vertexSet() {
         return this.g.vertexSet();
     }
