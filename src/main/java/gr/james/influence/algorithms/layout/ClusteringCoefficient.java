@@ -12,8 +12,8 @@ public class ClusteringCoefficient {
         GraphState<V, Double> cc = GraphState.create();
         for (V v : g) {
             Set<V> neighborhood = new HashSet<>();
-            neighborhood.addAll(g.getOutEdges(v).keySet());
-            neighborhood.addAll(g.getInEdges(v).keySet());
+            neighborhood.addAll(g.adjacentOut(v));
+            neighborhood.addAll(g.adjacentIn(v));
 
             Graph<V, E> nGraph = Graphs.deepCopy(g, neighborhood);
             cc.put(v, Graphs.getDensity(nGraph));

@@ -47,7 +47,7 @@ public class KosarajuComponents<V> implements ConnectedComponents<V> {
 
         final Map<V, Iterator<V>> edgeIterator = new HashMap<>();
         for (V v : g) {
-            edgeIterator.put(v, g.getOutEdges(v).keySet().iterator());
+            edgeIterator.put(v, g.adjacentOut(v).iterator());
         }
         final GraphState<V, Boolean> visited = GraphState.create(g.vertexSet(), false);
         final Stack<V> dfsStack = new Stack<>();
@@ -89,7 +89,7 @@ public class KosarajuComponents<V> implements ConnectedComponents<V> {
                         V next = dfsStack.pop();
                         component.add(next);
                         reverseDepthFirstOrder.remove(next);
-                        for (V w : g.getInEdges(next).keySet()) {
+                        for (V w : g.adjacentIn(next)) {
                             if (reverseDepthFirstOrder.contains(w)) {
                                 dfsStack.push(w);
                             }

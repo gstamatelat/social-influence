@@ -58,7 +58,7 @@ public class JaccardSimilarityTests {
             final Graph<Integer, Object> g = new CycleGenerator<>(n).generate();
             final VertexSimilarity<Integer, Double> jaccard = new JaccardSimilarity<>(g);
             for (Integer v : g) {
-                for (Integer e : g.getOutEdges(v).keySet()) {
+                for (Integer e : g.adjacentOut(v)) {
                     Assert.assertEquals("JaccardSimilarityTests.circle",
                             0, jaccard.similarity(v, e), 1e-4);
                 }

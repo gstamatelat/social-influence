@@ -82,7 +82,7 @@ public class DijkstraClosestFirstIterator<V> implements VertexIterator<V> {
             throw new NoSuchElementException();
         }
 
-        for (DirectedEdge<V, ?> e : g.getOutEdges(u).values()) {
+        for (DirectedEdge<V, ?> e : g.outEdges(u)) {
             final V to = e.target();
             final double distanceThroughU = distTo.get(u) + e.weight();
             if (distanceThroughU < distTo.get(to)) {

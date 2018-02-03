@@ -53,10 +53,10 @@ public class PearsonSimilarity<V> implements VertexSimilarity<V, Double> {
 
         for (V v : g) {
             double sum = 0;
-            for (DirectedEdge<V, ?> e : g.getOutEdges(v).values()) {
+            for (DirectedEdge<V, ?> e : g.outEdges(v)) {
                 sum += Math.pow(e.weight() - averages.get(v), 2);
             }
-            sum += (g.vertexCount() - g.getOutEdges(v).size()) * Math.pow(averages.get(v), 2);
+            sum += (g.vertexCount() - g.outDegree(v)) * Math.pow(averages.get(v), 2);
             this.variances.put(v, Math.sqrt(sum));
         }
     }
@@ -76,7 +76,7 @@ public class PearsonSimilarity<V> implements VertexSimilarity<V, Double> {
     @Override
     public Double similarity(V v1, V v2) {
         double sum = 0;
-        final Set<V> union = Sets.union(g.getOutEdges(v1).keySet(), g.getOutEdges(v2).keySet());
+        final Set<V> union = Sets.union(g.adjacentOut(v1), g.adjacentOut(v2));
         int unionSize = 0;
         for (V k : union) {
             final double aik = g.getWeightElse(v1, k, 0);

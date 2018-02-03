@@ -26,13 +26,13 @@ public class EdgesExporter implements GraphExporter {
         BufferedWriter w = new BufferedWriter(new OutputStreamWriter(target, Finals.IO_ENCODING));
 
         for (V v : g) {
-            for (V u : g.getOutEdges(v).keySet()) {
+            for (V u : g.adjacentOut(v)) {
                 w.write(String.format("%s%s%s%s%f%n",
                         vertexSerializer.serialize(v),
                         this.delimiter,
                         vertexSerializer.serialize(u),
                         this.delimiter,
-                        g.getOutEdges(v).get(u).weight()));
+                        g.getWeight(v, u)));
             }
         }
 

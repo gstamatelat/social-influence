@@ -2,7 +2,10 @@ package gr.james.influence.graph;
 
 import gr.james.influence.util.Conditions;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+import java.util.Spliterator;
 import java.util.function.Consumer;
 
 public abstract class GraphDecorator<V, E> implements Graph<V, E> {
@@ -88,11 +91,6 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
     }
 
     @Override
-    public Map<V, DirectedEdge<V, E>> getOutEdges(V v) {
-        return this.g.getOutEdges(v);
-    }
-
-    @Override
     public Set<DirectedEdge<V, E>> outEdges(V v) {
         return this.g.outEdges(v);
     }
@@ -100,11 +98,6 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
     @Override
     public Set<V> adjacentOut(V v) {
         return this.g.adjacentOut(v);
-    }
-
-    @Override
-    public Map<V, DirectedEdge<V, E>> getInEdges(V v) {
-        return this.g.getInEdges(v);
     }
 
     @Override

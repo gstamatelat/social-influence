@@ -58,7 +58,7 @@ public class SimpleMatchingSimilarityTests {
             final Graph<Integer, Object> g = new CycleGenerator<>(n).generate();
             final VertexSimilarity<Integer, Double> smc = new SimpleMatchingSimilarity<>(g);
             for (Integer v : g) {
-                for (Integer e : g.getOutEdges(v).keySet()) {
+                for (Integer e : g.adjacentOut(v)) {
                     Assert.assertEquals("SimpleMatchingSimilarityTests.circle",
                             (g.vertexCount() - 4) / (double) g.vertexCount(),
                             smc.similarity(v, e), 1e-4);

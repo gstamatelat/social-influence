@@ -55,7 +55,7 @@ public class JaccardSimilarity<V> implements VertexSimilarity<V, Double> {
      */
     @Override
     public Double similarity(V v1, V v2) {
-        final int intersection = Sets.intersection(g.getOutEdges(v1).keySet(), g.getOutEdges(v2).keySet()).size();
+        final int intersection = Sets.intersection(g.adjacentOut(v1), g.adjacentOut(v2)).size();
         final int union = g.outDegree(v1) + g.outDegree(v2) - intersection;
         assert union >= intersection && union <= g.vertexCount();
         assert intersection <= g.outDegree(v1) && intersection <= g.outDegree(v2);

@@ -59,7 +59,7 @@ public class PearsonSimilarityTests {
             final Graph<Integer, Object> g = new CycleGenerator<>(n).generate();
             final VertexSimilarity<Integer, Double> pearson = new PearsonSimilarity<>(g);
             for (Integer v : g) {
-                for (Integer e : g.getOutEdges(v).keySet()) {
+                for (Integer e : g.adjacentOut(v)) {
                     Assert.assertEquals("PearsonSimilarityTests.circle",
                             similarity, pearson.similarity(v, e), 1e-4);
                 }

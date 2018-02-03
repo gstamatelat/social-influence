@@ -32,8 +32,8 @@ public class Json<V, E> implements GraphImporter<Graph<V, E>, V, E>, GraphExport
         public JsonGraph(Graph<V, E> g) {
             for (V v : g) {
                 this.nodes.add(new JsonVertex<>(v));
-                for (V y : g.getOutEdges(v).keySet()) {
-                    this.edges.add(new JsonEdge<>(v, y, g.getOutEdges(v).get(y)));
+                for (V y : g.adjacentOut(v)) {
+                    this.edges.add(new JsonEdge<>(v, y, g.findEdge(v, y)));
                 }
             }
         }

@@ -184,19 +184,6 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
     }
 
     /**
-     * Get all outbound edges of {@code v}. The result is a {@link Map} where the keys are the destination vertices
-     * and the values are the respective {@link DirectedEdge} objects.
-     *
-     * @param v the vertex to get the outbound edges of
-     * @return the outbound edges of {@code v} as a {@code Map<V, DirectedEdge<V,E>>}
-     * @throws NullPointerException   if {@code v} is {@code null}
-     * @throws IllegalVertexException if {@code v} is not in the graph
-     * @see #getInEdges
-     */
-    @Deprecated
-    Map<V, DirectedEdge<V, E>> getOutEdges(V v);
-
-    /**
      * Gets an {@link Set} of all outbound edges of {@code v}.
      *
      * @param v the vertex to get the outbound edges of
@@ -218,19 +205,6 @@ public interface Graph<V, E> extends Iterable<V>, Metadata {
      * @see #adjacentIn(Object)
      */
     Set<V> adjacentOut(V v);
-
-    /**
-     * Get all inbound edges of {@code v}. The result is a {@link Map} where the keys are the source vertices and the
-     * values are the respective {@link DirectedEdge} objects.
-     *
-     * @param v the vertex to get the inbound edges of
-     * @return the inbound edges of {@code v} as a {@code Map<Vertex, DirectedEdge<V, E>>}
-     * @throws NullPointerException   if {@code v} is {@code null}
-     * @throws IllegalVertexException if {@code v} is not in the graph
-     * @see #getOutEdges
-     */
-    @Deprecated
-    Map<V, DirectedEdge<V, E>> getInEdges(V v);
 
     /**
      * Gets an {@link Set} of all inbound edges of {@code v}.

@@ -5,8 +5,6 @@ import gr.james.influence.graph.DirectedEdge;
 import gr.james.influence.graph.Graph;
 import gr.james.influence.util.collections.GraphState;
 
-import java.util.Map;
-
 public class HITS<V> extends AbstractIterativeAlgorithm<V, HITS.HITSScore> {
     public static final double DEFAULT_PRECISION = -1.0;
 
@@ -41,16 +39,14 @@ public class HITS<V> extends AbstractIterativeAlgorithm<V, HITS.HITSScore> {
         GraphState<V, HITSScore> next = GraphState.create(g.vertexSet(), new HITSScore(0.0, 0.0));
 
         for (V v : g) {
-            Map<V, ? extends DirectedEdge<V, ?>> inEdges = g.getInEdges(v);
-            for (Map.Entry<V, ? extends DirectedEdge<V, ?>> e : inEdges.entrySet()) {
-                next.put(v, next.get(v).addToAuthority(e.getValue().weight() * previous.get(e.getKey()).getHub()));
+            for (DirectedEdge<V, ?> e : g.inEdges(v)) {
+                next.put(v, next.get(v).addToAuthority(e.weight() * previous.get(e.source()).getHub()));
             }
         }
 
         for (V v : g) {
-            Map<V, ? extends DirectedEdge<V, ?>> outEdges = g.getOutEdges(v);
-            for (Map.Entry<V, ? extends DirectedEdge<V, ?>> e : outEdges.entrySet()) {
-                next.put(v, next.get(v).addToHub(e.getValue().weight() * next.get(e.getKey()).getAuthority()));
+            for (DirectedEdge<V, ?> e : g.outEdges(v)) {
+                next.put(v, next.get(v).addToHub(e.weight() * next.get(e.target()).getAuthority()));
             }
         }
 

@@ -83,11 +83,11 @@ public final class Graphs {
         V v = g.addVertex(vertexProvider);
 
         for (V y : f) {
-            for (Map.Entry<V, DirectedEdge<V, E>> e : g.getOutEdges(y).entrySet()) {
-                g.addEdge(v, e.getKey(), e.getValue().weight());
+            for (DirectedEdge<V, E> e : g.outEdges(y)) {
+                g.addEdge(v, e.target(), e.value(), e.weight());
             }
-            for (Map.Entry<V, DirectedEdge<V, E>> e : g.getInEdges(y).entrySet()) {
-                g.addEdge(e.getKey(), v, e.getValue().weight());
+            for (DirectedEdge<V, E> e : g.inEdges(y)) {
+                g.addEdge(e.source(), v, e.value(), e.weight());
             }
             g.removeVertex(y);
         }
@@ -175,7 +175,7 @@ public final class Graphs {
     public static <V, E> Set<V> getStubbornVertices(Graph<V, E> g) {
         return Collections.unmodifiableSet(
                 g.vertexSet().stream()
-                        .filter(v -> g.outDegree(v) == 1 && g.getOutEdges(v).containsKey(v))
+                        .filter(v -> g.outDegree(v) == 1 && g.adjacentOut(v).contains(v))
                         .collect(Collectors.toSet())
         );
     }
