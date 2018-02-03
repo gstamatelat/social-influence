@@ -1,11 +1,11 @@
 package gr.james.influence.algorithms.similarity;
 
+import gr.james.influence.IntegerVertexProvider;
 import gr.james.influence.algorithms.generators.basic.CompleteGenerator;
 import gr.james.influence.algorithms.generators.basic.CycleGenerator;
 import gr.james.influence.algorithms.generators.random.RandomGenerator;
 import gr.james.influence.api.algorithms.VertexSimilarity;
 import gr.james.influence.graph.DirectedGraph;
-import gr.james.influence.graph.SimpleGraph;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -19,9 +19,9 @@ public class JaccardSimilarityTests {
     @Test
     public void simple() {
         final DirectedGraph<Integer, Object> g = DirectedGraph.create();
-        final Integer v1 = g.addVertex(SimpleGraph.vertexProvider);
-        final Integer v2 = g.addVertex(SimpleGraph.vertexProvider);
-        final Integer v3 = g.addVertex(SimpleGraph.vertexProvider);
+        final Integer v1 = g.addVertex(IntegerVertexProvider.provider);
+        final Integer v2 = g.addVertex(IntegerVertexProvider.provider);
+        final Integer v3 = g.addVertex(IntegerVertexProvider.provider);
         g.addEdge(v1, v2);
         g.addEdge(v1, v3);
         g.addEdge(v3, v2);
@@ -40,7 +40,7 @@ public class JaccardSimilarityTests {
     @Test
     public void empty() {
         final DirectedGraph<Integer, Object> g = DirectedGraph.create();
-        g.addVertices(5, SimpleGraph.vertexProvider);
+        g.addVertices(5, IntegerVertexProvider.provider);
         final VertexSimilarity<Integer, Double> jaccard = new JaccardSimilarity<>(g);
         for (Integer v : g) {
             for (Integer w : g) {
@@ -55,7 +55,7 @@ public class JaccardSimilarityTests {
     @Test
     public void circle() {
         for (int n = 4; n < 100; n++) {
-            final DirectedGraph<Integer, Object> g = new CycleGenerator<>(n).generate();
+            final DirectedGraph<Integer, Object> g = new CycleGenerator<Integer, Object>(n).generate(IntegerVertexProvider.provider);
             final VertexSimilarity<Integer, Double> jaccard = new JaccardSimilarity<>(g);
             for (Integer v : g) {
                 for (Integer e : g.adjacentOut(v)) {
@@ -71,7 +71,7 @@ public class JaccardSimilarityTests {
      */
     @Test
     public void commutativity() {
-        final DirectedGraph<Integer, Object> g = new RandomGenerator<>(100, 0.1).generate();
+        final DirectedGraph<Integer, Object> g = new RandomGenerator<Integer, Object>(100, 0.1).generate(IntegerVertexProvider.provider);
         final VertexSimilarity<Integer, Double> jaccard = new JaccardSimilarity<>(g);
         for (Integer v : g) {
             for (Integer w : g) {
@@ -86,7 +86,7 @@ public class JaccardSimilarityTests {
      */
     @Test
     public void identity() {
-        final DirectedGraph<Integer, Object> g = new RandomGenerator<>(100, 0.1).generate();
+        final DirectedGraph<Integer, Object> g = new RandomGenerator<Integer, Object>(100, 0.1).generate(IntegerVertexProvider.provider);
         final VertexSimilarity<Integer, Double> jaccard = new JaccardSimilarity<>(g);
         for (Integer v : g) {
             if (g.outDegree(v) != 0) {
@@ -104,7 +104,7 @@ public class JaccardSimilarityTests {
      */
     @Test
     public void complete() {
-        final DirectedGraph<Integer, Object> g = new CompleteGenerator<>(5).generate();
+        final DirectedGraph<Integer, Object> g = new CompleteGenerator<Integer, Object>(5).generate(IntegerVertexProvider.provider);
         for (Integer v : g) {
             g.addEdge(v, v, 1.0);
         }

@@ -1,5 +1,6 @@
 package gr.james.influence.main;
 
+import gr.james.influence.IntegerVertexProvider;
 import gr.james.influence.algorithms.generators.random.RandomGenerator;
 import gr.james.influence.algorithms.scoring.PageRank;
 import gr.james.influence.graph.DirectedGraph;
@@ -49,7 +50,7 @@ public class LineChartSample extends Application implements Runnable {
         //populating the series with data
 
         // -------------------------------------------------------------
-        DirectedGraph g = new RandomGenerator(10000, 0.1).generate();
+        DirectedGraph g = new RandomGenerator<Integer, Object>(10000, 0.1).generate(IntegerVertexProvider.provider);
 
         List<Double> h = new ArrayList<>();
 

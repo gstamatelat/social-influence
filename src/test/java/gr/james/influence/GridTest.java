@@ -17,7 +17,7 @@ public class GridTest {
         int i = RandomHelper.getRandom().nextInt(100) + 1;
         int j = RandomHelper.getRandom().nextInt(100) + 1;
 
-        DirectedGraph<Integer, Object> g = new GridGenerator<>(i, j).generate();
+        DirectedGraph<Integer, Object> g = new GridGenerator<Integer, Object>(i, j).generate(IntegerVertexProvider.provider);
         Assert.assertEquals("gridGenerator.invalidVertexCount", g.vertexCount(), i * j);
         Assert.assertEquals("gridGenerator.invalidEdgeCount", Graphs.getEdgesCount(g), 2 * (2 * i * j - i - j));
     }
