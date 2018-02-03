@@ -43,6 +43,16 @@ public interface UndirectedEdge<V, E> {
      */
     V w();
 
+    default V other(V ref) {
+        if (v().equals(ref)) {
+            return w();
+        } else if (w().equals(ref)) {
+            return v();
+        } else {
+            throw new IllegalArgumentException();
+        }
+    }
+
     /**
      * Returns the weight of the edge.
      *

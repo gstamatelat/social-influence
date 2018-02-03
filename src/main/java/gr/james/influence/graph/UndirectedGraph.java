@@ -5,7 +5,9 @@ import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.util.Conditions;
 import gr.james.influence.util.Finals;
 
+import java.util.AbstractSet;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.Set;
 
 public interface UndirectedGraph<V, E> extends Graph<V, E> {
@@ -64,6 +66,127 @@ public interface UndirectedGraph<V, E> extends Graph<V, E> {
      */
     default UndirectedGraph<V, E> toImmutable() {
         return create(this).asUnmodifiable();
+    }
+
+    default DirectedGraph<V, E> asDirected() {
+        return new AbstractDirectedGraph<V, E>() {
+            @Override
+            public DirectedEdge<V, E> findEdge(V source, V target) {
+                final UndirectedEdge<V, E> e = UndirectedGraph.this.findEdge(source, target);
+                return DirectedEdge.from(e.value(), source, target, e.weight());
+            }
+
+            @Override
+            public Set<DirectedEdge<V, E>> outEdges(V v) {
+                final Set<UndirectedEdge<V, E>> edges = UndirectedGraph.this.edges(v);
+                return new AbstractSet<DirectedEdge<V, E>>() {
+                    @Override
+                    public Iterator<DirectedEdge<V, E>> iterator() {
+                        return new Iterator<DirectedEdge<V, E>>() {
+                            private final Iterator<UndirectedEdge<V, E>> it = edges.iterator();
+
+                            @Override
+                            public boolean hasNext() {
+                                return it.hasNext();
+                            }
+
+                            @Override
+                            public DirectedEdge<V, E> next() {
+                                final UndirectedEdge<V, E> e = it.next();
+                                return DirectedEdge.from(e.value(), v, e.other(v), e.weight());
+                            }
+                        };
+                    }
+
+                    @Override
+                    public int size() {
+                        return edges.size();
+                    }
+
+                    @Override
+                    public boolean contains(Object o) {
+                        if (!(o instanceof DirectedEdge)) {
+                            return false;
+                        }
+                        final DirectedEdge e = (DirectedEdge) o;
+                        return edges.contains(UndirectedEdge.from(e.value(), e.source(), e.target(), e.weight()));
+                    }
+                };
+            }
+
+            @Override
+            public Set<V> adjacentOut(V v) {
+                return UndirectedGraph.this.adjacent(v);
+            }
+
+            @Override
+            public Set<DirectedEdge<V, E>> inEdges(V v) {
+                final Set<UndirectedEdge<V, E>> edges = UndirectedGraph.this.edges(v);
+                return new AbstractSet<DirectedEdge<V, E>>() {
+                    @Override
+                    public Iterator<DirectedEdge<V, E>> iterator() {
+                        return new Iterator<DirectedEdge<V, E>>() {
+                            private final Iterator<UndirectedEdge<V, E>> it = edges.iterator();
+
+                            @Override
+                            public boolean hasNext() {
+                                return it.hasNext();
+                            }
+
+                            @Override
+                            public DirectedEdge<V, E> next() {
+                                final UndirectedEdge<V, E> e = it.next();
+                                return DirectedEdge.from(e.value(), e.other(v), v, e.weight());
+                            }
+                        };
+                    }
+
+                    @Override
+                    public int size() {
+                        return edges.size();
+                    }
+
+                    @Override
+                    public boolean contains(Object o) {
+                        if (!(o instanceof DirectedEdge)) {
+                            return false;
+                        }
+                        final DirectedEdge e = (DirectedEdge) o;
+                        return edges.contains(UndirectedEdge.from(e.value(), e.source(), e.target(), e.weight()));
+                    }
+                };
+            }
+
+            @Override
+            public Set<V> adjacentIn(V v) {
+                return UndirectedGraph.this.adjacent(v);
+            }
+
+            @Override
+            public DirectedEdge<V, E> addEdge(V source, V target, E edge, double weight) {
+                throw new UnsupportedOperationException();
+            }
+
+            @Override
+            public DirectedEdge<V, E> removeEdge(V source, V target) {
+                throw new UnsupportedOperationException();
+            }
+
+            @Override
+            public Set<V> vertexSet() {
+                return UndirectedGraph.this.vertexSet();
+            }
+
+            @Override
+            public boolean addVertex(V v) {
+                return UndirectedGraph.this.addVertex(v);
+            }
+
+            @Override
+            public boolean removeVertex(V v) {
+                return UndirectedGraph.this.removeVertex(v);
+            }
+        };
     }
 
     /**
