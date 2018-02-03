@@ -58,6 +58,15 @@ public interface UndirectedGraph<V, E> extends Graph<V, E> {
     }
 
     /**
+     * Creates and returns an immutable graph from a copy of this graph.
+     *
+     * @return an immutable graph from a copy of this graph
+     */
+    default UndirectedGraph<V, E> toImmutable() {
+        return create(this).asUnmodifiable();
+    }
+
+    /**
      * Checks if this graph contains an edge connecting {@code v} and {@code w}.
      * <p>
      * This method is equivalent to

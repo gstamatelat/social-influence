@@ -100,6 +100,15 @@ public interface DirectedGraph<V, E> extends Graph<V, E> {
     }
 
     /**
+     * Creates and returns an immutable graph from a copy of this graph.
+     *
+     * @return an immutable graph from a copy of this graph
+     */
+    default DirectedGraph<V, E> toImmutable() {
+        return create(this).asUnmodifiable();
+    }
+
+    /**
      * Returns an edge reversed decorator around this graph.
      *
      * @return an edge reversed decorator around this graph
