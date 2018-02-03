@@ -76,6 +76,19 @@ public interface DirectedGraph<V, E> extends Graph<V, E> {
     }
 
     /**
+     * Creates and returns a new {@link DirectedGraph} from a copy of the given graph.
+     *
+     * @param g   the graph to copy
+     * @param <V> the vertex type
+     * @param <E> the edge type
+     * @return a new {@link DirectedGraph} from a copy of {@code g}
+     * @throws NullPointerException if {@code g} is {@code null}
+     */
+    static <V, E> DirectedGraph<V, E> create(UndirectedGraph<V, E> g) {
+        return new DirectedGraphImpl<>(g);
+    }
+
+    /**
      * Checks if this graph contains an edge with the specified {@code source} and {@code target}.
      * <p>
      * This method is equivalent to

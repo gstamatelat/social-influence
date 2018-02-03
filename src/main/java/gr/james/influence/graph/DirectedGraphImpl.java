@@ -37,6 +37,20 @@ final class DirectedGraphImpl<V, E> implements DirectedGraph<V, E> {
         }
     }
 
+    DirectedGraphImpl(UndirectedGraph<V, E> g) {
+        this(g.vertexCount());
+        for (V v : g) {
+            final boolean inserted = addVertex(v);
+            assert inserted;
+        }
+        for (UndirectedEdge<V, E> e : g.edges()) {
+            final DirectedEdge<V, E> newEdge1 = addEdge(e.v(), e.w(), e.value(), e.weight());
+            final DirectedEdge<V, E> newEdge2 = addEdge(e.w(), e.v(), e.value(), e.weight());
+            assert newEdge1 != null;
+            assert newEdge2 != null;
+        }
+    }
+
     @Override
     public DirectedEdge<V, E> findEdge(V source, V target) {
         Conditions.requireAllNonNull(source, target);
