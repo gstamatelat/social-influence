@@ -37,7 +37,7 @@ import java.util.Set;
  * @param <V> the vertex type
  * @param <E> the edge type
  */
-public interface DirectedGraph<V, E> extends Graph<V> {
+public interface DirectedGraph<V, E> extends Graph<V, E> {
     /**
      * Creates and returns a new empty {@link DirectedGraph}.
      *

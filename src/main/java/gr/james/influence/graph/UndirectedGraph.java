@@ -8,7 +8,7 @@ import gr.james.influence.util.Finals;
 import java.util.Arrays;
 import java.util.Set;
 
-public interface UndirectedGraph<V, E> extends Graph<V> {
+public interface UndirectedGraph<V, E> extends Graph<V, E> {
     /**
      * Creates and returns a new empty {@link UndirectedGraph}.
      *
