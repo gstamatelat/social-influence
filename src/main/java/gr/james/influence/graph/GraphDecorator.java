@@ -38,11 +38,6 @@ public abstract class GraphDecorator<V, E> implements Graph<V, E> {
     }
 
     @Override
-    public GraphType type() {
-        return this.g.type();
-    }
-
-    @Override
     public Iterator<V> iterator() {
         return this.g.iterator();
     }

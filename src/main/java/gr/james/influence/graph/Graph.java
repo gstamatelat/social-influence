@@ -35,39 +35,6 @@ import java.util.*;
  * @param <E> the edge type
  */
 public interface Graph<V, E> extends Iterable<V>, Metadata {
-    /*static <V, E> Graph<V, E> create() {
-        return new MemoryGraph<>();
-    }
-
-    static <V, E> Graph<V, E> create(int expectedVertexCount) {
-        return new MemoryGraph<>(expectedVertexCount);
-    }*/
-
-    /*static <V, E> GraphFactory<Graph<V, E>, V, E> factory() {
-        return new GraphFactory<Graph<V, E>, V, E>() {
-            @Override
-            public Graph<V, E> createGraph() {
-                return new MemoryGraph<>();
-            }
-
-            @Override
-            public Graph<V, E> createGraph(int expectedVertexCount) {
-                return new MemoryGraph<>(expectedVertexCount);
-            }
-        };
-    }*/
-
-    /*GraphFactory<? extends Graph<V, E>, V, E> factory();*/
-
-    /**
-     * Returns the type of this graph.
-     *
-     * @return the type of this graph
-     */
-    GraphType type();
-
-    /*Graph<V, E> create();*/
-
     /**
      * Checks if this graph contains an edge with the specified {@code source} and {@code target}.
      * <p>
