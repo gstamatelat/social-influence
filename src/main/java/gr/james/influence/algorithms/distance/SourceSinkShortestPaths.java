@@ -1,4 +1,4 @@
-package gr.james.influence.api.algorithms.distance;
+package gr.james.influence.algorithms.distance;
 
 import gr.james.influence.graph.DirectedEdge;
 

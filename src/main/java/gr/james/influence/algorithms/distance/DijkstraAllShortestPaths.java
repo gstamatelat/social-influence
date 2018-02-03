@@ -1,7 +1,6 @@
 package gr.james.influence.algorithms.distance;
 
 import gr.james.influence.annotation.UnmodifiableGraph;
-import gr.james.influence.api.algorithms.distance.AllPairsShortestPaths;
 import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.graph.DirectedEdge;
 import gr.james.influence.graph.Graph;
