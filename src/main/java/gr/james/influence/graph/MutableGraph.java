@@ -17,23 +17,33 @@ import java.util.*;
 public class MutableGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
     private final Map<V, BiMap<V, DirectedEdge<V, E>>> mOut;
     private final Map<V, BiMap<V, DirectedEdge<V, E>>> mIn;
-    private final List<V> vList;
 
+    /**
+     * Construct a new empty {@link MutableGraph}.
+     */
     public MutableGraph() {
         this.mOut = new HashMap<>();
         this.mIn = new HashMap<>();
-        this.vList = new ArrayList<>();
     }
 
+    /**
+     * Construct a new empty {@link MutableGraph} with some expectation of its size.
+     *
+     * @param expectedVertexCount the expected vertex count
+     */
     public MutableGraph(int expectedVertexCount) {
         if (expectedVertexCount < 0) {
             throw new IllegalArgumentException();
         }
         this.mOut = new HashMap<>(expectedVertexCount);
         this.mIn = new HashMap<>(expectedVertexCount);
-        this.vList = new ArrayList<>(expectedVertexCount);
     }
 
+    /**
+     * Construct a new {@link MutableGraph} from a copy of a given graph.
+     *
+     * @param g the graph to copy
+     */
     public MutableGraph(Graph<V, E> g) {
         this(g.vertexCount());
         for (V v : g) {
@@ -113,8 +123,6 @@ public class MutableGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
             final Object o1 = this.mOut.put(v, HashBiMap.create());
             final Object o2 = this.mIn.put(v, HashBiMap.create());
             assert o1 == null && o2 == null;
-            assert !this.vList.contains(v);
-            this.vList.add(v);
             return true;
         }
     }
@@ -134,9 +142,7 @@ public class MutableGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
         }
         final Object o1 = this.mOut.remove(v);
         final Object o2 = this.mIn.remove(v);
-        final boolean o3 = this.vList.remove(v);
         assert o1 != null && o2 != null;
-        assert o3;
         return true;
     }
 
@@ -144,7 +150,6 @@ public class MutableGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
     public void clear() {
         this.mOut.clear();
         this.mIn.clear();
-        this.vList.clear();
     }
 
     @Override
