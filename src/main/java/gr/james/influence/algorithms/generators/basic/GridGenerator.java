@@ -3,7 +3,6 @@ package gr.james.influence.algorithms.generators.basic;
 import gr.james.influence.algorithms.generators.GraphGenerator;
 import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.graph.VertexProvider;
-import gr.james.influence.util.Finals;
 
 import java.util.List;
 import java.util.Map;
@@ -40,10 +39,6 @@ public class GridGenerator<V, E> implements GraphGenerator<DirectedGraph<V, E>, 
                 count = count + 1;
             }
         }
-
-        g.setMeta(Finals.TYPE_META, "Grid");
-        g.setMeta("n", String.valueOf(n));
-        g.setMeta("m", String.valueOf(m));
 
         return g;
     }

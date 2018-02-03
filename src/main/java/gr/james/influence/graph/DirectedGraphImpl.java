@@ -8,7 +8,7 @@ import gr.james.influence.util.Finals;
 
 import java.util.*;
 
-final class DirectedGraphImpl<V, E> extends TreeMapMetadata implements DirectedGraph<V, E> {
+final class DirectedGraphImpl<V, E> implements DirectedGraph<V, E> {
     private final Map<V, BiMap<V, DirectedEdge<V, E>>> mOut;
     private final Map<V, BiMap<V, DirectedEdge<V, E>>> mIn;
 

@@ -3,7 +3,6 @@ package gr.james.influence.algorithms.generators.test;
 import gr.james.influence.algorithms.generators.GraphGenerator;
 import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.graph.VertexProvider;
-import gr.james.influence.util.Finals;
 
 import java.util.Map;
 import java.util.Random;
@@ -24,8 +23,6 @@ public class WeaklyConnectedGenerator<V, E> implements GraphGenerator<DirectedGr
         g.addEdges(v1, v2);
         g.addEdges(v3, v4);
         g.addEdge(v2, v3);
-
-        g.setMeta(Finals.TYPE_META, "WeaklyConnected");
 
         return g;
     }

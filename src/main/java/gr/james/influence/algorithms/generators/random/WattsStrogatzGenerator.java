@@ -5,7 +5,6 @@ import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.graph.Graphs;
 import gr.james.influence.graph.VertexProvider;
 import gr.james.influence.util.Conditions;
-import gr.james.influence.util.Finals;
 
 import java.util.List;
 import java.util.Map;
@@ -51,11 +50,6 @@ public class WattsStrogatzGenerator<V, E> implements GraphGenerator<DirectedGrap
                 }
             }
         }
-
-        g.setMeta(Finals.TYPE_META, "WattsStrogatz");
-        g.setMeta("n", String.valueOf(n));
-        g.setMeta("k", String.valueOf(k));
-        g.setMeta("b", String.valueOf(b));
 
         return g;
     }

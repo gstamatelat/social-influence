@@ -55,9 +55,6 @@ public class EdgesImporter<V, E> implements GraphImporter<DirectedGraph<V, E>, V
             }
         }
 
-        g.setMeta(Finals.TYPE_META, "EdgesImport");
-        g.setMeta("source", source.toString());
-
         return g;
     }
 }

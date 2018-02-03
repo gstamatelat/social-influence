@@ -5,7 +5,6 @@ import gr.james.influence.algorithms.generators.random.BarabasiAlbertGenerator;
 import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.graph.Graphs;
 import gr.james.influence.graph.VertexProvider;
-import gr.james.influence.util.Finals;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,13 +58,6 @@ public class BarabasiAlbertClusterGenerator<V, E> implements GraphGenerator<Dire
             V t = randomVertices.get((i + 1) % clusters);
             g.addEdges(s, t);
         }
-
-        g.setMeta(Finals.TYPE_META, "BarabasiAlbertCluster");
-        g.setMeta("totalVertices", String.valueOf(totalVertices));
-        g.setMeta("initialClique", String.valueOf(initialClique));
-        g.setMeta("stepEdges", String.valueOf(stepEdges));
-        g.setMeta("a", String.valueOf(a));
-        g.setMeta("clusters", String.valueOf(clusters));
 
         return g;
     }

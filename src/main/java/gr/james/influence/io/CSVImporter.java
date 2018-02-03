@@ -40,9 +40,6 @@ public class CSVImporter<V, E> implements GraphImporter<DirectedGraph<V, E>, V, 
             firstLine = false;
         }
 
-        g.setMeta(Finals.TYPE_META, "CSVImport");
-        g.setMeta("source", source.toString());
-
         return g;
     }
 }

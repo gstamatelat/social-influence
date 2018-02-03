@@ -3,7 +3,6 @@ package gr.james.influence.algorithms.generators.random;
 import gr.james.influence.algorithms.generators.GraphGenerator;
 import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.graph.VertexProvider;
-import gr.james.influence.util.Finals;
 
 import java.util.Map;
 import java.util.Random;
@@ -54,10 +53,6 @@ public class RandomGenerator<V, E> implements GraphGenerator<DirectedGraph<V, E>
                 }
             }
         }
-
-        g.setMeta(Finals.TYPE_META, "Random");
-        g.setMeta("totalVertices", String.valueOf(totalVertices));
-        g.setMeta("p", String.valueOf(p));
 
         return g;
     }

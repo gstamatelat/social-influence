@@ -21,21 +21,6 @@ public final class ImmutableGraph<V, E> extends GraphDecorator<V, E> {
     }
 
     @Override
-    public String setMeta(String key, String value) {
-        throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
-    }
-
-    @Override
-    public String removeMeta(String key) {
-        throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
-    }
-
-    @Override
-    public void clearMeta() {
-        throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
-    }
-
-    @Override
     public V addVertex(VertexProvider<V> vertexProvider) {
         throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }

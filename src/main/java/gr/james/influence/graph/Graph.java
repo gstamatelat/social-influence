@@ -5,7 +5,7 @@ import gr.james.influence.util.Conditions;
 
 import java.util.*;
 
-public interface Graph<V> extends Iterable<V>, Metadata {
+public interface Graph<V> extends Iterable<V> {
     /**
      * Returns an unmodifiable {@link Set} of the vertices contained in this graph.
      * <p>

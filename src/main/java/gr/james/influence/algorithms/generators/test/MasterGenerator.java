@@ -3,7 +3,6 @@ package gr.james.influence.algorithms.generators.test;
 import gr.james.influence.algorithms.generators.GraphGenerator;
 import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.graph.VertexProvider;
-import gr.james.influence.util.Finals;
 
 import java.util.Map;
 import java.util.Random;
@@ -27,8 +26,6 @@ public class MasterGenerator<V, E> implements GraphGenerator<DirectedGraph<V, E>
         g.addEdge(v1, v2);
         g.addEdge(v3, v2);
         g.addEdge(v2, v1);
-
-        g.setMeta(Finals.TYPE_META, "Master");
 
         return g;
     }

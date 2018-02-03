@@ -4,7 +4,6 @@ import gr.james.influence.algorithms.generators.GraphGenerator;
 import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.graph.VertexProvider;
 import gr.james.influence.util.Conditions;
-import gr.james.influence.util.Finals;
 
 import java.util.Map;
 import java.util.Random;
@@ -36,10 +35,6 @@ public class WiseCrowdGenerator<V, E> implements GraphGenerator<DirectedGraph<V,
         for (V v : g) {
             g.addEdge(v, v, 1 - delta);
         }
-
-        g.setMeta(Finals.TYPE_META, "WiseCrowd");
-        g.setMeta("totalVertices", String.valueOf(totalVertices));
-        g.setMeta("delta", String.valueOf(delta));
 
         return g;
     }

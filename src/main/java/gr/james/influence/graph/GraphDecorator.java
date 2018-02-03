@@ -16,31 +16,6 @@ public abstract class GraphDecorator<V, E> implements DirectedGraph<V, E> {
     }
 
     @Override
-    public String getMeta(String key) {
-        return this.g.getMeta(key);
-    }
-
-    @Override
-    public String setMeta(String key, String value) {
-        return this.g.setMeta(key, value);
-    }
-
-    @Override
-    public String removeMeta(String key) {
-        return this.g.removeMeta(key);
-    }
-
-    @Override
-    public Set<String> metaKeySet() {
-        return this.g.metaKeySet();
-    }
-
-    @Override
-    public void clearMeta() {
-        this.g.clearMeta();
-    }
-
-    @Override
     public Iterator<V> iterator() {
         return this.g.iterator();
     }

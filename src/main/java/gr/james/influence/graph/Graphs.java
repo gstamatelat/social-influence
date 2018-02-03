@@ -133,9 +133,6 @@ public final class Graphs {
                 r.addEdge(e.source(), e.target(), e.value(), e.weight());
             }
         }
-        for (String m : g.metaKeySet()) {
-            r.setMeta(m, g.getMeta(m));
-        }
         return r;
     }
 

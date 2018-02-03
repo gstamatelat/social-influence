@@ -51,13 +51,6 @@ public class BarabasiAlbertGenerator<V, E> implements GraphGenerator<DirectedGra
             }
         }
 
-        g.clearMeta();
-        g.setMeta(Finals.TYPE_META, "BarabasiAlbert");
-        g.setMeta("totalVertices", String.valueOf(totalVertices));
-        g.setMeta("initialClique", String.valueOf(initialClique));
-        g.setMeta("stepEdges", String.valueOf(stepEdges));
-        g.setMeta("a", String.valueOf(a));
-
         return g;
     }
 }
