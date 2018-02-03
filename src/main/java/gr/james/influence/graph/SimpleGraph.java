@@ -2,6 +2,7 @@ package gr.james.influence.graph;
 
 import java.util.List;
 
+@Deprecated
 public class SimpleGraph extends MutableGraph<Integer, Object> {
     public static VertexProvider<Integer> vertexProvider = new VertexProvider<Integer>() {
         private int nextId = 0;
