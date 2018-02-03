@@ -81,7 +81,7 @@ public interface VertexIterator<V> extends Iterator<V> {
      * @throws IllegalVertexException if {@code until} is not in the graph referenced by this instance
      */
     default void exhaust(V until) {
-        Conditions.requireNonNullAndExists(until, getGraph());
+        Conditions.requireVertexInGraph(getGraph(), until);
         while (hasNext()) {
             if (next().equals(until)) {
                 break;
@@ -101,7 +101,7 @@ public interface VertexIterator<V> extends Iterator<V> {
      * @throws IllegalVertexException if {@code until} is not in the graph referenced by this instance
      */
     default List<V> exhaustVertices(V until) {
-        Conditions.requireNonNullAndExists(until, getGraph());
+        Conditions.requireVertexInGraph(getGraph(), until);
         final List<V> vertices = new ArrayList<>();
         while (hasNext()) {
             final V next = next();

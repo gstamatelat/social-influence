@@ -25,7 +25,7 @@ public class RandomSurferIterator<V, E> implements Iterator<V> {
         Conditions.requireArgument(dampingFactor >= 0 && dampingFactor <= 1,
                 "dampingFactor must be inside [0,1], got %f", dampingFactor);
         this.dampingFactor = dampingFactor;
-        this.current = Conditions.requireNonNullAndExists(initialVertex, g);
+        this.current = Conditions.requireVertexInGraph(g, initialVertex);
     }
 
     @Override

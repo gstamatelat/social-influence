@@ -60,7 +60,7 @@ public abstract class AbstractSingleVertexScoring<V, T> implements VertexScoring
      */
     @Override
     public T score(V v) {
-        Conditions.requireNonNullAndExists(v, g);
+        Conditions.requireVertexInGraph(g, v);
         return scores.computeIfAbsent(v, this::scoreProtected);
     }
 

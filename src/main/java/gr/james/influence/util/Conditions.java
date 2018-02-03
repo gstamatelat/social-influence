@@ -16,15 +16,6 @@ public final class Conditions {
         }
     }
 
-    @Deprecated
-    public static <V, E> V requireNonNullAndExists(V v, Graph<V, E> g) {
-        Conditions.requireNonNull(v);
-        if (!g.containsVertex(v)) {
-            throw new IllegalVertexException();
-        }
-        return v;
-    }
-
     /**
      * Validates that a graph {@code g} and a vertex {@code v} are not {@code null} and that {@code v} is in {@code g}.
      * <p>
@@ -38,13 +29,15 @@ public final class Conditions {
      * @param g   the graph
      * @param v   the vertex
      * @param <V> the vertex type
+     * @return {@code v}
      * @throws NullPointerException   if {@code g} or {@code v} is {@code null}
      * @throws IllegalVertexException if {@code v} is not in {@code g}
      */
-    public static <V> void requireVertexInGraph(Graph<V, ?> g, V v) {
+    public static <V> V requireVertexInGraph(Graph<V, ?> g, V v) {
         if (!g.containsVertex(v)) {
             throw new IllegalVertexException();
         }
+        return v;
     }
 
     public static <T> T requireNonNull(T o) {
