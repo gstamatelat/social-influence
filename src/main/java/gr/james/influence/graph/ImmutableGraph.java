@@ -81,11 +81,6 @@ public final class ImmutableGraph<V, E> extends GraphDecorator<V, E> {
     }
 
     @Override
-    public void clear() {
-        throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
-    }
-
-    @Override
     public DirectedEdge<V, E> addEdge(V source, V target) {
         throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
@@ -122,11 +117,6 @@ public final class ImmutableGraph<V, E> extends GraphDecorator<V, E> {
 
     @Override
     public void removeEdges(V... among) {
-        throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
-    }
-
-    @Override
-    public void clearEdges() {
         throw new UnsupportedOperationException(Finals.E_IMMUTABLE_GRAPH);
     }
 }

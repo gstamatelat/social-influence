@@ -147,20 +147,6 @@ public class MutableGraph<V, E> extends TreeMapMetadata implements Graph<V, E> {
     }
 
     @Override
-    public void clear() {
-        this.mOut.clear();
-        this.mIn.clear();
-    }
-
-    @Override
-    public void clearEdges() {
-        for (V v : this) {
-            this.mOut.get(v).clear();
-            this.mIn.get(v).clear();
-        }
-    }
-
-    @Override
     public DirectedEdge<V, E> addEdge(V source, V target, E edge, double weight) {
         Conditions.requireArgument(weight > 0, Finals.E_EDGE_WEIGHT_NEGATIVE, weight);
         if (!containsEdge(source, target)) {
