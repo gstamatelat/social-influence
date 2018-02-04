@@ -1,7 +1,7 @@
 package gr.james.influence.algorithms.generators.basic;
 
 import gr.james.influence.algorithms.generators.GraphGenerator;
-import gr.james.influence.graph.DirectedGraph;
+import gr.james.influence.graph.UndirectedGraph;
 import gr.james.influence.graph.VertexProvider;
 
 import java.util.Map;
@@ -16,7 +16,7 @@ import java.util.Random;
  * <li>right: the vertex on the other tail of the path</li>
  * </ul>
  */
-public class PathGenerator<V, E> implements GraphGenerator<DirectedGraph<V, E>, V, E> {
+public class PathGenerator<V, E> implements GraphGenerator<UndirectedGraph<V, E>, V, E> {
     private final int vertexCount;
 
     /**
@@ -33,17 +33,16 @@ public class PathGenerator<V, E> implements GraphGenerator<DirectedGraph<V, E>, 
     }
 
     @Override
-    public DirectedGraph<V, E> generate(Random r,
-                                        VertexProvider<V> vertexProvider,
-                                        Map<String, V> identification) {
-        final DirectedGraph<V, E> g = DirectedGraph.create(vertexCount);
+    public UndirectedGraph<V, E> generate(Random r,
+                                          VertexProvider<V> vertexProvider,
+                                          Map<String, V> identification) {
+        final UndirectedGraph<V, E> g = UndirectedGraph.create(vertexCount);
 
         V current = g.addVertex(vertexProvider);
         identification.put("left", current);
         while (g.vertexCount() < vertexCount) {
             final V newVertex = g.addVertex(vertexProvider);
             g.addEdge(current, newVertex);
-            g.addEdge(newVertex, current);
             current = newVertex;
         }
         identification.put("right", current);
