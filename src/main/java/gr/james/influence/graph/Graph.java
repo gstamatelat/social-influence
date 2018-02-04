@@ -5,6 +5,12 @@ import gr.james.influence.util.Conditions;
 
 import java.util.*;
 
+/**
+ * Base interface for all graph types.
+ *
+ * @param <V> the vertex type
+ * @param <E> the edge type
+ */
 public interface Graph<V, E> extends Iterable<V> {
     /**
      * Returns an unmodifiable {@link Set} of the vertices contained in this graph.
@@ -72,8 +78,11 @@ public interface Graph<V, E> extends Iterable<V> {
     }
 
     /**
-     * Insert the specified vertex {@code v} to the graph. If the vertex is already contained in the graph, this method
-     * is a no-op.
+     * Insert the specified vertex {@code v} to the graph.
+     * <p>
+     * If the vertex is already contained in the graph, this method is a no-op and returns {@code false}.
+     * <p>
+     * Complexity: O(1)
      *
      * @param v the vertex to insert to the graph
      * @return {@code false} if the graph previously already contained the vertex, otherwise {@code true}
@@ -82,7 +91,39 @@ public interface Graph<V, E> extends Iterable<V> {
     boolean addVertex(V v);
 
     /**
-     * Insert a group of vertices in the graph. If any of the vertices are already on the graph, they are ignored.
+     * Insert a vertex produced by a {@link VertexProvider} to the graph.
+     * <p>
+     * If the vertex is already contained in the graph, this method will throw {@link IllegalVertexException} to
+     * indicate this unusual behavior.
+     *
+     * @param vertexProvider the vertex provider
+     * @return the newly added vertex
+     * @throws NullPointerException   if {@code vertexProvider} is {@code null}
+     * @throws IllegalVertexException if {@code vertexProvider} produced a vertex that is already in the graph
+     * @throws NoSuchElementException if the {@link VertexProvider#getVertex()} method of {@code vertexProvider} threw
+     *                                exception
+     */
+    default V addVertex(VertexProvider<V> vertexProvider) {
+        if (vertexProvider == null) {
+            throw new NullPointerException();
+        }
+        final V v = vertexProvider.getVertex();
+        if (!addVertex(v)) {
+            throw new IllegalVertexException();
+        }
+        return v;
+    }
+
+    /**
+     * Insert a group of vertices in the graph.
+     * <p>
+     * If any of the vertices are already on the graph, they are returned as a {@link List}.
+     * <p>
+     * This is mostly a convenient method to manually add vertices in a graph:
+     * <pre><code>
+     * UndirectedGraph&lt;String, Object&gt; g = UndirectedGraph.create();
+     * g.add("1", "2", "3");
+     * </code></pre>
      *
      * @param vertices the vertices to insert to the graph
      * @return an unmodifiable list view containing the vertices in {@code vertices} that were already in the graph
@@ -100,7 +141,9 @@ public interface Graph<V, E> extends Iterable<V> {
     }
 
     /**
-     * Insert a group of vertices in the graph. If any of the vertices are already on the graph, they are ignored.
+     * Insert a group of vertices in the graph.
+     * <p>
+     * If any of the vertices are already on the graph, they are returned as a {@link List}.
      *
      * @param vertices an {@link Iterable} of vertices to insert to the graph
      * @return an unmodifiable list view containing the vertices in {@code vertices} that were already in the graph
@@ -114,17 +157,6 @@ public interface Graph<V, E> extends Iterable<V> {
             }
         }
         return Collections.unmodifiableList(contained);
-    }
-
-    default V addVertex(VertexProvider<V> vertexProvider) {
-        if (vertexProvider == null) {
-            throw new NullPointerException();
-        }
-        final V v = vertexProvider.getVertex();
-        if (!addVertex(v)) {
-            throw new IllegalVertexException();
-        }
-        return v;
     }
 
     default List<V> addVertices(int n, VertexProvider<V> vertexProvider) {
@@ -142,8 +174,9 @@ public interface Graph<V, E> extends Iterable<V> {
     }
 
     /**
-     * Removes a vertex from the graph if it is present. This method will also remove the inbound and outbound edges of
-     * that vertex.
+     * Removes a vertex from the graph if it is present.
+     * <p>
+     * This method will also remove the inbound and outbound edges of that vertex.
      *
      * @param v the vertex to be removed
      * @return {@code true} if the graph previously contained this vertex, otherwise {@code false}
@@ -152,7 +185,9 @@ public interface Graph<V, E> extends Iterable<V> {
     boolean removeVertex(V v);
 
     /**
-     * Removes a group of vertices from the graph. Vertices in the group that are not in the graph are silently ignored.
+     * Removes a group of vertices from the graph.
+     * <p>
+     * Vertices in the group that are not in the graph are silently ignored.
      *
      * @param vertices an {@link Iterable} of vertices to remove from the graph
      * @throws NullPointerException if {@code vertices} or any of the objects in {@code vertices} is {@code null}
