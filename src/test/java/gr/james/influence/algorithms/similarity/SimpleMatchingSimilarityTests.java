@@ -19,9 +19,9 @@ public class SimpleMatchingSimilarityTests {
     @Test
     public void simple() {
         final DirectedGraph<Integer, Object> g = DirectedGraph.create();
-        final Integer v1 = g.addVertex(VertexProvider.intProvider);
-        final Integer v2 = g.addVertex(VertexProvider.intProvider);
-        final Integer v3 = g.addVertex(VertexProvider.intProvider);
+        final Integer v1 = g.addVertex(VertexProvider.INTEGER_PROVIDER);
+        final Integer v2 = g.addVertex(VertexProvider.INTEGER_PROVIDER);
+        final Integer v3 = g.addVertex(VertexProvider.INTEGER_PROVIDER);
         g.addEdge(v1, v2);
         g.addEdge(v1, v3);
         g.addEdge(v3, v2);
@@ -40,7 +40,7 @@ public class SimpleMatchingSimilarityTests {
     @Test
     public void empty() {
         final DirectedGraph<Integer, Object> g = DirectedGraph.create();
-        g.addVertices(5, VertexProvider.intProvider);
+        g.addVertices(5, VertexProvider.INTEGER_PROVIDER);
         final VertexSimilarity<Integer, Double> smc = new SimpleMatchingSimilarity<>(g);
         for (Integer v : g) {
             for (Integer w : g) {
@@ -55,7 +55,7 @@ public class SimpleMatchingSimilarityTests {
     @Test
     public void circle() {
         for (int n = 4; n < 100; n++) {
-            final DirectedGraph<Integer, Object> g = new CycleGenerator<Integer, Object>(n).generate(VertexProvider.intProvider);
+            final DirectedGraph<Integer, Object> g = new CycleGenerator<Integer, Object>(n).generate(VertexProvider.INTEGER_PROVIDER);
             final VertexSimilarity<Integer, Double> smc = new SimpleMatchingSimilarity<>(g);
             for (Integer v : g) {
                 for (Integer e : g.adjacentOut(v)) {
@@ -72,7 +72,7 @@ public class SimpleMatchingSimilarityTests {
      */
     @Test
     public void commutativity() {
-        final DirectedGraph<Integer, Object> g = new RandomGenerator<Integer, Object>(100, 0.1).generate(VertexProvider.intProvider);
+        final DirectedGraph<Integer, Object> g = new RandomGenerator<Integer, Object>(100, 0.1).generate(VertexProvider.INTEGER_PROVIDER);
         final VertexSimilarity<Integer, Double> smc = new SimpleMatchingSimilarity<>(g);
         for (Integer v : g) {
             for (Integer w : g) {
@@ -87,7 +87,7 @@ public class SimpleMatchingSimilarityTests {
      */
     @Test
     public void identity() {
-        final DirectedGraph<Integer, Object> g = new RandomGenerator<Integer, Object>(100, 0.1).generate(VertexProvider.intProvider);
+        final DirectedGraph<Integer, Object> g = new RandomGenerator<Integer, Object>(100, 0.1).generate(VertexProvider.INTEGER_PROVIDER);
         final VertexSimilarity<Integer, Double> smc = new SimpleMatchingSimilarity<>(g);
         for (Integer v : g) {
             Assert.assertEquals("SimpleMatchingSimilarityTests.identity",
@@ -100,7 +100,7 @@ public class SimpleMatchingSimilarityTests {
      */
     @Test
     public void complete() {
-        final DirectedGraph<Integer, Object> g = new CompleteGenerator<Integer, Object>(5).generate(VertexProvider.intProvider);
+        final DirectedGraph<Integer, Object> g = new CompleteGenerator<Integer, Object>(5).generate(VertexProvider.INTEGER_PROVIDER);
         for (Integer v : g) {
             g.addEdge(v, v, 1.0);
         }

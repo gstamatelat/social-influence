@@ -50,7 +50,7 @@ public class LineChartSample extends Application implements Runnable {
         //populating the series with data
 
         // -------------------------------------------------------------
-        DirectedGraph g = new RandomGenerator<Integer, Object>(10000, 0.1).generate(VertexProvider.intProvider);
+        DirectedGraph g = new RandomGenerator<Integer, Object>(10000, 0.1).generate(VertexProvider.INTEGER_PROVIDER);
 
         List<Double> h = new ArrayList<>();
 

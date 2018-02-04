@@ -24,7 +24,7 @@ public class DegreeDistributionTest {
          * [c_1, e_1] = [c_2, e_2] = ... = [c_p, e_p] in order for the graph to have scale-free degree
          * distribution. On this example p = coefficient_count / 2. Press Ctrl+C to terminate.
          */
-        DirectedGraph<Integer, Object> g = new BarabasiAlbertGenerator<Integer, Object>(10000, 2, 1, 1.2).generate(VertexProvider.intProvider);
+        DirectedGraph<Integer, Object> g = new BarabasiAlbertGenerator<Integer, Object>(10000, 2, 1, 1.2).generate(VertexProvider.INTEGER_PROVIDER);
         int coefficient_count = 2;
         double speed = 1.0;
 

@@ -35,7 +35,7 @@ public class Tests {
         int vertexCount = 40;
 
         /* Create graph and randomize edge weights */
-        DirectedGraph<Integer, Object> g0 = new RandomGenerator<Integer, Object>(vertexCount, p).generate(VertexProvider.intProvider);
+        DirectedGraph<Integer, Object> g0 = new RandomGenerator<Integer, Object>(vertexCount, p).generate(VertexProvider.INTEGER_PROVIDER);
         Graphs.connect(g0);
         DirectedGraph<Integer, Object> g = Graphs.randomizeEdgeWeights(g0, true);
 
@@ -56,7 +56,7 @@ public class Tests {
         int vertexCount = 40;
 
         /* Create graph and randomize edge weights */
-        DirectedGraph<Integer, Object> g0 = new RandomGenerator<Integer, Object>(vertexCount, p).generate(VertexProvider.intProvider);
+        DirectedGraph<Integer, Object> g0 = new RandomGenerator<Integer, Object>(vertexCount, p).generate(VertexProvider.INTEGER_PROVIDER);
         Graphs.connect(g0);
         DirectedGraph<Integer, Object> g = Graphs.randomizeEdgeWeights(g0, true);
 
@@ -92,7 +92,7 @@ public class Tests {
         int vertexCount = RandomHelper.getRandom().nextInt(240) + 10;
 
         /* Make the graph */
-        DirectedGraph<Integer, Object> g = new BarabasiAlbertGenerator<Integer, Object>(vertexCount, 2, 2, 1.0).generate(VertexProvider.intProvider);
+        DirectedGraph<Integer, Object> g = new BarabasiAlbertGenerator<Integer, Object>(vertexCount, 2, 2, 1.0).generate(VertexProvider.INTEGER_PROVIDER);
 
         /* Get PageRank and DegreeCentrality */
         GraphState<Integer, Integer> degree = DegreeCentrality.execute(g, Direction.INBOUND);
@@ -118,7 +118,7 @@ public class Tests {
         //DirectedGraph<Integer, Object>[] graphs = (DirectedGraph<Integer, Object>) new DirectedGraph[GRAPHS];
         for (int i = 0; i < GRAPHS; i++) {
             int size = RandomHelper.getRandom().nextInt(50) + 50;
-            graphs.add(new RandomGenerator<Integer, Object>(size, RandomHelper.getRandom().nextDouble()).generate(VertexProvider.intProvider));
+            graphs.add(new RandomGenerator<Integer, Object>(size, RandomHelper.getRandom().nextDouble()).generate(VertexProvider.INTEGER_PROVIDER));
             Graphs.connect(graphs.get(i));
         }
 
@@ -140,7 +140,7 @@ public class Tests {
         int clusters = RandomHelper.getRandom().nextInt(5) + 5;
         int clusterSize = RandomHelper.getRandom().nextInt(10) + 10;
 
-        DirectedGraph<Integer, Object> g = new BarabasiAlbertClusterGenerator<Integer, Object>(clusterSize, 2, 2, 1.0, clusters).generate(VertexProvider.intProvider);
+        DirectedGraph<Integer, Object> g = new BarabasiAlbertClusterGenerator<Integer, Object>(clusterSize, 2, 2, 1.0, clusters).generate(VertexProvider.INTEGER_PROVIDER);
         Assert.assertEquals("clustersTest", clusters * clusterSize, g.vertexCount());
     }
 
@@ -153,7 +153,7 @@ public class Tests {
         int k = RandomHelper.getRandom().nextInt(100) + 4;
 
         /* Generate TwoWheels(k) */
-        DirectedGraph<Integer, Object> g = new TwoWheelsGenerator<Integer, Object>(k).generate(VertexProvider.intProvider);
+        DirectedGraph<Integer, Object> g = new TwoWheelsGenerator<Integer, Object>(k).generate(VertexProvider.INTEGER_PROVIDER);
 
         /* Get max degree */
         int max = new GraphStateIterator<>(DegreeCentrality.execute(g, Direction.INBOUND)).next().weight;
@@ -207,7 +207,7 @@ public class Tests {
     public void deGrootTest() {
         int size = RandomHelper.getRandom().nextInt(50) + 50;
         double p = RandomHelper.getRandom().nextDouble();
-        DirectedGraph<Integer, Object> g = new RandomGenerator<Integer, Object>(size, p).generate(VertexProvider.intProvider);
+        DirectedGraph<Integer, Object> g = new RandomGenerator<Integer, Object>(size, p).generate(VertexProvider.INTEGER_PROVIDER);
         Graphs.connect(g);
 
         GraphState<Integer, Double> initialState = GraphState.create(g.vertexSet(), 0.0);
@@ -227,10 +227,10 @@ public class Tests {
     public void deepCopyTest() {
         int size = RandomHelper.getRandom().nextInt(50) + 50;
         double p = RandomHelper.getRandom().nextDouble();
-        DirectedGraph<Integer, Object> g = new RandomGenerator<Integer, Object>(size, p).generate(VertexProvider.intProvider);
+        DirectedGraph<Integer, Object> g = new RandomGenerator<Integer, Object>(size, p).generate(VertexProvider.INTEGER_PROVIDER);
         Graphs.connect(g);
         DirectedGraph<Integer, Object> e = Graphs.deepCopy(g);
-        e.addVertex(VertexProvider.intProvider);
+        e.addVertex(VertexProvider.INTEGER_PROVIDER);
         Assert.assertEquals("deepCopyTest", g.vertexCount() + 1, e.vertexCount());
         Assert.assertEquals("deepCopyTest", Graphs.getEdgesCount(g), Graphs.getEdgesCount(e));
     }
@@ -240,7 +240,7 @@ public class Tests {
         int size = RandomHelper.getRandom().nextInt(50) + 50;
         double p = RandomHelper.getRandom().nextDouble();
         double dampingFactor = RandomHelper.getRandom().nextDouble();
-        DirectedGraph<Integer, Object> g = new RandomGenerator<Integer, Object>(size, p).generate(VertexProvider.intProvider);
+        DirectedGraph<Integer, Object> g = new RandomGenerator<Integer, Object>(size, p).generate(VertexProvider.INTEGER_PROVIDER);
 
         GraphState<Integer, Double> p1 = PageRank.execute(g, dampingFactor);
         GraphState<Integer, Double> p2 = PageRank.execute(g, dampingFactor);
@@ -252,7 +252,7 @@ public class Tests {
     public void connectTest() {
         int size = RandomHelper.getRandom().nextInt(50) + 50;
         double p = RandomHelper.getRandom().nextDouble();
-        DirectedGraph<Integer, Object> g = new RandomGenerator<Integer, Object>(size, p).generate(VertexProvider.intProvider);
+        DirectedGraph<Integer, Object> g = new RandomGenerator<Integer, Object>(size, p).generate(VertexProvider.INTEGER_PROVIDER);
         Graphs.connect(g);
         Assert.assertNotEquals("connectTest", Double.POSITIVE_INFINITY, new DijkstraDiameter<>(g).get());
     }

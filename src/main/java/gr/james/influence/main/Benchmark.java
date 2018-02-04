@@ -8,7 +8,7 @@ import gr.james.influence.util.Helper;
 
 public class Benchmark {
     public static void main(String[] args) {
-        DirectedGraph<Integer, Object> g = new BarabasiAlbertGenerator<Integer, Object>(250, 2, 2, 1.0).generate(VertexProvider.intProvider);
+        DirectedGraph<Integer, Object> g = new BarabasiAlbertGenerator<Integer, Object>(250, 2, 2, 1.0).generate(VertexProvider.INTEGER_PROVIDER);
 
         //System.out.printf("%e%n", Helper.benchmark(() -> Graphs.deepCopy(g), 1.0));
 

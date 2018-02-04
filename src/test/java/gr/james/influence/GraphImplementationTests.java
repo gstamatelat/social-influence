@@ -14,7 +14,7 @@ public class GraphImplementationTests {
      */
     @Test
     public void vertexIteratorTest() {
-        DirectedGraph<Integer, Object> g = new RandomGenerator<Integer, Object>(250, 0.2).generate(VertexProvider.intProvider);
+        DirectedGraph<Integer, Object> g = new RandomGenerator<Integer, Object>(250, 0.2).generate(VertexProvider.INTEGER_PROVIDER);
 
         Iterator<Integer> it1 = g.iterator();
         Iterator<Integer> it2 = g.vertexSet().iterator();
@@ -42,7 +42,7 @@ public class GraphImplementationTests {
      */
     @Test
     public void verticesCountTest() {
-        DirectedGraph<Integer, Object> g = new RandomGenerator<Integer, Object>(250, 0.2).generate(VertexProvider.intProvider);
+        DirectedGraph<Integer, Object> g = new RandomGenerator<Integer, Object>(250, 0.2).generate(VertexProvider.INTEGER_PROVIDER);
         Assert.assertEquals("verticesCountTest", g.vertexCount(), g.vertexSet().size());
     }
 }

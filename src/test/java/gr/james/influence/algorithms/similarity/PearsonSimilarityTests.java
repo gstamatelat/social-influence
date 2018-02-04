@@ -19,9 +19,9 @@ public class PearsonSimilarityTests {
     @Test
     public void simple() {
         final DirectedGraph<Integer, Object> g = DirectedGraph.create();
-        final Integer v1 = g.addVertex(VertexProvider.intProvider);
-        final Integer v2 = g.addVertex(VertexProvider.intProvider);
-        final Integer v3 = g.addVertex(VertexProvider.intProvider);
+        final Integer v1 = g.addVertex(VertexProvider.INTEGER_PROVIDER);
+        final Integer v2 = g.addVertex(VertexProvider.INTEGER_PROVIDER);
+        final Integer v3 = g.addVertex(VertexProvider.INTEGER_PROVIDER);
         g.addEdge(v1, v2, 1);
         g.addEdge(v1, v3, 1);
         g.addEdge(v3, v2, 2);
@@ -40,7 +40,7 @@ public class PearsonSimilarityTests {
     @Test
     public void empty() {
         final DirectedGraph<Integer, Object> g = DirectedGraph.create();
-        g.addVertices(5, VertexProvider.intProvider);
+        g.addVertices(5, VertexProvider.INTEGER_PROVIDER);
         final VertexSimilarity<Integer, Double> pearson = new PearsonSimilarity<>(g);
         for (Integer v : g) {
             for (Integer w : g) {
@@ -56,7 +56,7 @@ public class PearsonSimilarityTests {
     public void circle() {
         for (int n = 4; n < 100; n++) {
             final double similarity = 2.0 / (2.0 - n);
-            final DirectedGraph<Integer, Object> g = new CycleGenerator<Integer, Object>(n).generate(VertexProvider.intProvider);
+            final DirectedGraph<Integer, Object> g = new CycleGenerator<Integer, Object>(n).generate(VertexProvider.INTEGER_PROVIDER);
             final VertexSimilarity<Integer, Double> pearson = new PearsonSimilarity<>(g);
             for (Integer v : g) {
                 for (Integer e : g.adjacentOut(v)) {
@@ -72,7 +72,7 @@ public class PearsonSimilarityTests {
      */
     @Test
     public void commutativity() {
-        final DirectedGraph<Integer, Object> g = new RandomGenerator<Integer, Object>(100, 0.1).generate(VertexProvider.intProvider);
+        final DirectedGraph<Integer, Object> g = new RandomGenerator<Integer, Object>(100, 0.1).generate(VertexProvider.INTEGER_PROVIDER);
         final VertexSimilarity<Integer, Double> pearson = new PearsonSimilarity<>(g);
         for (Integer v : g) {
             for (Integer w : g) {
@@ -87,7 +87,7 @@ public class PearsonSimilarityTests {
      */
     @Test
     public void identity() {
-        final DirectedGraph<Integer, Object> g = new RandomGenerator<Integer, Object>(100, 0.1).generate(VertexProvider.intProvider);
+        final DirectedGraph<Integer, Object> g = new RandomGenerator<Integer, Object>(100, 0.1).generate(VertexProvider.INTEGER_PROVIDER);
         final PearsonSimilarity<Integer> pearson = new PearsonSimilarity<>(g);
         for (Integer v : g) {
             if (pearson.variance(v) != 0) {
@@ -105,7 +105,7 @@ public class PearsonSimilarityTests {
      */
     @Test
     public void complete() {
-        final DirectedGraph<Integer, Object> g = new CompleteGenerator<Integer, Object>(5).generate(VertexProvider.intProvider);
+        final DirectedGraph<Integer, Object> g = new CompleteGenerator<Integer, Object>(5).generate(VertexProvider.INTEGER_PROVIDER);
         for (Integer v : g) {
             g.addEdge(v, v, 1.0);
         }

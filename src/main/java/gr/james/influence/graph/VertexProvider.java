@@ -1,8 +1,11 @@
 package gr.james.influence.graph;
 
 import gr.james.influence.algorithms.generators.GraphGenerator;
+import gr.james.influence.util.Conditions;
 
+import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Set;
 
 /**
  * Represents an entity that can produce vertices.
@@ -28,7 +31,7 @@ public interface VertexProvider<V> {
      * The {@link #getVertex()} method will throw {@link NoSuchElementException} if all the possible non-negative
      * integers are exhausted.
      */
-    VertexProvider<Integer> intProvider = new VertexProvider<Integer>() {
+    VertexProvider<Integer> INTEGER_PROVIDER = new VertexProvider<Integer>() {
         private int nextId = 0;
 
         @Override
@@ -39,6 +42,37 @@ public interface VertexProvider<V> {
             return nextId++;
         }
     };
+
+    /**
+     * Construct a {@link VertexProvider} that provides elements from a pool.
+     * <p>
+     * The provider returns the elements with the same order as the {@link Iterator} of {@code pool}. The
+     * {@link #getVertex()} method will throw {@link UnsupportedOperationException} when the elements in {@code pool}
+     * are exhausted.
+     * <p>
+     * Because the resulting {@link VertexProvider} internally uses the {@link Iterator} of {@code pool}, if
+     * {@code pool} is modified before the provider is exhausted, a {@link java.util.ConcurrentModificationException}
+     * will be thrown.
+     *
+     * @param pool the pool of elements
+     * @param <V>  the type of vertex
+     * @return a {@link VertexProvider} that provides elements from {@code pool}
+     * @throws NullPointerException if {@code pool} is {@code null}
+     */
+    static <V> VertexProvider<V> fromPool(Set<V> pool) {
+        Conditions.requireNonNull(pool);
+        return new VertexProvider<V>() {
+            private final Iterator<V> it = pool.iterator();
+
+            @Override
+            public V getVertex() throws NoSuchElementException {
+                if (!it.hasNext()) {
+                    throw new UnsupportedOperationException();
+                }
+                return it.next();
+            }
+        };
+    }
 
     /**
      * Creates and returns a new discrete vertex.

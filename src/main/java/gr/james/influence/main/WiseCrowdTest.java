@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class WiseCrowdTest {
     public static void main(String[] args) throws IOException {
-        DirectedGraph wiseCrowd = new WiseCrowdGenerator<Integer, Object>(11, 0.5).generate(VertexProvider.intProvider);
+        DirectedGraph wiseCrowd = new WiseCrowdGenerator<Integer, Object>(11, 0.5).generate(VertexProvider.INTEGER_PROVIDER);
         new DotExporter().to(wiseCrowd, System.out);
         GraphState<String, Double> pr = PageRank.execute(wiseCrowd, 0.0);
         System.out.println(pr);

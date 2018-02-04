@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Random;
 
 public class RandomVertexIteratorTests {
-    private DirectedGraph<Integer, Object> g = new RandomGenerator<Integer, Object>(100, 0.0).generate(VertexProvider.intProvider);
+    private DirectedGraph<Integer, Object> g = new RandomGenerator<Integer, Object>(100, 0.0).generate(VertexProvider.INTEGER_PROVIDER);
 
     @Test
     public void allItems() {
