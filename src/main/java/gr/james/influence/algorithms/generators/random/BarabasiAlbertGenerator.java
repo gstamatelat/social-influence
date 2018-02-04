@@ -8,13 +8,10 @@ import gr.james.influence.graph.Direction;
 import gr.james.influence.graph.VertexProvider;
 import gr.james.influence.util.Conditions;
 import gr.james.influence.util.Finals;
-import gr.james.influence.util.Helper;
 import gr.james.influence.util.collections.GraphState;
+import gr.james.sampling.EfraimidisSampling;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 public class BarabasiAlbertGenerator<V, E> implements GraphGenerator<DirectedGraph<V, E>, V, E> {
     private int totalVertices;
@@ -43,7 +40,10 @@ public class BarabasiAlbertGenerator<V, E> implements GraphGenerator<DirectedGra
                 weightMap.put(v, Math.pow((double) degree.get(v), a));
             }
 
-            Set<V> newVertices = Helper.weightedRandom(weightMap, stepEdges, r);
+            EfraimidisSampling<V> wrs = new EfraimidisSampling<>(stepEdges, r);
+            wrs.feed(weightMap);
+            Set<V> newVertices = new HashSet<>(wrs.sample());
+            //Set<V> newVertices = Helper.weightedRandom(weightMap, stepEdges, r);
 
             V v = g.addVertex(vertexProvider);
             for (V w : newVertices) {
