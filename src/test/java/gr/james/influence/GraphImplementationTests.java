@@ -2,6 +2,7 @@ package gr.james.influence;
 
 import gr.james.influence.algorithms.generators.random.RandomGenerator;
 import gr.james.influence.graph.DirectedGraph;
+import gr.james.influence.graph.VertexProvider;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -13,7 +14,7 @@ public class GraphImplementationTests {
      */
     @Test
     public void vertexIteratorTest() {
-        DirectedGraph<Integer, Object> g = new RandomGenerator<Integer, Object>(250, 0.2).generate(IntegerVertexProvider.provider);
+        DirectedGraph<Integer, Object> g = new RandomGenerator<Integer, Object>(250, 0.2).generate(VertexProvider.intProvider);
 
         Iterator<Integer> it1 = g.iterator();
         Iterator<Integer> it2 = g.vertexSet().iterator();
@@ -41,7 +42,7 @@ public class GraphImplementationTests {
      */
     @Test
     public void verticesCountTest() {
-        DirectedGraph<Integer, Object> g = new RandomGenerator<Integer, Object>(250, 0.2).generate(IntegerVertexProvider.provider);
+        DirectedGraph<Integer, Object> g = new RandomGenerator<Integer, Object>(250, 0.2).generate(VertexProvider.intProvider);
         Assert.assertEquals("verticesCountTest", g.vertexCount(), g.vertexSet().size());
     }
 }

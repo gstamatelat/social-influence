@@ -1,11 +1,11 @@
 package gr.james.influence.algorithms.components;
 
-import gr.james.influence.IntegerVertexProvider;
 import gr.james.influence.algorithms.generators.basic.CompleteGenerator;
 import gr.james.influence.algorithms.generators.basic.DirectedPathGenerator;
 import gr.james.influence.algorithms.generators.random.RandomGenerator;
 import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.graph.Graphs;
+import gr.james.influence.graph.VertexProvider;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -50,7 +50,7 @@ public class ConnectedComponentsTests {
     public void isolated() {
         final int n = 25;
 
-        final DirectedGraph<Integer, Object> g = new DirectedPathGenerator<Integer, Object>(n).generate(IntegerVertexProvider.provider);
+        final DirectedGraph<Integer, Object> g = new DirectedPathGenerator<Integer, Object>(n).generate(VertexProvider.intProvider);
 
         final ConnectedComponents<Integer> cc = factory.apply(g);
 
@@ -71,7 +71,7 @@ public class ConnectedComponentsTests {
     @Test
     public void complete() {
         final int n = 25;
-        final DirectedGraph<Integer, Object> g = new CompleteGenerator<Integer, Object>(n).generate(IntegerVertexProvider.provider);
+        final DirectedGraph<Integer, Object> g = new CompleteGenerator<Integer, Object>(n).generate(VertexProvider.intProvider);
         final ConnectedComponents<Integer> cc = factory.apply(g);
 
         Assert.assertTrue("ConnectedComponentsTests.complete", cc.size() == 1);
@@ -84,9 +84,9 @@ public class ConnectedComponentsTests {
      */
     @Test
     public void clusters() {
-        final DirectedGraph<Integer, Object> g1 = new CompleteGenerator<Integer, Object>(10).generate(IntegerVertexProvider.provider);
-        final DirectedGraph<Integer, Object> g2 = new CompleteGenerator<Integer, Object>(15).generate(IntegerVertexProvider.provider);
-        final DirectedGraph<Integer, Object> g3 = new CompleteGenerator<Integer, Object>(20).generate(IntegerVertexProvider.provider);
+        final DirectedGraph<Integer, Object> g1 = new CompleteGenerator<Integer, Object>(10).generate(VertexProvider.intProvider);
+        final DirectedGraph<Integer, Object> g2 = new CompleteGenerator<Integer, Object>(15).generate(VertexProvider.intProvider);
+        final DirectedGraph<Integer, Object> g3 = new CompleteGenerator<Integer, Object>(20).generate(VertexProvider.intProvider);
         final DirectedGraph<Integer, Object> g = Graphs.combineGraphs(Arrays.asList(g1, g2, g3));
         final ConnectedComponents<Integer> cc = factory.apply(g);
         final Set<Set<Integer>> s = new HashSet<>();
@@ -102,7 +102,7 @@ public class ConnectedComponentsTests {
     @Test
     public void random() {
         final int n = 100;
-        final DirectedGraph<Integer, Object> g = new RandomGenerator<Integer, Object>(n, 0.1, true).generate(IntegerVertexProvider.provider);
+        final DirectedGraph<Integer, Object> g = new RandomGenerator<Integer, Object>(n, 0.1, true).generate(VertexProvider.intProvider);
         final ConnectedComponents<Integer> cc = factory.apply(g);
 
         api(cc, g);

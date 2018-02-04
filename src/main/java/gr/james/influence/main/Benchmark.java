@@ -1,14 +1,14 @@
 package gr.james.influence.main;
 
-import gr.james.influence.IntegerVertexProvider;
 import gr.james.influence.algorithms.generators.random.BarabasiAlbertGenerator;
 import gr.james.influence.graph.DirectedEdge;
 import gr.james.influence.graph.DirectedGraph;
+import gr.james.influence.graph.VertexProvider;
 import gr.james.influence.util.Helper;
 
 public class Benchmark {
     public static void main(String[] args) {
-        DirectedGraph<Integer, Object> g = new BarabasiAlbertGenerator<Integer, Object>(250, 2, 2, 1.0).generate(IntegerVertexProvider.provider);
+        DirectedGraph<Integer, Object> g = new BarabasiAlbertGenerator<Integer, Object>(250, 2, 2, 1.0).generate(VertexProvider.intProvider);
 
         //System.out.printf("%e%n", Helper.benchmark(() -> Graphs.deepCopy(g), 1.0));
 

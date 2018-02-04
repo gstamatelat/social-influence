@@ -3,6 +3,7 @@ package gr.james.influence;
 import gr.james.influence.algorithms.generators.basic.GridGenerator;
 import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.graph.Graphs;
+import gr.james.influence.graph.VertexProvider;
 import gr.james.influence.util.RandomHelper;
 import org.junit.Assert;
 import org.junit.Test;
@@ -17,7 +18,7 @@ public class GridTest {
         int i = RandomHelper.getRandom().nextInt(100) + 1;
         int j = RandomHelper.getRandom().nextInt(100) + 1;
 
-        DirectedGraph<Integer, Object> g = new GridGenerator<Integer, Object>(i, j).generate(IntegerVertexProvider.provider);
+        DirectedGraph<Integer, Object> g = new GridGenerator<Integer, Object>(i, j).generate(VertexProvider.intProvider);
         Assert.assertEquals("gridGenerator.invalidVertexCount", g.vertexCount(), i * j);
         Assert.assertEquals("gridGenerator.invalidEdgeCount", Graphs.getEdgesCount(g), 2 * (2 * i * j - i - j));
     }
