@@ -1,6 +1,6 @@
 package gr.james.influence.algorithms.generators.test;
 
-import gr.james.influence.algorithms.generators.GraphGenerator;
+import gr.james.influence.algorithms.generators.RandomGraphGenerator;
 import gr.james.influence.algorithms.generators.basic.WheelGenerator;
 import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.graph.Graphs;
@@ -21,7 +21,7 @@ import java.util.Random;
  * <li>hub2: the hub of the other wheel</li>
  * </ul>
  */
-public class TwoWheelsGenerator<V, E> implements GraphGenerator<DirectedGraph<V, E>, V, E> {
+public class TwoWheelsGenerator<V, E> implements RandomGraphGenerator<DirectedGraph<V, E>, V, E> {
     private final int wheelVertices;
 
     /**

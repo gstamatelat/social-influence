@@ -1,6 +1,6 @@
 package gr.james.influence.graph;
 
-import gr.james.influence.algorithms.generators.GraphGenerator;
+import gr.james.influence.algorithms.generators.RandomGraphGenerator;
 import gr.james.influence.util.Conditions;
 
 import java.util.Iterator;
@@ -10,7 +10,7 @@ import java.util.Set;
 /**
  * Represents an entity that can produce vertices.
  * <p>
- * Normally, this interface is used on graph generators ({@link GraphGenerator}) because generators need to add generic
+ * Normally, this interface is used on graph generators ({@link RandomGraphGenerator}) because generators need to add generic
  * vertices to a graph.
  * <p>
  * A {@code VertexProvider} has the single method {@link #getVertex()} which must create and return a new vertex. Each

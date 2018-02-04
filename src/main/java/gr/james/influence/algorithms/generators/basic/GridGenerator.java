@@ -1,6 +1,6 @@
 package gr.james.influence.algorithms.generators.basic;
 
-import gr.james.influence.algorithms.generators.GraphGenerator;
+import gr.james.influence.algorithms.generators.RandomGraphGenerator;
 import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.graph.VertexProvider;
 
@@ -13,7 +13,7 @@ import java.util.Random;
  *
  * @see <a href="http://mathworld.wolfram.com/GridGraph.html">http://mathworld.wolfram.com/GridGraph.html</a>
  */
-public class GridGenerator<V, E> implements GraphGenerator<DirectedGraph<V, E>, V, E> {
+public class GridGenerator<V, E> implements RandomGraphGenerator<DirectedGraph<V, E>, V, E> {
     private int n, m;
 
     public GridGenerator(int n, int m) {

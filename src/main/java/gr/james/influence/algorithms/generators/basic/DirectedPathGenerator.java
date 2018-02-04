@@ -1,6 +1,6 @@
 package gr.james.influence.algorithms.generators.basic;
 
-import gr.james.influence.algorithms.generators.GraphGenerator;
+import gr.james.influence.algorithms.generators.RandomGraphGenerator;
 import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.graph.VertexProvider;
 
@@ -16,7 +16,7 @@ import java.util.Random;
  * <li>target: the vertex on the target tail of the path, which has no outgoing edges</li>
  * </ul>
  */
-public class DirectedPathGenerator<V, E> implements GraphGenerator<DirectedGraph<V, E>, V, E> {
+public class DirectedPathGenerator<V, E> implements RandomGraphGenerator<DirectedGraph<V, E>, V, E> {
     private final int vertexCount;
 
     /**

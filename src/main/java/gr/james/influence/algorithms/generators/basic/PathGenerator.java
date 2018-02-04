@@ -1,6 +1,6 @@
 package gr.james.influence.algorithms.generators.basic;
 
-import gr.james.influence.algorithms.generators.GraphGenerator;
+import gr.james.influence.algorithms.generators.RandomGraphGenerator;
 import gr.james.influence.graph.UndirectedGraph;
 import gr.james.influence.graph.VertexProvider;
 
@@ -16,7 +16,7 @@ import java.util.Random;
  * <li>right: the vertex on the other tail of the path</li>
  * </ul>
  */
-public class PathGenerator<V, E> implements GraphGenerator<UndirectedGraph<V, E>, V, E> {
+public class PathGenerator<V, E> implements RandomGraphGenerator<UndirectedGraph<V, E>, V, E> {
     private final int vertexCount;
 
     /**

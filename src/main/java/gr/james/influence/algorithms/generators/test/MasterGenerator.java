@@ -1,6 +1,6 @@
 package gr.james.influence.algorithms.generators.test;
 
-import gr.james.influence.algorithms.generators.GraphGenerator;
+import gr.james.influence.algorithms.generators.RandomGraphGenerator;
 import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.graph.VertexProvider;
 
@@ -11,7 +11,7 @@ import java.util.Random;
  * <p>Jackson, Matthew O. Social and economic networks. Vol. 3. Princeton: Princeton University Press, 2008, Figure
  * 8.3.2. A Society with a Convergent Updating Process.</p>
  */
-public class MasterGenerator<V, E> implements GraphGenerator<DirectedGraph<V, E>, V, E> {
+public class MasterGenerator<V, E> implements RandomGraphGenerator<DirectedGraph<V, E>, V, E> {
     public MasterGenerator() {
     }
 

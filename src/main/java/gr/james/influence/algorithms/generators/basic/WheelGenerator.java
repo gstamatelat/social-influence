@@ -1,6 +1,6 @@
 package gr.james.influence.algorithms.generators.basic;
 
-import gr.james.influence.algorithms.generators.GraphGenerator;
+import gr.james.influence.algorithms.generators.RandomGraphGenerator;
 import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.graph.Graphs;
 import gr.james.influence.graph.VertexProvider;
@@ -18,7 +18,7 @@ import java.util.Random;
  *
  * @see <a href="http://mathworld.wolfram.com/WheelGraph.html">http://mathworld.wolfram.com/WheelGraph.html</a>
  */
-public class WheelGenerator<V, E> implements GraphGenerator<DirectedGraph<V, E>, V, E> {
+public class WheelGenerator<V, E> implements RandomGraphGenerator<DirectedGraph<V, E>, V, E> {
     private final int vertexCount;
 
     /**

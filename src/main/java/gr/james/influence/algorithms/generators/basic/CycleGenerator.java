@@ -1,6 +1,6 @@
 package gr.james.influence.algorithms.generators.basic;
 
-import gr.james.influence.algorithms.generators.GraphGenerator;
+import gr.james.influence.algorithms.generators.RandomGraphGenerator;
 import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.graph.VertexProvider;
 
@@ -10,7 +10,7 @@ import java.util.Random;
 /**
  * A generator that produces undirected cycle graphs.
  */
-public class CycleGenerator<V, E> implements GraphGenerator<DirectedGraph<V, E>, V, E> {
+public class CycleGenerator<V, E> implements RandomGraphGenerator<DirectedGraph<V, E>, V, E> {
     private final int vertexCount;
 
     /**

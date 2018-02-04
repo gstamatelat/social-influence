@@ -1,6 +1,6 @@
 package gr.james.influence.algorithms.generators.random;
 
-import gr.james.influence.algorithms.generators.GraphGenerator;
+import gr.james.influence.algorithms.generators.RandomGraphGenerator;
 import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.graph.VertexProvider;
 
@@ -13,7 +13,7 @@ import java.util.Random;
  * @see <a href="https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93R%C3%A9nyi_model">
  * https://en.wikipedia.org/wiki/Erdős–Rényi_model</a>
  */
-public class RandomGenerator<V, E> implements GraphGenerator<DirectedGraph<V, E>, V, E> {
+public class RandomGenerator<V, E> implements RandomGraphGenerator<DirectedGraph<V, E>, V, E> {
     private int totalVertices;
     private double p;
     private boolean directed;

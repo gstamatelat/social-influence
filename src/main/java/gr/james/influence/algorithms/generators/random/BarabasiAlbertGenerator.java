@@ -1,6 +1,6 @@
 package gr.james.influence.algorithms.generators.random;
 
-import gr.james.influence.algorithms.generators.GraphGenerator;
+import gr.james.influence.algorithms.generators.RandomGraphGenerator;
 import gr.james.influence.algorithms.generators.basic.CompleteGenerator;
 import gr.james.influence.algorithms.scoring.DegreeCentrality;
 import gr.james.influence.graph.DirectedGraph;
@@ -13,7 +13,7 @@ import gr.james.sampling.EfraimidisSampling;
 
 import java.util.*;
 
-public class BarabasiAlbertGenerator<V, E> implements GraphGenerator<DirectedGraph<V, E>, V, E> {
+public class BarabasiAlbertGenerator<V, E> implements RandomGraphGenerator<DirectedGraph<V, E>, V, E> {
     private int totalVertices;
     private int initialClique;
     private int stepEdges;

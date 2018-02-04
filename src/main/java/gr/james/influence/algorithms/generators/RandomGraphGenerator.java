@@ -11,7 +11,7 @@ import java.util.Random;
 /**
  * Represents an algorithm that can generate a {@link Graph}.
  */
-public interface GraphGenerator<G extends Graph<V, E>, V, E> {
+public interface RandomGraphGenerator<G extends Graph<V, E>, V, E> {
     /**
      * Generates a graph.
      * <p>
