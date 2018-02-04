@@ -5,10 +5,7 @@ import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.util.Conditions;
 import gr.james.influence.util.Finals;
 
-import java.util.AbstractSet;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 
 public interface UndirectedGraph<V, E> extends Graph<V, E> {
     /**
@@ -371,8 +368,41 @@ public interface UndirectedGraph<V, E> extends Graph<V, E> {
      * @return an {@link Iterable} of all the edges in this graph
      */
     default Iterable<UndirectedEdge<V, E>> edges() {
-        // TODO
-        throw new UnsupportedOperationException();
+        return () -> new AbstractIterator<UndirectedEdge<V, E>>() {
+            private Iterator<V> vertexIterator;
+            private Iterator<UndirectedEdge<V, E>> edgeIterator;
+            private Set<V> visited;
+            private V current;
+
+            @Override
+            UndirectedEdge<V, E> computeNext() {
+                while (true) {
+                    while (!edgeIterator.hasNext()) {
+                        if (vertexIterator.hasNext()) {
+                            if (current != null) {
+                                visited.add(current);
+                            }
+                            current = vertexIterator.next();
+                            edgeIterator = UndirectedGraph.this.edges(current).iterator();
+                        } else {
+                            return null;
+                        }
+                    }
+                    final UndirectedEdge<V, E> e = edgeIterator.next();
+                    if (!visited.contains(e.v()) && !visited.contains(e.w())) {
+                        return e;
+                    }
+                }
+            }
+
+            @Override
+            void init() {
+                vertexIterator = UndirectedGraph.this.iterator();
+                edgeIterator = Collections.emptyIterator();
+                visited = new HashSet<>();
+                current = null;
+            }
+        };
     }
 
     /**

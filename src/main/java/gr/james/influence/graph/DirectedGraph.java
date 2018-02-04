@@ -4,12 +4,8 @@ import gr.james.influence.exceptions.IllegalEdgeException;
 import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.util.Conditions;
 import gr.james.influence.util.Finals;
-import gr.james.influence.util.collections.EdgesIterator;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Represents a weighted and directed graph which can contain self loops but not parallel edges.
@@ -324,7 +320,28 @@ public interface DirectedGraph<V, E> extends Graph<V, E> {
      * @return an {@link Iterable} of all the edges in this graph
      */
     default Iterable<DirectedEdge<V, E>> edges() {
-        return () -> new EdgesIterator<>(DirectedGraph.this);
+        return () -> new AbstractIterator<DirectedEdge<V, E>>() {
+            private Iterator<V> vertexIterator;
+            private Iterator<DirectedEdge<V, E>> edgeIterator;
+
+            @Override
+            DirectedEdge<V, E> computeNext() {
+                while (!edgeIterator.hasNext()) {
+                    if (vertexIterator.hasNext()) {
+                        edgeIterator = DirectedGraph.this.outEdges(vertexIterator.next()).iterator();
+                    } else {
+                        return null;
+                    }
+                }
+                return edgeIterator.next();
+            }
+
+            @Override
+            void init() {
+                vertexIterator = DirectedGraph.this.iterator();
+                edgeIterator = Collections.emptyIterator();
+            }
+        };
     }
 
     /**
