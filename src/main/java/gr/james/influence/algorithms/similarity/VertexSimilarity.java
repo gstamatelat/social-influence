@@ -1,4 +1,4 @@
-package gr.james.influence.api.algorithms;
+package gr.james.influence.algorithms.similarity;
 
 import gr.james.influence.exceptions.IllegalVertexException;
 
