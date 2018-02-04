@@ -9,21 +9,15 @@ import java.util.Map;
 import java.util.Random;
 
 /**
- * Represents an algorithm that can generate a {@link Graph}.
+ * Represents an algorithm that can generate a random {@link Graph}.
  */
-public interface RandomGraphGenerator<G extends Graph<V, E>, V, E> {
-    /**
-     * Generates a graph.
-     * <p>
-     * This method is using the global random instance.
-     *
-     * @param vertexProvider the vertex provider
-     * @return the generated graph
-     */
+public interface RandomGraphGenerator<G extends Graph<V, E>, V, E> extends GraphGenerator<G, V, E> {
+    @Override
     default G generate(VertexProvider<V> vertexProvider) {
-        return generate(RandomHelper.getRandom(), vertexProvider, new HashMap<>());
+        return generate(RandomHelper.getRandom(), vertexProvider);
     }
 
+    @Override
     default G generate(VertexProvider<V> vertexProvider, Map<String, V> identification) {
         return generate(RandomHelper.getRandom(), vertexProvider, identification);
     }
