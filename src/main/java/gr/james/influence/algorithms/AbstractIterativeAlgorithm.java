@@ -1,6 +1,5 @@
 package gr.james.influence.algorithms;
 
-import gr.james.influence.api.algorithms.IterativeAlgorithm;
 import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.util.Finals;
 import gr.james.influence.util.collections.EvictingLinkedHashSet;

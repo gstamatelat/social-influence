@@ -1,4 +1,4 @@
-package gr.james.influence.api.algorithms;
+package gr.james.influence.algorithms;
 
 /**
  * Represents an algorithm that computes a property of a graph.

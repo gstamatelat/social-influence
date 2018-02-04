@@ -1,7 +1,7 @@
 package gr.james.influence.algorithms.distance;
 
+import gr.james.influence.algorithms.GraphProperty;
 import gr.james.influence.annotation.UnmodifiableGraph;
-import gr.james.influence.api.algorithms.GraphProperty;
 import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.util.Conditions;
 

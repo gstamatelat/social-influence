@@ -1,7 +1,7 @@
 package gr.james.influence.algorithms.connectivity;
 
+import gr.james.influence.algorithms.VertexIterator;
 import gr.james.influence.annotation.UnmodifiableGraph;
-import gr.james.influence.api.algorithms.VertexIterator;
 import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.util.Conditions;

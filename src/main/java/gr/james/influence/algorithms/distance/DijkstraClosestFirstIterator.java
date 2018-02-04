@@ -1,8 +1,8 @@
 package gr.james.influence.algorithms.distance;
 
 import com.google.common.collect.Lists;
+import gr.james.influence.algorithms.VertexIterator;
 import gr.james.influence.annotation.UnmodifiableGraph;
-import gr.james.influence.api.algorithms.VertexIterator;
 import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.graph.DirectedEdge;
 import gr.james.influence.graph.DirectedGraph;
