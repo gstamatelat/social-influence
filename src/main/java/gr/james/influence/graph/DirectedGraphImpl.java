@@ -4,7 +4,6 @@ import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.util.Conditions;
-import gr.james.influence.util.Finals;
 
 import java.util.*;
 
@@ -58,7 +57,7 @@ final class DirectedGraphImpl<V, E> extends AbstractDirectedGraph<V, E> {
         if (edges == null) {
             throw new IllegalVertexException();
         }
-        if (!mOut.containsKey(target)) {
+        if (!this.mIn.containsKey(target)) {
             throw new IllegalVertexException();
         }
         return edges.get(target);
@@ -112,14 +111,11 @@ final class DirectedGraphImpl<V, E> extends AbstractDirectedGraph<V, E> {
 
     @Override
     public boolean addVertex(V v) {
-        if (this.containsVertex(v)) {
-            return false;
-        } else {
-            final Object o1 = this.mOut.put(v, HashBiMap.create());
-            final Object o2 = this.mIn.put(v, HashBiMap.create());
-            assert o1 == null && o2 == null;
-            return true;
-        }
+        Conditions.requireNonNull(v);
+        final Object o1 = this.mOut.putIfAbsent(v, HashBiMap.create());
+        final Object o2 = this.mIn.putIfAbsent(v, HashBiMap.create());
+        assert (o1 == null) == (o2 == null);
+        return o1 == null;
     }
 
     @Override
@@ -143,13 +139,18 @@ final class DirectedGraphImpl<V, E> extends AbstractDirectedGraph<V, E> {
 
     @Override
     public DirectedEdge<V, E> addEdge(V source, V target, E edge, double weight) {
-        Conditions.requireArgument(weight > 0, Finals.E_EDGE_WEIGHT_NEGATIVE, weight);
-        if (!containsEdge(source, target)) {
-            final DirectedEdge<V, E> e = DirectedEdge.from(edge, source, target, weight);
-            final DirectedEdge<V, E> e1 = this.mOut.get(source).put(target, e);
-            final DirectedEdge<V, E> e2 = this.mIn.get(target).put(source, e);
-            assert e1 == null;
-            assert e2 == null;
+        Conditions.requireAllNonNull(source, target);
+        Graphs.requireWeightLegal(weight);
+        final BiMap<V, DirectedEdge<V, E>> eOut = mOut.get(source);
+        final BiMap<V, DirectedEdge<V, E>> eIn = mIn.get(target);
+        if (eOut == null || eIn == null) {
+            throw new IllegalVertexException();
+        }
+        final DirectedEdge<V, E> e = DirectedEdge.from(edge, source, target, weight);
+        final DirectedEdge<V, E> e1 = eOut.putIfAbsent(target, e);
+        final DirectedEdge<V, E> e2 = eIn.putIfAbsent(source, e);
+        assert (e1 == null && e2 == null) || (e1 != null && e2 != null && e1.equals(e2));
+        if (e1 == null) {
             return e;
         } else {
             return null;
@@ -158,14 +159,15 @@ final class DirectedGraphImpl<V, E> extends AbstractDirectedGraph<V, E> {
 
     @Override
     public DirectedEdge<V, E> removeEdge(V source, V target) {
-        if (this.mOut.get(source).remove(target) != null) {
-            final DirectedEdge<V, E> h = this.mIn.get(target).remove(source);
-            assert h != null;
-            assert h.source().equals(source);
-            assert h.target().equals(target);
-            return h;
-        } else {
-            return null;
+        Conditions.requireAllNonNull(source, target);
+        final BiMap<V, DirectedEdge<V, E>> eOut = mOut.get(source);
+        final BiMap<V, DirectedEdge<V, E>> eIn = mIn.get(target);
+        if (eOut == null || eIn == null) {
+            throw new IllegalVertexException();
         }
+        final DirectedEdge<V, E> e1 = eOut.remove(target);
+        final DirectedEdge<V, E> e2 = eIn.remove(source);
+        assert (e1 == null && e2 == null) || (e1 != null && e2 != null && e1.equals(e2));
+        return e1;
     }
 }
