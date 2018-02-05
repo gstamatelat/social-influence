@@ -11,6 +11,8 @@ import java.util.*;
 /**
  * Implementation of depth first search (DFS) as {@link Iterator}.
  * <p>
+ * The {@link Iterator} iterates over the vertices of a graph in the order they are discovered by DFS.
+ * <p>
  * The size of the state of this class is {@code O(V)}.
  *
  * @param <V> the vertex type
@@ -51,7 +53,7 @@ public class DepthFirstIterator<V> implements VertexIterator<V> {
     }
 
     /**
-     * Returns the next vertex imposed by the DFS order.
+     * Returns the next vertex that is discovered by DFS.
      * <p>
      * This method runs in time proportional to the out degree of the next vertex.
      *

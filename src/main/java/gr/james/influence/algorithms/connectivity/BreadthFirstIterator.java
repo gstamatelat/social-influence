@@ -11,6 +11,8 @@ import java.util.*;
 /**
  * Implementation of breadth first search (BFS) as {@link Iterator}.
  * <p>
+ * The {@link Iterator} iterates over the vertices of a graph in the order they are discovered by BFS.
+ * <p>
  * The size of the state of this class is {@code O(V)}.
  *
  * @param <V> the vertex type
@@ -52,7 +54,7 @@ public class BreadthFirstIterator<V> implements VertexIterator<V> {
     }
 
     /**
-     * Returns the next vertex imposed by the BFS order.
+     * Returns the next vertex that is discovered by BFS.
      * <p>
      * This method runs in time proportional to the out degree of the next vertex.
      *
