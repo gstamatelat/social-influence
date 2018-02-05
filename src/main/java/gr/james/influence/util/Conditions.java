@@ -1,7 +1,7 @@
 package gr.james.influence.util;
 
 import gr.james.influence.exceptions.IllegalVertexException;
-import gr.james.influence.graph.DirectedGraph;
+import gr.james.influence.graph.Graph;
 
 public final class Conditions {
     public static void requireArgument(boolean expression, String errorMessageTemplate, Object... errorMessageArgs) {
@@ -33,7 +33,7 @@ public final class Conditions {
      * @throws NullPointerException   if {@code g} or {@code v} is {@code null}
      * @throws IllegalVertexException if {@code v} is not in {@code g}
      */
-    public static <V> V requireVertexInGraph(DirectedGraph<V, ?> g, V v) {
+    public static <V> V requireVertexInGraph(Graph<V, ?> g, V v) {
         if (!g.containsVertex(v)) {
             throw new IllegalVertexException();
         }
