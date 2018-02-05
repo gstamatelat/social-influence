@@ -36,7 +36,19 @@ public class DepthFirstIterator<V> implements VertexIterator<V> {
         this.visited = new HashSet<>();
 
         this.stack.offer(source);
-        this.visited.add(source);
+    }
+
+    public static void main(String[] args) {
+        DirectedGraph<Integer, Object> g = DirectedGraph.create(4);
+        g.addVertices(1, 2, 3, 4);
+        g.addEdge(1, 2);
+        g.addEdge(2, 1);
+        g.addEdge(2, 3);
+        g.addEdge(1, 3);
+        g.addEdge(3, 4);
+        g.addEdge(4, 3);
+        DepthFirstIterator<Integer> dfs = new DepthFirstIterator<>(g, 1);
+        dfs.exhaust();
     }
 
     /**
@@ -67,11 +79,17 @@ public class DepthFirstIterator<V> implements VertexIterator<V> {
             throw new NoSuchElementException();
         }
 
-        // works with this interfaces but needs to change
+        boolean added = visited.add(next);
+        assert added;
+
         for (V v : g.adjacentOut(next)) {
-            if (visited.add(v)) {
+            if (!visited.contains(v)) {
                 stack.push(v);
             }
+        }
+
+        while (!stack.isEmpty() && visited.contains(stack.peek())) {
+            stack.pop();
         }
 
         return next;
