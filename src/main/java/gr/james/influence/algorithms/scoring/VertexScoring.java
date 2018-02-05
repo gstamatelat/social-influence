@@ -1,4 +1,4 @@
-package gr.james.influence.algorithms;
+package gr.james.influence.algorithms.scoring;
 
 import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.util.collections.GraphState;

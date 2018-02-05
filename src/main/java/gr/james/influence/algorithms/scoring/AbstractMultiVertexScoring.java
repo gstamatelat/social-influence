@@ -1,6 +1,5 @@
 package gr.james.influence.algorithms.scoring;
 
-import gr.james.influence.algorithms.VertexScoring;
 import gr.james.influence.annotation.UnmodifiableGraph;
 import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.graph.DirectedGraph;
