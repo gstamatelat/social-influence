@@ -28,7 +28,8 @@ public class DijkstraClosestFirstIterator<V> implements VertexIterator<V> {
     private final PriorityQueue<V> pq;
 
     /**
-     * Construct an instance of {@link DijkstraClosestFirstIterator} with a given {@link DirectedGraph} and a {@code source}.
+     * Construct an instance of {@link DijkstraClosestFirstIterator} with a given {@link DirectedGraph} and a
+     * {@code source}.
      * <p>
      * The constructor will initialize the instance in time {@code O(V)}.
      *
