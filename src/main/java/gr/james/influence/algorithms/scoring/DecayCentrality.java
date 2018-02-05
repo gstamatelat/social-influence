@@ -42,7 +42,7 @@ public class DecayCentrality<V> extends AbstractSingleVertexScoring<V, Double> {
     }
 
     @Override
-    protected Double scoreProtected(V v) {
+    Double scoreProtected(V v) {
         final DijkstraShortestPaths<V> dijkstra = new DijkstraShortestPaths<>(g, v);
         double sum = 0;
         for (V w : g) {

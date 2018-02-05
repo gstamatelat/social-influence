@@ -21,7 +21,7 @@ import gr.james.influence.util.collections.GraphState;
  * @param <T> the score type
  * @see AbstractMultiVertexScoring
  */
-public abstract class AbstractSingleVertexScoring<V, T> implements VertexScoring<V, T> {
+abstract class AbstractSingleVertexScoring<V, T> implements VertexScoring<V, T> {
     private final DirectedGraph<V, ?> g;
     private final GraphState<V, T> scores;
 
@@ -47,7 +47,7 @@ public abstract class AbstractSingleVertexScoring<V, T> implements VertexScoring
      * @param v the vertex to get the score of
      * @return the score of vertex {@code v}
      */
-    protected abstract T scoreProtected(V v);
+    abstract T scoreProtected(V v);
 
     /**
      * {@inheritDoc}

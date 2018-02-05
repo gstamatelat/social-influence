@@ -38,7 +38,7 @@ public class ClosenessCentrality<V> extends AbstractSingleVertexScoring<V, Doubl
     }
 
     @Override
-    protected Double scoreProtected(V v) {
+    Double scoreProtected(V v) {
         final DijkstraShortestPaths<V> dijkstra = new DijkstraShortestPaths<>(g, v);
         double farness = 0;
         for (V w : g) {
