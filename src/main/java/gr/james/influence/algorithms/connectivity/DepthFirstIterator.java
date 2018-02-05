@@ -38,19 +38,6 @@ public class DepthFirstIterator<V> implements VertexIterator<V> {
         this.stack.offer(source);
     }
 
-    public static void main(String[] args) {
-        DirectedGraph<Integer, Object> g = DirectedGraph.create(4);
-        g.addVertices(1, 2, 3, 4);
-        g.addEdge(1, 2);
-        g.addEdge(2, 1);
-        g.addEdge(2, 3);
-        g.addEdge(1, 3);
-        g.addEdge(3, 4);
-        g.addEdge(4, 3);
-        DepthFirstIterator<Integer> dfs = new DepthFirstIterator<>(g, 1);
-        dfs.exhaust();
-    }
-
     /**
      * Returns {@code true} if DFS has more vertices to discover, otherwise {@code false}.
      * <p>
