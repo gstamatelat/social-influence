@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-final class BipartiteGraphImpl<V, E> extends AbstractUndirectedGraph<V, E> implements BipartiteGraph<V, E> {
+final class BipartiteGraphImpl<V, E> extends AbstractBipartiteGraph<V, E> {
     private final UndirectedGraph<V, E> g;
     private final Set<V> setA;
     private final Set<V> setB;
