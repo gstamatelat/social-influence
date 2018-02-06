@@ -49,8 +49,8 @@ public class JaccardSimilarity<V> implements VertexSimilarity<V, Double> {
      * @param v1 one vertex
      * @param v2 the other vertex
      * @return the Jaccard index between {@code v1} and {@code v2} or {@link Double#NaN} if undefined
-     * @throws NullPointerException   {@inheritDoc}
-     * @throws IllegalVertexException {@inheritDoc}
+     * @throws NullPointerException   if either {@code v1} or {@code v2} is {@code null}
+     * @throws IllegalVertexException if either {@code v1} or {@code v2} is not in the graph
      */
     @Override
     public Double similarity(V v1, V v2) {
