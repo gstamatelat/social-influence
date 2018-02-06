@@ -26,17 +26,17 @@ final class BipartiteGraphImpl<V, E> extends AbstractBipartiteGraph<V, E> {
 
     BipartiteGraphImpl(BipartiteGraph<V, E> g) {
         this.g = UndirectedGraph.create(g);
-        this.setA = new HashSet<>(g.vertexASet());
-        this.setB = new HashSet<>(g.vertexBSet());
+        this.setA = new HashSet<>(g.vertexSetA());
+        this.setB = new HashSet<>(g.vertexSetB());
     }
 
     @Override
-    public Set<V> vertexASet() {
+    public Set<V> vertexSetA() {
         return Collections.unmodifiableSet(setA);
     }
 
     @Override
-    public Set<V> vertexBSet() {
+    public Set<V> vertexSetB() {
         return Collections.unmodifiableSet(setB);
     }
 

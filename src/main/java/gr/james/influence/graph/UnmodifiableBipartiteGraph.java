@@ -10,13 +10,13 @@ final class UnmodifiableBipartiteGraph<V, E> extends AbstractBipartiteGraph<V, E
     }
 
     @Override
-    public Set<V> vertexASet() {
-        return this.g.vertexASet();
+    public Set<V> vertexSetA() {
+        return this.g.vertexSetA();
     }
 
     @Override
-    public Set<V> vertexBSet() {
-        return this.g.vertexBSet();
+    public Set<V> vertexSetB() {
+        return this.g.vertexSetB();
     }
 
     @Override

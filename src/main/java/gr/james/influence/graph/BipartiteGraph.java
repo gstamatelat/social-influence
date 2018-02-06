@@ -50,9 +50,9 @@ public interface BipartiteGraph<V, E> extends UndirectedGraph<V, E> {
         return create(this).asUnmodifiable();
     }
 
-    Set<V> vertexASet();
+    Set<V> vertexSetA();
 
-    Set<V> vertexBSet();
+    Set<V> vertexSetB();
 
     boolean addVertexInA(V v);
 

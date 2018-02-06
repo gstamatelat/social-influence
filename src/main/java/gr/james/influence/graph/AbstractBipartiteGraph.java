@@ -5,7 +5,7 @@ abstract class AbstractBipartiteGraph<V, E> implements BipartiteGraph<V, E> {
     public String toString() {
         final StringBuilder sb = new StringBuilder();
         sb.append(String.format("BipartiteGraph(%d,%d+%d) {%n",
-                this.vertexCount(), this.vertexASet().size(), this.vertexBSet().size()));
+                this.vertexCount(), this.vertexSetA().size(), this.vertexSetB().size()));
         for (UndirectedEdge<V, E> e : this.edges()) {
             if (e.value() == null) {
                 sb.append(String.format("  %s -- %s [%.2f]%n", e.v(), e.w(), e.weight()));
