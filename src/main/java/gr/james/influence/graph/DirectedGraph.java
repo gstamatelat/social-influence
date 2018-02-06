@@ -25,10 +25,9 @@ import java.util.*;
  * <p>
  * Both vertex and edge types {@code <V>} and {@code <E>} need to be immutable or effectively immutable.
  * <h2>Collections returned</h2>
- * Methods that return collections ({@link Map Maps}, {@link Set Sets} and {@link List Lists}) return read-only views of
- * the actual collections they represent, meaning that you can't insert, remove or reorder elements. These collections
- * may or may not be backed by the graph so changes to the graph may not reflect on collections after they have been
- * returned; you need to call the method again.
+ * Methods that return collections ({@link Map Maps} and {@link Set Sets} return read-only views of the actual
+ * collections they represent, meaning that you can't insert, remove or reorder elements. These collections are backed
+ * by the graph so changes to the graph will reflect on the collections after they have been returned.
  *
  * @param <V> the vertex type
  * @param <E> the edge type
