@@ -40,6 +40,16 @@ public interface BipartiteGraph<V, E> extends UndirectedGraph<V, E> {
         return new BipartiteGraphImpl<>(g);
     }
 
+    @Override
+    default BipartiteGraph<V, E> asUnmodifiable() {
+        return new UnmodifiableBipartiteGraph<>(this);
+    }
+
+    @Override
+    default BipartiteGraph<V, E> toImmutable() {
+        return create(this).asUnmodifiable();
+    }
+
     Set<V> vertexASet();
 
     Set<V> vertexBSet();
