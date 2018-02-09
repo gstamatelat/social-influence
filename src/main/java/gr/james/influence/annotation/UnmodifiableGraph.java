@@ -1,11 +1,11 @@
 package gr.james.influence.annotation;
 
-import gr.james.influence.graph.DirectedGraph;
+import gr.james.influence.graph.Graph;
 
 import java.lang.annotation.*;
 
 /**
- * A constructor parameter of type {@link DirectedGraph} annotated {@code @UnmodifiableGraph} indicates that instances of the
+ * A constructor parameter of type {@link Graph} annotated {@code @UnmodifiableGraph} indicates that instances of the
  * class expect that the graph will not be mutated after the constructor is invoked and will not reflect changes to it.
  * <p>
  * Often, this means that the constructor is generating state that relies upon the graph annotated with
