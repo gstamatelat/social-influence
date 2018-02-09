@@ -1,7 +1,6 @@
 # Social Influence
 
-Java 8 network/graph framework with emphasis on social influence and opinion
-dynamics.
+Java 8 network/graph framework with emphasis on social network analysis.
 
 ## Using
 
