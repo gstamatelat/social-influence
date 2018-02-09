@@ -23,8 +23,10 @@ public interface VertexSimilarity<V, T> {
      * @param v1 the first vertex
      * @param v2 the second vertex
      * @return the similarity between {@code v1} and {@code v2}
-     * @throws NullPointerException   if either {@code v1} or {@code v2} is {@code null}
-     * @throws IllegalVertexException if either {@code v1} or {@code v2} is not in the graph referenced by the instance
+     * @throws NullPointerException          if either {@code v1} or {@code v2} is {@code null}
+     * @throws IllegalVertexException        if either {@code v1} or {@code v2} is not in the graph referenced by the
+     *                                       instance
+     * @throws UnsupportedOperationException if for some reason the operation is not supported
      */
     T similarity(V v1, V v2);
 }

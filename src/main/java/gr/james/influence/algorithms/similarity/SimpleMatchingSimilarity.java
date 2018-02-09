@@ -3,8 +3,11 @@ package gr.james.influence.algorithms.similarity;
 import com.google.common.collect.Sets;
 import gr.james.influence.annotation.ModifiableGraph;
 import gr.james.influence.exceptions.IllegalVertexException;
+import gr.james.influence.graph.BipartiteGraph;
 import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.util.Conditions;
+
+import java.util.Set;
 
 /**
  * Implementation of the <a href="https://en.wikipedia.org/wiki/Simple_matching_coefficient">Simple matching
@@ -23,7 +26,8 @@ import gr.james.influence.util.Conditions;
  * @param <V> the vertex type
  */
 public class SimpleMatchingSimilarity<V> implements VertexSimilarity<V, Double> {
-    private final DirectedGraph<V, ?> g;
+    private final DirectedGraph<V, ?> directedGraph;
+    private final BipartiteGraph<V, ?> bipartiteGraph;
 
     /**
      * Construct a {@link SimpleMatchingSimilarity} instance from a {@link DirectedGraph}.
@@ -34,7 +38,33 @@ public class SimpleMatchingSimilarity<V> implements VertexSimilarity<V, Double> 
      * @throws NullPointerException if {@code g} is {@code null}
      */
     public SimpleMatchingSimilarity(@ModifiableGraph DirectedGraph<V, ?> g) {
-        this.g = Conditions.requireNonNull(g);
+        this.directedGraph = Conditions.requireNonNull(g);
+        this.bipartiteGraph = null;
+    }
+
+    /**
+     * Construct a {@link SimpleMatchingSimilarity} instance from a {@link BipartiteGraph}.
+     * <p>
+     * The constructor doesn't perform any calculations.
+     *
+     * @param g the {@link BipartiteGraph} to construct this instance from
+     * @throws NullPointerException if {@code g} is {@code null}
+     */
+    public SimpleMatchingSimilarity(@ModifiableGraph BipartiteGraph<V, ?> g) {
+        this.directedGraph = null;
+        this.bipartiteGraph = Conditions.requireNonNull(g);
+    }
+
+    private static <V> double smc(Set<V> s1, Set<V> s2, Set<V> reference) {
+        assert reference.containsAll(s1) && reference.containsAll(s2);
+        final int intersection = Sets.intersection(s1, s2).size();
+        final int union = s1.size() + s2.size() - intersection;
+        final int unionComplement = reference.size() - union;
+        assert union >= intersection && union <= reference.size();
+        assert intersection <= s1.size() && intersection <= s2.size();
+        assert union + unionComplement == reference.size();
+        assert unionComplement + intersection <= reference.size();
+        return (double) (unionComplement + intersection) / (double) reference.size();
     }
 
     /**
@@ -46,18 +76,28 @@ public class SimpleMatchingSimilarity<V> implements VertexSimilarity<V, Double> 
      * @param v1 one vertex
      * @param v2 the other vertex
      * @return the SMC between {@code v1} and {@code v2} or {@link Double#NaN} if undefined
-     * @throws NullPointerException   if either {@code v1} or {@code v2} is {@code null}
-     * @throws IllegalVertexException if either {@code v1} or {@code v2} is not in the graph
+     * @throws NullPointerException          if either {@code v1} or {@code v2} is {@code null}
+     * @throws IllegalVertexException        if either {@code v1} or {@code v2} is not in the graph
+     * @throws UnsupportedOperationException if the graph is bipartite and {@code v1} and {@code v2} are in the same
+     *                                       group
      */
     @Override
     public Double similarity(V v1, V v2) {
-        final int intersection = Sets.intersection(g.adjacentOut(v1), g.adjacentOut(v2)).size();
-        final int union = g.outDegree(v1) + g.outDegree(v2) - intersection;
-        final int unionComplement = g.vertexCount() - union;
-        assert union >= intersection && union <= g.vertexCount();
-        assert intersection <= g.outDegree(v1) && intersection <= g.outDegree(v2);
-        assert union + unionComplement == g.vertexCount();
-        assert unionComplement + intersection <= g.vertexCount();
-        return (double) (unionComplement + intersection) / (double) g.vertexCount();
+        assert (directedGraph == null) ^ (bipartiteGraph == null);
+        if (directedGraph != null) {
+            return smc(
+                    directedGraph.adjacentOut(v1),
+                    directedGraph.adjacentOut(v2),
+                    directedGraph.vertexSet());
+        } else {
+            if (!bipartiteGraph.setOf(v1).equals(bipartiteGraph.setOf(v2))) {
+                throw new UnsupportedOperationException();
+            }
+            assert bipartiteGraph.otherSetOf(v1).equals(bipartiteGraph.otherSetOf(v2));
+            return smc(
+                    bipartiteGraph.adjacent(v1),
+                    bipartiteGraph.adjacent(v2),
+                    bipartiteGraph.otherSetOf(v1));
+        }
     }
 }

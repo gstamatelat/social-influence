@@ -1,5 +1,8 @@
 package gr.james.influence.graph;
 
+import gr.james.influence.exceptions.IllegalVertexException;
+import gr.james.influence.util.Conditions;
+
 import java.util.Set;
 
 public interface BipartiteGraph<V, E> extends UndirectedGraph<V, E> {
@@ -48,6 +51,36 @@ public interface BipartiteGraph<V, E> extends UndirectedGraph<V, E> {
     @Override
     default BipartiteGraph<V, E> toImmutable() {
         return create(this).asUnmodifiable();
+    }
+
+    default Set<V> setOf(V v) {
+        Conditions.requireNonNull(v);
+        final boolean inA = vertexSetA().contains(v);
+        final boolean inB = vertexSetB().contains(v);
+        assert !(inA && inB);
+        if (!inA && !inB) {
+            throw new IllegalVertexException();
+        }
+        if (inA) {
+            return vertexSetA();
+        } else {
+            return vertexSetB();
+        }
+    }
+
+    default Set<V> otherSetOf(V v) {
+        Conditions.requireNonNull(v);
+        final boolean inA = vertexSetA().contains(v);
+        final boolean inB = vertexSetB().contains(v);
+        assert !(inA && inB);
+        if (!inA && !inB) {
+            throw new IllegalVertexException();
+        }
+        if (inA) {
+            return vertexSetB();
+        } else {
+            return vertexSetA();
+        }
     }
 
     Set<V> vertexSetA();
