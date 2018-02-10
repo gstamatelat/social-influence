@@ -17,20 +17,18 @@ public class JaccardSimilarityTests {
      */
     @Test
     public void simple() {
-        final DirectedGraph<Integer, Object> g = DirectedGraph.create();
-        final Integer v1 = g.addVertex(VertexProvider.INTEGER_PROVIDER);
-        final Integer v2 = g.addVertex(VertexProvider.INTEGER_PROVIDER);
-        final Integer v3 = g.addVertex(VertexProvider.INTEGER_PROVIDER);
-        g.addEdge(v1, v2);
-        g.addEdge(v1, v3);
-        g.addEdge(v3, v2);
-        final VertexSimilarity<Integer, Double> jaccard = new JaccardSimilarity<>(g);
-        Assert.assertEquals("JaccardSimilarityTests.simple", 0.0, jaccard.similarity(v1, v2), 1e-4);
-        Assert.assertEquals("JaccardSimilarityTests.simple", 0.5, jaccard.similarity(v1, v3), 1e-4);
-        Assert.assertEquals("JaccardSimilarityTests.simple", 0.0, jaccard.similarity(v2, v3), 1e-4);
-        Assert.assertEquals("JaccardSimilarityTests.simple", 1.0, jaccard.similarity(v1, v1), 1e-4);
-        Assert.assertEquals("JaccardSimilarityTests.simple", 1.0, jaccard.similarity(v3, v3), 1e-4);
-        Assert.assertTrue("JaccardSimilarityTests.simple", Double.isNaN(jaccard.similarity(v2, v2)));
+        final DirectedGraph<String, Object> g = DirectedGraph.create();
+        g.addVertices("A", "B", "C");
+        g.addEdge("A", "B");
+        g.addEdge("A", "C");
+        g.addEdge("C", "B");
+        final VertexSimilarity<String, Double> jaccard = new JaccardSimilarity<>(g);
+        Assert.assertEquals("JaccardSimilarityTests.simple", 0.0, jaccard.similarity("A", "B"), 1e-4);
+        Assert.assertEquals("JaccardSimilarityTests.simple", 0.5, jaccard.similarity("A", "C"), 1e-4);
+        Assert.assertEquals("JaccardSimilarityTests.simple", 0.0, jaccard.similarity("B", "C"), 1e-4);
+        Assert.assertEquals("JaccardSimilarityTests.simple", 1.0, jaccard.similarity("A", "A"), 1e-4);
+        Assert.assertEquals("JaccardSimilarityTests.simple", 1.0, jaccard.similarity("C", "C"), 1e-4);
+        Assert.assertTrue("JaccardSimilarityTests.simple", Double.isNaN(jaccard.similarity("B", "B")));
     }
 
     /**

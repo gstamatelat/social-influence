@@ -17,20 +17,18 @@ public class SorensenDiceSimilarityTests {
      */
     @Test
     public void simple() {
-        final DirectedGraph<Integer, Object> g = DirectedGraph.create();
-        final Integer v1 = g.addVertex(VertexProvider.INTEGER_PROVIDER);
-        final Integer v2 = g.addVertex(VertexProvider.INTEGER_PROVIDER);
-        final Integer v3 = g.addVertex(VertexProvider.INTEGER_PROVIDER);
-        g.addEdge(v1, v2);
-        g.addEdge(v1, v3);
-        g.addEdge(v3, v2);
-        final VertexSimilarity<Integer, Double> dice = new SorensenDiceSimilarity<>(g);
-        Assert.assertEquals("SorensenDiceSimilarityTests.simple", 0.0, dice.similarity(v1, v2), 1e-4);
-        Assert.assertEquals("SorensenDiceSimilarityTests.simple", 2.0 / 3.0, dice.similarity(v1, v3), 1e-4);
-        Assert.assertEquals("SorensenDiceSimilarityTests.simple", 0.0, dice.similarity(v2, v3), 1e-4);
-        Assert.assertEquals("SorensenDiceSimilarityTests.simple", 1.0, dice.similarity(v1, v1), 1e-4);
-        Assert.assertEquals("SorensenDiceSimilarityTests.simple", 1.0, dice.similarity(v3, v3), 1e-4);
-        Assert.assertTrue("SorensenDiceSimilarityTests.simple", Double.isNaN(dice.similarity(v2, v2)));
+        final DirectedGraph<String, Object> g = DirectedGraph.create();
+        g.addVertices("A", "B", "C");
+        g.addEdge("A", "B");
+        g.addEdge("A", "C");
+        g.addEdge("C", "B");
+        final VertexSimilarity<String, Double> dice = new SorensenDiceSimilarity<>(g);
+        Assert.assertEquals("SorensenDiceSimilarityTests.simple", 0.0, dice.similarity("A", "B"), 1e-4);
+        Assert.assertEquals("SorensenDiceSimilarityTests.simple", 2.0 / 3.0, dice.similarity("A", "C"), 1e-4);
+        Assert.assertEquals("SorensenDiceSimilarityTests.simple", 0.0, dice.similarity("B", "C"), 1e-4);
+        Assert.assertEquals("SorensenDiceSimilarityTests.simple", 1.0, dice.similarity("A", "A"), 1e-4);
+        Assert.assertEquals("SorensenDiceSimilarityTests.simple", 1.0, dice.similarity("C", "C"), 1e-4);
+        Assert.assertTrue("SorensenDiceSimilarityTests.simple", Double.isNaN(dice.similarity("B", "B")));
     }
 
     /**

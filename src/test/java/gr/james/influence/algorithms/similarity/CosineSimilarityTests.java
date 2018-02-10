@@ -17,20 +17,18 @@ public class CosineSimilarityTests {
      */
     @Test
     public void simple() {
-        final DirectedGraph<Integer, Object> g = DirectedGraph.create();
-        final Integer v1 = g.addVertex(VertexProvider.INTEGER_PROVIDER);
-        final Integer v2 = g.addVertex(VertexProvider.INTEGER_PROVIDER);
-        final Integer v3 = g.addVertex(VertexProvider.INTEGER_PROVIDER);
-        g.addEdge(v1, v2);
-        g.addEdge(v1, v3);
-        g.addEdge(v3, v2);
-        final VertexSimilarity<Integer, Double> cosine = new CosineSimilarity<>(g);
-        Assert.assertTrue("CosineSimilarityTests.simple", Double.isNaN(cosine.similarity(v1, v2)));
-        Assert.assertEquals("CosineSimilarityTests.simple", 1.0 / Math.sqrt(2), cosine.similarity(v1, v3), 1e-4);
-        Assert.assertTrue("CosineSimilarityTests.simple", Double.isNaN(cosine.similarity(v2, v3)));
-        Assert.assertEquals("CosineSimilarityTests.simple", 1.0, cosine.similarity(v1, v1), 1e-4);
-        Assert.assertEquals("CosineSimilarityTests.simple", 1.0, cosine.similarity(v3, v3), 1e-4);
-        Assert.assertTrue("CosineSimilarityTests.simple", Double.isNaN(cosine.similarity(v2, v2)));
+        final DirectedGraph<String, Object> g = DirectedGraph.create();
+        g.addVertices("A", "B", "C");
+        g.addEdge("A", "B");
+        g.addEdge("A", "C");
+        g.addEdge("C", "B");
+        final VertexSimilarity<String, Double> cosine = new CosineSimilarity<>(g);
+        Assert.assertTrue("CosineSimilarityTests.simple", Double.isNaN(cosine.similarity("A", "B")));
+        Assert.assertEquals("CosineSimilarityTests.simple", 1.0 / Math.sqrt(2), cosine.similarity("A", "C"), 1e-4);
+        Assert.assertTrue("CosineSimilarityTests.simple", Double.isNaN(cosine.similarity("B", "C")));
+        Assert.assertEquals("CosineSimilarityTests.simple", 1.0, cosine.similarity("A", "A"), 1e-4);
+        Assert.assertEquals("CosineSimilarityTests.simple", 1.0, cosine.similarity("C", "C"), 1e-4);
+        Assert.assertTrue("CosineSimilarityTests.simple", Double.isNaN(cosine.similarity("B", "B")));
     }
 
     /**

@@ -17,17 +17,15 @@ public class PearsonSimilarityTests {
      */
     @Test
     public void simple() {
-        final DirectedGraph<Integer, Object> g = DirectedGraph.create();
-        final Integer v1 = g.addVertex(VertexProvider.INTEGER_PROVIDER);
-        final Integer v2 = g.addVertex(VertexProvider.INTEGER_PROVIDER);
-        final Integer v3 = g.addVertex(VertexProvider.INTEGER_PROVIDER);
-        g.addEdge(v1, v2, 1);
-        g.addEdge(v1, v3, 1);
-        g.addEdge(v3, v2, 2);
-        final VertexSimilarity<Integer, Double> pearson = new PearsonSimilarity<>(g);
-        final double v1v2 = pearson.similarity(v1, v2);
-        final double v1v3 = pearson.similarity(v1, v3);
-        final double v2v3 = pearson.similarity(v2, v3);
+        final DirectedGraph<String, Object> g = DirectedGraph.create();
+        g.addVertices("A", "B", "C");
+        g.addEdge("A", "B");
+        g.addEdge("A", "C");
+        g.addEdge("C", "B");
+        final VertexSimilarity<String, Double> pearson = new PearsonSimilarity<>(g);
+        final double v1v2 = pearson.similarity("A", "B");
+        final double v1v3 = pearson.similarity("A", "C");
+        final double v2v3 = pearson.similarity("B", "C");
         Assert.assertEquals("PearsonSimilarityTests.simple", 0.5, v1v3, 1e-4);
         Assert.assertTrue("PearsonSimilarityTests.simple", Double.isNaN(v1v2));
         Assert.assertTrue("PearsonSimilarityTests.simple", Double.isNaN(v2v3));
