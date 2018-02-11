@@ -1,6 +1,7 @@
 package gr.james.influence.io;
 
 import gr.james.influence.graph.DirectedGraph;
+import gr.james.influence.graph.Graph;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,7 +11,7 @@ import java.net.URL;
  * A {@code GraphImporter} provides means to read a {@link DirectedGraph} from an {@link InputStream} with the format imposed by
  * this class.
  */
-public interface GraphImporter<G extends DirectedGraph<V, E>, V, E> {
+public interface GraphImporter<G extends Graph<V, E>, V, E> {
     /**
      * Read a {@link DirectedGraph} from the {@code source} URL using the format imposed by this class.
      *
