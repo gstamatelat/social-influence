@@ -83,6 +83,10 @@ public interface BipartiteGraph<V, E> extends UndirectedGraph<V, E> {
         }
     }
 
+    default BipartiteGraph<V, E> asSwapped() {
+        return new SwappedBipartiteGraph<>(this);
+    }
+
     Set<V> vertexSetA();
 
     Set<V> vertexSetB();
