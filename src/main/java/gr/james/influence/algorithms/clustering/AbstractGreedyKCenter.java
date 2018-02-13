@@ -50,14 +50,14 @@ public abstract class AbstractGreedyKCenter<V> {
      * @return the resulting centers
      * @throws NullPointerException     if {@code data} is {@code null}
      * @throws IllegalArgumentException if {@code size < 1}
-     * @throws IllegalArgumentException if {@code size < data.size()}
+     * @throws IllegalArgumentException if {@code size > data.size()}
      * @throws IllegalArgumentException if {@code start} is not in {@code data}
      */
     public final Set<V> centers(Set<V> data, V start, int size) {
         if (size < 1) {
             throw new IllegalArgumentException();
         }
-        if (size < data.size()) {
+        if (size > data.size()) {
             throw new IllegalArgumentException();
         }
         if (!data.contains(start)) {
