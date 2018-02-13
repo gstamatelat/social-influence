@@ -70,7 +70,11 @@ public interface UndirectedGraph<V, E> extends Graph<V, E> {
             @Override
             public DirectedEdge<V, E> findEdge(V source, V target) {
                 final UndirectedEdge<V, E> e = UndirectedGraph.this.findEdge(source, target);
-                return DirectedEdge.from(e.value(), source, target, e.weight());
+                if (e == null) {
+                    return null;
+                } else {
+                    return DirectedEdge.from(e.value(), source, target, e.weight());
+                }
             }
 
             @Override
