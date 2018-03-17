@@ -8,7 +8,7 @@ import gr.james.influence.graph.VertexProvider;
 /**
  * Demonstration on how to use a graph generator to generate a random directed graph.
  */
-public class GenerateRandomDirectedGraph {
+public final class GenerateRandomDirectedGraph {
     public static void main(String[] args) {
         final DirectedGraph<String, Object> g = generateRandomDirectedGraph();
         System.out.println(g);

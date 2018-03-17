@@ -5,7 +5,7 @@ import gr.james.influence.graph.DirectedGraph;
 /**
  * Demonstration on how to manually create a directed graph.
  */
-public class CreateDirectedGraph {
+public final class CreateDirectedGraph {
     public static void main(String[] args) {
         createDirectedGraph();
     }

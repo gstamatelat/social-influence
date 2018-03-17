@@ -5,7 +5,7 @@ import gr.james.influence.graph.DirectedGraph;
 /**
  * Demonstration on how to get the maximum inbound degree in a {@link DirectedGraph}.
  */
-public class MaximumInDegree {
+public final class MaximumInDegree {
     public static void main(String[] args) {
         final DirectedGraph<String, Object> g = GenerateRandomDirectedGraph.generateRandomDirectedGraph();
         assert maximumInDegree(g) == maximumInDegreeStream(g);
