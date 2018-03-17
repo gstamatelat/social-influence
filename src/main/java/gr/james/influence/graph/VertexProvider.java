@@ -3,6 +3,7 @@ package gr.james.influence.graph;
 import gr.james.influence.algorithms.generators.RandomGraphGenerator;
 import gr.james.influence.util.Conditions;
 
+import java.math.BigInteger;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Set;
@@ -40,6 +41,24 @@ public interface VertexProvider<V> {
                 throw new NoSuchElementException();
             }
             return nextId++;
+        }
+    };
+
+    /**
+     * Package-wide {@link VertexProvider} that returns all the non-negative {@link Integer} values as {@link String} in
+     * order (starting from {@code 0}).
+     * <p>
+     * The {@link #getVertex()} method will never throw {@link NoSuchElementException} as it is internally based on a
+     * {@link BigInteger} implementation.
+     */
+    VertexProvider<String> STRING_PROVIDER = new VertexProvider<String>() {
+        private BigInteger nextId = BigInteger.ZERO;
+
+        @Override
+        public String getVertex() {
+            final BigInteger r = nextId;
+            nextId = nextId.add(BigInteger.ONE);
+            return r.toString();
         }
     };
 
