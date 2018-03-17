@@ -396,7 +396,7 @@ public interface DirectedGraph<V, E> extends Graph<V, E> {
     }
 
     /**
-     * Returns the outbound degree of a vertex, aka the number of outbound edges. UndirectedEdge to self is included (if present).
+     * Returns the outbound degree of a vertex, aka the number of outbound edges. Edge to self is included (if present).
      * <p>
      * This method is equivalent to
      * <pre><code>
@@ -414,7 +414,7 @@ public interface DirectedGraph<V, E> extends Graph<V, E> {
     }
 
     /**
-     * Returns the inbound degree of a vertex, aka the number of inbound edges. UndirectedEdge to self is included (if present).
+     * Returns the inbound degree of a vertex, aka the number of inbound edges. Edge to self is included (if present).
      * <p>
      * This method is equivalent to
      * <pre><code>
