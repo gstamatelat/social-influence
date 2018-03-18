@@ -17,7 +17,7 @@ public class CalculatePageRank {
     /**
      * Run PageRank and return the {@link GraphState} result.
      * <p>
-     * This method uses a damping factor of {@code 0.5} and a small epsilon
+     * This method uses a damping factor of {@code 0.5} and a small epsilon.
      *
      * @param g   the graph
      * @param <V> the vertex type
