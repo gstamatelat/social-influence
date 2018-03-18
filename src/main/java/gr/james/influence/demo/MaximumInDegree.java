@@ -18,13 +18,14 @@ public final class MaximumInDegree {
      * Returns {@code -1} if the graph has no vertices. Returns {@code 0} if the graph has at least one vertex but no
      * edges. The degree of a vertex includes a self-loop, if present.
      *
-     * @param g the graph
+     * @param g   the graph
+     * @param <V> the vertex type
      * @return the maximum inbound degree in {@code g}
      * @throws NullPointerException if {@code g} is {@code null}
      */
-    public static int maximumInDegree(DirectedGraph<String, Object> g) {
+    public static <V> int maximumInDegree(DirectedGraph<V, ?> g) {
         int maxDegree = -1;
-        for (String v : g) {
+        for (V v : g) {
             final int degree = g.inDegree(v);
             if (degree > maxDegree) {
                 maxDegree = degree;
@@ -39,11 +40,12 @@ public final class MaximumInDegree {
      * Returns {@code -1} if the graph has no vertices. Returns {@code 0} if the graph has at least one vertex but no
      * edges. The degree of a vertex includes a self-loop, if present.
      *
-     * @param g the graph
+     * @param g   the graph
+     * @param <V> the vertex type
      * @return the maximum inbound degree in {@code g}
      * @throws NullPointerException if {@code g} is {@code null}
      */
-    public static int maximumInDegreeStream(DirectedGraph<String, Object> g) {
+    public static <V> int maximumInDegreeStream(DirectedGraph<V, ?> g) {
         return g.vertexSet().stream().mapToInt(g::inDegree).max().orElse(-1);
     }
 }
