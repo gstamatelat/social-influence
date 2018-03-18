@@ -7,13 +7,15 @@ import gr.james.influence.graph.DirectedGraph;
  */
 public final class CreateDirectedGraph {
     public static void main(String[] args) {
-        createDirectedGraph();
+        System.out.println(createDirectedGraph());
     }
 
     /**
-     * Creates the graph (A-&gt;B, B-&gt;C, C-&gt;A, B-&gt;A).
+     * Creates and returns the graph (A-&gt;B, B-&gt;C, C-&gt;A, B-&gt;A).
+     *
+     * @return the graph (A-&gt;B, B-&gt;C, C-&gt;A, B-&gt;A)
      */
-    public static void createDirectedGraph() {
+    public static DirectedGraph<String, Object> createDirectedGraph() {
         // Instantiate an empty directed graph with vertices of type String
         final DirectedGraph<String, Object> g = DirectedGraph.create();
 
@@ -26,7 +28,7 @@ public final class CreateDirectedGraph {
         g.addEdge("C", "A");
         g.addEdge("B", "A");
 
-        // Print the string representation of g in stdout
-        System.out.println(g);
+        // Return g
+        return g;
     }
 }
