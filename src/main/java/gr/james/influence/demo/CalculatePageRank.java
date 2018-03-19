@@ -22,6 +22,7 @@ public final class CalculatePageRank {
      * @param g   the graph
      * @param <V> the vertex type
      * @return the {@link GraphState} result of PageRank
+     * @throws NullPointerException if {@code g} is {@code null}
      * @see <a href="http://pr.efactory.de/e-pagerank-algorithm.shtml">pr.efactory.de</a>
      */
     public static <V> GraphState<V, Double> pageRank(DirectedGraph<V, ?> g) {
