@@ -45,6 +45,9 @@ public interface BipartiteGraph<V, E> extends UndirectedGraph<V, E> {
 
     @Override
     default BipartiteGraph<V, E> asUnmodifiable() {
+        if (this instanceof UnmodifiableBipartiteGraph) {
+            return this;
+        }
         return new UnmodifiableBipartiteGraph<>(this);
     }
 

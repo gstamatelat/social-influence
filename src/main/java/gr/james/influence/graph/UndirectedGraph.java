@@ -53,6 +53,9 @@ public interface UndirectedGraph<V, E> extends Graph<V, E> {
      * @return an unmodifiable decorator around this graph
      */
     default UndirectedGraph<V, E> asUnmodifiable() {
+        if (this instanceof UnmodifiableUndirectedGraph) {
+            return this;
+        }
         return new UnmodifiableUndirectedGraph<>(this);
     }
 

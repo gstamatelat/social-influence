@@ -91,6 +91,9 @@ public interface DirectedGraph<V, E> extends Graph<V, E> {
      * @return an unmodifiable decorator around this graph
      */
     default DirectedGraph<V, E> asUnmodifiable() {
+        if (this instanceof UnmodifiableDirectedGraph) {
+            return this;
+        }
         return new UnmodifiableDirectedGraph<>(this);
     }
 
