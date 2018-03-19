@@ -267,6 +267,7 @@ public interface DirectedGraph<V, E> extends Graph<V, E> {
      * @return the outbound edges of {@code v}
      * @throws NullPointerException   if {@code v} is {@code null}
      * @throws IllegalVertexException if {@code v} is not in the graph
+     * @see #inEdges(Object)
      */
     Set<DirectedEdge<V, E>> outEdges(V v);
 
@@ -290,6 +291,7 @@ public interface DirectedGraph<V, E> extends Graph<V, E> {
      * @return the inbound edges of {@code v}
      * @throws NullPointerException   if {@code v} is {@code null}
      * @throws IllegalVertexException if {@code v} is not in the graph
+     * @see #outEdges(Object)
      */
     Set<DirectedEdge<V, E>> inEdges(V v);
 
