@@ -7,7 +7,7 @@ import gr.james.influence.util.collections.GraphState;
 /**
  * Demonstration on how to calculate PageRank on a {@link DirectedGraph}.
  */
-public class CalculatePageRank {
+public final class CalculatePageRank {
     public static void main(String[] args) {
         final DirectedGraph<String, Object> g = CreateDirectedGraph.createDirectedGraph();
         System.out.println(g);
