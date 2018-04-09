@@ -84,12 +84,11 @@ public interface DirectedGraph<V, E> extends Graph<V, E> {
     }
 
     /**
-     * Returns an unmodifiable decorator around this graph.
-     * <p>
-     * Invoking mutation methods on the resulting graph will result in {@link UnsupportedOperationException}.
+     * {@inheritDoc}
      *
-     * @return an unmodifiable decorator around this graph
+     * @return {@inheritDoc}
      */
+    @Override
     default DirectedGraph<V, E> asUnmodifiable() {
         if (this instanceof UnmodifiableDirectedGraph) {
             return this;
@@ -98,10 +97,11 @@ public interface DirectedGraph<V, E> extends Graph<V, E> {
     }
 
     /**
-     * Creates and returns an immutable graph from a copy of this graph.
+     * {@inheritDoc}
      *
-     * @return an immutable graph from a copy of this graph
+     * @return {@inheritDoc}
      */
+    @Override
     default DirectedGraph<V, E> toImmutable() {
         return create(this).asUnmodifiable();
     }

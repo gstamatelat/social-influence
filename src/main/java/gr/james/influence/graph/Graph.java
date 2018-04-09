@@ -199,6 +199,22 @@ public interface Graph<V, E> extends Iterable<V> {
     }
 
     /**
+     * Returns an unmodifiable decorator around this graph.
+     * <p>
+     * Invoking mutation methods on the resulting graph will result in {@link UnsupportedOperationException}.
+     *
+     * @return an unmodifiable decorator around this graph
+     */
+    Graph<V, E> asUnmodifiable();
+
+    /**
+     * Creates and returns an immutable graph from a copy of this graph.
+     *
+     * @return an immutable graph from a copy of this graph
+     */
+    Graph<V, E> toImmutable();
+
+    /**
      * Returns a string representation of this graph.
      *
      * @return a string representation of this graph

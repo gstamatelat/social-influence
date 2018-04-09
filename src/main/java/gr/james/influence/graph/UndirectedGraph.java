@@ -46,12 +46,11 @@ public interface UndirectedGraph<V, E> extends Graph<V, E> {
     }
 
     /**
-     * Returns an unmodifiable decorator around this graph.
-     * <p>
-     * Invoking mutation methods on the resulting graph will result in {@link UnsupportedOperationException}.
+     * {@inheritDoc}
      *
-     * @return an unmodifiable decorator around this graph
+     * @return {@inheritDoc}
      */
+    @Override
     default UndirectedGraph<V, E> asUnmodifiable() {
         if (this instanceof UnmodifiableUndirectedGraph) {
             return this;
@@ -60,10 +59,11 @@ public interface UndirectedGraph<V, E> extends Graph<V, E> {
     }
 
     /**
-     * Creates and returns an immutable graph from a copy of this graph.
+     * {@inheritDoc}
      *
-     * @return an immutable graph from a copy of this graph
+     * @return {@inheritDoc}
      */
+    @Override
     default UndirectedGraph<V, E> toImmutable() {
         return create(this).asUnmodifiable();
     }
