@@ -29,8 +29,6 @@ public final class Finals {
     public static final String L_PERIODIC = "Periodicity on {} with maxSize = {}";
 
     /* Exceptions: these finals must be arguments to GraphException(). Format: E_CLASSNAME_IDENTIFIER. */
-    public static final String E_EDGE_WEIGHT_NEGATIVE = "UndirectedEdge weight must be positive. Got %f.";
-
     public static final String E_MOVEPOINTER_SET_NULL = "Cannot submit a null move.";
 
     public static final String E_BARABASI_STEP = "stepEdges <= initialClique is a constraint";

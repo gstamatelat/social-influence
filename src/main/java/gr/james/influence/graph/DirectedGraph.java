@@ -2,7 +2,6 @@ package gr.james.influence.graph;
 
 import gr.james.influence.exceptions.IllegalEdgeException;
 import gr.james.influence.exceptions.IllegalVertexException;
-import gr.james.influence.util.Conditions;
 import gr.james.influence.util.Finals;
 
 import java.util.*;
@@ -512,7 +511,7 @@ public interface DirectedGraph<V, E> extends Graph<V, E> {
      * @throws IllegalArgumentException if {@code weight} is non-positive
      */
     default boolean setEdgeWeight(V source, V target, double weight) {
-        Conditions.requireArgument(weight > 0, Finals.E_EDGE_WEIGHT_NEGATIVE, weight);
+        Graphs.requireWeightLegal(weight);
         DirectedEdge<V, E> previousEdge = removeEdge(source, target);
         if (previousEdge != null) {
             DirectedEdge<V, E> e = addEdge(source, target, previousEdge.value(), weight);
