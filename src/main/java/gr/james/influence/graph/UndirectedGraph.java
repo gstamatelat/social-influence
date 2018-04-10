@@ -2,6 +2,7 @@ package gr.james.influence.graph;
 
 import gr.james.influence.exceptions.IllegalEdgeException;
 import gr.james.influence.exceptions.IllegalVertexException;
+import gr.james.influence.exceptions.IllegalWeightException;
 import gr.james.influence.util.Finals;
 
 import java.util.*;
@@ -476,9 +477,9 @@ public interface UndirectedGraph<V, E> extends Graph<V, E> {
      * @param w      the other end of the edge
      * @param weight the weight to be associated with the edge
      * @return the {@link UndirectedEdge} object of the newly added edge, or {@code null} if an edge already exists
-     * @throws NullPointerException     if any of the arguments is {@code null}
-     * @throws IllegalVertexException   if either {@code v} or {@code w} is not in the graph
-     * @throws IllegalArgumentException if {@code weight} is non-positive
+     * @throws NullPointerException   if any of the arguments is {@code null}
+     * @throws IllegalVertexException if either {@code v} or {@code w} is not in the graph
+     * @throws IllegalWeightException if {@code weight} is illegal
      */
     default UndirectedEdge<V, E> addEdge(V v, V w, double weight) {
         return addEdge(v, w, null, weight);
@@ -509,9 +510,9 @@ public interface UndirectedGraph<V, E> extends Graph<V, E> {
      * @param edge   the object to attach to the edge
      * @param weight the weight to be associated with the edge
      * @return the {@link UndirectedEdge} object of the newly added edge, or {@code null} if an edge already exists
-     * @throws NullPointerException     if either {@code v} or {@code w} is {@code null}
-     * @throws IllegalVertexException   if either {@code v} or {@code w} is not in the graph
-     * @throws IllegalArgumentException if {@code weight} is non-positive
+     * @throws NullPointerException   if either {@code v} or {@code w} is {@code null}
+     * @throws IllegalVertexException if either {@code v} or {@code w} is not in the graph
+     * @throws IllegalWeightException if {@code weight} is illegal
      */
     UndirectedEdge<V, E> addEdge(V v, V w, E edge, double weight);
 
@@ -524,9 +525,9 @@ public interface UndirectedGraph<V, E> extends Graph<V, E> {
      * @param weight the new weight to be associated with the edge
      * @return {@code true} if there was previously an edge with the specified {@code v} and {@code w} and
      * thus the weight could be changed, {@code false} otherwise
-     * @throws NullPointerException     if either {@code v} or {@code w} is {@code null}
-     * @throws IllegalVertexException   if either {@code v} or {@code w} is not in the graph
-     * @throws IllegalArgumentException if {@code weight} is non-positive
+     * @throws NullPointerException   if either {@code v} or {@code w} is {@code null}
+     * @throws IllegalVertexException if either {@code v} or {@code w} is not in the graph
+     * @throws IllegalWeightException if {@code weight} is illegal
      */
     default boolean setEdgeWeight(V v, V w, double weight) {
         Graphs.requireWeightLegal(weight);

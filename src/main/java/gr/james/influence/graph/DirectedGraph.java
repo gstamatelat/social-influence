@@ -2,6 +2,7 @@ package gr.james.influence.graph;
 
 import gr.james.influence.exceptions.IllegalEdgeException;
 import gr.james.influence.exceptions.IllegalVertexException;
+import gr.james.influence.exceptions.IllegalWeightException;
 import gr.james.influence.util.Finals;
 
 import java.util.*;
@@ -458,9 +459,9 @@ public interface DirectedGraph<V, E> extends Graph<V, E> {
      * @param target the target of the edge
      * @param weight the weight to be associated with the edge
      * @return the {@link DirectedEdge} object of the newly added edge, or {@code null} if an edge already exists
-     * @throws NullPointerException     if any of the arguments is {@code null}
-     * @throws IllegalVertexException   if either {@code source} or {@code target} is not in the graph
-     * @throws IllegalArgumentException if {@code weight} is non-positive
+     * @throws NullPointerException   if any of the arguments is {@code null}
+     * @throws IllegalVertexException if either {@code source} or {@code target} is not in the graph
+     * @throws IllegalWeightException if {@code weight} is illegal
      */
     default DirectedEdge<V, E> addEdge(V source, V target, double weight) {
         return addEdge(source, target, null, weight);
@@ -491,9 +492,9 @@ public interface DirectedGraph<V, E> extends Graph<V, E> {
      * @param edge   the object to attach to the edge
      * @param weight the weight to be associated with the edge
      * @return the {@link DirectedEdge} object of the newly added edge, or {@code null} if an edge already exists
-     * @throws NullPointerException     if either {@code source} or {@code target} is {@code null}
-     * @throws IllegalVertexException   if either {@code source} or {@code target} is not in the graph
-     * @throws IllegalArgumentException if {@code weight} is non-positive
+     * @throws NullPointerException   if either {@code source} or {@code target} is {@code null}
+     * @throws IllegalVertexException if either {@code source} or {@code target} is not in the graph
+     * @throws IllegalWeightException if {@code weight} is illegal
      */
     DirectedEdge<V, E> addEdge(V source, V target, E edge, double weight);
 
@@ -506,9 +507,9 @@ public interface DirectedGraph<V, E> extends Graph<V, E> {
      * @param weight the new weight to be associated with the edge
      * @return {@code true} if there was previously an edge with the specified {@code source} and {@code target} and
      * thus the weight could be changed, {@code false} otherwise
-     * @throws NullPointerException     if either {@code source} or {@code target} is {@code null}
-     * @throws IllegalVertexException   if either {@code source} or {@code target} is not in the graph
-     * @throws IllegalArgumentException if {@code weight} is non-positive
+     * @throws NullPointerException   if either {@code source} or {@code target} is {@code null}
+     * @throws IllegalVertexException if either {@code source} or {@code target} is not in the graph
+     * @throws IllegalWeightException if {@code weight} is illegal
      */
     default boolean setEdgeWeight(V source, V target, double weight) {
         Graphs.requireWeightLegal(weight);
