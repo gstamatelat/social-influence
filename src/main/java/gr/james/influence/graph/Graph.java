@@ -100,14 +100,14 @@ public interface Graph<V, E> extends Iterable<V> {
      * @return the newly added vertex
      * @throws NullPointerException   if {@code vertexProvider} is {@code null}
      * @throws IllegalVertexException if {@code vertexProvider} produced a vertex that is already in the graph
-     * @throws NoSuchElementException if the {@link VertexProvider#getVertex()} method of {@code vertexProvider} threw
+     * @throws NoSuchElementException if the {@link VertexProvider#create()} method of {@code vertexProvider} threw
      *                                exception
      */
     default V addVertex(VertexProvider<V> vertexProvider) {
         if (vertexProvider == null) {
             throw new NullPointerException();
         }
-        final V v = vertexProvider.getVertex();
+        final V v = vertexProvider.create();
         if (!addVertex(v)) {
             throw new IllegalVertexException();
         }

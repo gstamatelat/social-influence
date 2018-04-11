@@ -14,9 +14,9 @@ import java.util.Set;
  * Normally, this interface is used on graph generators ({@link RandomGraphGenerator}) because generators need to add generic
  * vertices to a graph.
  * <p>
- * A {@code VertexProvider} has the single method {@link #getVertex()} which must create and return a new vertex. Each
+ * A {@code VertexProvider} has the single method {@link #create()} which must create and return a new vertex. Each
  * instance of {@code VertexProvider} must return discrete vertices over its lifetime. More formally, the method
- * {@link #getVertex()} cannot return a vertex that is equal to another one that has already been returned by the same
+ * {@link #create()} cannot return a vertex that is equal to another one that has already been returned by the same
  * instance. The equality is based on the {@code V.equals} method. If no more discrete vertices can be produced, a
  * {@link java.util.NoSuchElementException} will be raised. Furthermore, this method cannot
  * return {@code null}.
@@ -29,14 +29,14 @@ public interface VertexProvider<V> {
      * Package-wide {@link VertexProvider} that returns all the non-negative {@link Integer} values in order (starting
      * from {@code 0}).
      * <p>
-     * The {@link #getVertex()} method will throw {@link NoSuchElementException} if all the possible non-negative
+     * The {@link #create()} method will throw {@link NoSuchElementException} if all the possible non-negative
      * integers are exhausted.
      */
     VertexProvider<Integer> INTEGER_PROVIDER = new VertexProvider<Integer>() {
         private int nextId = 0;
 
         @Override
-        public Integer getVertex() throws NoSuchElementException {
+        public Integer create() throws NoSuchElementException {
             if (nextId < 0) {
                 throw new NoSuchElementException();
             }
@@ -48,14 +48,14 @@ public interface VertexProvider<V> {
      * Package-wide {@link VertexProvider} that returns all the non-negative {@link Integer} values as {@link String} in
      * order (starting from {@code 0}).
      * <p>
-     * The {@link #getVertex()} method will never throw {@link NoSuchElementException} as it is internally based on a
+     * The {@link #create()} method will never throw {@link NoSuchElementException} as it is internally based on a
      * {@link BigInteger} implementation.
      */
     VertexProvider<String> STRING_PROVIDER = new VertexProvider<String>() {
         private BigInteger nextId = BigInteger.ZERO;
 
         @Override
-        public String getVertex() {
+        public String create() {
             final BigInteger r = nextId;
             nextId = nextId.add(BigInteger.ONE);
             return r.toString();
@@ -66,7 +66,7 @@ public interface VertexProvider<V> {
      * Construct a {@link VertexProvider} that provides elements from a pool.
      * <p>
      * The provider returns the elements with the same order as the {@link Iterator} of {@code pool}. The
-     * {@link #getVertex()} method will throw {@link UnsupportedOperationException} when the elements in {@code pool}
+     * {@link #create()} method will throw {@link UnsupportedOperationException} when the elements in {@code pool}
      * are exhausted.
      * <p>
      * Because the resulting {@link VertexProvider} internally uses the {@link Iterator} of {@code pool}, if
@@ -84,7 +84,7 @@ public interface VertexProvider<V> {
             private final Iterator<V> it = pool.iterator();
 
             @Override
-            public V getVertex() throws NoSuchElementException {
+            public V create() throws NoSuchElementException {
                 if (!it.hasNext()) {
                     throw new UnsupportedOperationException();
                 }
@@ -102,5 +102,5 @@ public interface VertexProvider<V> {
      * @return a new discrete vertex
      * @throws NoSuchElementException if this {@link VertexProvider} cannot produce any more discrete vertices
      */
-    V getVertex() throws NoSuchElementException;
+    V create() throws NoSuchElementException;
 }
