@@ -4,6 +4,7 @@ import gr.james.influence.algorithms.generators.GraphGenerator;
 import gr.james.influence.util.Conditions;
 
 import java.math.BigInteger;
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Set;
@@ -65,12 +66,12 @@ public interface VertexProvider<V> {
      * Construct a {@link VertexProvider} that provides elements from a pool.
      * <p>
      * The provider returns the elements with the same order as the {@link Iterator} of {@code pool}. The
-     * {@link #create()} method will throw {@link UnsupportedOperationException} when the elements in {@code pool} are
+     * {@link #create()} method will throw {@link NoSuchElementException} when the elements in {@code pool} are
      * exhausted.
      * <p>
      * Because the resulting {@link VertexProvider} internally uses the {@link Iterator} of {@code pool}, if
-     * {@code pool} is modified before the provider is exhausted, a {@link java.util.ConcurrentModificationException}
-     * will be thrown.
+     * {@code pool} is modified before the provider is exhausted, a {@link ConcurrentModificationException} will be
+     * thrown.
      *
      * @param pool the pool of elements
      * @param <V>  the type of vertex
@@ -85,7 +86,7 @@ public interface VertexProvider<V> {
             @Override
             public V create() throws NoSuchElementException {
                 if (!it.hasNext()) {
-                    throw new UnsupportedOperationException();
+                    throw new NoSuchElementException();
                 }
                 return it.next();
             }
