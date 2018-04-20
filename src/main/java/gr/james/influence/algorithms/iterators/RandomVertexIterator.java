@@ -24,7 +24,7 @@ public class RandomVertexIterator<V> implements Iterator<V> {
 
     public RandomVertexIterator(DirectedGraph<V, ?> g, long seed) {
         this.nodes = new ArrayList<>(g.vertexSet());
-        this.random = RandomHelper.getNewRandom(seed);
+        this.random = new Random(seed);
     }
 
     @Override

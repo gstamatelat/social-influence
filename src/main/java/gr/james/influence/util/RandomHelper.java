@@ -49,7 +49,9 @@ public final class RandomHelper {
      * {@code Random} instance.</p>
      *
      * @return the new {@code Random} object
+     * @deprecated will be removed after 2018-10-20, use {@code new Random()} instead
      */
+    @Deprecated
     public static Random getNewRandom() {
         return new Random();
     }
@@ -60,7 +62,9 @@ public final class RandomHelper {
      *
      * @param seed the seed to use
      * @return the new {@code Random} object
+     * @deprecated will be removed after 2018-10-20, use {@code new Random(seed)} instead
      */
+    @Deprecated
     public static Random getNewRandom(long seed) {
         return new Random(seed);
     }
