@@ -16,10 +16,28 @@ public class GraphState<V, T> extends ForwardingMap<V, T> {
     private GraphState() {
     }
 
+    /**
+     * Create and return an empty {@link GraphState}.
+     *
+     * @param <V> the vertex type
+     * @param <T> the state type
+     * @return a new empty {@link GraphState}
+     */
     public static <V, T> GraphState<V, T> create() {
         return new GraphState<>();
     }
 
+    /**
+     * Create and return a new {@link GraphState} with the specified vertex collection and all values set to a single
+     * value.
+     *
+     * @param c     the vertex set
+     * @param value the value to associate with each vertex
+     * @param <V>   the vertex type
+     * @param <T>   the state type
+     * @return a new {@link GraphState} with the collection {@code c} as keys and all values set to {@code value}
+     * @throws NullPointerException if {@code c} is {@code null}
+     */
     public static <V, T> GraphState<V, T> create(Collection<V> c, T value) {
         GraphState<V, T> s = new GraphState<>();
         for (V v : c) {
@@ -28,6 +46,20 @@ public class GraphState<V, T> extends ForwardingMap<V, T> {
         return s;
     }
 
+    /**
+     * Create and return a new {@link GraphState} with the specified vertex collection and values generated using a
+     * {@link Supplier}.
+     * <p>
+     * The supplier is consumed at the order of iteration of {@code c}.
+     *
+     * @param c        the vertex set
+     * @param supplier the {@link Supplier} to use when generating values
+     * @param <V>      the vertex type
+     * @param <T>      the state type
+     * @return a new {@link GraphState} with the collection {@code c} as keys and all values generated using
+     * {@code supplier}
+     * @throws NullPointerException if {@code c} or {@code supplier} is {@code null}
+     */
     public static <V, T> GraphState<V, T> create(Collection<V> c, Supplier<T> supplier) {
         GraphState<V, T> s = new GraphState<>();
         for (V v : c) {
