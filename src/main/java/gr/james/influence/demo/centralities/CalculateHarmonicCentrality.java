@@ -1,7 +1,7 @@
 package gr.james.influence.demo.centralities;
 
 import gr.james.influence.algorithms.scoring.HarmonicCentrality;
-import gr.james.influence.demo.CreateDirectedGraph;
+import gr.james.influence.demo.simple.CreateDirectedGraph;
 import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.util.collections.GraphState;
 

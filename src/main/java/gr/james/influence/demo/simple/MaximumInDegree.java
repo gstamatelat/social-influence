@@ -1,5 +1,6 @@
-package gr.james.influence.demo;
+package gr.james.influence.demo.simple;
 
+import gr.james.influence.demo.GenerateRandomDirectedGraph;
 import gr.james.influence.graph.DirectedGraph;
 
 /**
