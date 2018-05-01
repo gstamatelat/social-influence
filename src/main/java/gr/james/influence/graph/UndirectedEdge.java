@@ -31,6 +31,11 @@ public interface UndirectedEdge<V, E> {
 
     /**
      * Returns an arbitrary end of the edge.
+     * <p>
+     * This method is equivalent to
+     * <pre><code>
+     * other(w())
+     * </code></pre>
      *
      * @return an arbitrary end of the edge
      */
@@ -38,6 +43,11 @@ public interface UndirectedEdge<V, E> {
 
     /**
      * Returns the end of the edge that is not {@link #v()}.
+     * <p>
+     * This method is equivalent to
+     * <pre><code>
+     * other(v())
+     * </code></pre>
      *
      * @return the end of the edge that is not {@link #v()}
      */
