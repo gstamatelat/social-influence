@@ -30,16 +30,16 @@ public interface UndirectedEdge<V, E> {
     E value();
 
     /**
-     * Returns one end of the edge.
+     * Returns an arbitrary end of the edge.
      *
-     * @return one end of the edge
+     * @return an arbitrary end of the edge
      */
     V v();
 
     /**
-     * Returns the other end of the edge.
+     * Returns the end of the edge that is not {@link #v()}.
      *
-     * @return the other end of the edge
+     * @return the end of the edge that is not {@link #v()}
      */
     V w();
 
