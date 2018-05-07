@@ -10,9 +10,22 @@ import gr.james.influence.util.collections.GraphState;
  */
 public final class CalculatePageRank {
     public static void main(String[] args) {
+        // Create a graph
         final DirectedGraph<String, Object> g = CreateDirectedGraph.createDirectedGraph();
+
+        // Populate the pr object with the PageRank values
+        final GraphState<String, Double> pr = pageRank(g);
+
+        // Print the graph
         System.out.println(g);
-        System.out.println(pageRank(g));
+
+        // Print PageRank as map
+        System.out.println(pr);
+
+        // Print the PageRank values individually for each vertex
+        for (String v : g) {
+            System.out.printf("%s = %f%n", v, pr.get(v));
+        }
     }
 
     /**
