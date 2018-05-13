@@ -44,6 +44,7 @@ public final class Graphs {
             pre = next;
         }
         g.addEdge(pre.iterator().next(), start.iterator().next());
+        assert KosarajuComponents.execute(g).size() == 1;
     }
 
     public static <V, E> DirectedGraph<V, E> randomizeEdgeWeights(DirectedGraph<V, E> g, boolean unused) {
