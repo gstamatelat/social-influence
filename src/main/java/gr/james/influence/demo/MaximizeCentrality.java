@@ -68,8 +68,8 @@ public final class MaximizeCentrality {
             // Surely, the removedEdge should never be null since it is guaranteed to exist in h
             assert removedEdge != null;
 
-            // Calculate the eigenvector centrality of v using the PageRank class with damping factor of 0
-            final double eigenvector = PageRank.execute(h, 0.0).get(v);
+            // Calculate the eigenvector centrality of v using the PageRank class with damping factor of 1
+            final double eigenvector = PageRank.execute(h, 1.0).get(v);
 
             // Assign a new edge if better
             if (eigenvector > bestEigenvector) {

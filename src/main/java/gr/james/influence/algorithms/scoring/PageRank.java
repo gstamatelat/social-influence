@@ -3,6 +3,7 @@ package gr.james.influence.algorithms.scoring;
 import gr.james.influence.algorithms.AbstractIterativeAlgorithm;
 import gr.james.influence.graph.DirectedEdge;
 import gr.james.influence.graph.DirectedGraph;
+import gr.james.influence.util.Conditions;
 import gr.james.influence.util.collections.GraphState;
 
 import java.util.HashMap;
@@ -17,6 +18,10 @@ public class PageRank<V> extends AbstractIterativeAlgorithm<V, Double> {
 
     public PageRank(DirectedGraph<V, ?> g, double dampingFactor, double epsilon) {
         super(g, GraphState.create(g.vertexSet(), 1.0));
+
+        Conditions.requireArgument(dampingFactor >= 0 && dampingFactor <= 1,
+                "dampingFactor must be in [0,1], got %f", dampingFactor);
+
         this.dampingFactor = dampingFactor;
         this.epsilon = epsilon;
 
@@ -52,7 +57,7 @@ public class PageRank<V> extends AbstractIterativeAlgorithm<V, Double> {
             for (DirectedEdge<V, ?> e : g.inEdges(v)) {
                 w += e.weight() * previous.get(e.source()) / outStrengths.get(e.source());
             }
-            nextState.put(v, dampingFactor + (1 - dampingFactor) * w);
+            nextState.put(v, (1 - dampingFactor) + dampingFactor * w);
         }
         return nextState;
     }

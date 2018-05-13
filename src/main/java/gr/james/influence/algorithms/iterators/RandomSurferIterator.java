@@ -23,7 +23,7 @@ public class RandomSurferIterator<V, E> implements Iterator<V> {
     public RandomSurferIterator(DirectedGraph<V, E> g, double dampingFactor, V initialVertex) {
         this.g = Conditions.requireNonNull(g);
         Conditions.requireArgument(dampingFactor >= 0 && dampingFactor <= 1,
-                "dampingFactor must be inside [0,1], got %f", dampingFactor);
+                "dampingFactor must be in [0,1], got %f", dampingFactor);
         this.dampingFactor = dampingFactor;
         this.current = Conditions.requireVertexInGraph(g, initialVertex);
     }
@@ -35,7 +35,7 @@ public class RandomSurferIterator<V, E> implements Iterator<V> {
 
     @Override
     public V next() {
-        if (RandomHelper.getRandom().nextDouble() > dampingFactor) {
+        if (RandomHelper.getRandom().nextDouble() < dampingFactor) {
             this.current = Graphs.getWeightedRandomOutVertex(g, this.current);
             if (this.current == null) {
                 this.current = Graphs.getRandomVertex(g);

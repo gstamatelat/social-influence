@@ -96,7 +96,7 @@ public class Tests {
 
         /* Get PageRank and DegreeCentrality */
         GraphState<Integer, Integer> degree = DegreeCentrality.execute(g, Direction.INBOUND);
-        GraphState<Integer, Double> pagerank = PageRank.execute(g, 0.0);
+        GraphState<Integer, Double> pagerank = PageRank.execute(g, 1.0);
 
         /* Normalize pagerank */
         double mean = degree.getAverage();
