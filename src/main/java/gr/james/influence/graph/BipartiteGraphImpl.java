@@ -80,10 +80,10 @@ final class BipartiteGraphImpl<V, E> extends AbstractBipartiteGraph<V, E> {
         Conditions.requireVertexInGraph(this.g, v);
         Conditions.requireVertexInGraph(this.g, w);
         if (setA.contains(v) && setA.contains(w)) {
-            throw new IllegalVertexException();
+            throw new IllegalVertexException("Vertices %s and %s are in the same disjoint set", v, w);
         }
         if (setB.contains(v) && setB.contains(w)) {
-            throw new IllegalVertexException();
+            throw new IllegalVertexException("Vertices %s and %s are in the same disjoint set", v, w);
         }
         return this.g.addEdge(v, w, edge, weight);
     }
@@ -100,7 +100,7 @@ final class BipartiteGraphImpl<V, E> extends AbstractBipartiteGraph<V, E> {
 
     @Override
     public boolean addVertex(V v) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("Cannot directly add a vertex, must use addVertexInA or addVertexInB methods");
     }
 
     @Override
