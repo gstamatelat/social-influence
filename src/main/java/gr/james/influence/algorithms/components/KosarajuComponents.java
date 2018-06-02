@@ -29,12 +29,14 @@ public class KosarajuComponents<V> implements ConnectedComponents<V> {
     }
 
     /**
-     * Convenience function to calculate the strongly connected components of a graph. This method will instantiate
-     * {@link KosarajuComponents} with the given graph {@code g} and invoke the {@link #components()} method.
+     * Convenience function to calculate the strongly connected components of a graph.
+     * <p>
+     * This method will instantiate {@link KosarajuComponents} with the given graph {@code g} and invoke the
+     * {@link #components()} method.
      *
      * @param g   the graph of which to get the components
      * @param <V> the type of vertex
-     * @return the strongly connected components of {@code g}
+     * @return an unmodifiable set of strongly connected components of the graph
      * @throws NullPointerException if {@code g} is {@code null}
      */
     public static <V> Set<Set<V>> execute(DirectedGraph<V, ?> g) {

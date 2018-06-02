@@ -195,6 +195,52 @@ public final class Graphs {
     }
 
     /**
+     * Returns the stubborn components contained in {@code g}.
+     * <p>
+     * A stubborn component is a (maximal) strongly connected component that is also closed.
+     * <p>
+     * A directed graph always contains at least one stubborn component, unless the graph is empty.
+     *
+     * @param g   the graph that the operation is to be performed
+     * @param <V> the vertex type
+     * @return an unmodifiable {@code Set} of all the stubborn components in {@code g}
+     * @throws NullPointerException if {@code g} is null
+     */
+    public static <V> Set<Set<V>> getStubbornComponents(DirectedGraph<V, ?> g) {
+        final Set<Set<V>> scc = KosarajuComponents.execute(g);
+        final Set<Set<V>> stubbornComponents = new HashSet<>();
+        for (Set<V> c : scc) {
+            if (isClosedComponent(g, c)) {
+                stubbornComponents.add(c);
+            }
+        }
+        return stubbornComponents;
+    }
+
+    /**
+     * Checks whether a component of a graph is a closed component.
+     * <p>
+     * A closed component consists of vertices that only point to other vertices inside the component.
+     * <p>
+     * The empty component returns {@code true}.
+     *
+     * @param g         the graph
+     * @param component the component to check if it is closed
+     * @param <V>       the vertex type
+     * @return {@code true} if {@code component} is closed, otherwise {@code false}
+     * @throws NullPointerException   if {@code g} or {@code component} is {@code null}
+     * @throws IllegalVertexException if not all vertices in {@code component} are elements of {@code g}
+     */
+    public static <V> boolean isClosedComponent(DirectedGraph<V, ?> g, Set<V> component) {
+        for (V v : component) {
+            if (!component.containsAll(g.adjacentOut(v))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
      * Returns a uniformly distributed random vertex of a graph using the provided {@code Random} instance.
      * <p>
      * Complexity: O(V)
