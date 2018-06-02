@@ -38,4 +38,13 @@ public class EvictingLinkedHashSet<E> {
         }
         return r;
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder stringBuilder = new StringBuilder();
+        for (E e : s) {
+            stringBuilder.append(String.format("%s%n", e.toString()));
+        }
+        return stringBuilder.toString();
+    }
 }

@@ -45,7 +45,7 @@ public abstract class AbstractIterativeAlgorithm<V, T> implements IterativeAlgor
         if (!stateHistory.add(nextState)) {
             hasNext = false;
             if (Finals.LOG.isDebugEnabled() && !nextState.equals(lastState)) {
-                Finals.LOG.debug(Finals.L_PERIODIC, g, stateHistory.getMaxSize());
+                Finals.LOG.debug(Finals.L_PERIODIC, g, stateHistory.getMaxSize(), System.lineSeparator(), stateHistory, nextState);
             }
             return nextState;
         }

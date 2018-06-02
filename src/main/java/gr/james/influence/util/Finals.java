@@ -26,7 +26,7 @@ public final class Finals {
 
     /* Logging messages */
     public static final String L_GAME_MOVE_EXCEED = "Move {} contains more than {} vertices. Slicing to {}. This indicates a mistake in your player.";
-    public static final String L_PERIODIC = "Periodicity on {} with maxSize = {}";
+    public static final String L_PERIODIC = "Periodicity on {} with maxSize = {} and history ={}{}{}";
 
     /* Exceptions: these finals must be arguments to GraphException(). Format: E_CLASSNAME_IDENTIFIER. */
     public static final String E_MOVEPOINTER_SET_NULL = "Cannot submit a null move.";
