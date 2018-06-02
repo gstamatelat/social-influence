@@ -183,11 +183,10 @@ public final class Graphs {
      *
      * @param g   the graph that the operation is to be performed
      * @param <V> the vertex type
-     * @param <E> the edge type
      * @return an unmodifiable {@code Set} of all the stubborn vertices in {@code g}
      * @throws NullPointerException if {@code g} is null
      */
-    public static <V, E> Set<V> getStubbornVertices(DirectedGraph<V, E> g) {
+    public static <V> Set<V> getStubbornVertices(DirectedGraph<V, ?> g) {
         return Collections.unmodifiableSet(
                 g.vertexSet().stream()
                         .filter(v -> g.outDegree(v) == 1 && g.adjacentOut(v).contains(v))
