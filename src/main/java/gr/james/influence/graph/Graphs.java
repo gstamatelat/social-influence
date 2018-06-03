@@ -12,6 +12,9 @@ import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+/**
+ * Helper static utilities for graphs.
+ */
 public final class Graphs {
     private Graphs() {
     }
