@@ -107,6 +107,18 @@ public interface DirectedGraph<V, E> extends Graph<V, E> {
     }
 
     /**
+     * {@inheritDoc}
+     *
+     * @return {@inheritDoc}
+     * @throws NullPointerException   {@inheritDoc}
+     * @throws IllegalVertexException {@inheritDoc}
+     */
+    @Override
+    default DirectedGraph<V, E> subGraph(Set<V> vertices) {
+        return new DirectedSubGraph<>(this, vertices);
+    }
+
+    /**
      * Returns an edge reversed decorator around this graph.
      *
      * @return an edge reversed decorator around this graph

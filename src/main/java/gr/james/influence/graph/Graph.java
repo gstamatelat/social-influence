@@ -230,6 +230,16 @@ public interface Graph<V, E> extends Iterable<V> {
     Graph<V, E> toImmutable();
 
     /**
+     * Returns a subgraph view of this graph.
+     *
+     * @param vertices the vertices of the subgraph
+     * @return a subgraph view of this graph bounded by {@code vertices}
+     * @throws NullPointerException   if {@code vertices} is {@code null}
+     * @throws IllegalVertexException if not all {@code vertices} are elements of this graph
+     */
+    Graph<V, E> subGraph(Set<V> vertices);
+
+    /**
      * Returns a string representation of this graph.
      *
      * @return a string representation of this graph

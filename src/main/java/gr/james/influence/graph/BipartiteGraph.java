@@ -66,6 +66,18 @@ public interface BipartiteGraph<V, E> extends UndirectedGraph<V, E> {
         return create(this).asUnmodifiable();
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @return {@inheritDoc}
+     * @throws NullPointerException   {@inheritDoc}
+     * @throws IllegalVertexException {@inheritDoc}
+     */
+    @Override
+    default BipartiteGraph<V, E> subGraph(Set<V> vertices) {
+        return new BipartiteSubGraph<>(this, vertices);
+    }
+
     default Set<V> setOf(V v) {
         Conditions.requireNonNull(v);
         final boolean inA = vertexSetA().contains(v);

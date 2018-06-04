@@ -68,6 +68,18 @@ public interface UndirectedGraph<V, E> extends Graph<V, E> {
         return create(this).asUnmodifiable();
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @return {@inheritDoc}
+     * @throws NullPointerException   {@inheritDoc}
+     * @throws IllegalVertexException {@inheritDoc}
+     */
+    @Override
+    default UndirectedGraph<V, E> subGraph(Set<V> vertices) {
+        return new UndirectedSubGraph<>(this, vertices);
+    }
+
     default DirectedGraph<V, E> asDirected() {
         return new AbstractDirectedGraph<V, E>() {
             @Override
