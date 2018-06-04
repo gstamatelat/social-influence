@@ -14,6 +14,7 @@ public final class Helper {
      * @param r          the {@code Random} to use
      * @return a {@code Set} of objects as the weighted random selection
      * @see "Efraimidis, Spirakis. Weighted random sampling with a reservoir."
+     * @deprecated will be removed after 2018-12-04
      */
     @Deprecated
     public static <E> Set<E> weightedRandom(Map<E, Double> weightMap, int selections, Random r) {
@@ -36,6 +37,7 @@ public final class Helper {
      * @param <E>        the type of objects
      * @return a {@code Set} of objects as the weighted random selection
      * @see "Efraimidis, Spirakis. Weighted random sampling with a reservoir."
+     * @deprecated will be removed after 2018-12-04
      */
     @Deprecated
     public static <E> Set<E> weightedRandom(Map<E, Double> weightMap, int selections) {
