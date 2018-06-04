@@ -6,6 +6,7 @@ import gr.james.influence.exceptions.IllegalWeightException;
 import gr.james.influence.util.RandomHelper;
 import gr.james.sampling.EfraimidisSampling;
 import gr.james.sampling.RandomSampling;
+import gr.james.sampling.WatermanSampling;
 import gr.james.sampling.WeightedRandomSampling;
 
 import java.util.*;
@@ -72,9 +73,10 @@ public final class Graphs {
      * @param g         the graph
      * @param condition the condition to be satisfied
      * @param <V>       the vertex type
-     * @return any vertex in a graph that satisfies {@code condition}, or {@code null} if no vertex in {@code g}
+     * @return any vertex in {@code g} that satisfies {@code condition}, or {@code null} if no vertex in {@code g}
      * satisfies {@code condition}
      * @throws NullPointerException if {@code g} or {@code condition} is {@code null}
+     * @see #findRandomVertex(DirectedGraph, Predicate)
      */
     public static <V> V findVertex(DirectedGraph<V, ?> g, Predicate<V> condition) {
         for (V v : g) {
@@ -83,6 +85,100 @@ public final class Graphs {
             }
         }
         return null;
+    }
+
+    /**
+     * Finds and returns a random vertex in a graph that satisfies a condition using the provided {@link Random}
+     * instance.
+     * <p>
+     * If many vertices satisfy the condition, a uniformly random vertex is selected and returned. Returns {@code null}
+     * if no vertex in the graph satisfies the condition.
+     * <p>
+     * Complexity: O(V)
+     *
+     * @param g         the graph
+     * @param condition the condition to be satisfied
+     * @param random    the {@link Random} instance to use
+     * @param <V>       the vertex type
+     * @return a uniformly random vertex in {@code g} that satisfies {@code condition}, or {@code null} if no vertex in
+     * {@code g} satisfies {@code condition}
+     * @throws NullPointerException if {@code g} or {@code condition} is {@code null}
+     * @see #findVertex(DirectedGraph, Predicate)
+     */
+    public static <V> V findRandomVertex(DirectedGraph<V, ?> g, Predicate<V> condition, Random random) {
+        final WatermanSampling<V> sampling = new WatermanSampling<>(1, random);
+        for (V v : g) {
+            if (condition.test(v)) {
+                sampling.feed(v);
+            }
+        }
+        final Collection<V> sample = sampling.sample();
+        if (sample.size() == 0) {
+            return null;
+        } else {
+            return sample.iterator().next();
+        }
+    }
+
+    /**
+     * Finds and returns a random vertex in a graph that satisfies a condition.
+     * <p>
+     * If many vertices satisfy the condition, a uniformly random vertex is selected and returned. Returns {@code null}
+     * if no vertex in the graph satisfies the condition.
+     * <p>
+     * Complexity: O(V)
+     *
+     * @param g         the graph
+     * @param condition the condition to be satisfied
+     * @param <V>       the vertex type
+     * @return a uniformly random vertex in {@code g} that satisfies {@code condition}, or {@code null} if no vertex in
+     * {@code g} satisfies {@code condition}
+     * @throws NullPointerException if {@code g} or {@code condition} is {@code null}
+     * @see #findVertex(DirectedGraph, Predicate)
+     */
+    public static <V> V findRandomVertex(DirectedGraph<V, ?> g, Predicate<V> condition) {
+        return findRandomVertex(g, condition, RandomHelper.getRandom());
+    }
+
+    /**
+     * Returns a uniformly distributed random vertex of a graph using the provided {@code Random} instance.
+     * <p>
+     * Complexity: O(V)
+     *
+     * @param g      the {@code DirectedGraph}
+     * @param random the {@code Random} instance to use
+     * @param <V>    the vertex type
+     * @return a uniformly distributed random vertex of {@code g}
+     * @throws NullPointerException     if {@code g} or {@code random} is {@code null}
+     * @throws IllegalArgumentException if {@code g} is empty
+     */
+    public static <V> V getRandomVertex(DirectedGraph<V, ?> g, Random random) {
+        if (g.vertexCount() < 1) {
+            throw new IllegalArgumentException();
+        }
+        int r = random.nextInt(g.vertexCount());
+        for (V v : g) {
+            if (r-- == 0) {
+                return v;
+            }
+        }
+        assert false;
+        return null;
+    }
+
+    /**
+     * Returns a uniformly distributed random vertex of a graph using the global random instance.
+     * <p>
+     * Complexity: O(V)
+     *
+     * @param g   the {@code DirectedGraph}
+     * @param <V> the vertex type
+     * @return a uniformly distributed random vertex of {@code g}
+     * @throws NullPointerException     if {@code g} or {@code random} is {@code random} is {@code null}
+     * @throws IllegalArgumentException if {@code g} is empty
+     */
+    public static <V> V getRandomVertex(DirectedGraph<V, ?> g) {
+        return getRandomVertex(g, RandomHelper.getRandom());
     }
 
     /**
@@ -243,47 +339,6 @@ public final class Graphs {
             }
         }
         return true;
-    }
-
-    /**
-     * Returns a uniformly distributed random vertex of a graph using the provided {@code Random} instance.
-     * <p>
-     * Complexity: O(V)
-     *
-     * @param g      the {@code DirectedGraph}
-     * @param random the {@code Random} instance to use
-     * @param <V>    the vertex type
-     * @return a uniformly distributed random vertex of {@code g}
-     * @throws NullPointerException     if {@code g} or {@code random} is {@code null}
-     * @throws IllegalArgumentException if {@code g} is empty
-     */
-    public static <V> V getRandomVertex(DirectedGraph<V, ?> g, Random random) {
-        if (g.vertexCount() < 1) {
-            throw new IllegalArgumentException();
-        }
-        int r = random.nextInt(g.vertexCount());
-        for (V v : g) {
-            if (r-- == 0) {
-                return v;
-            }
-        }
-        assert false;
-        return null;
-    }
-
-    /**
-     * Returns a uniformly distributed random vertex of a graph using the global random instance.
-     * <p>
-     * Complexity: O(V)
-     *
-     * @param g   the {@code DirectedGraph}
-     * @param <V> the vertex type
-     * @return a uniformly distributed random vertex of {@code g}
-     * @throws NullPointerException     if {@code g} or {@code random} is {@code random} is {@code null}
-     * @throws IllegalArgumentException if {@code g} is empty
-     */
-    public static <V> V getRandomVertex(DirectedGraph<V, ?> g) {
-        return getRandomVertex(g, RandomHelper.getRandom());
     }
 
     /**
