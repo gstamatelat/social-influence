@@ -188,6 +188,7 @@ public final class Graphs {
      * @param <V> the vertex type
      * @return an unmodifiable {@code Set} of all the stubborn vertices in {@code g}
      * @throws NullPointerException if {@code g} is null
+     * @see #getStubbornComponents(DirectedGraph)
      */
     public static <V> Set<V> getStubbornVertices(DirectedGraph<V, ?> g) {
         return Collections.unmodifiableSet(
@@ -208,6 +209,7 @@ public final class Graphs {
      * @param <V> the vertex type
      * @return an unmodifiable {@code Set} of all the stubborn components in {@code g}
      * @throws NullPointerException if {@code g} is null
+     * @see #getStubbornVertices(DirectedGraph)
      */
     public static <V> Set<Set<V>> getStubbornComponents(DirectedGraph<V, ?> g) {
         final Set<Set<V>> scc = KosarajuComponents.execute(g);
