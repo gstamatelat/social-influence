@@ -121,7 +121,7 @@ public final class Graphs {
     }
 
     /**
-     * Finds and returns a random vertex in a graph that satisfies a condition.
+     * Finds and returns a random vertex in a graph that satisfies a condition using the global random instance.
      * <p>
      * If many vertices satisfy the condition, a uniformly random vertex is selected and returned. Returns {@code null}
      * if no vertex in the graph satisfies the condition.
