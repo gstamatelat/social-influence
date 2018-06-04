@@ -230,14 +230,18 @@ public interface Graph<V, E> extends Iterable<V> {
     Graph<V, E> toImmutable();
 
     /**
-     * Returns a subgraph view of this graph.
+     * Returns a subgraph view of this graph that only contains the supplied vertices along with their interconnections.
      * <p>
-     * More specifically, this method will return a view of this graph that only contains the supplied {@code vertices}
-     * along with their interconnections. The resulting graph is not tolerant to behavior involving adding or removing
-     * vertices from this original graph. Using these operations after the subgraph is produced may lead to unexpected
-     * behavior without exception. The subgraph is tolerant however to edge insertion/removal. Subsequently, the
-     * operations of inserting or removing vertices from the subgraph will fail with
+     * The resulting graph is backed by this graph and will reflect changes to it. The subgraph, however, is not
+     * tolerant to behavior involving removing any vertex in {@code vertices} from the original graph. Performing this
+     * operation after the subgraph is produced may lead to unexpected behavior without exception. The subgraph is
+     * tolerant, however, to any other mutation, like edge insertion/removal and vertex insertions. It is also safe to
+     * remove any vertex not contained in the subgraph.
+     * <p>
+     * The operations of inserting or removing vertices from the subgraph will fail with
      * {@link UnsupportedOperationException}.
+     * <p>
+     * This method runs in time proportional to the size of {@code vertices}.
      *
      * @param vertices the vertices of the subgraph
      * @return a subgraph view of this graph bounded by {@code vertices}
