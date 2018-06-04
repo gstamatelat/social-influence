@@ -76,9 +76,9 @@ public final class Graphs {
      * @return any vertex in {@code g} that satisfies {@code condition}, or {@code null} if no vertex in {@code g}
      * satisfies {@code condition}
      * @throws NullPointerException if {@code g} or {@code condition} is {@code null}
-     * @see #findRandomVertex(DirectedGraph, Predicate)
+     * @see #findRandomVertex(Graph, Predicate)
      */
-    public static <V> V findVertex(DirectedGraph<V, ?> g, Predicate<V> condition) {
+    public static <V> V findVertex(Graph<V, ?> g, Predicate<V> condition) {
         for (V v : g) {
             if (condition.test(v)) {
                 return v;
@@ -103,9 +103,9 @@ public final class Graphs {
      * @return a uniformly random vertex in {@code g} that satisfies {@code condition}, or {@code null} if no vertex in
      * {@code g} satisfies {@code condition}
      * @throws NullPointerException if {@code g} or {@code condition} is {@code null}
-     * @see #findVertex(DirectedGraph, Predicate)
+     * @see #findVertex(Graph, Predicate)
      */
-    public static <V> V findRandomVertex(DirectedGraph<V, ?> g, Predicate<V> condition, Random random) {
+    public static <V> V findRandomVertex(Graph<V, ?> g, Predicate<V> condition, Random random) {
         final WatermanSampling<V> sampling = new WatermanSampling<>(1, random);
         for (V v : g) {
             if (condition.test(v)) {
@@ -134,9 +134,9 @@ public final class Graphs {
      * @return a uniformly random vertex in {@code g} that satisfies {@code condition}, or {@code null} if no vertex in
      * {@code g} satisfies {@code condition}
      * @throws NullPointerException if {@code g} or {@code condition} is {@code null}
-     * @see #findVertex(DirectedGraph, Predicate)
+     * @see #findVertex(Graph, Predicate)
      */
-    public static <V> V findRandomVertex(DirectedGraph<V, ?> g, Predicate<V> condition) {
+    public static <V> V findRandomVertex(Graph<V, ?> g, Predicate<V> condition) {
         return findRandomVertex(g, condition, RandomHelper.getRandom());
     }
 
@@ -145,14 +145,14 @@ public final class Graphs {
      * <p>
      * Complexity: O(V)
      *
-     * @param g      the {@code DirectedGraph}
+     * @param g      the graph
      * @param random the {@code Random} instance to use
      * @param <V>    the vertex type
      * @return a uniformly distributed random vertex of {@code g}
      * @throws NullPointerException     if {@code g} or {@code random} is {@code null}
      * @throws IllegalArgumentException if {@code g} is empty
      */
-    public static <V> V getRandomVertex(DirectedGraph<V, ?> g, Random random) {
+    public static <V> V getRandomVertex(Graph<V, ?> g, Random random) {
         if (g.vertexCount() < 1) {
             throw new IllegalArgumentException();
         }
@@ -171,13 +171,13 @@ public final class Graphs {
      * <p>
      * Complexity: O(V)
      *
-     * @param g   the {@code DirectedGraph}
+     * @param g   the graph
      * @param <V> the vertex type
      * @return a uniformly distributed random vertex of {@code g}
      * @throws NullPointerException     if {@code g} or {@code random} is {@code random} is {@code null}
      * @throws IllegalArgumentException if {@code g} is empty
      */
-    public static <V> V getRandomVertex(DirectedGraph<V, ?> g) {
+    public static <V> V getRandomVertex(Graph<V, ?> g) {
         return getRandomVertex(g, RandomHelper.getRandom());
     }
 
