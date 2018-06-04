@@ -231,6 +231,13 @@ public interface Graph<V, E> extends Iterable<V> {
 
     /**
      * Returns a subgraph view of this graph.
+     * <p>
+     * More specifically, this method will return a view of this graph that only contains the supplied {@code vertices}
+     * along with their interconnections. The resulting graph is not tolerant to behavior involving adding or removing
+     * vertices from this original graph. Using these operations after the subgraph is produced may lead to unexpected
+     * behavior without exception. The subgraph is tolerant however to edge insertion/removal. Subsequently, the
+     * operations of inserting or removing vertices from the subgraph will fail with
+     * {@link UnsupportedOperationException}.
      *
      * @param vertices the vertices of the subgraph
      * @return a subgraph view of this graph bounded by {@code vertices}
