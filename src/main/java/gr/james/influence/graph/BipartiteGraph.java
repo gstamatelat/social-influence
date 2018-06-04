@@ -78,6 +78,17 @@ public interface BipartiteGraph<V, E> extends UndirectedGraph<V, E> {
         return new BipartiteSubGraph<>(this, vertices);
     }
 
+    /**
+     * Returns the disjoint set of this bipartite graph that contains the specified vertex.
+     * <p>
+     * More specifically, this method will return {@code vertexSetA()} if {@code v} is in set {@code A} and
+     * {@code vertexSetB()} if {@code v} is in set {@code B}.
+     *
+     * @param v the vertex to get its disjoint bipartite set
+     * @return the disjoint set of this bipartite graph that contains {@code v}
+     * @throws NullPointerException   if {@code v} is {@code null}
+     * @throws IllegalVertexException if {@code v} is not an element of this graph
+     */
     default Set<V> setOf(V v) {
         Conditions.requireNonNull(v);
         final boolean inA = vertexSetA().contains(v);
