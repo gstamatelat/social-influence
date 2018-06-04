@@ -24,6 +24,21 @@ public interface Graph<V, E> extends Iterable<V> {
     Set<V> vertexSet();
 
     /**
+     * Returns an arbitrary vertex from the graph.
+     * <p>
+     * This method is equivalent to
+     * <pre><code>
+     * return vertexSet().iterator().next();
+     * </code></pre>
+     *
+     * @return an arbitrary vertex from the graph
+     * @throws NoSuchElementException if the graph is empty
+     */
+    default V anyVertex() {
+        return this.vertexSet().iterator().next();
+    }
+
+    /**
      * Checks if the graph contains the specified vertex.
      * <p>
      * This method is equivalent to
