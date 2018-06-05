@@ -1,5 +1,6 @@
 package gr.james.influence.graph;
 
+import com.google.common.math.IntMath;
 import gr.james.influence.algorithms.components.KosarajuComponents;
 import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.exceptions.IllegalWeightException;
@@ -335,6 +336,93 @@ public final class Graphs {
     public static <V> boolean isClosedComponent(DirectedGraph<V, ?> g, Set<V> component) {
         for (V v : component) {
             if (!component.containsAll(g.adjacentOut(v))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Checks weather a strongly connected {@link DirectedGraph} is aperiodic.
+     * <p>
+     * A directed graph is aperiodic if there is no integer {@code k > 1} that divides the length of every cycle in the
+     * graph.
+     * <p>
+     * This method assumes that the argument is strongly connected and will perform to checks to ensure that. The
+     * behavior of this method when the input is not strongly connected is undefined. The method
+     * {@link #isAperiodic(DirectedGraph)} can be used in-place when it is not known whether the graph is strongly
+     * connected.
+     * <p>
+     * This method uses the algorithm based on BFS in <i>Graph-theoretic analysis of finite Markov chains (Jarvis and
+     * Shier)</i>.
+     *
+     * @param g   the strongly connected graph
+     * @param <V> the vertex type
+     * @return {@code true} if {@code g} is aperiodic, otherwise {@code false}
+     * @throws NullPointerException if {@code g} is {@code null}
+     */
+    public static <V> boolean isStrongAperiodic(DirectedGraph<V, ?> g) {
+        final Queue<V> queue = new LinkedList<>();
+        final Map<V, Integer> distance = new HashMap<>();
+        final V start = g.anyVertex();
+        queue.offer(start);
+        distance.put(start, 0);
+        int gcd = 0;
+        while (!queue.isEmpty()) {
+            final V next = queue.poll();
+            for (V v : g.adjacentOut(next)) {
+                if (distance.containsKey(v)) {
+                    final int difference = distance.get(next) - distance.get(v) + 1;
+                    gcd = IntMath.gcd(gcd, difference);
+                    if (gcd == 1) {
+                        return true;
+                    }
+                } else {
+                    distance.put(v, distance.get(next) + 1);
+                    queue.offer(v);
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Checks weather a {@link DirectedGraph} is aperiodic.
+     * <p>
+     * A directed graph is aperiodic if there is no integer {@code k > 1} that divides the length of every cycle in the
+     * graph.
+     * <p>
+     * This method invokes the {@link #isStrongAperiodic(DirectedGraph)} function for every strongly connected component
+     * in {@code g} and checks if all strong components of this graph are aperiodic.
+     *
+     * @param g   the graph
+     * @param <V> the vertex type
+     * @return {@code true} if {@code g} is aperiodic, otherwise {@code false}
+     * @throws NullPointerException if {@code g} is {@code null}
+     */
+    public static <V> boolean isAperiodic(DirectedGraph<V, ?> g) {
+        for (Set<V> component : KosarajuComponents.execute(g)) {
+            if (!Graphs.isStrongAperiodic(g.subGraph(component))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Checks weather the updating process in a graph converges.
+     * <p>
+     * According to <i>Social and Economic Networks (Jackson)</i>, a graph is convergent if and only if every set of
+     * nodes that is strongly connected and closed is aperiodic.
+     *
+     * @param g   the graph
+     * @param <V> the vertex type
+     * @return {@code true} if {@code g} converges, otherwise {@code false}
+     * @throws NullPointerException if {@code g} is {@code null}
+     */
+    public static <V> boolean converges(DirectedGraph<V, ?> g) {
+        for (Set<V> component : Graphs.getStubbornComponents(g)) {
+            if (!Graphs.isStrongAperiodic(g.subGraph(component))) {
                 return false;
             }
         }
