@@ -129,7 +129,7 @@ public interface Graph<V, E> extends Iterable<V> {
         return v;
     }
 
-    default List<V> addVertices(int n, VertexProvider<V> vertexProvider) {
+    default List<V> addVertices(VertexProvider<V> vertexProvider, int n) {
         if (vertexProvider == null) {
             throw new NullPointerException();
         }

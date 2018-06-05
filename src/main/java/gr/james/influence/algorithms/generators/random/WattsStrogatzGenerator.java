@@ -29,7 +29,7 @@ public class WattsStrogatzGenerator<V, E> implements RandomGraphGenerator<Direct
     public DirectedGraph<V, E> generate(Random r, VertexProvider<V> vertexProvider, Map<String, V> identification) {
         DirectedGraph<V, E> g = DirectedGraph.create();
 
-        List<V> l = g.addVertices(n, vertexProvider);
+        List<V> l = g.addVertices(vertexProvider, n);
         for (int i = 0; i < n; i++) {
             for (int j = 1; j <= k / 2; j++) {
                 g.addEdges(l.get(i), l.get((i + j) % n));

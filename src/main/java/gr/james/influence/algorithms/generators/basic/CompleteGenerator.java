@@ -18,7 +18,7 @@ public class CompleteGenerator<V, E> implements RandomGraphGenerator<DirectedGra
     public DirectedGraph<V, E> generate(Random r, VertexProvider<V> vertexProvider, Map<String, V> identification) {
         DirectedGraph<V, E> g = DirectedGraph.create();
 
-        g.addEdges(g.addVertices(totalVertices, vertexProvider));
+        g.addEdges(g.addVertices(vertexProvider, totalVertices));
 
         return g;
     }

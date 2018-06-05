@@ -26,7 +26,7 @@ public class GridGenerator<V, E> implements RandomGraphGenerator<DirectedGraph<V
         DirectedGraph<V, E> g = DirectedGraph.create();
 
         int count = 0;
-        List<V> set = g.addVertices(n * m, vertexProvider);
+        List<V> set = g.addVertices(vertexProvider, n * m);
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {

@@ -37,7 +37,7 @@ public class SorensenDiceSimilarityTests {
     @Test
     public void empty() {
         final DirectedGraph<Integer, Object> g = DirectedGraph.create();
-        g.addVertices(5, VertexProvider.INTEGER_PROVIDER);
+        g.addVertices(VertexProvider.INTEGER_PROVIDER, 5);
         final VertexSimilarity<Integer, Double> dice = new SorensenDiceSimilarity<>(g);
         for (Integer v : g) {
             for (Integer w : g) {
