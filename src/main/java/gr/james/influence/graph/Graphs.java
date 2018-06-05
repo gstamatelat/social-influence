@@ -232,6 +232,7 @@ public final class Graphs {
         return r;
     }
 
+    @Deprecated
     public static <G extends DirectedGraph<V, E>, V, E> DirectedGraph<V, E> deepCopy(G g, Collection<V> filter) {
         final DirectedGraph<V, E> r = new DirectedGraphImpl<>();
         //final DirectedGraph<V, E> r = factory.createWeightedDirected();
@@ -249,29 +250,10 @@ public final class Graphs {
         return r;
     }
 
+    @Deprecated
     public static <G extends DirectedGraph<V, E>, V, E> DirectedGraph<V, E> deepCopy(G g) {
         return deepCopy(g, g.vertexSet());
     }
-
-    /*public static <V, E> DirectedGraph<V, E> deepCopy(DirectedGraph<V, E> g, GraphFactory<V, E> factory) {
-        return deepCopy(g, factory, g.vertexSet());
-    }
-
-    public static <V, E> DirectedGraph<V, E> deepCopy(DirectedGraph<V, E> g) {
-        return deepCopy(g, DirectedGraph.factory(), g.vertexSet());
-    }
-
-    public static <V, E> DirectedGraph<V, E> deepCopy(DirectedGraph<V, E> g, Collection<V> filter) {
-        return deepCopy(g, DirectedGraph.factory(), filter);
-    }
-
-    public static SimpleGraph deepCopy(SimpleGraph g, Collection<Integer> filter) {
-        return (SimpleGraph) deepCopy(g, SimpleGraph.factory, filter);
-    }
-
-    public static SimpleGraph deepCopy(SimpleGraph g) {
-        return (SimpleGraph) deepCopy(g, SimpleGraph.factory, g.getVertices());
-    }*/
 
     /**
      * Filters out and returns the stubborn vertices contained in {@code g}.
