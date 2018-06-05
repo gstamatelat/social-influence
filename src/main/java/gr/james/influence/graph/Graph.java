@@ -129,6 +129,20 @@ public interface Graph<V, E> extends Iterable<V> {
         return v;
     }
 
+    default List<V> addVertices(int n, VertexProvider<V> vertexProvider) {
+        if (vertexProvider == null) {
+            throw new NullPointerException();
+        }
+        if (n < 0) {
+            throw new IllegalArgumentException();
+        }
+        final List<V> contained = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            contained.add(addVertex(vertexProvider));
+        }
+        return Collections.unmodifiableList(contained);
+    }
+
     /**
      * Insert a group of vertices in the graph.
      * <p>
@@ -137,7 +151,7 @@ public interface Graph<V, E> extends Iterable<V> {
      * This is mostly a convenient method to manually add vertices in a graph:
      * <pre><code>
      * UndirectedGraph&lt;String, Object&gt; g = UndirectedGraph.create();
-     * g.add("1", "2", "3");
+     * g.addVertices("1", "2", "3");
      * </code></pre>
      *
      * @param vertices the vertices to insert to the graph
@@ -174,24 +188,10 @@ public interface Graph<V, E> extends Iterable<V> {
         return Collections.unmodifiableList(contained);
     }
 
-    default List<V> addVertices(int n, VertexProvider<V> vertexProvider) {
-        if (vertexProvider == null) {
-            throw new NullPointerException();
-        }
-        if (n < 0) {
-            throw new IllegalArgumentException();
-        }
-        final List<V> contained = new ArrayList<>();
-        for (int i = 0; i < n; i++) {
-            contained.add(addVertex(vertexProvider));
-        }
-        return Collections.unmodifiableList(contained);
-    }
-
     /**
      * Removes a vertex from the graph if it is present.
      * <p>
-     * This method will also remove the inbound and outbound edges of that vertex.
+     * This method will also remove the incident edges of that vertex.
      *
      * @param v the vertex to be removed
      * @return {@code true} if the graph previously contained this vertex, otherwise {@code false}
