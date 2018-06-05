@@ -129,6 +129,21 @@ public interface Graph<V, E> extends Iterable<V> {
         return v;
     }
 
+    /**
+     * Insert a number of vertices produced by a {@link VertexProvider} to the graph.
+     * <p>
+     * This method returns a {@link List} of the vertices that were generated and inserted. This collection always
+     * contains {@code n} distinct elements in the order at which they were generated.
+     *
+     * @param vertexProvider the vertex provider
+     * @param n              the number of vertices to generate and insert
+     * @return a {@link List} of the vertices that were generated and inserted
+     * @throws NullPointerException     if {@code vertexProvider} is {@code null}
+     * @throws IllegalArgumentException if {@code n < 0}
+     * @throws IllegalVertexException   if {@code vertexProvider} produced a vertex that is already in the graph
+     * @throws NoSuchElementException   if the {@link VertexProvider#create()} method of {@code vertexProvider} threw
+     *                                  exception
+     */
     default List<V> addVertices(VertexProvider<V> vertexProvider, int n) {
         if (vertexProvider == null) {
             throw new NullPointerException();
@@ -140,6 +155,8 @@ public interface Graph<V, E> extends Iterable<V> {
         for (int i = 0; i < n; i++) {
             contained.add(addVertex(vertexProvider));
         }
+        assert contained.size() == n;
+        assert contained.stream().distinct().count() == n;
         return Collections.unmodifiableList(contained);
     }
 
