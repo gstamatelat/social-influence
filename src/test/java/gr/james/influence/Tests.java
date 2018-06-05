@@ -201,25 +201,28 @@ public class Tests {
     }*/
 
     /**
-     * <p>In a graph without stubborn agents, all vertices reach to a common opinion upon DeGroot convergence.</p>
+     * In a graph without stubborn agents, all vertices reach to a common opinion upon DeGroot convergence.
      */
     @Test
     public void deGrootTest() {
-        int size = RandomHelper.getRandom().nextInt(50) + 50;
-        double p = RandomHelper.getRandom().nextDouble();
-        DirectedGraph<Integer, Object> g = new RandomGenerator<Integer, Object>(size, p).generate(VertexProvider.INTEGER_PROVIDER);
-        Graphs.connect(g);
+        DirectedGraph<Integer, Object> g = null;
+        while (g == null || !Graphs.converges(g)) {
+            final int size = RandomHelper.getRandom().nextInt(50) + 50;
+            final double p = RandomHelper.getRandom().nextDouble();
+            final RandomGenerator<Integer, Object> generator = new RandomGenerator<>(size, p);
+            g = generator.generate(VertexProvider.INTEGER_PROVIDER);
+        }
 
-        GraphState<Integer, Double> initialState = GraphState.create(g.vertexSet(), 0.0);
+        final GraphState<Integer, Double> initialState = GraphState.create(g.vertexSet(), 0.0);
         for (Integer v : g) {
             initialState.put(v, RandomHelper.getRandom().nextDouble());
         }
 
-        GraphState<Integer, Double> finalState = DeGroot.execute(g, initialState, 0.0);
+        final GraphState<Integer, Double> finalState = DeGroot.execute(g, initialState, 0.0);
         double avg = finalState.getAverage();
 
         for (double e : finalState.values()) {
-            Assert.assertEquals("deGrootTest", avg, e, 1.0e-5);
+            Assert.assertEquals("Tests.deGrootTest", avg, e, 1.0e-5);
         }
     }
 
