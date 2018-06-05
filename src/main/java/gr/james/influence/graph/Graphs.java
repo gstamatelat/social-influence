@@ -448,6 +448,25 @@ public final class Graphs {
     }
 
     /**
+     * Returns the number of undirected edges in {@code g}.
+     * <p>
+     * Complexity: O(V)
+     *
+     * @param g   the graph
+     * @param <V> the vertex type
+     * @return the number of undirected edges in {@code g}
+     * @throws NullPointerException if {@code g} is {@code null}
+     */
+    public static <V> int getEdgesCount(UndirectedGraph<V, ?> g) {
+        int count = 0;
+        for (V v : g.vertexSet()) {
+            count += g.adjacent(v).size();
+        }
+        assert count % 2 == 0;
+        return count / 2;
+    }
+
+    /**
      * Returns a random vertex that is adjacent to {@code v}.
      * <p>
      * This method returns {@code null} if {@code v} doesn't have any outbound edges.
