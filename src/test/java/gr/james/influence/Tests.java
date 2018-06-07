@@ -226,7 +226,7 @@ public class Tests {
         }
     }
 
-    @Test
+    /*@Test
     public void deepCopyTest() {
         int size = RandomHelper.getRandom().nextInt(50) + 50;
         double p = RandomHelper.getRandom().nextDouble();
@@ -236,7 +236,7 @@ public class Tests {
         e.addVertex(VertexProvider.INTEGER_PROVIDER);
         Assert.assertEquals("deepCopyTest", g.vertexCount() + 1, e.vertexCount());
         Assert.assertEquals("deepCopyTest", Graphs.getEdgesCount(g), Graphs.getEdgesCount(e));
-    }
+    }*/
 
     @Test
     public void pageRankDeterministicTest() {
