@@ -46,7 +46,7 @@ final class DirectedEdgeImpl<V, E> implements DirectedEdge<V, E> {
         if (this == o) {
             return true;
         }
-        if (o == null || !(o instanceof DirectedEdge)) {
+        if (!(o instanceof DirectedEdge)) {
             return false;
         }
         final DirectedEdge<?, ?> that = (DirectedEdge<?, ?>) o;

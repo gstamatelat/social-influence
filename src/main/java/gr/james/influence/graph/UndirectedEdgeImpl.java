@@ -46,7 +46,7 @@ final class UndirectedEdgeImpl<V, E> implements UndirectedEdge<V, E> {
         if (this == o) {
             return true;
         }
-        if (o == null || !(o instanceof UndirectedEdge)) {
+        if (!(o instanceof UndirectedEdge)) {
             return false;
         }
         final UndirectedEdge<?, ?> that = (UndirectedEdge<?, ?>) o;
