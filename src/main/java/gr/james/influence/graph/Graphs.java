@@ -232,6 +232,64 @@ public final class Graphs {
         return r;
     }
 
+    /**
+     * Checks two {@link DirectedGraph} for equality.
+     * <p>
+     * Two directed graphs are considered equal if their vertex sets and their edge sets are equal.
+     *
+     * @param g1  one graph
+     * @param g2  the other graph
+     * @param <V> the vertex type
+     * @param <E> the edge type
+     * @return {@code true} if {@code g1} and {@code g2} are equal, otherwise {@code false}
+     */
+    public static <V, E> boolean equals(DirectedGraph<V, E> g1, DirectedGraph<V, E> g2) {
+        if (g1 == g2) {
+            return true;
+        }
+        if (g1 == null || g2 == null) {
+            return false;
+        }
+        if (!g1.vertexSet().equals(g2.vertexSet())) {
+            return false;
+        }
+        for (V v : g1) {
+            if (!g1.outEdges(v).equals(g2.outEdges(v))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Checks two {@link UndirectedGraph} for equality.
+     * <p>
+     * Two undirected graphs are considered equal if their vertex sets and their edge sets are equal.
+     *
+     * @param g1  one graph
+     * @param g2  the other graph
+     * @param <V> the vertex type
+     * @param <E> the edge type
+     * @return {@code true} if {@code g1} and {@code g2} are equal, otherwise {@code false}
+     */
+    public static <V, E> boolean equals(UndirectedGraph<V, E> g1, UndirectedGraph<V, E> g2) {
+        if (g1 == g2) {
+            return true;
+        }
+        if (g1 == null || g2 == null) {
+            return false;
+        }
+        if (!g1.vertexSet().equals(g2.vertexSet())) {
+            return false;
+        }
+        for (V v : g1) {
+            if (!g1.edges(v).equals(g2.edges(v))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     @Deprecated
     public static <G extends DirectedGraph<V, E>, V, E> DirectedGraph<V, E> deepCopy(G g, Collection<V> filter) {
         final DirectedGraph<V, E> r = new DirectedGraphImpl<>();

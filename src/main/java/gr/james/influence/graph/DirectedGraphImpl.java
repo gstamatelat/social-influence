@@ -34,6 +34,7 @@ final class DirectedGraphImpl<V, E> extends AbstractDirectedGraph<V, E> {
             final DirectedEdge<V, E> newEdge = addEdge(e.source(), e.target(), e.value(), e.weight());
             assert newEdge != null;
         }
+        assert Graphs.equals(this, g);
     }
 
     DirectedGraphImpl(UndirectedGraph<V, E> g) {
@@ -48,6 +49,7 @@ final class DirectedGraphImpl<V, E> extends AbstractDirectedGraph<V, E> {
             assert newEdge1 != null;
             assert newEdge2 != null;
         }
+        assert Graphs.equals(this, g.asDirected());
     }
 
     @Override

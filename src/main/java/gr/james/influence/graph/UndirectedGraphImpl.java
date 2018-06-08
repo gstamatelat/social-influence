@@ -34,6 +34,7 @@ final class UndirectedGraphImpl<V, E> extends AbstractUndirectedGraph<V, E> {
             final UndirectedEdge<V, E> newEdge = addEdge(e.v(), e.w(), e.value(), e.weight());
             assert newEdge != null;
         }
+        assert Graphs.equals(this, g);
     }
 
     @Override
