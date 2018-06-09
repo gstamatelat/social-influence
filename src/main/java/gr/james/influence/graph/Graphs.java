@@ -385,13 +385,11 @@ public final class Graphs {
     /**
      * Checks weather a strongly connected {@link DirectedGraph} is aperiodic.
      * <p>
-     * A directed graph is aperiodic if there is no integer {@code k > 1} that divides the length of every cycle in the
-     * graph.
+     * A strongly connected directed graph is aperiodic if there is no integer {@code k > 1} that divides the length of
+     * every cycle in the graph.
      * <p>
-     * This method assumes that the argument is strongly connected and will perform to checks to ensure that. The
-     * behavior of this method when the input is not strongly connected is undefined. The method
-     * {@link #isAperiodic(DirectedGraph)} can be used in-place when it is not known whether the graph is strongly
-     * connected.
+     * This method assumes that the argument is strongly connected and will perform no checks to ensure that. The
+     * behavior of this method when the input is not strongly connected is undefined.
      * <p>
      * This method uses the algorithm based on BFS in <i>Graph-theoretic analysis of finite Markov chains (Jarvis and
      * Shier)</i>.
@@ -424,29 +422,6 @@ public final class Graphs {
             }
         }
         return false;
-    }
-
-    /**
-     * Checks weather a {@link DirectedGraph} is aperiodic.
-     * <p>
-     * A directed graph is aperiodic if there is no integer {@code k > 1} that divides the length of every cycle in the
-     * graph.
-     * <p>
-     * This method invokes the {@link #isStrongAperiodic(DirectedGraph)} function for every strongly connected component
-     * in {@code g} and checks if all strong components of this graph are aperiodic.
-     *
-     * @param g   the graph
-     * @param <V> the vertex type
-     * @return {@code true} if {@code g} is aperiodic, otherwise {@code false}
-     * @throws NullPointerException if {@code g} is {@code null}
-     */
-    public static <V> boolean isAperiodic(DirectedGraph<V, ?> g) {
-        for (Set<V> component : KosarajuComponents.execute(g)) {
-            if (!Graphs.isStrongAperiodic(g.subGraph(component))) {
-                return false;
-            }
-        }
-        return true;
     }
 
     /**
