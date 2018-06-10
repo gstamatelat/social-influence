@@ -3,7 +3,15 @@ package gr.james.influence.util;
 import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.graph.Graph;
 
+import java.util.ConcurrentModificationException;
+
 public final class Conditions {
+    public static void requireModCount(Graph<?, ?> g, int modCount) {
+        if (g.modCount() != modCount) {
+            throw new ConcurrentModificationException();
+        }
+    }
+
     public static void requireArgument(boolean expression, String errorMessageTemplate, Object... errorMessageArgs) {
         if (!expression) {
             throw new IllegalArgumentException(String.format(errorMessageTemplate, errorMessageArgs));

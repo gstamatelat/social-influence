@@ -1,7 +1,6 @@
 package gr.james.influence.algorithms.layout;
 
 import com.google.common.math.IntMath;
-import gr.james.influence.annotation.UnmodifiableGraph;
 import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.util.Conditions;
 
@@ -18,6 +17,7 @@ import java.util.Queue;
  */
 public class BreadthFirstSearchPeriodicity<V> {
     private final DirectedGraph<V, ?> g;
+    private final int modCount;
     private int period;
 
     /**
@@ -36,8 +36,9 @@ public class BreadthFirstSearchPeriodicity<V> {
      * @throws NullPointerException     if {@code g} is {@code null}
      * @throws IllegalArgumentException if there is a hint suggesting that {@code g} is not strongly connected
      */
-    public BreadthFirstSearchPeriodicity(@UnmodifiableGraph DirectedGraph<V, ?> g) {
-        this.g = Conditions.requireNonNull(g);
+    public BreadthFirstSearchPeriodicity(DirectedGraph<V, ?> g) {
+        this.g = g;
+        this.modCount = g.modCount();
         this.period = 0;
 
         final Queue<V> queue = new LinkedList<>();
@@ -111,8 +112,10 @@ public class BreadthFirstSearchPeriodicity<V> {
      * Returns the graph associated with this instance.
      *
      * @return the graph associated with this instance
+     * @throws java.util.ConcurrentModificationException if the graph has been previously modified
      */
     public DirectedGraph<V, ?> getGraph() {
+        Conditions.requireModCount(this.g, modCount);
         return this.g;
     }
 
@@ -124,8 +127,10 @@ public class BreadthFirstSearchPeriodicity<V> {
      * This method runs in constant time.
      *
      * @return the period of the graph
+     * @throws java.util.ConcurrentModificationException if the graph has been previously modified
      */
     public int period() {
+        Conditions.requireModCount(this.g, modCount);
         return this.period;
     }
 
@@ -140,8 +145,10 @@ public class BreadthFirstSearchPeriodicity<V> {
      * This method runs in constant time.
      *
      * @return {@code true} if the input graph is aperiodic, otherwise {@code false}
+     * @throws java.util.ConcurrentModificationException if the graph has been previously modified
      */
     public boolean isAperiodic() {
+        Conditions.requireModCount(this.g, modCount);
         return this.period == 1;
     }
 }
