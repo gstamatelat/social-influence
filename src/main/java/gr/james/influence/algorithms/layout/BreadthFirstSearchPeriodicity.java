@@ -12,7 +12,7 @@ import java.util.Queue;
 
 /**
  * Implementation of the algorithm based on BFS in <i>Graph-theoretic analysis of finite Markov chains (Jarvis and
- * Shier)</i> to find the periodicity of a strongly connected graph.
+ * Shier)</i> to find the period of a strongly connected graph.
  *
  * @param <V> the vertex type
  */
