@@ -12,6 +12,7 @@ import java.lang.annotation.*;
  * {@code UnmodifiableGraph} and mutations to it may result in unexpected behavior when invoking instance members that
  * utilize that state. In these cases, reliable operation of the instance can be achieved by re-instantiation.
  */
+@Deprecated
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.PARAMETER)
