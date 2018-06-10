@@ -1,7 +1,7 @@
 package gr.james.influence.graph;
 
-import com.google.common.math.IntMath;
 import gr.james.influence.algorithms.components.KosarajuComponents;
+import gr.james.influence.algorithms.layout.BreadthFirstSearchPeriodicity;
 import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.exceptions.IllegalWeightException;
 import gr.james.influence.util.RandomHelper;
@@ -398,30 +398,11 @@ public final class Graphs {
      * @param <V> the vertex type
      * @return {@code true} if {@code g} is aperiodic, otherwise {@code false}
      * @throws NullPointerException if {@code g} is {@code null}
+     * @deprecated will be removed after 2018-12-10, use {@link BreadthFirstSearchPeriodicity} instead
      */
+    @Deprecated
     public static <V> boolean isStrongAperiodic(DirectedGraph<V, ?> g) {
-        final Queue<V> queue = new LinkedList<>();
-        final Map<V, Integer> distance = new HashMap<>();
-        final V start = g.anyVertex();
-        queue.offer(start);
-        distance.put(start, 0);
-        int gcd = 0;
-        while (!queue.isEmpty()) {
-            final V next = queue.poll();
-            for (V v : g.adjacentOut(next)) {
-                if (distance.containsKey(v)) {
-                    final int difference = distance.get(next) - distance.get(v) + 1;
-                    gcd = IntMath.gcd(gcd, difference);
-                    if (gcd == 1) {
-                        return true;
-                    }
-                } else {
-                    distance.put(v, distance.get(next) + 1);
-                    queue.offer(v);
-                }
-            }
-        }
-        return false;
+        return BreadthFirstSearchPeriodicity.isAperiodic(g);
     }
 
     /**
