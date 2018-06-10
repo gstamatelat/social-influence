@@ -31,6 +31,11 @@ final class BipartiteGraphImpl<V, E> extends AbstractBipartiteGraph<V, E> {
     }
 
     @Override
+    public int modCount() {
+        return this.g.modCount();
+    }
+
+    @Override
     public Set<V> vertexSetA() {
         return Collections.unmodifiableSet(setA);
     }

@@ -202,6 +202,11 @@ public interface UndirectedGraph<V, E> extends Graph<V, E> {
             public boolean removeVertex(V v) {
                 return UndirectedGraph.this.removeVertex(v);
             }
+
+            @Override
+            public int modCount() {
+                return UndirectedGraph.this.modCount();
+            }
         };
     }
 

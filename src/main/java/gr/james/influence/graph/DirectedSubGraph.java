@@ -23,6 +23,11 @@ final class DirectedSubGraph<V, E> extends AbstractDirectedGraph<V, E> {
     }
 
     @Override
+    public int modCount() {
+        return this.g.modCount();
+    }
+
+    @Override
     public DirectedEdge<V, E> findEdge(V source, V target) {
         if (source == null || target == null) {
             throw new NullPointerException();

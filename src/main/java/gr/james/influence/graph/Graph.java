@@ -268,6 +268,16 @@ public interface Graph<V, E> extends Iterable<V> {
     Graph<V, E> subGraph(Set<V> vertices);
 
     /**
+     * Returns the number of changes made to this graph during its lifetime.
+     * <p>
+     * The {@code modCount} is a convenient way to check for modifications made in a graph instance between two points
+     * in time.
+     *
+     * @return the number of changes made to this graph during its lifetime
+     */
+    int modCount();
+
+    /**
      * Returns a string representation of this graph.
      *
      * @return a string representation of this graph

@@ -23,6 +23,11 @@ final class UndirectedSubGraph<V, E> extends AbstractUndirectedGraph<V, E> {
     }
 
     @Override
+    public int modCount() {
+        return this.g.modCount();
+    }
+
+    @Override
     public UndirectedEdge<V, E> findEdge(V v, V w) {
         if (v == null || w == null) {
             throw new NullPointerException();

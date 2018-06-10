@@ -10,6 +10,11 @@ final class EdgeReversedDirectedGraph<V, E> extends AbstractDirectedGraph<V, E> 
     }
 
     @Override
+    public int modCount() {
+        return this.g.modCount();
+    }
+
+    @Override
     public DirectedEdge<V, E> findEdge(V source, V target) {
         return g.findEdge(target, source).reverse();
     }

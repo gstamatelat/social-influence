@@ -23,6 +23,11 @@ final class BipartiteSubGraph<V, E> extends AbstractBipartiteGraph<V, E> {
     }
 
     @Override
+    public int modCount() {
+        return this.g.modCount();
+    }
+
+    @Override
     public Set<V> vertexSetA() {
         return Sets.intersection(vertices, g.vertexSetA());
     }

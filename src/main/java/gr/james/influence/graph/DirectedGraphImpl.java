@@ -10,10 +10,12 @@ import java.util.*;
 final class DirectedGraphImpl<V, E> extends AbstractDirectedGraph<V, E> {
     private final Map<V, BiMap<V, DirectedEdge<V, E>>> mOut;
     private final Map<V, BiMap<V, DirectedEdge<V, E>>> mIn;
+    private int modCount;
 
     DirectedGraphImpl() {
         this.mOut = new HashMap<>();
         this.mIn = new HashMap<>();
+        this.modCount = 0;
     }
 
     DirectedGraphImpl(int expectedVertexCount) {
@@ -22,6 +24,7 @@ final class DirectedGraphImpl<V, E> extends AbstractDirectedGraph<V, E> {
         }
         this.mOut = new HashMap<>(expectedVertexCount);
         this.mIn = new HashMap<>(expectedVertexCount);
+        this.modCount = 0;
     }
 
     DirectedGraphImpl(DirectedGraph<V, E> g) {
@@ -35,6 +38,7 @@ final class DirectedGraphImpl<V, E> extends AbstractDirectedGraph<V, E> {
             assert newEdge != null;
         }
         assert Graphs.equals(this, g);
+        this.modCount = 0;
     }
 
     DirectedGraphImpl(UndirectedGraph<V, E> g) {
@@ -50,6 +54,12 @@ final class DirectedGraphImpl<V, E> extends AbstractDirectedGraph<V, E> {
             assert newEdge2 != null;
         }
         assert Graphs.equals(this, g.asDirected());
+        this.modCount = 0;
+    }
+
+    @Override
+    public int modCount() {
+        return this.modCount;
     }
 
     @Override
@@ -117,6 +127,9 @@ final class DirectedGraphImpl<V, E> extends AbstractDirectedGraph<V, E> {
         final Object o1 = this.mOut.putIfAbsent(v, HashBiMap.create());
         final Object o2 = this.mIn.putIfAbsent(v, HashBiMap.create());
         assert (o1 == null) == (o2 == null);
+        if (o1 == null) {
+            this.modCount++;
+        }
         return o1 == null;
     }
 
@@ -136,6 +149,7 @@ final class DirectedGraphImpl<V, E> extends AbstractDirectedGraph<V, E> {
         final Object o1 = this.mOut.remove(v);
         final Object o2 = this.mIn.remove(v);
         assert o1 != null && o2 != null;
+        this.modCount++;
         return true;
     }
 
@@ -153,6 +167,7 @@ final class DirectedGraphImpl<V, E> extends AbstractDirectedGraph<V, E> {
         final DirectedEdge<V, E> e2 = eIn.putIfAbsent(source, e);
         assert (e1 == null && e2 == null) || (e1 != null && e2 != null && e1.equals(e2));
         if (e1 == null) {
+            this.modCount++;
             return e;
         } else {
             return null;
@@ -170,6 +185,9 @@ final class DirectedGraphImpl<V, E> extends AbstractDirectedGraph<V, E> {
         final DirectedEdge<V, E> e1 = eOut.remove(target);
         final DirectedEdge<V, E> e2 = eIn.remove(source);
         assert (e1 == null && e2 == null) || (e1 != null && e2 != null && e1.equals(e2));
+        if (e1 != null) {
+            this.modCount++;
+        }
         return e1;
     }
 }

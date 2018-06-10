@@ -10,6 +10,11 @@ final class UnmodifiableUndirectedGraph<V, E> extends AbstractUndirectedGraph<V,
     }
 
     @Override
+    public int modCount() {
+        return this.g.modCount();
+    }
+
+    @Override
     public UndirectedEdge<V, E> findEdge(V v, V w) {
         return g.findEdge(v, w);
     }

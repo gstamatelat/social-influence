@@ -12,9 +12,11 @@ import java.util.Set;
 
 final class UndirectedGraphImpl<V, E> extends AbstractUndirectedGraph<V, E> {
     private final Map<V, BiMap<V, UndirectedEdge<V, E>>> m;
+    private int modCount;
 
     UndirectedGraphImpl() {
         this.m = new HashMap<>();
+        this.modCount = 0;
     }
 
     UndirectedGraphImpl(int expectedVertexCount) {
@@ -22,6 +24,7 @@ final class UndirectedGraphImpl<V, E> extends AbstractUndirectedGraph<V, E> {
             throw new IllegalArgumentException();
         }
         this.m = new HashMap<>(expectedVertexCount);
+        this.modCount = 0;
     }
 
     UndirectedGraphImpl(UndirectedGraph<V, E> g) {
@@ -35,6 +38,12 @@ final class UndirectedGraphImpl<V, E> extends AbstractUndirectedGraph<V, E> {
             assert newEdge != null;
         }
         assert Graphs.equals(this, g);
+        this.modCount = 0;
+    }
+
+    @Override
+    public int modCount() {
+        return this.modCount;
     }
 
     @Override
@@ -84,6 +93,7 @@ final class UndirectedGraphImpl<V, E> extends AbstractUndirectedGraph<V, E> {
         final UndirectedEdge<V, E> e2 = eIn.putIfAbsent(v, e);
         assert (e1 == null && e2 == null) || (e1 != null && e2 != null && e1.equals(e2));
         if (e1 == null) {
+            this.modCount++;
             return e;
         } else {
             return null;
@@ -101,6 +111,9 @@ final class UndirectedGraphImpl<V, E> extends AbstractUndirectedGraph<V, E> {
         final UndirectedEdge<V, E> e1 = eOut.remove(w);
         final UndirectedEdge<V, E> e2 = eIn.remove(v);
         assert (e1 == null && e2 == null) || (e1 != null && e2 != null && e1.equals(e2));
+        if (e1 != null) {
+            this.modCount++;
+        }
         return e1;
     }
 
@@ -113,6 +126,9 @@ final class UndirectedGraphImpl<V, E> extends AbstractUndirectedGraph<V, E> {
     public boolean addVertex(V v) {
         Conditions.requireNonNull(v);
         final Object o = this.m.putIfAbsent(v, HashBiMap.create());
+        if (o == null) {
+            this.modCount++;
+        }
         return o == null;
     }
 
@@ -128,6 +144,7 @@ final class UndirectedGraphImpl<V, E> extends AbstractUndirectedGraph<V, E> {
         }
         final Object o = this.m.remove(v);
         assert o != null;
+        this.modCount++;
         return true;
     }
 }
