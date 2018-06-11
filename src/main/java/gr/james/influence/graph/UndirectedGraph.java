@@ -51,6 +51,16 @@ public interface UndirectedGraph<V, E> extends Graph<V, E> {
      * @return {@inheritDoc}
      */
     @Override
+    default UndirectedGraph<V, E> copy() {
+        return create(this);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @return {@inheritDoc}
+     */
+    @Override
     default UndirectedGraph<V, E> asUnmodifiable() {
         if (this instanceof UnmodifiableUndirectedGraph) {
             return this;
@@ -65,7 +75,7 @@ public interface UndirectedGraph<V, E> extends Graph<V, E> {
      */
     @Override
     default UndirectedGraph<V, E> toImmutable() {
-        return create(this).asUnmodifiable();
+        return copy().asUnmodifiable();
     }
 
     /**

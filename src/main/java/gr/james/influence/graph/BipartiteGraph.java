@@ -60,6 +60,16 @@ public interface BipartiteGraph<V, E> extends UndirectedGraph<V, E> {
      * @return {@inheritDoc}
      */
     @Override
+    default BipartiteGraph<V, E> copy() {
+        return create(this);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @return {@inheritDoc}
+     */
+    @Override
     default BipartiteGraph<V, E> asUnmodifiable() {
         if (this instanceof UnmodifiableBipartiteGraph) {
             return this;
@@ -74,7 +84,7 @@ public interface BipartiteGraph<V, E> extends UndirectedGraph<V, E> {
      */
     @Override
     default BipartiteGraph<V, E> toImmutable() {
-        return create(this).asUnmodifiable();
+        return copy().asUnmodifiable();
     }
 
     /**

@@ -241,6 +241,11 @@ public interface Graph<V, E> extends Iterable<V> {
 
     /**
      * Creates and returns an immutable graph from a copy of this graph.
+     * <p>
+     * This method is equivalent to
+     * <pre><code>
+     * return copy().asUnmodifiable();
+     * </code></pre>
      *
      * @return an immutable graph from a copy of this graph
      */
@@ -276,6 +281,13 @@ public interface Graph<V, E> extends Iterable<V> {
      * @return the number of changes made to this graph during its lifetime
      */
     int modCount();
+
+    /**
+     * Returns a copy of this graph.
+     *
+     * @return a copy of this graph
+     */
+    Graph<V, E> copy();
 
     /**
      * Returns a string representation of this graph.

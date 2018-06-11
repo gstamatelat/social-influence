@@ -89,6 +89,16 @@ public interface DirectedGraph<V, E> extends Graph<V, E> {
      * @return {@inheritDoc}
      */
     @Override
+    default DirectedGraph<V, E> copy() {
+        return create(this);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @return {@inheritDoc}
+     */
+    @Override
     default DirectedGraph<V, E> asUnmodifiable() {
         if (this instanceof UnmodifiableDirectedGraph) {
             return this;
@@ -103,7 +113,7 @@ public interface DirectedGraph<V, E> extends Graph<V, E> {
      */
     @Override
     default DirectedGraph<V, E> toImmutable() {
-        return create(this).asUnmodifiable();
+        return copy().asUnmodifiable();
     }
 
     /**
