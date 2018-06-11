@@ -258,6 +258,6 @@ public class Tests {
         double p = RandomHelper.getRandom().nextDouble();
         DirectedGraph<Integer, Object> g = new RandomGenerator<Integer, Object>(size, p).generate(VertexProvider.INTEGER_PROVIDER);
         Graphs.connect(g);
-        Assert.assertNotEquals("connectTest", Double.POSITIVE_INFINITY, new DijkstraDiameter<>(g).get());
+        Assert.assertNotEquals("connectTest", Double.POSITIVE_INFINITY, DijkstraDiameter.diameter(g));
     }
 }
