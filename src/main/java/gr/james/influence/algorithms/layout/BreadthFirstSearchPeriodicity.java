@@ -4,10 +4,7 @@ import com.google.common.math.IntMath;
 import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.util.Conditions;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * Implementation of the algorithm based on BFS in <i>Graph-theoretic analysis of finite Markov chains (Jarvis and
@@ -112,7 +109,7 @@ public class BreadthFirstSearchPeriodicity<V> {
      * Returns the graph associated with this instance.
      *
      * @return the graph associated with this instance
-     * @throws java.util.ConcurrentModificationException if the graph has been previously modified
+     * @throws ConcurrentModificationException if the graph has been previously modified
      */
     public DirectedGraph<V, ?> getGraph() {
         Conditions.requireModCount(this.g, modCount);
@@ -127,7 +124,7 @@ public class BreadthFirstSearchPeriodicity<V> {
      * This method runs in constant time.
      *
      * @return the period of the graph
-     * @throws java.util.ConcurrentModificationException if the graph has been previously modified
+     * @throws ConcurrentModificationException if the graph has been previously modified
      */
     public int period() {
         Conditions.requireModCount(this.g, modCount);
@@ -145,7 +142,7 @@ public class BreadthFirstSearchPeriodicity<V> {
      * This method runs in constant time.
      *
      * @return {@code true} if the input graph is aperiodic, otherwise {@code false}
-     * @throws java.util.ConcurrentModificationException if the graph has been previously modified
+     * @throws ConcurrentModificationException if the graph has been previously modified
      */
     public boolean isAperiodic() {
         Conditions.requireModCount(this.g, modCount);

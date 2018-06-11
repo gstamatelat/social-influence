@@ -2,7 +2,6 @@ package gr.james.influence.algorithms.distance;
 
 import com.google.common.collect.Lists;
 import gr.james.influence.algorithms.VertexIterator;
-import gr.james.influence.annotation.UnmodifiableGraph;
 import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.graph.DirectedEdge;
 import gr.james.influence.graph.DirectedGraph;
@@ -26,6 +25,7 @@ public class DijkstraClosestFirstIterator<V> implements VertexIterator<V> {
     private final Map<V, V> edgeTo;
     private final DirectedGraph<V, ?> g;
     private final PriorityQueue<V> pq;
+    private final int modCount;
 
     /**
      * Construct an instance of {@link DijkstraClosestFirstIterator} with a given {@link DirectedGraph} and a
@@ -38,12 +38,13 @@ public class DijkstraClosestFirstIterator<V> implements VertexIterator<V> {
      * @throws NullPointerException   if {@code g} or {@code source} is {@code null}
      * @throws IllegalVertexException if {@code source} is not in {@code g}
      */
-    public DijkstraClosestFirstIterator(@UnmodifiableGraph DirectedGraph<V, ?> g, V source) {
+    public DijkstraClosestFirstIterator(DirectedGraph<V, ?> g, V source) {
         Conditions.requireVertexInGraph(g, source);
 
         this.g = g;
         this.distTo = new HashMap<>();
         this.edgeTo = new HashMap<>();
+        this.modCount = g.modCount();
 
         for (V v : g) {
             this.distTo.put(v, Double.POSITIVE_INFINITY);
@@ -73,10 +74,13 @@ public class DijkstraClosestFirstIterator<V> implements VertexIterator<V> {
      * Returns the next closest vertex to the source.
      *
      * @return the next closest vertex to the source
-     * @throws NoSuchElementException if there are no more vertices to be marked
+     * @throws NoSuchElementException          if there are no more vertices to be marked
+     * @throws ConcurrentModificationException if the graph has been previously modified
      */
     @Override
     public V next() {
+        Conditions.requireModCount(this.g, this.modCount);
+
         final V u = pq.poll();
 
         if (u == null) {
@@ -99,9 +103,12 @@ public class DijkstraClosestFirstIterator<V> implements VertexIterator<V> {
 
     /**
      * {@inheritDoc}
+     *
+     * @throws ConcurrentModificationException if the graph has been previously modified
      */
     @Override
     public DirectedGraph<V, ?> getGraph() {
+        Conditions.requireModCount(this.g, this.modCount);
         return g;
     }
 
@@ -116,10 +123,12 @@ public class DijkstraClosestFirstIterator<V> implements VertexIterator<V> {
      *
      * @param v the vertex to get the distance to
      * @return the distance of the shortest path to {@code v}
-     * @throws NullPointerException   if {@code v} is null
-     * @throws IllegalVertexException if {@code v} is not in the graph
+     * @throws NullPointerException            if {@code v} is null
+     * @throws IllegalVertexException          if {@code v} is not in the graph
+     * @throws ConcurrentModificationException if the graph has been previously modified
      */
     public double distanceTo(V v) {
+        Conditions.requireModCount(this.g, this.modCount);
         Conditions.requireNonNull(v);
         final Double distance = distTo.get(v);
         if (distance == null) {
@@ -140,10 +149,12 @@ public class DijkstraClosestFirstIterator<V> implements VertexIterator<V> {
      *
      * @param v the vertex to get the shortest route to
      * @return an unmodifiable {@link List} of {@link DirectedEdge} representing the shortest route to {@code v}
-     * @throws NullPointerException   if {@code v} is null
-     * @throws IllegalVertexException if {@code v} is not in the graph
+     * @throws NullPointerException            if {@code v} is null
+     * @throws IllegalVertexException          if {@code v} is not in the graph
+     * @throws ConcurrentModificationException if the graph has been previously modified
      */
     public List<DirectedEdge<V, ?>> pathTo(V v) {
+        Conditions.requireModCount(this.g, this.modCount);
         Conditions.requireNonNull(v);
         if (!edgeTo.containsKey(v)) {
             throw new IllegalVertexException();
