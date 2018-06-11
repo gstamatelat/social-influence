@@ -436,14 +436,11 @@ public final class Graphs {
      * @param <V> the vertex type
      * @return {@code true} if {@code g} converges, otherwise {@code false}
      * @throws NullPointerException if {@code g} is {@code null}
+     * @deprecated will re removed after 2018-12-11, use {@link BreadthFirstSearchPeriodicity#isAperiodic()}
      */
+    @Deprecated
     public static <V> boolean converges(DirectedGraph<V, ?> g) {
-        for (Set<V> component : Graphs.getStubbornComponents(g)) {
-            if (!BreadthFirstSearchPeriodicity.isAperiodic(g.subGraph(component))) {
-                return false;
-            }
-        }
-        return true;
+        return BreadthFirstSearchPeriodicity.isAperiodic(g);
     }
 
     /**

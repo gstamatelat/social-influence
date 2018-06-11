@@ -8,6 +8,7 @@ import gr.james.influence.algorithms.generators.test.TwoWheelsGenerator;
 import gr.james.influence.algorithms.iterators.GraphStateIterator;
 import gr.james.influence.algorithms.iterators.OrderedVertexIterator;
 import gr.james.influence.algorithms.iterators.RandomSurferIterator;
+import gr.james.influence.algorithms.layout.BreadthFirstSearchPeriodicity;
 import gr.james.influence.algorithms.scoring.DeGroot;
 import gr.james.influence.algorithms.scoring.DegreeCentrality;
 import gr.james.influence.algorithms.scoring.PageRank;
@@ -206,7 +207,7 @@ public class Tests {
     @Test
     public void deGrootTest() {
         DirectedGraph<Integer, Object> g = null;
-        while (g == null || !Graphs.converges(g)) {
+        while (g == null || !BreadthFirstSearchPeriodicity.isAperiodic(g)) {
             final int size = RandomHelper.getRandom().nextInt(50) + 50;
             final double p = RandomHelper.getRandom().nextDouble();
             final RandomGenerator<Integer, Object> generator = new RandomGenerator<>(size, p);
