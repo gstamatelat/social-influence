@@ -7,6 +7,7 @@ import gr.james.influence.util.collections.GraphState;
 import java.util.HashSet;
 import java.util.Set;
 
+@Deprecated
 public class ClusteringCoefficient {
     public static <V, E> GraphState<V, Double> localClusteringCoefficient(DirectedGraph<V, E> g) {
         GraphState<V, Double> cc = GraphState.create();
