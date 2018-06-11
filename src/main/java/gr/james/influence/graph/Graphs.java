@@ -418,7 +418,7 @@ public final class Graphs {
      */
     public static <V> boolean converges(DirectedGraph<V, ?> g) {
         for (Set<V> component : Graphs.getStubbornComponents(g)) {
-            if (!Graphs.isStrongAperiodic(g.subGraph(component))) {
+            if (!BreadthFirstSearchPeriodicity.isAperiodic(g.subGraph(component))) {
                 return false;
             }
         }
