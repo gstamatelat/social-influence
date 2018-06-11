@@ -406,6 +406,27 @@ public final class Graphs {
     }
 
     /**
+     * Checks if a {@link DirectedGraph} is a markov chain.
+     * <p>
+     * A directed graph represents a Markov chain if every vertex has at least one outgoing edge.
+     * <p>
+     * This method runs in time O(V).
+     *
+     * @param g   the graph
+     * @param <V> the vertex type
+     * @return {@code true} if {@code g} is a markov chain, otherwise {@code false}
+     * @throws NullPointerException if {@code g} is {@code null}
+     */
+    public static <V> boolean isMarkovChain(DirectedGraph<V, ?> g) {
+        for (V v : g) {
+            if (g.adjacentOut(v).size() == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
      * Checks weather the updating process in a graph converges.
      * <p>
      * According to <i>Social and Economic Networks (Jackson)</i>, a graph is convergent if and only if every set of
