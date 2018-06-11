@@ -5,6 +5,17 @@ import gr.james.influence.util.Conditions;
 
 import java.util.Set;
 
+/**
+ * Represents a bipartite graph, a graph whose vertices can be divided into two disjoint and independent sets A and B
+ * such that each edge connects a vertex in A to one in B.
+ * <p>
+ * A {@code BipartiteGraph} is implemented as an {@link UndirectedGraph} which also contains the two vertex sets A and
+ * B. The {@code BipartiteGraph} class guarantees, via exceptions, that there won't be any edges between two vertices of
+ * the same disjoint set.
+ *
+ * @param <V> the vertex type
+ * @param <E> the edge type
+ */
 public interface BipartiteGraph<V, E> extends UndirectedGraph<V, E> {
     /**
      * Creates and returns a new empty {@link BipartiteGraph}.
@@ -84,7 +95,7 @@ public interface BipartiteGraph<V, E> extends UndirectedGraph<V, E> {
      * More specifically, this method will return {@code vertexSetA()} if {@code v} is in set {@code A} and
      * {@code vertexSetB()} if {@code v} is in set {@code B}.
      *
-     * @param v the vertex to get its disjoint bipartite set
+     * @param v the vertex
      * @return the disjoint set of this bipartite graph that contains {@code v}
      * @throws NullPointerException   if {@code v} is {@code null}
      * @throws IllegalVertexException if {@code v} is not an element of this graph
@@ -104,6 +115,17 @@ public interface BipartiteGraph<V, E> extends UndirectedGraph<V, E> {
         }
     }
 
+    /**
+     * Returns the disjoint set of this bipartite graph that does not contain the specified vertex.
+     * <p>
+     * More specifically, this method will return {@code vertexSetB()} if {@code v} is in set {@code A} and
+     * {@code vertexSetA()} if {@code v} is in set {@code B}.
+     *
+     * @param v the vertex
+     * @return the disjoint set of this bipartite graph that does not contain {@code v}
+     * @throws NullPointerException   if {@code v} is {@code null}
+     * @throws IllegalVertexException if {@code v} is not an element of this graph
+     */
     default Set<V> otherSetOf(V v) {
         Conditions.requireNonNull(v);
         final boolean inA = vertexSetA().contains(v);
