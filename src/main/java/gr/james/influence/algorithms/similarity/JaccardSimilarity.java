@@ -1,7 +1,6 @@
 package gr.james.influence.algorithms.similarity;
 
 import com.google.common.collect.Sets;
-import gr.james.influence.annotation.ModifiableGraph;
 import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.util.Conditions;
@@ -36,7 +35,7 @@ public class JaccardSimilarity<V> implements VertexSimilarity<V, Double> {
      * @param g the {@link DirectedGraph} to construct this instance from
      * @throws NullPointerException if {@code g} is {@code null}
      */
-    public JaccardSimilarity(@ModifiableGraph DirectedGraph<V, ?> g) {
+    public JaccardSimilarity(DirectedGraph<V, ?> g) {
         this.g = Conditions.requireNonNull(g);
     }
 
