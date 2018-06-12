@@ -49,7 +49,7 @@ public final class Graphs {
             pre = next;
         }
         g.addEdge(pre.iterator().next(), start.iterator().next());
-        assert KosarajuComponents.execute(g).size() == 1;
+        assert KosarajuComponents.components(g).size() == 1;
     }
 
     public static <V, E> DirectedGraph<V, E> randomizeEdgeWeights(DirectedGraph<V, E> g, boolean unused) {
@@ -349,7 +349,7 @@ public final class Graphs {
      * @see #getStubbornVertices(DirectedGraph)
      */
     public static <V> Set<Set<V>> getStubbornComponents(DirectedGraph<V, ?> g) {
-        final Set<Set<V>> scc = KosarajuComponents.execute(g);
+        final Set<Set<V>> scc = KosarajuComponents.components(g);
         final Set<Set<V>> stubbornComponents = new HashSet<>();
         for (Set<V> c : scc) {
             if (isClosedComponent(g, c)) {

@@ -3,6 +3,7 @@ package gr.james.influence.algorithms.components;
 import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.util.Conditions;
 
+import java.util.ConcurrentModificationException;
 import java.util.Set;
 
 /**
@@ -15,6 +16,7 @@ public interface ConnectedComponents<V> {
      * Returns how many strongly connected components there are in the graph.
      *
      * @return how many connected components there are
+     * @throws ConcurrentModificationException if the graph has been previously modified
      */
     default int size() {
         return components().size();
@@ -26,8 +28,9 @@ public interface ConnectedComponents<V> {
      * @param v1 one vertex
      * @param v2 the other vertex
      * @return {@code true} if {@code v1} and {@code v2} are in the same component, otherwise {@code false}
-     * @throws NullPointerException   if either vertex is {@code null}
-     * @throws IllegalVertexException if either vertex is not in the graph
+     * @throws NullPointerException            if either vertex is {@code null}
+     * @throws IllegalVertexException          if either vertex is not in the graph
+     * @throws ConcurrentModificationException if the graph has been previously modified
      */
     default boolean connected(V v1, V v2) {
         final Set<V> component1 = component(v1);
@@ -40,8 +43,9 @@ public interface ConnectedComponents<V> {
      *
      * @param v the vertex of which to get the enclosing component
      * @return the unmodifiable connected component of {@code v}
-     * @throws NullPointerException   if {@code v} is {@code null}
-     * @throws IllegalVertexException if {@code v} is not in the graph
+     * @throws NullPointerException            if {@code v} is {@code null}
+     * @throws IllegalVertexException          if {@code v} is not in the graph
+     * @throws ConcurrentModificationException if the graph has been previously modified
      */
     default Set<V> component(V v) {
         Conditions.requireNonNull(v);
@@ -57,6 +61,7 @@ public interface ConnectedComponents<V> {
      * Get all connected components of the graph associated with this instance.
      *
      * @return an unmodifiable set of connected components of the graph
+     * @throws ConcurrentModificationException if the graph has been previously modified
      */
     Set<Set<V>> components();
 }

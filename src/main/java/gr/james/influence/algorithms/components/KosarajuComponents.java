@@ -1,6 +1,5 @@
 package gr.james.influence.algorithms.components;
 
-import gr.james.influence.annotation.UnmodifiableGraph;
 import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.util.Conditions;
 import gr.james.influence.util.collections.GraphState;
@@ -9,12 +8,13 @@ import java.util.*;
 
 /**
  * Implementation of the <a href="https://en.wikipedia.org/wiki/Kosaraju%27s_algorithm">Kosaraju's algorithm</a> to
- * find the strongly connected components of a directed graph. This implementation uses an iterative approach and is not
- * prone to {@link StackOverflowError}.
+ * find the strongly connected components of a directed graph.
  *
  * @param <V> the type of vertex
  */
 public class KosarajuComponents<V> implements ConnectedComponents<V> {
+    private final DirectedGraph<V, ?> g;
+    private final int modCount;
     private final Set<Set<V>> components;
 
     /**
@@ -23,23 +23,28 @@ public class KosarajuComponents<V> implements ConnectedComponents<V> {
      * @param g the graph with which to construct this instance from
      * @throws NullPointerException if {@code g} is {@code null}
      */
-    public KosarajuComponents(@UnmodifiableGraph DirectedGraph<V, ?> g) {
-        Conditions.requireNonNull(g);
+    public KosarajuComponents(DirectedGraph<V, ?> g) {
+        this.g = g;
+        this.modCount = g.modCount();
         this.components = executeAlgorithm(g);
     }
 
     /**
-     * Convenience function to calculate the strongly connected components of a graph.
+     * Returns the strongly connected components of the graph.
      * <p>
-     * This method will instantiate {@link KosarajuComponents} with the given graph {@code g} and invoke the
-     * {@link #components()} method.
+     * This is a convenience method equivalent to
+     * <pre><code>
+     * return new KosarajuComponents&lt;&gt;(g).components();
+     * </code></pre>
      *
-     * @param g   the graph of which to get the components
-     * @param <V> the type of vertex
-     * @return an unmodifiable set of strongly connected components of the graph
+     * @param g   the graph
+     * @param <V> the vertex type
+     * @return an unmodifiable set of strongly connected components of {@code g}
      * @throws NullPointerException if {@code g} is {@code null}
+     * @see #KosarajuComponents(DirectedGraph)
+     * @see #components()
      */
-    public static <V> Set<Set<V>> execute(DirectedGraph<V, ?> g) {
+    public static <V> Set<Set<V>> components(DirectedGraph<V, ?> g) {
         return new KosarajuComponents<>(g).components();
     }
 
@@ -109,11 +114,12 @@ public class KosarajuComponents<V> implements ConnectedComponents<V> {
 
     /**
      * {@inheritDoc}
-     * <p>
-     * This method runs in constant time.
+     *
+     * @throws ConcurrentModificationException {@inheritDoc}
      */
     @Override
     public Set<Set<V>> components() {
+        Conditions.requireModCount(this.g, this.modCount);
         return this.components;
     }
 }
