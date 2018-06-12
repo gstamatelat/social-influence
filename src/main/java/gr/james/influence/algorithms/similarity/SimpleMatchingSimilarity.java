@@ -37,7 +37,7 @@ public class SimpleMatchingSimilarity<V> implements VertexSimilarity<V, Double> 
      * @param g the {@link DirectedGraph} to construct this instance from
      * @throws NullPointerException if {@code g} is {@code null}
      */
-    public SimpleMatchingSimilarity(@ModifiableGraph DirectedGraph<V, ?> g) {
+    public SimpleMatchingSimilarity(DirectedGraph<V, ?> g) {
         this.directedGraph = Conditions.requireNonNull(g);
         this.bipartiteGraph = null;
     }
