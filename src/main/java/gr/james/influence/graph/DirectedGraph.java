@@ -5,29 +5,13 @@ import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.exceptions.IllegalWeightException;
 import gr.james.influence.util.Finals;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.Set;
 
 /**
- * Represents a weighted and directed graph which can contain self loops but not parallel edges.
- * <p>
- * More formally, any ordered pair of endpoints may correspond to at most one edge.
- * <p>
- * An ordered pair {@code (a, b)} is a pair of objects where the order in which the objects appear in the pair is
- * significant: the ordered pair {@code (a, b)} is different from the ordered pair {@code (b, a)} unless {@code a = b}.
- * <h2>Vertices and edges</h2>
- * Objects of type {@code <V>} are used as vertices in the graph and each vertex is identified by the reference to this
- * object. Such objects must be unique in the scope of a graph. Methods that accept vertex objects as arguments will
- * automatically (but not silently) handle duplicate values.
- * <p>
- * On the other hand, edge objects {@code <E>} are objects that attach to higher level edges in the graph and, thus,
- * need not be unique. In fact, edge objects can also be {@code null}. It is the client's responsibility to ensure
- * uniqueness for edge objects if such behavior is desired.
- * <p>
- * Both vertex and edge types {@code <V>} and {@code <E>} need to be immutable or effectively immutable.
- * <h2>Collections returned</h2>
- * Methods that return collections ({@link Map Maps} and {@link Set Sets} return read-only views of the actual
- * collections they represent, meaning that you can't insert, remove or reorder elements. These collections are backed
- * by the graph so changes to the graph will reflect on the collections after they have been returned.
+ * Represents a weighted and directed {@link Graph} which can contain self loops but not parallel edges.
  *
  * @param <V> the vertex type
  * @param <E> the edge type

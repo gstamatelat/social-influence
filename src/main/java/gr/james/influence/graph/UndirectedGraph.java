@@ -7,6 +7,12 @@ import gr.james.influence.util.Finals;
 
 import java.util.*;
 
+/**
+ * Represents a weighted and undirected {@link Graph} which can contain self loops but not parallel edges.
+ *
+ * @param <V> the vertex type
+ * @param <E> the edge type
+ */
 public interface UndirectedGraph<V, E> extends Graph<V, E> {
     /**
      * Creates and returns a new empty {@link UndirectedGraph}.

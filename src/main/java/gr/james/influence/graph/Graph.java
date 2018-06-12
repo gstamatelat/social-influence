@@ -7,6 +7,20 @@ import java.util.*;
 
 /**
  * Base interface for all graph types.
+ * <h2>Vertices and edges</h2>
+ * Objects of type {@code <V>} are used as vertices in the graph and each vertex is identified by the reference to this
+ * object. Such objects must be unique in the scope of a graph. Methods that accept vertex objects as arguments will
+ * automatically (but not silently) handle duplicate values.
+ * <p>
+ * On the other hand, edge objects {@code <E>} are objects that attach to higher level edges in the graph and, thus,
+ * need not be unique. In fact, edge objects can also be {@code null}. It is the client's responsibility to ensure
+ * uniqueness for edge objects if such behavior is desired.
+ * <p>
+ * Both vertex and edge types {@code <V>} and {@code <E>} need to be immutable or effectively immutable.
+ * <h2>Collections returned</h2>
+ * Methods that return collections ({@link Map Maps} and {@link Set Sets} return read-only views of the actual
+ * collections they represent, meaning that you can't insert, remove or reorder elements. These collections are backed
+ * by the graph so changes to the graph will reflect on the collections after they have been returned.
  *
  * @param <V> the vertex type
  * @param <E> the edge type
@@ -30,6 +44,8 @@ public interface Graph<V, E> extends Iterable<V> {
      * <pre><code>
      * return vertexSet().iterator().next();
      * </code></pre>
+     * <p>
+     * Complexity: O(1)
      *
      * @return an arbitrary vertex from the graph
      * @throws NoSuchElementException if the graph is empty
@@ -110,6 +126,8 @@ public interface Graph<V, E> extends Iterable<V> {
      * <p>
      * If the vertex is already contained in the graph, this method will throw {@link IllegalVertexException} to
      * indicate this unusual behavior.
+     * <p>
+     * Complexity: O(1)
      *
      * @param vertexProvider the vertex provider
      * @return the newly added vertex
