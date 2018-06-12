@@ -1,7 +1,6 @@
 package gr.james.influence.algorithms.similarity;
 
 import com.google.common.collect.Sets;
-import gr.james.influence.annotation.ModifiableGraph;
 import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.graph.BipartiteGraph;
 import gr.james.influence.graph.DirectedGraph;
@@ -50,7 +49,7 @@ public class SimpleMatchingSimilarity<V> implements VertexSimilarity<V, Double> 
      * @param g the {@link BipartiteGraph} to construct this instance from
      * @throws NullPointerException if {@code g} is {@code null}
      */
-    public SimpleMatchingSimilarity(@ModifiableGraph BipartiteGraph<V, ?> g) {
+    public SimpleMatchingSimilarity(BipartiteGraph<V, ?> g) {
         this.directedGraph = null;
         this.bipartiteGraph = Conditions.requireNonNull(g);
     }
