@@ -1,7 +1,6 @@
 package gr.james.influence.algorithms.similarity;
 
 import com.google.common.collect.Sets;
-import gr.james.influence.annotation.UnmodifiableGraph;
 import gr.james.influence.exceptions.IllegalVertexException;
 import gr.james.influence.graph.BipartiteGraph;
 import gr.james.influence.graph.DirectedEdge;
@@ -9,6 +8,7 @@ import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.graph.UndirectedEdge;
 import gr.james.influence.util.Conditions;
 
+import java.util.ConcurrentModificationException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -31,6 +31,7 @@ import java.util.function.ToDoubleFunction;
 public class PearsonSimilarity<V> implements VertexSimilarity<V, Double> {
     private final DirectedGraph<V, ?> directedGraph;
     private final BipartiteGraph<V, ?> bipartiteGraph;
+    private final int modCount;
     private final Map<V, Double> averages;
     private final Map<V, Double> variances;
 
@@ -43,11 +44,12 @@ public class PearsonSimilarity<V> implements VertexSimilarity<V, Double> {
      * @throws NullPointerException     if {@code g} is {@code null}
      * @throws IllegalArgumentException if {@code g} does not contain any vertices
      */
-    public PearsonSimilarity(@UnmodifiableGraph DirectedGraph<V, ?> g) {
+    public PearsonSimilarity(DirectedGraph<V, ?> g) {
         Conditions.requireArgument(g.vertexCount() > 0, "Input graph is empty");
 
         this.directedGraph = g;
         this.bipartiteGraph = null;
+        this.modCount = g.modCount();
         this.averages = new HashMap<>();
         this.variances = new HashMap<>();
 
@@ -74,11 +76,12 @@ public class PearsonSimilarity<V> implements VertexSimilarity<V, Double> {
      * @throws NullPointerException     if {@code g} is {@code null}
      * @throws IllegalArgumentException if {@code g} does not contain any vertices
      */
-    public PearsonSimilarity(@UnmodifiableGraph BipartiteGraph<V, ?> g) {
+    public PearsonSimilarity(BipartiteGraph<V, ?> g) {
         Conditions.requireArgument(g.vertexCount() > 0, "Input graph is empty");
 
         this.directedGraph = null;
         this.bipartiteGraph = g;
+        this.modCount = g.modCount();
         this.averages = new HashMap<>();
         this.variances = new HashMap<>();
 
@@ -124,15 +127,17 @@ public class PearsonSimilarity<V> implements VertexSimilarity<V, Double> {
      * @param v1 one vertex
      * @param v2 the other vertex
      * @return the Pearson correlation between {@code v1} and {@code v2} or {@link Double#NaN} if undefined
-     * @throws NullPointerException          if either {@code v1} or {@code v2} is {@code null}
-     * @throws IllegalVertexException        if either {@code v1} or {@code v2} is not in the graph
-     * @throws UnsupportedOperationException if the graph is bipartite and {@code v1} and {@code v2} are in the same
-     *                                       group
+     * @throws NullPointerException            if either {@code v1} or {@code v2} is {@code null}
+     * @throws IllegalVertexException          if either {@code v1} or {@code v2} is not in the graph
+     * @throws UnsupportedOperationException   if the graph is bipartite and {@code v1} and {@code v2} are in the same
+     *                                         group
+     * @throws ConcurrentModificationException if the graph has been previously modified
      */
     @Override
     public Double similarity(V v1, V v2) {
         assert (directedGraph == null) ^ (bipartiteGraph == null);
         if (directedGraph != null) {
+            Conditions.requireModCount(this.directedGraph, this.modCount);
             final double similarity = cov(directedGraph.adjacentOut(v1), directedGraph.adjacentOut(v2),
                     v -> directedGraph.getWeightElse(v1, v, 0), v -> directedGraph.getWeightElse(v2, v, 0),
                     averages.get(v1), averages.get(v2),
@@ -141,6 +146,7 @@ public class PearsonSimilarity<V> implements VertexSimilarity<V, Double> {
             assert Double.isNaN(similarity) == (variance(v1) == 0 || variance(v2) == 0);
             return similarity;
         } else {
+            Conditions.requireModCount(this.bipartiteGraph, this.modCount);
             if (!bipartiteGraph.setOf(v1).equals(bipartiteGraph.setOf(v2))) {
                 throw new UnsupportedOperationException();
             }
@@ -162,11 +168,13 @@ public class PearsonSimilarity<V> implements VertexSimilarity<V, Double> {
      *
      * @param v the vertex to return the variance for
      * @return the variance of {@code v}
-     * @throws NullPointerException   if {@code v} is {@code null}
-     * @throws IllegalVertexException if {@code v} is not in the graph
+     * @throws NullPointerException            if {@code v} is {@code null}
+     * @throws IllegalVertexException          if {@code v} is not in the graph
+     * @throws ConcurrentModificationException if the graph has been previously modified
      */
     public double variance(V v) {
         Conditions.requireNonNull(v);
+        Conditions.requireModCount(this.directedGraph == null ? this.bipartiteGraph : this.directedGraph, this.modCount);
         assert (directedGraph == null) ^ (bipartiteGraph == null);
         final int count = (directedGraph != null) ? directedGraph.vertexCount() : bipartiteGraph.otherSetOf(v).size();
         final Double mapping = this.variances.get(v);
@@ -185,11 +193,13 @@ public class PearsonSimilarity<V> implements VertexSimilarity<V, Double> {
      *
      * @param v the vertex to return the average for
      * @return the average of {@code v}
-     * @throws NullPointerException   if {@code v} is {@code null}
-     * @throws IllegalVertexException if {@code v} is not in the graph
+     * @throws NullPointerException            if {@code v} is {@code null}
+     * @throws IllegalVertexException          if {@code v} is not in the graph
+     * @throws ConcurrentModificationException if the graph has been previously modified
      */
     public double average(V v) {
         Conditions.requireNonNull(v);
+        Conditions.requireModCount(this.directedGraph == null ? this.bipartiteGraph : this.directedGraph, this.modCount);
         final Double mapping = this.averages.get(v);
         if (mapping == null) {
             throw new IllegalVertexException("Vertex %s is not in the graph", v);
