@@ -7,6 +7,7 @@ final class SwappedBipartiteGraph<V, E> extends AbstractBipartiteGraph<V, E> {
 
     SwappedBipartiteGraph(BipartiteGraph<V, E> g) {
         this.g = g;
+        assert Graphs.equals(this, g);
     }
 
     @Override
