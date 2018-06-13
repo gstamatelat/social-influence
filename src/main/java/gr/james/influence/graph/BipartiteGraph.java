@@ -151,6 +151,11 @@ public interface BipartiteGraph<V, E> extends UndirectedGraph<V, E> {
         }
     }
 
+    /**
+     * Returns a view of this graph, in which the vertex sets {@code A} and {@code B} are swapped.
+     *
+     * @return a view of this graph, in which the vertex sets {@code A} and {@code B} are swapped
+     */
     default BipartiteGraph<V, E> asSwapped() {
         return new SwappedBipartiteGraph<>(this);
     }
