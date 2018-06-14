@@ -99,7 +99,7 @@ public interface UndirectedEdge<V, E> {
      * for the {@code equals} method.
      *
      * @param obj the reference object with which to compare
-     * @return {@code true} if {@code obj} is equal to this {@link DirectedEdge}, otherwise {@code false}
+     * @return {@code true} if {@code obj} is equal to this edge, otherwise {@code false}
      */
     @Override
     boolean equals(Object obj);
