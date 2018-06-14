@@ -89,7 +89,7 @@ public interface UndirectedEdge<V, E> {
     String toString();
 
     /**
-     * Indicates whether some object is equal to this {@link UndirectedEdge}.
+     * Indicates whether some object is equal to this edge.
      * <p>
      * This method will return {@code true} if {@code obj} is of type {@link UndirectedEdge} and is equal to this edge.
      * Two {@link UndirectedEdge} objects are equal if the respective fields {@link #value()}, {@link #v()},
@@ -105,9 +105,9 @@ public interface UndirectedEdge<V, E> {
     boolean equals(Object obj);
 
     /**
-     * Returns a hash code value for this {@link UndirectedEdge}.
+     * Returns a hash code value for this edge.
      *
-     * @return a hash code value for this {@link UndirectedEdge}
+     * @return a hash code value for this edge
      */
     @Override
     int hashCode();

@@ -71,7 +71,7 @@ public interface DirectedEdge<V, E> {
     String toString();
 
     /**
-     * Indicates whether some object is equal to this {@link DirectedEdge}.
+     * Indicates whether some object is equal to this edge.
      * <p>
      * This method will return {@code true} if {@code obj} is of type {@link DirectedEdge} and is equal to this edge.
      * Two {@link DirectedEdge} objects are equal if the respective fields {@link #value()}, {@link #source()},
@@ -84,9 +84,9 @@ public interface DirectedEdge<V, E> {
     boolean equals(Object obj);
 
     /**
-     * Returns a hash code value for this {@link DirectedEdge}.
+     * Returns a hash code value for this edge.
      *
-     * @return a hash code value for this {@link DirectedEdge}
+     * @return a hash code value for this edge
      */
     @Override
     int hashCode();
