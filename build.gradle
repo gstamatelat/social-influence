@@ -12,7 +12,7 @@ dependencies {
     compile 'org.slf4j:slf4j-api:1.7.25',
             'com.google.guava:guava:25.1-jre',
             'com.google.code.gson:gson:2.8.2',
-            'gr.james:random-sampling:0.4'
+            'gr.james:random-sampling:0.5'
     runtime 'ch.qos.logback:logback-classic:1.2.3'
     testCompile 'junit:junit:4.12'
 }
