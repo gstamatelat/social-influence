@@ -9,9 +9,9 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * Tests for {@link JaccardMinSimilarity}.
+ * Tests for {@link OverlapSimilarity}.
  */
-public class JaccardMinSimilarityTests {
+public class OverlapSimilarityTests {
     /**
      * Test for the graph {A->B, A->C, C->B}.
      */
@@ -22,13 +22,13 @@ public class JaccardMinSimilarityTests {
         g.addEdge("A", "B");
         g.addEdge("A", "C");
         g.addEdge("C", "B");
-        final VertexSimilarity<String, Double> jaccard = new JaccardMinSimilarity<>(g);
-        Assert.assertTrue("JaccardMinSimilarityTests.simple", Double.isNaN(jaccard.similarity("A", "B")));
-        Assert.assertEquals("JaccardMinSimilarityTests.simple", 1.0, jaccard.similarity("A", "C"), 1e-4);
-        Assert.assertTrue("JaccardMinSimilarityTests.simple", Double.isNaN(jaccard.similarity("B", "C")));
-        Assert.assertEquals("JaccardMinSimilarityTests.simple", 1.0, jaccard.similarity("A", "A"), 1e-4);
-        Assert.assertEquals("JaccardMinSimilarityTests.simple", 1.0, jaccard.similarity("C", "C"), 1e-4);
-        Assert.assertTrue("JaccardMinSimilarityTests.simple", Double.isNaN(jaccard.similarity("B", "B")));
+        final VertexSimilarity<String, Double> jaccard = new OverlapSimilarity<>(g);
+        Assert.assertTrue("OverlapSimilarityTests.simple", Double.isNaN(jaccard.similarity("A", "B")));
+        Assert.assertEquals("OverlapSimilarityTests.simple", 1.0, jaccard.similarity("A", "C"), 1e-4);
+        Assert.assertTrue("OverlapSimilarityTests.simple", Double.isNaN(jaccard.similarity("B", "C")));
+        Assert.assertEquals("OverlapSimilarityTests.simple", 1.0, jaccard.similarity("A", "A"), 1e-4);
+        Assert.assertEquals("OverlapSimilarityTests.simple", 1.0, jaccard.similarity("C", "C"), 1e-4);
+        Assert.assertTrue("OverlapSimilarityTests.simple", Double.isNaN(jaccard.similarity("B", "B")));
     }
 
     /**
@@ -38,10 +38,10 @@ public class JaccardMinSimilarityTests {
     public void empty() {
         final DirectedGraph<Integer, Object> g = DirectedGraph.create();
         g.addVertices(VertexProvider.INTEGER_PROVIDER, 5);
-        final VertexSimilarity<Integer, Double> jaccard = new JaccardMinSimilarity<>(g);
+        final VertexSimilarity<Integer, Double> jaccard = new OverlapSimilarity<>(g);
         for (Integer v : g) {
             for (Integer w : g) {
-                Assert.assertTrue("JaccardMinSimilarityTests.empty", Double.isNaN(jaccard.similarity(v, w)));
+                Assert.assertTrue("OverlapSimilarityTests.empty", Double.isNaN(jaccard.similarity(v, w)));
             }
         }
     }
@@ -53,10 +53,10 @@ public class JaccardMinSimilarityTests {
     public void circle() {
         for (int n = 4; n < 100; n++) {
             final DirectedGraph<Integer, Object> g = new CycleGenerator<Integer, Object>(n).generate(VertexProvider.INTEGER_PROVIDER);
-            final VertexSimilarity<Integer, Double> jaccard = new JaccardMinSimilarity<>(g);
+            final VertexSimilarity<Integer, Double> jaccard = new OverlapSimilarity<>(g);
             for (Integer v : g) {
                 for (Integer e : g.adjacentOut(v)) {
-                    Assert.assertEquals("JaccardMinSimilarityTests.circle",
+                    Assert.assertEquals("OverlapSimilarityTests.circle",
                             0, jaccard.similarity(v, e), 1e-4);
                 }
             }
@@ -69,10 +69,10 @@ public class JaccardMinSimilarityTests {
     @Test
     public void commutativity() {
         final DirectedGraph<Integer, Object> g = new RandomGenerator<Integer, Object>(100, 0.1).generate(VertexProvider.INTEGER_PROVIDER);
-        final VertexSimilarity<Integer, Double> jaccard = new JaccardMinSimilarity<>(g);
+        final VertexSimilarity<Integer, Double> jaccard = new OverlapSimilarity<>(g);
         for (Integer v : g) {
             for (Integer w : g) {
-                Assert.assertEquals("JaccardMinSimilarityTests.commutativity",
+                Assert.assertEquals("OverlapSimilarityTests.commutativity",
                         jaccard.similarity(v, w), jaccard.similarity(w, v), 1e-4);
             }
         }
@@ -84,13 +84,13 @@ public class JaccardMinSimilarityTests {
     @Test
     public void identity() {
         final DirectedGraph<Integer, Object> g = new RandomGenerator<Integer, Object>(100, 0.1).generate(VertexProvider.INTEGER_PROVIDER);
-        final VertexSimilarity<Integer, Double> jaccard = new JaccardMinSimilarity<>(g);
+        final VertexSimilarity<Integer, Double> jaccard = new OverlapSimilarity<>(g);
         for (Integer v : g) {
             if (g.outDegree(v) != 0) {
-                Assert.assertEquals("JaccardMinSimilarityTests.identity",
+                Assert.assertEquals("OverlapSimilarityTests.identity",
                         1.0, jaccard.similarity(v, v), 1e-4);
             } else {
-                Assert.assertTrue("JaccardMinSimilarityTests.identity",
+                Assert.assertTrue("OverlapSimilarityTests.identity",
                         Double.isNaN(jaccard.similarity(v, v)));
             }
         }
@@ -105,10 +105,10 @@ public class JaccardMinSimilarityTests {
         for (Integer v : g) {
             g.addEdge(v, v, 1.0);
         }
-        final VertexSimilarity<Integer, Double> jaccard = new JaccardMinSimilarity<>(g);
+        final VertexSimilarity<Integer, Double> jaccard = new OverlapSimilarity<>(g);
         for (Integer v : g) {
             for (Integer w : g) {
-                Assert.assertEquals("JaccardMinSimilarityTests.complete", 1.0, jaccard.similarity(v, w), 1e-4);
+                Assert.assertEquals("OverlapSimilarityTests.complete", 1.0, jaccard.similarity(v, w), 1e-4);
             }
         }
     }
