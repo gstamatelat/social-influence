@@ -1,9 +1,9 @@
-package gr.james.influence.demo.centralities;
+package centralities;
 
 import gr.james.influence.algorithms.scoring.DecayCentrality;
-import gr.james.influence.demo.simple.CreateDirectedGraph;
 import gr.james.influence.graph.DirectedGraph;
 import gr.james.influence.util.collections.GraphState;
+import simple.CreateDirectedGraph;
 
 /**
  * Demonstration on how to calculate decay centrality on a {@link DirectedGraph}.

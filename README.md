@@ -26,4 +26,4 @@ Java 8 network/graph framework with emphasis on social network analysis.
 ## Demos
 
 For some usage examples see the files inside the
-[demo](src/main/java/gr/james/influence/demo) directory.
+[demo](demo/src) directory.

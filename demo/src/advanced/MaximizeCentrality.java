@@ -1,4 +1,4 @@
-package gr.james.influence.demo;
+package advanced;
 
 import gr.james.influence.algorithms.generators.random.RandomGenerator;
 import gr.james.influence.algorithms.scoring.PageRank;

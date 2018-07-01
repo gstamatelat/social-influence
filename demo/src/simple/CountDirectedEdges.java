@@ -1,4 +1,4 @@
-package gr.james.influence.demo.simple;
+package simple;
 
 import gr.james.influence.graph.DirectedGraph;
 

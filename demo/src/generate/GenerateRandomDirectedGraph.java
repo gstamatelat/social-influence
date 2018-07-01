@@ -1,4 +1,4 @@
-package gr.james.influence.demo;
+package generate;
 
 import gr.james.influence.algorithms.generators.RandomGraphGenerator;
 import gr.james.influence.algorithms.generators.random.RandomGenerator;
