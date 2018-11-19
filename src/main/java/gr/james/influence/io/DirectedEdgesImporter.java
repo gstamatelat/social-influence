@@ -10,7 +10,7 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EdgesImporter<V, E> implements GraphImporter<DirectedGraph<V, E>, V, E> {
+public class DirectedEdgesImporter<V, E> implements GraphImporter<DirectedGraph<V, E>, V, E> {
     public static final String DEFAULT_SEPARATOR = ",";
     public static final double DEFAULT_WEIGHT = 1;
     public static final String PARALLEL_EDGES = "The .edges file contains parallel edge [%s -> %s]";
@@ -18,11 +18,11 @@ public class EdgesImporter<V, E> implements GraphImporter<DirectedGraph<V, E>, V
 
     private final String delimiter;
 
-    public EdgesImporter(String delimiter) {
+    public DirectedEdgesImporter(String delimiter) {
         this.delimiter = delimiter;
     }
 
-    public EdgesImporter() {
+    public DirectedEdgesImporter() {
         this(DEFAULT_SEPARATOR);
     }
 
