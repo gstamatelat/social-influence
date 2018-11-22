@@ -280,7 +280,7 @@ public interface UndirectedGraph<V, E> extends Graph<V, E> {
         if (edge == null) {
             throw new IllegalEdgeException();
         } else {
-            assert edge.weight() > 0;
+            /*assert edge.weight() > 0;*/
             return edge.weight();
         }
     }
@@ -563,7 +563,7 @@ public interface UndirectedGraph<V, E> extends Graph<V, E> {
      * @throws IllegalWeightException if {@code weight} is illegal
      */
     default boolean setEdgeWeight(V v, V w, double weight) {
-        Graphs.requireWeightLegal(weight);
+        /*Graphs.requireWeightLegal(weight);*/
         UndirectedEdge<V, E> previousEdge = removeEdge(v, w);
         if (previousEdge != null) {
             UndirectedEdge<V, E> e = addEdge(v, w, previousEdge.value(), weight);

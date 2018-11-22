@@ -2,7 +2,10 @@ package gr.james.influence.exceptions;
 
 /**
  * An {@code IllegalWeightException} indicates that a weight argument is not valid.
+ *
+ * @deprecated will be removed after 2019-05-22
  */
+@Deprecated
 public class IllegalWeightException extends RuntimeException {
     /**
      * Constructs a new {@link IllegalWeightException}.

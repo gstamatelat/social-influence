@@ -82,7 +82,7 @@ final class UndirectedGraphImpl<V, E> extends AbstractUndirectedGraph<V, E> {
     @Override
     public UndirectedEdge<V, E> addEdge(V v, V w, E edge, double weight) {
         Conditions.requireAllNonNull(v, w);
-        Graphs.requireWeightLegal(weight);
+        /*Graphs.requireWeightLegal(weight);*/
         final BiMap<V, UndirectedEdge<V, E>> eOut = m.get(v);
         final BiMap<V, UndirectedEdge<V, E>> eIn = m.get(w);
         if (eOut == null || eIn == null) {

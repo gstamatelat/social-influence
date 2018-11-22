@@ -13,7 +13,7 @@ final class UndirectedEdgeImpl<V, E> implements UndirectedEdge<V, E> {
         this.v = v;
         this.w = w;
         this.weight = weight;
-        assert Graphs.isWeightLegal(weight);
+        /*assert Graphs.isWeightLegal(weight);*/
     }
 
     @Override
