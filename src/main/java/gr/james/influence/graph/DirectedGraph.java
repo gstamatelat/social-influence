@@ -210,7 +210,7 @@ public interface DirectedGraph<V, E> extends Graph<V, E> {
         if (edge == null) {
             return other;
         } else {
-            assert edge.weight() > 0;
+            /*assert edge.weight() > 0;*/
             return edge.weight();
         }
     }
