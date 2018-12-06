@@ -13,7 +13,7 @@ final class DirectedEdgeImpl<V, E> implements DirectedEdge<V, E> {
         this.source = source;
         this.target = target;
         this.weight = weight;
-        assert Graphs.isWeightLegal(weight);
+        /*assert Graphs.isWeightLegal(weight);*/
     }
 
     @Override

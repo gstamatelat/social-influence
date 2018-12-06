@@ -156,7 +156,7 @@ final class DirectedGraphImpl<V, E> extends AbstractDirectedGraph<V, E> {
     @Override
     public DirectedEdge<V, E> addEdge(V source, V target, E edge, double weight) {
         Conditions.requireAllNonNull(source, target);
-        Graphs.requireWeightLegal(weight);
+        /*Graphs.requireWeightLegal(weight);*/
         final BiMap<V, DirectedEdge<V, E>> eOut = mOut.get(source);
         final BiMap<V, DirectedEdge<V, E>> eIn = mIn.get(target);
         if (eOut == null || eIn == null) {

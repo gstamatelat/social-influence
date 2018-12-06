@@ -180,7 +180,7 @@ public interface DirectedGraph<V, E> extends Graph<V, E> {
         if (edge == null) {
             throw new IllegalEdgeException();
         } else {
-            assert edge.weight() > 0;
+            /*assert edge.weight() > 0;*/
             return edge.weight();
         }
     }
@@ -210,7 +210,7 @@ public interface DirectedGraph<V, E> extends Graph<V, E> {
         if (edge == null) {
             return other;
         } else {
-            assert edge.weight() > 0;
+            /*assert edge.weight() > 0;*/
             return edge.weight();
         }
     }
@@ -522,7 +522,7 @@ public interface DirectedGraph<V, E> extends Graph<V, E> {
      * @throws IllegalWeightException if {@code weight} is illegal
      */
     default boolean setEdgeWeight(V source, V target, double weight) {
-        Graphs.requireWeightLegal(weight);
+        /*Graphs.requireWeightLegal(weight);*/
         DirectedEdge<V, E> previousEdge = removeEdge(source, target);
         if (previousEdge != null) {
             DirectedEdge<V, E> e = addEdge(source, target, previousEdge.value(), weight);

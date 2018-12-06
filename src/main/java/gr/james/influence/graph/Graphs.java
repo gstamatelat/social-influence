@@ -3,7 +3,6 @@ package gr.james.influence.graph;
 import gr.james.influence.algorithms.components.KosarajuComponents;
 import gr.james.influence.algorithms.layout.BreadthFirstSearchPeriodicity;
 import gr.james.influence.exceptions.IllegalVertexException;
-import gr.james.influence.exceptions.IllegalWeightException;
 import gr.james.influence.util.RandomHelper;
 import gr.james.sampling.EfraimidisSampling;
 import gr.james.sampling.RandomSampling;
@@ -21,7 +20,7 @@ public final class Graphs {
     private Graphs() {
     }
 
-    public static boolean isWeightLegal(double weight) {
+    /*public static boolean isWeightLegal(double weight) {
         return !Double.isInfinite(weight) && !Double.isNaN(weight);
     }
 
@@ -30,7 +29,7 @@ public final class Graphs {
             throw new IllegalWeightException();
         }
         return weight;
-    }
+    }*/
 
     public static <V, E> void connect(DirectedGraph<V, E> g) {
         final Set<Set<V>> scc = new KosarajuComponents<>(g).components();
