@@ -32,6 +32,7 @@ public class MinimumLinearArrangement<V> {
      *
      * @param g the graph
      * @param r the random seed
+     * @throws NullPointerException if {@code g} or {@code r} is {@code null}
      */
     public MinimumLinearArrangement(@UnmodifiableGraph UndirectedGraph<V, ?> g, Random r) {
         this.g = g;
@@ -51,6 +52,7 @@ public class MinimumLinearArrangement<V> {
      * @param arrangement the linear arrangement
      * @param <V>         the vertex type
      * @return the cost of {@code arrangement} given the graph {@code g}
+     * @throws NullPointerException if {@code g} or {@code arrangement} is {@code null}
      */
     public static <V> double calculateScore(UndirectedGraph<V, ?> g, List<V> arrangement) {
         double score = 0;
@@ -117,6 +119,7 @@ public class MinimumLinearArrangement<V> {
      * Run the algorithm for multiple times.
      *
      * @param times how many times to run the algorithm for
+     * @throws IllegalArgumentException if {@code times < 1}
      */
     public void runForTimes(int times) {
         if (times < 1) {
@@ -131,6 +134,7 @@ public class MinimumLinearArrangement<V> {
      * Run the algorithm for a specific amount of minutes.
      *
      * @param minutes how many minutes to run the algorithm for
+     * @throws IllegalArgumentException if {@code minutes <= 0}
      */
     public void runForMinutes(double minutes) {
         if (minutes <= 0) {
